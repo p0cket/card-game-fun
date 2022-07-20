@@ -5,16 +5,26 @@ import Shop from "./Shop";
 import Rest from "./Rest";
 import Battle from "./Battle";
 import MiniBoss from "./MiniBoss";
+import { ACTIONS } from "../App";
 
 const Screen = ({ gameData, dispatch, map, changeToScene }) => {
   const curLevelNum = gameData.curScene.lvl;
-  const nextLevel = map[curLevelNum];
+  const levelToSet = map[curLevelNum];
 
-  switch (nextLevel) {
+  switch (levelToSet) {
     case "intro":
       return <Intro />;
     case "battle":
       console.log("battleLogic");
+      //begin battle logic
+      dispatch({ type: ACTIONS.BEGIN_BATTLE, payload: "start" });
+      //--
+      //   if (!gameData.battle.enemy) {
+      //     decideEnemy();
+      //     decideEnemyATK();
+      //   }
+      //--
+
       return (
         <Battle
           gameData={gameData}

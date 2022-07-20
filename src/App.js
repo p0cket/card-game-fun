@@ -1,63 +1,8 @@
-// import "./styles.css";
-// import React, { useState, useReducer } from "react";
-// import Todo from "./components/Todo";
-
-// export const ACTIONS = {
-//   ADD_TODO: "add-todo",
-//   TOGGLE_TODO: "toggle-todo",
-//   DELETE_TODO: "delete-todo"
-// };
-// function reducer(todos, action) {
-//   switch (action.type) {
-//     case ACTIONS.ADD_TODO:
-//       return [...todos, newTodo(action.payload.name)];
-//     case ACTIONS.TOGGLE_TODO:
-//       return todos.map((todo) => {
-//         if (todo.id === action.payload.id) {
-//           return { ...todo, complete: !todo.complete };
-//         }
-//         return todo;
-//       });
-//     case ACTIONS.DELETE_TODO:
-//       return todos.filter((todo) => todo.id !== action.payload.id);
-//     default:
-//       return todos;
-//   }
-// }
-
-// function newTodo(name) {
-//   return { id: Date.now(), name: name, complete: false };
-// }
-
-// export default function App() {
-//   const [todos, dispatch] = useReducer(reducer, []);
-//   const [name, setName] = useState("");
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     dispatch({ type: ACTIONS.ADD_TODO, payload: { name: name } });
-//     setName("");
-//   }
-//   return (
-//     <>
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           type="text"
-//           value={name}
-//           onChange={(e) => setName(e.target.value)}
-//         />
-//       </form>
-//       {todos.map((todo) => {
-//         return <Todo key={todo.id} todo={todo} dispatch={dispatch} />;
-//       })}
-//     </>
-//   );
-// }
-
 import "./styles.css";
 import Screen from "./components/Screen";
 import React, { useState, useReducer } from "react";
 import mapGenerator from "./components/mapGenerator";
+import enemies from "./components/enemies";
 
 export const ACTIONS = {
   SET_SCENE: "set_scene",
@@ -68,9 +13,34 @@ export const ACTIONS = {
   PLAY_CARD: "play-card",
   DISCARD_CARD: "discard-card",
   BEGIN_BATTLE: "begin-battle",
-  TAKE_DAMAGE: "take-damage"
+  TAKE_DAMAGE: "take-damage",
 };
+
+//---enemy and enemy attack functions
+const decideEnemy = () => {
+  const rndm = Math.floor(Math.random * enemies.length);
+  console.log("deciding enemy:", rndm, enemies[rndm], enemies);
+  const ourEnemy = enemies[rndm];
+  dispatch({
+    type: ACTIONS.SET_ENEMY,
+    payload: { enemy: ourEnemy },
+  });
+};
+const decideEnemyATK = () => {
+  const randomizeATK = Math.floor(
+    Math.random() * gameData.battle.enemy.attacks.length
+  );
+  const nextATK = gameData.battle.enemy.attacks[randomizeATK];
+  dispatch({
+    type: ACTIONS.SET_ENEMY_ATTACK,
+    payload: { attack: nextATK },
+  });
+};
+//--
+
 function reducer(gameData, action) {
+  //@TODO when you get a chance, destructure it all
+  // const {payload} = action;
   switch (action.type) {
     case ACTIONS.SET_SCENE:
       gameData.scene = action.payload;
@@ -104,32 +74,33 @@ function reducer(gameData, action) {
     case ACTIONS.DISCARD_CARD:
       gameData.battle.discarded = [
         ...gameData.battle.discarded,
-        action.payload.cardToRemove
+        action.payload.cardToRemove,
       ];
       return gameData;
     case ACTIONS.BEGIN_BATTLE:
-      gameData.battle.beginning = !gameData.battle.beginning;
+      //this should set the screen to be battle screen
+      gameData.battle.beginning = true;
+      //then decide the opponent
+      decideEnemy();
+      decideEnemyATK();
+      //
+
       return gameData; //@TODO
     case ACTIONS.SET_ENEMY_ATTACK:
       gameData.battle.enemy.nextAttack = action.payload.attack;
       return gameData; //@TODO
     case ACTIONS.END_TURN:
+      // currently: enemyAtk is 1, payload:{ damage: enemyAtk, effect: "stunned" }
       const finalHealth = gameData.hero.health - action.payload.damage;
-
       if (finalHealth > 0) {
         gameData.hero.health = finalHealth;
+        decideEnemyATK(); //for next turn
       } else {
         //game over
+        console.log(`game over man :)`);
       }
       return gameData;
 
-    //-----
-    // enemyAtk is 1, payload:{ damage: enemyAtk, effect: "stunned" }
-
-    //----
-    // case ACTIONS.TAKE_DAMAGE:
-    //   gameData.hero.health = gameData.hero.health - action.payload.damage;
-    //   return gameData;
     default:
       return gameData;
   }
@@ -141,7 +112,7 @@ let startingData = {
   hero: {
     health: 100,
     energy: 10,
-    status: "Feeling Fine"
+    status: "Feeling Fine",
   },
   battle: {
     enemy: {
@@ -155,23 +126,23 @@ let startingData = {
           name: "hitting you",
           type: "hit",
           damage: 20,
-          status: "dizzy"
+          status: "dizzy",
         },
         {
           name: "hitting again",
           type: "hit",
           damage: 40,
-          status: "none"
-        }
-      ]
+          status: "none",
+        },
+      ],
     },
     nextAttack: "none",
     hand: [],
     discarded: [],
-    beginning: true
+    beginning: true,
   },
   curScene: { scene: "intro", lvl: 0 },
-  alert: ""
+  alert: "",
 };
 
 const types = ["Fire", "Water", "Blood", "Poison"];
@@ -189,7 +160,7 @@ const makeDeck = (emptyDeck) => {
         type: types[j],
         name: names[j],
         num: numbers[i],
-        cost: 1
+        cost: 1,
       });
     }
   }
@@ -205,7 +176,7 @@ const shuffle = (thisDeck, shuffledDeck) => {
     }
   }
   //set back from a Set() to an Array
-  preparedDeck = [...shuffDeck];
+  preparedDeck = [...shuffledDeck];
 };
 
 makeDeck(deck);
@@ -213,17 +184,11 @@ shuffle(deck, shuffDeck);
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
-  // const [curScene, setCurScene] = useState(["intro", 0]);
 
-  // prev version
-  // const loadNextLevel = () => {
-  //   const nextLevel = [map[curScene[1] + 1], curScene[1] + 1];
-  //   setCurScene(nextLevel);
-  // };
   const loadNextLevel = () => {
     const nextLevel = [
       map[gameData.curScene.lvl + 1],
-      gameData.curScene.lvl + 1
+      gameData.curScene.lvl + 1,
     ];
     dispatch({ type: ACTIONS.SET_SCENE, payload: nextLevel });
   };
@@ -323,17 +288,3 @@ Game: {
 // - Amount
 // - Status
 // - Name
-
-// screen prev
-{
-  /* <Screen
-gameData={gameData}
-dispatch={dispatch}
-curScene={curScene}
-setCurScene={setCurScene}
-alert={alert}
-setAlert={setAlert}
-map={map}
-changeToScene={changeToScene}
-/> */
-}

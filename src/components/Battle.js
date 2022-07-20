@@ -34,58 +34,30 @@ const Battle = ({ gameData, dispatch, changeToScene }) => {
       payload: { cardToRemove: removedCard }
     });
   };
-  // draw a starting hand
-  // useEffect(() => {
-  //   //beginning
-  //   if (gameData.battle.beginning && gameData.battle.hand.length < 4) {
-  //     drawCard(gameData.deck);
-  //   } else {
-  //     dispatch({
-  //       type: ACTIONS.BEGIN_BATTLE,
-  //       payload: {}
-  //     });
-  //     // beginning = false;
-  //   }
-  // }, [
-  //   gameData.deck,
-  //   dispatch,
-  //   drawCard,
-  //   gameData.battle.beginning,
-  //   gameData.battle.hand
-  // ]);
 
-  //@todo make a condition on taking damage to set health to zero
-  // useEffect(() => {
-  //   if (gameData.hero.health <= 0) {
-  //     // if (myHealth <= 0) {
-  //     console.log("YOU DIED (dark souls would be proud)");
-  //   }
-  // }, [gameData.hero.health]);
 
-  const decideEnemy = useCallback(() => {
-    const rndm = Math.floor(Math.random * enemies.length);
-    console.log("deciding enemy:", rndm, enemies[rndm], enemies);
-    //set Enemy
-    const ourEnemy = enemies[rndm];
-    dispatch({
-      type: ACTIONS.SET_ENEMY,
-      payload: { enemy: ourEnemy }
-    });
-  }, [dispatch]);
-
-  const decideEnemyATK = useCallback(() => {
-    const randomizeATK = Math.floor(
-      Math.random() * gameData.battle.enemy.attacks.length
-    );
-    const nextATK = gameData.battle.enemy.attacks[randomizeATK];
-    dispatch({
-      type: ACTIONS.SET_ENEMY_ATTACK,
-      payload: { attack: nextATK }
-    });
-  }, [dispatch, gameData]);
-
-  // instead of below, when switching scenes, dispatch
-  // and set the game to begin
+  //maybe move this all to screen.js and then seperate into other files
+  // const decideEnemy = useCallback(() => {
+  //   const rndm = Math.floor(Math.random * enemies.length);
+  //   console.log("deciding enemy:", rndm, enemies[rndm], enemies);
+  //   //set Enemy
+  //   const ourEnemy = enemies[rndm];
+  //   dispatch({
+  //     type: ACTIONS.SET_ENEMY,
+  //     payload: { enemy: ourEnemy }
+  //   });
+  // }, [dispatch]);
+  // const decideEnemyATK = useCallback(() => {
+  //   const randomizeATK = Math.floor(
+  //     Math.random() * gameData.battle.enemy.attacks.length
+  //   );
+  //   const nextATK = gameData.battle.enemy.attacks[randomizeATK];
+  //   dispatch({
+  //     type: ACTIONS.SET_ENEMY_ATTACK,
+  //     payload: { attack: nextATK }
+  //   });
+  // }, [dispatch, gameData]);
+  //-----
 
   useEffect(() => {
     if (!gameData.battle.enemy) {
@@ -97,6 +69,7 @@ const Battle = ({ gameData, dispatch, changeToScene }) => {
       console.log("You defeated the enemy! Great job!");
     }
   }, [gameData.battle.enemy, decideEnemy, decideEnemyATK]);
+  //----
 
   const endTurn = () => {
     console.log(`End Turn`);
