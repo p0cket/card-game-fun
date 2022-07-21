@@ -7,7 +7,7 @@ import Battle from "./Battle";
 import MiniBoss from "./MiniBoss";
 import { ACTIONS } from "../App";
 
-const Screen = ({ gameData, dispatch, map, changeToScene }) => {
+const Screen = ({ gameData, dispatch, map }) => {
   const curLevelNum = gameData.curScene.lvl;
   const levelToSet = map[curLevelNum];
   console.log(`levelToSet`,levelToSet)

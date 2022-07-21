@@ -40,7 +40,7 @@ function reducer(gameData, action) {
   switch (action.type) {
     case ACTIONS.SET_SCENE:
       console.log(`action.payload`, action.payload, `gameData.scene`, gameData.scene)
-      gameData.scene = action.payload;
+      gameData.curScene = action.payload;
       return gameData;
     case ACTIONS.SET_MYDATA:
       return {};
