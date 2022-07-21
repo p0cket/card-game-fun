@@ -10,6 +10,7 @@ import { ACTIONS } from "../App";
 const Screen = ({ gameData, dispatch, map, changeToScene }) => {
   const curLevelNum = gameData.curScene.lvl;
   const levelToSet = map[curLevelNum];
+  console.log(`levelToSet`,levelToSet)
 
   switch (levelToSet) {
     case "intro":
@@ -18,18 +19,10 @@ const Screen = ({ gameData, dispatch, map, changeToScene }) => {
       console.log("battleLogic");
       //begin battle logic
       dispatch({ type: ACTIONS.BEGIN_BATTLE, payload: "start" });
-      //--
-      //   if (!gameData.battle.enemy) {
-      //     decideEnemy();
-      //     decideEnemyATK();
-      //   }
-      //--
-
       return (
         <Battle
           gameData={gameData}
           dispatch={dispatch}
-          changeToScene={changeToScene}
         />
       );
     case "shop":

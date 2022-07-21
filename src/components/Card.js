@@ -15,7 +15,7 @@ const Card = ({ cardValue, playCard }) => {
 
   return (
     <>
-      <button style={styles.cardStyle} onClick={() => playCard(cardValue)}>
+      <button style={styles.cardStyle} onClick={() => playCard()}>
         {`${name} ${energyEmoji.repeat(cost)}`}
         <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
         <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
