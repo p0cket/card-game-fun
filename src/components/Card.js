@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
 const Card = ({ cardValue, playCard }) => {
   const { type, name, num, cost } = cardValue;
   const styles = {
@@ -23,6 +26,11 @@ const Card = ({ cardValue, playCard }) => {
       </button>
     </>
   );
+};
+
+Card.propTypes = {
+  cardValue: PropTypes.string,
+  playCard: PropTypes.func
 };
 
 export default Card;

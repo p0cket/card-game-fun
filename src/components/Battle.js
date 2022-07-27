@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import React from 'react';
 import Card from "./Card";
 import Enemy from "./Enemy";
 import { useState, useEffect, useCallback } from "react";
@@ -33,9 +35,11 @@ const Battle = ({ gameData, dispatch }) => {
     console.log(`End Turn`);
     // enemy takes turn
     let enemyAtk = 1;
+    // decide the next attack here, and pass that into dispatch
+    // let enemyAtk = decideEnemyAtk()
     dispatch({
       type: ACTIONS.END_TURN,
-      payload: { damage: enemyAtk, effect: "stunned" },
+      payload: {atk: enemyAtk},
     });
   };
 
@@ -87,6 +91,13 @@ const Battle = ({ gameData, dispatch }) => {
       {!gameData.battle.beginning && <BattleElement />}
     </>
   );
+
+
+};
+
+Card.propTypes = {
+  // props.gameData: PropTypes.object,
+  // props.dispatch: PropTypes.func,
 };
 
 export default Battle;
