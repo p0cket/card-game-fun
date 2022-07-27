@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Card from "./Card";
 import Enemy from "./Enemy";
 import ACTIONS from "../App";
@@ -90,12 +92,3 @@ Card.propTypes = {
 };
 
 export default Battle;
-
-// const VictoryElement = () => {
-//   return <>victory</>;
-// };
-// const RewardElement = () => {
-//   return <>reward</>;
-// };
-// const battlePhase  = () {
-// }

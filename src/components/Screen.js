@@ -1,4 +1,5 @@
 // different screens
+import React from 'react'
 import Intro from "./Intro";
 import Event from "./Event";
 import Shop from "./Shop";
@@ -10,14 +11,13 @@ import { ACTIONS } from "../App";
 const Screen = ({ gameData, dispatch, map }) => {
   const curLevelNum = gameData.curScene.lvl;
   const levelToSet = map[curLevelNum];
-  console.log(`levelToSet`,levelToSet)
+  console.log(`levelToSet is:`,levelToSet)
 
   switch (levelToSet) {
     case "intro":
       return <Intro />;
     case "battle":
-      console.log("battleLogic");
-      //begin battle logic
+      console.log("(battle Screen)");
       return (
         <Battle
           gameData={gameData}

@@ -1,9 +1,7 @@
 {
   "extends":    
-[
-    "eslint:recommended"
-    // "plugin:react/recommended"
-  ],
+    "react:recommended",
+  
   "env": {
     "browser": true,
     "commonjs": true,
@@ -19,8 +17,12 @@
       }
   },
   "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-vars": "off",
+    "react/jsx-uses-react": "off",
     "no-console": "off",
     "strict": ["error", "global"],
     "curly": "warn"
+ 
   }
 }

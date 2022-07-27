@@ -1,3 +1,4 @@
+import React from 'react'
 import Card from "./Card";
 const cardValue1 = { type: "poison", name: "syphon", num: 4, cost: 2 };
 const cardValue2 = {

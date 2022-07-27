@@ -1,3 +1,4 @@
+import React from "react";
 import "./styles.css";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
@@ -15,19 +16,15 @@ export const ACTIONS = {
   DISCARD_CARD: "discard-card",
   BEGIN_BATTLE: "begin-battle",
   TAKE_DAMAGE: "take-damage",
+  END_TURN: "end-turn",
 };
 
 function reducer(gameData, action) {
   // @TODO when you get a chance, destructure it all
   // const {payload} = action;
+  console.log(`reducer ran`)
   switch (action.type) {
     case ACTIONS.SET_SCENE:
-      console.log(
-        `action.payload`,
-        action.payload,
-        `gameData.curScene`,
-        gameData.curScene
-      );
       return {
         ...gameData,
         curScene: action.payload,
@@ -42,17 +39,22 @@ function reducer(gameData, action) {
     case ACTIONS.SET_DECK:
       return { ...gameData, deck: action.payload };
     case ACTIONS.DRAW_CARD:
+      console.log(`DRAW_CARD`);
+      //   dispatch({
+      //     type: ACTIONS.DRAW_CARD,
+      //     payload: { deck: gameData.deck, hand: gameData.battle.hand },
       if (gameData.deck.length > 0) {
-        gameData.battle.hand = [...gameData.battle.hand, gameData.deck[0]];
-        gameData.deck.slice(1);
+        console.log(`if - deck's length: ${gameData.deck.length}`);
         return {
           ...gameData,
           battle: {
             ...gameData.battle,
             hand: [...gameData.battle.hand, gameData.deck[0]],
           },
+          deck: gameData.deck.slice(1),
         };
       } else {
+        console.log(`else -deck's length: ${gameData.deck.length}`);
         return {
           ...gameData,
           alert: "No cards left to draw :( ",
@@ -78,10 +80,12 @@ function reducer(gameData, action) {
           },
         };
       } else {
-        gameData.alert = "Not enough energy to play that card :( ";
+        return {
+          ...gameData,
+          alert: "Not enough energy to play that card :( ",
+        };
       }
       //put the card in the discard
-      return gameData;
     case ACTIONS.DISCARD_CARD:
       return {
         ...gameData,
@@ -93,33 +97,36 @@ function reducer(gameData, action) {
           ],
         },
       };
-    case ACTIONS.BEGIN_BATTLE: {
-      let shuffledDeck = [];
-      if (gameData.deck.length > 0) {
-        let shuffledDeck = shuffle(startingDeck);
-      } else {
-        let shuffledDeck = shuffle(gameData.length);
+    case ACTIONS.BEGIN_BATTLE:
+      {
+        let shuffledDeck = [];
+        if (gameData.deck.length > 0) {
+          let shuffledDeck = shuffle(startingDeck);
+        } else {
+          let shuffledDeck = shuffle(gameData.length);
+        }
+        //then decide the opponent
+        setEnemyHandler(gameData, action.payload.enemy);
+        setEnemyAtkHandler(gameData, action.payload.startingAtk);
+        return {
+          ...gameData,
+          battle: { ...gameData.battle, beginning: true },
+          deck: shuffledDeck,
+        };
       }
-      //then decide the opponent
-      setEnemyHandler(gameData, action.payload.enemy);
-      setEnemyAtkHandler(gameData, action.payload.startingAtk);
-      return {
-        ...gameData,
-        battle: { ...gameData.battle, beginning: true },
-        deck: shuffledDeck,
-      };
-    }
-    case ACTIONS.END_TURN: {
-      const finalHealth = gameData.hero.health - action.payload.damage;
-      if (finalHealth > 0) {
-        gameData.hero.health = finalHealth;
-        // const atk = decideEnemyATK();
-        setEnemyAtkHandler(gameData, action.payload.atk); //setting atk for next turn
-      } else {
-        console.log(`game over man :)`);
+    case ACTIONS.END_TURN:
+      {
+        const finalHealth = gameData.hero.health - action.payload.damage;
+        if (finalHealth > 0) {
+          // const atk = decideEnemyATK();
+          setEnemyAtkHandler(gameData, action.payload.atk); //setting atk for next turn
+        } else {
+          console.log(
+            `game over man :). Your Health:${gameData.hero.health} and fh: ${finalHealth}`
+          );
+        }
+        return { ...gameData, hero: { ...gameData.hero, health: finalHealth } };
       }
-      return { ...gameData };
-    }
     default:
       console.log(`no action type matched, returning gameData`);
       return gameData;
