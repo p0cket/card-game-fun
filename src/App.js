@@ -51,7 +51,7 @@ function reducer(gameData, action) {
             ...gameData.battle,
             hand: [...gameData.battle.hand, gameData.deck[0]],
           },
-          deck: gameData.deck.slice(1),
+          deck: gameData.deck.slice(1)
         };
       } else {
         console.log(`else -deck's length: ${gameData.deck.length}`);
@@ -103,7 +103,7 @@ function reducer(gameData, action) {
         if (gameData.deck.length > 0) {
           let shuffledDeck = shuffle(startingDeck);
         } else {
-          let shuffledDeck = shuffle(gameData.length);
+          let shuffledDeck = shuffle(gameData.deck);
         }
         //then decide the opponent
         setEnemyHandler(gameData, action.payload.enemy);
