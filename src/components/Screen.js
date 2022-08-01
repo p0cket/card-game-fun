@@ -38,6 +38,9 @@ const Screen = ({ gameData, dispatch, map }) => {
     case "boss":
       console.log("bossLogic");
       return <div>`bossLogic`</div>;
+    case "game over":
+        console.log("game over");
+        return <div>`game over`</div>;
     default:
       console.log("no scene selected");
       return <></>

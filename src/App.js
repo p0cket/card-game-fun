@@ -3,7 +3,8 @@ import "./styles.css";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
 import mapGenerator from "./components/mapGenerator";
-import { enemies, startingData, startingDeck } from "./components/consts";
+import { startingData, startingDeck } from "./components/consts";
+import { decideEnemy, decideEnemyATK } from "./utils/battle-utils";
 
 export const ACTIONS = {
   SET_SCENE: "set_scene",
@@ -34,7 +35,7 @@ function reducer(gameData, action) {
     case ACTIONS.SET_ALERT:
       return {
         ...gameData,
-        alert: action.payload.alert,
+        alert: action.payload,
       };
     case ACTIONS.SET_DECK:
       return { ...gameData, deck: action.payload };
@@ -55,31 +56,34 @@ function reducer(gameData, action) {
         };
       }
     case ACTIONS.PLAY_CARD:
-      console.log(`PlayCard payload:`, action.payload)
-      if (gameData.hero.energy >= action.payload.cost) {
+      console.log(`PlayCard payload:`, action.payload);
+      // if (gameData.hero.energy >= action.payload.cost) {
         if (gameData.battle.enemy.health - action.payload.damage <= 0) {
           console.log(`you defeated the enemy!`);
           //also use energy needed to make the card
           //end battle logic
           //move to next scene
         }
+        const energyLeft = gameData.hero.energy - action.payload.cost;
+        const enemyHealthLeft =
+          gameData.battle.enemy.health - action.payload.damage;
         return {
           ...gameData,
+          hero: {...gameData.hero, energy: energyLeft},
           battle: {
             ...gameData.battle,
             enemy: {
               ...gameData.battle.enemy,
-              health: gameData.battle.enemy.health - action.payload.damage,
-              energy: gameData.hero.energy - action.payload.cost,
+              health: enemyHealthLeft,
             },
           },
         };
-      } else {
-        return {
-          ...gameData,
-          alert: "Not enough energy to play that card :( ",
-        };
-      }
+      // } else {
+        // return {
+        //   ...gameData,
+        //   alert: "Not enough energy to play that card :( ",
+        // };
+      // }
     //put the card in the discard
     case ACTIONS.DISCARD_CARD:
       return {
@@ -105,8 +109,7 @@ function reducer(gameData, action) {
           enemy: { ...gameData.battle.enemy, nextAttack: action.payload },
         },
       };
-    case ACTIONS.BEGIN_BATTLE: // payload: { // type: ACTIONS.BEGIN_BATTLE,
-    //   enemy: decidedEnemy,
+    case ACTIONS.BEGIN_BATTLE: //   enemy: decidedEnemy, // payload: { // type: ACTIONS.BEGIN_BATTLE,
     //   startingAtk: startingAtk,
     //   deck: gameData.deck,
     // },
@@ -153,18 +156,18 @@ const shuffle = (array) => {
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
 
-  const decideEnemy = () => {
-    const rndm = Math.floor(Math.random() * enemies.length);
-    const ourEnemy = enemies[rndm];
-    return ourEnemy;
-  };
-  const decideEnemyATK = () => {
-    const randomizeATK = Math.floor(
-      Math.random() * gameData.battle.enemy.attacks.length
-    );
-    const nextATK = gameData.battle.enemy.attacks[randomizeATK];
-    return nextATK;
-  };
+  // const decideEnemy = () => {
+  //   const rndm = Math.floor(Math.random() * enemies.length);
+  //   const ourEnemy = enemies[rndm];
+  //   return ourEnemy;
+  // };
+  // const decideEnemyATK = () => {
+  //   const randomizeATK = Math.floor(
+  //     Math.random() * gameData.battle.enemy.attacks.length
+  //   );
+  //   const nextATK = gameData.battle.enemy.attacks[randomizeATK];
+  //   return nextATK;
+  // };
 
   const loadNextLevel = () => {
     console.log(`loadNextLevel`);
@@ -177,7 +180,7 @@ export default function App() {
     // Load Battle Prep
     if (nextLevel.scene === "battle") {
       const decidedEnemy = decideEnemy();
-      const startingAtk = decideEnemyATK();
+      const startingAtk = decideEnemyATK(gameData.battle.enemy.attacks);
       console.log(`Battle prep: enemy & atk`, decidedEnemy, startingAtk);
       dispatch({
         type: ACTIONS.BEGIN_BATTLE,
@@ -189,6 +192,7 @@ export default function App() {
       });
       dispatch({ type: ACTIONS.SET_ENEMY, payload: decidedEnemy });
       dispatch({ type: ACTIONS.SET_ATK, payload: startingAtk });
+      // next draw your starting hand
     }
   };
   console.log(`[App.js Rendered]`);

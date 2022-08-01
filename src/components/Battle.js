@@ -1,6 +1,7 @@
 import React from "react";
 import { ACTIONS } from "../App";
-// import ACTIONS from "../App";
+import { startingData } from "./consts";
+import { decideEnemyATK } from "../utils/battle-utils";
 
 import Card from "./Card";
 import Enemy from "./Enemy";
@@ -16,40 +17,64 @@ const Battle = ({ gameData, dispatch }) => {
   const playCard = (card) => {
     console.log(`card`, card);
     // 1. do card effects
-    dispatch({
-      type: ACTIONS.PLAY_CARD,
-      payload: {
-        damage: card.num,
-        cost: card.cost, // also card status effect, and set the alert to blank
-      },
-    });
-    const myHandIndex = gameData.battle.hand.indexOf(card);
-    const removedCard = gameData.battle.hand.splice(myHandIndex, 1);
-    // 2. put in discard
-    dispatch({
-      type: ACTIONS.DISCARD_CARD,
-      payload: { cardToRemove: removedCard },
-    });
+    if (gameData.hero.energy >= card.cost) {
+      dispatch({
+        type: ACTIONS.PLAY_CARD,
+        payload: {
+          damage: card.num,
+          cost: card.cost, // also card status effect, and set the alert to blank
+        },
+      });
+      const myHandIndex = gameData.battle.hand.indexOf(card);
+      const removedCard = gameData.battle.hand.splice(myHandIndex, 1);
+      // 2. put in discard
+      dispatch({
+        type: ACTIONS.DISCARD_CARD,
+        payload: { cardToRemove: removedCard },
+      });
+    } else {
+      // set alert
+      dispatch({
+        type: ACTIONS.SET_ALERT,
+        payload: `"Not enough energy to play that card :(`,
+      });
+      console.log(`our alert: ${gameData.alert}`, gameData.alert);
+    }
   };
 
   const endTurn = () => {
     console.log(`End Turn`);
     // PUT ENDTURN LOGIC HERE
     // 1. use enemy's atk
-    const finalHealth = gameData.hero.health - gameData.battle.enemy.nextAttack.damage;
+    const finalHealth =
+      gameData.hero.health - gameData.battle.enemy.nextAttack.damage;
     // console.log(
     //   `finalHealth ${finalHealth} = h ${gameData.hero.health} - d ${gameData.battle.enemy.nextAttack.damage}`
     // );
-    if(finalHealth > 0){
+    if (finalHealth > 0) {
       // hero health lower
       dispatch({
         type: ACTIONS.SET_MYDATA,
-        payload: { ...gameData, hero: {...gameData.hero, health: finalHealth} },
+        payload: {
+          ...gameData,
+          hero: { ...gameData.hero, health: finalHealth },
+        },
       });
       // decide new enemy atk
-
+      const decidedATK = decideEnemyATK(gameData.battle.enemy.attacks);
+      dispatch({ type: ACTIONS.SET_ATK, payload: decidedATK });
     } else {
-      console.log(`game over`)
+      console.log(`game over`);
+      dispatch({
+        type: ACTIONS.SET_MYDATA,
+        payload: startingData,
+      });
+
+      const gameOverLevel = {
+        scene: "game over",
+        lvl: 0,
+      };
+      dispatch({ type: ACTIONS.SET_SCENE, payload: gameOverLevel });
     }
 
     // const finalHealth = gameData.hero.health - action.payload.damage;
@@ -75,6 +100,7 @@ const Battle = ({ gameData, dispatch }) => {
         <Enemy enemyData={gameData.battle.enemy} />
         <br />
         <h5>Our hand:</h5>
+        <div style={{ color: "Red" }}>{`${gameData.alert}`}</div>
         <div style={{ color: "Red" }}>
           {gameData.battle.hand.length > 0
             ? gameData.battle.hand.map((card) => {
