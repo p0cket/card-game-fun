@@ -13,8 +13,6 @@ export const decideEnemyATK = (enemyAttacks) => {
     } else {
         console.log(`no enemyAttacks`)
     }
-
-
 };
 export const decideEnemy = () => {
   const rndm = Math.floor(Math.random() * enemies.length);

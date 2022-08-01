@@ -32,13 +32,26 @@ const Battle = ({ gameData, dispatch }) => {
         type: ACTIONS.DISCARD_CARD,
         payload: { cardToRemove: removedCard },
       });
+
+      //-----
+      //-------
+      //--if Enemy has no health, go to next level
+      // const enemyHealthAfter = gameData.battle.enemy.health - card.num;
+      // if (enemyHealthAfter <= 0) {
+      //   const nextLevel = {
+      //     scene: map[gameData.curScene.lvl + 1],
+      //     lvl: gameData.curScene.lvl + 1,
+      //   };
+      //   dispatch({ type: ACTIONS.SET_SCENE, payload: nextLevel });
+      // }
+      //-------
+      //-----
     } else {
       // set alert
       dispatch({
         type: ACTIONS.SET_ALERT,
         payload: `"Not enough energy to play that card :(`,
       });
-      console.log(`our alert: ${gameData.alert}`, gameData.alert);
     }
   };
 
@@ -48,9 +61,6 @@ const Battle = ({ gameData, dispatch }) => {
     // 1. use enemy's atk
     const finalHealth =
       gameData.hero.health - gameData.battle.enemy.nextAttack.damage;
-    // console.log(
-    //   `finalHealth ${finalHealth} = h ${gameData.hero.health} - d ${gameData.battle.enemy.nextAttack.damage}`
-    // );
     if (finalHealth > 0) {
       // hero health lower
       dispatch({
@@ -64,6 +74,7 @@ const Battle = ({ gameData, dispatch }) => {
       const decidedATK = decideEnemyATK(gameData.battle.enemy.attacks);
       dispatch({ type: ACTIONS.SET_ATK, payload: decidedATK });
     } else {
+      // Your health is less than 0, game over
       console.log(`game over`);
       dispatch({
         type: ACTIONS.SET_MYDATA,
@@ -76,17 +87,6 @@ const Battle = ({ gameData, dispatch }) => {
       };
       dispatch({ type: ACTIONS.SET_SCENE, payload: gameOverLevel });
     }
-
-    // const finalHealth = gameData.hero.health - action.payload.damage;
-    // if (finalHealth > 0){
-    // dispatch ACTIONS.SET_MYDATA
-    // 2.
-    // enemy takes turn
-    // decide the next atk
-    // dispatch ACTIONS.SET_ATK
-    //
-    //}
-    // else {dispatch GAME_OVER}
   };
 
   // 5 cases: beginning, inBattle, victory, reward screen, loss

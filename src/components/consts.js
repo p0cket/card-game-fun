@@ -31,13 +31,13 @@ export const startingData = {
       nextAttack: "none",
       attacks: [
         {
-          name: "hitting you",
+          name: "sample atk hitting you",
           type: "hit",
           damage: 20,
           status: "dizzy",
         },
         {
-          name: "hitting again",
+          name: "sample atk hitting again",
           type: "hit",
           damage: 40,
           status: "none",
@@ -59,6 +59,7 @@ export const enemies = [
     health: 30,
     passive: "none",
     bio: "A bad dude",
+    status: "none",
     attacks: [
       {
         name: "flails fist at you",
@@ -79,6 +80,7 @@ export const enemies = [
     health: 15,
     passive: "heal",
     bio: "A bad dude's smaller dude",
+    status: "none",
     attacks: [
       {
         name: "flails fist weakly",
