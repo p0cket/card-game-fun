@@ -6,7 +6,6 @@ import Shop from "./Shop";
 import Rest from "./Rest";
 import Battle from "./Battle";
 import MiniBoss from "./MiniBoss";
-import { ACTIONS } from "../App";
 
 const Screen = ({ gameData, dispatch, map }) => {
   const curLevelNum = gameData.curScene.lvl;

@@ -49,6 +49,7 @@ const Battle = ({ gameData, dispatch }) => {
 
   return (
     <>
+    {console.log('Battle return')}
       Battle Component
       <h1>--{typeof myStatus} --</h1>
       <div>
@@ -59,7 +60,7 @@ const Battle = ({ gameData, dispatch }) => {
         <div style={{ color: "Red" }}>
           {gameData.battle.hand.length > 0
             ? gameData.battle.hand.map((card) => {
-                return <Card cardValue={card} playCard={playCard} />;
+                return <Card key={card.cost} cardValue={card} playCard={playCard} />;
               })
             : `No Cards in hand. Click "Draw" to spend an energy and draw a card.`}
         </div>
@@ -86,9 +87,9 @@ const Battle = ({ gameData, dispatch }) => {
   );
 };
 
-Card.propTypes = {
+// Card.propTypes = {
   // props.gameData: PropTypes.object,
   // props.dispatch: PropTypes.func,
-};
+// };
 
 export default Battle;

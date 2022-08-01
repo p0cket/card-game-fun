@@ -7,21 +7,21 @@ const Enemy = ({ enemyData }) => {
   return (
     <div style={{ border: "2px dotted lightgray", borderRadius: "10px" }}>
       <div style={{ border: "2px dotted lightgray", borderRadius: "30px" }}>
-        ---{name} 🫀{health ? health : "None"}---
+        ---{name} <span role='img'  aria-label="emoji heart">🫀</span>{health ? health : "None"}---
       </div>
       <div>{bio}</div>
       <br />
       <div>
         {Math.floor(Math.random() * 2) === 1
-          ? "🔥\\_(X_X)-/🔥"
-          : "🔥\\-(X_X)_/🔥"}
+          ? <span role='img'  aria-label="emoji enemy">"🔥\\_(X_X)-/🔥"</span>
+          : <span role='img'  aria-label="emoji enemy"> "🔥\\-(X_X)_/🔥"</span>}
       </div>
       <br />
-      <div>Status: He is 📊 {status}</div>
+      <div>Status: He is {status}</div>
       <br />
       <div style={{ border: "2px dotted lightgray", borderRadius: "30px" }}>
         Next attack: <br />
-        {`${nextAttack.name}  💨${nextAttack.damage}`}
+        {`${nextAttack.name}  ${nextAttack.damage}`}
         <div>status inflict? {nextAttack.status}</div>
       </div>
     </div>

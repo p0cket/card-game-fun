@@ -101,9 +101,9 @@ function reducer(gameData, action) {
       {
         let shuffledDeck = [];
         if (gameData.deck.length > 0) {
-          let shuffledDeck = shuffle(startingDeck);
+          shuffledDeck = shuffle(startingDeck);
         } else {
-          let shuffledDeck = shuffle(gameData.deck);
+          shuffledDeck = shuffle(gameData.deck);
         }
         //then decide the opponent
         setEnemyHandler(gameData, action.payload.enemy);
