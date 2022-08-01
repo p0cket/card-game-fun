@@ -1,8 +1,9 @@
-import React from 'react'
+import React from "react";
+import { ACTIONS } from "../App";
+// import ACTIONS from "../App";
 
 import Card from "./Card";
 import Enemy from "./Enemy";
-import ACTIONS from "../App";
 
 const Battle = ({ gameData, dispatch }) => {
   const drawCard = () => {
@@ -13,6 +14,7 @@ const Battle = ({ gameData, dispatch }) => {
   };
 
   const playCard = (card) => {
+    console.log(`card`, card);
     // 1. do card effects
     dispatch({
       type: ACTIONS.PLAY_CARD,
@@ -32,35 +34,53 @@ const Battle = ({ gameData, dispatch }) => {
 
   const endTurn = () => {
     console.log(`End Turn`);
+    // PUT ENDTURN LOGIC HERE
+    // 1. use enemy's atk
+    const finalHealth = gameData.hero.health - gameData.battle.enemy.nextAttack.damage;
+    // console.log(
+    //   `finalHealth ${finalHealth} = h ${gameData.hero.health} - d ${gameData.battle.enemy.nextAttack.damage}`
+    // );
+    if(finalHealth > 0){
+      // hero health lower
+      dispatch({
+        type: ACTIONS.SET_MYDATA,
+        payload: { ...gameData, hero: {...gameData.hero, health: finalHealth} },
+      });
+      // decide new enemy atk
+
+    } else {
+      console.log(`game over`)
+    }
+
+    // const finalHealth = gameData.hero.health - action.payload.damage;
+    // if (finalHealth > 0){
+    // dispatch ACTIONS.SET_MYDATA
+    // 2.
     // enemy takes turn
-    let enemyAtk = 1;
-    // decide the next attack here, and pass that into dispatch
-    // let enemyAtk = decideEnemyAtk()
-    dispatch({
-      type: ACTIONS.END_TURN,
-      payload: { atk: enemyAtk },
-    });
+    // decide the next atk
+    // dispatch ACTIONS.SET_ATK
+    //
+    //}
+    // else {dispatch GAME_OVER}
   };
 
   // 5 cases: beginning, inBattle, victory, reward screen, loss
   // just change the scene to victory, pass the data,
   //  {/* different phases will be done through scene changes */}
-  // {!gameData.battle.beginning && <BattleElement />}
 
   return (
     <>
-    {console.log('Battle return')}
       Battle Component
-      <h1>--{typeof myStatus} --</h1>
       <div>
         <Enemy enemyData={gameData.battle.enemy} />
         <br />
         <h5>Our hand:</h5>
-        <div style={{ color: "Red" }}>{alert}</div>
         <div style={{ color: "Red" }}>
           {gameData.battle.hand.length > 0
             ? gameData.battle.hand.map((card) => {
-                return <Card key={card.cost} cardValue={card} playCard={playCard} />;
+                return (
+                  <Card key={card.id} cardValue={card} playCard={playCard} />
+                );
               })
             : `No Cards in hand. Click "Draw" to spend an energy and draw a card.`}
         </div>
@@ -80,7 +100,7 @@ const Battle = ({ gameData, dispatch }) => {
 
         <h5 style={{ color: "gray" }}>Our deck:</h5>
         {gameData.deck.map((card) => {
-          return <Card cardValue={card} playCard={playCard} />;
+          return <Card key={card.id} cardValue={card} playCard={playCard} />;
         })}
       </div>
     </>
@@ -88,8 +108,8 @@ const Battle = ({ gameData, dispatch }) => {
 };
 
 // Card.propTypes = {
-  // props.gameData: PropTypes.object,
-  // props.dispatch: PropTypes.func,
+// props.gameData: PropTypes.object,
+// props.dispatch: PropTypes.func,
 // };
 
 export default Battle;

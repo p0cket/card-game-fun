@@ -40,6 +40,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <div>`bossLogic`</div>;
     default:
       console.log("no scene selected");
+      return <></>
   }
 };
 

@@ -9,6 +9,7 @@ export const ACTIONS = {
   SET_SCENE: "set_scene",
   SET_MYDATA: "set-mydata",
   SET_ENEMY: "set-enemy",
+  SET_ATK: "set-atk",
   SET_DECK: "set-deck",
   SET_ALERT: "set_alert",
   DRAW_CARD: "draw-card",
@@ -22,7 +23,6 @@ export const ACTIONS = {
 function reducer(gameData, action) {
   // @TODO when you get a chance, destructure it all
   // const {payload} = action;
-  console.log(`reducer ran`)
   switch (action.type) {
     case ACTIONS.SET_SCENE:
       return {
@@ -30,7 +30,7 @@ function reducer(gameData, action) {
         curScene: action.payload,
       };
     case ACTIONS.SET_MYDATA:
-      return {};
+      return action.payload;
     case ACTIONS.SET_ALERT:
       return {
         ...gameData,
@@ -39,28 +39,23 @@ function reducer(gameData, action) {
     case ACTIONS.SET_DECK:
       return { ...gameData, deck: action.payload };
     case ACTIONS.DRAW_CARD:
-      console.log(`DRAW_CARD`);
-      //   dispatch({
-      //     type: ACTIONS.DRAW_CARD,
-      //     payload: { deck: gameData.deck, hand: gameData.battle.hand },
       if (gameData.deck.length > 0) {
-        console.log(`if - deck's length: ${gameData.deck.length}`);
         return {
           ...gameData,
           battle: {
             ...gameData.battle,
             hand: [...gameData.battle.hand, gameData.deck[0]],
           },
-          deck: gameData.deck.slice(1)
+          deck: gameData.deck.slice(1),
         };
       } else {
-        console.log(`else -deck's length: ${gameData.deck.length}`);
         return {
           ...gameData,
           alert: "No cards left to draw :( ",
         };
       }
     case ACTIONS.PLAY_CARD:
+      console.log(`PlayCard payload:`, action.payload)
       if (gameData.hero.energy >= action.payload.cost) {
         if (gameData.battle.enemy.health - action.payload.damage <= 0) {
           console.log(`you defeated the enemy!`);
@@ -85,7 +80,7 @@ function reducer(gameData, action) {
           alert: "Not enough energy to play that card :( ",
         };
       }
-      //put the card in the discard
+    //put the card in the discard
     case ACTIONS.DISCARD_CARD:
       return {
         ...gameData,
@@ -97,36 +92,37 @@ function reducer(gameData, action) {
           ],
         },
       };
-    case ACTIONS.BEGIN_BATTLE:
-      {
-        let shuffledDeck = [];
-        if (gameData.deck.length > 0) {
-          shuffledDeck = shuffle(startingDeck);
-        } else {
-          shuffledDeck = shuffle(gameData.deck);
-        }
-        //then decide the opponent
-        setEnemyHandler(gameData, action.payload.enemy);
-        setEnemyAtkHandler(gameData, action.payload.startingAtk);
-        return {
-          ...gameData,
-          battle: { ...gameData.battle, beginning: true },
-          deck: shuffledDeck,
-        };
+    case ACTIONS.SET_ENEMY:
+      return {
+        ...gameData,
+        battle: { ...gameData.battle, enemy: action.payload },
+      };
+    case ACTIONS.SET_ATK:
+      return {
+        ...gameData,
+        battle: {
+          ...gameData.battle,
+          enemy: { ...gameData.battle.enemy, nextAttack: action.payload },
+        },
+      };
+    case ACTIONS.BEGIN_BATTLE: // payload: { // type: ACTIONS.BEGIN_BATTLE,
+    //   enemy: decidedEnemy,
+    //   startingAtk: startingAtk,
+    //   deck: gameData.deck,
+    // },
+    {
+      let shuffledDeck = [];
+      if (gameData.deck.length > 0) {
+        shuffledDeck = shuffle(startingDeck);
+      } else {
+        shuffledDeck = shuffle(gameData.deck);
       }
-    case ACTIONS.END_TURN:
-      {
-        const finalHealth = gameData.hero.health - action.payload.damage;
-        if (finalHealth > 0) {
-          // const atk = decideEnemyATK();
-          setEnemyAtkHandler(gameData, action.payload.atk); //setting atk for next turn
-        } else {
-          console.log(
-            `game over man :). Your Health:${gameData.hero.health} and fh: ${finalHealth}`
-          );
-        }
-        return { ...gameData, hero: { ...gameData.hero, health: finalHealth } };
-      }
+      return {
+        ...gameData,
+        battle: { ...gameData.battle, beginning: true },
+        deck: shuffledDeck,
+      };
+    }
     default:
       console.log(`no action type matched, returning gameData`);
       return gameData;
@@ -135,29 +131,30 @@ function reducer(gameData, action) {
 
 let map = mapGenerator();
 
-function setEnemyHandler(gameData, action) {
-  return { ...gameData, battle: { ...gameData.battle, enemy: action } };
-}
-function setEnemyAtkHandler(gameData, action) {
-  return {
-    ...gameData,
-    battle: {
-      ...gameData.battle,
-      enemy: { ...gameData.battle.enemy, nextAttack: action },
-    },
-  };
-}
-
 const shuffle = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
+
+// Replace the other functions of the same name
+// so you can use the functions in Battle.js
+// export const decideEnemyATK = (enemyAttacks) => {
+//   const randomizeATK = Math.floor(
+//     Math.random() * enemyAttacks.length
+//   );
+//   const nextATK = enemyAttacks[randomizeATK];
+//   return nextATK;
+// };
+// export const decideEnemy = () => {
+//   const rndm = Math.floor(Math.random() * enemies.length);
+//   const ourEnemy = enemies[rndm];
+//   return ourEnemy;
+// };
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
 
   const decideEnemy = () => {
-    const rndm = Math.floor(Math.random * enemies.length);
-    console.log("deciding enemy:", rndm, enemies[rndm], enemies);
+    const rndm = Math.floor(Math.random() * enemies.length);
     const ourEnemy = enemies[rndm];
     return ourEnemy;
   };
@@ -177,11 +174,11 @@ export default function App() {
     };
     dispatch({ type: ACTIONS.SET_SCENE, payload: nextLevel });
 
-    const curLevelNum = gameData.curScene.lvl;
-    const levelToSet = map[curLevelNum];
-    if (levelToSet === "battle") {
+    // Load Battle Prep
+    if (nextLevel.scene === "battle") {
       const decidedEnemy = decideEnemy();
       const startingAtk = decideEnemyATK();
+      console.log(`Battle prep: enemy & atk`, decidedEnemy, startingAtk);
       dispatch({
         type: ACTIONS.BEGIN_BATTLE,
         payload: {
@@ -190,9 +187,11 @@ export default function App() {
           deck: gameData.deck,
         },
       });
+      dispatch({ type: ACTIONS.SET_ENEMY, payload: decidedEnemy });
+      dispatch({ type: ACTIONS.SET_ATK, payload: startingAtk });
     }
   };
-  console.log(`x`);
+  console.log(`[App.js Rendered]`);
 
   return (
     <div className="App">
