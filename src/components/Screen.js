@@ -1,5 +1,7 @@
 // different screens
-import React from 'react'
+import React from 'react';
+import { SCENES } from '../scenes';
+// All of our scenes are below
 import Intro from "./Intro";
 import Event from "./Event";
 import Shop from "./Shop";
@@ -12,10 +14,12 @@ const Screen = ({ gameData, dispatch, map }) => {
   const levelToSet = map[curLevelNum];
   console.log(`levelToSet is:`,levelToSet)
 
+  const { INTRO, BATTLE, SHOP, EVENT, REST, MINIBOSS, BOSS, GAMEOVER } = SCENES;
+
   switch (levelToSet) {
-    case "intro":
+    case INTRO:
       return <Intro />;
-    case "battle":
+    case BATTLE:
       console.log("(battle Screen)");
       return (
         <Battle
@@ -23,27 +27,27 @@ const Screen = ({ gameData, dispatch, map }) => {
           dispatch={dispatch}
         />
       );
-    case "shop":
+    case SHOP:
       console.log("shopLogic");
       return <Shop />;
-    case "event":
+    case EVENT:
       console.log("eventLogic");
       return <Event />;
-    case "rest":
+    case REST:
       console.log("restLogic");
       return <Rest />;
-    case "miniboss":
+    case MINIBOSS:
       console.log("minibossLogic");
       return <MiniBoss />;
-    case "boss":
+    case BOSS:
       console.log("bossLogic");
       return <div>`bossLogic`</div>;
-    case "game over":
+    case GAMEOVER:
         console.log("game over");
         return <div>`game over`</div>;
     default:
       console.log("no scene selected");
-      return <></>
+      return <>404 Yo</>
   }
 };
 

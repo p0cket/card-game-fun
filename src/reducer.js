@@ -1,46 +1,37 @@
 import { ACTIONS } from "./actions";
+import { SCENES } from "./scenes";
 import { startingDeck, startingData } from "./components/consts";
 import { shuffle, decideEnemy, decideEnemyATK } from "./utils/reducer-utils";
 import { map } from "./components/mapGenerator";
 
 export default function reducer(state, action) {
   // @TODO when you get a chance, destructure it all
-  // const {payload} = action;
+  const { payload } = action;
   switch (action.type) {
     case ACTIONS.SET_SCENE:
-      return setSceneHandler(state, action.payload);
+      return setSceneHandler(state, payload);
     case ACTIONS.SET_MYDATA:
-      return action.payload;
+      return payload;
     case ACTIONS.SET_ALERT:
-        return setAlertHandler(state, action.payload)
-    //   return {
-    //     ...state,
-    //     alert: action.payload,
-    //   };
+      return setAlertHandler(state, payload);
     case ACTIONS.SET_DECK:
-      return { ...state, deck: action.payload };
+      return { ...state, deck: payload };
     case ACTIONS.DRAW_CARD:
-      return drawCardHandler(state, action.payload);
-    
+      return drawCardHandler(state, payload);
     case ACTIONS.PLAY_CARD:
-      return playCardHandler(state, action.payload);
-    
+      return playCardHandler(state, payload);
     case ACTIONS.DISCARD_CARD:
-      return discardCardHandler(state, action.payload);
-    
+      return discardCardHandler(state, payload);
     case ACTIONS.SET_ENEMY:
-      return setEnemyHandler(state, action.payload);
+      return setEnemyHandler(state, payload);
     case ACTIONS.SET_ATK:
-      return setAtkHandler(state, action.payload);
+      return setAtkHandler(state, payload);
     case ACTIONS.BEGIN_BATTLE:
-      return beginBattleHandler(state, action.payload);
-
+      return beginBattleHandler(state, payload);
     case ACTIONS.END_TURN:
-      return endTurnHandler(state, action.payload);
-
+      return endTurnHandler(state, payload);
     case ACTIONS.GAME_OVER:
       return gameOverHandler(state);
-
     default:
       console.log(`no action type matched, returning state`);
       return state;
@@ -48,34 +39,47 @@ export default function reducer(state, action) {
 }
 
 const setAlertHandler = (state, payload) => {
-  console.error('payload', payload)
+  console.error("payload", payload);
   return {
     ...state,
     alert: payload,
-  }
-}
-
+  };
+};
 
 const playCardHandler = (state, { card }) => {
+  // 
+  // let nextState = {...gameData}
+  // 
   if (state.hero.energy < card.cost) {
-    return setAlertHandler(state, `Not enough energy to play that card :(`)
+    return setAlertHandler(state, `Not enough energy to play that card :(`);
   }
-
-  console.log(`PlayCard payload:`, card.num, card.cost);
-  // if (state.hero.energy >= action.payload.cost) {
   if (state.battle.enemy.health - card.num <= 0) {
     console.log(`you defeated the enemy!`);
+    // ---- for now, go to next level, later turn into:
+    // set scene for a results screen.
+    // results screen goes to a reward screen.
+    // reward screen goes to next level. (or map)
+    // setSceneHandler(state, payload)
+    // ----
     //also use energy needed to make the card
     //end battle logic
-    //move to next scene
+
+    //move to next scene (mimicking our other call)
+    // let nextState = {...state}
+    // const payload = {
+    //   enemySeed: Math.random(),
+    //   atkSeed: Math.random(),
+    //   beginBattleSeed: Math.random(),
+    //   startingHandCount: 3,
+    // }
+
+    // const nextState = setSceneHandler(state, payload);
+    // return nextState;
   }
   const myHandIndex = state.battle.hand.indexOf(card);
   const hand = [...state.battle.hand];
   hand.splice(myHandIndex, 1);
-  //[1,2,3].splice(0, 1) -> [1]
-  
-  console.log(`myHandIndex: ${myHandIndex},[...state.battle.hand]`,[...state.battle.hand], 'hand', hand)
-  console.log(`initialState: `, state)
+
   const energyLeft = state.hero.energy - card.cost;
   const enemyHealthLeft = state.battle.enemy.health - card.num;
   const nextState = {
@@ -90,7 +94,7 @@ const playCardHandler = (state, { card }) => {
       hand,
     },
   };
-  console.log(`nextState: `,nextState)
+  console.log(`nextState: `, nextState);
   return discardCardHandler(nextState, { cardToRemove: card });
 };
 
@@ -102,7 +106,7 @@ const discardCardHandler = (state, payload) => {
       discarded: [...state.battle.discarded, payload.cardToRemove],
     },
   };
-}
+};
 
 const endTurnHandler = (state, payload) => {
   const { hero, battle } = state;
@@ -121,7 +125,7 @@ const gameOverHandler = (state) => {
   return {
     ...startingData,
     curScene: {
-      scene: "game over",
+      scene: SCENES.GAMEOVER,
       lvl: 0,
     },
   };
@@ -133,7 +137,7 @@ const setSceneHandler = (state, payload) => {
     lvl: state.curScene.lvl + 1,
   };
   let nextState = state;
-  if (nextLevel.scene === "battle") {
+  if (nextLevel.scene === SCENES.BATTLE) {
     const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload;
     nextState = setEnemyHandler(nextState, { seed: enemySeed });
     nextState = setAtkHandler(nextState, { seed: atkSeed });
@@ -149,6 +153,14 @@ const setSceneHandler = (state, payload) => {
   };
 };
 
+const setEnemyHandler = (state, payload) => {
+  const { seed } = payload;
+  return {
+    ...state,
+    battle: { ...state.battle, enemy: decideEnemy(seed) },
+  };
+};
+
 const setAtkHandler = (state, payload) => {
   const { seed } = payload;
   return {
@@ -160,14 +172,6 @@ const setAtkHandler = (state, payload) => {
         nextAttack: decideEnemyATK(seed, state.battle.enemy.attacks),
       },
     },
-  };
-};
-
-const setEnemyHandler = (state, payload) => {
-  const { seed } = payload;
-  return {
-    ...state,
-    battle: { ...state.battle, enemy: decideEnemy(seed) },
   };
 };
 

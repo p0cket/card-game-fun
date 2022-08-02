@@ -1,6 +1,6 @@
 import React from 'react'
 const Card = ({ cardValue, playCard }) => {
-  const { type, name, num, cost, id } = cardValue;
+  const { type, name, num, cost } = cardValue;
   const styles = {
     cardStyle: {
       color: "blue",
@@ -20,7 +20,6 @@ const Card = ({ cardValue, playCard }) => {
         {`${name} ${energyEmoji.repeat(cost)}`}
         <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
         <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
-        {/* type: types[j], name: names[j], num */}
       </button>
     </>
   );

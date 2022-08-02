@@ -1,8 +1,5 @@
 import React from "react";
 import { ACTIONS } from "../actions";
-import { startingData } from "./consts";
-import { decideEnemyATK } from "../utils/battle-utils";
-
 import Card from "./Card";
 import Enemy from "./Enemy";
 
