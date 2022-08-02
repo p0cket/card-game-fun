@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 // import enemies from "./enemies";
 
 const Enemy = ({ enemyData }) => {
   const { name, health, bio, status, nextAttack } = enemyData;
+  const [danceLeft, setDanceLeft] = useState(true);
+  useEffect(() => {
+    // setTimeout(() => setDanceLeft(!danceLeft), 500)
+    setTimeout(() => setDanceLeft(!danceLeft), 2000)
+
+  }, [danceLeft])
+
 
   return (
     <div style={{ border: "2px dotted lightgray", borderRadius: "10px" }}>
@@ -12,9 +19,7 @@ const Enemy = ({ enemyData }) => {
       <div>{bio}</div>
       <br />
       <div>
-        {Math.floor(Math.random() * 2) === 1
-          ? <span role='img'  aria-label="emoji enemy">"🔥\\_(X_X)-/🔥"</span>
-          : <span role='img'  aria-label="emoji enemy"> "🔥\\-(X_X)_/🔥"</span>}
+        {danceLeft ? '🔥\\_(X_X)-/🔥' : '🔥\\-(X_X)_/🔥'}
       </div>
       <br />
       <div>Status: He is {status}</div>

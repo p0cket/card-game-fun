@@ -18,7 +18,7 @@ export const startingData = {
   gold: 50,
   hero: {
     health: 100,
-    energy: 10,
+    energy: 5,
     status: "Feeling Fine",
   },
   battle: {
@@ -49,7 +49,7 @@ export const startingData = {
     discarded: [],
     beginning: false,
   },
-  curScene: { scene: "intro", lvl: 0 },
+  curScene: { scene: "intro", lvl: 1 },
   alert: "",
 };
 

@@ -14,11 +14,6 @@ export const decideEnemyATK = (enemyAttacks) => {
         console.log(`no enemyAttacks`)
     }
 };
-export const decideEnemy = () => {
-  const rndm = Math.floor(Math.random() * enemies.length);
-  const ourEnemy = enemies[rndm];
-  return ourEnemy;
-};
 
 // export const drawCard = () => {
 //   dispatch({

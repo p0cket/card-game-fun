@@ -1,5 +1,6 @@
 const mapGenerator = () => {
   return [
+    "game over",
     "intro",
     "battle",
     "shop",
@@ -39,4 +40,5 @@ const mapGenerator = () => {
   ];
 };
 
-export default mapGenerator;
+export const map =  mapGenerator();
+

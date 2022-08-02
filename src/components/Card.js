@@ -1,6 +1,6 @@
 import React from 'react'
 const Card = ({ cardValue, playCard }) => {
-  const { type, name, num, cost } = cardValue;
+  const { type, name, num, cost, id } = cardValue;
   const styles = {
     cardStyle: {
       color: "blue",
