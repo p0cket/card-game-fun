@@ -1,5 +1,6 @@
 import React from "react";
-import Card from "./Card";
+import Card from "../Card";
+import Item from "../Item"
 const cardValue1 = { type: "poison", name: "syphon life", num: 4, cost: 2 };
 const cardValue2 = {
   type: "lightning",
@@ -20,6 +21,11 @@ const Shop = () => {
       Shop Component
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
+      <div>
+      <Item />
+      <Item />
+      <Item />
+      </div>
       <div>
         <Card cardValue={cardValue1} />
 

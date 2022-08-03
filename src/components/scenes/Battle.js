@@ -1,7 +1,7 @@
 import React from "react";
-import { ACTIONS } from "../actions";
-import Card from "./Card";
-import Enemy from "./Enemy";
+import { ACTIONS } from "../../actions";
+import Card from "../Card";
+import Enemy from "../Enemy";
 
 const Battle = ({ gameData, dispatch }) => {
   const drawCard = () => {

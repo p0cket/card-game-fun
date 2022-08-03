@@ -2,12 +2,12 @@
 import React from 'react';
 import { SCENES } from '../scenes';
 // All of our scenes are below
-import Intro from "./Intro";
-import Event from "./Event";
-import Shop from "./Shop";
-import Rest from "./Rest";
-import Battle from "./Battle";
-import MiniBoss from "./MiniBoss";
+import Intro from "./scenes/Intro";
+import Event from "./scenes/Event";
+import Shop from "./scenes/Shop";
+import Rest from "./scenes/Rest";
+import Battle from "./scenes/Battle";
+import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
   const curLevelNum = gameData.curScene.lvl;
