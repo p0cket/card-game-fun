@@ -48,8 +48,7 @@ const Battle = ({ gameData, dispatch }) => {
       <br />
       <div>
         <button onClick={() => drawCard()}>
-          Draw ({gameData.hero.energy} Energy Left (This doesn't cost energy
-          anymore))
+          Draw a card
         </button>
         <h4 style={{ color: "gray" }}>
           {gameData.battle.discarded.length} discarded Cards

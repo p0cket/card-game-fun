@@ -1,8 +1,8 @@
 import { ACTIONS } from "./actions";
 import { SCENES } from "./scenes";
-import { startingDeck, startingData } from "./components/consts";
+import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts";
 import { shuffle, decideEnemy, decideEnemyATK } from "./utils/reducer-utils";
-import { map } from "./components/mapGenerator";
+import { map } from "./consts/mapGenerator";
 
 export default function reducer(state, action) {
   // @TODO when you get a chance, destructure it all
@@ -11,7 +11,8 @@ export default function reducer(state, action) {
     case ACTIONS.SET_SCENE:
       return setSceneHandler(state, payload);
     case ACTIONS.SET_MYDATA:
-      return payload;
+      // return payload;
+      return setMyDataHandler(state, payload);
     case ACTIONS.SET_ALERT:
       return setAlertHandler(state, payload);
     case ACTIONS.SET_DECK:
@@ -46,14 +47,18 @@ const setAlertHandler = (state, payload) => {
   };
 };
 
+const setMyDataHandler = (payload) => {
+  return payload;
+};
+
 const playCardHandler = (state, { card }) => {
-  // 
-  // let nextState = {...gameData}
-  // 
-  if (state.hero.energy < card.cost) {
-    return setAlertHandler(state, `Not enough energy to play that card :(`);
+  //
+  let nextState = { ...state };
+  //
+  if (nextState.hero.energy < card.cost) {
+    return setAlertHandler(nextState, `Not enough energy to play that card :(`);
   }
-  if (state.battle.enemy.health - card.num <= 0) {
+  if (nextState.battle.enemy.health - card.num <= 0) {
     console.log(`you defeated the enemy!`);
     // ---- for now, go to next level, later turn into:
     // set scene for a results screen.
@@ -61,34 +66,33 @@ const playCardHandler = (state, { card }) => {
     // reward screen goes to next level. (or map)
     // setSceneHandler(state, payload)
     // ----
-    //also use energy needed to make the card
+
     //end battle logic
+    nextState = setMyDataHandler({ ...nextState, gold: nextState.gold + 25 });
 
-    //move to next scene (mimicking our other call)
-    // let nextState = {...state}
-    // const payload = {
-    //   enemySeed: Math.random(),
-    //   atkSeed: Math.random(),
-    //   beginBattleSeed: Math.random(),
-    //   startingHandCount: 3,
-    // }
+    const payload = {
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: 3,
+    };
 
-    // const nextState = setSceneHandler(state, payload);
+    nextState = setSceneHandler(nextState, payload);
     // return nextState;
   }
-  const myHandIndex = state.battle.hand.indexOf(card);
-  const hand = [...state.battle.hand];
+  const myHandIndex = nextState.battle.hand.indexOf(card);
+  const hand = [...nextState.battle.hand];
   hand.splice(myHandIndex, 1);
 
-  const energyLeft = state.hero.energy - card.cost;
-  const enemyHealthLeft = state.battle.enemy.health - card.num;
-  const nextState = {
-    ...state,
-    hero: { ...state.hero, energy: energyLeft },
+  const energyLeft = nextState.hero.energy - card.cost;
+  const enemyHealthLeft = nextState.battle.enemy.health - card.num;
+  nextState = {
+    ...nextState,
+    hero: { ...nextState.hero, energy: energyLeft },
     battle: {
-      ...state.battle,
+      ...nextState.battle,
       enemy: {
-        ...state.battle.enemy,
+        ...nextState.battle.enemy,
         health: enemyHealthLeft,
       },
       hand,
@@ -114,7 +118,7 @@ const endTurnHandler = (state, payload) => {
   if (finalHealth > 0) {
     const nextState = {
       ...state,
-      hero: { ...state.hero, health: finalHealth },
+      hero: { ...state.hero, health: finalHealth, energy: fullEnergyAmount },
     };
     return setAtkHandler(nextState, payload);
   } else {
@@ -187,8 +191,9 @@ const beginBattleHandler = (state, payload) => {
   }
   let nextState = {
     ...state,
-    battle: { ...state.battle, beginning: true },
+    battle: { ...state.battle, beginning: true, hand: [] },
     deck: [...shuffledDeck],
+    hero: { ...state.hero, energy: fullEnergyAmount },
   };
 
   for (let i = 0; i < startingHandCount; i++) {

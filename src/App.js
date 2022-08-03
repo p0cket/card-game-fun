@@ -2,8 +2,8 @@ import React from "react";
 import "./styles.css";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
-import { map } from "./components/mapGenerator";
-import { startingData } from "./components/consts";
+import { map } from "./consts/mapGenerator";
+import { startingData } from "./consts/consts";
 import reducer from "./reducer";
 import { ACTIONS } from "./actions";
 

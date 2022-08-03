@@ -1,4 +1,4 @@
-import { enemies } from "../components/consts";
+import { enemies } from "../consts/consts";
 
 export const shuffle = (array, seed) => {
   return array.sort(() => seed - 0.5);

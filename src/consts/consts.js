@@ -1,16 +1,16 @@
 export const startingDeck = [
-  {type: "Fire", name: "Flamethrower", num: 2, cost: 1, id: 1},
-  {type: "Water", name: "Gush", num: 2, cost: 1, id:2},
-  {type: "Poison", name: "Sting", num: 2, cost: 1, id:3},
-  {type: "Fire", name: "Flamethrower", num: 2, cost: 1, id:4},
-  {type: "Physical", name: "Throw Fist", num: 3, cost: 2, id:5},
-  {type: "Physical", name: "Throw Fist", num: 3, cost: 2, id:6},
-  {type: "Fire", name: "Flamethrower", num: 2, cost: 1, id:7},
-  {type: "Water", name: "Gush", num: 2, cost: 1, id:8},
-  {type: "Poison", name: "Sting", num: 2, cost: 1, id:9},
-  {type: "Fire", name: "Flamethrower", num: 2, cost: 1, id:10},
-  {type: "Physical", name: "Throw Fist", num: 3, cost: 2, id:11},
-  {type: "Physical", name: "Throw Fist", num: 3, cost: 2, id:12},
+  { type: "Fire", name: "Flamethrower+", num: 8, cost: 1, id: 1 },
+  { type: "Water", name: "Gush+", num: 6, cost: 1, id: 2 },
+  { type: "Poison", name: "Sting+", num: 5, cost: 1, id: 3 },
+  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 4 },
+  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 5 },
+  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 6 },
+  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 7 },
+  { type: "Water", name: "Gush", num: 2, cost: 1, id: 8 },
+  { type: "Poison", name: "Sting", num: 2, cost: 1, id: 9 },
+  { type: "Fire", name: "Flamethrower", num: 5, cost: 1, id: 10 },
+  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 11 },
+  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 12 },
 ];
 
 export const startingData = {
@@ -56,7 +56,7 @@ export const startingData = {
 export const enemies = [
   {
     name: "EvilMan",
-    health: 30,
+    health: 15,
     passive: "none",
     bio: "A bad dude",
     status: "none",
@@ -77,7 +77,7 @@ export const enemies = [
   },
   {
     name: "Lackey",
-    health: 15,
+    health: 10,
     passive: "heal",
     bio: "A bad dude's smaller dude",
     status: "none",
@@ -97,3 +97,5 @@ export const enemies = [
     ],
   },
 ];
+
+export const fullEnergyAmount = 5;
