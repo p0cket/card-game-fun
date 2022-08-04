@@ -31,6 +31,8 @@ export default function reducer(state, action) {
       return beginBattleHandler(state, payload);
     case ACTIONS.END_TURN:
       return endTurnHandler(state, payload);
+    // case ACTIONS.ADD_CARD:
+    //   return addCardHandler(state, payload);
     case ACTIONS.GAME_OVER:
       return gameOverHandler(state);
     default:

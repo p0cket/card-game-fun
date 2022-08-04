@@ -3,7 +3,7 @@ import React from 'react'
 const Rest = () => {
   return (
     <>
-      Rest Component
+      <h2>Rest Component</h2>
       <h3>Stay a while, and listen</h3>
       <div>As you come upon a campfire, you feel calm.</div>
       <div>A wise old scholar greets you.</div>
@@ -11,6 +11,8 @@ const Rest = () => {
         You realize the old man will keep watch and alarm you if there is any
         danger
       </div>
+      <button>Heal</button>
+      <br/><br/>
     </>
   );
 };

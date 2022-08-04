@@ -1,13 +1,13 @@
 import React from 'react'
 
 const Event = () => {
-  //doOption
   const eventDeets = [
     {
-      description: "we're no strangers to ",
-      choices: ["yes", "no"],
+      name: "Sample Event",
+      description: "You happen upon a glade",
+      choices: ["Fight the civilians", "Keep going going on path"],
       choiceResults: [
-        { type: "health", num: 30 },
+        { type: "gold", num: 30 },
         { type: "exit", num: 0 }
       ]
     }
@@ -51,7 +51,7 @@ const Event = () => {
 
   return (
     <div>
-      <h5>Event Name: -name- </h5>
+      <h5>Event Name: {eventDeets[0].name} </h5>
       <div>{eventDeets[0].description}</div>
       <br />
       <button onClick={() => executeChoice(eventDeets[0].choiceResults[0])}>

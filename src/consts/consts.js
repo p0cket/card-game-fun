@@ -98,4 +98,32 @@ export const enemies = [
   },
 ];
 
+export const sampleItems = [
+  {
+    name: "Wand of Gameleon",
+    desc: "+50 to total health",
+    boost: {health: 50},
+    flavortext: `"The Wand of Gameleon's power is has been spoken of 
+          in historical texts to give life
+          to the one who holds it" -Korvo, the missing link`,
+    price: 50,
+  },
+  {
+    name: "Kamuk's Brute Sword",
+    desc: "-4 to total health, +3 to base damage",
+    boost: {health: -50, baseDMG: 3},
+    flavortext: `Kamuk's prey never stood a chance.
+     His rage radiated from him, 
+     imbuing everything around with power,
+      the grass, his clothes, and his blade.`,
+    price: 25,
+  },
+  {
+    name: "Isiaac's Lucky tooth",
+    desc: "Every 3 turns, you get an extra energy",
+    boost: {rune: 'RUNE.LUCKYTOOTH (@TODO: add this)'},
+    flavortext: `Isiaac only knew pain, so he didn't realized this was missing`,
+    price: 40,
+  },
+];
 export const fullEnergyAmount = 5;

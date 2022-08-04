@@ -5,6 +5,10 @@ export const shuffle = (array, seed) => {
 };
 
 export const decideEnemy = (seed) => {
+  //@todo: check for which level enemies they should be
+  //return those level enemies like
+  // const rndm = Math.floor(seed * enemies[lvl].length);
+  // const ourEnemy = enemies[lvl][rndm];
   const rndm = Math.floor(seed * enemies.length);
   const ourEnemy = enemies[rndm];
   return ourEnemy;
