@@ -31,8 +31,8 @@ export default function reducer(state, action) {
       return beginBattleHandler(state, payload);
     case ACTIONS.END_TURN:
       return endTurnHandler(state, payload);
-    // case ACTIONS.ADD_CARD:
-    //   return addCardHandler(state, payload);
+    case ACTIONS.ADD_CARD:
+      return addCardHandler(state, payload);
     case ACTIONS.GAME_OVER:
       return gameOverHandler(state);
     default:
@@ -40,6 +40,12 @@ export default function reducer(state, action) {
       return state;
   }
 }
+
+const addCardHandler = (state, payload) => {
+  const ourDeck = state.deck;
+  const updatedDeck = ourDeck.push(payload);
+  return { ...state, deck: updatedDeck };
+};
 
 const setAlertHandler = (state, payload) => {
   console.error("payload", payload);
@@ -145,6 +151,7 @@ const setSceneHandler = (state, payload) => {
   let nextState = state;
   if (nextLevel.scene === SCENES.BATTLE) {
     const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload;
+    // give also the lvl and miniboss or boss
     nextState = setEnemyHandler(nextState, { seed: enemySeed });
     nextState = setAtkHandler(nextState, { seed: atkSeed });
     nextState = beginBattleHandler(nextState, {

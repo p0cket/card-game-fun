@@ -5,9 +5,7 @@ const Enemy = ({ enemyData }) => {
   const { name, health, bio, status, nextAttack } = enemyData;
   const [danceLeft, setDanceLeft] = useState(true);
   useEffect(() => {
-    // setTimeout(() => setDanceLeft(!danceLeft), 500)
     setTimeout(() => setDanceLeft(!danceLeft), 2000)
-
   }, [danceLeft])
 
 

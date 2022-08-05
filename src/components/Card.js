@@ -12,8 +12,14 @@ const Card = ({ cardValue, playCard }) => {
     }
   };
 
-  const energyEmoji = "🧪";
+  // const addCard = (card) => {
+  //   dispatch({
+  //     type: ACTIONS.ADD_CARD,
+  //     payload: { card },
+  //   });
+  // };
 
+  const energyEmoji = "🧪";
   return (
     <>
       <button style={styles.cardStyle} onClick={() => playCard(cardValue)}>

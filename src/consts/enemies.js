@@ -1,4 +1,15 @@
-export const actOneEnemies = [
+export const enemyTypes = {
+  actOne: [],
+  actOneMini: [],
+  actOneBoss: [],
+  actTwo: [],
+  actTwoMini: [],
+  actTwoBoss: [],
+  actThree: [],
+  actThreeMini: [],
+  actThreeBoss: [],
+  finalBoss: [],
+  enemies: [
     {
       name: "EvilMan",
       health: 15,
@@ -41,4 +52,5 @@ export const actOneEnemies = [
         },
       ],
     },
-  ];
+  ],
+};

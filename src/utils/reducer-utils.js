@@ -4,11 +4,11 @@ export const shuffle = (array, seed) => {
   return array.sort(() => seed - 0.5);
 };
 
-export const decideEnemy = (seed) => {
+// seed, and lvl/miniboss/boss/etc. What type
+export const decideEnemy = (seed, enemiesArr) => {
   //@todo: check for which level enemies they should be
   //return those level enemies like
-  // const rndm = Math.floor(seed * enemies[lvl].length);
-  // const ourEnemy = enemies[lvl][rndm];
+  // use enemiesArr instead of `enemies` 
   const rndm = Math.floor(seed * enemies.length);
   const ourEnemy = enemies[rndm];
   return ourEnemy;

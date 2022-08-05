@@ -11,5 +11,6 @@ export const ACTIONS = {
   BEGIN_BATTLE: "begin-battle",
   TAKE_DAMAGE: "take-damage",
   END_TURN: "end-turn",
+  ADD_CARD: "add-card",
   GAME_OVER: "game-over",
 };
