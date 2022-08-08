@@ -14,10 +14,3 @@ export const decideEnemyATK = (enemyAttacks) => {
         console.log(`no enemyAttacks`)
     }
 };
-
-// export const drawCard = () => {
-//   dispatch({
-//     type: ACTIONS.DRAW_CARD,
-//     payload: { deck: gameData.deck, hand: gameData.battle.hand },
-//   });
-// };

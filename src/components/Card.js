@@ -31,9 +31,4 @@ const Card = ({ cardValue, playCard }) => {
   );
 };
 
-// Card.propTypes = {
-//   cardValue: PropTypes.string,
-//   playCard: PropTypes.func
-// };
-
 export default Card;

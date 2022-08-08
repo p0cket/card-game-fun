@@ -122,6 +122,7 @@ const discardCardHandler = (state, payload) => {
 
 const endTurnHandler = (state, payload) => {
   const { hero, battle } = state;
+  // apply status effects. maybe a applyStatusEffectsHandler()
   const finalHealth = hero.health - battle.enemy.nextAttack.damage;
   if (finalHealth > 0) {
     const nextState = {

@@ -19,6 +19,7 @@ export default function App() {
         atkSeed: Math.random(),
         beginBattleSeed: Math.random(),
         startingHandCount: 3,
+        // enemiesArr, determined by level
       },
     });
   };
