@@ -11,8 +11,9 @@ export default function reducer(state, action) {
     case ACTIONS.SET_SCENE:
       return setSceneHandler(state, payload);
     case ACTIONS.SET_MYDATA:
-      // return payload;
       return setMyDataHandler(state, payload);
+    case ACTIONS.SET_MYBALANCE:
+      return setMyBalanceHandler(state, payload);
     case ACTIONS.SET_ALERT:
       return setAlertHandler(state, payload);
     case ACTIONS.SET_DECK:
@@ -27,6 +28,11 @@ export default function reducer(state, action) {
       return setEnemyHandler(state, payload);
     case ACTIONS.SET_ATK:
       return setAtkHandler(state, payload);
+    // level handlers
+    case ACTIONS.EVENT_CHOICE:
+      return eventChoiceHandler(state, payload);
+    case ACTIONS.SELECT_REWARD:
+      return setRewardHandler(state, payload);
     case ACTIONS.BEGIN_BATTLE:
       return beginBattleHandler(state, payload);
     case ACTIONS.END_TURN:
@@ -41,9 +47,39 @@ export default function reducer(state, action) {
   }
 }
 
+const eventChoiceHandler = (state, payload) => {
+  //maybe as a `switch` statement to determine the actions
+  const newState = setMyBalanceHandler(state, payload)
+  const fakeScenePayload = {
+    enemySeed: 1,
+    atkSeed: 1,
+    beginBattleSeed: 1,
+    startingHandCount: 3,
+  };
+  //breaks here because of the fake scene payload
+  const nextSceneState = setSceneHandler(newState, fakeScenePayload);
+  return nextSceneState;
+};
+
+const setRewardHandler = (state, payload) => {
+  const newState = addCardHandler(state, payload);
+  const fakeScenePayload = {
+    enemySeed: 1,
+    atkSeed: 1,
+    beginBattleSeed: 1,
+    startingHandCount: 3,
+  };
+  const nextSceneState = setSceneHandler(newState, fakeScenePayload);
+  return nextSceneState;
+  // return newState;
+};
+
 const addCardHandler = (state, payload) => {
   const ourDeck = state.deck;
-  const updatedDeck = ourDeck.push(payload);
+  console.log("adding this card to our deck", payload);
+  ourDeck.push(payload);
+  // set some notification that the card is added
+  const updatedDeck = ourDeck;
   return { ...state, deck: updatedDeck };
 };
 
@@ -57,6 +93,11 @@ const setAlertHandler = (state, payload) => {
 
 const setMyDataHandler = (payload) => {
   return payload;
+};
+const setMyBalanceHandler = (state, payload) => {
+  const newBalance = state.gold + payload;
+  const nextState = { ...state, gold: newBalance };
+  return nextState;
 };
 
 const playCardHandler = (state, { card }) => {

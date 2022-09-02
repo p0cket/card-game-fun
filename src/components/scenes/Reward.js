@@ -21,14 +21,16 @@ const cardsForSale = [
   },
 ];
 
-const Reward = (gameData, dispatch) => {
+const Reward = ({gameData, dispatch}) => {
   //@TODO add card function ----
-  // const addCard = (card) => {
-  //   dispatch({
-  //     type: ACTIONS.ADD_CARD,
-  //     payload: { card },
-  //   });
-  // };
+  const addCard = (card) => {
+    console.log(`adding this card:`, card)
+    dispatch({
+      // type: ACTIONS.ADD_CARD,
+      type: ACTIONS.SELECT_REWARD,
+      payload: { card },
+    });
+  };
   // ------------
 
   return (
@@ -38,19 +40,9 @@ const Reward = (gameData, dispatch) => {
       <h3>Its dangerous to go alone, give me money</h3>
       <div>
  {cardsForSale.map(card => {
-  const {type, name, num, cost} = card
-  return (
-    <>
-      <div>
-        <p>type: {type}</p>
-        <p>name: {name}</p>
-        <p>Damage: {num}</p>
-        <p>cost: {cost}</p>
-        <button>Add to deck</button>
-        {/* <button onClick={addCard(card)}>Add to deck</button> */}
-      </div>
-    </>
-  )
+  return(
+    <Card key={card.id} cardValue={card} useCard={addCard} />
+    )
  })}
       </div>
       {/* <div>

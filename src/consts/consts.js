@@ -44,7 +44,7 @@ export const startingData = {
         },
       ],
     },
-
+    runes:[],
     hand: [],
     discarded: [],
     beginning: false,

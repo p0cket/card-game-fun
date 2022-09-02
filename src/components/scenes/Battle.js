@@ -39,7 +39,7 @@ const Battle = ({ gameData, dispatch }) => {
           {gameData.battle.hand.length > 0
             ? gameData.battle.hand.map((card) => {
                 return (
-                  <Card key={card.id} cardValue={card} playCard={playCard} />
+                  <Card key={card.id} cardValue={card} useCard={playCard} />
                 );
               })
             : `No Cards in hand. Click "Draw" to spend an energy and draw a card.`}

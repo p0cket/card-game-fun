@@ -1,5 +1,5 @@
 import React from 'react'
-const Card = ({ cardValue, useCard }) => {
+const RewardCard = ({ cardValue, addCard }) => {
   const { type, name, num, cost } = cardValue;
   const styles = {
     cardStyle: {
@@ -15,7 +15,7 @@ const Card = ({ cardValue, useCard }) => {
   const energyEmoji = "🧪";
   return (
     <>
-      <button style={styles.cardStyle} onClick={() => useCard(cardValue)}>
+      <button style={styles.cardStyle} onClick={() => addCard(cardValue)}>
         {`${name} ${energyEmoji.repeat(cost)}`}
         <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
         <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
@@ -24,4 +24,4 @@ const Card = ({ cardValue, useCard }) => {
   );
 };
 
-export default Card;
+export default RewardCard;

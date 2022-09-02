@@ -1,13 +1,14 @@
 import React from 'react'
+import { ACTIONS } from '../../actions';
 
-const Event = () => {
+const Event = ({dispatch}) => {
   const eventDeets = [
     {
       name: "Sample Event",
       description: "You happen upon a glade",
       choices: ["Fight the civilians", "Keep going going on path"],
       choiceResults: [
-        { type: "gold", num: 30 },
+        { type: "money", num: 30 },
         { type: "exit", num: 0 }
       ]
     }
@@ -30,6 +31,11 @@ const Event = () => {
         break;
       case "money":
         console.log(`money choice`);
+        dispatch({
+          // type: ACTIONS.SET_MYBALANCE,
+          type: ACTIONS.EVENT_CHOICE,
+          payload: choice.num,
+        });
         break;
       case "cards":
         console.log(`cards choice`);

@@ -3,7 +3,7 @@ import { sampleItems } from "../../consts/consts";
 // import Card from "../Card";
 import Item from "../Item";
 
-const Shop = () => {
+const Shop = ({dispatch}) => {
   console.log(sampleItems);
 
   return (
