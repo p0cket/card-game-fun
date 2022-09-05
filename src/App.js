@@ -6,6 +6,10 @@ import { map } from "./consts/mapGenerator";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
 import { ACTIONS } from "./actions";
+//antd
+import { PageHeader, Button } from "antd";
+import "antd/dist/antd.css";
+
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
@@ -31,17 +35,25 @@ export default function App() {
 
   return (
     <div className="App">
+      <PageHeader
+        className="site-page-header"
+        // onBack={() => null}
+        title={`One Wish`}
+        subTitle={`Hero: 💞${health}HP 🧪${energy} Energy 💰${gameData.gold} ---ACT1: level
+        ${gameData.curScene.lvl}---`}
+      />
       <div>
-        <h3 style={{ textAlign: "center" }}>
+        {/*  //A repeating healthbar. I can do better
+         <h3 style={{ textAlign: "center" }}>
           {heartEmoji.repeat(healthBarCount)}
-        </h3>
-        <h3>
+        </h3> */}
+        {/* <h3>
           {`Hero: 💞${health}HP 🧪${energy} Energy 💰${gameData.gold} ---ACT1: level
         ${gameData.curScene.lvl}---`}
-        </h3>
+        </h3> */}
       </div>
       <Screen gameData={gameData} dispatch={dispatch} map={map} />
-      <button onClick={loadNextLevel}>Next Level</button>
+      <Button onClick={loadNextLevel} type="primary">Next Level</Button>
     </div>
   );
 }
