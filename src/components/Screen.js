@@ -32,7 +32,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Event dispatch={dispatch} />;
     case REST:
       console.log("restLogic");
-      return <Rest />;
+      return <Rest dispatch={dispatch} />;
     case REWARD:
       console.log("rewardLogic");
       return <Reward gameData={gameData} dispatch={dispatch} />;

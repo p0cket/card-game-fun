@@ -33,6 +33,8 @@ export default function reducer(state, action) {
       return eventChoiceHandler(state, payload);
     case ACTIONS.SELECT_REWARD:
       return setRewardHandler(state, payload);
+    case ACTIONS.SELECT_REST:
+      return restHandler(state);
     case ACTIONS.BEGIN_BATTLE:
       return beginBattleHandler(state, payload);
     case ACTIONS.END_TURN:
@@ -47,16 +49,22 @@ export default function reducer(state, action) {
   }
 }
 
+const restHandler = (state) => {
+  const fullHealed = {...state, hero: {...state.hero, health: startingData.hero.health} }
+  return fullHealed;
+}
+
+
 const eventChoiceHandler = (state, payload) => {
   //maybe as a `switch` statement to determine the actions
-  const newState = setMyBalanceHandler(state, payload)
+  const newState = setMyBalanceHandler(state, payload);
   const fakeScenePayload = {
-    enemySeed: 1,
-    atkSeed: 1,
-    beginBattleSeed: 1,
+    enemySeed: Math.random(),
+    atkSeed: Math.random(),
+    beginBattleSeed: Math.random(),
     startingHandCount: 3,
   };
-  //breaks here because of the fake scene payload
+  //breaks here because of something...
   const nextSceneState = setSceneHandler(newState, fakeScenePayload);
   return nextSceneState;
 };
@@ -64,9 +72,9 @@ const eventChoiceHandler = (state, payload) => {
 const setRewardHandler = (state, payload) => {
   const newState = addCardHandler(state, payload);
   const fakeScenePayload = {
-    enemySeed: 1,
-    atkSeed: 1,
-    beginBattleSeed: 1,
+    enemySeed: Math.random(),
+    atkSeed: Math.random(),
+    beginBattleSeed: Math.random(),
     startingHandCount: 3,
   };
   const nextSceneState = setSceneHandler(newState, fakeScenePayload);
@@ -194,7 +202,9 @@ const setSceneHandler = (state, payload) => {
   if (nextLevel.scene === SCENES.BATTLE) {
     const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload;
     // give also the lvl and miniboss or boss
+    console.log(`state`, state);
     nextState = setEnemyHandler(nextState, { seed: enemySeed });
+    console.log(`nextState`, nextState);
     nextState = setAtkHandler(nextState, { seed: atkSeed });
     nextState = beginBattleHandler(nextState, {
       seed: beginBattleSeed,

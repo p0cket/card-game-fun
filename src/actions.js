@@ -8,6 +8,7 @@ export const ACTIONS = {
   SET_ALERT: "set_alert",
   DRAW_CARD: "draw-card",
   PLAY_CARD: "play-card",
+  SELECT_REST: "select-rest",
   SELECT_REWARD: "select-reward",
   DISCARD_CARD: "discard-card",
   BEGIN_BATTLE: "begin-battle",

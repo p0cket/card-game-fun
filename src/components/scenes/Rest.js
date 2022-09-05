@@ -1,6 +1,14 @@
-import React from 'react'
+import React from "react";
+import { ACTIONS } from "../../actions";
+import { startingData } from "../../consts/consts";
 
-const Rest = () => {
+const Rest = ({dispatch}) => {
+
+  const healToFullHealth = () => {
+    dispatch({
+      type: ACTIONS.SELECT_REST,
+    });
+  };
   return (
     <>
       <h2>Rest Component</h2>
@@ -11,8 +19,15 @@ const Rest = () => {
         You realize the old man will keep watch and alarm you if there is any
         danger
       </div>
-      <button>Heal</button>
-      <br/><br/>
+      <button
+        onClick={() => {
+          healToFullHealth();
+        }}
+      >
+        Heal
+      </button>
+      <br />
+      <br />
     </>
   );
 };
