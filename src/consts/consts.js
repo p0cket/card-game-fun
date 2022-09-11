@@ -49,7 +49,7 @@ export const startingData = {
     discarded: [],
     beginning: false,
   },
-  curScene: { scene: "intro", lvl: 1 },
+  curScene: { scene: "intro", lvl: 1, act: 1 },
   alert: "",
 };
 

@@ -1,7 +1,13 @@
 import { ACTIONS } from "./actions";
 import { SCENES } from "./scenes";
 import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts";
-import { shuffle, decideEnemy, decideEnemyATK } from "./utils/reducer-utils";
+import {
+  shuffle,
+  decideEnemyArr,
+  decideEnemy,
+  decideEnemyATK,
+  battlePayload,
+} from "./utils/reducer-utils";
 import { map } from "./consts/mapGenerator";
 
 export default function reducer(state, action) {
@@ -50,20 +56,17 @@ export default function reducer(state, action) {
 }
 
 const restHandler = (state) => {
-  const fullHealed = {...state, hero: {...state.hero, health: startingData.hero.health} }
+  const fullHealed = {
+    ...state,
+    hero: { ...state.hero, health: startingData.hero.health },
+  };
   return fullHealed;
-}
-
+};
 
 const eventChoiceHandler = (state, payload) => {
   //maybe as a `switch` statement to determine the actions
   const newState = setMyBalanceHandler(state, payload);
-  const fakeScenePayload = {
-    enemySeed: Math.random(),
-    atkSeed: Math.random(),
-    beginBattleSeed: Math.random(),
-    startingHandCount: 3,
-  };
+  const fakeScenePayload = battlePayload;
   //breaks here because of something...
   const nextSceneState = setSceneHandler(newState, fakeScenePayload);
   return nextSceneState;
@@ -71,12 +74,7 @@ const eventChoiceHandler = (state, payload) => {
 
 const setRewardHandler = (state, payload) => {
   const newState = addCardHandler(state, payload);
-  const fakeScenePayload = {
-    enemySeed: Math.random(),
-    atkSeed: Math.random(),
-    beginBattleSeed: Math.random(),
-    startingHandCount: 3,
-  };
+  const fakeScenePayload = battlePayload;
   const nextSceneState = setSceneHandler(newState, fakeScenePayload);
   return nextSceneState;
   // return newState;
@@ -127,12 +125,7 @@ const playCardHandler = (state, { card }) => {
     //end battle logic
     nextState = setMyDataHandler({ ...nextState, gold: nextState.gold + 25 });
 
-    const payload = {
-      enemySeed: Math.random(),
-      atkSeed: Math.random(),
-      beginBattleSeed: Math.random(),
-      startingHandCount: 3,
-    };
+    const payload = battlePayload;
 
     nextState = setSceneHandler(nextState, payload);
     // return nextState;
@@ -189,28 +182,48 @@ const gameOverHandler = (state) => {
     curScene: {
       scene: SCENES.GAMEOVER,
       lvl: 0,
+      act: 0,
     },
   };
 };
 
 const setSceneHandler = (state, payload) => {
+  const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload;
   const nextLevel = {
     scene: map[state.curScene.lvl + 1],
     lvl: state.curScene.lvl + 1,
+    act: state.curScene.act,
   };
   let nextState = state;
+  //
+  //
+  switch (nextLevel.scene) {
+    case SCENES.BATTLE:
+      break;
+    case SCENES.MINIBOSS:
+      break;
+    case SCENES.BOSS:
+      break;
+  }
+  //
+  //
   if (nextLevel.scene === SCENES.BATTLE) {
-    const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload;
+    // -----
+    const enemyArr = decideEnemyArr(state.curScene.act, `regular`);
+    // ------
+    // const enemyArr = decideEnemyArr(state.curScene.act, type )
+
     // give also the lvl and miniboss or boss
-    console.log(`state`, state);
     nextState = setEnemyHandler(nextState, { seed: enemySeed });
-    console.log(`nextState`, nextState);
+    //
+    // nextState = setEnemyHandler(nextState, { seed: enemySeed, enemyArr: enemyArr });
+    //
     nextState = setAtkHandler(nextState, { seed: atkSeed });
     nextState = beginBattleHandler(nextState, {
       seed: beginBattleSeed,
       startingHandCount,
     });
-  }
+  } // else if SCENES.MINIBOSS, use the pool of enemies from minibosses
 
   return {
     ...nextState,
@@ -219,10 +232,11 @@ const setSceneHandler = (state, payload) => {
 };
 
 const setEnemyHandler = (state, payload) => {
-  const { seed } = payload;
+  const { seed, enemyArr } = payload;
+
   return {
     ...state,
-    battle: { ...state.battle, enemy: decideEnemy(seed) },
+    battle: { ...state.battle, enemy: decideEnemy(seed, enemyArr) },
   };
 };
 

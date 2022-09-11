@@ -36,8 +36,8 @@ export default function App() {
           {heartEmoji.repeat(healthBarCount)}
         </h3>
         <h3>
-          {`Hero: 💞${health}HP 🧪${energy} Energy 💰${gameData.gold} ---ACT1: level
-        ${gameData.curScene.lvl}---`}
+          {`Hero: 💞${health}HP 🧪${energy} Energy 💰${gameData.gold}  level
+        ${gameData.curScene.lvl} -ACT${gameData.curScene.act}-`}
         </h3>
       </div>
       <Screen gameData={gameData} dispatch={dispatch} map={map} />

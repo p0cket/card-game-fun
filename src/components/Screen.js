@@ -21,9 +21,7 @@ const Screen = ({ gameData, dispatch, map }) => {
   switch (levelToSet) {
     case INTRO:
       return <Intro />;
-    case BATTLE:
-      console.log("(battle Screen)");
-      return <Battle gameData={gameData} dispatch={dispatch} />;
+
     case SHOP:
       console.log("shopLogic");
       return <Shop dispatch={dispatch} />;
@@ -36,9 +34,14 @@ const Screen = ({ gameData, dispatch, map }) => {
     case REWARD:
       console.log("rewardLogic");
       return <Reward gameData={gameData} dispatch={dispatch} />;
+    case BATTLE:
+      console.log("(battle Screen)");
+      return <Battle gameData={gameData} dispatch={dispatch} />;
     case MINIBOSS:
       console.log("minibossLogic");
       return <MiniBoss />;
+    // return <Battle gameData={gameData} dispatch={dispatch} type={'miniboss'} />;
+
     case BOSS:
       console.log("bossLogic");
       return <div>`bossLogic`</div>;

@@ -25,12 +25,6 @@ const Shop = ({dispatch}) => {
           );
         })}
       </div>
-      {/* <div>
-        <div>Cards for sale:</div>
-        <Card cardValue={cardValue1} />
-        <Card cardValue={cardValue2} />
-        <Card cardValue={cardValue3} />
-      </div> */}
     </div>
   );
 };
