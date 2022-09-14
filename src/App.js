@@ -23,7 +23,7 @@ export default function App() {
       },
     });
   };
-  console.log(`[App.js Rendered]`);
+  // console.log(`[App.js Rendered]`);
 
   const { health, energy } = gameData.hero;
   const healthBarCount = health / 4;

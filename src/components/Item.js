@@ -18,7 +18,6 @@ const Item = (item, applyItem) => {
 //   const logClick = (data) => {
 //     console.log('clicked', data)
 //   }
-
   return (
     <div style={styles.itemStyle}>
       <h3>{name ? name : "No Item"}</h3>

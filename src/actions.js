@@ -17,3 +17,9 @@ export const ACTIONS = {
   ADD_CARD: "add-card",
   GAME_OVER: "game-over",
 };
+
+export const ENEMY_TYPES = {
+  REG: 'regular',
+  MINI: 'miniboss',
+  BOSS: 'boss'
+}

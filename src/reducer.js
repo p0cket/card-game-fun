@@ -1,4 +1,4 @@
-import { ACTIONS } from "./actions";
+import { ACTIONS, ENEMY_TYPES } from "./actions";
 import { SCENES } from "./scenes";
 import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts";
 import {
@@ -82,10 +82,10 @@ const setRewardHandler = (state, payload) => {
 
 const addCardHandler = (state, payload) => {
   const ourDeck = state.deck;
-  console.log("adding this card to our deck", payload);
-  ourDeck.push(payload);
+  ourDeck.push(payload.card);
   // set some notification that the card is added
   const updatedDeck = ourDeck;
+  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
   return { ...state, deck: updatedDeck };
 };
 
@@ -195,35 +195,55 @@ const setSceneHandler = (state, payload) => {
     act: state.curScene.act,
   };
   let nextState = state;
-  //
-  //
+
+  let enemyArr = [];
   switch (nextLevel.scene) {
     case SCENES.BATTLE:
+      enemyArr = decideEnemyArr(state.curScene.act, ENEMY_TYPES.REG);
+
+      // typical battle code:
+      nextState = setEnemyHandler(nextState, {
+        seed: enemySeed,
+        enemyArr: enemyArr,
+      });
+      nextState = setAtkHandler(nextState, { seed: atkSeed });
+      nextState = beginBattleHandler(nextState, {
+        seed: beginBattleSeed,
+        startingHandCount,
+      });
       break;
     case SCENES.MINIBOSS:
+      enemyArr = decideEnemyArr(state.curScene.act, `mini`);
+      // typical battle code:
+      nextState = setEnemyHandler(nextState, {
+        seed: enemySeed,
+        enemyArr: enemyArr,
+      });
+      nextState = setAtkHandler(nextState, { seed: atkSeed });
+      nextState = beginBattleHandler(nextState, {
+        seed: beginBattleSeed,
+        startingHandCount,
+      });
       break;
     case SCENES.BOSS:
+      enemyArr = decideEnemyArr(state.curScene.act, `boss`);
+      // typical battle code:
+      nextState = setEnemyHandler(nextState, {
+        seed: enemySeed,
+        enemyArr: enemyArr,
+      });
+      nextState = setAtkHandler(nextState, { seed: atkSeed });
+      nextState = beginBattleHandler(nextState, {
+        seed: beginBattleSeed,
+        startingHandCount,
+      });
       break;
+    default:
+      console.log(
+        `setSceneHandler type isn't battle, type is: ${nextLevel.scene}`,
+        nextLevel
+      );
   }
-  //
-  //
-  if (nextLevel.scene === SCENES.BATTLE) {
-    // -----
-    const enemyArr = decideEnemyArr(state.curScene.act, `regular`);
-    // ------
-    // const enemyArr = decideEnemyArr(state.curScene.act, type )
-
-    // give also the lvl and miniboss or boss
-    nextState = setEnemyHandler(nextState, { seed: enemySeed });
-    //
-    // nextState = setEnemyHandler(nextState, { seed: enemySeed, enemyArr: enemyArr });
-    //
-    nextState = setAtkHandler(nextState, { seed: atkSeed });
-    nextState = beginBattleHandler(nextState, {
-      seed: beginBattleSeed,
-      startingHandCount,
-    });
-  } // else if SCENES.MINIBOSS, use the pool of enemies from minibosses
 
   return {
     ...nextState,
@@ -242,6 +262,7 @@ const setEnemyHandler = (state, payload) => {
 
 const setAtkHandler = (state, payload) => {
   const { seed } = payload;
+
   return {
     ...state,
     battle: {
@@ -258,10 +279,12 @@ const setAtkHandler = (state, payload) => {
 const beginBattleHandler = (state, payload) => {
   const { startingHandCount, seed } = payload;
   let shuffledDeck = [];
-  if (state.deck.length > 0) {
+  if (state.deck.length <= 0) {
     // impure
+    console.log(`using starting deck`)
     shuffledDeck = shuffle(startingDeck, seed);
   } else {
+    console.log(`using current deck`, state.deck)
     shuffledDeck = shuffle(state.deck, seed);
   }
   let nextState = {

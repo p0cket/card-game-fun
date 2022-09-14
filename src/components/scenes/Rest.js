@@ -1,6 +1,6 @@
 import React from "react";
 import { ACTIONS } from "../../actions";
-import { startingData } from "../../consts/consts";
+// import { startingData } from "../../consts/consts";
 
 const Rest = ({dispatch}) => {
 

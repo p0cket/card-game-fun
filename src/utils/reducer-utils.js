@@ -1,6 +1,6 @@
 // import { enemies } from "../consts/consts";
-import { enemyTypes, allEnemies } from "../consts/enemies";
-const { enemies } = enemyTypes;
+import { allEnemies } from "../consts/enemies";
+// const { enemies } = enemyTypes;
 // actOne: [],
 // actOneMini: [],
 // actOneBoss: [],
@@ -27,22 +27,17 @@ export const decideEnemyArr = (act, type) => {
 export const decideEnemy = (seed, enemiesArr) => {
   //@todo: check for which level enemies they should be
   //return those level enemies like
-  // use enemiesArr instead of `enemies`
-  const rndm = Math.floor(seed * enemies.length);
-  //
-  //
-  // const rndm = Math.floor(seed * enemiesArr.length);
-  //
-  //
-  // const ourEnemy = enemiesArr[rndm];
-  //
-  //
-  const ourEnemy = enemies[rndm];
+  const rndm = Math.floor(seed * enemiesArr.length);
+  const ourEnemy = enemiesArr[rndm];
   return ourEnemy;
 };
 
 export const decideEnemyATK = (seed, enemyAttacks) => {
+  // console.log(`setAtkHandler: missing attacks`, state.battle.enemy);
+  console.log(`ennmyATK enemyAttacks`, enemyAttacks, `seed`, seed)
   const randomizeATK = Math.floor(seed * enemyAttacks.length);
   const nextATK = enemyAttacks[randomizeATK];
+  console.log(`decideEnemyATK: next attack`, nextATK);
+
   return nextATK;
 };
