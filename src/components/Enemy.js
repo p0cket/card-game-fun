@@ -20,6 +20,7 @@ const Enemy = ({ enemyData }) => {
         {danceLeft ? '🔥\\_(X_X)-/🔥' : '🔥\\-(X_X)_/🔥'}
       </div>
       <br />
+      {/* @TODO fix status so it shows something other than None */}
       <div>Status: He is {status}</div>
       <br />
       <div style={{ border: "2px dotted lightgray", borderRadius: "30px" }}>

@@ -66,9 +66,4 @@ const Battle = ({ gameData, dispatch }) => {
   );
 };
 
-// Card.propTypes = {
-// props.gameData: PropTypes.object,
-// props.dispatch: PropTypes.func,
-// };
-
 export default Battle;

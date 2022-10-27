@@ -15,6 +15,7 @@ const mapGenerator = () => {
     BATTLE,
     REWARD,
     REST,
+    //
     MINIBOSS,
     REWARD,
     BATTLE,
@@ -22,6 +23,7 @@ const mapGenerator = () => {
     BATTLE,
     REWARD,
     REST,
+    //
     BOSS,
     REWARD,
     EVENT,

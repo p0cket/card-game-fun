@@ -8,45 +8,55 @@ import Shop from "./scenes/Shop";
 import Rest from "./scenes/Rest";
 import Reward from "./scenes/Reward";
 import Battle from "./scenes/Battle";
-import MiniBoss from "./scenes/MiniBoss";
+// import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
   const curLevelNum = gameData.curScene.lvl;
   const levelToSet = map[curLevelNum];
   console.log(`levelToSet is:`, levelToSet);
 
-  const { INTRO, BATTLE, SHOP, EVENT, REST, REWARD, MINIBOSS, BOSS, GAMEOVER } =
-    SCENES;
+  const {
+    INTRO,
+    BATTLE,
+    SHOP,
+    EVENT,
+    REST,
+    REWARD,
+    MINIBOSS,
+    BOSS,
+    GAMEOVER,
+  } = SCENES;
 
   switch (levelToSet) {
     case INTRO:
       return <Intro />;
     case SHOP:
-      console.log("shopLogic");
+      console.log("shop Screen Case");
       return <Shop dispatch={dispatch} />;
     case EVENT:
-      console.log("eventLogic");
+      console.log("event Screen Case");
       return <Event dispatch={dispatch} />;
     case REST:
-      console.log("restLogic");
+      console.log("rest Screen Case");
       return <Rest dispatch={dispatch} />;
     case REWARD:
-      console.log("rewardLogic");
+      console.log("reward Screen Case");
       return <Reward gameData={gameData} dispatch={dispatch} />;
     case BATTLE:
       console.log("(battle Screen)");
       return <Battle gameData={gameData} dispatch={dispatch} />;
     case MINIBOSS:
-      console.log("minibossLogic");
-      return <MiniBoss />;
+      console.log("miniboss Screen Case");
+      // return <MiniBoss />;
+      return <Battle gameData={gameData} dispatch={dispatch} />;
     case BOSS:
-      console.log("bossLogic");
-      return <div>`bossLogic`</div>;
+      console.log("boss Screen Case");
+      return <div>`boss Screen Case`</div>;
     case GAMEOVER:
-      console.log("game over");
+      console.log("game over Screen Case");
       return <div>`game over`</div>;
     default:
-      console.log("no scene selected");
+      console.log("no scene (Screen Case) selected");
       return <>404 Yo</>;
   }
 };
