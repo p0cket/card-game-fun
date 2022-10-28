@@ -22,7 +22,8 @@
     "react/jsx-uses-react": "off",
     "no-console": "off",
     "strict": ["error", "global"],
-    "curly": "warn"
+    "curly": "warn",
+    "semi": ["error", "never"]
  
   }
 }

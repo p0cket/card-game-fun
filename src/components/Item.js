@@ -1,8 +1,8 @@
 import React from "react";
 // import Button from "./Button";
-const Item = (item, applyItem) => {
+const Item = (props) => {
   // const {item, name, description, notes} = props
-  const { name, desc, boost, flavortext, price } = item;
+  const { name, desc, boost, flavortext, price } = props;
 
   const styles = {
     itemStyle: {
@@ -15,16 +15,17 @@ const Item = (item, applyItem) => {
     },
   };
 
-//   const logClick = (data) => {
-//     console.log('clicked', data)
-//   }
+
+  const boostDispatchPlaceholder = (data) => {
+    console.log('clicked', data)
+  }
   return (
     <div style={styles.itemStyle}>
       <h3>{name ? name : "No Item"}</h3>
       <h3>{price ? price : "no price"}</h3>
       <h5>{desc ? desc : "no description"}</h5>
       <div>{flavortext ? flavortext : "no flavortext"}</div>
-      <button onClick={() => applyItem(boost)}>Buy</button>
+      <button onClick={() => boostDispatchPlaceholder(boost)}>Buy</button>
       {/* <Button onClick={logClick(boost)} text={'Buy'}/> */}
     </div>
   );

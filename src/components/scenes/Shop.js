@@ -4,14 +4,13 @@ import { sampleItems } from "../../consts/consts";
 import Item from "../Item";
 
 const Shop = ({dispatch}) => {
-  console.log(sampleItems);
-
   return (
     <div>
       <h3>Shop Component</h3>
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
       <div>Items for sale</div>
+      <h2>@TODO, make the buttons add the boosts. for now, just click (next level) below</h2>
       <div>
         {sampleItems.map((item) => {
           return (

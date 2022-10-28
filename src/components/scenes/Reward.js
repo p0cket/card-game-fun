@@ -36,7 +36,8 @@ const Reward = ({ gameData, dispatch }) => {
     <div>
       <h1>Reward Component</h1>
       <br />
-      <h3>Its dangerous to go alone, give me money</h3>
+      <h3>Thank you for vanquishing those foes.</h3>
+      <h4>Please take something, its on us</h4>
       <div>
         {cardsForSale.map((card) => {
           return <Card key={card.id} cardValue={card} useCard={addCard} />;
