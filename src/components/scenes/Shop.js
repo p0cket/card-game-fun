@@ -9,7 +9,7 @@ const Shop = ({dispatch}) => {
       <h3>Shop Component</h3>
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
-      <div>Items for sale</div>
+      <div>Items for sale (And attacks in the future)</div>
       <h2>@TODO, make the buttons add the boosts. for now, just click (next level) below</h2>
       <div>
         {sampleItems.map((item) => {

@@ -3,7 +3,7 @@ export const allEnemies = {
     regular: [
       {
         name: "EvilMan",
-        health: 15,
+        health: 10,
         passive: "none",
         bio: "A bad dude",
         status: "none",
@@ -24,7 +24,7 @@ export const allEnemies = {
       },
       {
         name: "Lackey",
-        health: 10,
+        health: 30,
         passive: "heal",
         bio: "A bad dude's smaller dude",
         status: "none",
@@ -43,10 +43,31 @@ export const allEnemies = {
           },
         ],
       },
+      {
+        name: "Grunt",
+        health: 20,
+        passive: "boost",
+        bio: "A crazy guy, don't make him angry",
+        status: "none",
+        attacks: [
+          {
+            name: "Big ol' slash",
+            type: "hit",
+            damage: 20,
+            status: "dizzy",
+          },
+          {
+            name: "comically bad swipe",
+            type: "hit",
+            damage: 3,
+            status: "none",
+          },
+        ],
+      },
     ],
     mini: [      {
       name: "EvilMINIBOSSMan",
-      health: 15,
+      health: 80,
       passive: "none",
       bio: "A bad dude",
       status: "none",
@@ -67,7 +88,7 @@ export const allEnemies = {
     },],
     boss: [      {
       name: "EvilACT1BOSSMan",
-      health: 15,
+      health: 120,
       passive: "none",
       bio: "A bad dude",
       status: "none",
@@ -79,7 +100,7 @@ export const allEnemies = {
           status: "dizzy",
         },
         {
-          name: "flails fist HARDER",
+          name: "flails fist REALLY HARD",
           type: "hit",
           damage: 40,
           status: "none",

@@ -1,8 +1,9 @@
-import React from "react";
-import Card from "../Card";
-import { ACTIONS } from "../../actions";
+import React from "react"
+import Card from "../Card"
+import { ACTIONS } from "../../actions"
+import { shuffle } from "../../utils/reducer-utils"
 
-const cardsForSale = [
+const allCards = [
   { type: "poison", name: "syphon life", num: 4, cost: 2, id: 20 },
   {
     type: "lightning",
@@ -18,18 +19,42 @@ const cardsForSale = [
     cost: 1,
     id: 22,
   },
-];
+  {
+    type: "Ice",
+    name: "Freeze Blast",
+    num: 6,
+    cost: 1,
+    id: 23,
+  },
+  {
+    type: "mind",
+    name: "hypnotic distress",
+    num: 5,
+    cost: 1,
+    id: 24,
+  },
+]
+
+const makeCardsForSale = (allCards) => {
+  // randomize allCards
+  const randomizedCards = shuffle(allCards, Math.random() * 10)
+  // takes 3 off the top
+  const cardsToReturn = randomizedCards.slice(0, 3)
+  return cardsToReturn
+}
+
+const cardsForSale = makeCardsForSale(allCards)
 
 const Reward = ({ gameData, dispatch }) => {
   //@TODO add card function ----
   const addCard = (card) => {
-    console.log(`adding this card:`, card);
+    console.log(`adding this card:`, card)
     dispatch({
       // type: ACTIONS.ADD_CARD,
       type: ACTIONS.SELECT_REWARD,
       payload: { card },
-    });
-  };
+    })
+  }
   // ------------
 
   return (
@@ -40,11 +65,11 @@ const Reward = ({ gameData, dispatch }) => {
       <h4>Please take something, its on us</h4>
       <div>
         {cardsForSale.map((card) => {
-          return <Card key={card.id} cardValue={card} useCard={addCard} />;
+          return <Card key={card.id} cardValue={card} useCard={addCard} />
         })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Reward;
+export default Reward
