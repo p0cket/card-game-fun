@@ -50,6 +50,7 @@ export const startingData = {
     beginning: false,
   },
   curScene: { scene: "intro", lvl: 1, act: 1 },
+  availableRewards: [],
   alert: "",
 };
 

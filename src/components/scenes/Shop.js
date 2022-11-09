@@ -1,18 +1,33 @@
 import React from "react";
-import { sampleItems } from "../../consts/consts";
-// import Card from "../Card";
-import Item from "../Item";
+// import { sampleItems } from "../../consts/consts";
+import { allShopItems } from "../../consts/allShopItems";
+// import Item from "../Item";
+import Card from "../Card";
+import { ACTIONS } from "../../actions";
 
-const Shop = ({dispatch}) => {
+const Shop = ({ gameData, dispatch }) => {
+
+  const buyCard = (card) => {
+    console.log(`adding this card:`, card)
+    dispatch({
+      type: ACTIONS.PURCHASE_ITEM,
+      payload: { card },
+    })
+  }
+
   return (
     <div>
       <h3>Shop Component</h3>
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
-      <div>Items for sale (And attacks in the future)</div>
-      <h2>@TODO, make the buttons add the boosts. for now, just click (next level) below</h2>
+      <div>Items for sale (Just attacks for now)</div>
       <div>
-        {sampleItems.map((item) => {
+      {allShopItems.map((card) => {
+          return <Card key={card.id} cardValue={card} useCard={buyCard} />
+        })}
+      </div>
+      {/* <div>
+        {allShopItems.map((item) => {
           return (
             <Item 
               name={item.name}
@@ -23,7 +38,7 @@ const Shop = ({dispatch}) => {
             />
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

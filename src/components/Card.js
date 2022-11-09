@@ -19,6 +19,7 @@ const Card = ({ cardValue, useCard }) => {
         {`${name} ${energyEmoji.repeat(cost)}`}
         <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
         <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
+        { cardValue.price? <div>price: {cardValue.price}</div> : <></>}
       </button>
     </>
   );

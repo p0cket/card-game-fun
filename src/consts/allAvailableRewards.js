@@ -1,0 +1,45 @@
+export const allAvailableRewards = [
+    { type: "poison", name: "drain syphon life", num: 4, cost: 2, id: 20 },
+    {
+      type: "electric",
+      name: "electric symphonies",
+      num: 8,
+      cost: 1,
+      id: 21,
+    },
+    {
+      type: "normal",
+      name: "backstab",
+      num: 4,
+      cost: 1,
+      id: 22,
+    },
+    {
+      type: "Ice",
+      name: "Freeze Blast",
+      num: 6,
+      cost: 1,
+      id: 23,
+    },
+    {
+      type: "mind",
+      name: "hypnotic distress",
+      num: 5,
+      cost: 1,
+      id: 24,
+    },
+    {
+      type: "pioson",
+      name: "Black Ooze",
+      num: 9,
+      cost: 1,
+      id: 25,
+    },
+    {
+      type: "electric",
+      name: "overload",
+      num: 11,
+      cost: 1,
+      id: 26,
+    },
+]

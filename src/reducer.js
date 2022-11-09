@@ -1,6 +1,7 @@
 import { ACTIONS, ENEMY_TYPES } from "./actions"
 import { SCENES } from "./scenes"
 import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts"
+import { allAvailableRewards } from "./consts/allAvailableRewards"
 import {
   shuffle,
   decideEnemyArr,
@@ -37,8 +38,12 @@ export default function reducer(state, action) {
     // level handlers
     case ACTIONS.EVENT_CHOICE:
       return eventChoiceHandler(state, payload)
+    case ACTIONS.GENERATE_REWARDS:
+      return generateRewardsHandler(state, payload)
     case ACTIONS.SELECT_REWARD:
       return setRewardHandler(state, payload)
+    case ACTIONS.PURCHASE_ITEM:
+      return purchaseHandler(state, payload)
     case ACTIONS.SELECT_REST:
       return restHandler(state)
     case ACTIONS.BEGIN_BATTLE:
@@ -72,12 +77,49 @@ const eventChoiceHandler = (state, payload) => {
   return nextSceneState
 }
 
+const generateRewardsHandler = (state, payload) => {
+  console.log(`generateRewardsHandler running:`, state, `payload (currently none)`, payload)
+  // take list of rewards, use a seed for the randomization
+  let randomizedCards = shuffle(allAvailableRewards, Math.random())
+  // let randomizedCards = shuffle(rewardAttacks, Math.random() * seed)
+  console.log(`reward card arr`,randomizedCards)
+
+  const cardsToReturn = randomizedCards.slice(0, 3)
+  console.log(`reward card arr sliced for only 3`,randomizedCards)
+
+  const nextState = { ...state, availableRewards: cardsToReturn }
+  return nextState
+}
+
 const setRewardHandler = (state, payload) => {
+  
   const newState = addCardHandler(state, payload)
+
+  const newStateWithFreshRewards =  generateRewardsHandler(
+    newState
+    // ,payload (seed, level)
+  )
+  // fix fake payload
   const fakeScenePayload = battlePayload
-  const nextSceneState = setSceneHandler(newState, fakeScenePayload)
+  const nextSceneState = setSceneHandler(newStateWithFreshRewards, fakeScenePayload)
   return nextSceneState
   // return newState;
+}
+
+// purchaseHandler(state, payload)
+const purchaseHandler = (state, payload) => {
+  // if you have enough money, you can buy.
+  
+    //subtract the money from the gameData.gold,
+    // add the card from the payload
+    
+    // const newState = addCardHandler(state, payload)
+
+
+  // if you don't, show error for not enough money
+
+
+
 }
 
 const addCardHandler = (state, payload) => {
@@ -135,6 +177,13 @@ const playCardHandler = (state, { card }) => {
     nextDeck.push(...nextState.deck)
     nextDeck.push(...nextState.battle.hand)
     console.log(`nextDeck`, nextDeck)
+
+    // generate new rewards
+    nextState = generateRewardsHandler(
+      nextState
+      // ,payload (seed, level)
+    )
+
     nextState = setMyDataHandler({
       ...nextState,
       gold: nextState.gold + 25,

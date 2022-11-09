@@ -41,6 +41,10 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Rest dispatch={dispatch} />;
     case REWARD:
       console.log("reward Screen Case");
+      // dispatch({
+      //   type: ACTIONS.GENERATE_REWARDS,
+      //   payload: { curLevelNum },
+      // })
       return <Reward gameData={gameData} dispatch={dispatch} />;
     case BATTLE:
       console.log("(battle Screen)");
