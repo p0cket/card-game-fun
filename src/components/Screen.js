@@ -47,11 +47,10 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Battle gameData={gameData} dispatch={dispatch} />;
     case MINIBOSS:
       console.log("miniboss Screen Case");
-      // return <MiniBoss />;
       return <Battle gameData={gameData} dispatch={dispatch} />;
     case BOSS:
       console.log("boss Screen Case");
-      return <div>`boss Screen Case`</div>;
+      return <Battle gameData={gameData} dispatch={dispatch} />;
     case GAMEOVER:
       console.log("game over Screen Case");
       return <div>`game over`</div>;

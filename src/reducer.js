@@ -92,14 +92,6 @@ const playCardHandler = (state, { card, battlePayload }) => {
   }
   if (nextState.battle.enemy.health - card.num <= 0) {
     console.log(`you defeated the enemy!`)
-    // ---- for now, go to next level, later turn into:
-    // set scene for a results screen.
-    // results screen goes to a reward screen.
-    // reward screen goes to next level. (or map)
-    // setSceneHandler(state, payload)
-    // ----
-
-    //end battle logic
 
     //put hand back into deck
     console.log(
@@ -175,7 +167,9 @@ const endTurnHandler = (state, payload) => {
       hero: { ...state.hero, health: finalHealth, energy: fullEnergyAmount },
     }
     const drawCardState = drawCardHandler(endTurnState)
-    const nextState = setAtkHandler(drawCardState, payload)
+    let nextState = setAtkHandler(drawCardState, payload)
+    // Clear the alert messages
+    nextState = setAlertHandler(nextState, ``)
 
     return nextState
   } else {

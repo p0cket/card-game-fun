@@ -67,7 +67,7 @@ export const allEnemies = {
     ],
     mini: [      {
       name: "EvilMINIBOSSMan",
-      health: 80,
+      health: 60,
       passive: "none",
       bio: "A bad dude",
       status: "none",
@@ -82,6 +82,18 @@ export const allEnemies = {
           name: "flails fist HARDER",
           type: "hit",
           damage: 40,
+          status: "none",
+        },
+        {
+          name: "too tired to attack",
+          type: "hit",
+          damage: 0,
+          status: "none",
+        },
+        {
+          name: "distracted movement",
+          type: "hit",
+          damage: 0,
           status: "none",
         },
       ],
