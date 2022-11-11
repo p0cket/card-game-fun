@@ -12,7 +12,8 @@ import {
 import { map } from "./consts/mapGenerator"
 
 export default function reducer(state, action) {
-  // @TODO when you get a chance, destructure it all
+  //option to deep clone the state immediately here, 
+  //solving all problems of stale state
   const { payload } = action
   switch (action.type) {
     case ACTIONS.SET_SCENE:
@@ -60,75 +61,16 @@ export default function reducer(state, action) {
   }
 }
 
-const restHandler = (state) => {
-  const fullHealed = {
-    ...state,
-    hero: { ...state.hero, health: startingData.hero.health },
-  }
-  return fullHealed
+// General GameData Handlers
+const setMyDataHandler = (payload) => {
+  return payload
 }
 
-const eventChoiceHandler = (state, payload) => {
-  //maybe as a `switch` statement to determine the actions
-  const newState = setMyBalanceHandler(state, payload)
-  const fakeScenePayload = battlePayload
-  //breaks here because of something...
-  const nextSceneState = setSceneHandler(newState, fakeScenePayload)
-  return nextSceneState
-}
 
-const generateRewardsHandler = (state, payload) => {
-  console.log(`generateRewardsHandler running:`, state, `payload (currently none)`, payload)
-  // take list of rewards, use a seed for the randomization
-  let randomizedCards = shuffle(allAvailableRewards, Math.random())
-  // let randomizedCards = shuffle(rewardAttacks, Math.random() * seed)
-  console.log(`reward card arr`,randomizedCards)
-
-  const cardsToReturn = randomizedCards.slice(0, 3)
-  console.log(`reward card arr sliced for only 3`,randomizedCards)
-
-  const nextState = { ...state, availableRewards: cardsToReturn }
+const setMyBalanceHandler = (state, payload) => {
+  const newBalance = state.gold + payload
+  const nextState = { ...state, gold: newBalance }
   return nextState
-}
-
-const setRewardHandler = (state, payload) => {
-  
-  const newState = addCardHandler(state, payload)
-
-  const newStateWithFreshRewards =  generateRewardsHandler(
-    newState
-    // ,payload (seed, level)
-  )
-  // fix fake payload
-  const fakeScenePayload = battlePayload
-  const nextSceneState = setSceneHandler(newStateWithFreshRewards, fakeScenePayload)
-  return nextSceneState
-  // return newState;
-}
-
-// purchaseHandler(state, payload)
-const purchaseHandler = (state, payload) => {
-  // if you have enough money, you can buy.
-  
-    //subtract the money from the gameData.gold,
-    // add the card from the payload
-    
-    // const newState = addCardHandler(state, payload)
-
-
-  // if you don't, show error for not enough money
-
-
-
-}
-
-const addCardHandler = (state, payload) => {
-  const ourDeck = state.deck
-  ourDeck.push(payload.card)
-  // set some notification that the card is added
-  const updatedDeck = ourDeck
-  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
-  return { ...state, deck: updatedDeck }
 }
 
 const setAlertHandler = (state, payload) => {
@@ -139,14 +81,7 @@ const setAlertHandler = (state, payload) => {
   }
 }
 
-const setMyDataHandler = (payload) => {
-  return payload
-}
-const setMyBalanceHandler = (state, payload) => {
-  const newBalance = state.gold + payload
-  const nextState = { ...state, gold: newBalance }
-  return nextState
-}
+// Battle Handlers
 
 const playCardHandler = (state, { card }) => {
   //
@@ -247,6 +182,73 @@ const endTurnHandler = (state, payload) => {
   }
 }
 
+const setEnemyHandler = (state, payload) => {
+  const { seed, enemyArr } = payload
+
+  return {
+    ...state,
+    battle: { ...state.battle, enemy: decideEnemy(seed, enemyArr) },
+  }
+}
+
+const setAtkHandler = (state, payload) => {
+  const { seed } = payload
+
+  return {
+    ...state,
+    battle: {
+      ...state.battle,
+      enemy: {
+        ...state.battle.enemy,
+        nextAttack: decideEnemyATK(seed, state.battle.enemy.attacks),
+      },
+    },
+  }
+}
+
+const beginBattleHandler = (state, payload) => {
+  const { startingHandCount, seed } = payload
+  let shuffledDeck = []
+  if (state.deck.length <= 0) {
+    // impure
+    console.log(`using starting deck`)
+    shuffledDeck = shuffle(startingDeck, seed)
+  } else {
+    console.log(`using current deck`, state.deck)
+    shuffledDeck = shuffle(state.deck, seed)
+  }
+  let nextState = {
+    ...state,
+    battle: { ...state.battle, beginning: true, hand: [] },
+    deck: [...shuffledDeck],
+    hero: { ...state.hero, energy: fullEnergyAmount },
+  }
+
+  for (let i = 0; i < startingHandCount; i++) {
+    nextState = drawCardHandler(nextState)
+  }
+
+  return nextState
+}
+
+const drawCardHandler = (state) => {
+  if (state.deck.length > 0) {
+    return {
+      ...state,
+      battle: {
+        ...state.battle,
+        hand: [...state.battle.hand, state.deck[0]],
+      },
+      deck: state.deck.slice(1),
+    }
+  } else {
+    return {
+      ...state,
+      alert: "No cards left to draw :( ",
+    }
+  }
+}
+
 const gameOverHandler = (state) => {
   return {
     ...startingData,
@@ -258,6 +260,84 @@ const gameOverHandler = (state) => {
   }
 }
 
+const addCardHandler = (state, payload) => {
+  const ourDeck = state.deck
+  ourDeck.push(payload.card)
+  // set some notification that the card is added
+  const updatedDeck = ourDeck
+  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
+  return { ...state, deck: updatedDeck }
+}
+
+// GameEvent Handlers
+
+const restHandler = (state) => {
+  const fullHealed = {
+    ...state,
+    hero: { ...state.hero, health: startingData.hero.health },
+  }
+  return fullHealed
+}
+
+const eventChoiceHandler = (state, payload) => {
+  //maybe as a `switch` statement to determine the actions
+  const newState = setMyBalanceHandler(state, payload)
+  const fakeScenePayload = battlePayload
+  //breaks here because of something...
+  const nextSceneState = setSceneHandler(newState, fakeScenePayload)
+  return nextSceneState
+}
+
+const purchaseHandler = (state, payload) => {
+  // ---
+  // const { card } = payload;
+  // const nextState = {...state}
+  //   //subtract the money from the gameData.gold,
+  //   // add the card from the payload
+  // if(nextState.gold >=  card.price) {
+  //   const addedCardState = addCardHandler(nextState, { card })
+  //   const newGoldBalance = addedCardState.gold - card.price
+
+  //   const returnableState = {...addedCardState, gold: newGoldBalance}  
+  //   //@TODO Add SetScene to next level 
+  // } else {
+  //   // if you don't have enough money, you can buy.
+  //   console.log(`not enough money to buy ${card.name}`)
+
+  // }
+  // return returnableState
+  // ---
+}
+
+const generateRewardsHandler = (state, payload) => {
+  console.log(`generateRewardsHandler running:`, state, `payload (currently none)`, payload)
+  // take list of rewards, use a seed for the randomization
+  let randomizedCards = shuffle(allAvailableRewards, Math.random())
+  // let randomizedCards = shuffle(rewardAttacks, Math.random() * seed)
+  console.log(`reward card arr`,randomizedCards)
+
+  const cardsToReturn = randomizedCards.slice(0, 3)
+  console.log(`reward card arr sliced for only 3`,randomizedCards)
+
+  const nextState = { ...state, availableRewards: cardsToReturn }
+  return nextState
+}
+
+const setRewardHandler = (state, payload) => {
+  const newState = addCardHandler(state, payload)
+
+  const newStateWithFreshRewards =  generateRewardsHandler(
+    newState
+    // ,payload (seed, level)
+  )
+  // fix fake payload
+  const fakeScenePayload = battlePayload
+  const nextSceneState = setSceneHandler(newStateWithFreshRewards, fakeScenePayload)
+  return nextSceneState
+  // return newState;
+}
+
+// Set Level Handlers
 const setSceneHandler = (state, payload) => {
   const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
   const nextLevel = {
@@ -319,74 +399,5 @@ const setSceneHandler = (state, payload) => {
   return {
     ...nextState,
     curScene: nextLevel,
-  }
-}
-
-const setEnemyHandler = (state, payload) => {
-  const { seed, enemyArr } = payload
-
-  return {
-    ...state,
-    battle: { ...state.battle, enemy: decideEnemy(seed, enemyArr) },
-  }
-}
-
-const setAtkHandler = (state, payload) => {
-  const { seed } = payload
-
-  return {
-    ...state,
-    battle: {
-      ...state.battle,
-      enemy: {
-        ...state.battle.enemy,
-        nextAttack: decideEnemyATK(seed, state.battle.enemy.attacks),
-      },
-    },
-  }
-}
-
-// handlers can call other handlers, which return state
-const beginBattleHandler = (state, payload) => {
-  const { startingHandCount, seed } = payload
-  let shuffledDeck = []
-  if (state.deck.length <= 0) {
-    // impure
-    console.log(`using starting deck`)
-    shuffledDeck = shuffle(startingDeck, seed)
-  } else {
-    console.log(`using current deck`, state.deck)
-    shuffledDeck = shuffle(state.deck, seed)
-  }
-  let nextState = {
-    ...state,
-    battle: { ...state.battle, beginning: true, hand: [] },
-    deck: [...shuffledDeck],
-    hero: { ...state.hero, energy: fullEnergyAmount },
-  }
-
-  for (let i = 0; i < startingHandCount; i++) {
-    nextState = drawCardHandler(nextState)
-  }
-
-  return nextState
-}
-
-//handlers are pure too
-const drawCardHandler = (state) => {
-  if (state.deck.length > 0) {
-    return {
-      ...state,
-      battle: {
-        ...state.battle,
-        hand: [...state.battle.hand, state.deck[0]],
-      },
-      deck: state.deck.slice(1),
-    }
-  } else {
-    return {
-      ...state,
-      alert: "No cards left to draw :( ",
-    }
   }
 }

@@ -3,17 +3,15 @@ import React from "react";
 import { allShopItems } from "../../consts/allShopItems";
 // import Item from "../Item";
 import Card from "../Card";
-import { ACTIONS } from "../../actions";
+import { buyCardAction } from "../../actions";
 
 const Shop = ({ gameData, dispatch }) => {
 
   const buyCard = (card) => {
     console.log(`adding this card:`, card)
-    dispatch({
-      type: ACTIONS.PURCHASE_ITEM,
-      payload: { card },
-    })
+    dispatch(buyCardAction(card))
   }
+
 
   return (
     <div>

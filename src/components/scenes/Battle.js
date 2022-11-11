@@ -1,26 +1,23 @@
 import React from "react";
-import { ACTIONS } from "../../actions";
+import { endTurnAction, playCardAction } from "../../actions";
 import Card from "../Card";
 import Enemy from "../Enemy";
 
 const Battle = ({ gameData, dispatch }) => {
-  const drawCard = () => {
-    dispatch({
-      type: ACTIONS.DRAW_CARD,
-      payload: { deck: gameData.deck, hand: gameData.battle.hand },
-    });
-  };
+  //keeping drawCard for debugging
+  // const drawCard = () => {
+  //   dispatch({
+  //     type: ACTIONS.DRAW_CARD,
+  //     payload: { deck: gameData.deck, hand: gameData.battle.hand },
+  //   });
+  // };
 
   const playCard = (card) => {
-    dispatch({
-      type: ACTIONS.PLAY_CARD,
-      payload: { card },
-    });
+    dispatch(playCardAction(card));
   };
 
   const endTurn = () => {
-    console.log(`End Turn`);
-    dispatch({ type: ACTIONS.END_TURN, payload: { seed: Math.random() }})
+    dispatch(endTurnAction())
   };
 
   // 5 cases: beginning, inBattle, victory, reward screen, loss
@@ -42,14 +39,15 @@ const Battle = ({ gameData, dispatch }) => {
                   <Card key={card.id} cardValue={card} useCard={playCard} />
                 );
               })
-            : `No Cards in hand. Click "Draw" to spend an energy and draw a card.`}
+            : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
         </div>
       </div>
       <br />
       <div>
-        <button onClick={() => drawCard()}>
+        {/* Keeping draw button for debugging */}
+        {/* <button onClick={() => drawCard()}>
           Draw a card
-        </button>
+        </button> */}
         <h4 style={{ color: "gray" }}>
           {gameData.battle.discarded.length} discarded Cards
         </h4>

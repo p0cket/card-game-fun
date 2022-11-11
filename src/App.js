@@ -5,23 +5,14 @@ import { useReducer } from "react";
 import { map } from "./consts/mapGenerator";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
-import { ACTIONS } from "./actions";
+import { setSceneAction } from "./actions";
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
 
   const loadNextLevel = () => {
     console.log(`loadNextLevel`);
-    dispatch({
-      type: ACTIONS.SET_SCENE,
-      payload: {
-        enemySeed: Math.random(),
-        atkSeed: Math.random(),
-        beginBattleSeed: Math.random(),
-        startingHandCount: 3,
-        // enemiesArr, determined by level
-      },
-    });
+    dispatch(setSceneAction());
   };
   // console.log(`[App.js Rendered]`);
 

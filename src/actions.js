@@ -18,10 +18,49 @@ export const ACTIONS = {
   END_TURN: "end-turn",
   ADD_CARD: "add-card",
   GAME_OVER: "game-over",
-};
+}
 
 export const ENEMY_TYPES = {
-  REG: 'regular',
-  MINI: 'miniboss',
-  BOSS: 'boss'
+  REG: "regular",
+  MINI: "miniboss",
+  BOSS: "boss",
+}
+
+export const addCardAction = (card) => {
+  return {
+    type: ACTIONS.SELECT_REWARD,
+    payload: { card },
+  }
+}
+
+export const playCardAction = (card) => {
+  return {
+    type: ACTIONS.PLAY_CARD,
+    payload: { card },
+  }
+}
+
+export const endTurnAction = () => {
+  console.log(`End Turn`)
+  return { type: ACTIONS.END_TURN, payload: { seed: Math.random() } }
+}
+
+export const setSceneAction = () => {
+  return {
+    type: ACTIONS.SET_SCENE,
+    payload: {
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: 3,
+    },
+  }
+}
+
+export const  buyCardAction = (card) => {
+  console.log(`adding this card:`, card)
+  return {
+    type: ACTIONS.PURCHASE_ITEM,
+    payload: { card },
+  }
 }

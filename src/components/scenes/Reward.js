@@ -1,6 +1,6 @@
 import React from "react"
 import Card from "../Card"
-import { ACTIONS } from "../../actions"
+import { addCardAction } from "../../actions"
 
 
 
@@ -9,10 +9,7 @@ const Reward = ({ gameData, dispatch }) => {
 
   const addCard = (card) => {
     console.log(`adding this card:`, card)
-    dispatch({
-      type: ACTIONS.SELECT_REWARD,
-      payload: { card },
-    })
+    dispatch(addCardAction(card))
   }
   // ------------
   console.log(`gameData from Rewards`, gameData)

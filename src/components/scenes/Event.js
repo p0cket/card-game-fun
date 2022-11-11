@@ -35,6 +35,7 @@ const Event = ({dispatch}) => {
           // type: ACTIONS.SET_MYBALANCE,
           type: ACTIONS.EVENT_CHOICE,
           payload: choice.num,
+          // as long as it is before the reducer, I can do Math.random()
         });
         break;
       case "cards":
