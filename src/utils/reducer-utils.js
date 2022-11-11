@@ -6,13 +6,6 @@ import { allEnemies } from "../consts/enemies";
 // actOneBoss: [],
 // actTwo: [],
 
-export const battlePayload = {
-  enemySeed: Math.random(),
-  atkSeed: Math.random(),
-  beginBattleSeed: Math.random(),
-  startingHandCount: 3,
-};
-
 export const shuffle = (array, seed) => {
   return array.sort(() => seed - 0.5);
 };

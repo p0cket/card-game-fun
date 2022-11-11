@@ -7,7 +7,6 @@ import {
   decideEnemyArr,
   decideEnemy,
   decideEnemyATK,
-  battlePayload,
 } from "./utils/reducer-utils"
 import { map } from "./consts/mapGenerator"
 
@@ -83,7 +82,8 @@ const setAlertHandler = (state, payload) => {
 
 // Battle Handlers
 
-const playCardHandler = (state, { card }) => {
+const playCardHandler = (state, { card, battlePayload }) => {
+  console.log(`payload&card`, card, battlePayload)
   //
   let nextState = { ...state }
   //
@@ -127,6 +127,7 @@ const playCardHandler = (state, { card }) => {
     console.log(`nextState`, nextState)
 
     const payload = battlePayload
+    console.log(`payload`, battlePayload)
 
     nextState = setSceneHandler(nextState, payload)
     // return nextState;
@@ -279,32 +280,31 @@ const restHandler = (state) => {
   return fullHealed
 }
 
-const eventChoiceHandler = (state, payload) => {
+const eventChoiceHandler = (state, {num, battlePayload}) => {
   //maybe as a `switch` statement to determine the actions
-  const newState = setMyBalanceHandler(state, payload)
-  const fakeScenePayload = battlePayload
-  //breaks here because of something...
-  const nextSceneState = setSceneHandler(newState, fakeScenePayload)
+  const newState = setMyBalanceHandler(state, num)
+  const nextSceneState = setSceneHandler(newState, battlePayload)
   return nextSceneState
 }
 
 const purchaseHandler = (state, payload) => {
   // ---
-  // const { card } = payload;
-  // const nextState = {...state}
-  //   //subtract the money from the gameData.gold,
-  //   // add the card from the payload
-  // if(nextState.gold >=  card.price) {
-  //   const addedCardState = addCardHandler(nextState, { card })
-  //   const newGoldBalance = addedCardState.gold - card.price
+  const { card, battlePayload } = payload;
+  const nextState = {...state}
+    //subtract the money from the gameData.gold,
+    // add the card from the payload
+  if(nextState.gold >=  card.price) {
+    const addedCardState = addCardHandler(nextState, { card })
+    const newGoldBalance = addedCardState.gold - card.price
 
-  //   const returnableState = {...addedCardState, gold: newGoldBalance}  
-  //   //@TODO Add SetScene to next level 
-  // } else {
-  //   // if you don't have enough money, you can buy.
-  //   console.log(`not enough money to buy ${card.name}`)
-
-  // }
+    const newCardandGoldState = {...addedCardState, gold: newGoldBalance}
+    const returnableState =  setSceneHandler(newCardandGoldState, battlePayload)
+    return returnableState 
+  } else {
+    // if you don't have enough money, you can buy.
+    console.log(`not enough money to buy ${card.name}`)
+    return nextState
+  }
   // return returnableState
   // ---
 }
@@ -326,13 +326,11 @@ const generateRewardsHandler = (state, payload) => {
 const setRewardHandler = (state, payload) => {
   const newState = addCardHandler(state, payload)
 
-  const newStateWithFreshRewards =  generateRewardsHandler(
+  const newStateWithFreshRewards = generateRewardsHandler(
     newState
     // ,payload (seed, level)
   )
-  // fix fake payload
-  const fakeScenePayload = battlePayload
-  const nextSceneState = setSceneHandler(newStateWithFreshRewards, fakeScenePayload)
+  const nextSceneState = setSceneHandler(newStateWithFreshRewards, payload.battlePayload)
   return nextSceneState
   // return newState;
 }

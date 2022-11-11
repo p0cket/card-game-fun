@@ -1,5 +1,5 @@
 import React from 'react'
-import { ACTIONS } from '../../actions';
+import { eventChoiceAction } from '../../actions';
 
 const Event = ({dispatch}) => {
   const eventDeets = [
@@ -31,12 +31,7 @@ const Event = ({dispatch}) => {
         break;
       case "money":
         console.log(`money choice`);
-        dispatch({
-          // type: ACTIONS.SET_MYBALANCE,
-          type: ACTIONS.EVENT_CHOICE,
-          payload: choice.num,
-          // as long as it is before the reducer, I can do Math.random()
-        });
+        dispatch(eventChoiceAction(choice.num))
         break;
       case "cards":
         console.log(`cards choice`);

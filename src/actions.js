@@ -29,14 +29,25 @@ export const ENEMY_TYPES = {
 export const addCardAction = (card) => {
   return {
     type: ACTIONS.SELECT_REWARD,
-    payload: { card },
+    payload: { card, battlePayload: {
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: 3,
+    }},
   }
 }
 
 export const playCardAction = (card) => {
   return {
     type: ACTIONS.PLAY_CARD,
-    payload: { card },
+    payload: { card ,
+    battlePayload: {
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: 3,
+    }},
   }
 }
 
@@ -57,10 +68,33 @@ export const setSceneAction = () => {
   }
 }
 
-export const  buyCardAction = (card) => {
+export const buyCardAction = (card) => {
   console.log(`adding this card:`, card)
   return {
     type: ACTIONS.PURCHASE_ITEM,
-    payload: { card },
+    payload: {
+      card,
+      battlePayload: {
+        enemySeed: Math.random(),
+        atkSeed: Math.random(),
+        beginBattleSeed: Math.random(),
+        startingHandCount: 3,
+      },
+    },
+  }
+}
+
+export const eventChoiceAction = (num) => {
+  return {
+    type: ACTIONS.EVENT_CHOICE,
+    payload: {
+      num,
+      battlePayload: {
+        enemySeed: Math.random(),
+        atkSeed: Math.random(),
+        beginBattleSeed: Math.random(),
+        startingHandCount: 3,
+      },
+    },
   }
 }
