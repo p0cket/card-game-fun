@@ -1,8 +1,12 @@
 import React from "react";
 import { ACTIONS } from "../../actions";
-// import { startingData } from "../../consts/consts";
+import { setSceneAction } from "../../actions";
 
 const Rest = ({dispatch}) => {
+    const loadNextLevel = () => {
+    console.log(`loadNextLevel`);
+    dispatch(setSceneAction());
+  };
 
   const healToFullHealth = () => {
     dispatch({
@@ -27,6 +31,7 @@ const Rest = ({dispatch}) => {
         Heal
       </button>
       <br />
+      <button onClick={loadNextLevel}>Next Level</button>
       <br />
     </>
   );
