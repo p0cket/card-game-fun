@@ -29,7 +29,7 @@ const Screen = ({ gameData, dispatch, map }) => {
 
   switch (levelToSet) {
     case INTRO:
-      return <Intro />;
+      return <Intro dispatch={dispatch} />;
     case SHOP:
       console.log("shop Screen Case");
       return <Shop dispatch={dispatch} />;

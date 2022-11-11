@@ -56,9 +56,10 @@ const Battle = ({ gameData, dispatch }) => {
         <button onClick={endTurn}>End Turn</button>
 
         <h5 style={{ color: "gray" }}>Our deck:</h5>
-        {gameData.deck.map((card) => {
+        <div style={{pointerEvents: "none", opacity: "0.4"}}>        {gameData.deck.map((card) => {
           return <Card key={card.id} cardValue={card} playCard={playCard} />;
-        })}
+        })}</div>
+
       </div>
     </>
   );
