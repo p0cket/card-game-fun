@@ -21,7 +21,7 @@ const Enemy = ({ enemyData }) => {
       </div>
       <br />
       {/* @TODO fix status so it shows something other than None */}
-      <div>Status: He is {status}</div>
+      <div style={{ color: "red" }}> {status? `He is ${status}ed`: `unaffected`}</div>
       <br />
       <div style={{ border: "2px dotted lightgray", borderRadius: "30px" }}>
         Next attack: <br />

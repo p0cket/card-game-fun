@@ -31,8 +31,8 @@ const Rest = ({dispatch}) => {
         Heal
       </button>
       <br />
-      <button onClick={loadNextLevel}>Next Level</button>
       <br />
+      <button onClick={loadNextLevel}>Next Level</button>
     </>
   );
 };

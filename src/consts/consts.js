@@ -1,16 +1,16 @@
 export const startingDeck = [
-  { type: "Fire", name: "Flamethrower+", num: 8, cost: 1, id: 1 },
-  { type: "Water", name: "Gush+", num: 6, cost: 1, id: 2 },
-  { type: "Poison", name: "Sting+", num: 5, cost: 1, id: 3 },
-  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 4 },
-  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 5 },
-  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 6 },
-  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 7 },
-  { type: "Water", name: "Gush", num: 2, cost: 1, id: 8 },
-  { type: "Poison", name: "Sting", num: 2, cost: 1, id: 9 },
-  { type: "Fire", name: "Flamethrower", num: 5, cost: 1, id: 10 },
-  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 11 },
-  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 12 },
+  { type: "Fire", name: "Flamethrower+", num: 8, cost: 1, id: 1, effect: null },
+  { type: "Water", name: "Gush+", num: 6, cost: 1, id: 2, effect: null },
+  { type: "Poison", name: "Sting+", num: 5, cost: 1, id: 3, effect: null },
+  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 4, effect: null },
+  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 5, effect: "stun" },
+  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 6, effect: "stun" },
+  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 7, effect: null },
+  { type: "Water", name: "Gush", num: 2, cost: 1, id: 8, effect: null },
+  { type: "Poison", name: "Sting", num: 2, cost: 1, id: 9, effect: null },
+  { type: "Fire", name: "Flamethrower", num: 5, cost: 1, id: 10, effect: null },
+  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 11, effect: "stun" },
+  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 12, effect: "stun" },
 ];
 
 export const startingData = {
@@ -27,7 +27,7 @@ export const startingData = {
       bio: "just a standaard enemi",
       health: "30",
       energy: 6,
-      status: "Feelin great",
+      status: "none",
       nextAttack: "none",
       attacks: [
         {
