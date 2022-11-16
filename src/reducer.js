@@ -124,7 +124,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
   hand.splice(myHandIndex, 1)
 
   if (card.effect != null) {
-    const statusPayload = {card, battlePayload}
+    const statusPayload = { card, battlePayload }
     nextState = applyStatusHandler(nextState, statusPayload)
   }
 
@@ -191,17 +191,48 @@ const discardCardHandler = (state, payload) => {
 }
 
 const endTurnHandler = (state, payload) => {
-  const { hero, battle } = state
+  let nextState = { ...state }
+  //
+  const { hero, battle } = nextState
+  const enemyStatus = nextState.battle.enemy.status
   // apply status effects. maybe a applyStatusEffectsHandler()
-  const finalHealth = hero.health - battle.enemy.nextAttack.damage
+  let finalHealth = hero.health
+  //  let finalHealth = hero.health - battle.enemy.nextAttack.damage
+
+
+  // Apply Status with attacks
+  switch (enemyStatus) {
+    case "stun":
+      console.log(`stunned, so don't attack, set status to _null_`)
+      const enemyWithoutStatusState = {
+        ...nextState,
+        battle: {
+          ...nextState.battle,
+          enemy: { ...nextState.battle.enemy, status: null },
+        },
+      }
+      nextState = enemyWithoutStatusState
+      break
+    case null:
+      console.log(` enemyStatus of null matched, returning a hero-damaged state`)
+      finalHealth = finalHealth - battle.enemy.nextAttack.damage
+      break
+    default:
+      console.log(`no enemyStatus matched, returning state`)
+  }
+
   if (finalHealth > 0) {
     // if not dead, update health and fill energy, draw a card, and set enemy's attack
     const endTurnState = {
-      ...state,
-      hero: { ...state.hero, health: finalHealth, energy: fullEnergyAmount },
+      ...nextState,
+      hero: {
+        ...nextState.hero,
+        health: finalHealth,
+        energy: fullEnergyAmount,
+      },
     }
     const drawCardState = drawCardHandler(endTurnState)
-    let nextState = setAtkHandler(drawCardState, payload)
+    nextState = setAtkHandler(drawCardState, payload)
     // Clear the alert messages
     nextState = setAlertHandler(nextState, ``)
 
