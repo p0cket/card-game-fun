@@ -15,7 +15,7 @@ const Enemy = ({ enemyData }) => {
       backgroundColor: "#fffff0",
       width: "50%",
       margin: "auto",
-      fontFamily: 'Silkscreen',
+      fontFamily: "Silkscreen",
       // marginLeft: "20%",
       // marginRight: "20%",
       // color: "blue",
@@ -25,6 +25,12 @@ const Enemy = ({ enemyData }) => {
       // padding: "7px",
       // margin: "3px",
     },
+    pokeBorderStyle: {
+      // border: "gray",
+      // borderBottomStyle: "dotted",
+      // borderLeftStyle: "dotted",
+      // margin: "10px"
+    },
   }
   const fullHealth = 100
 
@@ -32,19 +38,22 @@ const Enemy = ({ enemyData }) => {
     // <div style={{ border: "2px dotted lightgray", borderRadius: "10px" }}>
     //   <div style={{ border: "2px dotted lightgray", borderRadius: "30px" }}>
     <div style={styles.cardStyle}>
-      <h2>
-        {name}{" "}
-        <span role="img" aria-label="emoji heart">
-          🫀
-        </span>
-        {health ? health : "None"}           <progress
+      <div style={styles.pokeBorderStyle}>
+        <h2>
+          {name}{" "}
+          <span role="img" aria-label="emoji heart">
+            🫀
+          </span>
+          {health ? health : "None"}{" "}
+          <progress
             id="health"
             value={health}
             max={fullHealth}
             style={{ color: "red" }}
           ></progress>
-      </h2>
-      <h3 style={{ color: "gray" }}>{bio}</h3>
+        </h2>
+        <h3 style={{ color: "gray" }}>{bio}</h3>
+      </div>
       <br />
       <div>{danceLeft ? "🔥\\_(X_X)-/🔥" : "🔥\\-(X_X)_/🔥"}</div>
       <br />
