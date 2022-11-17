@@ -18,7 +18,7 @@ const Shop = ({ gameData, dispatch }) => {
       <h3>Shop Component</h3>
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
-      <div>Items for sale (Just attacks for now)</div>
+      <div>Items for sale (Just attacks for now. I'm too busy for this)</div>
       <div>
       {allShopItems.map((card) => {
           return <Card key={card.id} cardValue={card} useCard={buyCard} />
