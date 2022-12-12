@@ -16,6 +16,7 @@ const Card = ({ cardValue, useCard }) => {
     },
     fontStyle: {
       fontFamily: "Silkscreen",
+      // add Koulen, Press Start 2P, Squada One?
       // fontFamily: 'Silkscreen', cursive,
     },
   }

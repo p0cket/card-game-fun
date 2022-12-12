@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 // import { motion } from "framer-motion/dist/framer-motion"
+import enemyImg from "../assets/fluffic GB Test_cropped.jpg"
+
 
 const Enemy = ({ enemyData }) => {
   const { name, health, bio, status, nextAttack } = enemyData
@@ -57,6 +59,8 @@ const Enemy = ({ enemyData }) => {
       <br />
       <div>{danceLeft ? "🔥\\_(X_X)-/🔥" : "🔥\\-(X_X)_/🔥"}</div>
       <br />
+      <img src={enemyImg} alt="Enemy" />
+
       <div style={{ color: "red" }}>
         {" "}
         {status ? `He is ${status}ed` : `unaffected`}

@@ -11,7 +11,7 @@ import {
 import { map } from "./consts/mapGenerator"
 
 export default function reducer(state, action) {
-  //option to deep clone the state immediately here,
+  //we can always deep clone the state immediately here,
   //solving all problems of stale state
   const { payload } = action
   switch (action.type) {
@@ -90,6 +90,18 @@ const playCardHandler = (state, { card, battlePayload }) => {
   if (myEnergy < card.cost) {
     return setAlertHandler(nextState, `Not enough energy to play that card :(`)
   }
+
+  //-----
+  // create typeChart
+  // Calculate super-effectiveness here
+  // const multiplier = typeChart(attackType, defenderType)
+
+  // note for later - confirmation of added card - and map of levels
+
+  // ---
+  // if `typeisDraw`, run draw for however many cards
+  // ---
+  // ----
   if (enemyHealth - card.num <= 0) {
     console.log(`you defeated the enemy!`)
 

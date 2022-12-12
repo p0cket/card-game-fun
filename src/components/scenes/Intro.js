@@ -1,6 +1,8 @@
 import React from "react"
 import { setSceneAction } from "../../actions"
 import { motion } from "framer-motion/dist/framer-motion"
+import heroFrontImg from "../../assets/Anime_protag_pixelated.png"
+import "./Intro.css"
 
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
@@ -9,8 +11,8 @@ const Intro = ({ dispatch }) => {
   }
   const styles = {
     fontStyle: {
-      fontFamily: 'Silkscreen',
-      fontSize: '100px'
+      fontFamily: "Silkscreen",
+      fontSize: "100px",
       // fontFamily: 'Silkscreen', cursive,
     },
   }
@@ -20,12 +22,12 @@ const Intro = ({ dispatch }) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 2}}
+        transition={{ delay: 1.1, duration: 2 }}
         style={styles.fontStyle}
-
       >
         Slay all the things!
       </motion.div>
+      <img src={heroFrontImg} alt="Hero Frontside" />
       <div>This is a card game, let's see how far you can go </div>
       <h3>instructions</h3>
       <div>

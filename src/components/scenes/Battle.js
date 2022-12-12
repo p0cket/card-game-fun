@@ -3,6 +3,7 @@ import { endTurnAction, playCardAction } from "../../actions"
 import Card from "../Card"
 import Enemy from "../Enemy"
 import { motion } from "framer-motion/dist/framer-motion"
+import heroBackImg from "../../assets/Protagonist.png"
 
 const Battle = ({ gameData, dispatch }) => {
   //keeping drawCard for debugging
@@ -33,6 +34,10 @@ const Battle = ({ gameData, dispatch }) => {
       <div>
         <Enemy enemyData={gameData.battle.enemy} />
         <br />
+        {/* Image of you */}
+        <div>
+          <img src={heroBackImg} alt="Hero Backside" />
+        </div>
         <div>
           {`🧪${energy} Energy 💞${health}HP`}
           {``}
