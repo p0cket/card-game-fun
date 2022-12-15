@@ -82,7 +82,7 @@ const setAlertHandler = (state, payload) => {
 // Battle Handlers
 
 const playCardHandler = (state, { card, battlePayload }) => {
-  console.log(`payload&card`, card, battlePayload)
+  console.log(`playCardHandler: payload&card`, card, battlePayload)
   let nextState = { ...state }
   const myEnergy = nextState.hero.energy
   const enemyHealth = nextState.battle.enemy.health
@@ -90,21 +90,17 @@ const playCardHandler = (state, { card, battlePayload }) => {
   if (myEnergy < card.cost) {
     return setAlertHandler(nextState, `Not enough energy to play that card :(`)
   }
-
   //-----
   // create typeChart
   // Calculate super-effectiveness here
   // const multiplier = typeChart(attackType, defenderType)
 
   // note for later - confirmation of added card - and map of levels
-
   // ---
   // if `typeisDraw`, run draw for however many cards
-  // ---
   // ----
   if (enemyHealth - card.num <= 0) {
     console.log(`you defeated the enemy!`)
-
     //put hand back into deck
     let nextDeck = []
     nextDeck.push(...nextState.deck)
@@ -130,14 +126,24 @@ const playCardHandler = (state, { card, battlePayload }) => {
 
     nextState = setSceneHandler(nextState, payload)
   }
-  // play the card
+  // remove the card
   const myHandIndex = nextState.battle.hand.indexOf(card)
-  const hand = [...nextState.battle.hand]
+  let hand = [...nextState.battle.hand]
   hand.splice(myHandIndex, 1)
 
-  if (card.effect != null) {
+  // apply the spliced hand (removed the used card) into the state
+  nextState = {
+    ...nextState,
+    battle: {
+      ...nextState.battle,
+      hand: hand,
+    },
+  }
+
+  if (card.effect != null || undefined) {
     const statusPayload = { card, battlePayload }
     nextState = applyStatusHandler(nextState, statusPayload)
+    console.log(`now back in playCardHandler after applying our effect, lets see our state`, nextState)
   }
 
   // If status affect, use status affect
@@ -164,17 +170,16 @@ const playCardHandler = (state, { card, battlePayload }) => {
         ...nextState.battle.enemy,
         health: enemyHealthLeft,
       },
-      hand,
+      // hand,
     },
   }
-  console.log(`nextState: `, nextState)
-  return discardCardHandler(nextState, { cardToRemove: card })
+  console.log(`endOf playCardHandler- nextState is: `, nextState)
+  return discardCardHandler(nextState, { cardToAddToDiscarded: card })
 }
 
 const applyStatusHandler = (state, { card, battlePayload }) => {
-  console.log(`Apply Status effect`, card, battlePayload)
 
-  const nextState = { ...state }
+  let nextState = { ...state }
   const statusEffect = card.effect
   console.log(`Apply Status of ${statusEffect}`, card, battlePayload)
   switch (statusEffect) {
@@ -186,6 +191,16 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
           enemy: { ...nextState.battle.enemy, status: "stun" },
         },
       }
+    case "draw":
+      console.log(`drawing ${card.qty}, cur hand length:${nextState.battle.hand.length}`)
+      for (let i = 0; i < card.qty; i++) {
+        nextState = drawCardHandler(nextState)
+      }
+      console.log(
+        `drew ${card.qty} cards, now hand is ${nextState.battle.hand.length} cards`,
+        nextState
+      )
+      return nextState
     default:
       console.log(`no statusEffect matched, returning state`)
       return nextState
@@ -193,11 +208,13 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
 }
 
 const discardCardHandler = (state, payload) => {
+  // notes the card that is in the discard pile.
+  // removing from deck happens elsewhere
   return {
     ...state,
     battle: {
       ...state.battle,
-      discarded: [...state.battle.discarded, payload.cardToRemove],
+      discarded: [...state.battle.discarded, payload.cardToAddToDiscarded],
     },
   }
 }
@@ -211,8 +228,7 @@ const endTurnHandler = (state, payload) => {
   let finalHealth = hero.health
   //  let finalHealth = hero.health - battle.enemy.nextAttack.damage
 
-
-  // Apply Status with attacks
+  // ENDTURN: Apply Status with attacks
   switch (enemyStatus) {
     case "stun":
       console.log(`stunned, so don't attack, set status to _null_`)
@@ -226,7 +242,9 @@ const endTurnHandler = (state, payload) => {
       nextState = enemyWithoutStatusState
       break
     case null:
-      console.log(` enemyStatus of null matched, returning a hero-damaged state`)
+      console.log(
+        ` enemyStatus of null matched, returning a hero-damaged state`
+      )
       finalHealth = finalHealth - battle.enemy.nextAttack.damage
       break
     default:
@@ -305,6 +323,7 @@ const beginBattleHandler = (state, payload) => {
 
 const drawCardHandler = (state) => {
   if (state.deck.length > 0) {
+    console.log(`draw. Deck has ${state.deck.length} cards`)
     return {
       ...state,
       battle: {
@@ -364,6 +383,9 @@ const purchaseHandler = (state, payload) => {
   const nextState = { ...state }
   //subtract the money from the gameData.gold,
   // add the card from the payload
+  if(!card.price){
+    console.warn(`card.price does not exist here. card.price = ${card.price}. fullcard:`, card)
+  }
   if (nextState.gold >= card.price) {
     const addedCardState = addCardHandler(nextState, { card })
     const newGoldBalance = addedCardState.gold - card.price

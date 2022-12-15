@@ -2,7 +2,7 @@ import React from "react";
 import { ACTIONS } from "../../actions";
 import { setSceneAction } from "../../actions";
 
-const Rest = ({dispatch}) => {
+const Rest = ({gameData, dispatch}) => {
     const loadNextLevel = () => {
     console.log(`loadNextLevel`);
     dispatch(setSceneAction());
@@ -23,12 +23,13 @@ const Rest = ({dispatch}) => {
         You realize the old man will keep watch and alarm you if there is any
         danger
       </div>
+      <div>( current health is {gameData.hero.health}/100 )</div>
       <button
         onClick={() => {
           healToFullHealth();
         }}
       >
-        Heal
+        Heal 
       </button>
       <br />
       <br />

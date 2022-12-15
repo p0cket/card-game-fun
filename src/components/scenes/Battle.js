@@ -36,7 +36,7 @@ const Battle = ({ gameData, dispatch }) => {
         <br />
         {/* Image of you */}
         <div>
-          <img src={heroBackImg} alt="Hero Backside" />
+          <img style={{ width: 100, height: 100 }} src={heroBackImg} alt="Hero Backside" />
         </div>
         <div>
           {`🧪${energy} Energy 💞${health}HP`}

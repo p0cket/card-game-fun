@@ -1,16 +1,18 @@
+import { uniqueId } from "../utils/reducer-utils"
+
 export const startingDeck = [
-  { type: "Fire", name: "Flamethrower+", num: 8, cost: 1, id: 1, effect: null },
-  { type: "Water", name: "Gush+", num: 6, cost: 1, id: 2, effect: null },
-  { type: "Poison", name: "Sting+", num: 5, cost: 1, id: 3, effect: null },
-  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 4, effect: null },
-  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 5, effect: "stun" },
-  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: 6, effect: "stun" },
-  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: 7, effect: null },
-  { type: "Water", name: "Gush", num: 2, cost: 1, id: 8, effect: null },
-  { type: "Poison", name: "Sting", num: 2, cost: 1, id: 9, effect: null },
-  { type: "Fire", name: "Flamethrower", num: 5, cost: 1, id: 10, effect: null },
-  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 11, effect: "stun" },
-  { type: "Physical", name: "Throw Fist", num: 5, cost: 2, id: 12, effect: "stun" },
+  { type: "Fire", name: "Flamethrower", num: 4, cost: 1, id: uniqueId(), effect: null },
+  { type: "Fire", name: "Flamethrower+", num: 8, cost: 1, id: uniqueId(), effect: null },
+  { type: "Water", name: "Gush", num: 2, cost: 1, id: uniqueId(), effect: null },
+  { type: "Water", name: "Gush+", num: 6, cost: 1, id: uniqueId(), effect: null },
+  { type: "Poison", name: "Sting", num: 2, cost: 1, id: uniqueId(), effect: null },
+  { type: "Poison", name: "Sting+", num: 5, cost: 1, id: uniqueId(), effect: null },
+  { type: "Physical", name: "Throw Fist", num: 3, cost: 2, id: uniqueId(), effect: "stun" },
+  { type: "Physical", name: "Throw Fist+", num: 5, cost: 2, id: uniqueId(), effect: "stun" },
+  { type: "Psychic", name: "Think", num: 0, cost: 0, id: uniqueId(), effect: "draw", qty: 1 },
+  { type: "Psychic", name: "Think+", num: 0, cost: 0, id: uniqueId(), effect: "draw", qty: 2 },
+  { type: "Psychic", name: "Recollect Mind", num: 0, cost: 1, id: uniqueId(), effect: "draw", qty: 2 },
+  { type: "Psychic", name: "Recollect Mind+", num: 0, cost: 1, id: uniqueId(), effect: "draw", qty: 3 },
 ];
 
 export const startingData = {
@@ -20,6 +22,7 @@ export const startingData = {
     health: 100,
     energy: 5,
     status: "Feeling Fine",
+    // max health
   },
   battle: {
     enemy: {

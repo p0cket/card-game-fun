@@ -38,7 +38,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Event dispatch={dispatch} />;
     case REST:
       console.log("rest Screen Case");
-      return <Rest dispatch={dispatch} />;
+      return <Rest gameData={gameData} dispatch={dispatch} />;
     case REWARD:
       console.log("reward Screen Case");
       return <Reward gameData={gameData} dispatch={dispatch} randomizedVal={Math.random()} />;

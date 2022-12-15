@@ -1,3 +1,5 @@
+import { uniqueId } from "./utils/reducer-utils"
+
 export const ACTIONS = {
   SET_SCENE: "set_scene",
   SET_MYDATA: "set-mydata",
@@ -27,9 +29,10 @@ export const ENEMY_TYPES = {
 }
 
 export const addCardAction = (card) => {
+  const cardWithFreshID = {...card, id: uniqueId()}
   return {
     type: ACTIONS.SELECT_REWARD,
-    payload: { card, battlePayload: {
+    payload: { card: cardWithFreshID, battlePayload: {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),

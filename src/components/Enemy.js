@@ -59,7 +59,7 @@ const Enemy = ({ enemyData }) => {
       <br />
       <div>{danceLeft ? "🔥\\_(X_X)-/🔥" : "🔥\\-(X_X)_/🔥"}</div>
       <br />
-      <img src={enemyImg} alt="Enemy" />
+      <img style={{ width: 150, height: 100 }} src={enemyImg} alt="Enemy" />
 
       <div style={{ color: "red" }}>
         {" "}

@@ -27,7 +27,7 @@ const Intro = ({ dispatch }) => {
       >
         Slay all the things!
       </motion.div>
-      <img src={heroFrontImg} alt="Hero Frontside" />
+      <img style={{ width: 300, height: 300 }} src={heroFrontImg} alt="Hero Frontside" />
       <div>This is a card game, let's see how far you can go </div>
       <h3>instructions</h3>
       <div>
