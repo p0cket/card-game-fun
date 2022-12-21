@@ -1,5 +1,5 @@
 import React from "react"
-import Card from "../Card"
+import Card from "../common/Card";
 import { addCardAction } from "../../actions"
 import { motion } from "framer-motion/dist/framer-motion"
 

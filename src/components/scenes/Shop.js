@@ -2,7 +2,7 @@ import React from "react";
 // import { sampleItems } from "../../consts/consts";
 import { allShopItems } from "../../consts/allShopItems";
 // import Item from "../Item";
-import Card from "../Card";
+import Card from "../common/Card";
 import { buyCardAction } from "../../actions";
 
 const Shop = ({ gameData, dispatch }) => {

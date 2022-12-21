@@ -1,7 +1,7 @@
 import React from "react"
 import { endTurnAction, playCardAction } from "../../actions"
-import Card from "../Card"
-import Enemy from "../Enemy"
+import Card from "../common/Card";
+import Enemy from "../common/Enemy"
 import { motion } from "framer-motion/dist/framer-motion"
 import heroBackImg from "../../assets/Protagonist.png"
 

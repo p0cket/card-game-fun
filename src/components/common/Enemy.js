@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 // import { motion } from "framer-motion/dist/framer-motion"
-import enemyImg from "../assets/fluffic GB Test_cropped.jpg"
+import enemyImg from "../../assets/fluffic GB Test_cropped.jpg"
 
 
 const Enemy = ({ enemyData }) => {
