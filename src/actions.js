@@ -36,7 +36,7 @@ export const addCardAction = (card) => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 3,
+      startingHandCount: 5,
     }},
   }
 }
@@ -49,7 +49,7 @@ export const playCardAction = (card) => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 3,
+      startingHandCount: 5,
     }},
   }
 }
@@ -66,7 +66,7 @@ export const setSceneAction = () => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 3,
+      startingHandCount: 5,
     },
   }
 }
@@ -81,7 +81,7 @@ export const buyCardAction = (card) => {
         enemySeed: Math.random(),
         atkSeed: Math.random(),
         beginBattleSeed: Math.random(),
-        startingHandCount: 3,
+        startingHandCount: 5,
       },
     },
   }
@@ -96,7 +96,7 @@ export const eventChoiceAction = (num) => {
         enemySeed: Math.random(),
         atkSeed: Math.random(),
         beginBattleSeed: Math.random(),
-        startingHandCount: 3,
+        startingHandCount: 5,
       },
     },
   }

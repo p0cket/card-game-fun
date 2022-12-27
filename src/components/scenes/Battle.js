@@ -1,19 +1,10 @@
 import React from "react"
 import { endTurnAction, playCardAction } from "../../actions"
-import Card from "../common/Card";
+import Card from "../common/Card"
 import Enemy from "../common/Enemy"
 import { motion } from "framer-motion/dist/framer-motion"
-import heroBackImg from "../../assets/Protagonist.png"
 
 const Battle = ({ gameData, dispatch }) => {
-  //keeping drawCard for debugging
-  // const drawCard = () => {
-  //   dispatch({
-  //     type: ACTIONS.DRAW_CARD,
-  //     payload: { deck: gameData.deck, hand: gameData.battle.hand },
-  //   });
-  // };
-
   const playCard = (card) => {
     dispatch(playCardAction(card))
   }
@@ -22,21 +13,43 @@ const Battle = ({ gameData, dispatch }) => {
     dispatch(endTurnAction())
   }
   const { health, energy } = gameData.hero
+
+  const yourVariants = {
+    visible: {
+      x: [0, 2, -3, 5, -1, 5, -3, 0],
+      y: [0, 3, -1],
+      transition: {
+        // delay: 0.5,
+        duration: 15,
+        yoyo: Infinity
+      }
+    }
+  }
   // const healthBarCount = health / 4
   // const heartEmoji = `❤️`
 
   // 5 cases: beginning, inBattle, victory, reward screen, loss
   // just change the scene to victory, pass the data,
   //  {/* different phases will be done through scene changes */}
-
   return (
     <>
       <div>
         <Enemy enemyData={gameData.battle.enemy} />
         <br />
-        {/* Image of you */}
         <div>
-          <img style={{ width: 100, height: 100 }} src={heroBackImg} alt="Hero Backside" />
+          <motion.img
+            style={{ width: 120, height: 100 }}
+            animate="visible"
+            whileHover="hover"
+            variants={yourVariants}
+            src="/creatures/Chibipal.png"
+            alt="Enemy"
+          />
+          {/* <img
+            style={{ width: 100, height: 100 }}
+            src="/creatures/Chibipal.png"
+            alt="Chibipal Backside"
+          /> */}
         </div>
         <div>
           {`🧪${energy} Energy 💞${health}HP`}

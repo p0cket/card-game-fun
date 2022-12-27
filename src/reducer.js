@@ -262,7 +262,8 @@ const endTurnHandler = (state, payload) => {
       },
     }
     const drawCardState = drawCardHandler(endTurnState)
-    nextState = setAtkHandler(drawCardState, payload)
+    const drawSecondCardState = drawCardHandler(drawCardState)
+    nextState = setAtkHandler(drawSecondCardState, payload)
     // Clear the alert messages
     nextState = setAlertHandler(nextState, ``)
 

@@ -9,7 +9,7 @@ export const decideEnemyATK = (enemyAttacks) => {
     const nextATK = enemyAttacks[randomizeATK]
     return nextATK
   } else {
-    console.log(`no enemyAttacks`)
+    console.log(`no enemyAttacks passed into decideEnemyATK`)
   }
 }
 
@@ -18,6 +18,6 @@ export const getBattlePayloadRandomized = () => {
     enemySeed: Math.random(),
     atkSeed: Math.random(),
     beginBattleSeed: Math.random(),
-    startingHandCount: 3,
+    startingHandCount: 5,
   }
 }

@@ -29,10 +29,13 @@ const Intro = ({ dispatch }) => {
       </motion.div>
       <img style={{ width: 300, height: 300 }} src={heroFrontImg} alt="Hero Frontside" />
       <div>This is a card game, let's see how far you can go </div>
+      <br/>
+      <div>Heres your Chibipal, its the last one I had. It can learn moves</div>
+      <img style={{ width: 120, height: 100 }} src="/creatures/Chibipal.png" alt="Chibipal Backside" />
       <h3>instructions</h3>
       <div>
-        Your cards can ONLY BE USED ONCE. Use them strategically to defeat
-        bosses
+        Your cards can ONLY BE USED ONCE. Use them strategically to command your Chibipal and defeat
+        enemies. You can save the wooorrrrld!
       </div>
 
       <div>

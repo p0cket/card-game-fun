@@ -25,7 +25,13 @@ const Card = ({ cardValue, useCard }) => {
   return (
     <>
       <motion.button
-        whileHover={{ scale: 1.3, rotate: 3 }}
+        whileHover={{
+          scale: 1.1,
+          rotate: 1,
+          transition: {
+            yoyo: Infinity,
+          },
+        }}
         whileTap={{
           scale: 0.8,
           rotate: -90,
