@@ -25,8 +25,10 @@ const Intro = ({ dispatch }) => {
         transition={{ delay: 1.1, duration: 2 }}
         style={styles.fontStyle}
       >
-        Slay all the things!
+        Super Chibipal Slayer!
       </motion.div>
+      <div>(Pending Title)</div>
+      <br/>
       <img style={{ width: 300, height: 300 }} src={heroFrontImg} alt="Hero Frontside" />
       <div>This is a card game, let's see how far you can go </div>
       <br/>

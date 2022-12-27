@@ -56,7 +56,7 @@ export const allEnemies = {
         name: "Bunster",
         health: 17,
         passive: "none",
-        bio: "The experiment went wrong, and then it started to hop",
+        bio: "'The experiment went wrong, and then it started to hop' -Professor Blue",
         status: null,
         img: "/creatures/Bunster.png",
         attacks: [
