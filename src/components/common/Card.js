@@ -19,6 +19,19 @@ const Card = ({ cardValue, useCard }) => {
       // Fonts: add Koulen, Press Start 2P, Squada One?
       // fontFamily: 'Silkscreen', cursive,
     },
+    newCardStyle: {
+      fontFamily: 'Silkscreen',
+      backgroundColor: 'green',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundImage: 'url(/backgrounds/gridBGlight.png)',
+      backgroundRepeat: 'repeat',
+      backgroundSize: '1000px',
+      width: '150px',
+      height: '200px',
+      padding: '2px'
+    }
   }
 
   const energyEmoji = "🧪"
@@ -37,7 +50,8 @@ const Card = ({ cardValue, useCard }) => {
           rotate: -90,
           borderRadius: "100%",
         }}
-        style={styles.cardStyle}
+        // style={styles.cardStyle}
+        style={styles.newCardStyle}
         onClick={() => useCard(cardValue)}
       >
         {`${name} ${energyEmoji.repeat(cost)}`}

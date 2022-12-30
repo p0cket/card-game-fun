@@ -88,7 +88,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
   const enemyHealth = nextState.battle.enemy.health
 
   if (myEnergy < card.cost) {
-    return setAlertHandler(nextState, `Not enough energy to play that card :(`)
+    return setAlertHandler(nextState, `Not enough energy to play that card :(. End turn to replenish Energy!`)
   }
   //-----
   // create typeChart
@@ -143,7 +143,10 @@ const playCardHandler = (state, { card, battlePayload }) => {
   if (card.effect != null || undefined) {
     const statusPayload = { card, battlePayload }
     nextState = applyStatusHandler(nextState, statusPayload)
-    console.log(`now back in playCardHandler after applying our effect, lets see our state`, nextState)
+    console.log(
+      `now back in playCardHandler after applying our effect, lets see our state`,
+      nextState
+    )
   }
 
   // If status affect, use status affect
@@ -178,7 +181,6 @@ const playCardHandler = (state, { card, battlePayload }) => {
 }
 
 const applyStatusHandler = (state, { card, battlePayload }) => {
-
   let nextState = { ...state }
   const statusEffect = card.effect
   console.log(`Apply Status of ${statusEffect}`, card, battlePayload)
@@ -191,8 +193,30 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
           enemy: { ...nextState.battle.enemy, status: "stun" },
         },
       }
+
+    // make tween scenes
+    case "poison":
+      return {
+        ...nextState,
+      }
+    case "sleep":
+      // 50% chance of waking up
+      return {
+        ...nextState,
+      }
+    case "sheild":
+      // temporary
+      return {
+        ...nextState,
+      }
+    case "armor":
+      return {
+        ...nextState,
+      }
     case "draw":
-      console.log(`drawing ${card.qty}, cur hand length:${nextState.battle.hand.length}`)
+      console.log(
+        `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`
+      )
       for (let i = 0; i < card.qty; i++) {
         nextState = drawCardHandler(nextState)
       }
@@ -384,8 +408,11 @@ const purchaseHandler = (state, payload) => {
   const nextState = { ...state }
   //subtract the money from the gameData.gold,
   // add the card from the payload
-  if(!card.price){
-    console.warn(`card.price does not exist here. card.price = ${card.price}. fullcard:`, card)
+  if (!card.price) {
+    console.warn(
+      `card.price does not exist here. card.price = ${card.price}. fullcard:`,
+      card
+    )
   }
   if (nextState.gold >= card.price) {
     const addedCardState = addCardHandler(nextState, { card })

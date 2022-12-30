@@ -1,3 +1,4 @@
+//Deprecated while we figure out what we want to use for our buttons.
 import React from "react";
 
 const Button = (text, onClick) => {

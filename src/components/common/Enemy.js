@@ -1,3 +1,4 @@
+// Deprecated for UI change, but may reuse later
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion/dist/framer-motion"
 import enemyTestImg from "../../assets/fluffic GB Test_cropped.jpg"
@@ -7,7 +8,7 @@ const Enemy = ({ enemyData }) => {
   let enemyImg = enemyTestImg
   //Do we have an image for this creature yet?
   if (img !== null) {
-    console.log(`enemy.img is: ${img},not null`)
+    console.log(`enemy.img is: ${img},not null on this render`)
     enemyImg = img
   }
   // width:50%; margin-left:20%
@@ -21,10 +22,10 @@ const Enemy = ({ enemyData }) => {
     hover: {
       scale: 1.1,
       initial: {
-        y: 20
+        y: 20,
       },
       animate: {
-        y: -20
+        y: -20,
       },
       transition: {
         delay: 0.1,
@@ -37,9 +38,9 @@ const Enemy = ({ enemyData }) => {
       transition: {
         // delay: 0.5,
         duration: 15,
-        yoyo: Infinity
-      }
-    }
+        yoyo: Infinity,
+      },
+    },
   }
 
   const styles = {
@@ -79,7 +80,9 @@ const Enemy = ({ enemyData }) => {
             id="health"
             value={health}
             max={fullHealth}
-            style={{ color: "red" }}
+            style={{
+              backgroundColor: "#4caf50",
+            }}
           ></progress>
         </h2>
         <h3 style={{ color: "gray" }}>{bio}</h3>

@@ -18,15 +18,16 @@ export default function App() {
   // console.log(`[App.js Rendered]`);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundImage: "url(/backgrounds/gridBGlight.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px 500px",
+      }}
+    >
       <div>
-        {/* <motion.h1
-          initial={{ y: -300 }}
-          animate={{ fontSize: 200, color: "#ff2994" , x: 0, y: 0}}
-        >
-          FramerMotion
-        </motion.h1> */}
-        <h3>
+        <h3 style={{ padding: "5px" }}>
           {` 💰${gameData.gold}Gold  Level  
         ${gameData.curScene.lvl} -ACT${gameData.curScene.act}- `}
         </h3>
