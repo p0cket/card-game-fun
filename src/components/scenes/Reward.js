@@ -23,6 +23,7 @@ const Reward = ({ gameData, dispatch }) => {
         initial={{ opacity: 0.5 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1, duration: 3 }}
+        style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}
       >
         {currentRewards.map((card) => {
           return <Card key={card.id} cardValue={card} useCard={addCard} />

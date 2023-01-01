@@ -26,12 +26,6 @@ export default function App() {
         backgroundSize: "800px 500px",
       }}
     >
-      <div>
-        <h3 style={{ padding: "5px" }}>
-          {` 💰${gameData.gold}Gold  Level  
-        ${gameData.curScene.lvl} -ACT${gameData.curScene.act}- `}
-        </h3>
-      </div>
       <Screen gameData={gameData} dispatch={dispatch} map={map} />
       {/* <button onClick={loadNextLevel}>Next Level</button> */}
     </div>

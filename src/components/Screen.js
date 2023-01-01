@@ -32,10 +32,10 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Intro dispatch={dispatch} />;
     case SHOP:
       console.log("shop Screen Case");
-      return <Shop dispatch={dispatch} />;
+      return <Shop gameData={gameData} dispatch={dispatch} />;
     case EVENT:
       console.log("event Screen Case");
-      return <Event dispatch={dispatch} />;
+      return <Event gameData={gameData} dispatch={dispatch} />;
     case REST:
       console.log("rest Screen Case");
       return <Rest gameData={gameData} dispatch={dispatch} />;

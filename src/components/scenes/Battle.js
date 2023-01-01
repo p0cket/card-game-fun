@@ -29,6 +29,7 @@ const Battle = ({ gameData, dispatch }) => {
   // const healthBarCount = health / 4
   // const heartEmoji = `❤️`
   const energyEmoji = "🧪"
+  const goldEmoji = "💰"
 
   // 5 cases: beginning, inBattle, victory, reward screen, loss
   // just change the scene to victory, pass the data,
@@ -39,7 +40,14 @@ const Battle = ({ gameData, dispatch }) => {
         <div className="battleUIcontainer">
           <div className="battleUI">
             <div className="battleStats">
-              <p>Simulation Room: No Effects</p>
+              <p>
+                {`${goldEmoji}${gameData.gold}`}
+                <span style={{ color: "#e6ecc3" }}>Gold</span>
+                <span style={{ color: "#e6ecc3" }}> Level</span>
+                {gameData.curScene.lvl}{" -"}
+                <span style={{ color: "#e6ecc3" }}>ACT</span>
+                {gameData.curScene.act}- Simulation Room: No Effects
+              </p>
             </div>
             <div className="battleTop">
               {/* Top column */}
@@ -109,7 +117,7 @@ const Battle = ({ gameData, dispatch }) => {
                   {health}HP{" "}
                   <progress
                     id="health"
-                    value="80"
+                    value={health}
                     max="100"
                     style={{
                       backgroundColor: "#4caf50",
