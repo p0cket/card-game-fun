@@ -8,6 +8,7 @@ import Shop from "./scenes/Shop";
 import Rest from "./scenes/Rest";
 import Reward from "./scenes/Reward";
 import Battle from "./scenes/Battle";
+import Map from "./scenes/Map";
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -19,6 +20,7 @@ const Screen = ({ gameData, dispatch, map }) => {
     INTRO,
     BATTLE,
     SHOP,
+    MAP,
     EVENT,
     REST,
     REWARD,
@@ -33,6 +35,9 @@ const Screen = ({ gameData, dispatch, map }) => {
     case SHOP:
       console.log("shop Screen Case");
       return <Shop gameData={gameData} dispatch={dispatch} />;
+    case MAP:
+        console.log("map Screen Case");
+    return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:
       console.log("event Screen Case");
       return <Event gameData={gameData} dispatch={dispatch} />;

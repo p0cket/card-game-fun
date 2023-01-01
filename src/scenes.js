@@ -1,6 +1,7 @@
 export const SCENES = {
     INTRO: "intro",
     SHOP: "shop",
+    MAP: "map",
     EVENT: "event",
     REST: "rest",
     REWARD: "reward",

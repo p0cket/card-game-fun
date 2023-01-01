@@ -1,11 +1,12 @@
 import { SCENES } from "../scenes";
 
-const { INTRO, BATTLE, SHOP, REWARD, EVENT, REST, MINIBOSS, BOSS, GAMEOVER } = SCENES;
+const { INTRO, BATTLE, MAP, SHOP, REWARD, EVENT, REST, MINIBOSS, BOSS, GAMEOVER } = SCENES;
 
 const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
+    MAP,
     BATTLE,
     REWARD,
     REWARD,
