@@ -9,6 +9,7 @@ import Rest from "./scenes/Rest";
 import Reward from "./scenes/Reward";
 import Battle from "./scenes/Battle";
 import Map from "./scenes/Map";
+import Trans from "./scenes/Trans";
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -17,6 +18,7 @@ const Screen = ({ gameData, dispatch, map }) => {
   console.log(`levelToSet is:`, levelToSet);
 
   const {
+    TRANSITION,
     INTRO,
     BATTLE,
     SHOP,
@@ -30,6 +32,9 @@ const Screen = ({ gameData, dispatch, map }) => {
   } = SCENES;
 
   switch (levelToSet) {
+    case TRANSITION:
+      console.log("transition Screen Case");
+      return <Trans gameData={gameData} dispatch={dispatch} />;
     case INTRO:
       return <Intro dispatch={dispatch} />;
     case SHOP:

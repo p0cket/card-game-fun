@@ -1,12 +1,25 @@
-import { SCENES } from "../scenes";
+import { SCENES } from "../scenes"
 
-const { INTRO, BATTLE, MAP, SHOP, REWARD, EVENT, REST, MINIBOSS, BOSS, GAMEOVER } = SCENES;
+const {
+  // TRANSITION,
+  INTRO,
+  BATTLE,
+  MAP,
+  SHOP,
+  REWARD,
+  EVENT,
+  REST,
+  MINIBOSS,
+  BOSS,
+  GAMEOVER,
+} = SCENES
 
 const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
     MAP,
+    // TRANSITION,
     BATTLE,
     REWARD,
     REWARD,
@@ -71,7 +84,7 @@ const mapGenerator = () => {
     REWARD,
     REST,
     BOSS,
-  ];
-};
+  ]
+}
 
-export const map = mapGenerator();
+export const map = mapGenerator()

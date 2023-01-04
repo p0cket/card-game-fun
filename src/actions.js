@@ -1,6 +1,7 @@
 import { uniqueId } from "./utils/reducer-utils"
 
 export const ACTIONS = {
+  SET_TRANS: "set-trans",
   SET_SCENE: "set_scene",
   SET_MYDATA: "set-mydata",
   SET_MYBALANCE: "set-mybalance",
@@ -57,6 +58,19 @@ export const playCardAction = (card) => {
 export const endTurnAction = () => {
   console.log(`End Turn`)
   return { type: ACTIONS.END_TURN, payload: { seed: Math.random() } }
+}
+
+// @TODO finish or remove this Transition functionality
+export const transitionSceneAction = () => {
+  return {
+    type: ACTIONS.SET_TRANS,
+    payload: {
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: 5,
+    },
+  }
 }
 
 export const setSceneAction = () => {

@@ -15,6 +15,8 @@ export default function reducer(state, action) {
   //solving all problems of stale state
   const { payload } = action
   switch (action.type) {
+    case ACTIONS.SET_TRANS:
+      return setTransitionHandler(state, payload)
     case ACTIONS.SET_SCENE:
       return setSceneHandler(state, payload)
     case ACTIONS.SET_MYDATA:
@@ -88,7 +90,10 @@ const playCardHandler = (state, { card, battlePayload }) => {
   const enemyHealth = nextState.battle.enemy.health
 
   if (myEnergy < card.cost) {
-    return setAlertHandler(nextState, `Not enough energy to play that card :(. End turn to replenish Energy!`)
+    return setAlertHandler(
+      nextState,
+      `Not enough energy to play that card :(. End turn to replenish Energy!`
+    )
   }
   //-----
   // create typeChart
@@ -108,11 +113,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
     console.log(`nextDeck`, nextDeck)
 
     // generate new rewards
-    nextState = generateRewardsHandler(
-      nextState,
-      battlePayload
-      //(seed, level)
-    )
+    nextState = generateRewardsHandler(nextState, battlePayload)
 
     nextState = setMyDataHandler({
       ...nextState,
@@ -124,6 +125,10 @@ const playCardHandler = (state, { card, battlePayload }) => {
     const payload = battlePayload
     console.log(`payload`, battlePayload)
 
+    // replace with something like setTransitionHandler
+    // nextState = setTransitionHandler(nextState, payload)
+    //
+    //
     nextState = setSceneHandler(nextState, payload)
   }
   // remove the card
@@ -464,6 +469,24 @@ const setRewardHandler = (state, payload) => {
   // return newState;
 }
 
+// @TODO: Finish in progress setTransitionHandler or get rid of it:
+const setTransitionHandler = (state, payload) => {
+  // Probably need text to display and options here. maybe confetti?
+  // Do you need a battle payload here? probably not.
+  // const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
+  //
+  const nextLevel = {
+    scene: SCENES.TRANSITION,
+    lvl: state.curScene.lvl,
+    act: state.curScene.act,
+  }
+  let nextState = state
+  return {
+    ...nextState,
+    curScene: nextLevel,
+  }
+}
+
 // Set Level Handlers
 const setSceneHandler = (state, payload) => {
   const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
@@ -475,6 +498,15 @@ const setSceneHandler = (state, payload) => {
   let nextState = state
 
   let enemyArr = []
+
+  // THOUGHTS on TRANSITION scene
+  // Send to map if needed but if not, don't send to map.
+  // switch (map[state.curScene.lvl]) {
+  //   case SCENES.BATTLE:
+  //     return {...nextState}
+  // }
+  //
+
   switch (nextLevel.scene) {
     case SCENES.BATTLE:
       enemyArr = decideEnemyArr(state.curScene.act, ENEMY_TYPES.REG)

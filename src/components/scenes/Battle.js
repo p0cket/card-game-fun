@@ -103,7 +103,7 @@ const Battle = ({ gameData, dispatch }) => {
                   whileHover="hover"
                   variants={yourVariants}
                   src="/creatures/Chibipal.png"
-                  alt="Enemy"
+                  alt="Your Chibipal"
                 />
               </div>
               <div className="battleBotLeft">
