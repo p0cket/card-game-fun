@@ -1,5 +1,6 @@
 import { ACTIONS, ENEMY_TYPES } from "./actions"
 import { SCENES } from "./scenes"
+// import { EFFECTS } from "./effects"
 import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts"
 import { allAvailableRewards } from "./consts/allAvailableRewards"
 import {
@@ -88,13 +89,28 @@ const playCardHandler = (state, { card, battlePayload }) => {
   let nextState = { ...state }
   const myEnergy = nextState.hero.energy
   const enemyHealth = nextState.battle.enemy.health
+  let damage = card.num
+  let energyCost = card.cost
 
-  if (myEnergy < card.cost) {
+  if (myEnergy < energyCost) {
     return setAlertHandler(
       nextState,
       `Not enough energy to play that card :(. End turn to replenish Energy!`
     )
   }
+
+  //apply hero buff effects
+  switch (nextState.hero.effects.buff) {
+    case "doubleDamage":
+      damage = damage * 2
+      break
+    case null:
+      console.log(`null (regular) case for hero buffs applied`)
+      break
+    default:
+      console.log(`default case for hero buffs applied`)
+  }
+
   //-----
   // create typeChart
   // Calculate super-effectiveness here
@@ -104,7 +120,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
   // ---
   // if `typeisDraw`, run draw for however many cards
   // ----
-  if (enemyHealth - card.num <= 0) {
+  if (enemyHealth - damage <= 0) {
     console.log(`you defeated the enemy!`)
     //put hand back into deck
     let nextDeck = []
@@ -167,8 +183,8 @@ const playCardHandler = (state, { card, battlePayload }) => {
   // armor buff
   // heal buff
 
-  const energyLeft = nextState.hero.energy - card.cost
-  const enemyHealthLeft = nextState.battle.enemy.health - card.num
+  const energyLeft = myEnergy - energyCost
+  const enemyHealthLeft = nextState.battle.enemy.health - damage
   nextState = {
     ...nextState,
     hero: { ...nextState.hero, energy: energyLeft },
@@ -201,6 +217,8 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
 
     // make tween scenes
     case "poison":
+      // add poison effect to enemy.
+      //
       return {
         ...nextState,
       }
@@ -217,6 +235,16 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
     case "armor":
       return {
         ...nextState,
+      }
+    case "buff":
+      // double attacks this turn
+      // nextState.hero.effects.buff = "doubleDamage"
+      return {
+        ...nextState,
+        hero: {
+          ...nextState.hero,
+          effects: { ...nextState.hero.effects, buff: "doubleDamage" },
+        },
       }
     case "draw":
       console.log(
@@ -290,6 +318,25 @@ const endTurnHandler = (state, payload) => {
         energy: fullEnergyAmount,
       },
     }
+
+    // @TODO: upkeep handler
+    // switch (heroStatus) {
+    //   case "stun":
+    //     console.log(
+    //       `upkeep: our hero is stunned, we can't attack, set status to _null_`
+    //     )
+    //     const enemyWithoutStatusState = {
+    //       ...nextState,
+    //     }
+    //     nextState = enemyWithoutStatusState
+    //     break
+    //   case null:
+    //     console.log(`upkeep: heroStatus of null matched`)
+    //     break
+    //   default:
+    //     console.log(`upkeep: no heroStatus matched`)
+    // }
+
     const drawCardState = drawCardHandler(endTurnState)
     const drawSecondCardState = drawCardHandler(drawCardState)
     nextState = setAtkHandler(drawSecondCardState, payload)
