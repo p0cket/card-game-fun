@@ -1,6 +1,6 @@
 import { ACTIONS, ENEMY_TYPES } from "./actions"
 import { SCENES } from "./scenes"
-// import { EFFECTS } from "./effects"
+import { EFFECTS } from "./effects"
 import { startingDeck, startingData, fullEnergyAmount } from "./consts/consts"
 import { allAvailableRewards } from "./consts/allAvailableRewards"
 import {
@@ -101,7 +101,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
 
   //apply hero buff effects
   switch (nextState.hero.effects.buff) {
-    case "doubleDamage":
+    case EFFECTS.DOUBLEDAMAGE:
       damage = damage * 2
       break
     case null:
@@ -115,11 +115,11 @@ const playCardHandler = (state, { card, battlePayload }) => {
   // create typeChart
   // Calculate super-effectiveness here
   // const multiplier = typeChart(attackType, defenderType)
+  //-----
 
-  // note for later - confirmation of added card - and map of levels
-  // ---
-  // if `typeisDraw`, run draw for however many cards
-  // ----
+  //This should replace the full check for if we defeated the enemy, and allow the code to be executed elsewhere
+  // nextState = checkIfDefeatedState(nextState, {damage, battlePayload})
+  // This below is what is replaced by the line above
   if (enemyHealth - damage <= 0) {
     console.log(`you defeated the enemy!`)
     //put hand back into deck
@@ -147,6 +147,8 @@ const playCardHandler = (state, { card, battlePayload }) => {
     //
     nextState = setSceneHandler(nextState, payload)
   }
+// 
+
   // remove the card
   const myHandIndex = nextState.battle.hand.indexOf(card)
   let hand = [...nextState.battle.hand]
@@ -170,19 +172,6 @@ const playCardHandler = (state, { card, battlePayload }) => {
     )
   }
 
-  // If status affect, use status affect
-  // appliedStatusState = applyStatusHandler(state, payload)
-
-  // poison deals damage,
-  // stun makes him not attack next turn
-  // injure makes his attacks weaker
-  // sleep makes him possibly not attack for multiple turns
-
-  // buffs
-  // evasion buff
-  // armor buff
-  // heal buff
-
   const energyLeft = myEnergy - energyCost
   const enemyHealthLeft = nextState.battle.enemy.health - damage
   nextState = {
@@ -201,31 +190,66 @@ const playCardHandler = (state, { card, battlePayload }) => {
   return discardCardHandler(nextState, { cardToAddToDiscarded: card })
 }
 
+//@TODO: we are extracting the defeat state to make it reusable
+// eslint-disable-next-line 
+const checkIfDefeatedState = (state, {damage, battlePayload}) => {
+  let nextState = { ...state }
+  const enemyHealth = nextState.battle.enemy.health
+
+  if (enemyHealth - damage <= 0) {
+    console.log(`you defeated the enemy!`)
+    //put hand back into deck
+    let nextDeck = []
+    nextDeck.push(...nextState.deck)
+    nextDeck.push(...nextState.battle.hand)
+    console.log(`nextDeck`, nextDeck)
+
+    // generate new rewards
+    nextState = generateRewardsHandler(nextState, battlePayload)
+
+    nextState = setMyDataHandler({
+      ...nextState,
+      gold: nextState.gold + 25,
+      deck: nextDeck,
+    })
+    console.log(`nextState`, nextState)
+
+    const payload = battlePayload
+    console.log(`payload`, battlePayload)
+    nextState = setSceneHandler(nextState, payload)
+  }
+}
+
 const applyStatusHandler = (state, { card, battlePayload }) => {
   let nextState = { ...state }
   const statusEffect = card.effect
   console.log(`Apply Status of ${statusEffect}`, card, battlePayload)
   switch (statusEffect) {
-    case "stun":
+    case EFFECTS.STUN:
       return {
         ...nextState,
         battle: {
           ...nextState.battle,
-          enemy: { ...nextState.battle.enemy, status: "stun" },
+          enemy: { ...nextState.battle.enemy, status: EFFECTS.STUN },
         },
       }
-
-    // make tween scenes
-    case "poison":
+    case EFFECTS.POISON:
       // add poison effect to enemy.
-      //
       return {
         ...nextState,
+        battle: {
+          ...nextState.battle,
+          enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
+        },
       }
-    case "sleep":
+    case EFFECTS.SLEEP:
       // 50% chance of waking up
       return {
         ...nextState,
+        battle: {
+          ...nextState.battle,
+          enemy: { ...nextState.battle.enemy, status: EFFECTS.SLEEP },
+        },
       }
     case "sheild":
       // temporary
@@ -236,17 +260,17 @@ const applyStatusHandler = (state, { card, battlePayload }) => {
       return {
         ...nextState,
       }
-    case "buff":
+    case EFFECTS.DOUBLEDAMAGE:
       // double attacks this turn
-      // nextState.hero.effects.buff = "doubleDamage"
+      // nextState.hero.effects.buff = EFFECTS.DOUBLEDAMAGE
       return {
         ...nextState,
         hero: {
           ...nextState.hero,
-          effects: { ...nextState.hero.effects, buff: "doubleDamage" },
+          effects: { ...nextState.hero.effects, buff: EFFECTS.DOUBLEDAMAGE },
         },
       }
-    case "draw":
+    case EFFECTS.DRAW:
       console.log(
         `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`
       )
@@ -281,13 +305,15 @@ const endTurnHandler = (state, payload) => {
   //
   const { hero, battle } = nextState
   const enemyStatus = nextState.battle.enemy.status
+  const heroBuff = nextState.hero.effects.buff
+
   // apply status effects. maybe a applyStatusEffectsHandler()
   let finalHealth = hero.health
   //  let finalHealth = hero.health - battle.enemy.nextAttack.damage
 
-  // ENDTURN: Apply Status with attacks
+  // ENDTURN: Resolve applied enemy effects
   switch (enemyStatus) {
-    case "stun":
+    case EFFECTS.STUN:
       console.log(`stunned, so don't attack, set status to _null_`)
       const enemyWithoutStatusState = {
         ...nextState,
@@ -298,6 +324,28 @@ const endTurnHandler = (state, payload) => {
       }
       nextState = enemyWithoutStatusState
       break
+    case EFFECTS.POISON:
+      console.log(`Poisoned, so check if dead, and if not apply poison damage`)
+      //checkEnemyDefeat(damage)
+
+      break
+    case EFFECTS.SLEEP:
+      console.log(
+        `Sleep. 50% chance wakes up - status is removed, no damage applies while active`
+      )
+      // @TODO: replace Math.random() with Seed
+      const decision = Math.floor(Math.random() * 2)
+      if (decision === 1) {
+        const enemyAppliedSleepState = {
+          ...nextState,
+          battle: {
+            ...nextState.battle,
+            enemy: { ...nextState.battle.enemy, status: null },
+          },
+        }
+        nextState = enemyAppliedSleepState
+      }
+      break
     case null:
       console.log(
         ` enemyStatus of null matched, returning a hero-damaged state`
@@ -306,6 +354,29 @@ const endTurnHandler = (state, payload) => {
       break
     default:
       console.log(`no enemyStatus matched, returning state`)
+  }
+
+  //ENDTURN: Resolve your buffs
+  switch (heroBuff) {
+    case EFFECTS.DOUBLEDAMAGE: {
+      // your buff lasts one turn. Set back to _null_
+      const removedDoubleDamageState = {
+        ...nextState,
+        hero: {
+          ...nextState.hero,
+          effects: {
+            ...nextState.hero.effects,
+            buff: null,
+          },
+        },
+      }
+      nextState = removedDoubleDamageState
+      break
+    }
+    default:
+      console.log(
+        `endTurnHandler: default case reached while checking heroBuff of: ${heroBuff}`
+      )
   }
 
   if (finalHealth > 0) {
@@ -321,7 +392,7 @@ const endTurnHandler = (state, payload) => {
 
     // @TODO: upkeep handler
     // switch (heroStatus) {
-    //   case "stun":
+    //   case EFFECTS.STUN:
     //     console.log(
     //       `upkeep: our hero is stunned, we can't attack, set status to _null_`
     //     )
@@ -329,9 +400,6 @@ const endTurnHandler = (state, payload) => {
     //       ...nextState,
     //     }
     //     nextState = enemyWithoutStatusState
-    //     break
-    //   case null:
-    //     console.log(`upkeep: heroStatus of null matched`)
     //     break
     //   default:
     //     console.log(`upkeep: no heroStatus matched`)

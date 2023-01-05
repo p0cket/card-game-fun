@@ -1,4 +1,6 @@
 import { uniqueId } from "../utils/reducer-utils"
+import { EFFECTS } from "../effects"
+const { STUN } = EFFECTS
 
 export const allAvailableRewards = [
   {
@@ -7,6 +9,7 @@ export const allAvailableRewards = [
     num: 9,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "fire",
@@ -14,6 +17,7 @@ export const allAvailableRewards = [
     num: 11,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "fire",
@@ -21,6 +25,7 @@ export const allAvailableRewards = [
     num: 18,
     cost: 2,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "water",
@@ -28,6 +33,7 @@ export const allAvailableRewards = [
     num: 9,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "water",
@@ -35,6 +41,7 @@ export const allAvailableRewards = [
     num: 17,
     cost: 2,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "water",
@@ -42,6 +49,7 @@ export const allAvailableRewards = [
     num: 5,
     cost: 0,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "grass",
@@ -49,6 +57,7 @@ export const allAvailableRewards = [
     num: 8,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "grass",
@@ -56,6 +65,7 @@ export const allAvailableRewards = [
     num: 10,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "grass",
@@ -63,6 +73,7 @@ export const allAvailableRewards = [
     num: 19,
     cost: 2,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "poison",
@@ -70,6 +81,7 @@ export const allAvailableRewards = [
     num: 3,
     cost: 1,
     id: uniqueId(),
+    effect: null,
     //high chance of poisoning
   },
   {
@@ -78,6 +90,7 @@ export const allAvailableRewards = [
     num: 6,
     cost: 1,
     id: uniqueId(),
+    effect: null,
     //K0 chance
   },
   {
@@ -86,15 +99,24 @@ export const allAvailableRewards = [
     num: 10,
     cost: 1,
     id: uniqueId(),
+    effect: null,
     //Poison chance
   },
-  { type: "poison", name: "syphon life", num: 4, cost: 2, id: uniqueId() },
+  {
+    type: "poison",
+    name: "syphon life",
+    num: 4,
+    cost: 2,
+    id: uniqueId(),
+    effect: null,
+  },
   {
     type: "electric",
     name: "Electric Symphony",
     num: 8,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "normal",
@@ -102,6 +124,7 @@ export const allAvailableRewards = [
     num: 4,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "Ice",
@@ -109,6 +132,7 @@ export const allAvailableRewards = [
     num: 6,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "mind",
@@ -116,6 +140,7 @@ export const allAvailableRewards = [
     num: 5,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "pioson",
@@ -123,6 +148,7 @@ export const allAvailableRewards = [
     num: 9,
     cost: 1,
     id: uniqueId(),
+    effect: null,
   },
   {
     type: "electric",
@@ -130,5 +156,22 @@ export const allAvailableRewards = [
     num: 11,
     cost: 1,
     id: uniqueId(),
+    effect: null,
+  },
+  {
+    type: "electric",
+    name: "Stunning Delivery",
+    num: 7,
+    cost: 1,
+    id: uniqueId(),
+    effect: STUN,
+  },
+  {
+    type: "electric",
+    name: "Stunning Delivery",
+    num: 7,
+    cost: 1,
+    id: uniqueId(),
+    effect: STUN,
   },
 ]

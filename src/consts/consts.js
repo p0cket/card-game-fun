@@ -1,6 +1,56 @@
 import { uniqueId } from "../utils/reducer-utils"
+import { EFFECTS } from "../effects"
+const { DRAW, STUN, DOUBLEDAMAGE, SLEEP} = EFFECTS
 
 export const startingDeck = [
+  {
+    type: "Psychic",
+    name: "Hypnosis",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: SLEEP,
+  },
+  {
+    type: "Psychic",
+    name: "Hypnosis",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: SLEEP,
+  },
+  {
+    type: "Psychic",
+    name: "Hypnosis+",
+    num: 0,
+    cost: 1,
+    id: uniqueId(),
+    effect: SLEEP,
+  },
+  {
+    type: "Grass",
+    name: "Leaf Storm",
+    num: 2,
+    cost: 1,
+    id: uniqueId(),
+    effect: DOUBLEDAMAGE,
+  },
+  {
+    type: "Grass",
+    name: "Leaf Storm",
+    num: 2,
+    cost: 1,
+    id: uniqueId(),
+    effect: DOUBLEDAMAGE,
+  },
+    {
+    type: "Fire",
+    name: "Flamethrower",
+    num: 4,
+    cost: 1,
+    id: uniqueId(),
+    effect: null,
+  },
   {
     type: "Fire",
     name: "Flamethrower",
@@ -55,7 +105,7 @@ export const startingDeck = [
     num: 3,
     cost: 2,
     id: uniqueId(),
-    effect: "stun",
+    effect: STUN,
   },
   {
     type: "Physical",
@@ -63,7 +113,7 @@ export const startingDeck = [
     num: 5,
     cost: 2,
     id: uniqueId(),
-    effect: "stun",
+    effect: STUN,
   },
   {
     type: "Psychic",
@@ -71,7 +121,7 @@ export const startingDeck = [
     num: 0,
     cost: 0,
     id: uniqueId(),
-    effect: "draw",
+    effect: DRAW,
     qty: 1,
   },
   {
@@ -80,7 +130,7 @@ export const startingDeck = [
     num: 0,
     cost: 0,
     id: uniqueId(),
-    effect: "draw",
+    effect: DRAW,
     qty: 2,
   },
   {
@@ -89,7 +139,7 @@ export const startingDeck = [
     num: 0,
     cost: 1,
     id: uniqueId(),
-    effect: "draw",
+    effect: DRAW,
     qty: 2,
   },
   {
@@ -98,9 +148,10 @@ export const startingDeck = [
     num: 0,
     cost: 1,
     id: uniqueId(),
-    effect: "draw",
+    effect: DRAW,
     qty: 3,
   },
+
 ]
 
 export const startingData = {
@@ -142,7 +193,7 @@ export const startingData = {
           name: "sample atk hitting you",
           type: "hit",
           damage: 20,
-          status: "stun",
+          status: STUN,
         },
         {
           name: "sample atk hitting again",

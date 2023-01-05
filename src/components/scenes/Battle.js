@@ -44,7 +44,8 @@ const Battle = ({ gameData, dispatch }) => {
                 {`${goldEmoji}${gameData.gold}`}
                 <span style={{ color: "#e6ecc3" }}>Gold</span>
                 <span style={{ color: "#e6ecc3" }}> Level</span>
-                {gameData.curScene.lvl}{" -"}
+                {gameData.curScene.lvl}
+                {" -"}
                 <span style={{ color: "#e6ecc3" }}>ACT</span>
                 {gameData.curScene.act}- Simulation Room: No Effects
               </p>
@@ -80,10 +81,30 @@ const Battle = ({ gameData, dispatch }) => {
                   </span>
                   {gameData.battle.enemy.nextAttack.damage})
                 </div>
+                {/* <div style={{ color: "yellow", textShadow: "1px 1px 4px black" }}> */}
+                <div>
+                  {" "}
+                  {gameData.battle.enemy.status ? (
+                    <>
+                      {" "}
+                      <span
+                        style={{
+                          color: "yellow",
+                          textShadow:
+                            "-2px 0px black, 0 1px black, 1px 0 black, 0 -1px black",
+                        }}
+                      >
+                        He is {gameData.battle.enemy.status}ed
+                      </span>{" "}
+                      <span>(can't attack this turn)</span>
+                    </>
+                  ) : (
+                    ``
+                  )}
+                </div>
               </div>{" "}
               <div className="battleTopRight">
                 {" "}
-                {/* <div className="battleTRimg">enemy img</div> */}
                 <motion.img
                   style={{ width: 180, height: 150 }}
                   animate="visible"
@@ -108,7 +129,7 @@ const Battle = ({ gameData, dispatch }) => {
               </div>
               <div className="battleBotLeft">
                 <div className="battleBLname" style={{ fontSize: "25px" }}>
-                  Your Chibipal
+                  Your Chibipal <span> status:{gameData.hero.effects.buff}</span>
                 </div>
                 <div className="battleTLdesc" style={{ fontSize: "12px" }}>
                   "This {gameData.battle.enemy.name} seems tough!" -Communicator
@@ -162,7 +183,8 @@ const Battle = ({ gameData, dispatch }) => {
       <br />
       <div>
         <button onClick={endTurn} className="simpleButton">
-          End Turn
+          <div>End Turn</div>{" "}
+          <div>(also refills all PP and draws two cards) </div>
         </button>
         <br />
 

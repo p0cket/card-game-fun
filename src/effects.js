@@ -8,5 +8,6 @@ export const EFFECTS = {
     ARMOR: "armor",
     POISON: "poison",
     EVADE: "evade",
-    
+    WEAKENED:"weakened",
+    HEALING: "healing",
   }
