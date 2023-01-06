@@ -6,7 +6,9 @@ const Map = ({ gameData, dispatch, map }) => {
     dispatch(setSceneAction())
   }
 
-  const mapPortion = map.slice(3)
+  const currentIndex = gameData.curScene.lvl
+  // const mapPortion = map.slice(3)
+
   return (
     <>
       <h1>-</h1>
@@ -16,11 +18,27 @@ const Map = ({ gameData, dispatch, map }) => {
         It is a long way to the top, you can do this! (But you can't, because it
         is currently impossible)
       </div>
-      <h2>Heres a list of whats coming:</h2>
+      <h2>Heres the list of levels:</h2>
       <div>
-        {mapPortion.map((lvl) => {
-          return <h3>{lvl}</h3>
-        })}
+        <div>
+          {map.map((lvlName, index) => {
+            let style = {}
+            if (index < currentIndex) {
+              style.textDecoration = "line-through"
+              style.color = "gray"
+            }else {
+              style.padding = '10px';
+            }
+            if (lvlName === "battle") {
+              style.color = "blue"
+            } else if (lvlName === "reward") {
+              style.color = "green"
+            } else if (lvlName === "boss") {
+              style.color = "red"
+            }
+            return <div style={style}>{lvlName}</div>
+          })}
+        </div>
       </div>
     </>
   )
