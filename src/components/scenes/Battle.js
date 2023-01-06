@@ -145,9 +145,9 @@ const Battle = ({ gameData, dispatch }) => {
                     }}
                   ></progress>
                 </div>
-                <div className="battleBLattack">
+                <h1 className="battleBLattack">
                   {energy} PP{energyEmoji}
-                </div>
+                </h1>
               </div>
             </div>
             {/* <div className="battleStats"><p>Your stats: Armor 1  Attack 2</p></div> */}
