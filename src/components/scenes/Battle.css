@@ -121,3 +121,9 @@
     background-repeat: no-repeat;
     background-size: cover; */
 }
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}

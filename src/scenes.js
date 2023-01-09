@@ -10,4 +10,5 @@ export const SCENES = {
   MINIBOSS: "miniboss",
   BOSS: "boss",
   GAMEOVER: "game over",
+  VICTORY: "victory",
 }

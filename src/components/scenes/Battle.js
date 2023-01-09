@@ -105,6 +105,35 @@ const Battle = ({ gameData, dispatch }) => {
               </div>{" "}
               <div className="battleTopRight">
                 {" "}
+                {/* First Basic SVG for adding attack animations */}
+                {/* <motion.svg
+                  initial={{ d: "M0 50 H100" }}
+                  animate={{ d: "M0 50 H200" }}
+                  transition={{ duration: 6 }}
+                >
+                  <motion.path></motion.path>
+                  <img src={gameData.battle.enemy.img} alt="Enemy" />
+                </motion.svg> */}
+                {/* Second attempt at an SVG. Works okay, but isn't overlayed on the image */}
+                {/* <svg
+                  id="eMJmwrH5NbW1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 300 300"
+                  shape-rendering="geometricPrecision"
+                  text-rendering="geometricPrecision"
+                >
+                  <path
+                    style={{
+                      strokeDasharray: "30",
+                      animation: "dash 10s infinite",
+                    }}
+                    d="M48.099357,97.101989C79.149414,107.263826,114.715842,2.25818,161.5732,11.290924s45.615356,145.652992,92.585623,130.410237s19.759126,86.375612,32.179149,91.45653-20.323671,109.522023-88.069249,32.743701s64.170115-83.251793-36.695523-104.441104-27.435716,20.544271-44.034626,94.279262-32.396854-25.279024-84.117425-49.68009-16.371849-119.119308,14.678208-108.957471Z"
+                    transform="translate(.000003 0.000006)"
+                    fill="none"
+                    stroke="rgb(75, 119, 13)"
+                    stroke-width="3"
+                  />
+                </svg> */}
                 <motion.img
                   style={{ width: 180, height: 150 }}
                   animate="visible"
@@ -129,7 +158,8 @@ const Battle = ({ gameData, dispatch }) => {
               </div>
               <div className="battleBotLeft">
                 <div className="battleBLname" style={{ fontSize: "25px" }}>
-                  Your Chibipal <span> status:{gameData.hero.effects.buff}</span>
+                  Your Chibipal{" "}
+                  <span> status:{gameData.hero.effects.buff}</span>
                 </div>
                 <div className="battleTLdesc" style={{ fontSize: "12px" }}>
                   "This {gameData.battle.enemy.name} seems tough!" -Communicator

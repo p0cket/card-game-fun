@@ -570,7 +570,11 @@ const generateRewardsHandler = (state, payload) => {
 }
 
 const setRewardHandler = (state, payload) => {
+  // const nextState = {...state}
+  // const nextState = addCardHandler(nextState, payload)
+  // const newState = addCardHandler(nextState, payload)
   const newState = addCardHandler(state, payload)
+
 
   const newStateWithFreshRewards = generateRewardsHandler(
     newState

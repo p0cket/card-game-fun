@@ -1,6 +1,6 @@
 import { uniqueId } from "../utils/reducer-utils"
 import { EFFECTS } from "../effects"
-const { DRAW, STUN, DOUBLEDAMAGE, SLEEP} = EFFECTS
+const { DRAW, STUN, DOUBLEDAMAGE, SLEEP } = EFFECTS
 
 export const startingDeck = [
   {
@@ -43,7 +43,7 @@ export const startingDeck = [
     id: uniqueId(),
     effect: DOUBLEDAMAGE,
   },
-    {
+  {
     type: "Fire",
     name: "Flamethrower",
     num: 4,
@@ -151,7 +151,6 @@ export const startingDeck = [
     effect: DRAW,
     qty: 3,
   },
-
 ]
 
 export const startingData = {

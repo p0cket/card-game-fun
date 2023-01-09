@@ -7,8 +7,9 @@ const Reward = ({ gameData, dispatch }) => {
   const currentRewards = gameData.availableRewards
 
   const addCard = (card) => {
-    console.log(`adding this card:`, card)
+    console.log(`adding this card twice:`, card)
     dispatch(addCardAction(card))
+    // dispatch(addCardAction(card))
   }
   // ------------
   console.log(`gameData from Rewards`, gameData)
@@ -17,8 +18,9 @@ const Reward = ({ gameData, dispatch }) => {
     <div>
       <h1>A Reward!</h1>
       <br />
-      <h3>Thank you for vanquishing those foes.</h3>
+      <h3>Thank you for vanquishing those foes. You have {gameData.deck.length} cards.</h3>
       <h4>Please take something, its on us</h4>
+
       <motion.div
         initial={{ opacity: 0.5 }}
         animate={{ opacity: 1 }}

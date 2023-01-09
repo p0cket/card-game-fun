@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion/dist/framer-motion"
 
-const Card = ({ cardValue, useCard }) => {
+const Card = ({ cardValue, useCard, isOnSale }) => {
   const { type, name, num, cost, effect } = cardValue
   const styles = {
     cardStyle: {
@@ -58,6 +58,7 @@ const Card = ({ cardValue, useCard }) => {
         <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
         <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
         <div style={{ color: "brown" }}> {effect ? `${effect}s` : ``} </div>
+        {/* {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
         {cardValue.price ? <div>price: {cardValue.price}</div> : <></>}
       </motion.button>
     </>

@@ -8,6 +8,7 @@ import { buyCardAction } from "../../actions"
 const Shop = ({ gameData, dispatch }) => {
   const buyCard = (card) => {
     console.log(`adding this card:`, card)
+    //@TODO: Add ability to buy more than one card at a time
     dispatch(buyCardAction(card))
   }
 
