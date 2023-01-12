@@ -177,6 +177,10 @@ export const startingData = {
       // ---
       // when my turn start
     },
+    maxHP: 100,
+    maxEnergy: 5,
+    armor: 0,
+    power: 0,
     // max health
   },
   battle: {
@@ -208,8 +212,10 @@ export const startingData = {
     beginning: false,
   },
   curScene: { scene: "intro", lvl: 1, act: 1 },
+  curEvent: null,
   availableRewards: [],
   alert: "",
+  devMode: false,
 }
 
 export const sampleItems = [

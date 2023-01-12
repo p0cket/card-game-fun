@@ -1,71 +1,30 @@
-import React from 'react'
-import { eventChoiceAction } from '../../actions';
+import React from "react"
+import { eventChoiceAction } from "../../actions"
+import { possibleEvents } from "../../consts/allEvents"
 
-const Event = ({dispatch}) => {
-  const eventDeets = [
-    {
-      name: "Sample Event",
-      description: "You happen upon a glade",
-      choices: ["Fight the civilians", "Keep going going on path"],
-      choiceResults: [
-        { type: "money", num: 30 },
-        { type: "exit", num: 0 }
-      ]
-    }
-  ];
-
-  // types
-  // - reward
-  //  • health
-  //  • money
-  //  • cards
-  // - enemy
-  // - story
-  // - more dialog
-
+const Event = ({ dispatch }) => {
   const executeChoice = (choice) => {
-    // console.log(`Your choice: ${choice}`, choice, choice.type);
-    switch (choice.type) {
-      case "health":
-        console.log(`health choice`);
-        break;
-      case "money":
-        console.log(`money choice`);
-        dispatch(eventChoiceAction(choice.num))
-        break;
-      case "cards":
-        console.log(`cards choice`);
-        break;
-      case "enemy":
-        console.log(`enemy choice`);
-        break;
-      case "story":
-        console.log(`story choice`);
-        break;
-      case "exit":
-        console.log(`exit choice`);
-        break;
-      default:
-        console.log(`no proper executeChoice choice`);
-        break;
-    }
-  };
+    dispatch(eventChoiceAction(choice.type, choice.num))
+  }
+
+  const chosenEvent = Math.floor(Math.random() * possibleEvents.length)
+  const ourEvent = possibleEvents[chosenEvent]
 
   return (
     <div>
-      <h5>Event Name: {eventDeets[0].name} </h5>
-      <div>{eventDeets[0].description}</div>
+      <h5>Event Name: {ourEvent.name} </h5>
+      <div>{ourEvent.description}</div>
       <br />
-      <button onClick={() => executeChoice(eventDeets[0].choiceResults[0])}>
-        {eventDeets[0].choices[0]}
+      <button onClick={() => executeChoice(ourEvent.choiceResults[0])}>
+        {ourEvent.choices[0]}
       </button>
-      <button onClick={() => executeChoice(eventDeets[0].choiceResults[1])}>
-        {eventDeets[0].choices[1]}
+      <button onClick={() => executeChoice(ourEvent.choiceResults[1])}>
+        {ourEvent.choices[1]}
       </button>
       <br />
       <br />
     </div>
-  );
-};
+  )
+}
 
-export default Event;
+export default Event

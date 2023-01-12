@@ -1,3 +1,17 @@
+.sceneContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* max-width: 800px; */
+  /* max-width: 850px; */
+}
+
+.battleUIcontainer {
+  /* display: flex;
+  flex-direction: column; 
+  align-items: center; */
+   max-width: 850px;
+}
 .battleUI {
   font-family: Silkscreen;
   background-color: green;
@@ -7,10 +21,10 @@
   background-image: url(/backgrounds/gridBG1.png);
   background-repeat: repeat;
   background-size: cover;
-  /* max-width: 800px; */
   /* margin-left: 7%;
   margin-right: 7%; */
   margin: 0px 30px;
+  /* max-width: 600px; */
 }
 
 .battleTop {
@@ -95,8 +109,9 @@
   flex-grow: 1;
   flex-direction: row;
   /* align-items:  */
-  justify-content: space-around;
-  /* justify-content:center; */
+  /* justify-content: space-around; */
+  justify-content: center;
+  flex-wrap: wrap;
 
   padding: 10px;
   margin: 0px 30px;
@@ -120,6 +135,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover; */
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 @keyframes dash {

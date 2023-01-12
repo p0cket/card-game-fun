@@ -20,47 +20,56 @@ const Card = ({ cardValue, useCard, isOnSale }) => {
       // fontFamily: 'Silkscreen', cursive,
     },
     newCardStyle: {
-      fontFamily: 'Silkscreen',
-      backgroundColor: 'green',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      backgroundImage: 'url(/backgrounds/gridBGlight.png)',
-      backgroundRepeat: 'repeat',
-      backgroundSize: '1000px',
-      width: '150px',
-      height: '200px',
-      padding: '2px'
-    }
+      fontFamily: "Silkscreen",
+      backgroundColor: "green",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      backgroundImage: "url(/backgrounds/gridBGlight.png)",
+      backgroundRepeat: "repeat",
+      backgroundSize: "1000px",
+      width: "150px",
+      height: "200px",
+      padding: "2px",
+    },
   }
 
   const energyEmoji = "🧪"
   return (
     <>
-      <motion.button
-        whileHover={{
-          scale: 1.1,
-          rotate: 1,
-          transition: {
-            yoyo: Infinity,
-          },
-        }}
-        whileTap={{
-          scale: 0.8,
-          rotate: -90,
-          borderRadius: "100%",
-        }}
-        // style={styles.cardStyle}
-        style={styles.newCardStyle}
-        onClick={() => useCard(cardValue)}
-      >
-        {`${name} ${energyEmoji.repeat(cost)}`}
-        <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
-        <div style={{ color: "gray" }}>{`Deals ${num} damage`}</div>
-        <div style={{ color: "brown" }}> {effect ? `${effect}s` : ``} </div>
-        {/* {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
-        {cardValue.price ? <div>price: {cardValue.price}</div> : <></>}
-      </motion.button>
+      <div style={{ display: "flex" }}>
+        <motion.button
+          whileHover={{
+            scale: 1.1,
+            rotate: 1,
+            transition: {
+              yoyo: Infinity,
+            },
+          }}
+          whileTap={{
+            scale: 0.2,
+            rotate: -90,
+          }}
+          // style={styles.cardStyle}
+          style={styles.newCardStyle}
+          onClick={() => useCard(cardValue)}
+        >
+          <div style={{ display: "flex", flex: "1" }}>
+            {`${name} ${energyEmoji.repeat(cost)}`}
+          </div>
+          <div style={{ display: "flex", flex: "1" }}>
+            <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
+          </div>
+          <div
+            style={{ color: "gray", display: "flex", flex: "1" }}
+          >{`Deals ${num} damage`}</div>
+          <span style={{ display: "flex", flex: "1" }}>
+            <div style={{ color: "brown" }}> {effect ? `${effect}s` : ``} </div>
+            {/* {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
+            {cardValue.price ? <div>price: {cardValue.price}</div> : <></>}
+          </span>
+        </motion.button>
+      </div>
     </>
   )
 }

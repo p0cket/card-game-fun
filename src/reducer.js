@@ -21,7 +21,9 @@ export default function reducer(state, action) {
     case ACTIONS.SET_SCENE:
       return setSceneHandler(state, payload)
     case ACTIONS.SET_MYDATA:
-      return setMyDataHandler(state, payload)
+      return setMyDataHandler(state)
+    case ACTIONS.APPLY_HEAL:
+      return healHandler(state, payload)
     case ACTIONS.SET_MYBALANCE:
       return setMyBalanceHandler(state, payload)
     case ACTIONS.SET_ALERT:
@@ -63,14 +65,27 @@ export default function reducer(state, action) {
   }
 }
 
+// @TODO Organize these handlers.
+
 // General GameData Handlers
-const setMyDataHandler = (payload) => {
-  return payload
+const setMyDataHandler = (state) => {
+  return state
+}
+
+const healHandler = (state, payload) => {
+  let nextState = { ...state }
+  const newHealth = nextState.hero.health + payload
+  console.log(`newHealth is  ${newHealth}`)
+  nextState = { ...nextState, hero: { ...nextState.hero, health: newHealth } }
+  console.log(`nextState`, nextState)
+  return nextState
 }
 
 const setMyBalanceHandler = (state, payload) => {
   const newBalance = state.gold + payload
+  console.log(`newBalance is  ${newBalance}`)
   const nextState = { ...state, gold: newBalance }
+  console.log(`nextState`, nextState)
   return nextState
 }
 
@@ -147,7 +162,7 @@ const playCardHandler = (state, { card, battlePayload }) => {
     //
     nextState = setSceneHandler(nextState, payload)
   }
-// 
+  //
 
   // remove the card
   const myHandIndex = nextState.battle.hand.indexOf(card)
@@ -191,8 +206,8 @@ const playCardHandler = (state, { card, battlePayload }) => {
 }
 
 //@TODO: we are extracting the defeat state to make it reusable
-// eslint-disable-next-line 
-const checkIfDefeatedState = (state, {damage, battlePayload}) => {
+// eslint-disable-next-line
+const checkIfDefeatedState = (state, { damage, battlePayload }) => {
   let nextState = { ...state }
   const enemyHealth = nextState.battle.enemy.health
 
@@ -326,7 +341,7 @@ const endTurnHandler = (state, payload) => {
       break
     case EFFECTS.POISON:
       console.log(`Poisoned, so check if dead, and if not apply poison damage`)
-      //checkEnemyDefeat(damage)
+      //checkEnemyDefeat(state, {damage, make battle payload})
 
       break
     case EFFECTS.SLEEP:
@@ -515,9 +530,39 @@ const restHandler = (state) => {
   return fullHealed
 }
 
-const eventChoiceHandler = (state, { num, battlePayload }) => {
+const eventChoiceHandler = (state, { type, num, battlePayload }) => {
   //maybe as a `switch` statement to determine the actions
-  const newState = setMyBalanceHandler(state, num)
+  // switch(type)
+  let newState = { ...state }
+
+  switch (type) {
+    case "health":
+      console.log(`health choice`)
+      healHandler(newState, num)
+      break
+    case "money":
+      console.log(`money choice`)
+      if (num !== 0) {
+        newState = setMyBalanceHandler(newState, num)
+      }
+      break
+    case "cards":
+      console.log(`cards choice`)
+      break
+    case "enemy":
+      console.log(`enemy choice`)
+      break
+    case "story":
+      console.log(`story choice`)
+      break
+    case "exit":
+      console.log(`exit choice`)
+      break
+    default:
+      console.log(`no proper executeChoice choice`)
+      break
+  }
+
   const nextSceneState = setSceneHandler(newState, battlePayload)
   return nextSceneState
 }
@@ -574,7 +619,6 @@ const setRewardHandler = (state, payload) => {
   // const nextState = addCardHandler(nextState, payload)
   // const newState = addCardHandler(nextState, payload)
   const newState = addCardHandler(state, payload)
-
 
   const newStateWithFreshRewards = generateRewardsHandler(
     newState

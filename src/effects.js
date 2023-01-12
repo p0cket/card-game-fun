@@ -11,4 +11,6 @@ export const EFFECTS = {
   WEAKENED: "weakened",
   HEALING: "healing",
   STORM: "storm",
+  VAMPIRIC: "vampiric",
+  ENERGIZE: "energize",
 }

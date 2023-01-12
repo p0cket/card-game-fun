@@ -2,7 +2,12 @@ export const discoveries = [
   {
     quote:
       "I can't believe how much smarter the test subjects have become after merging them with the elements. The possibilities for genetic experimentation are endless.",
-    logger: "Dr. Julia Thompson",
+    logger: "Dr. Lisa Sakurai",
+  },
+  {
+    quote:
+      "The specimens denied the enhancements at first. I didn't know I if all my work had been for nothing. But if it was, the creatures would go free.",
+    logger: "Dr. Lisa Sakurai",
   },
   {
     quote:
@@ -11,7 +16,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I've been working with Dr. Thompson on these experiments for months now, and the progress we've made is truly groundbreaking.",
+      "I've been working with Dr. Sakurai on these experiments for months now, and the progress we've made is truly groundbreaking.",
     logger: "Sarah, lab assistant",
   },
   {
@@ -32,7 +37,7 @@ export const discoveries = [
   {
     quote:
       "I can't believe the government is funding these experiments. What if something goes wrong? The consequences could be disastrous.",
-    logger: "Dr. John Smith",
+    logger: "Dr. Adam Farley",
   },
   {
     quote:
@@ -46,23 +51,23 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero is actually trying to put a stop to these experiments. It's about time someone stood up to Dr. Thompson.",
+      "I can't believe the hero is actually trying to put a stop to these experiments. It's about time someone stood up to Dr. Sakurai.",
     logger: "Tom, lab assistant",
   },
   {
     quote:
-      "I've always known there was something off about Dr. Thompson. I'm glad someone is finally doing something about it.",
+      "I've always known there was something off about Dr. Sakurai. I'm glad someone is finally doing something about it.",
     logger: "Janet, lab assistant",
   },
   {
     quote:
-      "I never expected the hero to make it this far. Dr. Thompson will do everything in her power to stop them.",
+      "I never expected the hero to make it this far. Dr. Sakurai will do everything in her power to stop them.",
     logger: "Mike, security guard",
   },
   {
     quote:
       "I can't believe the hero is actually trying to shut down the lab. These experiments have the potential to change the world for the better.",
-    logger: "Dr. Thompson",
+    logger: "Dr. Sakurai",
   },
   {
     quote:
@@ -71,7 +76,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Thompson must be getting desperate.",
+      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Sakurai must be getting desperate.",
     logger: "Emily",
   },
   {
@@ -81,7 +86,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero is actually going to confront Dr. Thompson. I'm terrified, but also hopeful that this will all finally be over.",
+      "I can't believe the hero is actually going to confront Dr. Sakurai. I'm terrified, but also hopeful that this will all finally be over.",
     logger: "Maria",
   },
   {
@@ -91,13 +96,13 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't wait to see the look on Dr. Thompson's face when the hero confronts her. She's always thought she was untouchable.",
+      "I can't wait to see the look on Dr. Sakurai's face when the hero confronts her. She's always thought she was untouchable.",
     logger: "Janet",
   },
   {
     quote:
       "I never thought I'd see the day when someone would try to shut down the lab. It's about time someone took a stand against these unethical experiments.",
-    logger: "Dr. Smith",
+    logger: "Dr. Farley",
   },
   {
     quote:
@@ -106,7 +111,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero has made it this far. Dr. Thompson won't go down without a fight, though.",
+      "I can't believe the hero has made it this far. Dr. Sakurai won't go down without a fight, though.",
     logger: "Mike",
   },
   {
@@ -116,7 +121,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Thompson must be getting desperate.",
+      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Sakurai must be getting desperate.",
     logger: "Emily",
   },
   {
@@ -126,7 +131,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero is actually going to confront Dr. Thompson. I'm terrified, but also hopeful that this will all finally be over.",
+      "I can't believe the hero is actually going to confront Dr. Sakurai. I'm terrified, but also hopeful that this will all finally be over.",
     logger: "Maria",
   },
   {
@@ -136,13 +141,13 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't wait to see the look on Dr. Thompson's face when the hero confronts her. She's always thought she was untouchable.",
+      "I can't wait to see the look on Dr. Sakurai's face when the hero confronts her. She's always thought she was untouchable.",
     logger: "Janet",
   },
   {
     quote:
       "I never thought I'd see the day when someone would try to shut down the lab. It's about time someone took a stand against these unethical experiments.",
-    logger: "Dr. Smith",
+    logger: "Dr. Farley",
   },
   {
     quote:
@@ -151,7 +156,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero has made it this far. Dr. Thompson won't go down without a fight, though.",
+      "I can't believe the hero has made it this far. Dr. Sakurai won't go down without a fight, though.",
     logger: "Mike",
   },
   {
@@ -161,7 +166,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Thompson must be getting desperate.",
+      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Sakurai must be getting desperate.",
     logger: "Emily",
   },
   {
@@ -171,7 +176,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero is actually going to confront Dr. Thompson. I'm terrified, but also hopeful that this will all finally be over.",
+      "I can't believe the hero is actually going to confront Dr. Sakurai. I'm terrified, but also hopeful that this will all finally be over.",
     logger: "Maria",
   },
   {
@@ -181,13 +186,13 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't wait to see the look on Dr. Thompson's face when the hero confronts her. She's always thought she was untouchable.",
+      "I can't wait to see the look on Dr. Sakurai's face when the hero confronts her. She's always thought she was untouchable.",
     logger: "Janet",
   },
   {
     quote:
       "I never thought I'd see the day when someone would try to shut down the lab. It's about time someone took a stand against these unethical experiments.",
-    logger: "Dr. Smith",
+    logger: "Dr. Farley",
   },
   {
     quote:
@@ -196,7 +201,7 @@ export const discoveries = [
   },
   {
     quote:
-      "I can't believe the hero has made it this far. Dr. Thompson won't go down without a fight, though.",
+      "I can't believe the hero has made it this far. Dr. Sakurai won't go down without a fight, though.",
     logger: "Mike",
   },
   {
@@ -206,13 +211,13 @@ export const discoveries = [
   },
   {
     quote:
-      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Thompson must be getting desperate.",
+      "I never expected the hero to be able to defeat all of the creatures and get this far. Dr. Sakurai must be getting desperate.",
     logger: "Emily",
   },
   {
     quote:
       "I never thought I'd see the day when someone would tryto shut down the lab. It's about time someone took a stand against these unethical experiments.",
-    logger: "Dr. Smith",
+    logger: "Dr. Farley",
   },
   {
     quote:
@@ -229,9 +234,9 @@ export const discoveries = [
   // "I saw a creature that was a combination of lion and wind. It was able to move with such grace and speed, it was almost like it was floating on air." - Mike
   // "I encountered a creature that was a mix of bear and ice. Its fur was like armor, able to deflect attacks and protect it from the cold." - Dr. Barnes
   // "I came across a creature that was a combination of deer and lightning. It was able to move through the forest with such agility, it was like it was teleporting." - Dr. Lee
-  // "I saw a creature that was a mix of snake and fire. Its venom was like molten lava, melting everything it touched." - Dr. Smith
+  // "I saw a creature that was a mix of snake and fire. Its venom was like molten lava, melting everything it touched." - Dr. Farley
   // "I encountered a creature that was a mix of fish and water. It was able to breathe both on land and underwater, adapting to any environment." - Dr. Wilson
-  // "I came across a creature that was a combination of wolf and earth. It was able to burrow underground and appear anywhere at will." - Dr. Thompson
+  // "I came across a creature that was a combination of wolf and earth. It was able to burrow underground and appear anywhere at will." - Dr. Sakurai
   // "I saw a creature that was a mix of cat and wind. It was able to move so stealthily, it was like it was invisible." - Maria
   // "I encountered a creature that was a mix of rabbit and plant. It was able to blend in with its surroundings and hide from predators." - Tom
   // "I came across a creature that was a combination of horse and fire. It was able to charge at incredible speeds, leaving a trail of flames behind." - Janet

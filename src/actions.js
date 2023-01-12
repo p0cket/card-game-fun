@@ -4,6 +4,7 @@ export const ACTIONS = {
   SET_TRANS: "set-trans",
   SET_SCENE: "set_scene",
   SET_MYDATA: "set-mydata",
+  APPLY_HEAL: "apply-heal",
   SET_MYBALANCE: "set-mybalance",
   SET_ENEMY: "set-enemy",
   SET_ATK: "set-atk",
@@ -101,10 +102,11 @@ export const buyCardAction = (card) => {
   }
 }
 
-export const eventChoiceAction = (num) => {
+export const eventChoiceAction = (type, num) => {
   return {
     type: ACTIONS.EVENT_CHOICE,
     payload: {
+      type,
       num,
       battlePayload: {
         enemySeed: Math.random(),

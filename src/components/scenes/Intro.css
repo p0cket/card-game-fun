@@ -1,0 +1,21 @@
+.intro-container {
+    font-family: Silkscreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-image: url(/backgrounds/gridBG1.png); */
+    background-repeat: repeat;
+    background-size: cover;
+    color: white;
+    margin: 0px 30px;
+  }
+  .content {
+    /* display: flex; */
+    /* flex-direction: row; */
+    width: auto;
+    padding: 20px;
+    margin: 10px;
+    /* align-items: ; */
+    /* justify-content: space-around; */
+    background-color: #5a7d2a;
+  }

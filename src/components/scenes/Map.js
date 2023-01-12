@@ -20,14 +20,14 @@ const Map = ({ gameData, dispatch, map }) => {
       </div>
       <h2>Heres the list of levels:</h2>
       <div>
-        <div>
+        <div style={{ padding: "20px 200px" }}>
           {map.map((lvlName, index) => {
             let style = {}
             if (index < currentIndex) {
               style.textDecoration = "line-through"
               style.color = "gray"
-            }else {
-              style.padding = '10px';
+            } else {
+              style.padding = "10px"
             }
             if (lvlName === "battle") {
               style.color = "blue"
@@ -36,7 +36,12 @@ const Map = ({ gameData, dispatch, map }) => {
             } else if (lvlName === "boss") {
               style.color = "red"
             }
-            return <div style={style}>{lvlName}</div>
+            return (
+              <span style={style}>
+                {lvlName}
+                {" -> "}{" "}
+              </span>
+            )
           })}
         </div>
       </div>
