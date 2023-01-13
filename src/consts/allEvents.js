@@ -17,15 +17,15 @@ export const possibleEvents = [
     //         { type: "exit", num: 0 },
     //     ]
     // },
-    // {
-    //     name: "Riverside Picnic",
-    //     description: "You come across a beautiful riverside spot. You see a basket of food and a blanket laid out. It seems someone's been here recently.",
-    //     choices: ["Enjoy the food", "Leave the food"],
-    //     choiceResults: [
-    //         { type: "health", num: 20 },
-    //         { type: "exit", num: 0 },
-    //     ]
-    // },
+    {
+        name: "Riverside Picnic",
+        description: "You come across a beautiful riverside spot. You see a basket of food and a blanket laid out. It seems someone's been here recently.",
+        choices: ["Enjoy the food", "Leave the food"],
+        choiceResults: [
+            { type: "health", num: 20 },
+            { type: "exit", num: 0 },
+        ]
+    },
     // {
     //     name: "Abandoned Town",
     //     description: "You come across an old town. It looks abandoned, but you can see smoke coming from one of the chimneys.",
@@ -35,15 +35,15 @@ export const possibleEvents = [
     //         { type: "exit", num: 0 },
     //     ]
     // },
-    // {
-    //     name: "Fishing Hole",
-    //     description: "You come across a peaceful pond. It seems like a great spot to fish.",
-    //     choices: ["Go fishing", "Keep moving"],
-    //     choiceResults: [
-    //         { type: "health", num: 10 },
-    //         { type: "exit", num: 0 },
-    //     ]
-    // },
+    {
+        name: "Fishing Hole",
+        description: "You come across a peaceful pond. It seems like a great spot to fish.",
+        choices: ["Go fishing", "Keep moving"],
+        choiceResults: [
+            { type: "health", num: 10 },
+            { type: "exit", num: 0 },
+        ]
+    },
     // {
     //     name: "Help a traveler",
     //     description: "You come across a traveler who is lost, He needs your help to guide him to the next town.",
@@ -116,15 +116,15 @@ export const possibleEvents = [
     //         { type: "exit", num: 0 },
     //     ]
     // },
-    // {
-    //     name: "A Waterfall",
-    //     description: "You come across a beautiful waterfall. The water is crystal clear and inviting.",
-    //     choices: ["Take a swim", "Keep moving"],
-    //     choiceResults: [
-    //         { type: "health", num: 15 },
-    //         { type: "exit", num: 0 },
-    //     ]
-    // },
+    {
+        name: "A Waterfall",
+        description: "You come across a beautiful waterfall. The water is crystal clear and inviting.",
+        choices: ["Take a swim", "Keep moving"],
+        choiceResults: [
+            { type: "health", num: 15 },
+            { type: "exit", num: 0 },
+        ]
+    },
     // {
     //     name: "A Stampede",
     //     description: "You come across a herd of wild creatures stampeding. It's blocking your path.",

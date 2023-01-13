@@ -538,7 +538,7 @@ const eventChoiceHandler = (state, { type, num, battlePayload }) => {
   switch (type) {
     case "health":
       console.log(`health choice`)
-      healHandler(newState, num)
+      newState = healHandler(newState, num)
       break
     case "money":
       console.log(`money choice`)
