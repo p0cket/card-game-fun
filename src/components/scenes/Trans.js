@@ -1,30 +1,35 @@
 import React from "react"
-import { transitionSceneAction } from "../../actions"
+import {
+  // transitionSceneAction,
+  setSceneAction,
+} from "../../actions"
 const Trans = ({ gameData, dispatch, dialog, options }) => {
-  const loadTransitionScene = () => {
-    console.log(`loadTransitionScene`)
-    dispatch(transitionSceneAction())
+  const loadNextLevel = () => {
+    dispatch(setSceneAction())
   }
+  // TODO if another transition scene is warranted, send to that transition scene
+  //else, send them to the next scene in the map
+  // const loadTransitionScene = () => {
+  //   console.log(`loadTransitionScene`)
+  //   dispatch(transitionSceneAction())
+  // }
 
   return (
     <>
       <div style={{ fontFamily: "Silkscreen" }}>
-        <h1>-</h1>
-        <h1>Transitional Scene</h1>
-        {/* <h3>{dialog.title ? dialog.title : "No dialog title found"}</h3> */}
+        <h1 style={{ padding: "30px" }}>
+          {gameData.curEvent.resultDialogTitle
+            ? gameData.curEvent.resultDialogTitle
+            : "No dialog title found"}
+        </h1>
         <div>
-          {/* We are all like super proud of you. You earned some coins, you're up
-          to {gameData.gold} gold now. */}
-          {/* {dialog.text ? <div>{dialog.text}</div> : "No dialog text found"} */}
+          <div>{gameData.curEvent.resultDialog ? gameData.curEvent.resultDialog : "No dialog found"}</div>
         </div>
-        {/* <h3>{"Ready for more?"}</h3> */}
-        <h3>
-          {/* {dialog.callToAction ? dialog.callToAction : "No call to action text"}{" "} */}
-        </h3>
         {options ? (
           options
         ) : (
-          <button onClick={loadTransitionScene}>Next Level</button>
+          // <button onClick={loadTransitionScene}>Next Level</button>
+          <button onClick={() => loadNextLevel()}>Next Level</button>
         )}
       </div>
     </>

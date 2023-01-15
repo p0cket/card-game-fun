@@ -102,12 +102,11 @@ export const buyCardAction = (card) => {
   }
 }
 
-export const eventChoiceAction = (type, num) => {
+export const eventChoiceAction = (choice) => {
   return {
     type: ACTIONS.EVENT_CHOICE,
     payload: {
-      type,
-      num,
+      choice,
       battlePayload: {
         enemySeed: Math.random(),
         atkSeed: Math.random(),

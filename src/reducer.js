@@ -89,6 +89,15 @@ const setMyBalanceHandler = (state, payload) => {
   return nextState
 }
 
+const addCardHandler = (state, payload) => {
+  const ourDeck = state.deck
+  ourDeck.push(payload.card)
+  // set some notification that the card is added
+  const updatedDeck = ourDeck
+  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
+  return { ...state, deck: updatedDeck }
+}
+
 const setAlertHandler = (state, payload) => {
   console.error("payload", payload)
   return {
@@ -98,7 +107,6 @@ const setAlertHandler = (state, payload) => {
 }
 
 // Battle Handlers
-
 const playCardHandler = (state, { card, battlePayload }) => {
   console.log(`playCardHandler: payload&card`, card, battlePayload)
   let nextState = { ...state }
@@ -203,36 +211,6 @@ const playCardHandler = (state, { card, battlePayload }) => {
   }
   console.log(`endOf playCardHandler- nextState is: `, nextState)
   return discardCardHandler(nextState, { cardToAddToDiscarded: card })
-}
-
-//@TODO: we are extracting the defeat state to make it reusable
-// eslint-disable-next-line
-const checkIfDefeatedState = (state, { damage, battlePayload }) => {
-  let nextState = { ...state }
-  const enemyHealth = nextState.battle.enemy.health
-
-  if (enemyHealth - damage <= 0) {
-    console.log(`you defeated the enemy!`)
-    //put hand back into deck
-    let nextDeck = []
-    nextDeck.push(...nextState.deck)
-    nextDeck.push(...nextState.battle.hand)
-    console.log(`nextDeck`, nextDeck)
-
-    // generate new rewards
-    nextState = generateRewardsHandler(nextState, battlePayload)
-
-    nextState = setMyDataHandler({
-      ...nextState,
-      gold: nextState.gold + 25,
-      deck: nextDeck,
-    })
-    console.log(`nextState`, nextState)
-
-    const payload = battlePayload
-    console.log(`payload`, battlePayload)
-    nextState = setSceneHandler(nextState, payload)
-  }
 }
 
 const applyStatusHandler = (state, { card, battlePayload }) => {
@@ -500,101 +478,6 @@ const drawCardHandler = (state) => {
   }
 }
 
-const gameOverHandler = (state) => {
-  return {
-    ...startingData,
-    curScene: {
-      scene: SCENES.GAMEOVER,
-      lvl: 0,
-      act: 0,
-    },
-  }
-}
-
-const addCardHandler = (state, payload) => {
-  const ourDeck = state.deck
-  ourDeck.push(payload.card)
-  // set some notification that the card is added
-  const updatedDeck = ourDeck
-  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
-  return { ...state, deck: updatedDeck }
-}
-
-// GameEvent Handlers
-
-const restHandler = (state) => {
-  const fullHealed = {
-    ...state,
-    hero: { ...state.hero, health: startingData.hero.health },
-  }
-  return fullHealed
-}
-
-const eventChoiceHandler = (state, { type, num, battlePayload }) => {
-  //maybe as a `switch` statement to determine the actions
-  // switch(type)
-  let newState = { ...state }
-
-  switch (type) {
-    case "health":
-      console.log(`health choice`)
-      newState = healHandler(newState, num)
-      break
-    case "money":
-      console.log(`money choice`)
-      if (num !== 0) {
-        newState = setMyBalanceHandler(newState, num)
-      }
-      break
-    case "cards":
-      console.log(`cards choice`)
-      break
-    case "enemy":
-      console.log(`enemy choice`)
-      break
-    case "story":
-      console.log(`story choice`)
-      break
-    case "exit":
-      console.log(`exit choice`)
-      break
-    default:
-      console.log(`no proper executeChoice choice`)
-      break
-  }
-
-  const nextSceneState = setSceneHandler(newState, battlePayload)
-  return nextSceneState
-}
-
-const purchaseHandler = (state, payload) => {
-  // ---
-  const { card, battlePayload } = payload
-  const nextState = { ...state }
-  //subtract the money from the gameData.gold,
-  // add the card from the payload
-  if (!card.price) {
-    console.warn(
-      `card.price does not exist here. card.price = ${card.price}. fullcard:`,
-      card
-    )
-  }
-  if (nextState.gold >= card.price) {
-    const addedCardState = addCardHandler(nextState, { card })
-    const newGoldBalance = addedCardState.gold - card.price
-
-    const newCardandGoldState = { ...addedCardState, gold: newGoldBalance }
-    const returnableState = setSceneHandler(newCardandGoldState, battlePayload)
-    return returnableState
-  } else {
-    // if you don't have enough money, you can buy.
-    console.log(`not enough money to buy ${card.name}`)
-    return nextState
-  }
-  // return returnableState
-  // ---
-}
-
 const generateRewardsHandler = (state, payload) => {
   console.log(
     `generateRewardsHandler running:`,
@@ -630,24 +513,6 @@ const setRewardHandler = (state, payload) => {
   )
   return nextSceneState
   // return newState;
-}
-
-// @TODO: Finish in progress setTransitionHandler or get rid of it:
-const setTransitionHandler = (state, payload) => {
-  // Probably need text to display and options here. maybe confetti?
-  // Do you need a battle payload here? probably not.
-  // const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
-  //
-  const nextLevel = {
-    scene: SCENES.TRANSITION,
-    lvl: state.curScene.lvl,
-    act: state.curScene.act,
-  }
-  let nextState = state
-  return {
-    ...nextState,
-    curScene: nextLevel,
-  }
 }
 
 // Set Level Handlers
@@ -721,5 +586,157 @@ const setSceneHandler = (state, payload) => {
   return {
     ...nextState,
     curScene: nextLevel,
+  }
+}
+
+// GameEvent Handlers
+const restHandler = (state) => {
+  const fullHealed = {
+    ...state,
+    hero: { ...state.hero, health: startingData.hero.health },
+  }
+  return fullHealed
+}
+
+// const eventChoiceHandler = (state, { type, num, battlePayload }) => {
+const eventChoiceHandler = (state, { choice, battlePayload }) => {
+  let newState = { ...state }
+
+  switch (choice.resultType) {
+    case "health":
+      console.log(`health choice`)
+      newState = healHandler(newState, choice.resultNum)
+      // newState = setEventResultOBJ(newState, choice)
+      break
+    case "money":
+      console.log(`money choice`)
+      if (choice.resultNum !== 0) {
+        newState = setMyBalanceHandler(newState, choice.resultNum)
+        // newState = setEventResultOBJ(newState, choice)
+      }
+      break
+    case "cards":
+      console.log(`cards choice`)
+      break
+    case "enemy":
+      console.log(`enemy choice`)
+      break
+    case "story":
+      console.log(`story choice`)
+      break
+    case "exit":
+      console.log(`exit choice`)
+      break
+    default:
+      console.log(`no proper executeChoice choice`)
+      break
+  }
+
+  console.log(`eventChoiceHandler b4`)
+
+  // Work on setting up the transition element
+  const transSceneState = setTransitionHandler(newState, {
+    choice,
+    battlePayload,
+  })
+  console.log(`eventChoiceHandler after`, newState)
+
+  return transSceneState
+
+  // const nextSceneState = setSceneHandler(newState, battlePayload)
+  // return nextSceneState
+}
+
+// @TODO: Finish in progress setTransitionHandler or get rid of it:
+const setTransitionHandler = (state, payload) => {
+  // Probably need text to display and options here. maybe confetti?
+  // Do you need a battle payload here? probably not.
+  // const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
+  //
+
+  let nextState = { ...state }
+
+  const nextLevel = {
+    scene: SCENES.TRANSITION,
+    lvl: nextState.curScene.lvl,
+    act: nextState.curScene.act,
+  }
+
+  nextState = {
+    ...nextState,
+    curScene: nextLevel,
+    curEvent: payload.choice
+  }
+
+  return nextState
+}
+
+const purchaseHandler = (state, payload) => {
+  // ---
+  const { card, battlePayload } = payload
+  const nextState = { ...state }
+  //subtract the money from the gameData.gold,
+  // add the card from the payload
+  if (!card.price) {
+    console.warn(
+      `card.price does not exist here. card.price = ${card.price}. fullcard:`,
+      card
+    )
+  }
+  if (nextState.gold >= card.price) {
+    const addedCardState = addCardHandler(nextState, { card })
+    const newGoldBalance = addedCardState.gold - card.price
+
+    const newCardandGoldState = { ...addedCardState, gold: newGoldBalance }
+    const returnableState = setSceneHandler(newCardandGoldState, battlePayload)
+    return returnableState
+  } else {
+    // if you don't have enough money, you can buy.
+    console.log(`not enough money to buy ${card.name}`)
+    return nextState
+  }
+  // return returnableState
+  // ---
+}
+
+//gameEvents
+const gameOverHandler = (state) => {
+  return {
+    ...startingData,
+    curScene: {
+      scene: SCENES.GAMEOVER,
+      lvl: 0,
+      act: 0,
+    },
+  }
+}
+
+//@TODO: we are extracting the defeat state to make it reusable
+// eslint-disable-next-line
+const checkIfDefeatedState = (state, { damage, battlePayload }) => {
+  let nextState = { ...state }
+  const enemyHealth = nextState.battle.enemy.health
+
+  if (enemyHealth - damage <= 0) {
+    console.log(`you defeated the enemy!`)
+    //put hand back into deck
+    let nextDeck = []
+    nextDeck.push(...nextState.deck)
+    nextDeck.push(...nextState.battle.hand)
+    console.log(`nextDeck`, nextDeck)
+
+    // generate new rewards
+    nextState = generateRewardsHandler(nextState, battlePayload)
+
+    nextState = setMyDataHandler({
+      ...nextState,
+      gold: nextState.gold + 25,
+      deck: nextDeck,
+    })
+    console.log(`nextState`, nextState)
+
+    const payload = battlePayload
+    console.log(`payload`, battlePayload)
+    nextState = setSceneHandler(nextState, payload)
   }
 }

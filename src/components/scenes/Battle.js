@@ -197,7 +197,9 @@ const Battle = ({ gameData, dispatch }) => {
               margin: "0px 30px",
             }}
           >
-            Tell your Chibipal what to do!
+            {gameData.battle.dialog
+              ? gameData.battle.dialog
+              : "Tell your Chibipal what to do!"}
           </h3>
           <div style={{ color: "Red" }}>{gameData.alert}</div>
           <motion.div

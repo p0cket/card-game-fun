@@ -181,7 +181,6 @@ export const startingData = {
     maxEnergy: 5,
     armor: 0,
     power: 0,
-    // max health
   },
   battle: {
     enemy: {
@@ -210,11 +209,13 @@ export const startingData = {
     hand: [],
     discarded: [],
     beginning: false,
+    dialog: null,
   },
   curScene: { scene: "intro", lvl: 1, act: 1 },
   curEvent: null,
   availableRewards: [],
   alert: "",
+  eventResultObj: null,
   devMode: false,
 }
 

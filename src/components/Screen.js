@@ -14,10 +14,6 @@ import Victory from "./scenes/Victory"
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
-  const curLevelNum = gameData.curScene.lvl
-  const levelToSet = map[curLevelNum]
-  console.log(`levelToSet is:`, levelToSet)
-
   const {
     TRANSITION,
     INTRO,
@@ -32,6 +28,10 @@ const Screen = ({ gameData, dispatch, map }) => {
     GAMEOVER,
     VICTORY,
   } = SCENES
+
+  const levelToSet = gameData.curScene.scene
+
+  console.log(`levelToSet is:`, levelToSet)
 
   switch (levelToSet) {
     case TRANSITION:
@@ -73,7 +73,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       console.log("game over Screen Case")
       // return <GAMEOVER gameData={gameData} dispatch={dispatch} />
       return <div>`game over`</div>
-    case VICTORY: 
+    case VICTORY:
       console.log("victory Screen Case")
       return <Victory gameData={gameData} dispatch={dispatch} />
     default:
