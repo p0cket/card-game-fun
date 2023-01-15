@@ -2,6 +2,7 @@
 // so you can use the functions in Battle.js
 
 import { enemies } from "../components/consts"
+import { startHandCount } from "../consts/consts"
 
 export const decideEnemyATK = (enemyAttacks) => {
   if (enemyAttacks) {
@@ -18,6 +19,6 @@ export const getBattlePayloadRandomized = () => {
     enemySeed: Math.random(),
     atkSeed: Math.random(),
     beginBattleSeed: Math.random(),
-    startingHandCount: 5,
+    startingHandCount: startHandCount,
   }
 }

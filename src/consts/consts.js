@@ -248,3 +248,4 @@ export const sampleItems = [
   },
 ]
 export const fullEnergyAmount = 5
+export const startHandCount = 8

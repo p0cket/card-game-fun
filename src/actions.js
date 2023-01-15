@@ -1,4 +1,5 @@
 import { uniqueId } from "./utils/reducer-utils"
+import { startHandCount } from "./consts/consts"
 
 export const ACTIONS = {
   SET_TRANS: "set-trans",
@@ -38,7 +39,7 @@ export const addCardAction = (card) => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 5,
+      startingHandCount: startHandCount,
     }},
   }
 }
@@ -51,7 +52,7 @@ export const playCardAction = (card) => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 5,
+      startingHandCount: startHandCount,
     }},
   }
 }
@@ -69,7 +70,7 @@ export const transitionSceneAction = () => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 5,
+      startingHandCount: startHandCount,
     },
   }
 }
@@ -81,7 +82,7 @@ export const setSceneAction = () => {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
       beginBattleSeed: Math.random(),
-      startingHandCount: 5,
+      startingHandCount: startHandCount,
     },
   }
 }
@@ -96,7 +97,7 @@ export const buyCardAction = (card) => {
         enemySeed: Math.random(),
         atkSeed: Math.random(),
         beginBattleSeed: Math.random(),
-        startingHandCount: 5,
+        startingHandCount: startHandCount,
       },
     },
   }
@@ -111,7 +112,7 @@ export const eventChoiceAction = (choice) => {
         enemySeed: Math.random(),
         atkSeed: Math.random(),
         beginBattleSeed: Math.random(),
-        startingHandCount: 5,
+        startingHandCount: startHandCount,
       },
     },
   }
