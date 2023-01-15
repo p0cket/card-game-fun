@@ -31,6 +31,7 @@ const Card = ({ cardValue, useCard, isOnSale }) => {
       width: "150px",
       height: "200px",
       padding: "2px",
+      cursor: "pointer"
     },
   }
 

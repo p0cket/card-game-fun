@@ -70,7 +70,7 @@ export const allEnemies = {
         passive: "none",
         bio: "Not the sharpest squid in the squad",
         status: null,
-        img: "/creatures/Bunster.png",
+        img: "/creatures/Squidull.png",
         attacks: [
           { name: "Squirt", type: "hit", damage: 10, status: "dizzy" },
           { name: "Jet Stream", type: "hit", damage: 15, status: null },

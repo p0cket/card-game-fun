@@ -217,9 +217,34 @@ const Battle = ({ gameData, dispatch }) => {
                 })
               : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
           </motion.div>
+          <div>
+            <br />
+            <button onClick={endTurn} className="simpleButton">
+              <div>End Turn</div>{" "}
+              <div>(also refills all PP and draws two cards) </div>
+            </button>
+            <br />
+
+            <h5 style={{ color: "gray" }}>Our deck:</h5>
+            <motion.div
+              initial={{ x: "-100vw" }}
+              animate={{ x: 0 }}
+              style={{ pointerEvents: "none", opacity: "0.4" }}
+              className="battleUIdeck"
+            >
+              {" "}
+              {gameData.deck.map((card) => {
+                return (
+                  <Card key={card.id} cardValue={card} playCard={playCard} />
+                )
+              })}
+            </motion.div>
+            <h4 style={{ color: "gray" }}>
+              {gameData.battle.discarded.length} discarded Cards
+            </h4>
+          </div>
         </div>
-        <br />
-        <div>
+        {/* <div>
           <button onClick={endTurn} className="simpleButton">
             <div>End Turn</div>{" "}
             <div>(also refills all PP and draws two cards) </div>
@@ -241,7 +266,7 @@ const Battle = ({ gameData, dispatch }) => {
           <h4 style={{ color: "gray" }}>
             {gameData.battle.discarded.length} discarded Cards
           </h4>
-        </div>
+        </div> */}
       </div>
     </>
   )
