@@ -1,8 +1,7 @@
 
 import { EFFECTS } from "../effects"
-import { setAlertHandler, setMyDataHandler } from "./dataHandlers"
-import { generateRewardsHandler } from "./battleSetupHandlers"
-import { setSceneHandler } from "./sceneHandlers"
+import { setAlertHandler } from "./dataHandlers"
+import { winBattleHandler } from "./sceneHandlers"
 
 
 export const playCardHandler = (state, { card, battlePayload }) => {
@@ -19,7 +18,6 @@ export const playCardHandler = (state, { card, battlePayload }) => {
       `Not enough energy to play that card :(. End turn to replenish Energy!`
     )
   }
-
   //apply hero buff effects
   switch (nextState.hero.effects.buff) {
     case EFFECTS.DOUBLEDAMAGE:
@@ -31,7 +29,6 @@ export const playCardHandler = (state, { card, battlePayload }) => {
     default:
       console.log(`default case for hero buffs applied`)
   }
-
   //-----
   // create typeChart
   // Calculate super-effectiveness here
@@ -42,31 +39,7 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   // nextState = checkIfDefeatedState(nextState, {damage, battlePayload})
   // This below is what is replaced by the line above
   if (enemyHealth - damage <= 0) {
-    console.log(`you defeated the enemy!`)
-    //put hand back into deck
-    let nextDeck = []
-    nextDeck.push(...nextState.deck)
-    nextDeck.push(...nextState.battle.hand)
-    console.log(`nextDeck`, nextDeck)
-
-    // generate new rewards
-    nextState = generateRewardsHandler(nextState, battlePayload)
-
-    nextState = setMyDataHandler({
-      ...nextState,
-      gold: nextState.gold + 25,
-      deck: nextDeck,
-    })
-    console.log(`nextState`, nextState)
-
-    const payload = battlePayload
-    console.log(`payload`, battlePayload)
-
-    // replace with something like setTransitionHandler
-    // nextState = setTransitionHandler(nextState, payload)
-    //
-    //
-    nextState = setSceneHandler(nextState, payload)
+    nextState = winBattleHandler(nextState, {battlePayload: battlePayload})
   }
   //
 

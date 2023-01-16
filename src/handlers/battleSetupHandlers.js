@@ -34,8 +34,11 @@ export const endTurnHandler = (state, payload) => {
       break
     case EFFECTS.POISON:
       console.log(`Poisoned, so check if dead, and if not apply poison damage`)
-      //checkEnemyDefeat(state, {damage, make battle payload})
+      if((nextState.battle.enemy.health - 5) <= 0){
 
+      } else {
+      }
+      //checkEnemyDefeat(state, {damage, make battle payload})
       break
     case EFFECTS.SLEEP:
       console.log(
@@ -182,6 +185,7 @@ export const generateRewardsHandler = (state, payload) => {
     payload
   )
   // take list of rewards, use a seed for the randomization
+  // FIXME: Make this function pure
   let randomizedCards = shuffle(allAvailableRewards, Math.random())
   // let randomizedCards = shuffle(rewardAttacks, Math.random() * seed)
   console.log(`reward card arr`, randomizedCards)

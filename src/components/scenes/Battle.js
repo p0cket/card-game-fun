@@ -14,7 +14,7 @@ const Battle = ({ gameData, dispatch }) => {
   const endTurn = () => {
     dispatch(endTurnAction())
   }
-  const { health, energy } = gameData.hero
+  const { health, energy, maxHP } = gameData.hero
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],
@@ -26,8 +26,6 @@ const Battle = ({ gameData, dispatch }) => {
       },
     },
   }
-  // const healthBarCount = health / 4
-  // const heartEmoji = `❤️`
   const energyEmoji = "🧪"
   const goldEmoji = "💰"
 
@@ -60,7 +58,7 @@ const Battle = ({ gameData, dispatch }) => {
                     <progress
                       id="health"
                       value={gameData.battle.enemy.health}
-                      max="100"
+                      max={gameData.battle.enemy.maxHP}
                       style={{
                         backgroundColor: "#4caf50",
                       }}
@@ -175,15 +173,18 @@ const Battle = ({ gameData, dispatch }) => {
                     <progress
                       id="health"
                       value={health}
-                      max="100"
+                      max={maxHP}
                       style={{
                         backgroundColor: "#4caf50",
                       }}
                     ></progress>
                   </div>
-                  <h1 className="battleBLattack">
-                    {energy} PP{energyEmoji}
-                  </h1>
+                  <div>
+                    {" "}
+                    <h1 className="battleBLattack">
+                      {energy} Energy{": "}{energyEmoji.repeat(energy)}
+                    </h1>
+                  </div>
                 </div>
               </div>
               {/* <div className="battleStats"><p>Your stats: Armor 1  Attack 2</p></div> */}
@@ -244,29 +245,6 @@ const Battle = ({ gameData, dispatch }) => {
             </h4>
           </div>
         </div>
-        {/* <div>
-          <button onClick={endTurn} className="simpleButton">
-            <div>End Turn</div>{" "}
-            <div>(also refills all PP and draws two cards) </div>
-          </button>
-          <br />
-
-          <h5 style={{ color: "gray" }}>Our deck:</h5>
-          <motion.div
-            initial={{ x: "-100vw" }}
-            animate={{ x: 0 }}
-            style={{ pointerEvents: "none", opacity: "0.4" }}
-            className="battleUIdeck"
-          >
-            {" "}
-            {gameData.deck.map((card) => {
-              return <Card key={card.id} cardValue={card} playCard={playCard} />
-            })}
-          </motion.div>
-          <h4 style={{ color: "gray" }}>
-            {gameData.battle.discarded.length} discarded Cards
-          </h4>
-        </div> */}
       </div>
     </>
   )

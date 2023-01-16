@@ -4,6 +4,7 @@ export const allEnemies = {
       {
         name: "Chipwing",
         health: 10,
+        maxHP: 10,
         passive: "none",
         bio: "A furry eye in the sky",
         img: "/creatures/Chipwing2.png",
@@ -21,6 +22,7 @@ export const allEnemies = {
       {
         name: "Zappydillo",
         health: 32,
+        maxHP: 32,
         passive: "none",
         bio: "An Armadillo with an electric attitude",
         img: "/creatures/Zappydillo.png",
@@ -55,6 +57,7 @@ export const allEnemies = {
       {
         name: "Bunster",
         health: 17,
+        maxHP: 17,
         passive: "none",
         bio: "'The experiment went wrong, and then it started to hop' -Professor Blue",
         status: null,
@@ -67,6 +70,7 @@ export const allEnemies = {
       {
         name: "Squidull",
         health: 26,
+        maxHP: 26,
         passive: "none",
         bio: "Not the sharpest squid in the squad",
         status: null,

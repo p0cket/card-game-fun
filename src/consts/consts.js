@@ -187,6 +187,7 @@ export const startingData = {
       name: "sample guy",
       bio: "just a standaard enemi",
       health: "30",
+      maxHP: "30",
       energy: 6,
       status: "none",
       nextAttack: "none",

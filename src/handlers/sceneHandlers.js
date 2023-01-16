@@ -3,7 +3,13 @@ import { SCENES } from "../scenes"
 import { ENEMY_TYPES } from "../actions"
 import { decideEnemyArr } from "../utils/reducer-utils"
 import { startingData } from "../consts/consts"
-import { setEnemyHandler, setAtkHandler, beginBattleHandler } from "./battleSetupHandlers"
+import { setMyDataHandler } from "./dataHandlers"
+import {
+  setEnemyHandler,
+  setAtkHandler,
+  beginBattleHandler,
+  generateRewardsHandler,
+} from "./battleSetupHandlers"
 
 export const setSceneHandler = (state, payload) => {
   const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
@@ -91,6 +97,38 @@ export const setTransitionHandler = (state, payload) => {
   }
 
   return nextState
+}
+
+export const winBattleHandler = (state, { battlePayload }) => {
+  //why was `payload` not working? Investigate
+  // const {battlePayload} = payload
+
+  let nextState = { ...state }
+  console.log(`you defeated the enemy!`)
+  //put hand back into deck
+  let nextDeck = []
+  nextDeck.push(...nextState.deck)
+  nextDeck.push(...nextState.battle.hand)
+  console.log(`nextDeck`, nextDeck)
+
+  // generate new rewards
+  nextState = generateRewardsHandler(nextState, battlePayload)
+  nextState = setMyDataHandler({
+    ...nextState,
+    gold: nextState.gold + 25,
+    deck: nextDeck,
+  })
+  console.log(`nextState`, nextState)
+
+  const payload = battlePayload
+  console.log(`payload`, battlePayload)
+
+  // replace with something like setTransitionHandler
+  // nextState = setTransitionHandler(nextState, payload)
+  //
+  //
+  nextState = setSceneHandler(nextState, payload)
+  return nextState;
 }
 
 export const gameOverHandler = (state) => {
