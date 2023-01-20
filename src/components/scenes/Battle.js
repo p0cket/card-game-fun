@@ -1,7 +1,7 @@
 import React from "react"
 import { endTurnAction, playCardAction } from "../../actions"
 import Card from "../common/Card"
-// import Enemy from "../common/Enemy"
+import { dmgEmoji, energyEmoji, goldEmoji } from "../../consts/consts"
 import { motion } from "framer-motion/dist/framer-motion"
 import "../common/Button.css"
 import "./Battle.css"
@@ -26,8 +26,6 @@ const Battle = ({ gameData, dispatch }) => {
       },
     },
   }
-  const energyEmoji = "🧪"
-  const goldEmoji = "💰"
 
   return (
     <>
@@ -53,31 +51,6 @@ const Battle = ({ gameData, dispatch }) => {
                   <div className="battleTLname" style={{ fontSize: "25px" }}>
                     {gameData.battle.enemy.name}
                   </div>
-                  <div className="battleTLhealth">
-                    {gameData.battle.enemy.health}HP{" "}
-                    <progress
-                      id="health"
-                      value={gameData.battle.enemy.health}
-                      max={gameData.battle.enemy.maxHP}
-                      style={{
-                        backgroundColor: "#4caf50",
-                      }}
-                    ></progress>
-                  </div>
-                  <div className="battleTLdesc" style={{ fontSize: "12px" }}>
-                    {gameData.battle.enemy.bio}
-                  </div>
-                  <div className="battleTLnext" style={{ color: "gray" }}>
-                    Next Attack:
-                  </div>
-                  <div className="battleTLattack">
-                    {gameData.battle.enemy.nextAttack.name} (
-                    <span role="img" aria-label="fist">
-                      👊
-                    </span>
-                    {gameData.battle.enemy.nextAttack.damage})
-                  </div>
-                  {/* <div style={{ color: "yellow", textShadow: "1px 1px 4px black" }}> */}
                   <div>
                     {" "}
                     {gameData.battle.enemy.status ? (
@@ -97,7 +70,38 @@ const Battle = ({ gameData, dispatch }) => {
                     ) : (
                       ``
                     )}
+                    <span style={{ color: "red" }}>
+                      {gameData.battle.enemy.poison
+                        ? "Poisoned: " + gameData.battle.enemy.poison
+                        : ""}
+                    </span>
                   </div>
+                  <div className="battleTLhealth">
+                    {gameData.battle.enemy.health}HP{" "}
+                    <progress
+                      id="health"
+                      value={gameData.battle.enemy.health}
+                      max={gameData.battle.enemy.maxHP}
+                      style={{
+                        backgroundColor: "#4caf50",
+                      }}
+                    ></progress>
+                  </div>
+                  <div className="battleTLdesc" style={{ fontSize: "12px" }}>
+                    {gameData.battle.enemy.bio}
+                  </div>
+                  <div className="battleTLnext" style={{ color: "gray" }}>
+                    Next Attack:
+                  </div>
+                  <div className="battleTLattack">
+                    {gameData.battle.enemy.nextAttack.name} (
+                    {/* <span role="img" aria-label="fist">
+                      👊
+                    </span> */}
+                    {dmgEmoji}
+                    {gameData.battle.enemy.nextAttack.damage})
+                  </div>
+                  {/* <div style={{ color: "yellow", textShadow: "1px 1px 4px black" }}> */}
                 </div>{" "}
                 <div className="battleTopRight">
                   {" "}
@@ -182,7 +186,8 @@ const Battle = ({ gameData, dispatch }) => {
                   <div>
                     {" "}
                     <h1 className="battleBLattack">
-                      {energy} Energy{": "}{energyEmoji.repeat(energy)}
+                      {energy} Energy{": "}
+                      {energyEmoji.repeat(energy)}
                     </h1>
                   </div>
                 </div>
@@ -196,13 +201,28 @@ const Battle = ({ gameData, dispatch }) => {
               backgroundColor: "rgb(75, 119, 13)",
               color: "#a5e54d",
               margin: "0px 30px",
+              padding: "10px 0px",
             }}
           >
             {gameData.battle.dialog
               ? gameData.battle.dialog
               : "Tell your Chibipal what to do!"}
           </h3>
-          <div style={{ color: "Red" }}>{gameData.alert}</div>
+          {gameData.alert ? (
+            <div
+              style={{
+                color: "Red",
+                padding: "10px 0px",
+                margin: "0px 30px",
+                backgroundColor: "black",
+              }}
+            >
+              {gameData.alert}
+            </div>
+          ) : (
+            <></>
+          )}
+          {/* <div style={{ color: "Red", padding: "10px 0px", margin:"0px 30px", backgroundColor: "black" }}>{gameData.alert}</div> */}
           <motion.div
             initial={{ x: "100vw" }}
             animate={{ x: 0 }}

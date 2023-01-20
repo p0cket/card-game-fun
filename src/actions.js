@@ -32,34 +32,48 @@ export const ENEMY_TYPES = {
 }
 
 export const addCardAction = (card) => {
-  const cardWithFreshID = {...card, id: uniqueId()}
+  const cardWithFreshID = { ...card, id: uniqueId() }
   return {
     type: ACTIONS.SELECT_REWARD,
-    payload: { card: cardWithFreshID, battlePayload: {
-      enemySeed: Math.random(),
-      atkSeed: Math.random(),
-      beginBattleSeed: Math.random(),
-      startingHandCount: startHandCount,
-    }},
+    payload: {
+      card: cardWithFreshID,
+      battlePayload: {
+        enemySeed: Math.random(),
+        atkSeed: Math.random(),
+        beginBattleSeed: Math.random(),
+        startingHandCount: startHandCount,
+      },
+    },
   }
 }
 
 export const playCardAction = (card) => {
   return {
     type: ACTIONS.PLAY_CARD,
-    payload: { card ,
-    battlePayload: {
-      enemySeed: Math.random(),
-      atkSeed: Math.random(),
-      beginBattleSeed: Math.random(),
-      startingHandCount: startHandCount,
-    }},
+    payload: {
+      card,
+      battlePayload: {
+        enemySeed: Math.random(),
+        atkSeed: Math.random(),
+        beginBattleSeed: Math.random(),
+        startingHandCount: startHandCount,
+      },
+    },
   }
 }
 
 export const endTurnAction = () => {
   console.log(`End Turn`)
-  return { type: ACTIONS.END_TURN, payload: { seed: Math.random() } }
+  return {
+    type: ACTIONS.END_TURN,
+    payload: {
+      seed: Math.random(),
+      enemySeed: Math.random(),
+      atkSeed: Math.random(),
+      beginBattleSeed: Math.random(),
+      startingHandCount: startHandCount,
+    },
+  }
 }
 
 // @TODO finish or remove this Transition functionality

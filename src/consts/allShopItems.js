@@ -3,7 +3,7 @@ import { uniqueId } from "../utils/reducer-utils"
 export const allShopItems = [
   {
     type: "poison",
-    name: "shop_syphon life",
+    name: "s_syphon life",
     num: 4,
     cost: 2,
     id: uniqueId(),
@@ -11,7 +11,7 @@ export const allShopItems = [
   },
   {
     type: "electric",
-    name: "shop_electric symphonies",
+    name: "s_electric symphonies",
     num: 8,
     cost: 1,
     id: uniqueId(),
@@ -19,7 +19,7 @@ export const allShopItems = [
   },
   {
     type: "normal",
-    name: "shop_backstab",
+    name: "s_backstab",
     num: 4,
     cost: 1,
     id: uniqueId(),
@@ -27,7 +27,7 @@ export const allShopItems = [
   },
   {
     type: "ice",
-    name: "shop_freeze blast",
+    name: "s_freeze blast",
     num: 6,
     cost: 1,
     id: uniqueId(),
@@ -35,7 +35,7 @@ export const allShopItems = [
   },
   {
     type: "mind",
-    name: "shop_hypnotic distress",
+    name: "s_hypnotic distress",
     num: 5,
     cost: 1,
     id: uniqueId(),
@@ -43,7 +43,7 @@ export const allShopItems = [
   },
   {
     type: "pioson",
-    name: "shop_black ooze",
+    name: "s_black ooze",
     num: 9,
     cost: 1,
     id: uniqueId(),
@@ -51,7 +51,7 @@ export const allShopItems = [
   },
   {
     type: "electric",
-    name: "shop_overload",
+    name: "s_overload",
     num: 11,
     cost: 1,
     id: uniqueId(),

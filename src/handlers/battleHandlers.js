@@ -1,8 +1,8 @@
-
+import { dmgEmoji, energyEmoji } from "../consts/consts"
 import { EFFECTS } from "../effects"
 import { setAlertHandler } from "./dataHandlers"
 import { winBattleHandler } from "./sceneHandlers"
-
+import { setDialogHandler } from "./dataHandlers"
 
 export const playCardHandler = (state, { card, battlePayload }) => {
   console.log(`playCardHandler: payload&card`, card, battlePayload)
@@ -11,6 +11,7 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   const enemyHealth = nextState.battle.enemy.health
   let damage = card.num
   let energyCost = card.cost
+  let cardName = card.name
 
   if (myEnergy < energyCost) {
     return setAlertHandler(
@@ -24,7 +25,7 @@ export const playCardHandler = (state, { card, battlePayload }) => {
       damage = damage * 2
       break
     case null:
-      console.log(`null (regular) case for hero buffs applied`)
+      console.log(`null (regular) case for no hero buffs applied`)
       break
     default:
       console.log(`default case for hero buffs applied`)
@@ -35,13 +36,14 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   // const multiplier = typeChart(attackType, defenderType)
   //-----
 
-  //This should replace the full check for if we defeated the enemy, and allow the code to be executed elsewhere
-  // nextState = checkIfDefeatedState(nextState, {damage, battlePayload})
-  // This below is what is replaced by the line above
+  //Check if the enemy is defeated
   if (enemyHealth - damage <= 0) {
-    nextState = winBattleHandler(nextState, {battlePayload: battlePayload})
+    nextState = winBattleHandler(nextState, { battlePayload: battlePayload })
   }
-  //
+
+  // TODO Add note about the buff, and effects applied
+  const dialog = `Pal used ${energyCost}${energyEmoji} to do: ${cardName}! Pal dealt ${damage}${dmgEmoji}`
+  nextState = setDialogHandler(nextState, { dialog })
 
   // remove the card
   const myHandIndex = nextState.battle.hand.indexOf(card)
@@ -60,10 +62,6 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   if (card.effect != null || undefined) {
     const statusPayload = { card, battlePayload }
     nextState = applyStatusHandler(nextState, statusPayload)
-    console.log(
-      `now back in playCardHandler after applying our effect, lets see our state`,
-      nextState
-    )
   }
 
   const energyLeft = myEnergy - energyCost
@@ -110,13 +108,30 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
       }
     case EFFECTS.POISON:
       // add poison effect to enemy.
-      return {
-        ...nextState,
-        battle: {
-          ...nextState.battle,
-          enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
-        },
+      // TODO finish poison
+      if (!nextState.battle.enemy.poison) {
+        return {
+          ...nextState,
+          battle: {
+            ...nextState.battle,
+            // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
+            enemy: { ...nextState.battle.enemy, poison: card.qty },
+          },
+        }
+      } else {
+        return {
+          ...nextState,
+          battle: {
+            ...nextState.battle,
+            // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
+            enemy: {
+              ...nextState.battle.enemy,
+              poison: nextState.battle.enemy.poison + card.qty,
+            },
+          },
+        }
       }
+
     case EFFECTS.SLEEP:
       // 50% chance of waking up
       return {

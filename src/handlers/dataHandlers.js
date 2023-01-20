@@ -30,9 +30,13 @@ export const addCardHandler = (state, payload) => {
 }
 
 export const setAlertHandler = (state, payload) => {
-  console.error("payload", payload)
   return {
     ...state,
     alert: payload,
   }
+}
+
+export const setDialogHandler = (state, payload) => {
+  const { dialog } = payload
+  return { ...state, battle: { ...state.battle, dialog: dialog } }
 }

@@ -3,14 +3,20 @@ import React from "react"
 import { allShopItems } from "../../consts/allShopItems"
 // import Item from "../Item";
 import Card from "../common/Card"
-import { buyCardAction } from "../../actions"
+import { buyCardAction, setSceneAction } from "../../actions"
 
 const Shop = ({ gameData, dispatch }) => {
+  // TODO: change buyCardAction to get rid of the card after adding to deck, and not change scenes
   const buyCard = (card) => {
     console.log(`adding this card:`, card)
     //@TODO: Add ability to buy more than one card at a time
     dispatch(buyCardAction(card))
   }
+  const loadNextLevel = () => {
+    console.log(`loadNextLevel`);
+    dispatch(setSceneAction());
+  };
+  
 
   return (
     <div>
@@ -29,7 +35,7 @@ const Shop = ({ gameData, dispatch }) => {
       <h3>Shop Component</h3>
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
-      <div>Items for sale (Just attacks for now. I'm too busy for this)</div>
+      <div>Items for sale (Just attacks for now. I'm too busy for this), also you can only buy 1 right now :P</div>
       <div
         style={{
           display: "flex",
@@ -43,19 +49,9 @@ const Shop = ({ gameData, dispatch }) => {
           return <Card key={card.id} cardValue={card} useCard={buyCard} />
         })}
       </div>
-      {/* <div>
-        {allShopItems.map((item) => {
-          return (
-            <Item 
-              name={item.name}
-              desc={item.desc}
-              flavortext={item.flavortext}
-              price={item.price}
-              boost={item.boost}
-            />
-          );
-        })}
-      </div> */}
+      <button onClick={loadNextLevel}>Leave without buying something</button>
+
+      
     </div>
   )
 }

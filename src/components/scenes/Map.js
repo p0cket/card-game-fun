@@ -6,8 +6,9 @@ const Map = ({ gameData, dispatch, map }) => {
     dispatch(setSceneAction())
   }
 
-  const currentIndex = gameData.curScene.lvl
   // const mapPortion = map.slice(3)
+
+  const currentIndex = gameData.curScene.lvl
 
   return (
     <>
@@ -19,6 +20,8 @@ const Map = ({ gameData, dispatch, map }) => {
         is currently impossible)
       </div>
       <h2>Heres the list of levels:</h2>
+      {/* <div style={mapContainerStyle}> {printedMap(mapExample)}</div> */}
+
       <div>
         <div style={{ padding: "20px 200px" }}>
           {map.map((lvlName, index) => {
@@ -48,5 +51,45 @@ const Map = ({ gameData, dispatch, map }) => {
     </>
   )
 }
+  // const printedMap = (oneMap) => {
+  //   return oneMap.map(row => {
+  //     <div>r</div>
+  //   })
+  // }
+
+  // const mapContainerStyle = {
+  //   display: "flex",
+  //   width: "20px",
+  //   height: "20px",
+  // }
+  // const mapRowStyle = {
+  //   display: "flex",
+  //   width: "20px",
+  //   height: "20px",
+  //   padding: "20px"
+  // }
+
+  // const mapElementStyle = {
+  //   width: "20px",
+  //   height: "20px",
+  //   padding: "20px",
+  //   color: 'blue'
+
+  // }
+
+  // const printedMap = (oneMap) => {
+  //   return oneMap.map((row) => {
+  //     return (
+  //       <div style={mapRowStyle}>
+  //         {row.map((place) => {
+  //           // return <div style={mapElementStyle}>{place}</div>
+  //           return <div style={mapElementStyle}>{place}</div>
+
+  //         })}
+  //       </div>
+  //     )
+  //   })
+  // }
+
 
 export default Map

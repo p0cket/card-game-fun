@@ -15,7 +15,8 @@ const Rest = ({gameData, dispatch}) => {
   };
   return (
     <>
-      <h2>Rest Component</h2>
+      <img src="/eventImages/campfirePXL.png" alt="Campfire with people" />
+      <h1>Rest</h1>
       <h3>Stay a while, and listen</h3>
       <div>As you come upon a campfire, you feel calm.</div>
       <div>A wise old scholar greets you.</div>

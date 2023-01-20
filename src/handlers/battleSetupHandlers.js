@@ -5,10 +5,14 @@ import { startingDeck, fullEnergyAmount } from "../consts/consts"
 import { decideEnemy, decideEnemyATK } from "../utils/reducer-utils"
 import { drawCardHandler } from "./battleHandlers"
 import { addCardHandler, setAlertHandler } from "./dataHandlers"
-import { setSceneHandler, gameOverHandler } from "./sceneHandlers"
-
+import {
+  setSceneHandler,
+  gameOverHandler,
+  winBattleHandler,
+} from "./sceneHandlers"
 
 export const endTurnHandler = (state, payload) => {
+  const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
   let nextState = { ...state }
   //
   const { hero, battle } = nextState
@@ -19,7 +23,40 @@ export const endTurnHandler = (state, payload) => {
   let finalHealth = hero.health
   //  let finalHealth = hero.health - battle.enemy.nextAttack.damage
 
+  // TODO: Add check for battle-long battleBuffs
+
   // ENDTURN: Resolve applied enemy effects
+  //First special cases like Poison
+  if (nextState.battle.enemy.poison) {
+    console.log(`Poisoned, so check if dead, and if not apply poison damage`)
+    if (nextState.battle.enemy.health - nextState.battle.enemy.poison <= 0) {
+      // you win the battle, continue
+      nextState = winBattleHandler(nextState, {
+        battlePayload: {
+          enemySeed,
+          atkSeed,
+          beginBattleSeed,
+          startingHandCount,
+        },
+      })
+    } else {
+      // Take enemy health away from poison damage
+      nextState = {
+        ...nextState,
+        battle: {
+          ...nextState.battle,
+          enemy: {
+            ...nextState.battle.enemy,
+            // health: nextState.battle.enemy.health - poisonDamage,
+            health:
+              nextState.battle.enemy.health - nextState.battle.enemy.poison,
+          },
+        },
+      }
+    }
+  }
+
+  // Then the rest of the status effects
   switch (enemyStatus) {
     case EFFECTS.STUN:
       console.log(`stunned, so don't attack, set status to _null_`)
@@ -31,14 +68,6 @@ export const endTurnHandler = (state, payload) => {
         },
       }
       nextState = enemyWithoutStatusState
-      break
-    case EFFECTS.POISON:
-      console.log(`Poisoned, so check if dead, and if not apply poison damage`)
-      if((nextState.battle.enemy.health - 5) <= 0){
-
-      } else {
-      }
-      //checkEnemyDefeat(state, {damage, make battle payload})
       break
     case EFFECTS.SLEEP:
       console.log(
@@ -100,21 +129,6 @@ export const endTurnHandler = (state, payload) => {
         energy: fullEnergyAmount,
       },
     }
-
-    // @TODO: upkeep handler
-    // switch (heroStatus) {
-    //   case EFFECTS.STUN:
-    //     console.log(
-    //       `upkeep: our hero is stunned, we can't attack, set status to _null_`
-    //     )
-    //     const enemyWithoutStatusState = {
-    //       ...nextState,
-    //     }
-    //     nextState = enemyWithoutStatusState
-    //     break
-    //   default:
-    //     console.log(`upkeep: no heroStatus matched`)
-    // }
 
     const drawCardState = drawCardHandler(endTurnState)
     const drawSecondCardState = drawCardHandler(drawCardState)

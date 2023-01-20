@@ -13,6 +13,7 @@ const Event = ({ dispatch }) => {
   const ourEvent = possibleEvents[chosenEvent]
   return (
     <div>
+      <img src="/eventImages/questionMark.png" alt="Question Mark" />
       <h5>Event Name: {ourEvent.name} </h5>
       <div>{ourEvent.description}</div>
       <br />

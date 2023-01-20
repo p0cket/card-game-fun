@@ -1,6 +1,6 @@
 import { uniqueId } from "../utils/reducer-utils"
 import { EFFECTS } from "../effects"
-const { DRAW, STUN, DOUBLEDAMAGE, SLEEP } = EFFECTS
+const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
 export const startingDeck = [
   {
@@ -89,7 +89,7 @@ export const startingDeck = [
     num: 2,
     cost: 1,
     id: uniqueId(),
-    effect: null,
+    effect: POISON,
   },
   {
     type: "Poison",
@@ -151,6 +151,79 @@ export const startingDeck = [
     effect: DRAW,
     qty: 3,
   },
+  // 
+  {
+    type: "Poison",
+    name: "Toxic Gas",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 3,
+  },
+  {
+    type: "Poison",
+    name: "Venomous Bite",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Poison Needle",
+    num: 0,
+    cost: 1,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Acid Spray",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Toxic Spores",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Poisonous Touch",
+    num: 0,
+    cost: 1,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Toxic Ooze",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  },
+  {
+    type: "Poison",
+    name: "Poisonous Cloud",
+    num: 0,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 6,
+  }
 ]
 
 export const startingData = {
@@ -215,7 +288,7 @@ export const startingData = {
   curScene: { scene: "intro", lvl: 1, act: 1 },
   curEvent: null,
   availableRewards: [],
-  alert: "",
+  alert: "--- Cards PERMANENTLY go away. They can only be used once ---",
   eventResultObj: null,
   devMode: false,
 }
@@ -250,3 +323,9 @@ export const sampleItems = [
 ]
 export const fullEnergyAmount = 5
 export const startHandCount = 8
+export const poisonDamage = 5
+
+export const energyEmoji = "🧪"
+export const goldEmoji = "💰"
+export const dmgEmoji = "👊"
+
