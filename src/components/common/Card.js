@@ -61,15 +61,14 @@ const Card = ({ cardValue, useCard, isOnSale }) => {
           <div style={{ display: "flex", flex: "1" }}>
             <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
           </div>
-          <div
-            style={{ color: "gray", display: "flex", flex: "1" }}
-          >{`Deals ${num} damage`}</div>
+          <div style={{ color: "gray", display: "flex", flex: "1" }}>
+            {num <= 0 ? " " : `Deals ${num} damage`}
+          </div>
           <span style={{ display: "flex", flex: "1" }}>
             <div style={{ color: "brown" }}>
               {" "}
               {/* {effect ? `Causes ${qty ? qty : ``} ${effect}` : ``}{" "} */}
-
-              {effect ? `Causes ${qty ? qty: ""} ${effect}` : ``}{" "}
+              {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "}
             </div>
             {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
             {cardValue.price ? <div>price: {cardValue.price}</div> : <></>}
