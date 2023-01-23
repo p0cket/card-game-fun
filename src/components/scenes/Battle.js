@@ -45,7 +45,6 @@ const Battle = ({ gameData, dispatch }) => {
                 </p>
               </div>
               <div className="battleTop">
-                {/* Top column */}
                 <div className="battleTopLeft">
                   <div></div>
                   <div className="battleTLname" style={{ fontSize: "25px" }}>
@@ -157,32 +156,43 @@ const Battle = ({ gameData, dispatch }) => {
                   />
                 </div>
                 <div className="battleBotLeft">
-                  <div className="battleBLname" style={{ fontSize: "25px" }}>
-                    Your Chibipal{" "}
-                    <span>
+                  <div className="battleBotLeftUpper">
+                    <div>
+                      <div
+                        className="battleBLname"
+                        style={{ fontSize: "25px" }}
+                      >
+                        Your Chibipal{" "}
+                      </div>
+                      <div className="battleBLhealth">
+                        {health}HP{" "}
+                        <progress
+                          id="health"
+                          value={health}
+                          max={maxHP}
+                          style={{
+                            backgroundColor: "#4caf50",
+                          }}
+                        ></progress>
+                      </div>
+                    </div>
+                    <div className="battleBuffs">
                       {" "}
-                      {gameData.hero.effects.buff ? (
-                        <span>status:{gameData.hero.effects.buff}</span>
-                      ) : (
-                        ""
-                      )}
-                    </span>
+                      <span>
+                        {" "}
+                        {gameData.hero.effects.buff ? (
+                          <span>{gameData.hero.effects.buff}</span>
+                        ) : (
+                          ""
+                        )}
+                      </span>
+                    </div>
+                    {/* <div className="battleBLdesc" style={{ fontSize: "12px" }}>
+                      "This {gameData.battle.enemy.name} seems tough!"
+                      -Communicator
+                    </div> */}
                   </div>
-                  <div className="battleTLdesc" style={{ fontSize: "12px" }}>
-                    "This {gameData.battle.enemy.name} seems tough!"
-                    -Communicator
-                  </div>
-                  <div className="battleBLhealth">
-                    {health}HP{" "}
-                    <progress
-                      id="health"
-                      value={health}
-                      max={maxHP}
-                      style={{
-                        backgroundColor: "#4caf50",
-                      }}
-                    ></progress>
-                  </div>
+
                   <div>
                     {" "}
                     <h1 className="battleBLattack">

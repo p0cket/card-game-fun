@@ -1,18 +1,18 @@
-import React from "react";
-import { ACTIONS } from "../../actions";
-import { setSceneAction } from "../../actions";
+import React from "react"
+import { ACTIONS } from "../../actions"
+import { setSceneAction } from "../../actions"
 
-const Rest = ({gameData, dispatch}) => {
-    const loadNextLevel = () => {
-    console.log(`loadNextLevel`);
-    dispatch(setSceneAction());
-  };
+const Rest = ({ gameData, dispatch }) => {
+  const loadNextLevel = () => {
+    console.log(`loadNextLevel`)
+    dispatch(setSceneAction())
+  }
 
   const healToFullHealth = () => {
     dispatch({
       type: ACTIONS.SELECT_REST,
-    });
-  };
+    })
+  }
   return (
     <>
       <img src="/eventImages/campfirePXL.png" alt="Campfire with people" />
@@ -27,16 +27,16 @@ const Rest = ({gameData, dispatch}) => {
       <div>( current health is {gameData.hero.health}/100 )</div>
       <button
         onClick={() => {
-          healToFullHealth();
+          healToFullHealth()
         }}
       >
-        Heal 
+        Heal
       </button>
       <br />
       <br />
       <button onClick={loadNextLevel}>Next Level</button>
     </>
-  );
-};
+  )
+}
 
-export default Rest;
+export default Rest

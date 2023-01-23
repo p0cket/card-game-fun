@@ -35,14 +35,14 @@ export const startingDeck = [
     id: uniqueId(),
     effect: DOUBLEDAMAGE,
   },
-  {
-    type: "Grass",
-    name: "Leaf Storm",
-    num: 2,
-    cost: 1,
-    id: uniqueId(),
-    effect: DOUBLEDAMAGE,
-  },
+  // {
+  //   type: "Grass",
+  //   name: "Leaf Storm",
+  //   num: 2,
+  //   cost: 1,
+  //   id: uniqueId(),
+  //   effect: DOUBLEDAMAGE,
+  // },
   {
     type: "Fire",
     name: "Flamethrower",

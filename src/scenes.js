@@ -6,9 +6,10 @@ export const SCENES = {
   EVENT: "event",
   REST: "rest",
   REWARD: "reward",
+  PACKREWARD: "pack-reward",
   BATTLE: "battle",
   MINIBOSS: "miniboss",
   BOSS: "boss",
-  GAMEOVER: "game over",
+  GAMEOVER: "game-over",
   VICTORY: "victory",
 }

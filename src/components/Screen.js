@@ -7,6 +7,7 @@ import Event from "./scenes/Event"
 import Shop from "./scenes/Shop"
 import Rest from "./scenes/Rest"
 import Reward from "./scenes/Reward"
+import PackReward from "./scenes/packReward"
 import Battle from "./scenes/Battle"
 import Map from "./scenes/Map"
 import Trans from "./scenes/Trans"
@@ -23,6 +24,7 @@ const Screen = ({ gameData, dispatch, map }) => {
     EVENT,
     REST,
     REWARD,
+    PACKREWARD,
     MINIBOSS,
     BOSS,
     GAMEOVER,
@@ -60,6 +62,9 @@ const Screen = ({ gameData, dispatch, map }) => {
           randomizedVal={Math.random()}
         />
       )
+    case PACKREWARD:
+      console.log("PackReward Screen Case")
+      return <PackReward gameData={gameData} dispatch={dispatch} />
     case BATTLE:
       console.log("(battle Screen)")
       return <Battle gameData={gameData} dispatch={dispatch} />
