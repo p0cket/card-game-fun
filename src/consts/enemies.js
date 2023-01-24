@@ -174,10 +174,11 @@ export const allEnemies = {
       {
         name: "FrostFang (MiniBoss)",
         health: 70,
+        maxHP: 70,
         passive: null,
         bio: "A dragon made of ice that can freeze its enemies with a single touch. It's piercing blue eyes and shimmering crystalline scales are near hypnotic",
-        status: null,
         img: "/creatures/bosses/Frostfang.png",
+        status: null,
         attacks: [
           {
             name: "Frostbite",
@@ -225,10 +226,11 @@ export const allEnemies = {
       {
         name: "Moltenscale (MiniBoss)",
         health: 72,
+        maxHP: 72,
         passive: null,
         bio: "A fiery dragon dragon with bright red scales, a smoldering gaze, volcanic breath, and an ash-covered body.",
-        status: null,
         img: "/creatures/bosses/Moltenscale.png",
+        status: null,
         attacks: [
           {
             name: "Flame Breath",
@@ -318,10 +320,11 @@ export const allEnemies = {
       {
         name: "Collos",
         health: 120,
+        maxHP: 120,
         passive: null,
         bio: "The Gelatinous Behemoth is a fearsome predator that roams the swamps and marshes, devouring anything in its path. Its massive size and powerful, slimy tentacles make it almost unstoppable.",
-        status: null,
         img: "/creatures/bosses/BossColoss.png",
+        status: null,
         attacks: [
           {
             name: "Slime Volley",
