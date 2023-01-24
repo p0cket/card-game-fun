@@ -6,7 +6,7 @@ import { generateRewardPackSelection } from "../../utils/reward-utils"
 
 function PackReward({ gameData, dispatch }) {
   const addPackAndProceedToNextLevel = (Pack) => {
-    console.log(`adding this Pack:`, Pack)
+    console.log(`addin this Pack:`, Pack)
     dispatch(addPackAction(Pack))
     dispatch(setSceneAction())
   }
