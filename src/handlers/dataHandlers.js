@@ -31,7 +31,6 @@ export const addCardHandler = (state, payload) => {
 export const addPackHandler = (state, payload) => {
   const ourDeck = state.deck
   const newDeck = [...ourDeck, ...payload.pack]
-  console.log(`adding card to deck, and full deck here`, payload, newDeck)
   return { ...state, deck: newDeck }
 }
 

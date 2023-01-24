@@ -30,7 +30,7 @@ export const startingDeck = [
   {
     type: "Fire",
     name: "Flamethrower",
-    num: 4,
+    num: 6,
     cost: 1,
     id: uniqueId(),
     effect: null,
@@ -46,7 +46,7 @@ export const startingDeck = [
   {
     type: "Fire",
     name: "Flamethrower",
-    num: 4,
+    num: 7,
     cost: 1,
     id: uniqueId(),
     effect: null,
@@ -110,7 +110,23 @@ export const startingDeck = [
     id: uniqueId(),
     effect: DRAW,
     qty: 3,
-  }
+  },
+  {
+    type: "Physical",
+    name: "Throw Fist",
+    num: 3,
+    cost: 2,
+    id: uniqueId(),
+    effect: STUN,
+  },
+  {
+    type: "Physical",
+    name: "Throw Fist+",
+    num: 5,
+    cost: 2,
+    id: uniqueId(),
+    effect: STUN,
+  },
 ]
 
 export const startingTestDeck = [
@@ -262,7 +278,7 @@ export const startingTestDeck = [
     effect: DRAW,
     qty: 3,
   },
-  // 
+  //
   {
     type: "Poison",
     name: "Toxic Gas",
@@ -334,7 +350,7 @@ export const startingTestDeck = [
     id: uniqueId(),
     effect: POISON,
     qty: 6,
-  }
+  },
 ]
 
 export const startingData = {
@@ -439,4 +455,3 @@ export const poisonDamage = 5
 export const energyEmoji = "🧪"
 export const goldEmoji = "💰"
 export const dmgEmoji = "👊"
-
