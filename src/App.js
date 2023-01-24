@@ -22,6 +22,7 @@ export default function App() {
       className="App"
       style={{
         backgroundImage: "url(/backgrounds/gridBGlight.png)",
+        // backgroundImage: "url(/backgrounds/gridBGdark.png)",
         backgroundRepeat: "repeat",
         backgroundSize: "800px 500px",
       }}

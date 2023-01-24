@@ -7,11 +7,9 @@ const Reward = ({ gameData, dispatch }) => {
   const currentRewards = gameData.availableRewards
 
   const addCard = (card) => {
-    console.log(`adding this card twice:`, card)
+    console.log(`adding this card:`, card)
     dispatch(addCardAction(card))
-    // dispatch(addCardAction(card))
   }
-  // ------------
   console.log(`gameData from Rewards`, gameData)
 
   return (

@@ -55,3 +55,6 @@ export const decideEnemyATK = (seed, enemyAttacks) => {
 let id = 20
 // export const uniqueId = (prefix = '') => prefix + id++;
 export const uniqueId = () => id++
+// if I need packId to be unique and generated, I can uncomment below
+// let packId = 20
+// export const uniquePackId = () => packId++

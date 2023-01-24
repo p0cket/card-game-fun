@@ -25,8 +25,14 @@ export const addCardHandler = (state, payload) => {
   ourDeck.push(payload.card)
   // set some notification that the card is added
   const updatedDeck = ourDeck
-  console.log(`adding card to deck, and full deck here`, payload, updatedDeck)
   return { ...state, deck: updatedDeck }
+}
+
+export const addPackHandler = (state, payload) => {
+  const ourDeck = state.deck
+  const newDeck = [...ourDeck, ...payload.pack]
+  console.log(`adding card to deck, and full deck here`, payload, newDeck)
+  return { ...state, deck: newDeck }
 }
 
 export const setAlertHandler = (state, payload) => {

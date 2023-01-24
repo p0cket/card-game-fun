@@ -4,6 +4,7 @@ import {
   healHandler,
   setMyBalanceHandler,
   addCardHandler,
+  addPackHandler,
   setAlertHandler,
 } from "./handlers/dataHandlers"
 import {
@@ -24,7 +25,11 @@ import {
   setTransitionHandler,
   gameOverHandler,
 } from "./handlers/sceneHandlers"
-import { restHandler, eventChoiceHandler, purchaseHandler } from "./handlers/eventHandlers"
+import {
+  restHandler,
+  eventChoiceHandler,
+  purchaseHandler,
+} from "./handlers/eventHandlers"
 
 export default function reducer(state, action) {
   //we can always deep clone the state immediately here,
@@ -72,6 +77,8 @@ export default function reducer(state, action) {
       return endTurnHandler(state, payload)
     case ACTIONS.ADD_CARD:
       return addCardHandler(state, payload)
+    case ACTIONS.SELECT_PACK:
+      return addPackHandler(state, payload)
     case ACTIONS.GAME_OVER:
       return gameOverHandler(state)
     default:

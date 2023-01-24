@@ -16,6 +16,7 @@ export const ACTIONS = {
   SELECT_REST: "select-rest",
   GENERATE_REWARDS: "generate-rewards",
   SELECT_REWARD: "select-reward",
+  SELECT_PACK: "select-pack",
   PURCHASE_ITEM: "purchase-item",
   DISCARD_CARD: "discard-card",
   BEGIN_BATTLE: "begin-battle",
@@ -37,6 +38,21 @@ export const addCardAction = (card) => {
     type: ACTIONS.SELECT_REWARD,
     payload: {
       card: cardWithFreshID,
+      battlePayload: {
+        enemySeed: Math.random(),
+        atkSeed: Math.random(),
+        beginBattleSeed: Math.random(),
+        startingHandCount: startHandCount,
+      },
+    },
+  }
+}
+
+export const addPackAction = (ourPack) => {
+  return {
+    type: ACTIONS.SELECT_PACK,
+    payload: {
+      pack: ourPack,
       battlePayload: {
         enemySeed: Math.random(),
         atkSeed: Math.random(),
