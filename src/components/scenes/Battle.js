@@ -271,7 +271,7 @@ const Battle = ({ gameData, dispatch }) => {
               })}
             </motion.div>
             <h4 style={{ color: "gray" }}>
-              {gameData.battle.discarded.length} discarded Cards
+              {gameData.battle.discarded.length} cards in your Used Cards pile
             </h4>
           </div>
         </div>
