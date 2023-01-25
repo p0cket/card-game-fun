@@ -243,7 +243,7 @@ const Battle = ({ gameData, dispatch }) => {
             {gameData.battle.hand.length > 0
               ? gameData.battle.hand.map((card) => {
                   return (
-                    <Card key={card.id} cardValue={card} useCard={playCard} />
+                    <Card key={card.id} cardValue={card} useCard={playCard} isBattle={true} />
                   )
                 })
               : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
@@ -256,7 +256,7 @@ const Battle = ({ gameData, dispatch }) => {
             </button>
             <br />
 
-            <h5 style={{ color: "gray" }}>Our deck:</h5>
+            <h5 style={{ color: "gray" }}>Our deck:</h5> 
             <motion.div
               initial={{ x: "-100vw" }}
               animate={{ x: 0 }}

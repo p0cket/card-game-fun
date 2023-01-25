@@ -1,8 +1,7 @@
 //choose between 3 in the beginning to be added to your deck
 //packs can have variable rarity of cards that are better, like loot in diablo
-import { uniqueId } from "../utils/reducer-utils"
-import { EFFECTS } from "../effects"
-const { STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
+import { ddamageCards, poisonCards, sleepCards, stunCards } from "./allCards"
+
 
 export const poisonPackBasic = {
   title: "Poison",
@@ -12,61 +11,21 @@ export const poisonPackBasic = {
   img: "/packImages/Poison.png",
   id: 1,
   pack: [
-    {
-      type: "Poison",
-      name: "Toxic Gas",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 3,
-    },
-    {
-      type: "Poison",
-      name: "Acid Spray",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 6,
-    },
-    {
-      type: "Poison",
-      name: "Toxic Spores",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 6,
-    },
-    {
-      type: "Poison",
-      name: "Poisonous Touch",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 6,
-    },
-    {
-      type: "Poison",
-      name: "Toxic Ooze",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 6,
-    },
-    {
-      type: "Poison",
-      name: "Poisonous Cloud",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: POISON,
-      qty: 6,
-    },
+    poisonCards.ToxicGas,
+    poisonCards.AcidSpray,
+    poisonCards.ToxicSpores,
+    poisonCards.PoisonousTouch,
+    poisonCards.ToxicOoze,
+    poisonCards.PoisonCloud,
   ],
+  // pack: [
+  //   poisonCards.ToxicGas(),
+  //   poisonCards.AcidSpray(),
+  //   poisonCards.ToxicSpores(),
+  //   poisonCards.PoisonousTouch(),
+  //   poisonCards.ToxicOoze(),
+  //   poisonCards.PoisonCloud(),
+  // ],
 }
 
 export const doubledamagePackBasic = {
@@ -77,55 +36,21 @@ export const doubledamagePackBasic = {
   img: "/packImages/DoubleDamage.png",
   id: 2,
   pack: [
-    {
-      type: "Physical",
-      name: "Focus",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
-    {
-      type: "Physical",
-      name: "Focus",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
-    {
-      type: "Physical",
-      name: "Focus",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
-    {
-      type: "Physical",
-      name: "Focus Punch",
-      num: 2,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
-    {
-      type: "Physical",
-      name: "Focus Punch",
-      num: 2,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
-    {
-      type: "Physical",
-      name: "Focus Punch",
-      num: 2,
-      cost: 1,
-      id: uniqueId(),
-      effect: DOUBLEDAMAGE,
-    },
+    ddamageCards.focus,
+    ddamageCards.focus,
+    ddamageCards.focus,
+    ddamageCards.focusPunch,
+    ddamageCards.focusPunch,
+    ddamageCards.focusPunch,
   ],
+  // pack: [
+  //   ddamageCards.focus(),
+  //   ddamageCards.focus(),
+  //   ddamageCards.focus(),
+  //   ddamageCards.focusPunch(),
+  //   ddamageCards.focusPunch(),
+  //   ddamageCards.focusPunch(),
+  // ],
 }
 
 export const stunPackBasic = {
@@ -135,55 +60,21 @@ export const stunPackBasic = {
   img: "/packImages/Stun.png",
   id: 3,
   pack: [
-    {
-      type: "Physical",
-      name: "Throw Fist",
-      num: 3,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
-    {
-      type: "Physical",
-      name: "Throw Fist+",
-      num: 5,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
-    {
-      type: "Physical",
-      name: "Throw Fist",
-      num: 3,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
-    {
-      type: "Physical",
-      name: "Throw Fist+",
-      num: 5,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
-    {
-      type: "Physical",
-      name: "Throw Fist",
-      num: 3,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
-    {
-      type: "Physical",
-      name: "Throw Fist+",
-      num: 5,
-      cost: 2,
-      id: uniqueId(),
-      effect: STUN,
-    },
+    stunCards.throwFist,
+    stunCards.throwFist,
+    stunCards.throwFist,
+    stunCards.throwFistPlus,
+    stunCards.throwFistPlus,
+    stunCards.throwFistPlus,
   ],
+  // pack: [
+  //   (stunCards.throwFist()),
+  //   (stunCards.throwFist()),
+  //  ( stunCards.throwFist()),
+  //   (stunCards.throwFistPlus()),
+  //   (stunCards.throwFistPlus()),
+  //   (stunCards.throwFistPlus()),
+  // ],
 }
 
 export const sleepPackBasic = {
@@ -194,55 +85,21 @@ export const sleepPackBasic = {
   img: "/packImages/Sleep.png",
   id: 4,
   pack: [
-    {
-      type: "Psychic",
-      name: "Hypnosis",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-    {
-      type: "Psychic",
-      name: "Hypnosis",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-    {
-      type: "Psychic",
-      name: "Hypnosis",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-    {
-      type: "Psychic",
-      name: "Hypnosis",
-      num: 0,
-      cost: 2,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-    {
-      type: "Psychic",
-      name: "Hypnosis+",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-    {
-      type: "Psychic",
-      name: "Hypnosis+",
-      num: 0,
-      cost: 1,
-      id: uniqueId(),
-      effect: SLEEP,
-    },
-  ],
+    sleepCards.hypnosis,
+    sleepCards.hypnosis,
+    sleepCards.hypnosis,
+    sleepCards.hypnosis,
+    sleepCards.hypnosisPlus,
+    sleepCards.hypnosisPlus,
+  ] 
+  //  pack: [
+  //   sleepCards.hypnosis(),
+  //   sleepCards.hypnosis(),
+  //   sleepCards.hypnosis(),
+  //   sleepCards.hypnosis(),
+  //   sleepCards.hypnosisPlus(),
+  //   sleepCards.hypnosisPlus(),
+  // ]
 }
 
 export const allBasicPacks = [

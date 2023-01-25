@@ -5,6 +5,7 @@ import { motion } from "framer-motion/dist/framer-motion"
 // @TODO: Add typewriter effect to text
 import heroFrontImg from "../../assets/Anime_protag_pixelated.png"
 import "../common/Button.css"
+import Dialog from "../common/Dialog"
 
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
@@ -40,6 +41,8 @@ const Intro = ({ dispatch }) => {
           src={heroFrontImg}
           alt="Hero Frontside"
         />
+        <h1>Dialog Text Should Go Here</h1>
+        <Dialog />
         <div class="content">
           <div>In 2020 - Society was relied on traditional methods for productivity and transportation.</div>
           <div>In 2025 - We discovered mystical creatures that harnessed the power of the elements</div>

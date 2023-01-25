@@ -1,5 +1,6 @@
 import { SCENES } from "../scenes"
 
+//As for the areas, you could also add more like a tutorial level, a challenge level, a puzzle level, a secret level, etc.
 const {
   // TRANSITION,
   INTRO,
@@ -34,6 +35,12 @@ const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
+    // REWARD,
+    // REWARD,
+    EVENT,
+    PACKREWARD,
+    PACKREWARD,
+
     MAP,
     BATTLE,
     PACKREWARD,

@@ -13,12 +13,14 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   let energyCost = card.cost
   let cardName = card.name
 
+  //Can he use the card?
   if (myEnergy < energyCost) {
     return setAlertHandler(
       nextState,
       `Not enough energy to play that card :(. End turn to replenish Energy!`
     )
   }
+  //if he can:
   //apply hero buff effects
   switch (nextState.hero.effects.buff) {
     case EFFECTS.DOUBLEDAMAGE:
@@ -78,6 +80,15 @@ export const playCardHandler = (state, { card, battlePayload }) => {
       // hand,
     },
   }
+
+  // TODO: Finish BUILDUP and/or PRESENCE effects (PRESENCE buffs other cards while the card is in hand)
+  // for(let i=0; i<nextState.battle.hand.length; i++) {
+    //add logic to see if there is a buff card, or a card with buildup
+
+    //maybe add in the addcard that if buildup is there, apply that it equals
+    // the state of how many cards have been used t
+  // }
+
   console.log(`endOf playCardHandler- nextState is: `, nextState)
   return discardCardHandler(nextState, { cardToAddToDiscarded: card })
 }

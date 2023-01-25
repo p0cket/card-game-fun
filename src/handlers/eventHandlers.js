@@ -1,4 +1,3 @@
-import { startingData } from "../consts/consts"
 import {
   healHandler,
   setMyBalanceHandler,
@@ -10,7 +9,7 @@ import { setSceneHandler, setTransitionHandler } from "./sceneHandlers"
 export const restHandler = (state) => {
   const fullHealed = {
     ...state,
-    hero: { ...state.hero, health: startingData.hero.health },
+    hero: { ...state.hero, health: state.hero.maxHP },
   }
   return fullHealed
 }

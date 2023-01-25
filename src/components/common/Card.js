@@ -1,8 +1,9 @@
 import React from "react"
 import { motion } from "framer-motion/dist/framer-motion"
 
-const Card = ({ cardValue, useCard, isOnSale }) => {
+const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
   const { type, name, num, cost, effect, qty } = cardValue
+
   const styles = {
     cardStyle: {
       backgroundColor: "#f0feff",
@@ -52,7 +53,22 @@ const Card = ({ cardValue, useCard, isOnSale }) => {
             rotate: -90,
           }}
           // style={styles.cardStyle}
-          style={styles.newCardStyle}
+          style={{
+            ...styles.newCardStyle,
+            border: `2px solid ${
+              type === "Poison"
+                ? "#99ff99"
+                : type === "Electric"
+                ? "yellow"
+                : type === "Technical"
+                ? "blue"
+                : type === "Physical"
+                ? "white"
+                : type === "Psychic"
+                ? "purple"
+                : "silver"
+            }`,
+          }}
           onClick={() => useCard(cardValue)}
         >
           <div style={{ display: "flex", flex: "1" }}>
@@ -71,7 +87,7 @@ const Card = ({ cardValue, useCard, isOnSale }) => {
               {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "}
             </div>
             {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
-            {cardValue.price ? <div>price: {cardValue.price}</div> : <></>}
+            {cardValue.price && (isBattle!==true) ? <div>price: {cardValue.price}</div> : <></>}
           </span>
         </motion.button>
       </div>
