@@ -1,7 +1,12 @@
 //choose between 3 in the beginning to be added to your deck
 //packs can have variable rarity of cards that are better, like loot in diablo
-import { ddamageCards, poisonCards, sleepCards, stunCards } from "./allCards"
-
+import {
+  buildupCards,
+  ddamageCards,
+  poisonCards,
+  sleepCards,
+  stunCards,
+} from "./allCards"
 
 export const poisonPackBasic = {
   title: "Poison",
@@ -18,14 +23,6 @@ export const poisonPackBasic = {
     poisonCards.ToxicOoze,
     poisonCards.PoisonCloud,
   ],
-  // pack: [
-  //   poisonCards.ToxicGas(),
-  //   poisonCards.AcidSpray(),
-  //   poisonCards.ToxicSpores(),
-  //   poisonCards.PoisonousTouch(),
-  //   poisonCards.ToxicOoze(),
-  //   poisonCards.PoisonCloud(),
-  // ],
 }
 
 export const doubledamagePackBasic = {
@@ -43,14 +40,6 @@ export const doubledamagePackBasic = {
     ddamageCards.focusPunch,
     ddamageCards.focusPunch,
   ],
-  // pack: [
-  //   ddamageCards.focus(),
-  //   ddamageCards.focus(),
-  //   ddamageCards.focus(),
-  //   ddamageCards.focusPunch(),
-  //   ddamageCards.focusPunch(),
-  //   ddamageCards.focusPunch(),
-  // ],
 }
 
 export const stunPackBasic = {
@@ -67,14 +56,6 @@ export const stunPackBasic = {
     stunCards.throwFistPlus,
     stunCards.throwFistPlus,
   ],
-  // pack: [
-  //   (stunCards.throwFist()),
-  //   (stunCards.throwFist()),
-  //  ( stunCards.throwFist()),
-  //   (stunCards.throwFistPlus()),
-  //   (stunCards.throwFistPlus()),
-  //   (stunCards.throwFistPlus()),
-  // ],
 }
 
 export const sleepPackBasic = {
@@ -91,15 +72,23 @@ export const sleepPackBasic = {
     sleepCards.hypnosis,
     sleepCards.hypnosisPlus,
     sleepCards.hypnosisPlus,
-  ] 
-  //  pack: [
-  //   sleepCards.hypnosis(),
-  //   sleepCards.hypnosis(),
-  //   sleepCards.hypnosis(),
-  //   sleepCards.hypnosis(),
-  //   sleepCards.hypnosisPlus(),
-  //   sleepCards.hypnosisPlus(),
-  // ]
+  ],
+}
+
+export const buildupPackBasic = {
+  title: "BuildUp",
+  desc: `Each time you play a card, your BuildUp card's damage increases permanently if it is in your hand.`,
+  buttonText: "I want to grow",
+  img: "/packImages/Buildup.png",
+  id: 4,
+  pack: [
+    buildupCards.channel,
+    buildupCards.channel,
+    buildupCards.channel,
+    buildupCards.channel,
+    buildupCards.channelPlus,
+    buildupCards.channelPlus,
+  ],
 }
 
 export const allBasicPacks = [
@@ -107,5 +96,6 @@ export const allBasicPacks = [
   doubledamagePackBasic,
   stunPackBasic,
   sleepPackBasic,
+  buildupPackBasic,
 ]
 // export const startingPack = []

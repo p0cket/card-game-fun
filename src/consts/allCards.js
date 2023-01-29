@@ -296,7 +296,6 @@ export const sleepCards = {
     effect: SLEEP,
   },
 }
-
 export const basicCards = {
   flame: {
     type: "Fire",
@@ -367,14 +366,22 @@ export const basicCards = {
     qty: 3,
   },
 }
-
 export const buildupCards = {
   channel: {
     type: "Psychic",
     name: "Channel",
     cost: 1,
-    num: 4,
-    qty: 3,
+    num: 1,
+    qty: 0,
+    effect: BUILDUP,
+    // id: uniqueId(),
+  },
+  channelPlus: {
+    type: "Psychic",
+    name: "Channel Plus",
+    cost: 1,
+    num: 5,
+    qty: 0,
     effect: BUILDUP,
     // id: uniqueId(),
   },

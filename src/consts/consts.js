@@ -279,6 +279,7 @@ export const startingData = {
     status: "Feeling Fine",
     effects: {
       buff: null,
+      buildup: 1,
     },
     maxHP: 100,
     maxEnergy: 5,

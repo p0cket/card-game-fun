@@ -1,7 +1,9 @@
 import React from "react"
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion"
+import { EFFECTS } from "../../effects"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
+  const { STUN, DRAW, SLEEP, POISON, BUILDUP } = EFFECTS
   const { type, name, num, cost, effect, qty, id } = cardValue
 
   const styles = {
@@ -34,6 +36,30 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
       padding: "2px",
       cursor: "pointer",
     },
+  }
+
+  let effectString = ""
+
+  switch (effect) {
+    case STUN:
+      effectString = `Stuns for 1 turn`
+      break
+    case DRAW:
+      effectString = `Draws ${qty} cards`
+      break
+    case SLEEP:
+      effectString = `Puts to Sleep`
+      break
+    case POISON:
+      effectString = `Applies ${qty} Poison`
+      break
+    case BUILDUP:
+      effectString = `${qty} BuildUp bonus damage`
+      break
+
+    default:
+      effectString = ``
+    // console.log(`"Card" effectString default case`)
   }
 
   const energyEmoji = "🧪"
@@ -85,7 +111,8 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
             <span style={{ display: "flex", flex: "1" }}>
               <div style={{ color: "brown" }}>
                 {" "}
-                {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "}
+                {effectString}
+                {/* {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "} */}
               </div>
               {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
               {cardValue.price && isBattle !== true ? (
