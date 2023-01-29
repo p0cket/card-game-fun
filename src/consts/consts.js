@@ -1,48 +1,26 @@
 import { uniqueId } from "../utils/reducer-utils"
 import { EFFECTS } from "../effects"
-import { basicCards, stunCards } from "./allCards"
+import { basicCards, stunCards, buildupCards } from "./allCards"
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
 export const startingDeck = [
- { ...basicCards.flame, id: 1},
- { ...basicCards.flame, id: 2},
- { ...basicCards.flame, id: 3},
- { ...basicCards.flame, id: 4},
- { ...basicCards.flame, id: 5},
- { ...basicCards.flame, id: 6},
- { ...basicCards.flame, id: 7},
- { ...basicCards.flame, id: 8},
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  // basicCards.flame,
-  {...basicCards.flamethrower, id: 9},
-  {...basicCards.flamethrower, id: 10},
-  {...basicCards.flamethrower, id: 11},
-  // basicCards.flamethrower,
-  // basicCards.flamethrower,
-  {...stunCards.throwFist, id: 12},
-  {...stunCards.throwFistPlus, id: 13}
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flame(),
-  // basicCards.flamethrower(),
-  // basicCards.flamethrower(),
-  // basicCards.flamethrower(),
-  // stunCards.throwFist(),
-  // stunCards.throwFistPlus()
+  { ...basicCards.flame, id: 1 },
+  { ...basicCards.flame, id: 2 },
+  { ...basicCards.flame, id: 3 },
+  { ...basicCards.flame, id: 4 },
+  { ...basicCards.flame, id: 5 },
+  { ...basicCards.flame, id: 6 },
+  { ...basicCards.flame, id: 7 },
+  { ...basicCards.flame, id: 8 },
+  { ...basicCards.flamethrower, id: 9 },
+  { ...basicCards.flamethrower, id: 10 },
+  { ...basicCards.flamethrower, id: 11 },
+  { ...stunCards.throwFist, id: 12 },
+  { ...stunCards.throwFistPlus, id: 13 },
+  // { ...buildupCards.channel, id: 14 },
+  // { ...buildupCards.channel, id: 15 },
+  // { ...buildupCards.channel, id: 16 },
+  // { ...buildupCards.channel, id: 17 },
 ]
 
 //Needs to be functions anyways so the deck format below won't work

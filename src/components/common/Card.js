@@ -54,7 +54,8 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
       effectString = `Applies ${qty} Poison`
       break
     case BUILDUP:
-      effectString = `${qty} BuildUp bonus damage`
+      // effectString = `${qty} BuildUp bonus. +2 dmg each`
+      effectString = `BuildUp: ${qty * 2} bonus dmg`
       break
 
     default:
