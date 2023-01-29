@@ -1,14 +1,20 @@
 import { uniqueId } from "../utils/reducer-utils"
+import { EFFECTS } from "../effects"
+import { poisonCards } from "./allCards"
+const { POISON } = EFFECTS
 
 export const allShopItems = [
-  {
-    type: "poison",
-    name: "s_syphon life",
-    num: 4,
-    cost: 2,
-    id: uniqueId(),
-    price: 12,
-  },
+  // {
+  //   type: "poison",
+  //   name: "s_syphon life",
+  //   num: 4,
+  //   cost: 2,
+  //   id: uniqueId(),
+  //   effect: POISON,
+  //   price: 12,
+  // },
+  poisonCards.ToxicGas,
+  poisonCards.AcidSpray,
   {
     type: "electric",
     name: "s_electric symphonies",
@@ -25,22 +31,22 @@ export const allShopItems = [
     id: uniqueId(),
     price: 30,
   },
-  {
-    type: "ice",
-    name: "s_freeze blast",
-    num: 6,
-    cost: 1,
-    id: uniqueId(),
-    price: 60,
-  },
-  {
-    type: "mind",
-    name: "s_hypnotic distress",
-    num: 5,
-    cost: 1,
-    id: uniqueId(),
-    price: 20,
-  },
+  // {
+  //   type: "ice",
+  //   name: "s_freeze blast",
+  //   num: 6,
+  //   cost: 1,
+  //   id: uniqueId(),
+  //   price: 60,
+  // },
+  // {
+  //   type: "mind",
+  //   name: "s_hypnotic distress",
+  //   num: 5,
+  //   cost: 1,
+  //   id: uniqueId(),
+  //   price: 20,
+  // },
   {
     type: "pioson",
     name: "s_black ooze",
@@ -48,6 +54,15 @@ export const allShopItems = [
     cost: 1,
     id: uniqueId(),
     price: 35,
+  },
+  {
+    type: "Poison",
+    name: "Super Acid Spray",
+    num: 5,
+    cost: 2,
+    id: uniqueId(),
+    effect: POISON,
+    qty: 9,
   },
   {
     type: "electric",

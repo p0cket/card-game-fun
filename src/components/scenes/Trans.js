@@ -1,4 +1,5 @@
 import React from "react"
+import { motion } from "framer-motion/dist/framer-motion"
 import {
   // transitionSceneAction,
   setSceneAction,
@@ -17,13 +18,37 @@ const Trans = ({ gameData, dispatch, dialog, options }) => {
   return (
     <>
       <div style={{ fontFamily: "Silkscreen" }}>
+        <br />
+        <h1>Results:</h1>
+        <motion.div
+        style={{ padding: "30px", fontSize: "20px"}}
+          animate={{
+            rotate: 360,
+            borderRadius: ["50% 50%", "2% 50%"],
+            x: 75,
+          }}
+          initial={{
+            x: -75,
+          }}
+          transition={{
+            flip: Infinity,
+            duration: 1,
+            ease: "easeInOut",
+          }}
+        >
+          Success!!!
+        </motion.div>
         <h1 style={{ padding: "30px" }}>
           {gameData.curEvent.resultDialogTitle
             ? gameData.curEvent.resultDialogTitle
             : "No dialog title found"}
         </h1>
         <div>
-          <div>{gameData.curEvent.resultDialog ? gameData.curEvent.resultDialog : "No dialog found"}</div>
+          <div>
+            {gameData.curEvent.resultDialog
+              ? gameData.curEvent.resultDialog
+              : "No dialog found"}
+          </div>
         </div>
         {options ? (
           options

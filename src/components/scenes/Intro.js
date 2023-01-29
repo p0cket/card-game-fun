@@ -6,6 +6,8 @@ import { motion } from "framer-motion/dist/framer-motion"
 import heroFrontImg from "../../assets/Anime_protag_pixelated.png"
 import "../common/Button.css"
 
+import Dialog from "../common/Dialog"
+
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
     console.log(`loadNextLevel`)
@@ -40,15 +42,16 @@ const Intro = ({ dispatch }) => {
           src={heroFrontImg}
           alt="Hero Frontside"
         />
+
         <div class="content">
-          <div>In 2020 - Society was relied on traditional methods for productivity and transportation.</div>
-          <div>In 2025 - We discovered mystical creatures that harnessed the power of the elements</div>
-          <div>In 2030 - The incredible creatures revolutionized mankind</div>
+          <Dialog
+            size="30"
+            myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
+      In 2030 - The incredible creatures revolutionized mankind.`}
+          />
+          <div></div>
           <div>Today, you get yours.</div>
           <br />
-          <div>
-            "Heres your Chibipal, now you are old enough to learn. It is the last of its' kind. It can learn moves" -Professor Saple
-          </div>
         </div>
         <div class="content">
           <img
@@ -58,7 +61,8 @@ const Intro = ({ dispatch }) => {
           />
           <h3>instructions</h3>
           <div>
-            <p>Your cards can ONLY BE USED ONCE.</p>
+            <h1>Your cards can ONLY BE USED ONCE.</h1>
+            <h3>They are burned after.</h3>
             <p>
               {" "}
               Use them strategically to command your Chibipal and defeat

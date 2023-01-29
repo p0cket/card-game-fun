@@ -89,6 +89,11 @@
   flex-grow: 2;
   background-color: #e6ecc3;
 }
+
+.battleBLname {
+  display:flex;
+  align-items: flex-start;
+}
 .battleBotRight {
   display: flex;
   flex-grow: 1;
@@ -111,6 +116,13 @@
   background-color: #5a7d2a;
   color: white;
 }
+
+.battleDialog {
+  background-color: #5a7d2a;
+  /* max-width: 800px; */
+  margin: 0px 30px;
+}
+
 .battleUIhand {
   display: flex;
   flex-grow: 1;

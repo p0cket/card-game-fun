@@ -15,7 +15,8 @@ export const EFFECTS = {
   // Apply percentage chance that player does not receive damage
   WEAKENED: "weakened",
   // Apply a amt of damage that is weakens the enemy
-  STACKING: "stacking",
+  // STACKING: "stacking",
+  BUILDUP: "buildup",
   // For each card used this turn, add more damage this card will apply
   VAMPIRIC: "vampiric",
   // Heal player for the amt of dmg the attack does

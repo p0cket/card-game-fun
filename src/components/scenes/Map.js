@@ -9,7 +9,7 @@ const Map = ({ gameData, dispatch, map }) => {
   const mapPortion = map.slice(1)
 
   const currentIndex = gameData.curScene.lvl
-  const nextLevels = map.slice(currentIndex + 1 , currentIndex + 6)
+  const nextLevels = map.slice(currentIndex + 1, currentIndex + 6)
 
   return (
     <>
@@ -35,7 +35,6 @@ const Map = ({ gameData, dispatch, map }) => {
               display: "flex",
               justifyContent: "column",
               flexWrap: "wrap",
-              // fontFamily: "Silkscreen",
             }}
           >
             {mapPortion.map((lvlName, index) => {
@@ -54,19 +53,33 @@ const Map = ({ gameData, dispatch, map }) => {
                 style.color = "red"
               }
               return (
-                // <div style=padding>
-                <span style={{ ...style, padding: "5px" }}>
-                  <img
-                    src="/eventImages/questionMark.png"
-                    style={{ width: "20px", height: "20px" }}
-                    alt="level icon"
-                  />
-                  <span>
-                    {` ${lvlName}`}
-                    {"→ "}{" "}
+                <div
+                  className="map-container"
+                  style={{
+                    ...style,
+                    padding: "10px",
+                    margin: "10px",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <span
+                  // style={{
+                  //   ...style,
+                  //   padding: "10px",
+                  //   margin: "10px",
+                  //   backgroundColor: "white",
+                  // }}
+                  >
+                    <img
+                      src="/eventImages/questionMark.png"
+                      style={{ width: "20px", height: "20px" }}
+                      alt="level icon"
+                    />
+                    <span>
+                      {` ${lvlName}`} {"→ "}{" "}
+                    </span>
                   </span>
-                </span>
-                // </div>
+                </div>
               )
             })}
           </div>

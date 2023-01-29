@@ -58,3 +58,8 @@ export const uniqueId = () => id++
 // if I need packId to be unique and generated, I can uncomment below
 // let packId = 20
 // export const uniquePackId = () => packId++
+export const applyUniqueId = (card) => {
+  // return {...card, Id: uniqueId()}
+  return {...card, id: uniqueId()}
+
+}
