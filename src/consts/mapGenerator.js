@@ -35,12 +35,6 @@ const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
-    // REWARD,
-    // REWARD,
-    EVENT,
-    PACKREWARD,
-    PACKREWARD,
-
     MAP,
     BATTLE,
     PACKREWARD,

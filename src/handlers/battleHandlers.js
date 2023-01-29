@@ -42,9 +42,10 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   if (enemyHealth - damage <= 0) {
     nextState = winBattleHandler(nextState, { battlePayload: battlePayload })
   }
-
+  
   // TODO Add note about the buff, and effects applied
   const dialog = `Pal used ${energyCost}${energyEmoji} to do: ${cardName}! Pal dealt ${damage}${dmgEmoji}`
+
   nextState = setDialogHandler(nextState, { dialog })
 
   // remove the card
@@ -83,10 +84,10 @@ export const playCardHandler = (state, { card, battlePayload }) => {
 
   // TODO: Finish BUILDUP and/or PRESENCE effects (PRESENCE buffs other cards while the card is in hand)
   // for(let i=0; i<nextState.battle.hand.length; i++) {
-    //add logic to see if there is a buff card, or a card with buildup
+  //add logic to see if there is a buff card, or a card with buildup
 
-    //maybe add in the addcard that if buildup is there, apply that it equals
-    // the state of how many cards have been used t
+  //maybe add in the addcard that if buildup is there, apply that it equals
+  // the state of how many cards have been used t
   // }
 
   console.log(`endOf playCardHandler- nextState is: `, nextState)

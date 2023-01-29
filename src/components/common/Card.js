@@ -1,8 +1,8 @@
 import React from "react"
-import { motion } from "framer-motion/dist/framer-motion"
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
-  const { type, name, num, cost, effect, qty } = cardValue
+  const { type, name, num, cost, effect, qty, id } = cardValue
 
   const styles = {
     cardStyle: {
@@ -26,7 +26,7 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      backgroundImage: "url(/backgrounds/gridBGlight.png)",
+      backgroundImage: "url(/backgrounds/gridBGlightGreen.png)",
       backgroundRepeat: "repeat",
       backgroundSize: "1000px",
       width: "150px",
@@ -40,56 +40,62 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <motion.button
-          whileHover={{
-            scale: 1.1,
-            rotate: 1,
-            transition: {
-              yoyo: Infinity,
-            },
-          }}
-          whileTap={{
-            scale: 0.2,
-            rotate: -90,
-          }}
-          // style={styles.cardStyle}
-          style={{
-            ...styles.newCardStyle,
-            border: `2px solid ${
-              type === "Poison"
-                ? "#99ff99"
-                : type === "Electric"
-                ? "yellow"
-                : type === "Technical"
-                ? "blue"
-                : type === "Physical"
-                ? "white"
-                : type === "Psychic"
-                ? "purple"
-                : "silver"
-            }`,
-          }}
-          onClick={() => useCard(cardValue)}
-        >
-          <div style={{ display: "flex", flex: "1" }}>
-            {`${name} ${energyEmoji.repeat(cost)}`}
-          </div>
-          <div style={{ display: "flex", flex: "1" }}>
-            <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
-          </div>
-          <div style={{ color: "gray", display: "flex", flex: "1" }}>
-            {num <= 0 ? " " : `Deals ${num} damage`}
-          </div>
-          <span style={{ display: "flex", flex: "1" }}>
-            <div style={{ color: "brown" }}>
-              {" "}
-              {/* {effect ? `Causes ${qty ? qty : ``} ${effect}` : ``}{" "} */}
-              {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "}
+        <AnimatePresence>
+          <motion.button
+            // exit={{ x: -300, opacity: 0 }}
+            exit={{ y: -500 }}
+            key={id}
+            whileHover={{
+              scale: 2.0,
+              transition: { type: "spring", duration: 1.5, bounce: 0.6 },
+            }}
+            //Uncomment for the tap turning
+            // whileTap={{
+            //   scale: 0.2,
+            //   rotate: -90,
+            // }}
+            // style={styles.cardStyle}
+            style={{
+              ...styles.newCardStyle,
+              border: `2px solid ${
+                type === "Poison"
+                  ? "#99ff99"
+                  : type === "Electric"
+                  ? "yellow"
+                  : type === "Technical"
+                  ? "blue"
+                  : type === "Physical"
+                  ? "white"
+                  : type === "Psychic"
+                  ? "purple"
+                  : "silver"
+              }`,
+            }}
+            onClick={() => useCard(cardValue)}
+          >
+            <div style={{ display: "flex", flex: "1" }}>
+              {`${name} ${energyEmoji.repeat(cost)}`}
             </div>
-            {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
-            {cardValue.price && (isBattle!==true) ? <div>price: {cardValue.price}</div> : <></>}
-          </span>
-        </motion.button>
+            <div style={{ display: "flex", flex: "1" }}>
+              <h5 style={{ color: "gray" }}>{`(${type})`}</h5>
+            </div>
+            <div style={{ color: "gray", display: "flex", flex: "1" }}>
+              {num <= 0 ? " " : `Deals ${num} damage`}
+            </div>
+            <span style={{ display: "flex", flex: "1" }}>
+              <div style={{ color: "brown" }}>
+                {" "}
+                {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "}
+              </div>
+              {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
+              {cardValue.price && isBattle !== true ? (
+                <div>price: {cardValue.price}</div>
+              ) : (
+                <></>
+              )}
+            </span>
+          </motion.button>
+        </AnimatePresence>
       </div>
     </>
   )

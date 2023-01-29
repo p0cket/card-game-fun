@@ -5,6 +5,7 @@ import { dmgEmoji, energyEmoji, goldEmoji } from "../../consts/consts"
 import { motion } from "framer-motion/dist/framer-motion"
 import "../common/Button.css"
 import "./Battle.css"
+import Dialog from "../common/Dialog"
 
 const Battle = ({ gameData, dispatch }) => {
   const playCard = (card) => {
@@ -162,7 +163,7 @@ const Battle = ({ gameData, dispatch }) => {
                         className="battleBLname"
                         style={{ fontSize: "25px" }}
                       >
-                        Your Chibipal{" "}
+                        Your Pal{" "}
                       </div>
                       <div className="battleBLhealth">
                         {health}HP{" "}
@@ -205,19 +206,25 @@ const Battle = ({ gameData, dispatch }) => {
               {/* <div className="battleStats"><p>Your stats: Armor 1  Attack 2</p></div> */}
             </div>
           </div>
-          <h3
-            style={{
-              fontFamily: "Silkscreen",
-              backgroundColor: "rgb(75, 119, 13)",
-              color: "#a5e54d",
-              margin: "0px 30px",
-              padding: "10px 0px",
-            }}
-          >
-            {gameData.battle.dialog
-              ? gameData.battle.dialog
-              : "Tell your Chibipal what to do!"}
-          </h3>
+          <div className="battleDialog">
+            <Dialog
+              // style={{
+              //   fontFamily: "Silkscreen",
+              //   // backgroundColor: "rgb(75, 119, 13)",
+              //   color: "#a5e54d",
+              //   margin: "0px 30px",
+              //   padding: "10px 0px",
+              //   fontSize: "20px"
+              // }}
+              size="30"
+              key={gameData.battle.dialog}
+              myText={
+                gameData.battle.dialog
+                  ? gameData.battle.dialog
+                  : "Tell your Chibipal what to do!"
+              }
+            />
+          </div>
           {gameData.alert ? (
             <div
               style={{
@@ -232,7 +239,6 @@ const Battle = ({ gameData, dispatch }) => {
           ) : (
             <></>
           )}
-          {/* <div style={{ color: "Red", padding: "10px 0px", margin:"0px 30px", backgroundColor: "black" }}>{gameData.alert}</div> */}
           <motion.div
             initial={{ x: "100vw" }}
             animate={{ x: 0 }}
@@ -243,7 +249,12 @@ const Battle = ({ gameData, dispatch }) => {
             {gameData.battle.hand.length > 0
               ? gameData.battle.hand.map((card) => {
                   return (
-                    <Card key={card.id} cardValue={card} useCard={playCard} isBattle={true} />
+                    <Card
+                      key={card.id}
+                      cardValue={card}
+                      useCard={playCard}
+                      isBattle={true}
+                    />
                   )
                 })
               : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
@@ -256,7 +267,7 @@ const Battle = ({ gameData, dispatch }) => {
             </button>
             <br />
 
-            <h5 style={{ color: "gray" }}>Our deck:</h5> 
+            <h5 style={{ color: "gray" }}>Our deck:</h5>
             <motion.div
               initial={{ x: "-100vw" }}
               animate={{ x: 0 }}
