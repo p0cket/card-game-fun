@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion/dist/framer-motion"
 import { EFFECTS } from "../../effects"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
-  const { STUN, DRAW, SLEEP, POISON, BUILDUP } = EFFECTS
+  const { STUN, DRAW, SLEEP, POISON, DOUBLEDAMAGE, BUILDUP } = EFFECTS
   const { type, name, num, cost, effect, qty, id } = cardValue
 
   const styles = {
@@ -53,9 +53,12 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
     case POISON:
       effectString = `Applies ${qty} Poison`
       break
+    case DOUBLEDAMAGE:
+      effectString = `DoubleDamage`
+      break
     case BUILDUP:
       // effectString = `${qty} BuildUp bonus. +2 dmg each`
-      effectString = `BuildUp: ${qty * 2} bonus dmg`
+      effectString = `BuildUp: ${qty}*2 bonus dmg`
       break
 
     default:
