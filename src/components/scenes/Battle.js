@@ -263,7 +263,7 @@ const Battle = ({ gameData, dispatch }) => {
             <br />
             <button onClick={endTurn} className="simpleButton">
               <div>End Turn</div>{" "}
-              <div>(also refills all PP and draws two cards) </div>
+              <div>(also refills all Energy and draws two cards) </div>
             </button>
             <br />
 

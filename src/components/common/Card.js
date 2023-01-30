@@ -60,7 +60,6 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
       // effectString = `${qty} BuildUp bonus. +2 dmg each`
       effectString = `BuildUp: ${qty}*2 bonus dmg`
       break
-
     default:
       effectString = ``
     // console.log(`"Card" effectString default case`)
