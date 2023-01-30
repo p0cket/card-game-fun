@@ -21,10 +21,6 @@ export const startingDeck = [
   // { ...buildupCards.channel, id: 15 },
   // {...ddamageCards.focus, id: 18},
   // {...ddamageCards.focusPunch, id: 19},
-
-
-  // (...ddamageCards.focus, id: 18),
-  // {ddamageCards.focus, id:19}
 ]
 
 //Needs to be functions anyways so the deck format below won't work

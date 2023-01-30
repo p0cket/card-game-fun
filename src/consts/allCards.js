@@ -1,189 +1,7 @@
 // import { uniqueId } from "../utils/reducer-utils"
 import { EFFECTS } from "../effects"
-const { POISON, STUN, SLEEP, DOUBLEDAMAGE, DRAW, BUILDUP } = EFFECTS
+const { POISON, STUN, SLEEP, DOUBLEDAMAGE, DRAW, BUILDUP, LIFESTEAL } = EFFECTS
 
-// export const poisonCards = {
-//   ToxicGas: () => ({
-//     type: "Poison",
-//     name: "Toxic Gas",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 3,
-//     price: 37,
-//   }),
-//   AcidSpray: () => ({
-//     type: "Poison",
-//     name: "Acid Spray",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 6,
-//     price: 34,
-//   }),
-//   ToxicSpores: () => ({
-//     type: "Poison",
-//     name: "Toxic Spores",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 6,
-//   }),
-//   PoisonousTouch: () => ({
-//     type: "Poison",
-//     name: "Poisonous Touch",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 6,
-//   }),
-//   ToxicOoze: () => ({
-//     type: "Poison",
-//     name: "Toxic Ooze",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 6,
-//   }),
-//   PoisonCloud: () => ({
-//     type: "Poison",
-//     name: "Poison Cloud",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: POISON,
-//     qty: 6,
-//   }),
-// }
-// export const stunCards = {
-//   throwFist: () => ({
-//     type: "Electric",
-//     name: "Throw Fist",
-//     num: 3,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: STUN,
-//   }),
-//   throwFistPlus: () => ({
-//     type: "Electric",
-//     name: "Throw Fist+",
-//     num: 5,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: STUN,
-//   }),
-// }
-// export const ddamageCards = {
-//   focus: () => ({
-//     type: "Physical",
-//     name: "Focus",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: DOUBLEDAMAGE,
-//   }),
-//   focusPunch: () => ({
-//     type: "Physical",
-//     name: "Focus Punch",
-//     num: 2,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: DOUBLEDAMAGE,
-//   }),
-// }
-// export const sleepCards = {
-//   hypnosis: () => ({
-//     type: "Psychic",
-//     name: "Hypnosis",
-//     num: 0,
-//     cost: 2,
-//     id: uniqueId(),
-//     effect: SLEEP,
-//   }),
-//   hypnosisPlus: () => ({
-//     type: "Psychic",
-//     name: "Hypnosis+",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: SLEEP,
-//   }),
-// }
-// export const basicCards = {
-//   flame: () => ({
-//     type: "Fire",
-//     name: "Flame",
-//     num: 4,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: null,
-//   }),
-//   flamethrower: () => ({
-//     type: "Fire",
-//     name: "Flamethrower",
-//     num: 8,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: null,
-//   }),
-//   gush: () => ({
-//     type: "Water",
-//     name: "Gush",
-//     num: 2,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: null,
-//   }),
-//   gushPlus: () => ({
-//     type: "Water",
-//     name: "Gush+",
-//     num: 6,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: null,
-//   }),
-//   think: () => ({
-//     type: "Psychic",
-//     name: "Think",
-//     num: 0,
-//     cost: 0,
-//     id: uniqueId(),
-//     effect: DRAW,
-//   }),
-//   thinkPlus: () => ({
-//     type: "Psychic",
-//     name: "Think+",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: DRAW,
-//   }),
-
-//   recollectMind: () => ({
-//     type: "Psychic",
-//     name: "Recollect Mind",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: DRAW,
-//     qty: 2,
-//   }),
-//   recollectMindPlus: () => ({
-//     type: "Psychic",
-//     name: "Recollect Mind+",
-//     num: 0,
-//     cost: 1,
-//     id: uniqueId(),
-//     effect: DRAW,
-//     qty: 3,
-//   }),
-// }
-//----------------------------------------------------------------
 export const poisonCards = {
   ToxicGas: {
     type: "Poison",
@@ -313,6 +131,26 @@ export const buildupCards = {
     num: 5,
     qty: 0,
     effect: BUILDUP,
+    // id: uniqueId(),
+  },
+}
+export const lifestealCards = {
+  bloodsuck: {
+    type: "Unholy",
+    name: "Bloodsuck",
+    cost: 1,
+    num: 4,
+    qty: 0,
+    effect: LIFESTEAL,
+    // id: uniqueId(),
+  },
+  drainingKiss: {
+    type: "Unholy",
+    name: "Draining Kiss",
+    cost: 1,
+    num: 6,
+    qty: 0,
+    effect: LIFESTEAL,
     // id: uniqueId(),
   },
 }

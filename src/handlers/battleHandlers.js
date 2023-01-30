@@ -13,14 +13,14 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   let energyCost = card.cost
   let cardName = card.name
 
-  //Can he use the card?
+  //Can the USER use the card?
   if (myEnergy < energyCost) {
     return setAlertHandler(
       nextState,
       `Not enough energy to play that card :(. End turn to replenish Energy!`
     )
   }
-  //if he can:
+  //if the USER can use the card:
   //apply hero buff effects
   switch (nextState.hero.effects.buff) {
     case EFFECTS.DOUBLEDAMAGE:
@@ -33,19 +33,13 @@ export const playCardHandler = (state, { card, battlePayload }) => {
       console.log(`default case for hero buffs applied`)
   }
 
-  //-----
-  // create typeChart
-  // Calculate super-effectiveness here
-  // const multiplier = typeChart(attackType, defenderType)
-  //-----
-
   //Check if the enemy is defeated
   if (enemyHealth - damage <= 0) {
     nextState = winBattleHandler(nextState, { battlePayload: battlePayload })
   }
 
   // TODO Add note about the buff, and effects applied
-  const dialog = `Pal used ${energyCost}${energyEmoji} to do: ${cardName}! Pal dealt ${damage}${dmgEmoji}`
+  const dialog = `${energyCost}${energyEmoji} used ${cardName}. Dealt ${damage}${dmgEmoji}!`
 
   nextState = setDialogHandler(nextState, { dialog })
 
@@ -83,26 +77,20 @@ export const playCardHandler = (state, { card, battlePayload }) => {
     },
   }
 
-  // TODO: Finish BUILDUP and/or PRESENCE effects (PRESENCE buffs other cards while the card is in hand)
+  // TODO: Finish PRESENCE effects. PRESENCE buffs other cards while the card is in hand.
+  // Presence may have to apply earlier.
   for (let i = 0; i < nextState.battle.hand.length; i++) {
     switch (nextState.battle.hand[i].effect) {
       case EFFECTS.BUILDUP:
         nextState.battle.hand[i].num += 2
         nextState.battle.hand[i].qty += 1
-      // nextState.hero.effects
-      break;
+        // nextState.hero.effects
+        break
       default:
         console.log(`no individual effects found for this card`)
     }
   }
-  // for(let i=0; i<nextState.battle.hand.length; i++) {
-  //add logic to see if there is a buff card, or a card with buildup
 
-  //maybe add in the addcard that if buildup is there, apply that it equals
-  // the state of how many cards have been used t
-  // }
-
-  console.log(`endOf playCardHandler- nextState is: `, nextState)
   return discardCardHandler(nextState, { cardToAddToDiscarded: card })
 }
 export const discardCardHandler = (state, payload) => {
@@ -155,7 +143,6 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
           },
         }
       }
-
     case EFFECTS.SLEEP:
       // 50% chance of waking up
       return {
@@ -196,18 +183,10 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
         nextState
       )
       return nextState
-    // case EFFECTS.BUILDUP:
-    //   const buildAmount = 2
-    //   return {
-    //     ...nextState,
-    //     hero: {
-    //       ...nextState.hero,
-    //       effects: {
-    //         ...nextState.hero.effects,
-    //         buildup: nextState.hero.effects + buildAmount,
-    //       },
-    //     },
-    //   }
+    case EFFECTS.LIFESTEAL:
+      const healAmount = card.num
+      nextState.hero.health = nextState.hero.health + healAmount
+      return {...nextState}
 
     default:
       console.log(`no statusEffect matched, returning state`)
