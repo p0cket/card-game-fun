@@ -1,6 +1,6 @@
 import { uniqueId } from "../utils/reducer-utils"
 import { EFFECTS } from "../effects"
-import { basicCards, stunCards, buildupCards, ddamageCards } from "./allCards"
+import { basicCards, stunCards } from "./allCards"
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
 export const startingDeck = [

@@ -22,7 +22,7 @@ const Map = ({ gameData, dispatch, map }) => {
           <h3> Next 5 Levels:</h3>
           {nextLevels.map((lvlName, index) => {
             return (
-              <span>
+              <span style={{fontSize: "30px"}}>
                 {` ${lvlName}`}
                 {"→ "}{" "}
               </span>
@@ -62,14 +62,7 @@ const Map = ({ gameData, dispatch, map }) => {
                     backgroundColor: "white",
                   }}
                 >
-                  <span
-                  // style={{
-                  //   ...style,
-                  //   padding: "10px",
-                  //   margin: "10px",
-                  //   backgroundColor: "white",
-                  // }}
-                  >
+                  <span>
                     <img
                       src="/eventImages/questionMark.png"
                       style={{ width: "20px", height: "20px" }}
@@ -88,44 +81,5 @@ const Map = ({ gameData, dispatch, map }) => {
     </>
   )
 }
-// const printedMap = (oneMap) => {
-//   return oneMap.map(row => {
-//     <div>r</div>
-//   })
-// }
-
-// const mapContainerStyle = {
-//   display: "flex",
-//   width: "20px",
-//   height: "20px",
-// }
-// const mapRowStyle = {
-//   display: "flex",
-//   width: "20px",
-//   height: "20px",
-//   padding: "20px"
-// }
-
-// const mapElementStyle = {
-//   width: "20px",
-//   height: "20px",
-//   padding: "20px",
-//   color: 'blue'
-
-// }
-
-// const printedMap = (oneMap) => {
-//   return oneMap.map((row) => {
-//     return (
-//       <div style={mapRowStyle}>
-//         {row.map((place) => {
-//           // return <div style={mapElementStyle}>{place}</div>
-//           return <div style={mapElementStyle}>{place}</div>
-
-//         })}
-//       </div>
-//     )
-//   })
-// }
 
 export default Map

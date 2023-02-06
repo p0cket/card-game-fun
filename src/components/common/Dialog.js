@@ -1,12 +1,7 @@
-// import "./styles.css"
-// .App {
-//     font-family: sans-serif;
-//     text-align: center;
-//   }
 import React from "react"
 import { motion } from "framer-motion"
 
-export const Dialog = ({ myText, size }) => {
+export const Dialog = ({ myText, size, speed = 0.05 }) => {
   const initialText = "this is sample text. It is long so that it is noticable"
   //if newText, wait .5 seconds, and then run the text
 
@@ -28,7 +23,8 @@ export const Dialog = ({ myText, size }) => {
             }}
             transition={{
               duration: 0.05,
-              delay: index * 0.05,
+              //speed
+              delay: index * speed,
             }}
             style={{fontSize:`${size}px`, fontFamily:"Silkscreen"}}
             // animate={replay ? "visible" : "hidden"}

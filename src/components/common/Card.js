@@ -1,5 +1,5 @@
 import React from "react"
-import { AnimatePresence, motion } from "framer-motion/dist/framer-motion"
+import { motion } from "framer-motion/dist/framer-motion"
 import { EFFECTS } from "../../effects"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
@@ -69,7 +69,7 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <AnimatePresence>
+        {/* <AnimatePresence> */}
           <motion.button
             // exit={{ x: -300, opacity: 0 }}
             exit={{ y: -500 }}
@@ -125,7 +125,7 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
               )}
             </span>
           </motion.button>
-        </AnimatePresence>
+        {/* </AnimatePresence> */}
       </div>
     </>
   )

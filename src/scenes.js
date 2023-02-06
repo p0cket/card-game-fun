@@ -7,6 +7,7 @@ export const SCENES = {
   REST: "rest",
   REWARD: "reward",
   PACKREWARD: "pack-reward",
+  CONVO: "convo",
   BATTLE: "battle",
   MINIBOSS: "miniboss",
   BOSS: "boss",

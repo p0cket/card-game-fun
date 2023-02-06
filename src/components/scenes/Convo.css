@@ -1,0 +1,140 @@
+.convo-scene {
+  background-color: #5a7d2a;
+  padding: 10%;
+}
+
+.convo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(/backgrounds/gridBG1.png);
+  /* padding: 10%; */
+}
+
+.convo-img-container {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+
+.convo-img-container-left {
+  /* order: -1; */
+  order: -1;
+  align-self: flex-start;
+}
+
+.convo-img-container-right {
+  order: -1;
+  align-self: flex-end;
+}
+
+.convo-img-container-middle {
+  order: 0;
+  align-self: center;
+}
+
+.convo-img {
+  width: 500px;
+  height: 500px;
+}
+
+.convo-dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.convo-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  background-color: #5a7d2a;
+  padding: 20px;
+  /* border-radius: 10px; */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.convo-dialog h1 {
+  flex: 1;
+
+  font-family: silkscreen;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+.convo-dialog .dialog-text {
+  flex: 2;
+}
+
+.convo-dialog .convo-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 1;
+  /* display: flex;
+  flex-direction: row;
+  flex: 1; */
+}
+
+.convo-dialog-left {
+  align-self: flex-start;
+  margin-right: 20px;
+}
+
+.convo-dialog-right {
+  align-self: flex-end;
+  margin-left: 20px;
+}
+
+.convo-dialog-middle {
+  align-self: center;
+  margin: 0 20px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.convo-next-btn {
+  /* margin-left: auto; */
+  margin-right: auto;
+}
+/* .convo-container {
+    display: flex;
+    align-items: center;
+    background-color: lightgreen;
+  }
+  
+  .convo-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .convo-img-left {
+    order: -1;
+    margin-right: 20px;
+    align-self: flex-start;
+  }
+  
+  .convo-img-right {
+    order: 1;
+    margin-left: 20px;
+    align-self: flex-end;
+  }
+  
+  .convo-img-middle {
+    order: 0;
+    align-self: center;
+    margin: 0 20px;
+  } */

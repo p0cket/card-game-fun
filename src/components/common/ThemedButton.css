@@ -1,0 +1,15 @@
+.stylish-button {
+    background-color: #99cd66;
+    border: 1px solid #597d2b;
+    color: #263419;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Silkscreen;
+    margin: 5px;
+  }
+  
+  .stylish-button:hover {
+    background-color: #263419;
+    color: white;
+  }

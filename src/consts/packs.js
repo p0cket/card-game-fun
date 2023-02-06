@@ -42,6 +42,7 @@ export const doubledamagePackBasic = {
   ],
 }
 
+//Nerf slightly
 export const stunPackBasic = {
   title: "Stun",
   desc: `Stun will disable an enemy from attacking for coming attack`,
@@ -58,6 +59,7 @@ export const stunPackBasic = {
   ],
 }
 
+//nerf
 export const sleepPackBasic = {
   title: "Sleep",
   desc: `Puts enemies to sleep, disabling them from attacking.

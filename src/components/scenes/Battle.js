@@ -2,7 +2,7 @@ import React from "react"
 import { endTurnAction, playCardAction } from "../../actions"
 import Card from "../common/Card"
 import { dmgEmoji, energyEmoji, goldEmoji } from "../../consts/consts"
-import { motion } from "framer-motion/dist/framer-motion"
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion"
 import "../common/Button.css"
 import "./Battle.css"
 import Dialog from "../common/Dialog"
@@ -27,7 +27,7 @@ const Battle = ({ gameData, dispatch }) => {
       },
     },
   }
-
+// TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
     <>
       <div className="sceneContainer">
@@ -239,26 +239,28 @@ const Battle = ({ gameData, dispatch }) => {
           ) : (
             <></>
           )}
-          <motion.div
-            initial={{ x: "100vw" }}
-            animate={{ x: 0 }}
-            transition={{ delay: 0.1, duration: 2 }}
-            style={{ color: "Red" }}
-            className="battleUIhand"
-          >
-            {gameData.battle.hand.length > 0
-              ? gameData.battle.hand.map((card) => {
-                  return (
-                    <Card
-                      key={card.id}
-                      cardValue={card}
-                      useCard={playCard}
-                      isBattle={true}
-                    />
-                  )
-                })
-              : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
-          </motion.div>
+          <AnimatePresence>
+            <motion.div
+              initial={{ x: "100vw" }}
+              animate={{ x: 0 }}
+              transition={{ delay: 0.1, duration: 2 }}
+              style={{ color: "Red" }}
+              className="battleUIhand"
+            >
+              {gameData.battle.hand.length > 0
+                ? gameData.battle.hand.map((card) => {
+                    return (
+                      <Card
+                        key={card.id}
+                        cardValue={card}
+                        useCard={playCard}
+                        isBattle={true}
+                      />
+                    )
+                  })
+                : `No Cards in hand. Click "End Turn" to let enemies attack and you'll draw a card.`}
+            </motion.div>
+          </AnimatePresence>
           <div>
             <br />
             <button onClick={endTurn} className="simpleButton">

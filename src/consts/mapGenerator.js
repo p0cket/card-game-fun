@@ -9,6 +9,7 @@ const {
   SHOP,
   REWARD,
   PACKREWARD,
+  CONVO,
   EVENT,
   REST,
   MINIBOSS,
@@ -35,6 +36,7 @@ const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
+    // CONVO,
     MAP,
     BATTLE,
     PACKREWARD,

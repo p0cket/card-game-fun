@@ -8,6 +8,7 @@ import Shop from "./scenes/Shop"
 import Rest from "./scenes/Rest"
 import Reward from "./scenes/Reward"
 import PackReward from "./scenes/PackRewardTemp"
+import Convo from "./scenes/Convo"
 import Battle from "./scenes/Battle"
 import Map from "./scenes/Map"
 import Trans from "./scenes/Trans"
@@ -25,6 +26,7 @@ const Screen = ({ gameData, dispatch, map }) => {
     REST,
     REWARD,
     PACKREWARD,
+    CONVO,
     MINIBOSS,
     BOSS,
     GAMEOVER,
@@ -65,6 +67,9 @@ const Screen = ({ gameData, dispatch, map }) => {
     case PACKREWARD:
       console.log("PackReward Screen Case")
       return <PackReward gameData={gameData} dispatch={dispatch} />
+    case CONVO:
+      console.log("Convo Screen Case")
+      return <Convo gameData={gameData} dispatch={dispatch} />
     case BATTLE:
       console.log("(battle Screen)")
       return <Battle gameData={gameData} dispatch={dispatch} />
