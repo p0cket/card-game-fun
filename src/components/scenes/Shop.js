@@ -1,11 +1,15 @@
 import React from "react"
 // import { sampleItems } from "../../consts/consts";
 import { allShopItems } from "../../consts/allShopItems"
+import { shuffle } from "../../utils/reducer-utils"
 // import Item from "../Item";
 import Card from "../common/Card"
 import { buyCardAction, setSceneAction } from "../../actions"
 
 const Shop = ({ gameData, dispatch }) => {
+  const shuffledCards = shuffle(allShopItems)
+  const itemSelection = shuffledCards.slice(0,4)
+  // const {itemSelection, setItemSelection} = useState(shuffledCards.slice(0,4))
   // TODO: change buyCardAction to get rid of the card after adding to deck, and not change scenes
   const buyCard = (card) => {
     console.log(`adding this card:`, card)
@@ -15,8 +19,7 @@ const Shop = ({ gameData, dispatch }) => {
   const loadNextLevel = () => {
     console.log(`loadNextLevel`);
     dispatch(setSceneAction());
-  };
-  
+  };  
 
   return (
     <div>
@@ -45,9 +48,12 @@ const Shop = ({ gameData, dispatch }) => {
           flexWrap: "wrap",
         }}
       >
-        {allShopItems.map((card) => {
+                {itemSelection.map((card) => {
           return <Card key={card.id} cardValue={card} useCard={buyCard} />
         })}
+        {/* {allShopItems.map((card) => {
+          return <Card key={card.id} cardValue={card} useCard={buyCard} />
+        })} */}
       </div>
       <button onClick={loadNextLevel}>Leave without buying something</button>
 
