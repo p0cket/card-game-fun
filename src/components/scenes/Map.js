@@ -20,14 +20,17 @@ const Map = ({ gameData, dispatch, map }) => {
           <button onClick={loadNextLevel}>Next Level</button>
 
           <h3> Next 5 Levels:</h3>
-          {nextLevels.map((lvlName, index) => {
-            return (
-              <span style={{fontSize: "30px"}}>
-                {` ${lvlName}`}
-                {"→ "}{" "}
-              </span>
-            )
-          })}
+          <h3>
+            {nextLevels.map((lvlName, index) => {
+              return (
+                <span style={{ fontSize: "30px" }}>
+                  {` ${lvlName}`}
+                  {"→ "}{" "}
+                </span>
+              )
+            })}
+          </h3>
+
           <h3>All Levels:</h3>
           <div
             style={{

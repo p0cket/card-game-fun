@@ -9,7 +9,7 @@ const {
   SHOP,
   REWARD,
   PACKREWARD,
-  CONVO,
+  // CONVO,
   EVENT,
   REST,
   MINIBOSS,
