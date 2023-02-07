@@ -6,6 +6,7 @@ import {
   poisonCards,
   sleepCards,
   stunCards,
+  shopCards,
   rewardCards,
 } from "./allCards"
 
@@ -111,6 +112,26 @@ export const rewardPack = [
   rewardCards.blackOoze,
   rewardCards.overload,
   rewardCards.stunningDelivery,
+]
+
+export const shopPack = [
+  shopCards.AcidRain,
+  shopCards.DreamCatcher,
+  shopCards.ElectricBolt,
+  shopCards.ElectroPunch,
+  shopCards.ForcefulBlow,
+  shopCards.HypnoWave,
+  shopCards.NoxiousBite,
+  shopCards.PoisonousClaw,
+  shopCards.PoisonousMist,
+  shopCards.PowerPunch,
+  shopCards.PowerSurge,
+  shopCards.PsychicBlast,
+  shopCards.Shockwave,
+  shopCards.StrongHit,
+  shopCards.ThunderFist,
+  shopCards.ToxicFog,
+  shopCards.VenomousFang
 ]
 
 export const allBasicPacks = [
