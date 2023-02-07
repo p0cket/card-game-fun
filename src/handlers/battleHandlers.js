@@ -87,7 +87,7 @@ export const playCardHandler = (state, { card, battlePayload }) => {
         // nextState.hero.effects
         break
       default:
-        console.log(`no individual effects found for this card`)
+        console.log(`no individual effects (like BUILDUP) found for this card`)
     }
   }
 
@@ -109,88 +109,110 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
   let nextState = { ...state }
   const statusEffect = card.effect
   console.log(`Apply Status of ${statusEffect}`, card, battlePayload)
-  switch (statusEffect) {
-    case EFFECTS.STUN:
-      return {
-        ...nextState,
-        battle: {
-          ...nextState.battle,
-          enemy: { ...nextState.battle.enemy, status: EFFECTS.STUN },
-        },
-      }
-    case EFFECTS.POISON:
-      // add poison effect to enemy.
-      // TODO finish poison
-      if (!nextState.battle.enemy.poison) {
-        return {
-          ...nextState,
-          battle: {
-            ...nextState.battle,
-            // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
-            enemy: { ...nextState.battle.enemy, poison: card.qty },
-          },
-        }
-      } else {
-        return {
-          ...nextState,
-          battle: {
-            ...nextState.battle,
-            // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
-            enemy: {
-              ...nextState.battle.enemy,
-              poison: nextState.battle.enemy.poison + card.qty,
-            },
-          },
-        }
-      }
-    case EFFECTS.SLEEP:
-      // 50% chance of waking up
-      return {
-        ...nextState,
-        battle: {
-          ...nextState.battle,
-          enemy: { ...nextState.battle.enemy, status: EFFECTS.SLEEP },
-        },
-      }
-    case "sheild":
-      // temporary
-      return {
-        ...nextState,
-      }
-    case "armor":
-      return {
-        ...nextState,
-      }
-    case EFFECTS.DOUBLEDAMAGE:
-      // double attacks this turn
-      // nextState.hero.effects.buff = EFFECTS.DOUBLEDAMAGE
-      return {
-        ...nextState,
-        hero: {
-          ...nextState.hero,
-          effects: { ...nextState.hero.effects, buff: EFFECTS.DOUBLEDAMAGE },
-        },
-      }
-    case EFFECTS.DRAW:
-      console.log(
-        `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`
-      )
-      for (let i = 0; i < card.qty; i++) {
-        nextState = drawCardHandler(nextState)
-      }
-      console.log(
-        `drew ${card.qty} cards, now hand is ${nextState.battle.hand.length} cards`,
-        nextState
-      )
-      return nextState
-    case EFFECTS.LIFESTEAL:
-      const healAmount = card.num
-      nextState.hero.health = nextState.hero.health + healAmount
-      return {...nextState}
 
-    default:
-      console.log(`no statusEffect matched, returning state`)
-      return nextState
+  console.log(
+    `card.effectChance: ${card.effectChance},atkSeed ${
+      battlePayload.atkSeed
+    }, ${card.effectChance > battlePayload.atkSeed}`
+  )
+
+  // if a card has a percentage chance of having an effect work, try that before applying.
+  if (!card.effectChance || card.effectChance > battlePayload.atkSeed) {
+    // success, apply status
+    switch (statusEffect) {
+      case EFFECTS.STUN:
+        console.log(`stun case met, applying stun`)
+        return {
+          ...nextState,
+          battle: {
+            ...nextState.battle,
+            enemy: { ...nextState.battle.enemy, status: EFFECTS.STUN },
+          },
+        }
+      case EFFECTS.POISON:
+        // add poison effect to enemy.
+        // TODO finish poison
+        if (!nextState.battle.enemy.poison) {
+          return {
+            ...nextState,
+            battle: {
+              ...nextState.battle,
+              // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
+              enemy: { ...nextState.battle.enemy, poison: card.qty },
+            },
+          }
+        } else {
+          return {
+            ...nextState,
+            battle: {
+              ...nextState.battle,
+              // enemy: { ...nextState.battle.enemy, status: EFFECTS.POISON },
+              enemy: {
+                ...nextState.battle.enemy,
+                poison: nextState.battle.enemy.poison + card.qty,
+              },
+            },
+          }
+        }
+      case EFFECTS.SLEEP:
+        // 50% chance of waking up
+        return {
+          ...nextState,
+          battle: {
+            ...nextState.battle,
+            enemy: { ...nextState.battle.enemy, status: EFFECTS.SLEEP },
+          },
+        }
+      case "sheild":
+        // temporary
+        return {
+          ...nextState,
+        }
+      case "armor":
+        return {
+          ...nextState,
+        }
+      case EFFECTS.DOUBLEDAMAGE:
+        // double attacks this turn
+        // nextState.hero.effects.buff = EFFECTS.DOUBLEDAMAGE
+        return {
+          ...nextState,
+          hero: {
+            ...nextState.hero,
+            effects: { ...nextState.hero.effects, buff: EFFECTS.DOUBLEDAMAGE },
+          },
+        }
+      case EFFECTS.DRAW:
+        console.log(
+          `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`
+        )
+        for (let i = 0; i < card.qty; i++) {
+          nextState = drawCardHandler(nextState)
+        }
+        console.log(
+          `drew ${card.qty} cards, now hand is ${nextState.battle.hand.length} cards`,
+          nextState
+        )
+        return nextState
+      case EFFECTS.LIFESTEAL:
+        const healAmount = card.num
+        nextState.hero.health = nextState.hero.health + healAmount
+        return { ...nextState }
+      default:
+        console.log(`no statusEffect matched, returning state`)
+        return nextState
+    }
+  } else {
+    console.log(
+      `percentage chance of effect landing was less than the seed, returning state`
+    )
+    // TODO no status applied, set Dialog to reflect this. This state must be mutating somehow
+    // const newDialog = nextState.battle.dialog + ` no Effect applied`
+    // console.log(`newDialog SHOULD be:`, newDialog)
+    // nextState = setDialogHandler(nextState, { newDialog })
+    // ${appliedEffect? `Applied ${appliedEffect} effect`: ""}
+
+    return nextState
   }
 }
 

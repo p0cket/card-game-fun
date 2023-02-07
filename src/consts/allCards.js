@@ -69,12 +69,22 @@ export const stunCards = {
     //   id: uniqueId(),
     effect: STUN,
   },
+
   throwFistPlus: {
     type: "Electric",
     name: "Throw Fist+",
     num: 5,
     cost: 2,
     //   id: uniqueId(),
+    effect: STUN,
+  },
+  chaoticBolt: {
+    type: "Electric",
+    name: "Chaotic Bolt",
+    num: 3,
+    cost: 2,
+    //   id: uniqueId(),
+    effectChance: 0.5,
     effect: STUN,
   },
 }

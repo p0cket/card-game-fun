@@ -113,10 +113,22 @@ export const winBattleHandler = (state, { battlePayload }) => {
 
   // generate new rewards
   nextState = generateRewardsHandler(nextState, battlePayload)
+
   nextState = setMyDataHandler({
     ...nextState,
     gold: nextState.gold + 25,
     deck: nextDeck,
+    hero: {
+      ...nextState.hero,
+      effects: { ...nextState.hero.effects, buff: null },
+    },
+    battle: {
+      ...nextState.battle,
+      enemy: {
+        ...nextState.battle.enemy,
+        status: "none",
+      },
+    },
   })
   console.log(`nextState`, nextState)
 
@@ -128,7 +140,7 @@ export const winBattleHandler = (state, { battlePayload }) => {
   //
   //
   nextState = setSceneHandler(nextState, payload)
-  return nextState;
+  return nextState
 }
 
 export const gameOverHandler = (state) => {

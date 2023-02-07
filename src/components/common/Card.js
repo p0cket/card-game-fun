@@ -4,7 +4,7 @@ import { EFFECTS } from "../../effects"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
   const { STUN, DRAW, SLEEP, POISON, DOUBLEDAMAGE, BUILDUP } = EFFECTS
-  const { type, name, num, cost, effect, qty, id } = cardValue
+  const { type, name, num, cost, effect, effectChance, qty, id } = cardValue
 
   const styles = {
     cardStyle: {
@@ -42,7 +42,7 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
 
   switch (effect) {
     case STUN:
-      effectString = `Stuns for 1 turn`
+      effectString = `${effectChance? `${effectChance*100}% chance` :""} Stuns for 1 turn`
       break
     case DRAW:
       effectString = `Draws ${qty} cards`
