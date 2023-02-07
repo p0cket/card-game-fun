@@ -6,6 +6,7 @@ import {
   poisonCards,
   sleepCards,
   stunCards,
+  rewardCards,
 } from "./allCards"
 
 export const poisonPackBasic = {
@@ -92,6 +93,25 @@ export const buildupPackBasic = {
     buildupCards.channelPlus,
   ],
 }
+
+export const rewardPack = [
+  rewardCards.flameToss,
+  rewardCards.fireBreath,
+  rewardCards.broil,
+  rewardCards.waterMissile,
+  rewardCards.aquaBlast,
+  rewardCards.drippingWet,
+  rewardCards.grassBlade,
+  rewardCards.pelletGun,
+  rewardCards.swarm,
+  rewardCards.shadowDrop,
+  rewardCards.electricSymphony,
+  rewardCards.backstab,
+  rewardCards.hypnoticDistress,
+  rewardCards.blackOoze,
+  rewardCards.overload,
+  rewardCards.stunningDelivery,
+]
 
 export const allBasicPacks = [
   poisonPackBasic,
