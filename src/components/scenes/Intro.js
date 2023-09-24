@@ -1,36 +1,45 @@
-import React from "react"
-import "./Intro.css"
-import { setSceneAction } from "../../actions"
-import { motion } from "framer-motion/dist/framer-motion"
+import React from "react";
+import "./Intro.css";
+import { setSceneAction } from "../../actions";
+import { motion } from "framer-motion/dist/framer-motion";
 // @TODO: Add typewriter effect to text
-import heroFrontImg from "../../assets/Anime_protag_pixelated.png"
-import "../common/Button.css"
+import heroFrontImg from "../../assets/Anime_protag_pixelated.png";
+import "../common/Button.css";
 
-import Dialog from "../common/Dialog"
-import ThemedButton from "../common/ThemedButton"
+import Dialog from "../common/Dialog";
+import ThemedButton from "../common/ThemedButton";
 
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
-    console.log(`loadNextLevel`)
-    dispatch(setSceneAction())
-  }
+    console.log(`loadNextLevel`);
+    dispatch(setSceneAction());
+  };
   const styles = {
     fontStyle: {
       fontFamily: "Silkscreen",
-      fontSize: "100px",
+      // fontSize: "100px",
+      fontSize: "22px",
       color: "white",
+      padding: "20px"
     },
     fontFam: {
       fontFamily: "Silkscreen",
     },
-  }
+  };
 
   return (
     <>
       {/* <button onClick={loadNextLevel}>go</button> */}
-      <div className="intro-scene">
-        <div className="intro-container">
-          <div className="logo-container">
+      <div>
+        <div
+          className="font-silkscreen flex flex-col items-center
+         bg-repeat bg-cover bg-white text-white p-5" 
+        >
+          {/* small screens should have this text smaller */}
+          {/* <div className="bg-green-600 text-white p-5 text-4xl sm:text-2xl font-silkscreen">
+            Super Chibipal Slayer!
+          </div>  */}
+          <div >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -40,29 +49,28 @@ const Intro = ({ dispatch }) => {
               Super Chibipal Slayer!
             </motion.div>
           </div>
-          <br />
-          <div className="intro-images-container">
-            <img
+          <div>
+            {/* <img
               style={{ width: 500, height: 500 }}
               src={heroFrontImg}
               alt="Hero Frontside"
-            />
+            /> */}
             <img
-              style={{ width: 240, height: 200 }}
+              style={{ width: 240, height: 200, padding: "20px" }}
               src="/creatures/Chibipal.png"
               alt="Chibipal Backside"
             />
           </div>
-
-          <div class="content">
+          <div style={{paddingRight: "5px", paddingLeft: "5px"}}>
             <Dialog
-              size="30"
+              size="20"
               myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
       In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
             />
             <br />
-          </div>
-          <div class="content">
+          </div>{" "}
+          {/* @TODO: Add instructions page */}
+          {/* <div >
             <div>
               <div>instructions</div>
               <h1>Your cards can ONLY BE USED ONCE.</h1>
@@ -84,11 +92,14 @@ const Intro = ({ dispatch }) => {
             <div style={{ padding: "30px" }}>
               <ThemedButton text={`Lets a' go`} onClick={loadNextLevel} />
             </div>
-          </div>
+          </div> */}
+          <div style={{ padding: "30px" }}>
+              <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
+            </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;

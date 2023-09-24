@@ -1,25 +1,35 @@
-import React from "react"
-import { setSceneAction } from "../../actions"
+import React from "react";
+import { setSceneAction } from "../../actions";
+import ThemedButton from "../common/ThemedButton";
 const Map = ({ gameData, dispatch, map }) => {
   const loadNextLevel = () => {
-    console.log(`loadNextLevel`)
-    dispatch(setSceneAction())
-  }
+    console.log(`loadNextLevel`);
+    dispatch(setSceneAction());
+  };
 
-  const mapPortion = map.slice(1)
+  const mapPortion = map.slice(1);
 
-  const currentIndex = gameData.curScene.lvl
-  const nextLevels = map.slice(currentIndex + 1, currentIndex + 6)
+  const currentIndex = gameData.curScene.lvl;
+  const nextLevels = map.slice(currentIndex + 1, currentIndex + 6);
 
   return (
     <>
-      <div style={{ fontFamily: "Silkscreen" }}>
-        <h1>- The {gameData.curScene.scene} -</h1>
-        <div>
-          <h3> Next Level: {map[currentIndex + 1]}</h3>
-          <button onClick={loadNextLevel}>Next Level</button>
+      <div
+        style={{
+          fontFamily: "Silkscreen",
+          // color: "white",
+          display: "flex",
+          flexDirection: "column",
+          backgroundPosition: "center",
+        }}
+      >
+        <h1 style={{ color: "white" }}>- The {gameData.curScene.scene} -</h1>
+        <div style={{ color: "gray" }}>
+          <h3 > Next Level: {map[currentIndex + 1]}</h3>
+          <ThemedButton text={`Next level`} onClick={loadNextLevel} />
+          {/* <button onClick={loadNextLevel}>Next Level</button> */}
 
-          <h3> Next 5 Levels:</h3>
+          {/* <h3> Next 5 Levels:</h3>
           <h3>
             {nextLevels.map((lvlName, index) => {
               return (
@@ -27,11 +37,11 @@ const Map = ({ gameData, dispatch, map }) => {
                   {` ${lvlName}`}
                   {"→ "}{" "}
                 </span>
-              )
+              );
             })}
-          </h3>
+          </h3> */}
 
-          <h3>All Levels:</h3>
+          {/* <h3>All Levels:</h3>
           <div
             style={{
               padding: "20px 200px",
@@ -78,11 +88,11 @@ const Map = ({ gameData, dispatch, map }) => {
                 </div>
               )
             })}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

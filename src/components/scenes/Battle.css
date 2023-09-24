@@ -4,6 +4,7 @@
   align-items: center;
   /* max-width: 800px; */
   /* max-width: 850px; */
+  
 }
 
 .battleUIcontainer {
@@ -14,25 +15,31 @@
 }
 .battleUI {
   font-family: Silkscreen;
-  background-color: green;
+  /* background-color: green; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   align-items: center;
-  background-image: url(/backgrounds/gridBG1.png);
+
+  /* background-image: url(/backgrounds/gridBG1.png);
   background-repeat: repeat;
   background-size: cover;
+  width: "100vw";
+  height: "100vh"; */
+
+
   /* margin-left: 7%;
   margin-right: 7%; */
-  margin: 0px 30px;
+  /* margin: 0px 30px; */
   /* max-width: 600px; */
 }
 
 .battleTop {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  padding: 20px;
-  margin: 10px 50px;
+  /* flex-direction: row; */
+  /* width: 90%; */
+  padding: 2px;
+  margin: 2px;
   /* align-items: ; */
   justify-content: space-between;
   background-color: #5a7d2a;
@@ -42,7 +49,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: #e6ecc3;
 
   flex-grow: 1;
@@ -59,8 +66,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  margin: 0px 0px 0px 30px;
+  /* padding: 2px; */
+  margin: 0px 0px 0px 2px;
   flex-grow: 2;
 
   /* background-color: #e6ecc3; */
@@ -71,10 +78,10 @@
 }
 .battleBot {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  padding: 20px;
-  margin: 10px;
+  /* flex-direction: row; */
+  /* width: 90%; */
+  /* padding: 2px; */
+  /* margin: 10px; */
   /* align-items: ; */
   justify-content: space-around;
   background-color: #5a7d2a;
@@ -83,8 +90,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
-  margin: 0px 0px 0px 30px;
+  /* padding: 2px; */
+  margin: 0px 0px 0px 2px;
   /* width: 50%; */
   flex-grow: 2;
   background-color: #e6ecc3;
@@ -99,7 +106,7 @@
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
   /* background-color: #e6ecc3; */
   background-image: url(/backgrounds/bg1.png);
   background-position: center;
@@ -109,9 +116,9 @@
 
 .battleStats {
   display: flex;
-  flex-direction: column;
-  padding: 0px 10px;
-  margin: 7px;
+  /* flex-direction: column; */
+  /* padding: 0px 0px; */
+  /* margin: 4px; */
   /* width: 90%; */
   background-color: #5a7d2a;
   color: white;
@@ -120,7 +127,7 @@
 .battleDialog {
   background-color: #5a7d2a;
   /* max-width: 800px; */
-  margin: 0px 30px;
+  /* margin: 0px 30px; */
 }
 
 .battleUIhand {
@@ -129,11 +136,11 @@
   flex-direction: row;
   /* align-items:  */
   /* justify-content: space-around; */
-  justify-content: center;
+  /* justify-content: center; */
   flex-wrap: wrap;
 
-  padding: 10px;
-  margin: 0px 30px;
+  padding: 2px;
+  /* margin: 0px 30px; */
   /* dark, medium, and light colors below */
   background-color: rgb(75, 119, 13);
   /* background-color: rgb(95, 143, 28); */
@@ -146,9 +153,9 @@
 .battleUIdeck {
   display: flex;
   flex-grow: 1;
-  flex-direction: row;
+  /* flex-direction: row; */
   justify-content: center;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: #5a7d2a;
   /* background-image: url(/backgrounds/bg1.png);
     background-position: center;
@@ -156,6 +163,10 @@
     background-size: cover; */
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.simpleButton {
+  font-family: Silkscreen;
 }
 
 @keyframes dash {
