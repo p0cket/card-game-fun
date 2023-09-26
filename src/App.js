@@ -6,6 +6,7 @@ import { map } from "./consts/mapGenerator";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
 import { useStateContext } from "./MainContext";
+import './scanlines.css'
 // import { motion } from "framer-motion/dist/framer-motion"
 
 export default function App() {
@@ -23,7 +24,7 @@ export default function App() {
 
   return (
     <div
-      className="App"
+      className="App scanlines"
       style={{
         // backgroundImage: "url(/backgrounds/gridBGlight.png)",
         backgroundImage: "url(/backgrounds/gridBGdark.png)",

@@ -6,6 +6,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 import heroFrontImg from "../../assets/Anime_protag_pixelated.png";
 import "../common/Button.css";
 
+
 import Dialog from "../common/Dialog";
 import ThemedButton from "../common/ThemedButton";
 

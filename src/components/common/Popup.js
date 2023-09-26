@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 
 function Popup(props) {
+  const [showAttacks, setShowAttacks] = useState(true);
+
+  const toggleView = () => {
+    setShowAttacks(!showAttacks);
+  };
+
   return props.trigger ? (
     <div
       style={{
@@ -10,98 +16,183 @@ function Popup(props) {
         left: 0,
         width: "100%",
         height: "100vh",
-        backgroundColor: "rgba(0,0,0,0.2)",
-        // zIndex: "100",
-        // zIndex:1
-
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        zIndex: 100,
       }}
     >
       <div
         style={{
           position: "relative",
-          padding: "10px",
+          padding: "20px",
           backgroundColor: "#5a7d2a",
           width: "80%",
           maxWidth: "640px",
-          boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
         }}
       >
-        <div>Attacks</div>
-          <div>
-            <div
-              style={{
-                border: "1px solid #a5e54d",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>Slash</div>
-              <div>50</div>
-            </div>
-            <div
-              style={{
-                border: "1px solid #a5e54d",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>Sting</div>
-              <div>50</div>
-            </div>
-            <div
-              style={{
-                border: "1px solid #a5e54d",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>Bite</div>
-              <div>35</div>
-            </div>
-            <div
-              style={{
-                border: "1px solid #a5e54d",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>Stab</div>
-              <div>15</div>
-            </div>
-            <div
-              style={{
-                border: "1px solid #a5e54d",
-                display: "flex",
-                justifyContent: "space-around",
-              }}
-            >
-              <div>Hide</div>
-              <div>(defend 5)</div>
-            </div>
-            <div>details...</div>
-            {/* <Button text="Close" onClick={() => props.togglePopup()} /> */}
-            <button
-              style={{
-                // position: "absolute",
-                // top: "16",
-                // right: "16",
-                backgroundColor: "#4b770e",
-              }}
-              onClick={() => props.togglePopup()}
-            >
-              close
-            </button>
+        <div style={attackHeaderStyle}>
+          <div style={characterIconStyle}></div> {/* Character Icon */}
+          <div style={attackLabelStyle}>
+            {showAttacks ? "Attacks" : "Bench Attacks"}
           </div>
-
-        {props.children}
+        </div>
+        <div>
+          {showAttacks ? (
+            <>
+              {renderAttack("Slash", "50", "A powerful sword slash.", "20")}
+              {renderAttack("Sting", "50", "A deadly insect sting.", "15")}
+              {renderAttack("Bite", "35", "A vicious animal bite.", "10")}
+              {renderAttack(
+                "Stab",
+                "15",
+                "A quick and precise stab with a dagger.",
+                "25"
+              )}
+            </>
+          ) : (
+            // Render Bench Attacks content here
+            <>
+              {renderMonster("Monster 1", ["Tackle", "Growl"])}
+              {renderMonster("Monster 2", ["Scratch"])}
+              {renderMonster("Monster 3", ["Fire Breath", "Tail Whip"])}
+            </>
+          )}
+          <div style={{ marginTop: "20px", borderTop: "1px solid #a5e54d" }}>
+            <strong onClick={toggleView} style={{ cursor: "pointer" }}>
+              {showAttacks ? "Bench Attacks >" : "< Attacks"}
+            </strong>
+          </div>
+        </div>
+        <div style={{ marginTop: "20px" }}>
+          {/* Add any additional details here */}
+        </div>
+        <button
+          style={{
+            backgroundColor: "#4b770e",
+            border: "none",
+            color: "#fff",
+            padding: "10px 20px",
+            cursor: "pointer",
+            marginTop: "20px",
+          }}
+          onClick={() => props.togglePopup()}
+        >
+          Close
+        </button>
       </div>
     </div>
   ) : (
     ""
   );
 }
+
+function renderAttack(name, damage, description, energyCost) {
+  return (
+    <div style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}>
+      <div style={attackInfoStyle}>
+        <div style={attackNameStyle}>{name}</div>
+        <div style={attackDamageStyle}>{damage}</div>
+      </div>
+      <div style={attackDescriptionStyle}>{description}</div>
+      <div style={attackEnergyCostStyle}>Energy Cost: {energyCost}</div>
+    </div>
+  );
+}
+
+function renderMonster(name, abilities) {
+  // Placeholder for the tiny Pokemon icon (green square)
+  const monsterIcon = (
+    <div
+      style={{
+        backgroundColor: "green",
+        width: "24px",
+        height: "24px",
+        marginRight: "10px",
+      }}
+    ></div>
+  );
+
+  return (
+    <div style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}>
+      <div style={attackInfoStyle}>
+        {monsterIcon}
+        <div style={monsterNameStyle}>{name}</div>
+      </div>
+      <div style={monsterAbilitiesStyle}>
+        {abilities.map((ability, index) => (
+          <div key={index}>{ability}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const attackContainerStyle = {
+  border: "1px solid #a5e54d",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "stretch",
+  padding: "12px",
+  margin: "8px 0",
+  backgroundColor: "#fff",
+};
+
+const attackInfoStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  marginBottom: "8px",
+};
+
+const attackNameStyle = {
+  fontWeight: "bold",
+};
+
+const attackDamageStyle = {
+  flex: 1,
+  textAlign: "right",
+};
+
+const attackDescriptionStyle = {
+  flex: 1,
+  textAlign: "left",
+  color: "black",
+};
+
+const attackEnergyCostStyle = {
+  alignSelf: "flex-end",
+  textAlign: "right",
+};
+
+const attackHeaderStyle = {
+  display: "flex",
+  alignItems: "center",
+  marginBottom: "10px",
+};
+
+const characterIconStyle = {
+  width: "24px",
+  height: "24px",
+  backgroundColor: "green", // Blue circle (placeholder for character icon)
+  marginRight: "10px",
+};
+
+const attackLabelStyle = {
+  fontSize: "24px",
+  fontWeight: "bold",
+};
+
+const monsterNameStyle = {
+  fontWeight: "bold",
+};
+
+const monsterAbilitiesStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  marginLeft: "34px", // To align with the monster icon
+};
 
 export default Popup;
