@@ -26,6 +26,7 @@ const Map = ({ gameData, dispatch, map }) => {
         <h1 style={{ color: "white" }}>- The {gameData.curScene.scene} -</h1>
         <div style={{ color: "gray" }}>
           <h3 > Next Level: {map[currentIndex + 1]}</h3>
+          <h1 className=" pr-20 text-blue-300">DOes tailwind work</h1>
           <ThemedButton text={`Next level`} onClick={loadNextLevel} />
           {/* <button onClick={loadNextLevel}>Next Level</button> */}
 

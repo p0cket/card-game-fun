@@ -97,34 +97,7 @@ const Battle = ({ gameData, dispatch }) => {
           <div style={{ color: "#a5e54d", flex: 3, fontFamily: "Silkscreen",    backgroundColor: "#5a7d2a", }}>
             {/* Oh man, the battle is on */}
           </div>
-          {/* <div
-            style={{
-              fontFamily: "Silkscreen",
-              display: "flex",
-              justifyContent: "space-around",
-              flex: 2,
-              backgroundColor: "#5a7d2a",
-              color: "white",
-              margin: "3px",
-            }}
-          >
-            <div>
-              <div
-                style={{ padding: "3px" }}
-                onClick={togglePopup}
-                className="text-green-200"
-              >
-                Attack
-              </div>
-              <div style={{ padding: "3px" }} className="text-blue-400">
-                Items
-              </div>
-            </div>
-            <div>
-              <div style={{ padding: "3px" }}>PaLs</div>
-              <div style={{ padding: "3px" }}>Options</div>
-            </div>
-          </div> */}
+       
           <MenuButtonGroup togglePopup={togglePopup} />
         </div>
         <UserPartyDisplay />
