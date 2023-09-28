@@ -271,7 +271,7 @@ export const startingData = {
   battle: {
     enemy: {
       name: "sample guy",
-      bio: "just a standaard enemi",
+      bio: "just a standaard enemy",
       health: "30",
       maxHP: "30",
       energy: 6,

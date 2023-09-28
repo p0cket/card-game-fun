@@ -135,9 +135,9 @@ ul li {
 }
 
 body {
-  position: relative;
-  background: #1b1b1b;
-  color: #c8c8c8;
-  text-shadow: 2px 2px 2px #333;
-  overflow-x: scroll;
+  /* position: relative; */
+  /* background: #1b1b1b; */
+  /* color: #c8c8c8; */
+  /* text-shadow: 2px 2px 2px #333; */
+  /* overflow-x: scroll; */
 }
