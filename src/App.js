@@ -1,12 +1,13 @@
 import React from "react";
-import "./styles.css";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
 import { map } from "./consts/mapGenerator";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
 import { useStateContext } from "./MainContext";
-import './scanlines.css'
+import "./scanlines.css";
+import "./styles.css";
+import "./index.css";
 // import { motion } from "framer-motion/dist/framer-motion"
 
 export default function App() {
@@ -37,5 +38,7 @@ export default function App() {
       <Screen gameData={gameData} dispatch={dispatch} map={map} />
       {/* <button onClick={loadNextLevel}>Next Level</button> */}
     </div>
+    // #TODO: Test out why tailwind is broken here
+    // <h1 className="text-3xl font-bold underline">Hello world!</h1>
   );
 }
