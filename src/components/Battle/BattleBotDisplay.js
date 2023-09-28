@@ -71,11 +71,6 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
         </div>
 
         <div>
-          {" "}
-          <div className="battleBLattack text-pink-400">
-            {energy} Energy{": "}
-            {energyEmoji.repeat(energy)}
-          </div>
         </div>
       </div>
     </div>

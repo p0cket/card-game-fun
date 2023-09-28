@@ -11,6 +11,7 @@ import EnemyDisplay from "../Battle/BattleTopDisplay";
 import BattleTopDisplay from "../Battle/BattleTopDisplay";
 import BattleBotDisplay from "../Battle/BattleBotDisplay";
 import UserPartyDisplay from "../Battle/UserPartyDisplay";
+import MenuButtonGroup from "../Battle/MenuButtonGroup";
 
 const Battle = ({ gameData, dispatch }) => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -93,10 +94,10 @@ const Battle = ({ gameData, dispatch }) => {
         )}
 
         <div style={{ display: "flex" }}>
-          <div style={{ color: "#a5e54d", flex: 3, fontFamily: "Silkscreen" }}>
+          <div style={{ color: "#a5e54d", flex: 3, fontFamily: "Silkscreen",    backgroundColor: "#5a7d2a", }}>
             {/* Oh man, the battle is on */}
           </div>
-          <div
+          {/* <div
             style={{
               fontFamily: "Silkscreen",
               display: "flex",
@@ -123,7 +124,8 @@ const Battle = ({ gameData, dispatch }) => {
               <div style={{ padding: "3px" }}>PaLs</div>
               <div style={{ padding: "3px" }}>Options</div>
             </div>
-          </div>
+          </div> */}
+          <MenuButtonGroup togglePopup={togglePopup} />
         </div>
         <UserPartyDisplay />
         <div

@@ -343,3 +343,5 @@ export const poisonDamage = 5
 export const energyEmoji = "🧪"
 export const goldEmoji = "💰"
 export const dmgEmoji = "👊"
+export const clockEmoji = "⏰"
+
