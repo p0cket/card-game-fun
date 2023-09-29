@@ -6,9 +6,9 @@ import { motion } from "framer-motion/dist/framer-motion";
 import heroFrontImg from "../../assets/Anime_protag_pixelated.png";
 import "../common/Button.css";
 
-
 import Dialog from "../common/Dialog";
 import ThemedButton from "../common/ThemedButton";
+import { useDispatchContext, useStateContext } from "../../MainContext";
 
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
@@ -21,12 +21,15 @@ const Intro = ({ dispatch }) => {
       // fontSize: "100px",
       fontSize: "22px",
       color: "white",
-      padding: "20px"
+      padding: "20px",
     },
     fontFam: {
       fontFamily: "Silkscreen",
     },
   };
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
 
   return (
     <>
@@ -34,13 +37,13 @@ const Intro = ({ dispatch }) => {
       <div>
         <div
           className="font-silkscreen flex flex-col items-center
-         bg-repeat bg-cover bg-white text-white p-5" 
+         bg-repeat bg-cover bg-white text-white p-5"
         >
           {/* small screens should have this text smaller */}
           {/* <div className="bg-green-600 text-white p-5 text-4xl sm:text-2xl font-silkscreen">
             Super Chibipal Slayer!
           </div>  */}
-          <div >
+          <div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -62,7 +65,7 @@ const Intro = ({ dispatch }) => {
               alt="Chibipal Backside"
             />
           </div>
-          <div style={{paddingRight: "5px", paddingLeft: "5px"}}>
+          <div style={{ paddingRight: "5px", paddingLeft: "5px" }}>
             <Dialog
               size="20"
               myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
@@ -95,8 +98,11 @@ const Intro = ({ dispatch }) => {
             </div>
           </div> */}
           <div style={{ padding: "30px" }}>
-              <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
-            </div>
+            <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
+          </div>
+          <div style={{ color: "white" }}>
+            {JSON.stringify(contextualState)}
+          </div>
         </div>
       </div>
     </>

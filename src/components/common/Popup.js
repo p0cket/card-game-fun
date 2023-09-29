@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import { useDispatchContext, useStateContext } from "../../MainContext";
 
 // Define an enum for menu options
 const MenuOptions = {
@@ -14,6 +15,8 @@ function Popup(props) {
   const toggleMenu = (menu) => {
     setCurrentMenu(menu);
   };
+
+
 
   const renderTab = (menuOption) => (
     <div
@@ -130,8 +133,10 @@ function Popup(props) {
 
 // ... (rest of the code remains the same)
 function renderAttack(name, damage, description, energyCost) {
+  const stateContext = useStateContext()
+  const dispatchContext = useDispatchContext()
   return (
-    <div style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}>
+    <div onClick={() => dispatchContext({type: 'ATTACK', payload: damage})} style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}>
       <div style={attackInfoStyle}>
         <div style={attackNameStyle}>{name}</div>
         <div style={attackDamageStyle}>{damage}</div>

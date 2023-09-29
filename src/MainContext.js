@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import "./index.css";
+// import { startingData } from "./consts/consts";
+import { newStartingData } from "./consts/startingData";
 
 const stateContext = React.createContext();
 const dispatchContext = React.createContext();
@@ -18,25 +20,26 @@ export const ACTIONS = {
   SET_GOLD: "SET_GOLD",
   SET_LEVEL: "SET_LEVEL",
   SET_INVENTORY: "SET_INVENTORY",
+  ATTACK: "ATTACK",
 };
 
 export const MainProvider = ({ children }) => {
-  //initial state
-  const initialState = {
-    health: 100,
-    gold: 0,
-    level: 1,
-    scene: "town",
-    inventory: [],
-  };
+  // Here we initialize the state with the startingData
+  // const initialState = { startingData };
+  // Here is the reducer function
+  // const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, newStartingData);
 
-  //Here is the reducer function
-  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   function reducer(state, action) {
+    console.log(`reducer HIT`)
     switch (action.type) {
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload };
+        case ACTIONS.ATTACK:
+          console.log(`reducer action.type: ${action.type} action.payload: ${action.payload}`, state)
+
+          return { ...state, playerParty: [ {...state.playerParty, health: action.payload}] };
       case ACTIONS.SET_HEALTH:
         return { ...state, health: action.payload };
       case ACTIONS.SET_GOLD:
@@ -46,6 +49,7 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.SET_INVENTORY:
         return { ...state, inventory: action.payload };
       default:
+        console.log("ERROR: Invalid action type. End of Reducer reached");
         return state;
     }
   }

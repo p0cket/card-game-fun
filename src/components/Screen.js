@@ -88,7 +88,12 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Victory gameData={gameData} dispatch={dispatch} />;
     default:
       console.log("no scene (Screen Case) selected");
-      return <>404 Yo</>;
+      return (
+        <h1>
+          404 Yo. Something went wrong with selecting a Screen to display.
+          likely something related to the switch case, dawg.
+        </h1>
+      );
   }
 };
 

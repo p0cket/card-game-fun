@@ -12,6 +12,7 @@ import BattleTopDisplay from "../Battle/BattleTopDisplay";
 import BattleBotDisplay from "../Battle/BattleBotDisplay";
 import UserPartyDisplay from "../Battle/UserPartyDisplay";
 import MenuButtonGroup from "../Battle/MenuButtonGroup";
+import { useDispatchContext, useStateContext } from "../../MainContext";
 
 const Battle = ({ gameData, dispatch }) => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -48,6 +49,9 @@ const Battle = ({ gameData, dispatch }) => {
       </div>
     );
   }
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
   // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
     <div
