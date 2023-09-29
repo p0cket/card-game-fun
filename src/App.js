@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
 import { map } from "./consts/mapGenerator";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
-import { useStateContext } from "./MainContext";
+import { useDispatchContext, useStateContext } from "./MainContext";
 import "./scanlines.css";
 import "./styles.css";
 import "./index.css";
@@ -12,16 +12,15 @@ import "./index.css";
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
-
-  // Uncomment this, the import, and button below for control to always load another level
-  // const loadNextLevel = () => {
-  //   console.log(`loadNextLevel`);
-  //   dispatch(setSceneAction());
-  // };
-  // console.log(`[App.js Rendered]`);
+  // const [screen, setScreen] = useState(null)
 
   const contextualState = useStateContext();
-  console.log(`[App.js ContextualState]`, contextualState);
+  const contextualDispatch = useDispatchContext();
+  console.log(
+    `[App.js ContextualState and ContextualDispatch]`,
+    contextualState,
+    contextualDispatch
+  );
 
   return (
     <div
@@ -35,8 +34,7 @@ export default function App() {
         height: "100vh",
       }}
     >
-      <Screen gameData={gameData} dispatch={dispatch} map={map} />
-      {/* <button onClick={loadNextLevel}>Next Level</button> */}
+      <Screen gameData={gameData} dispatch={dispatch} map={map}  />
     </div>
     // #TODO: Test out why tailwind is broken here
     // <h1 className="text-3xl font-bold underline">Hello world!</h1>

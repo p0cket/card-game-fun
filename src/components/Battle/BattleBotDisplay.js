@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 
 import "./../scenes/Battle.css";
 import "./../common/Button.css";
+import { useDispatchContext, useStateContext } from "../../MainContext";
 
 function BattleBotDisplay({ gameData, health, maxHP, energy }) {
   const yourVariants = {
@@ -17,6 +18,9 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
       },
     },
   };
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
   return (
     <div className="battleBot">
       {/* @TODO: reverse left and right here */}
@@ -56,7 +60,7 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
           <div className="battleBuffs">
             {" "}
             <span>
-              {" "}
+              {" "}{JSON.stringify(contextualState.playerParty[0].health)}
               {gameData.hero.effects.buff ? (
                 <span>{gameData.hero.effects.buff}</span>
               ) : (
