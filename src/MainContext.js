@@ -30,16 +30,19 @@ export const MainProvider = ({ children }) => {
   // const [state, dispatch] = React.useReducer(reducer, initialState);
   const [state, dispatch] = React.useReducer(reducer, newStartingData);
 
-
   function reducer(state, action) {
-    console.log(`reducer HIT`)
+    console.log(`reducer HIT`);
     switch (action.type) {
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload };
-        case ACTIONS.ATTACK:
-          console.log(`reducer action.type: ${action.type} action.payload: ${action.payload}`, state)
-
-          return { ...state, playerParty: [ {...state.playerParty, health: action.payload}] };
+      case ACTIONS.ATTACK:
+        return {
+          ...state,
+          playerParty: [
+            { ...state.playerParty[0], health: action.payload },
+            ...state.playerParty,
+          ],
+        };
       case ACTIONS.SET_HEALTH:
         return { ...state, health: action.payload };
       case ACTIONS.SET_GOLD:
@@ -53,6 +56,8 @@ export const MainProvider = ({ children }) => {
         return state;
     }
   }
+
+
 
   return (
     <stateContext.Provider value={state}>

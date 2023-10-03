@@ -6,12 +6,12 @@ import { motion } from "framer-motion/dist/framer-motion";
 
 import Dialog from "../common/Dialog";
 import Popup from "../common/Popup";
-import HUDHeader from "../Battle/HUDHeader";
-import EnemyDisplay from "../Battle/BattleTopDisplay";
-import BattleTopDisplay from "../Battle/BattleTopDisplay";
-import BattleBotDisplay from "../Battle/BattleBotDisplay";
-import UserPartyDisplay from "../Battle/UserPartyDisplay";
-import MenuButtonGroup from "../Battle/MenuButtonGroup";
+import HUDHeader from "../battle/HUDHeader";
+import EnemyDisplay from "../battle/BattleTopDisplay";
+import BattleTopDisplay from "../battle/BattleTopDisplay";
+import BattleBotDisplay from "../battle/BattleBotDisplay";
+import UserPartyDisplay from "../battle/UserPartyDisplay";
+import MenuButtonGroup from "../battle/MenuButtonGroup";
 import { useDispatchContext, useStateContext } from "../../MainContext";
 
 const Battle = ({ gameData, dispatch }) => {
@@ -52,6 +52,13 @@ const Battle = ({ gameData, dispatch }) => {
 
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
+
+const ourParty = contextualState.playerParty
+const ourCurrentMon = ourParty[0]
+console.log(`ourCurrentMon`,ourCurrentMon,`curMON`,ourParty)
+
+
+
   // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
     <div
@@ -60,7 +67,7 @@ const Battle = ({ gameData, dispatch }) => {
         flexDirection: "column",
       }}
     >
-      {" "}
+
       <div style={{}}>
         <div>
           <div
@@ -75,10 +82,12 @@ const Battle = ({ gameData, dispatch }) => {
             <UserPartyDisplay />
             <BattleTopDisplay gameData={gameData} />
             <BattleBotDisplay
-              gameData={gameData}
-              health={health}
-              maxHP={maxHP}
-              energy={energy}
+              ourCurrentMon={ourCurrentMon}
+              // gameData={gameData}
+              // health={health}
+              // maxHP={maxHP}
+              // energy={energy}
+
             />
           </div>
         </div>
@@ -98,10 +107,17 @@ const Battle = ({ gameData, dispatch }) => {
         )}
 
         <div style={{ display: "flex" }}>
-          <div style={{ color: "#a5e54d", flex: 3, fontFamily: "Silkscreen",    backgroundColor: "#5a7d2a", }}>
+          <div
+            style={{
+              color: "#a5e54d",
+              flex: 3,
+              fontFamily: "Silkscreen",
+              backgroundColor: "#5a7d2a",
+            }}
+          >
             {/* Oh man, the battle is on */}
           </div>
-       
+
           <MenuButtonGroup togglePopup={togglePopup} />
         </div>
         <UserPartyDisplay />
