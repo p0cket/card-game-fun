@@ -9,6 +9,7 @@ import "../common/Button.css";
 import Dialog from "../common/Dialog";
 import ThemedButton from "../common/ThemedButton";
 import { useDispatchContext, useStateContext } from "../../MainContext";
+import { getRandomPALAcronym } from "../../consts/fun/pal";
 
 const Intro = ({ dispatch }) => {
   const loadNextLevel = () => {
@@ -51,6 +52,7 @@ const Intro = ({ dispatch }) => {
               style={styles.fontStyle}
             >
               Super Chibipal Slayer!
+              <h5>{getRandomPALAcronym()}</h5>
             </motion.div>
           </div>
           <div>
@@ -73,30 +75,6 @@ const Intro = ({ dispatch }) => {
             />
             <br />
           </div>{" "}
-          {/* @TODO: Add instructions page */}
-          {/* <div >
-            <div>
-              <div>instructions</div>
-              <h1>Your cards can ONLY BE USED ONCE.</h1>
-              <h3>They are burned after.</h3>
-              <p>
-                {" "}
-                Use them strategically to command your Chibipal and defeat
-                enemies.
-              </p>
-              <p> You can save the wooorrrrld!</p>
-            </div>
-
-            <div>
-              Most importantly, have fun{" "}
-              <span role="img" aria-label="emoji smile">
-                💞😇💞
-              </span>
-            </div>
-            <div style={{ padding: "30px" }}>
-              <ThemedButton text={`Lets a' go`} onClick={loadNextLevel} />
-            </div>
-          </div> */}
           <div style={{ padding: "30px" }}>
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>

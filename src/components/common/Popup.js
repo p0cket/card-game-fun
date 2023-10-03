@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { useDispatchContext, useStateContext } from "../../MainContext";
+import { useMove } from "../../handlers/Battle/useMove";
+import { Party } from "../../consts/party/parties";
 
+const { SLOT_1, SLOT_2, SLOT_3, SLOT_4, SLOT_5, SLOT_6 } = Party;
 // Define an enum for menu options
 const MenuOptions = {
   ATTACKS: "attacks",
@@ -15,8 +18,6 @@ function Popup(props) {
   const toggleMenu = (menu) => {
     setCurrentMenu(menu);
   };
-
-
 
   const renderTab = (menuOption) => (
     <div
@@ -40,7 +41,13 @@ function Popup(props) {
       label: "Attacks",
       content: (
         <>
-          {renderAttack("Slash", "50", "A powerful sword slash.", "20")}
+          {renderAttack(
+            "Slash",
+            "50",
+            "A powerful sword slash.",
+            "20",
+            "mainOpponent"
+          )}
           {renderAttack("Sting", "50", "A deadly insect sting.", "15")}
           {renderAttack("Bite", "35", "A vicious animal bite.", "10")}
           {renderAttack(
@@ -101,7 +108,13 @@ function Popup(props) {
           <div style={attackLabelStyle}>{menuContent[currentMenu].label}</div>
         </div>
         <div>{menuContent[currentMenu].content}</div>
-        <div style={{ marginTop: "20px", borderTop: "1px solid #a5e54d", minHeight: "80px", }}>
+        <div
+          style={{
+            marginTop: "20px",
+            borderTop: "1px solid #a5e54d",
+            minHeight: "80px",
+          }}
+        >
           <div style={{ display: "flex" }}>
             {Object.values(MenuOptions).map((menuOption) =>
               renderTab(menuOption)
@@ -133,16 +146,25 @@ function Popup(props) {
 
 // ... (rest of the code remains the same)
 function renderAttack(name, damage, description, energyCost) {
-  const stateContext = useStateContext()
-  const dispatchContext = useDispatchContext()
+  const stateContext = useStateContext();
+  const dispatchContext = useDispatchContext();
+
   return (
-    <div onClick={() => dispatchContext({type: 'ATTACK', payload: damage})} style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}>
+    <div
+      // onClick={() => dispatchContext({ type: "ATTACK", payload: damage })}
+      // I need to have all the move details in the useMove
+      // so like useMove(moveInfo, party, party index, targetIndex)
+      // onClick={() => useMove()}
+
+      style={{ ...attackContainerStyle, backgroundColor: "#5a7d2a" }}
+    >
       <div style={attackInfoStyle}>
         <div style={attackNameStyle}>{name}</div>
         <div style={attackDamageStyle}>{damage}</div>
       </div>
       <div style={attackDescriptionStyle}>{description}</div>
       <div style={attackEnergyCostStyle}>Cost: {energyCost}</div>
+      <input>attack who</input>
     </div>
   );
 }

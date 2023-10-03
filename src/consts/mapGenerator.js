@@ -36,6 +36,7 @@ const mapGenerator = () => {
   return [
     GAMEOVER,
     INTRO,
+    REWARD,
     // CONVO,
     MAP,
     BATTLE,
