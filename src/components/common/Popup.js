@@ -101,7 +101,7 @@ function Popup(props) {
           <div style={attackLabelStyle}>{menuContent[currentMenu].label}</div>
         </div>
         <div>{menuContent[currentMenu].content}</div>
-        <div style={{ marginTop: "20px", borderTop: "1px solid #a5e54d" }}>
+        <div style={{ marginTop: "20px", borderTop: "1px solid #a5e54d", minHeight: "80px", }}>
           <div style={{ display: "flex" }}>
             {Object.values(MenuOptions).map((menuOption) =>
               renderTab(menuOption)

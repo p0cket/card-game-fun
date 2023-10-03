@@ -1,7 +1,6 @@
 import { startingDeck } from "./consts";
 import { EFFECTS } from "../effects";
-const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
-
+const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
 
 // export const newStartingData = {
 //   // Party system for the player and enemy
@@ -110,16 +109,17 @@ export const newStartingData = {
   // Party system for the player and enemy
   playerParty: [
     {
-      name: "Monster 1",
+      name: "Pupcake",
       health: 100,
       maxHP: 100,
       energy: 5,
       status: "Fine",
       flaws: {
-        weak: 'poison',
-        resist: 'fire',
+        weak: "poison",
+        resist: "fire",
       },
-      exp: 10000000000,
+      lvl: 3,
+      exp: 168034502,
       Abilities: [
         {
           name: "Claw Slash",
@@ -298,5 +298,3 @@ export const startingData = {
   eventResultObj: null,
   devMode: false,
 };
-
-

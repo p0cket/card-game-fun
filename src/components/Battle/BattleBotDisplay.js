@@ -6,7 +6,8 @@ import "./../scenes/Battle.css";
 import "./../common/Button.css";
 import { useDispatchContext, useStateContext } from "../../MainContext";
 
-function BattleBotDisplay({ gameData, health, maxHP, energy }) {
+// function BattleBotDisplay({ gameData, health, maxHP, energy }) {
+function BattleBotDisplay({ ourCurrentMon }) {
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],
@@ -38,10 +39,10 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
         <div className="battleBotLeftUpper">
           <div>
             <div className="battleBLname" style={{ fontSize: "25px" }}>
-              Pupcake Lvl 1
+              {ourCurrentMon.name}
             </div>
             <div className="battleBLhealth">
-              {health}
+              {ourCurrentMon.health}
               <img
                 style={{ width: 10, height: 10 }}
                 src="./icons/heart.png"
@@ -49,8 +50,8 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
               />
               <progress
                 id="health"
-                value={health}
-                max={maxHP}
+                value={ourCurrentMon.health}
+                max={ourCurrentMon.maxHP}
                 style={{
                   backgroundColor: "#4caf50",
                 }}
@@ -59,13 +60,15 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
           </div>
           <div className="battleBuffs">
             {" "}
-            <span>
-              {" "}{JSON.stringify(contextualState.playerParty[0].health)}
-              {gameData.hero.effects.buff ? (
+            <span style={{fontSize: '12px'}}>
+              {" "}
+              <span style={{ color: "gray" }}>lvl</span>
+              {JSON.stringify(contextualState.playerParty[0].lvl)}
+              {/* {gameData.hero.effects.buff ? (
                 <span>{gameData.hero.effects.buff}</span>
               ) : (
                 ""
-              )}
+              )} */}
             </span>
           </div>
           {/* <div className="battleBLdesc" style={{ fontSize: "12px" }}>
@@ -74,8 +77,7 @@ function BattleBotDisplay({ gameData, health, maxHP, energy }) {
           </div> */}
         </div>
 
-        <div>
-        </div>
+        <div></div>
       </div>
     </div>
   );
