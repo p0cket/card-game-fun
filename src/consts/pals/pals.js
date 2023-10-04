@@ -16,6 +16,8 @@ const Luminowl = {
   quirks: ["Guiding Light", "Soothing Feathers"],
   stats: {
     hp: 100,
+    max_hp: 190,
+
     attack: 80,
     defense: 60,
     special_attack: 120,
@@ -49,6 +51,8 @@ const Shadowstalker = {
   quirks: ["Ambush Predator", "Shadow Cloak"],
   stats: {
     hp: 100,
+    max_hp: 190,
+
     attack: 110,
     defense: 70,
     special_attack: 80,
@@ -82,6 +86,8 @@ const Infernodragon = {
   quirks: ["Flame Breather", "Inferno Creator"],
   stats: {
     hp: 120,
+    max_hp: 190,
+
     attack: 140,
     defense: 90,
     special_attack: 160,
@@ -115,6 +121,8 @@ const Aquaphoenix = {
   quirks: ["Water Manipulator", "Rainmaker"],
   stats: {
     hp: 110,
+    max_hp: 190,
+
     attack: 80,
     defense: 70,
     special_attack: 130,
@@ -148,6 +156,8 @@ const Verdantshifter = {
   quirks: ["Morphing Mastery", "Environmental Guardian"],
   stats: {
     hp: 90,
+    max_hp: 90,
+
     attack: 70,
     defense: 80,
     special_attack: 100,
@@ -181,6 +191,8 @@ const Technotitan = {
   quirks: ["Mechanical Guardian", "Advanced Arsenal"],
   stats: {
     hp: 150,
+    max_hp: 190,
+
     attack: 130,
     defense: 140,
     special_attack: 80,
@@ -214,6 +226,7 @@ const Glowbuggle = {
   quirks: ["Warm Light Emission", "Comforting Glow"],
   stats: {
     hp: 80,
+    max_hp: 90,
     attack: 50,
     defense: 40,
     special_attack: 100,
@@ -250,6 +263,7 @@ const Umbrabunny = {
   quirks: ["Emotion Sponge", "Reassuring Presence"],
   stats: {
     hp: 90,
+    max_hp: 90,
     attack: 60,
     defense: 70,
     special_attack: 80,
