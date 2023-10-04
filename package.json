@@ -1,6 +1,9 @@
 {
   "name": "card-stuff-065th-fork-switch-to-usereducer-03-done",
   "version": "1.0.0",
+  
+  "homepage": "https://p0cket.github.io/card-game-fun/",
+
   "description": "",
   "keywords": [],
   "main": "src/index.js",
@@ -15,13 +18,17 @@
   "devDependencies": {
     "@babel/runtime": "7.13.8",
     "eslint-plugin-react": "^7.30.1",
+    "gh-pages": "^6.0.0",
     "tailwindcss": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
