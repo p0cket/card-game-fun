@@ -94,14 +94,6 @@ const ChibipalsSelection = () => {
           >
             <p style={{ fontSize: "16px", marginBottom: "4px" }}>
               {selectedMonster.name}
-              {/* <span style={{ marginRight: '10px' }}>Cost: {selectedMonster.cost}</span> */}
-              <span style={{ marginRight: "10px" }}>
-                {" "}
-                Lvl: {selectedMonster.level}
-              </span>
-              <span style={{ marginRight: "10px" }}>
-                Exp: {selectedMonster.experience}
-              </span>
             </p>
             <div style={{ display: "flex" }}>
               <img
@@ -116,50 +108,138 @@ const ChibipalsSelection = () => {
                 }}
               />{" "}
               <div>
-                <table
-                  style={{ borderCollapse: "collapse", marginRight: "10px" }}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginRight: "10px",
+                  }}
                 >
-                  <tbody>
-                    <tr>
-                      <td>HP:</td>
-                      <td>{selectedMonster.stats.hp}</td>
-                    </tr>
-                    <tr>
-                      <td>Atk:</td>
-                      <td>{selectedMonster.stats.attack}</td>
-                    </tr>
-                    <tr>
-                      <td>Def:</td>
-                      <td>{selectedMonster.stats.defense}</td>
-                    </tr>
-                    <tr>
-                      <td>Sp Atk:</td>
-                      <td>{selectedMonster.stats.special_attack}</td>
-                    </tr>
-                    <tr>
-                      <td>Sp Def:</td>
-                      <td>{selectedMonster.stats.special_defense}</td>
-                    </tr>
-                    <tr>
-                      <td>Speed:</td>
-                      <td>{selectedMonster.stats.speed}</td>
-                    </tr>
-                    {/* <tr>
-                      <td>Size:</td>
-                      <td>{selectedMonster.size}</td>
-                    </tr>
-                    <tr>
-                      <td>Weight:</td>
-                      <td>{selectedMonster.weight}</td>
-                    </tr> */}
-                  </tbody>
-                </table>
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span>Level:</span>
+                      <span>{selectedMonster.level}</span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "4px",
+                        }}
+                      ></div>
+                      <div
+                        style={{
+                          width: "100px",
+                          height: "10px",
+                          backgroundColor: "lightgray",
+                          borderRadius: "5px",
+                          border: "1px solid lightgreen",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: `${
+                              (selectedMonster.stats.hp /
+                                selectedMonster.stats.max_hp) *
+                              100
+                            }%`,
+                            height: "100%",
+                            backgroundColor: "darkgreen",
+                            borderRadius: "3px",
+                          }}
+                        ></div>
+                      </div>
+                      <div style={{ marginTop: "4px", fontSize: "12px" }}>
+                        {selectedMonster.stats.hp} /{" "}
+                        {selectedMonster.stats.max_hp
+                          ? selectedMonster.stats.max_hp
+                          : "not found"}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <span>Atk:</span>
+                    <span>{selectedMonster.stats.attack}</span>
+                  </div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <span>Def:</span>
+                    <span>{selectedMonster.stats.defense}</span>
+                  </div>
+                  {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <span>SpAtk:</span>
+    <span>{selectedMonster.stats.special_attack}</span>
+  </div>
+  <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <span>SpDef:</span>
+    <span>{selectedMonster.stats.special_defense}</span>
+  </div> */}
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <span>Speed:</span>
+                    <span>{selectedMonster.stats.speed}</span>
+                  </div>
+                  {/* Uncomment and customize as needed
+  <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <span>Size:</span>
+    <span>{selectedMonster.size}</span>
+  </div>
+  <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <span>Weight:</span>
+    <span>{selectedMonster.weight}</span>
+  </div> */}
+                </div>
                 {selectedMonster.elemental_type}
                 {"-"}
                 {selectedMonster.creature_type} [
                 {selectedMonster.specialty_group}]
               </div>{" "}
             </div>
+
+            <div>
+              <span style={{ marginRight: "10px" }}>
+                Lvl: {selectedMonster.level}
+              </span>
+              <span style={{ marginRight: "10px" }}>
+                Exp: {selectedMonster.experience}
+              </span>
+              <span>Exp to Next Lvl: xxx</span>
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "gray",
+                  height: "10px",
+                  borderRadius: "2px",
+                  border: "1px solid lightgreen",
+                }}
+              >
+                <div
+                  style={{
+                    width: `${30}%`,
+                    backgroundColor: "darkgreen",
+                    height: "100%",
+                    borderRadius: "2px",
+                  }}
+                ></div>
+              </div>
+            </div>
+
             <div>
               <p style={{ padding: "10px" }}>
                 <span>{selectedMonster.description}</span>
@@ -177,32 +257,89 @@ const ChibipalsSelection = () => {
                 gap: "4px",
               }}
             >
-              {/* <span >
-                {`Moves: ${selectedMonster.moves.join(" | ")}`}
-              </span> */}
+              {/* <div style={{ display: "flex", gap: "4px" }}>
+                <button>Stats</button>
+                <button>Moves</button>
+                <button>Passives</button>
+              </div> */}
+              <div>Moves: </div>
               <div
                 style={{
-                  backgroundColor: "lightgreen",
-                  padding: "4px",
-                  borderRadius: "4px",
-                  marginBottom: "4px",
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  flexWrap: "wrap",
+                  gap: `2px`,
                 }}
               >
-                Moves:{" "}
                 {selectedMonster.moves.map((move, index) => (
-                  <span key={index} style={{ marginRight: "4px" }}>
-                    {move}
-                  </span>
+                  <div style={{ padding: "1px" }}>
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "lightgreen",
+                        borderRadius: "4px",
+                        padding: "3px",
+                        color: "darkgreen",
+                      }}
+                    >
+                      {move}
+                    </span>
+                  </div>
                 ))}
               </div>
-              <span style={{ color: "lightGray" }}>
-                {` ${selectedMonster.possible_moves.join(", ")}`}
+              <div>
+                <div>Possible Moves:</div>
+                <span>
+                  <div
+                    style={{ color: "lightGray", gap: "2px", display: "flex" }}
+                  >
+                    {selectedMonster.possible_moves.map((move, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          // marginBottom: "4px",
+                          backgroundColor: "black",
+                          borderRadius: "8%",
+                          padding: "2px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            backgroundColor: "gray",
+                            borderRadius: "50%",
+                            width: "7px", // Adjust the width and height as needed
+                            height: "7px",
+                            marginRight: "2px",
+                            // padding: "3px",
+                          }}
+                        ></div>
+                        <span>{move}</span>
+                      </div>
+                    ))}
+                  </div>
+                </span>
+              </div>
+              <span>
+                <div>Passive:</div>
+                <span
+                  style={{
+                    backgroundColor: "lightgreen",
+                    borderRadius: "4px",
+                    padding: "1px",
+                    color: "green",
+                  }}
+                >
+                  {selectedMonster.passive_ability}
+                </span>
               </span>
-              <span>Passive: {selectedMonster.passive_ability}</span>
             </div>
             {/* <p style={{ margin: "4px 0" }}>Lore: {selectedMonster.lore}</p> */}
-            <button onClick={handleSelect}>Select</button>
-            <button onClick={handleGoBack}>Go Back</button>
+            <div style={{ padding: "4px" }}>
+              <button onClick={handleSelect}>Select</button>
+              <button onClick={handleGoBack}>Go Back</button>
+            </div>
           </div>
         </div>
       )}

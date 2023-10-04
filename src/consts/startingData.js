@@ -1,109 +1,10 @@
 import { startingDeck } from "./consts";
 import { EFFECTS } from "../effects";
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
+//
 
-// export const newStartingData = {
-//   // Party system for the player and enemy
-//   playerParty: [
-//     {
-//       name: "Monster 1",
-//       health: 100,
-//       maxHP: 100,
-//       energy: 5,
-//       status: "Fine",
-//       attacks: [
-//         {
-//           name: "Basic Attack",
-//           type: "physical",
-//           damage: 20,
-//           speed: 7,
-//           fuel: 2,
-//           effect: { Desc: "chance to paralyze", chance: "50%", result: "stun" },
-//           chance: 50,
-//           descripition,
-//         },
-//         // Add more attacks as needed
-//       ],
-//       quirks: [
-//         // Quirks that affect this monster's behavior or abilities
-//         // Example: "Furious" - Increases damage output
-//         "furious",
-//         "pirate",
-//       ],
-//       stats: {
-//         // Stats that influence the monster's performance
-//         // Example: "Strength", "Agility", "Intelligence"
-//       },
-//       nature: "Friendly",
-//       // Add more attributes as needed
-//     },
-//     // Add more party members as needed
-//   ],
-
-//   enemyParty: [
-//     {
-//       name: "Sample Guy",
-//       health: 30,
-//       maxHP: 30,
-//       energy: 6,
-//       status: "None",
-//       attacks: [
-//         {
-//           name: "Sample Attack",
-//           type: "magical",
-//           damage: 10,
-//         },
-//         // Add more enemy attacks as needed
-//       ],
-//       quirks: {
-//         // Quirks that affect this enemy's behavior or abilities
-//       },
-//       stats: {
-//         // Stats that influence the enemy's performance
-//       },
-//       nature: "Neutral",
-//       // Add more attributes as needed
-//     },
-//     // Add more enemy party members as needed
-//   ],
-
-//   // ...
-
-//   // Game state for various variables
-//   gameState: {
-//     turn: 1, // Current turn number
-//     currentPlayer: "player", // Current player's turn ("player" or "enemy")
-//     // Add more game state variables as needed
-//   },
-
-//   // ...
-
-//   // Event system (placeholder)
-//   events: {
-//     introEvent: {
-//       text: "Welcome to the game!",
-//       options: [
-//         {
-//           text: "Start the adventure",
-//           action: () => {
-//             // Handle action when this option is chosen
-//             // For example, transition to the first map node
-//           },
-//         },
-//         // Add more options as needed
-//       ],
-//     },
-//     // Add more events as needed
-//   },
-
-//   // Error handling and alerts
-//   alerts: [],
-
-//   // ...
-
-//   // Development mode flag
-//   devMode: false,
-// };
+// On load generate:
+// Generate party or choose a starting PAL
 
 export const newStartingData = {
   // Party system for the player and enemy
@@ -205,42 +106,53 @@ export const newStartingData = {
   // ...
 
   // Game state for various variables
-  gameState: {
+  battleManager: {
     turn: 1, // Current turn number
     currentPlayer: "player", // Current player's turn ("player" or "enemy")
     // Add more game state variables as needed
   },
-
-  playerInfo: {
-    gold: 50,
-    credability: 3,
+  current: {
+    level: null,
+    act: null,
+    scene: null,
+    curEvent: null,
   },
 
-  // ...
-
-  // Event system (placeholder)
-  events: {
-    introEvent: {
-      text: "Welcome to the game!",
-      options: [
-        {
-          text: "Start the adventure",
-          action: () => {
-            // Handle action when this option is chosen
-            // For example, transition to the first map node
-          },
-        },
-        // Add more options as needed
-      ],
+  game: {
+    player: {
+      gold: 50,
+      credability: 3,
+      runes: [],
+      inventory: [],
+      effects: [],
     },
-    // Add more events as needed
-  },
 
-  // Error handling and alerts
-  alerts: [],
-  // ...
-  // Development mode flag
-  devMode: false,
+    // ...
+
+    // Event system (placeholder)
+    events: {
+      introEvent: {
+        text: "Welcome to the game!",
+        options: [
+          {
+            text: "Start the adventure",
+            action: () => {
+              // Handle action when this option is chosen
+              // For example, transition to the first map node
+            },
+          },
+          // Add more options as needed
+        ],
+      },
+      // Add more events as needed
+    },
+
+    // Error handling and alerts
+    alerts: [],
+    // ...
+    // Development mode flag
+    devMode: false,
+  },
 };
 
 export const startingData = {
