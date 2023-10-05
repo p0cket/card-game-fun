@@ -23,6 +23,7 @@ export const SCENES = {
     BOSS: "boss",
     GAMEOVER: "game-over",
     VICTORY: "victory",
+    CHOOSECHARACTER: "choose-character",
 }
 
 /**
@@ -34,7 +35,7 @@ export const SCENES = {
  */
 export function updateLevel(newData, newLevel) {
   const updatedData = { ...newData };
-  updatedData.current.level = newLevel;
+  updatedData.current.level += newLevel;
   return updatedData;
 }
 

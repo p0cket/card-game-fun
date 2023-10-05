@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import { testPals } from "../../consts/pals/pals";
+import { Luminowl, Glowbuggle, Umbrabunny } from "../../consts/pals/pals";
+import { addMonsterToParty } from "../../handlers/partyHandlers_new";
+import {
+  ACTIONS,
+  useDispatchContext,
+  useStateContext,
+} from "../../MainContext";
+import {
+  SCENES,
+  updateLevel,
+  updateScene,
+} from "../../handlers/sceneHandlers_new";
 
 const ChibipalsSelection = () => {
   const [selectedMonster, setSelectedMonster] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
 
-  // const monsters = [
-  //   { id: 1, name: 'Monster1', image: 'monster1.png', description: 'Description of Monster1' },
-  //   { id: 2, name: 'Monster2', image: '', description: 'Description of Monster2' }, // No image available
-  //   { id: 3, name: 'Monster3', image: 'monster3.png', description: 'Description of Monster3' },
-  // ];
-  const [Luminowl, Glowbuggle, Umbrabunny] = [
-    testPals[0],
-    testPals[1],
-    testPals[2],
-  ];
   const monsters = [Luminowl, Glowbuggle, Umbrabunny];
 
-  const handleMonsterSelect = (monster) => {
+  const handkeMonsterClick = (monster) => {
     setSelectedMonster(monster);
     setShowDetails(true);
-  };
-
-  const handleSelect = () => {
-    // dispatch({ type: 'ADD_TO_PARTY', monster: selectedMonster });
-    setShowDetails(false);
   };
 
   const handleGoBack = () => {
@@ -56,6 +53,32 @@ const ChibipalsSelection = () => {
     paddingTop: "100%",
   };
 
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
+
+  const handleSelect = (selectedMonster) => {
+    console.log(
+      `you selected monster: ${selectedMonster.name}`,
+      selectedMonster
+    );
+    // dispatch({ type: 'ADD_TO_PARTY', monster: selectedMonster });
+    setShowDetails(false);
+    const partyWithMonsterAdded = addMonsterToParty(
+      selectedMonster,
+      contextualState.userParty
+    );
+    console.log(`partyWithMonsterAdded:`, partyWithMonsterAdded);
+    // send to next level too
+    const nextState = { ...contextualState, userParty: partyWithMonsterAdded };
+    const nextSceneState = updateScene(nextState, SCENES.MAP);
+    const nextLevelState = updateLevel(nextSceneState, 1);
+    contextualDispatch({
+      type: ACTIONS.UPDATEGAMEDATA,
+      payload: nextLevelState,
+    });
+    console.log(`state after adding monster:`, nextLevelState);
+  };
+
   return (
     <div>
       <h1 style={{ color: "white" }}>Choose Your Chibipal</h1>
@@ -66,7 +89,7 @@ const ChibipalsSelection = () => {
             className={`monster ${
               selectedMonster === monster ? "selected" : ""
             }`}
-            onClick={() => handleMonsterSelect(monster)}
+            onClick={() => handkeMonsterClick(monster)}
             style={{ flex: "1", margin: "10px", cursor: "pointer" }}
           >
             <div
@@ -182,13 +205,13 @@ const ChibipalsSelection = () => {
                     <span>{selectedMonster.stats.defense}</span>
                   </div>
                   {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
-    <span>SpAtk:</span>
-    <span>{selectedMonster.stats.special_attack}</span>
-  </div>
-  <div style={{ display: "flex", justifyContent: "space-between" }}>
-    <span>SpDef:</span>
-    <span>{selectedMonster.stats.special_defense}</span>
-  </div> */}
+                    <span>SpAtk:</span>
+                    <span>{selectedMonster.stats.special_attack}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span>SpDef:</span>
+                    <span>{selectedMonster.stats.special_defense}</span>
+                  </div> */}
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
@@ -196,14 +219,14 @@ const ChibipalsSelection = () => {
                     <span>{selectedMonster.stats.speed}</span>
                   </div>
                   {/* Uncomment and customize as needed
-  <div style={{ display: "flex", justifyContent: "space-between" }}>
-    <span>Size:</span>
-    <span>{selectedMonster.size}</span>
-  </div>
-  <div style={{ display: "flex", justifyContent: "space-between" }}>
-    <span>Weight:</span>
-    <span>{selectedMonster.weight}</span>
-  </div> */}
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span>Size:</span>
+                    <span>{selectedMonster.size}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span>Weight:</span>
+                    <span>{selectedMonster.weight}</span>
+                  </div> */}
                 </div>
                 {selectedMonster.elemental_type}
                 {"-"}
@@ -337,7 +360,9 @@ const ChibipalsSelection = () => {
             </div>
             {/* <p style={{ margin: "4px 0" }}>Lore: {selectedMonster.lore}</p> */}
             <div style={{ padding: "4px" }}>
-              <button onClick={handleSelect}>Select</button>
+              <button onClick={() => handleSelect(selectedMonster)}>
+                Select
+              </button>
               <button onClick={handleGoBack}>Go Back</button>
             </div>
           </div>

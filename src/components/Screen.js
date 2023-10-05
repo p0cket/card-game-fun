@@ -1,6 +1,7 @@
 // different screens
 import React from "react";
-import { SCENES } from "../scenes";
+// import { SCENES } from "../scenes";
+import { SCENES } from "../handlers/sceneHandlers_new";
 // All of our scenes are below
 import Intro from "./scenes/Intro";
 import Event from "./scenes/Event";
@@ -10,15 +11,19 @@ import Reward from "./scenes/Reward";
 import PackReward from "./scenes/PackRewardTemp";
 import Convo from "./scenes/Convo";
 import Battle from "./scenes/Battle";
-import Map from "./scenes/Map";
+// import Map from "./scenes/Map";
+import Map from "./map/Map";
 import Trans from "./scenes/Trans";
 import Victory from "./scenes/Victory";
+import { useDispatchContext, useStateContext } from "../MainContext";
+import ChooseCharacter from "./scenes/ChooseCharacter";
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
   const {
     TRANSITION,
     INTRO,
+    CHOOSECHARACTER,
     BATTLE,
     SHOP,
     MAP,
@@ -33,22 +38,30 @@ const Screen = ({ gameData, dispatch, map }) => {
     VICTORY,
   } = SCENES;
 
-  const levelToSet = gameData.curScene.scene;
-
   console.log(`levelToSet is:`, levelToSet);
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
+
+  // const levelToSet = gameData.curScene.scene;
+  const levelToSet = contextualState.current.scene;
 
   switch (levelToSet) {
     case TRANSITION:
       console.log("transition Screen Case");
       return <Trans gameData={gameData} dispatch={dispatch} />;
     case INTRO:
+      // return <Intro dispatch={dispatch} />;
       return <Intro dispatch={dispatch} />;
+    case CHOOSECHARACTER:
+      return <ChooseCharacter />;
     case SHOP:
       console.log("shop Screen Case");
       return <Shop gameData={gameData} dispatch={dispatch} />;
     case MAP:
       console.log("map Screen Case");
-      return <Map gameData={gameData} dispatch={dispatch} map={map} />;
+      return <Map />;
+    // return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:
       console.log("event Screen Case");
       return <Event gameData={gameData} dispatch={dispatch} />;

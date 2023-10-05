@@ -1,5 +1,8 @@
 import { startingDeck } from "./consts";
 import { EFFECTS } from "../effects";
+import { SCENES } from "../handlers/sceneHandlers_new";
+import { userParty } from "./party/parties";
+
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
 //
 
@@ -8,74 +11,75 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
 
 export const newStartingData = {
   // Party system for the player and enemy
-  playerParty: [
-    {
-      name: "Pupcake",
-      health: 100,
-      maxHP: 100,
-      energy: 5,
-      status: "Fine",
-      flaws: {
-        weak: "poison",
-        resist: "fire",
-      },
-      lvl: 3,
-      exp: 168034502,
-      Abilities: [
-        {
-          name: "Claw Slash",
-          type: "physical",
-          damage: 20,
-          speed: 7,
-          fuel: 2,
-          effect: { Desc: "chance to paralyze", chance: "50%", result: "stun" },
-          chance: 50,
-          descripition: "chance to paralyze",
-          priority: "fast",
-          notSoFast: {
-            name: "Claw counter",
-            type: "physical",
-            damage: 20,
-            speed: 7,
-            fuel: 2,
-            Desc: "chance to paralyze on counter",
-            chance: "50%",
-            result: "stun",
-            priority: "fast",
-          },
-          forceful: {
-            name: "Claw Rage",
-            type: "physical",
-            damage: 20,
-            speed: 7,
-            fuel: 2,
-            Desc: "chance to paralyze on counter",
-            chance: "50%",
-            result: "stun",
-            priority: "fast",
-          },
-        },
-        // Add more attacks as needed
-      ],
-      quirks: [
-        // Quirks that affect this monster's behavior or abilities
-        // Example: "Furious" - Increases damage output
-        ["furious", ["damage buff", 20]],
-        //Allows the user to dodge on his own.
-        ["pirate", ["Illusive chance", "10%"]], //if dodged, "X's pirate wit caused him to evade the attack"
-      ],
-      stats: {
-        // Stats that influence the monster's performance
-        // Example: "Strength", "Agility", "Intelligence"
-      },
-      nature: "Friendly",
-      // Add more attributes as needed
-      uniqueness:
-        "I don't know, any unique attributes we can add based on this individual instance of the monster",
-    },
-    // Add more party members as needed
-  ],
-
+  // playerParty: [
+  //   {
+  //     name: "Pupcake",
+  //     health: 100,
+  //     maxHP: 100,
+  //     energy: 5,
+  //     status: "Fine",
+  //     flaws: {
+  //       weak: "poison",
+  //       resist: "fire",
+  //     },
+  //     lvl: 3,
+  //     exp: 168034502,
+  //     Abilities: [
+  //       {
+  //         name: "Claw Slash",
+  //         type: "physical",
+  //         damage: 20,
+  //         speed: 7,
+  //         fuel: 2,
+  //         effect: { Desc: "chance to paralyze", chance: "50%", result: "stun" },
+  //         chance: 50,
+  //         descripition: "chance to paralyze",
+  //         priority: "fast",
+  //         notSoFast: {
+  //           name: "Claw counter",
+  //           type: "physical",
+  //           damage: 20,
+  //           speed: 7,
+  //           fuel: 2,
+  //           Desc: "chance to paralyze on counter",
+  //           chance: "50%",
+  //           result: "stun",
+  //           priority: "fast",
+  //         },
+  //         forceful: {
+  //           name: "Claw Rage",
+  //           type: "physical",
+  //           damage: 20,
+  //           speed: 7,
+  //           fuel: 2,
+  //           Desc: "chance to paralyze on counter",
+  //           chance: "50%",
+  //           result: "stun",
+  //           priority: "fast",
+  //         },
+  //       },
+  //       // Add more attacks as needed
+  //     ],
+  //     quirks: [
+  //       // Quirks that affect this monster's behavior or abilities
+  //       // Example: "Furious" - Increases damage output
+  //       ["furious", ["damage buff", 20]],
+  //       //Allows the user to dodge on his own.
+  //       ["pirate", ["Illusive chance", "10%"]], //if dodged, "X's pirate wit caused him to evade the attack"
+  //     ],
+  //     stats: {
+  //       // Stats that influence the monster's performance
+  //       // Example: "Strength", "Agility", "Intelligence"
+  //     },
+  //     nature: "Friendly",
+  //     // Add more attributes as needed
+  //     uniqueness:
+  //       "I don't know, any unique attributes we can add based on this individual instance of the monster",
+  //   },
+  //   // Add more party members as needed
+  // ],
+  userParty: userParty,
+  
   enemyParty: [
     {
       name: "Sample Guy",
@@ -103,8 +107,6 @@ export const newStartingData = {
     // Add more enemy party members as needed
   ],
 
-  // ...
-
   // Game state for various variables
   battleManager: {
     turn: 1, // Current turn number
@@ -112,9 +114,9 @@ export const newStartingData = {
     // Add more game state variables as needed
   },
   current: {
-    level: null,
-    act: null,
-    scene: null,
+    level: 0,
+    act: 1,
+    scene: SCENES.INTRO,
     curEvent: null,
   },
 

@@ -21,6 +21,7 @@ export const ACTIONS = {
   SET_LEVEL: "SET_LEVEL",
   SET_INVENTORY: "SET_INVENTORY",
   ATTACK: "ATTACK",
+  UPDATEGAMEDATA: "UPDATEGAMEDATA",
 };
 
 export const MainProvider = ({ children }) => {
@@ -33,6 +34,8 @@ export const MainProvider = ({ children }) => {
   function reducer(state, action) {
     console.log(`reducer HIT`);
     switch (action.type) {
+      case ACTIONS.UPDATEGAMEDATA:
+        return { ...state, ...action.payload };
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload };
       case ACTIONS.ATTACK:
@@ -56,8 +59,6 @@ export const MainProvider = ({ children }) => {
         return state;
     }
   }
-
-
 
   return (
     <stateContext.Provider value={state}>

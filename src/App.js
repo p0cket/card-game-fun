@@ -8,7 +8,6 @@ import { useDispatchContext, useStateContext } from "./MainContext";
 import "./scanlines.css";
 import "./styles.css";
 import "./index.css";
-// import { motion } from "framer-motion/dist/framer-motion"
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData);
@@ -26,7 +25,6 @@ export default function App() {
     <div
       className="App scanlines"
       style={{
-        // backgroundImage: "url(/backgrounds/gridBGlight.png)",
         backgroundImage: "url(/backgrounds/gridBGdark.png)",
         backgroundRepeat: "repeat",
         backgroundSize: "800px 500px",

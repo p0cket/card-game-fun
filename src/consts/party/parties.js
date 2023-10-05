@@ -50,11 +50,11 @@ export const Party = {
     }
   };
   
-  const userPartyMember = {
-    name: "Player1Monster",
-    level: 10,
+//   const userPartyMember = {
+//     name: "Player1Monster",
+//     level: 10,
     // Other properties of the party member...
-  };
+//   };
   // Example usage:
-  addPartyMemberToSlot(userParty, Party.SLOT_1, userPartyMember); // Add a member to Slot 1
+//   addPartyMemberToSlot(userParty, Party.SLOT_1, userPartyMember); // Add a member to Slot 1
   

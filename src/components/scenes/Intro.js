@@ -10,14 +10,12 @@ import {  AnimatePresence } from "framer-motion";
 
 import Dialog from "../common/Dialog";
 import ThemedButton from "../common/ThemedButton";
-import { useDispatchContext, useStateContext } from "../../MainContext";
+import { ACTIONS, useDispatchContext, useStateContext } from "../../MainContext";
 import { getRandomPALAcronym } from "../../consts/fun/pal";
+import { SCENES, updateLevel, updateScene } from "../../handlers/sceneHandlers_new";
 
 const Intro = ({ dispatch }) => {
-  const loadNextLevel = () => {
-    console.log(`loadNextLevel`);
-    dispatch(setSceneAction());
-  };
+
   const styles = {
     fontStyle: {
       fontFamily: "Silkscreen",
@@ -33,6 +31,19 @@ const Intro = ({ dispatch }) => {
 
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
+
+  const loadNextLevel = () => {
+    console.log(`loadNextLevel`);
+    dispatch(setSceneAction());
+
+
+    const nextSceneState = updateScene(contextualState, SCENES.CHOOSECHARACTER)
+    const nextLevelState = updateLevel(nextSceneState, 1)
+    console.log('cont state B4:',contextualState)
+    contextualDispatch(nextLevelState, ACTIONS.UPDATEGAMEDATA)
+    console.log('next level state:',nextLevelState)
+    console.log('cont state:',contextualState)
+  };
 
 
   const circleVariants = {
@@ -67,22 +78,17 @@ const Intro = ({ dispatch }) => {
   );
 
   const [explode, setExplode] = useState(false);
-
   const [startAnimation, setStartAnimation] = useState(false);
 
 
   return (
     <>
-      {/* <button onClick={loadNextLevel}>go</button> */}
       <div>
         <div
           className="font-silkscreen flex flex-col items-center
          bg-repeat bg-cover bg-white text-white p-5"
         >
-          {/* small screens should have this text smaller */}
-          {/* <div className="bg-green-600 text-white p-5 text-4xl sm:text-2xl font-silkscreen">
-            Super Chibipal Slayer!
-          </div>  */}
+           <div style={{color: 'gray'}}>Rebirth v0.21</div>
           <div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -95,11 +101,6 @@ const Intro = ({ dispatch }) => {
             </motion.div>
           </div>
           <div>
-            {/* <img
-              style={{ width: 500, height: 500 }}
-              src={heroFrontImg}
-              alt="Hero Frontside"
-            /> */}
             <img
               style={{ width: 240, height: 200, padding: "20px" }}
               src="/creatures/Chibipal.png"
@@ -124,8 +125,6 @@ const Intro = ({ dispatch }) => {
               {explode && <Explosion />}
             </AnimatePresence>
           </div>
-     
-
           <div style={{ color: "white" }}>
             {JSON.stringify(contextualState)}
           </div>
