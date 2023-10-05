@@ -21,7 +21,6 @@ function MenuButtonGroup({ togglePopup }) {
           padding: "4px",
         }}
       >
-        {/* 30{clockEmoji}  */}
         10{energyEmoji.repeat(10)}
       </div>
       <div

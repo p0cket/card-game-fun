@@ -6,7 +6,7 @@
 // Affinity/Type: Elemental or creature type.
 // Experience Points (XP): To track monster progression and leveling.
 
-const Luminowl = {
+export const Luminowl = {
   id: 1,
   name: "Luminowl",
   elemental_type: "Light",
@@ -40,7 +40,7 @@ const Luminowl = {
   lore: "Legends speak of Luminowl's ability to bring light and wisdom to those in need.",
 };
 
-const Shadowstalker = {
+export const Shadowstalker = {
   id: 2,
 
   name: "Shadowstalker",
@@ -75,7 +75,7 @@ const Shadowstalker = {
   lore: "Legends speak of Shadowstalker's ability to strike from the shadows with unmatched precision.",
 };
 
-const Infernodragon = {
+export const Infernodragon = {
   id: 3,
 
   name: "Infernodragon",
@@ -110,7 +110,7 @@ const Infernodragon = {
   lore: "Legends speak of Infernodragon's ability to bring devastation with its fiery breath.",
 };
 
-const Aquaphoenix = {
+export const Aquaphoenix = {
   id: 4,
 
   name: "Aquaphoenix",
@@ -145,7 +145,7 @@ const Aquaphoenix = {
   lore: "Legends speak of Aquaphoenix's ability to bring life-giving rains to drought-stricken lands.",
 };
 
-const Verdantshifter = {
+export const Verdantshifter = {
   id: 5,
 
   name: "Verdantshifter",
@@ -180,7 +180,7 @@ const Verdantshifter = {
   lore: "Legends speak of Verdantshifter's ability to restore balance to nature with its morphing skills.",
 };
 
-const Technotitan = {
+export const Technotitan = {
   id: 6,
 
   name: "Technotitan",
@@ -215,9 +215,8 @@ const Technotitan = {
   lore: "Legends speak of Technotitan's ability to defend cities and civilizations from threats with its advanced technology.",
 };
 
-const Glowbuggle = {
+export const Glowbuggle = {
   id: 7,
-
   name: "Glowbuggle",
   elemental_type: "Light",
   creature_type: "Firefly",
@@ -253,7 +252,7 @@ const Glowbuggle = {
   lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
 };
 
-const Umbrabunny = {
+export const Umbrabunny = {
   id: 8,
   name: "Umbrabunny",
   elemental_type: "Dark",
@@ -294,5 +293,4 @@ export const testPals = [
   Aquaphoenix,
   Verdantshifter,
   Technotitan,
-
 ];
