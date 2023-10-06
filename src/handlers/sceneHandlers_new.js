@@ -9,22 +9,22 @@
 //   };
 
 export const SCENES = {
-    TRANSITION: "transition",
-    INTRO: "intro",
-    SHOP: "shop",
-    MAP: "map",
-    EVENT: "event",
-    REST: "rest",
-    REWARD: "reward",
-    PACKREWARD: "pack-reward",
-    CONVO: "convo",
-    BATTLE: "battle",
-    MINIBOSS: "miniboss",
-    BOSS: "boss",
-    GAMEOVER: "game-over",
-    VICTORY: "victory",
-    CHOOSECHARACTER: "choose-character",
-}
+  TRANSITION: "transition",
+  INTRO: "intro",
+  SHOP: "shop",
+  MAP: "map",
+  EVENT: "event",
+  REST: "rest",
+  REWARD: "reward",
+  PACKREWARD: "pack-reward",
+  CONVO: "convo",
+  BATTLE: "battle",
+  MINIBOSS: "miniboss",
+  BOSS: "boss",
+  GAMEOVER: "game-over",
+  VICTORY: "victory",
+  CHOOSECHARACTER: "choose-character",
+};
 
 /**
  * Update the current level.
@@ -64,6 +64,13 @@ export function updateScene(newData, newScene) {
   updatedData.current.scene = newScene;
   return updatedData;
 }
+
+export const changeLevel = (state, scene) => {
+  console.log(`state before changing level:`, state, `also scene:`, scene);
+  // send to next level
+  const nextSceneState = updateScene(state, scene);
+  const nextLevelState = updateLevel(nextSceneState, 1);
+};
 
 /**
  * Update the current event.

@@ -13,16 +13,21 @@ import BattleBotDisplay from "../battle/BattleBotDisplay";
 import UserPartyDisplay from "../battle/UserPartyDisplay";
 import MenuButtonGroup from "../battle/MenuButtonGroup";
 import { useDispatchContext, useStateContext } from "../../MainContext";
+import { startingData } from "../../consts/startingData";
+import { Party } from "../../consts/party/parties";
 
-const Battle = ({ gameData, dispatch }) => {
+// const Battle = ({ gameData, dispatch }) => {
+const Battle = () => {
+  const gameData = startingData;
+
   const [popupOpen, setPopupOpen] = useState(false);
   const togglePopup = () => setPopupOpen(!popupOpen);
   const playCard = (card) => {
-    dispatch(playCardAction(card));
+    // dispatch(playCardAction(card));
   };
 
   const endTurn = () => {
-    dispatch(endTurnAction());
+    // dispatch(endTurnAction());
   };
   const { health, energy, maxHP } = gameData.hero;
   const yourVariants = {
@@ -53,11 +58,11 @@ const Battle = ({ gameData, dispatch }) => {
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
 
-const ourParty = contextualState.playerParty
-const ourCurrentMon = ourParty[0]
-console.log(`ourCurrentMon`,ourCurrentMon,`curMON`,ourParty)
+  const ourParty = contextualState.userParty;
+  console.log(`ourCurrentMonSHOULDBE`, ourParty);
 
-
+  const ourCurrentMon = ourParty[Party.SLOT_1];
+  console.log(`ourCurrentMon`, ourCurrentMon, `curMON`, ourParty);
 
   // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
@@ -67,7 +72,6 @@ console.log(`ourCurrentMon`,ourCurrentMon,`curMON`,ourParty)
         flexDirection: "column",
       }}
     >
-
       <div style={{}}>
         <div>
           <div
@@ -87,7 +91,6 @@ console.log(`ourCurrentMon`,ourCurrentMon,`curMON`,ourParty)
               // health={health}
               // maxHP={maxHP}
               // energy={energy}
-
             />
           </div>
         </div>

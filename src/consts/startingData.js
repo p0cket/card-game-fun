@@ -1,7 +1,8 @@
 import { startingDeck } from "./consts";
 import { EFFECTS } from "../effects";
 import { SCENES } from "../handlers/sceneHandlers_new";
-import { userParty } from "./party/parties";
+import { opponentParty, userParty } from "./party/parties";
+import { generateMap } from "./mapGenerator_new";
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
 //
@@ -78,34 +79,35 @@ export const newStartingData = {
   //   },
   //   // Add more party members as needed
   // ],
+  // a party of one commander monster that has a strat - and a party of 5 monsters
   userParty: userParty,
-  
-  enemyParty: [
-    {
-      name: "Sample Guy",
-      health: 30,
-      maxHP: 30,
-      energy: 6,
-      status: "None",
-      attacks: [
-        {
-          name: "Sample Attack",
-          type: "magical",
-          damage: 10,
-        },
-        // Add more enemy attacks as needed
-      ],
-      quirks: {
-        // Quirks that affect this enemy's behavior or abilities
-      },
-      stats: {
-        // Stats that influence the enemy's performance
-      },
-      nature: "Neutral",
-      // Add more attributes as needed
-    },
-    // Add more enemy party members as needed
-  ],
+  opponentParty: opponentParty,
+  // enemyParty: [
+  //   {
+  //     name: "Sample Guy",
+  //     health: 30,
+  //     maxHP: 30,
+  //     energy: 6,
+  //     status: "None",
+  //     attacks: [
+  //       {
+  //         name: "Sample Attack",
+  //         type: "magical",
+  //         damage: 10,
+  //       },
+  //       // Add more enemy attacks as needed
+  //     ],
+  //     quirks: {
+  //       // Quirks that affect this enemy's behavior or abilities
+  //     },
+  //     stats: {
+  //       // Stats that influence the enemy's performance
+  //     },
+  //     nature: "Neutral",
+  //     // Add more attributes as needed
+  //   },
+  //   // Add more enemy party members as needed
+  // ],
 
   // Game state for various variables
   battleManager: {
@@ -128,6 +130,7 @@ export const newStartingData = {
       inventory: [],
       effects: [],
     },
+    map: generateMap(),
 
     // ...
 

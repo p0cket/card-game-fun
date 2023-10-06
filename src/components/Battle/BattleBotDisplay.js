@@ -8,6 +8,8 @@ import { useDispatchContext, useStateContext } from "../../MainContext";
 
 // function BattleBotDisplay({ gameData, health, maxHP, energy }) {
 function BattleBotDisplay({ ourCurrentMon }) {
+
+  console.log(`battleBot currentMon`,ourCurrentMon)
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],
@@ -20,8 +22,8 @@ function BattleBotDisplay({ ourCurrentMon }) {
     },
   };
 
-  const contextualState = useStateContext();
-  const contextualDispatch = useDispatchContext();
+  // const contextualState = useStateContext();
+  // const contextualDispatch = useDispatchContext();
   return (
     <div className="battleBot">
       {/* @TODO: reverse left and right here */}
@@ -63,7 +65,8 @@ function BattleBotDisplay({ ourCurrentMon }) {
             <span style={{fontSize: '12px'}}>
               {" "}
               <span style={{ color: "gray" }}>lvl</span>
-              {JSON.stringify(contextualState.playerParty[0].lvl)}
+              {JSON.stringify(ourCurrentMon.lvl)}
+              {/* {JSON.stringify(contextualState.playerParty[0].lvl)} */}
               {/* {gameData.hero.effects.buff ? (
                 <span>{gameData.hero.effects.buff}</span>
               ) : (

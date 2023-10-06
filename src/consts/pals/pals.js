@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 // Energy/Mana (MP): Resource used for monster abilities.
 // Level: The monster's level.
 // Attack Power: Base damage dealt by the monster's attacks.
@@ -5,6 +7,38 @@
 // Speed: Determines turn order for monsters.
 // Affinity/Type: Elemental or creature type.
 // Experience Points (XP): To track monster progression and leveling.
+
+export const monsterPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  elemental_type: PropTypes.string.isRequired,
+  creature_type: PropTypes.string.isRequired,
+  specialty_group: PropTypes.string.isRequired,
+  nature: PropTypes.string.isRequired,
+  quirks: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stats: PropTypes.shape({
+    hp: PropTypes.number.isRequired,
+    max_hp: PropTypes.number.isRequired,
+    attack: PropTypes.number.isRequired,
+    defense: PropTypes.number.isRequired,
+    special_attack: PropTypes.number.isRequired,
+    special_defense: PropTypes.number.isRequired,
+    speed: PropTypes.number.isRequired,
+  }).isRequired,
+  strengths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  weaknesses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cost: PropTypes.number.isRequired,
+  lvl: PropTypes.number.isRequired,
+  experience: PropTypes.number.isRequired,
+  moves: PropTypes.arrayOf(PropTypes.string).isRequired,
+  possible_moves: PropTypes.arrayOf(PropTypes.string).isRequired,
+  passive_ability: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+  weight: PropTypes.string.isRequired,
+  lore: PropTypes.string.isRequired,
+});
 
 export const Luminowl = {
   id: 1,
@@ -27,7 +61,7 @@ export const Luminowl = {
   strengths: ["Dark"],
   weaknesses: ["Fire"],
   cost: 500,
-  level: 50,
+  lvl: 50,
   experience: 5000,
   moves: ["Light Beam", "Wise Gaze", "Feather Glide"],
   possible_moves: ["Luminous Aura", "Mystic Sight", "Soothing Melody"],
@@ -62,7 +96,7 @@ export const Shadowstalker = {
   strengths: ["Nature"],
   weaknesses: ["Light"],
   cost: 500,
-  level: 50,
+  lvl: 50,
   experience: 5000,
   moves: ["Shadow Pounce", "Stealth Strike", "Dark Cloak"],
   possible_moves: ["Shadowmeld", "Nightmare Slash", "Ambush"],
@@ -97,7 +131,7 @@ export const Infernodragon = {
   strengths: ["Grass", "Bug"],
   weaknesses: ["Water", "Ice"],
   cost: 600,
-  level: 55,
+  lvl: 55,
   experience: 5500,
   moves: ["Inferno Roar", "Dragon Blaze", "Firestorm"],
   possible_moves: ["Magma Eruption", "Dragon Rage", "Heat Wave"],
@@ -132,7 +166,7 @@ export const Aquaphoenix = {
   strengths: ["Fire"],
   weaknesses: ["Electric", "Ice"],
   cost: 550,
-  level: 52,
+  lvl: 52,
   experience: 5200,
   moves: ["Aqua Torrent", "Phoenix Glide", "Rain Dance"],
   possible_moves: ["Tidal Wave", "Hydroburst", "Aqua Healing"],
@@ -167,7 +201,7 @@ export const Verdantshifter = {
   strengths: ["Water", "Ground"],
   weaknesses: ["Fire", "Ice"],
   cost: 450,
-  level: 48,
+  lvl: 48,
   experience: 4800,
   moves: ["Nature's Transformation", "Shapeshift", "Eco Restoration"],
   possible_moves: ["Plant Manipulation", "Camouflage", "Adaptive Form"],
@@ -202,7 +236,7 @@ export const Technotitan = {
   strengths: ["Electric", "Steel"],
   weaknesses: ["Water", "Nature"],
   cost: 750,
-  level: 60,
+  lvl: 60,
   experience: 6000,
   moves: ["Mechanical Slam", "Energy Beam", "Defense Protocol"],
   possible_moves: ["Rocket Punch", "Repair Mode", "Techno Shield"],
@@ -235,7 +269,7 @@ export const Glowbuggle = {
   strengths: ["Dark"],
   weaknesses: ["Electric", "Ice"],
   cost: 400,
-  level: 40,
+  lvl: 40,
   experience: 4000,
   moves: ["Luminous Flight", "Glowing Charm", "Warm Embrace"],
   possible_moves: [
@@ -272,7 +306,7 @@ export const Umbrabunny = {
   strengths: ["Light"],
   weaknesses: ["Fighting", "Psychic"],
   cost: 450,
-  level: 48,
+  lvl: 48,
   experience: 4800,
   moves: ["Emotion Drain", "Cute Charm", "Comforting Hug"],
   possible_moves: ["Dark Aura", "Empathy Wave", "Peaceful Presence"],
@@ -283,6 +317,46 @@ export const Umbrabunny = {
   size: "Small",
   weight: "Light",
   lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
+};
+
+export const Recycleroo = {
+  id: 9,
+  "name": "Recycleroo",
+  "elemental_type": "Nature",
+  "creature_type": "Kangaroo",
+  "specialty_group": "Eco-Protector",
+  "nature": "Environmentally Conscious",
+  "quirks": ["Recycling Expert", "Projectile Thrower"],
+  "stats": {
+    "hp": 110,
+    "attack": 100,
+    "defense": 80,
+    "special_attack": 60,
+    "special_defense": 80,
+    "speed": 90
+  },
+  "strengths": ["Electric", "Ground"],
+  "weaknesses": ["Fire", "Ice"],
+  "cost": 550,
+  "lvl": 55,
+  "experience": 5500,
+  "moves": ["Recycle Rush", "Projectile Toss", "Leaf Shield"],
+  "possible_moves": ["Trash Bash", "Nature's Wrath", "Sorting Cyclone"],
+  "passive_ability": "Eco-Warrior",
+  "image": "recycleroo_image.png",
+  "description": "A kangaroo that collects and sorts recyclables but throws them as projectiles.",
+  "size": "Medium",
+  "weight": "Moderate",
+  "lore": "Recycleroo is known for its dedication to environmental protection, using recycled materials to defend nature."
+};
+
+
+export const shoe = {
+  lore: "Really? A shoe?",
+};
+
+export const wolfjobb = {
+  lore: "A wolf with a amazing work ethic",
 };
 
 export const testPals = [
