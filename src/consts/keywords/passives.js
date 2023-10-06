@@ -101,5 +101,6 @@ const passiveAbilities = {
     },
   };
   
+  //  undying like kenny
   export default passiveAbilities;
   
