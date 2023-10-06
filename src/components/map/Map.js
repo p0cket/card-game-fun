@@ -1,6 +1,11 @@
 import React from "react";
-import { useDispatchContext, useStateContext } from "../../MainContext";
+import {
+  ACTIONS,
+  useDispatchContext,
+  useStateContext,
+} from "../../MainContext";
 import { motion, useAnimation } from "framer-motion";
+import { changeLevel } from "../../handlers/sceneHandlers_new";
 
 function Map() {
   const containerStyle = {
@@ -59,6 +64,15 @@ function Map() {
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
 
+  const handleChangeLevel = (state, scene) => {
+    const stateWithChangedLevel = changeLevel(state, scene);
+    contextualDispatch({
+      type: ACTIONS.UPDATEGAMEDATA,
+      payload: stateWithChangedLevel,
+    });
+    console.log(`state after changing level:`, contextualState);
+  };
+
   const ourParty = contextualState.userParty;
   // Function to render details for a monster
   const renderMonsterDetails = (monster) => {
@@ -116,14 +130,28 @@ function Map() {
         <div style={sectionStyle}>
           <h2 style={headingStyle}>Map Stuff</h2>
           <p>Choose your path:</p>
-          <button style={buttonStyle}>Battle Ahead</button>
+          <div>
+            {" "}
+            {/* you see a shadowy figure, you can feed it or not. "feed me"
+          if you feed it it joins your party. you have bait/food I guess */}
+            {contextualState.game.map[contextualState.current.level].map(
+              (option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleChangeLevel(contextualState, option)}
+                  style={buttonStyle}
+                >
+                  {option}
+                </button>
+              )
+            )}
+          </div>
+          {/* <button style={buttonStyle}>Battle Ahead</button>
           <button style={buttonStyle}>investigate the market</button>
           <button style={buttonStyle}>
             ???
-            {/* you see a shadowy figure, you can feed it or not. "feed me"
-          if you feed it it joins your party. you have bait/food I guess */}
           </button>
-          <button style={buttonStyle}>Explore</button>
+          <button style={buttonStyle}>Explore</button> */}
         </div>
         <h2 style={headingStyle}>Prepare Your Party</h2>
         <div

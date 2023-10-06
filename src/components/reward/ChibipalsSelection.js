@@ -19,7 +19,7 @@ const ChibipalsSelection = () => {
 
   const monsters = [Luminowl, Glowbuggle, Umbrabunny];
 
-  const handkeMonsterClick = (monster) => {
+  const handleMonsterClick = (monster) => {
     setSelectedMonster(monster);
     setShowDetails(true);
   };
@@ -71,13 +71,17 @@ const ChibipalsSelection = () => {
     // send to next level too
     const nextState = { ...contextualState, userParty: partyWithMonsterAdded };
     const nextSceneState = updateScene(nextState, SCENES.MAP);
-    const nextLevelState = updateLevel(nextSceneState, 1);
+    const nextLevelState = updateLevel(nextSceneState, 0);
     contextualDispatch({
       type: ACTIONS.UPDATEGAMEDATA,
       payload: nextLevelState,
     });
     console.log(`state after adding monster:`, nextLevelState);
   };
+
+
+
+ 
 
   return (
     <div>
@@ -89,7 +93,7 @@ const ChibipalsSelection = () => {
             className={`monster ${
               selectedMonster === monster ? "selected" : ""
             }`}
-            onClick={() => handkeMonsterClick(monster)}
+            onClick={() => handleMonsterClick(monster)}
             style={{ flex: "1", margin: "10px", cursor: "pointer" }}
           >
             <div
