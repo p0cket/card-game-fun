@@ -10,7 +10,7 @@ export function generateNextLevelOptions() {
     const randomValue = Math.random(); // Generate a random number between 0 and 1
 
     if (randomValue < 0.5) {
-      options.push(BATTLE); // 50% chance for Monster
+      options.push(BATTLE); // 50% chance for Monster      
     } else if (randomValue < 0.7) {
       options.push(EVENT); // 20% chance for Event
     // }

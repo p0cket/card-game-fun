@@ -9,7 +9,7 @@ export const Trainer = {
       // Add more items as needed
     ],
   },
-  monsterNames: [
+  monsters: [
     { name: "Bunbun", level: 2 },
     { name: "FireDrake", level: 3 },
     { name: "WaterSplash", level: 4 },
@@ -20,6 +20,8 @@ export const Trainer = {
     lose: "Better luck next time!",
     // Add more dialogue lines as needed
   },
+  // Maybe spirit. Spirit would be a powerful buff from a dead monster. This could be the 
+  // commander ability
   // Add other trainer properties like image, location, etc.
 };
 
@@ -30,7 +32,7 @@ export const hikerBrak = {
     currency: 300,
     items: [{ name: "Rock Candy", quantity: 2 }],
   },
-  monsterNames: [
+  monsters: [
     { name: "Bunbun", level: 6 },
     { name: "Rockzilla", level: 8 },
   ],
@@ -48,7 +50,7 @@ export const mysticWillow = {
     currency: 400,
     items: [{ name: "Enchanted Orb", quantity: 1 }],
   },
-  monsterNames: [
+  monsters: [
     { name: "Sparklefox", level: 10 },
     { name: "Moonshadow", level: 12 },
   ],
@@ -66,7 +68,7 @@ export const acePilotSkyler = {
     currency: 600,
     items: [{ name: "Jet Fuel", quantity: 3 }],
   },
-  monsterNames: [
+  monsters: [
     { name: "Thunderhawk", level: 15 },
     { name: "Cyclonejet", level: 17 },
   ],
@@ -84,7 +86,7 @@ export const scientistTesla = {
     currency: 500,
     items: [{ name: "Tesla Coil", quantity: 1 }],
   },
-  monsterNames: [
+  monsters: [
     { name: "Electroray", level: 9 },
     { name: "Voltorbolt", level: 11 },
   ],
@@ -94,3 +96,34 @@ export const scientistTesla = {
     lose: "You've caused a short circuit in my plans. Well done.",
   },
 };
+
+export const basicTrainers = [
+  Trainer,
+  hikerBrak,
+  mysticWillow,
+  acePilotSkyler,
+  scientistTesla,
+  // Add more basic trainers as needed
+];
+
+export const allTrainers = [
+  ...basicTrainers,
+  // Add more advanced trainers as needed
+  // ...advancedTrainers,
+  // ...specialTrainers,
+  // ...otherTrainers,
+  // ...etc.
+];
+
+// What trainerNames does is it returns an array of trainer names.
+export const trainerNames = allTrainers.map((trainer) => trainer.name);
+
+// trainerNamesAndLevels returns an array of objects with the trainer name and level.
+// This is useful for displaying trainer names and levels in a table or list.
+// Example usage:
+// const trainerNamesAndLevels = trainerNamesAndLevels();
+// console.log(trainerNamesAndLevels); // [{ name: "Trainer Name", level: 2 }
+export const trainerNamesAndLevels = allTrainers.map((trainer) => ({
+  name: trainer.name,
+  level: trainer.monsters[0].level,
+}));

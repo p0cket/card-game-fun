@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 
 import "./../scenes/Battle.css";
 import "./../common/Button.css";
+import { useDispatchContext, useStateContext } from "../../MainContext";
 
 function BattleTopDisplay({ gameData }) {
   const { name, status, poison, health, maxHP, img, nextAttack } =
@@ -20,6 +21,9 @@ function BattleTopDisplay({ gameData }) {
       },
     },
   };
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
 
   return (
     <div className="battleTop">

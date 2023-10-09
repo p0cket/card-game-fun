@@ -131,17 +131,18 @@ const Intro = ({ dispatch }) => {
             />
             <br />
           </div>{" "}
-          <div style={{ position: "relative", height: "100vh" }}>
+          {/* <div style={{ position: "relative", height: "100vh" }}>
             <AnimatePresence>
               {!explode && <Circle onComplete={() => setExplode(true)} />}
               {explode && <Explosion />}
             </AnimatePresence>
-          </div>
+          </div> */} 
+            {/* <button onClick={() => setStartAnimation(true)}>
+              Start Animation
+            </button> */}
           <div style={{ padding: "30px" }}>
             {" "}
-            <button onClick={() => setStartAnimation(true)}>
-              Start Animation
-            </button>
+         
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
