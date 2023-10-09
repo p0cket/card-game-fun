@@ -60,6 +60,13 @@ export function updateAct(newData, newAct) {
  * @returns {object} - A copy of the updated data object with the scene updated.
  */
 export function updateScene(newData, newScene) {
+  console.log(
+    `newData, newScene`,
+    newData,
+    newScene,
+    `newData.current.scene`,
+    // newData?.current?.scene
+  );
   const updatedData = { ...newData };
   updatedData.current.scene = newScene;
   return updatedData;
