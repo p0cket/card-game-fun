@@ -70,9 +70,10 @@ const ChibipalsSelection = () => {
     //   contextualState.userParty
     // );
 
-    console.log(`partyWithMonsterAdded:`, partyWithMonsterAdded);
-    // send to next level too
-    const nextState = { ...contextualState, userParty: partyWithMonsterAdded };
+    // console.log(`partyWithMonsterAdded:`, partyWithMonsterAdded);
+    // // send to next level too
+    // const nextState = { ...contextualState, userParty: partyWithMonsterAdded };
+    const nextState = { ...contextualState}
     const nextSceneState = updateScene(nextState, SCENES.MAP);
     const nextLevelState = updateLevel(nextSceneState, 0);
     contextualDispatch({
