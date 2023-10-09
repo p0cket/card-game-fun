@@ -66,27 +66,27 @@ const Screen = ({ gameData, dispatch, map }) => {
 
       // If the scene is a battle, add a new opponent to the opponentParty
 
-      const stateWithTrainers = contextualState.game.map[
-        contextualState.current.level
-      ].map((option, index) => {
-        if (option === SCENES.BATTLE) {
-          // load new
-          const stateWithEnemyParty = generateEnemyParty(
-            contextualState,
-            hikerBrak
-          );
-          contextualDispatch({
-            type: ACTIONS.UPDATEGAMEDATA,
-            payload: stateWithEnemyParty,
-          });
+      // const stateWithTrainers = contextualState.game.map[
+      //   contextualState.current.level
+      // ].map((option, index) => {
+      //   if (option === SCENES.BATTLE) {
+      //     // load new
+      //     const stateWithEnemyParty = generateEnemyParty(
+      //       contextualState,
+      //       hikerBrak
+      //     );
+      //     contextualDispatch({
+      //       type: ACTIONS.UPDATEGAMEDATA,
+      //       payload: stateWithEnemyParty,
+      //     });
 
-          console.log(
-            `[!]state after adding an opponent:`,
-            contextualState,
-            contextualState.opponentParty
-          );
-        }
-      });
+      //     console.log(
+      //       `[!]state after adding an opponent:`,
+      //       contextualState,
+      //       contextualState.opponentParty
+      //     );
+      //   }
+      // });
       return <Map />;
     // return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:
