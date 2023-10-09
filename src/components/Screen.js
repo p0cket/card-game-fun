@@ -15,8 +15,10 @@ import Battle from "./scenes/Battle";
 import Map from "./map/Map";
 import Trans from "./scenes/Trans";
 import Victory from "./scenes/Victory";
-import { useDispatchContext, useStateContext } from "../MainContext";
+import { ACTIONS, useDispatchContext, useStateContext } from "../MainContext";
 import ChooseCharacter from "./scenes/ChooseCharacter";
+import { generateEnemyParty } from "../handlers/Battle/prepareBattle";
+import { hikerBrak } from "../consts/party/trainers";
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -60,6 +62,31 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Shop gameData={gameData} dispatch={dispatch} />;
     case MAP:
       console.log("map Screen Case");
+
+
+      // If the scene is a battle, add a new opponent to the opponentParty
+
+      const stateWithTrainers = contextualState.game.map[
+        contextualState.current.level
+      ].map((option, index) => {
+        if (option === SCENES.BATTLE) {
+          // load new
+          const stateWithEnemyParty = generateEnemyParty(
+            contextualState,
+            hikerBrak
+          );
+          contextualDispatch({
+            type: ACTIONS.UPDATEGAMEDATA,
+            payload: stateWithEnemyParty,
+          });
+
+          console.log(
+            `[!]state after adding an opponent:`,
+            contextualState,
+            contextualState.opponentParty
+          );
+        }
+      });
       return <Map />;
     // return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:

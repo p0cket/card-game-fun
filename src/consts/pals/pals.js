@@ -56,6 +56,7 @@ export const Luminowl = {
     special_defense: 90,
     speed: 110,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Dark"],
   weaknesses: ["Fire"],
   cost: 500,
@@ -66,7 +67,8 @@ export const Luminowl = {
   passive_ability: "Guiding Wisdom",
   commander_ability: {
     name: "Luminous Nova",
-    description: "Creates a blinding explosion of light, damaging all enemies and boosting the team's accuracy and evasion.",
+    description:
+      "Creates a blinding explosion of light, damaging all enemies and boosting the team's accuracy and evasion.",
   },
   image: "/pals/Luminowl_pxl.png",
   description:
@@ -93,6 +95,7 @@ export const Shadowstalker = {
     special_defense: 60,
     speed: 120,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Nature"],
   weaknesses: ["Light"],
   cost: 500,
@@ -103,7 +106,8 @@ export const Shadowstalker = {
   passive_ability: "Cloaked in Shadows",
   commander_ability: {
     name: "Shadow Assault",
-    description: "Launches a surprise attack from the shadows, dealing massive damage and inflicting the 'Shadowed' status on the target, reducing their accuracy and evasion.",
+    description:
+      "Launches a surprise attack from the shadows, dealing massive damage and inflicting the 'Shadowed' status on the target, reducing their accuracy and evasion.",
   },
   image: "/creatures/Chibipal.png",
   description:
@@ -130,6 +134,7 @@ export const Infernodragon = {
     special_defense: 110,
     speed: 100,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Grass", "Bug"],
   weaknesses: ["Water", "Ice"],
   cost: 600,
@@ -140,7 +145,8 @@ export const Infernodragon = {
   passive_ability: "Scorching Scales",
   commander_ability: {
     name: "Inferno Apocalypse",
-    description: "Unleashes an apocalyptic firestorm, dealing massive area damage over time to all enemies and leaving them with the 'Burned' status effect.",
+    description:
+      "Unleashes an apocalyptic firestorm, dealing massive area damage over time to all enemies and leaving them with the 'Burned' status effect.",
   },
   image: "/creatures/Chibipal.png",
   description:
@@ -167,6 +173,7 @@ export const Aquaphoenix = {
     special_defense: 100,
     speed: 120,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Fire"],
   weaknesses: ["Electric", "Ice"],
   cost: 550,
@@ -177,7 +184,8 @@ export const Aquaphoenix = {
   passive_ability: "Aqua Resurrection",
   commander_ability: {
     name: "Deluge of Renewal",
-    description: "Summons a massive tidal wave, healing the team to full health and removing all negative status effects while damaging enemies.",
+    description:
+      "Summons a massive tidal wave, healing the team to full health and removing all negative status effects while damaging enemies.",
   },
   image: "/creatures/Chibipal.png",
   description:
@@ -204,6 +212,7 @@ export const Verdantshifter = {
     special_defense: 120,
     speed: 110,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Water", "Ground"],
   weaknesses: ["Fire", "Ice"],
   cost: 450,
@@ -214,7 +223,8 @@ export const Verdantshifter = {
   passive_ability: "Nature's Harmony",
   commander_ability: {
     name: "Nature's Blessing",
-    description: "Calls upon the spirits of nature to bless the team, increasing their stats and granting temporary immunity to status effects.",
+    description:
+      "Calls upon the spirits of nature to bless the team, increasing their stats and granting temporary immunity to status effects.",
   },
   image: "/pals/Luminowl_pxl.png",
   description:
@@ -241,6 +251,7 @@ export const Technotitan = {
     special_defense: 100,
     speed: 60,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Electric", "Steel"],
   weaknesses: ["Water", "Nature"],
   cost: 750,
@@ -251,7 +262,8 @@ export const Technotitan = {
   passive_ability: "Guardian Armor",
   commander_ability: {
     name: "Techno Overload",
-    description: "Overloads its advanced systems, releasing a powerful shockwave that damages all enemies and paralyzes them.",
+    description:
+      "Overloads its advanced systems, releasing a powerful shockwave that damages all enemies and paralyzes them.",
   },
   image: "/creatures/Chibipal.png",
   description:
@@ -278,6 +290,7 @@ export const Glowbuggle = {
     special_defense: 70,
     speed: 120,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Dark"],
   weaknesses: ["Electric", "Ice"],
   cost: 400,
@@ -292,7 +305,8 @@ export const Glowbuggle = {
   passive_ability: "Radiant Aura",
   commander_ability: {
     name: "Radiant Infusion",
-    description: "Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.",
+    description:
+      "Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.",
   },
   image: "/creatures/Chibipal.png",
   description:
@@ -319,6 +333,7 @@ export const Umbrabunny = {
     special_defense: 110,
     speed: 120,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Light"],
   weaknesses: ["Fighting", "Psychic"],
   cost: 450,
@@ -329,7 +344,8 @@ export const Umbrabunny = {
   passive_ability: "Emotion Balance",
   commander_ability: {
     name: "Harmony Embrace",
-    description: "Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.",
+    description:
+      "Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.",
   },
   image: "/pals/Umbrabunny_pxl.png",
   description:
@@ -356,6 +372,7 @@ export const Recycleroo = {
     special_defense: 80,
     speed: 90,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Electric", "Ground"],
   weaknesses: ["Fire", "Ice"],
   cost: 550,
@@ -366,7 +383,8 @@ export const Recycleroo = {
   passive_ability: "Eco-Warrior",
   commander_ability: {
     name: "Eco Barrage",
-    description: "Launches a barrage of eco-friendly projectiles, dealing damage to all enemies and reducing their attack power.",
+    description:
+      "Launches a barrage of eco-friendly projectiles, dealing damage to all enemies and reducing their attack power.",
   },
   image: "recycleroo_image.png",
   description:
@@ -394,6 +412,7 @@ export const Shoe = {
     special_defense: 1,
     speed: 1,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: [],
   weaknesses: [],
   cost: 1,
@@ -422,6 +441,7 @@ export const Wolfjobb = {
     special_defense: 60,
     speed: 100,
   },
+  enterAbility: "on enter, does something cool. Otherwise no ability and have it stick around",
   strengths: ["Water", "Ground"],
   weaknesses: ["Fire", "Ice"],
   cost: 400,
@@ -441,7 +461,6 @@ export const testPals = [
   Verdantshifter,
   Technotitan,
 ];
-
 
 // export const Luminowl = {
 //   id: 1,
@@ -752,7 +771,6 @@ export const testPals = [
 //   "weight": "Moderate",
 //   "lore": "Recycleroo is known for its dedication to environmental protection, using recycled materials to defend nature."
 // };
-
 
 // export const shoe = {
 //   lore: "Really? A shoe?",

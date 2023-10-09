@@ -5,7 +5,9 @@ import {
   useStateContext,
 } from "../../MainContext";
 import { motion, useAnimation } from "framer-motion";
-import { changeLevel } from "../../handlers/sceneHandlers_new";
+import { SCENES, changeLevel } from "../../handlers/sceneHandlers_new";
+import { hikerBrak } from "../../consts/party/trainers";
+import { generateEnemyParty } from "../../handlers/Battle/prepareBattle";
 
 function Map() {
   const containerStyle = {
@@ -64,6 +66,28 @@ function Map() {
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
 
+  // const stateWithTrainers = contextualState.game.map[
+  //   contextualState.current.level
+  // ].map((option, index) => {
+  //   if (option === SCENES.BATTLE) {
+  //     // load new
+  //     const stateWithEnemyParty = generateEnemyParty(
+  //       contextualState,
+  //       hikerBrak
+  //     );
+  //     contextualDispatch({
+  //       type: ACTIONS.UPDATEGAMEDATA,
+  //       payload: stateWithEnemyParty,
+  //     });
+
+  //     console.log(
+  //       `[!]state after adding an opponent:`,
+  //       contextualState,
+  //       contextualState.opponentParty
+  //     );
+  //   }
+  // });
+
   const handleChangeLevel = (state, scene) => {
     const stateWithChangedLevel = changeLevel(state, scene);
     contextualDispatch({
@@ -74,8 +98,27 @@ function Map() {
   };
 
   const ourParty = contextualState.userParty;
+
   // Function to render details for a monster
   const renderMonsterDetails = (monster) => {
+    const mysticWillow = {
+      name: "Mystic Willow",
+      reward: {
+        experience: 200,
+        currency: 400,
+        items: [{ name: "Enchanted Orb", quantity: 1 }],
+      },
+      monsterNames: [
+        { name: "Sparklefox", level: 10 },
+        { name: "Moonshadow", level: 12 },
+      ],
+      dialogue: {
+        enter: "Let the magic of nature guide our battle!",
+        win: "Nature's power flows through you as well. Impressive!",
+        lose: "You've proven that the balance of nature is unpredictable.",
+      },
+    };
+
     return (
       <div
         key={monster ? monster.id : "empty-slot"}
@@ -135,17 +178,37 @@ function Map() {
             {/* you see a shadowy figure, you can feed it or not. "feed me"
           if you feed it it joins your party. you have bait/food I guess */}
             {contextualState.game.map[contextualState.current.level].map(
-              (option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleChangeLevel(contextualState, option)}
-                  style={buttonStyle}
-                >
-                  {option}
-                </button>
-              )
+              (option, index) => {
+                // if(option === SCENES.BATTLE){
+                // // load new
+                // const stateWithEnemyParty = generateEnemyParty(contextualState, hikerBrak)
+                // contextualDispatch({
+                //   type: ACTIONS.UPDATEGAMEDATA,
+                //   payload: stateWithEnemyParty,
+                // });
+
+                // console.log(`[!]state after adding an opponent:`, contextualState,
+                // contextualState.opponentParty
+                // )
+                // }
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleChangeLevel(contextualState, option)}
+                    style={buttonStyle}
+                  >
+                    {option}
+                  </button>
+                );
+              }
             )}
+            <button
+              onClick={() => handleChangeLevel(contextualState, SCENES.BATTLE)}
+            >
+              •Battle•
+            </button>
           </div>
+
           {/* <button style={buttonStyle}>Battle Ahead</button>
           <button style={buttonStyle}>investigate the market</button>
           <button style={buttonStyle}>

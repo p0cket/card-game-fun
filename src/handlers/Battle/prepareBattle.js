@@ -22,19 +22,23 @@
 //   },
 //   // Add other trainer properties like image, location, etc.
 // };
+import { basicTrainers } from "../../consts/party/trainers";
 import { hikerBrak } from "../../consts/party/trainers";
-// mix up the trainers and choose one.
 
-export const generateEnemyParty = (trainer) => {
-  const enemyParty = { ...opponentParty };
+
+// what this does is generate a new party for the enemy based on the trainer's monsters.
+export const generateEnemyParty = (state, trainer) => {
+  // const enemyParty = { ...opponentParty };
+  const newState = { ...state };
+
 
   // Iterate through the trainer's monsters and assign them to enemyParty slots
-  hikerBrak.monsters.forEach((monster, index) => {
-    const slot = Object.keys(enemyParty)[index]; // Get the slot name (e.g., Party.SLOT_1)
-    enemyParty[slot] = { ...monster };
+  trainer.monsters.forEach((monster, index) => {
+    const slot = Object.keys(newState.opponentParty)[index]; // Get the slot name (e.g., Party.SLOT_1)
+    newState.opponentParty[slot] = { ...monster };
   });
 
-  return enemyParty;
+  return newState;
 };
 
 export const startBattle = (trainer) => {

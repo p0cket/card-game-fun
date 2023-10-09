@@ -62,11 +62,14 @@ const ChibipalsSelection = () => {
       selectedMonster
     );
     // dispatch({ type: 'ADD_TO_PARTY', monster: selectedMonster });
-    setShowDetails(false);
-    const partyWithMonsterAdded = addMonsterToParty(
-      selectedMonster,
-      contextualState.userParty
-    );
+
+    // #TODO: This is the code that breaks things but I need to make it work:
+    // setShowDetails(false);
+    // const partyWithMonsterAdded = addMonsterToParty(
+    //   selectedMonster,
+    //   contextualState.userParty
+    // );
+
     console.log(`partyWithMonsterAdded:`, partyWithMonsterAdded);
     // send to next level too
     const nextState = { ...contextualState, userParty: partyWithMonsterAdded };
@@ -78,10 +81,6 @@ const ChibipalsSelection = () => {
     });
     console.log(`state after adding monster:`, nextLevelState);
   };
-
-
-
- 
 
   return (
     <div>
