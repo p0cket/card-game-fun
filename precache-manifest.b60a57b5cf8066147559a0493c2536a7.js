@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "fcaf687532550f7a9701",
+    "revision": "ec0829198df5f5ae6bc9",
     "url": "/card-game-fun/static/css/main.fd0008a9.chunk.css"
   },
   {
-    "revision": "fcaf687532550f7a9701",
-    "url": "/card-game-fun/static/js/main.5bb8f766.chunk.js"
+    "revision": "ec0829198df5f5ae6bc9",
+    "url": "/card-game-fun/static/js/main.ffefa206.chunk.js"
   },
   {
     "revision": "627f6e969bcd642ca279",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/card-game-fun/static/media/Anime_protag_pixelated.7bea2573.png"
   },
   {
-    "revision": "05121e25b75d48f4f0fa743f568024a9",
+    "revision": "4bc4495fe3a4f5fe751e24692f6f5918",
     "url": "/card-game-fun/index.html"
   }
 ];
