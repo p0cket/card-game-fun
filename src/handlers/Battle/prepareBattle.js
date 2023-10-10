@@ -28,14 +28,14 @@ import { hikerBrak } from "../../consts/party/trainers";
 
 // what this does is generate a new party for the enemy based on the trainer's monsters.
 export const generateEnemyParty = (state, trainer) => {
-  // const enemyParty = { ...opponentParty };
+  // const enemyParty = { ...opponent };
   const newState = { ...state };
 
 
   // Iterate through the trainer's monsters and assign them to enemyParty slots
   trainer.monsters.forEach((monster, index) => {
-    const slot = Object.keys(newState.opponentParty)[index]; // Get the slot name (e.g., Party.SLOT_1)
-    newState.opponentParty[slot] = { ...monster };
+    const slot = Object.keys(newState.opponent)[index]; // Get the slot name (e.g., Party.SLOT_1)
+    newState.opponent[slot] = { ...monster };
   });
 
   return newState;

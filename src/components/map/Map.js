@@ -83,7 +83,7 @@ function Map() {
   //     console.log(
   //       `[!]state after adding an opponent:`,
   //       contextualState,
-  //       contextualState.opponentParty
+  //       contextualState.opponent
   //     );
   //   }
   // });
@@ -188,7 +188,7 @@ function Map() {
                 // });
 
                 // console.log(`[!]state after adding an opponent:`, contextualState,
-                // contextualState.opponentParty
+                // contextualState.opponent
                 // )
                 // }
                 return (

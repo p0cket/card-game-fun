@@ -57,64 +57,34 @@ const ChibipalsSelection = () => {
 
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
+  
+  const mapLevels = contextualState.game.map[0]
+
+  console.log("mapLevels", mapLevels);  
 
   const handleSelect = (selectedMonster) => {
     console.log(
       `you selected monster: ${selectedMonster.name}`,
       selectedMonster
     );
-    // dispatch({ type: 'ADD_TO_PARTY', monster: selectedMonster });
-
     // #TODO: This is the code that breaks things but I need to make it work:
     setShowDetails(false);
-
     // this is just the party obj, not the full state
     const partyWithMonsterAdded = addMonsterToParty(
       selectedMonster,
       contextualState.userParty
     );
-    const stateWithParty = { ...contextualState, userParty: partyWithMonsterAdded };
-
-    //
-
-    //   console.log(`stateWithParty and map:`, stateWithParty, stateWithParty.game)
-    // const stateWithTrainers = stateWithParty.game.map[
-    //   contextualState.current.level
-    // ].map((option, index) => {
-    //   if (option === SCENES.BATTLE) {
-    //     // load new
-    //     const stateWithEnemyParty = generateEnemyParty(
-    //       contextualState,
-    //       hikerBrak
-    //     );
-    //     console.log("[!]stateWithEnemyParty:", stateWithEnemyParty);
-
-    //     contextualDispatch({
-    //       type: ACTIONS.UPDATEGAMEDATA,
-    //       payload: stateWithEnemyParty,
-    //     });
-
-    //     console.log(
-    //       `[!]state after adding an opponent:`,
-    //       contextualState,
-    //       contextualState.opponentParty
-    //     );
-    //   }
-    // });
-
-    //
-    // console.log(`stateWithTrainers:`, stateWithTrainers);
-    // // send to next level too
-    // const nextState = { ...contextualState}
+    const stateWithParty = {
+      ...contextualState,
+      userParty: partyWithMonsterAdded,
+    };
     const nextSceneState = updateScene(stateWithParty, SCENES.MAP);
-
-    // const nextSceneState = updateScene(stateWithTrainers, SCENES.MAP);
     const nextLevelState = updateLevel(nextSceneState, 0);
     contextualDispatch({
       type: ACTIONS.UPDATEGAMEDATA,
       payload: nextLevelState,
     });
-    console.log(`state after adding user monster:`, nextLevelState);
+    console.log(`state after adding user monster, changing level:`, nextLevelState);
   };
 
   return (
