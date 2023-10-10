@@ -8,7 +8,7 @@ import { useDispatchContext, useStateContext } from "../../MainContext";
 import { placeholderTrainer } from "../../consts/party/trainers";
 import { Ticklefairy } from "../../consts/pals/pals";
 
-function BattleTopDisplay({ gameData }) {
+export default function BattleTopDisplay({ gameData }) {
   const { name, status, poison, health, maxHP, img, nextAttack } =
     gameData.battle.enemy;
 
@@ -108,4 +108,4 @@ function BattleTopDisplay({ gameData }) {
   );
 }
 
-export default BattleTopDisplay;
+// export default BattleTopDisplay;
