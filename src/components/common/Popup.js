@@ -103,7 +103,7 @@ function Popup(props) {
   //     return null; // Don't render the enemy monsters if an attack is not selected
   //   }
 
-  //   return  stateContext.opponentParty.map((monster, index) => (
+  //   return  stateContext.opponent.map((monster, index) => (
   //     <div
   //       key={index}
   //       onClick={() => chooseTargets(index)} // Call chooseTargets when clicked

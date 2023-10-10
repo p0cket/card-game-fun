@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Screen from "./components/Screen";
 import { useReducer } from "react";
-import { map } from "./consts/mapGenerator";
+import { map } from "./consts/mapGenerator_old";
 import { startingData } from "./consts/consts";
 import reducer from "./reducer";
 import { useDispatchContext, useStateContext } from "./MainContext";

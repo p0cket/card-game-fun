@@ -6,7 +6,8 @@ import { motion } from "framer-motion/dist/framer-motion";
 
 import Dialog from "../common/Dialog";
 import Popup from "../common/Popup";
-import HUDHeader from "../battle/HUDHeader";
+// import HUDHeader from "../battle/HUDHeader";
+// import HUDHeader from "../battle/HUDHeader"
 import EnemyDisplay from "../battle/BattleTopDisplay";
 import BattleTopDisplay from "../battle/BattleTopDisplay";
 import BattleBotDisplay from "../battle/BattleBotDisplay";
@@ -82,7 +83,7 @@ const Battle = () => {
               alignItems: "center",
             }}
           >
-            <HUDHeader gameData={gameData} />
+            {/* <HUDHeader gameData={gameData} /> */}
             <UserPartyDisplay />
             <BattleTopDisplay gameData={gameData} />
             <BattleBotDisplay

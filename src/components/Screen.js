@@ -64,7 +64,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       console.log("map Screen Case");
 
 
-      // If the scene is a battle, add a new opponent to the opponentParty
+      // If the scene is a battle, add a new opponent to the opponent
 
       // const stateWithTrainers = contextualState.game.map[
       //   contextualState.current.level
@@ -83,7 +83,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       //     console.log(
       //       `[!]state after adding an opponent:`,
       //       contextualState,
-      //       contextualState.opponentParty
+      //       contextualState.opponent
       //     );
       //   }
       // });

@@ -1,8 +1,9 @@
 import { startingDeck } from "./consts";
 import { EFFECTS } from "../effects";
 import { SCENES } from "../handlers/sceneHandlers_new";
-import { opponentParty, userParty } from "./party/parties";
+import { opponent, userParty } from "./party/parties";
 import { generateMap } from "./mapGenerator_new";
+import { placeholderTrainer } from "./party/trainers";
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
 //
@@ -81,7 +82,7 @@ export const newStartingData = {
   // ],
   // a party of one commander monster that has a strat - and a party of 5 monsters
   userParty: userParty,
-  opponentParty: opponentParty,
+  opponent: placeholderTrainer,
   // enemyParty: [
   //   {
   //     name: "Sample Guy",
@@ -120,6 +121,14 @@ export const newStartingData = {
     act: 1,
     scene: SCENES.INTRO,
     curEvent: null,
+    incomingLevels: [
+      {
+        scene: "battle",
+        trainer: "hikerNed",
+        // level based on our progression
+
+      },
+    ],
   },
 
   game: {

@@ -20,7 +20,7 @@ export const Trainer = {
     lose: "Better luck next time!",
     // Add more dialogue lines as needed
   },
-  // Maybe spirit. Spirit would be a powerful buff from a dead monster. This could be the 
+  // Maybe spirit. Spirit would be a powerful buff from a dead monster. This could be the
   // commander ability
   // Add other trainer properties like image, location, etc.
 };
@@ -95,6 +95,30 @@ export const scientistTesla = {
     win: "Your energy is electrifying! Impressive!",
     lose: "You've caused a short circuit in my plans. Well done.",
   },
+};
+
+export const placeholderTrainer = {
+  name: "Mr. Placeholder",
+  reward: {
+    experience: 1, // He's not very experienced
+    currency: 10, // He's not rich either
+    items: [
+      { name: "Duct Tape", quantity: 1 }, // Just one roll of duct tape
+      { name: "Expired Banana", quantity: 3 }, // Watch out, they're expired
+    ],
+  },
+  monsters: [
+    { name: "Sillyslime", level: 1 }, // A slime that tells dad jokes
+    { name: "Pillowpet", level: 2 }, // Literally a fluffy pillow brought to life
+    { name: "Ticklefairy", level: 3 }, // Special move: Tickle Attack!
+  ],
+  dialogue: {
+    enter: "I challenge you to a tickle fight! Oops, I mean a battle!",
+    win: "You're a slightly stronger trainer than me!",
+    lose: "Better luck next time! I'm off to tell more dad jokes!",
+  },
+  spirit: "The Ghost of Bad Puns", // Commander ability: Increases the likelihood of eye-rolls
+  // Other properties like image, location, etc. are intentionally left blank because Mr. Placeholder is all about being generic!
 };
 
 export const basicTrainers = [

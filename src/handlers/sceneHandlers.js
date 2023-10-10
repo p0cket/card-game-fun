@@ -1,4 +1,4 @@
-import { map } from "../consts/mapGenerator"
+import { map } from "../consts/mapGenerator_old"
 import { SCENES } from "../scenes"
 import { ENEMY_TYPES } from "../actions"
 import { decideEnemyArr } from "../utils/reducer-utils"

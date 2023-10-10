@@ -29,7 +29,7 @@ export const Party = {
    * Represents the opponent's party with named slots.
    * @type {Object.<string, (null|any)>}
    */
-  export const opponentParty = {
+  export const opponent = {
     [Party.SLOT_1]: null, // Initially empty slot
     [Party.SLOT_2]: null,
     [Party.SLOT_3]: null,

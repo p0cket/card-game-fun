@@ -452,6 +452,35 @@ export const Wolfjobb = {
   passive_ability: "Leadership",
 };
 
+export const Ticklefairy = {
+  name: "Ticklefairy",
+  lore: "Ticklefairy is a mischievous fairy that spreads laughter and joy wherever it goes.",
+  image: "./pals/Ticklefairy_pxl.png",
+  elemental_type: "Light",
+  creature_type: "Fairy",
+  specialty_group: "Joybringer",
+  nature: "Playful",
+  quirks: ["Tickle Magician", "Laughter Enchanter"],
+  stats: {
+    hp: 80,
+    max_hp: 80,
+    attack: 40,
+    defense: 50,
+    special_attack: 120,
+    special_defense: 100,
+    speed: 150,
+  },
+  enterAbility: "Ticklefairy enters with a burst of laughter, raising the spirits of its allies.",
+  strengths: ["Dark"],
+  weaknesses: ["Electric", "Poison"],
+  cost: 400,
+  lvl: 40,
+  experience: 4000,
+  moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
+  possible_moves: ["Laughter Explosion", "Tickle Dance", "Happy Hug"],
+  passive_ability: "Joyful Aura",
+};
+
 export const testPals = [
   Luminowl,
   Glowbuggle,

@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import "./../scenes/Battle.css";
 import "./../common/Button.css";
 import { useDispatchContext, useStateContext } from "../../MainContext";
+import { placeholderTrainer } from "../../consts/party/trainers";
+import { Ticklefairy } from "../../consts/pals/pals";
 
 function BattleTopDisplay({ gameData }) {
   const { name, status, poison, health, maxHP, img, nextAttack } =
@@ -25,54 +27,71 @@ function BattleTopDisplay({ gameData }) {
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
 
+  const currentMonDetails = contextualState.opponent.monsters[0];
+  const currentMon = Ticklefairy;
+  const {
+    lore,
+    image,
+    elemental_type,
+    creature_type,
+    specialty_group,
+    nature,
+    quirks,
+    stats,
+    enterAbility,
+    strengths,
+    weaknesses,
+    cost,
+    moves,
+    possible_moves,
+    passive_ability,
+    experience,
+    lvl,
+  } = currentMon;
+  console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats);
+
   return (
     <div className="battleTop">
       <div className="battleTopLeft">
         <div></div>
         <div className="battleTLname" style={{ fontSize: "25px" }}>
-          {name}
-        </div>
-        <div>
-          {" "}
-          {status ? (
-            <>
-              {" "}
-              <span
-                style={{
-                  color: "yellow",
-                  textShadow:
-                    "-2px 0px black, 0 1px black, 1px 0 black, 0 -1px black",
-                }}
-              >
-                He is {status}ed
-              </span>{" "}
-              <span>(can't attack this turn)</span>
-            </>
-          ) : (
-            ``
-          )}
-          <span style={{ color: "red" }}>
-            {poison ? "Poisoned: " + poison : ""}
+          {/* {name} */}
+          {currentMonDetails
+            ? currentMonDetails.name
+            : placeholderTrainer.monsters[0].name}
+          <span style={{ color: "gray", fontSize: "12px" }}>
+            lvl{" "}
+            {currentMonDetails
+              ? currentMonDetails.level
+              : placeholderTrainer.monsters[0].level}
           </span>
         </div>
+        <div></div>
         <div className="battleTLhealth">
-          {health}HP{" "}
+          {stats.hp}HP
           <progress
             id="health"
-            value={health}
-            max={maxHP}
+            value={stats.hp}
+            max={stats.hp}
             style={{
               backgroundColor: "#4caf50",
             }}
           ></progress>
         </div>
-        <div className="battleTLnext" style={{ color: "gray" }}>
-          Next Attack:
+        <div className="battleTLnext">
+          {/* <span style={{ color: "gray" }}>Next: </span> */}
+          <span style={{ color: "gray" }}>
+            In 10{" "}
+            <img
+              src={`./icons/Seconds.png`}
+              style={{ width: 20, height: 20 }}
+              alt="Seconds Icon"
+            />{" "}
+          </span>
+          , will use:
         </div>
-        <div className="battleTLattack">
-          {nextAttack.name} ({dmgEmoji}
-          {nextAttack.damage})
-        </div>
+        <button> {moves[0]}</button>
+        <div></div>
       </div>{" "}
       <div className="battleTopRight">
         <motion.img
@@ -80,7 +99,8 @@ function BattleTopDisplay({ gameData }) {
           animate="visible"
           whileHover="hover"
           variants={yourVariants}
-          src={img}
+          // src={img}
+          src={image}
           alt="Enemy Frontside"
         />
       </div>
