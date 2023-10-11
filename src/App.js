@@ -32,7 +32,7 @@ export default function App() {
         height: "100vh",
       }}
     >
-      <p className="text-3xl font-bold underline">Hello Tailwind World!</p>
+      <p className="text-3xl font-bold underline text-red-300">Hello Tailwind World!</p>
 
       <Screen gameData={gameData} dispatch={dispatch} map={map} />
     </div>

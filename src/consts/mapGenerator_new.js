@@ -1,4 +1,5 @@
 import { SCENES } from "../scenes";
+import { basicTrainers } from "./party/trainers";
 
 export function generateNextLevelOptions() {
   const options = [];
@@ -11,7 +12,9 @@ export function generateNextLevelOptions() {
 
     if (randomValue < 0.5) {
       // would be better with {screen: "battle", details: null}
-      options.push({screen: BATTLE, details: null}); // 50% chance for Monster      
+      const randomTrainer = basicTrainers[Math.floor(Math.random() * basicTrainers.length)];
+      options.push({screen: BATTLE, details: randomTrainer}); // 50% chance for Battle encounter  
+      // options.push({screen: BATTLE, details: null});    
     } else if (randomValue < 0.7) {
       options.push({screen: EVENT, details: null}); // 20% chance for Event
     // }
