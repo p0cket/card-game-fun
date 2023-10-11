@@ -119,7 +119,7 @@ export const newStartingData = {
   current: {
     level: 0,
     act: 1,
-    scene: SCENES.INTRO,
+    scene: {screen: SCENES.INTRO, details: null},
     curEvent: null,
     incomingLevels: [
       {
@@ -140,6 +140,7 @@ export const newStartingData = {
       effects: [],
     },
     map: generateMap(),
+    battlesAhead: [],
 
     // ...
 

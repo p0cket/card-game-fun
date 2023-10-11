@@ -42,7 +42,7 @@ const Intro = ({ dispatch }) => {
     console.log(`loadNextLevel`);
     dispatch(setSceneAction());
 
-    const nextSceneState = updateScene(contextualState, SCENES.CHOOSECHARACTER);
+    const nextSceneState = updateScene(contextualState, {screen: SCENES.CHOOSECHARACTER, details: null});
     const nextLevelState = updateLevel(nextSceneState, 1);
     console.log("cont state B4:", contextualState);
     contextualDispatch(nextLevelState, ACTIONS.UPDATEGAMEDATA);
@@ -118,7 +118,7 @@ const Intro = ({ dispatch }) => {
           <div>
             <img
               style={{ width: 240, height: 200, padding: "20px" }}
-              src="/creatures/Chibipal.png"
+              src="creatures/Chibipal.png"
               alt="Chibipal Backside"
             />
           </div>
