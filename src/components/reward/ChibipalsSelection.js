@@ -57,10 +57,10 @@ const ChibipalsSelection = () => {
 
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
-  
-  const mapLevels = contextualState.game.map[0]
 
-  console.log("mapLevels", mapLevels);  
+  const mapLevels = contextualState.game.map[0];
+
+  console.log("mapLevels", mapLevels);
 
   const handleSelect = (selectedMonster) => {
     console.log(
@@ -78,13 +78,91 @@ const ChibipalsSelection = () => {
       ...contextualState,
       userParty: partyWithMonsterAdded,
     };
-    const nextSceneState = updateScene(stateWithParty, SCENES.MAP);
+    const nextSceneState = updateScene(stateWithParty, {screen: SCENES.MAP, details: null});
     const nextLevelState = updateLevel(nextSceneState, 0);
+
+    //
+    // Define a function to log colored messages
+    const logWithColor = (message, color) => {
+      console.log(`%c${message}`, `color: ${color}; font-weight: bold;`);
+    };
+
+    // Clone the current state into a new variable
+    const newState = { ...nextLevelState };
+    console.log(`[!!!]newState`, newState)
+    // lets log everything from the comments below in color
+    // console.log(
+    //   `[!!!]newState`,
+    //   newState,
+    //   `nextLevelState`,
+    //   nextLevelState,
+    //   `mapLevels`,
+    //   mapLevels,
+    //   `mapLevels[0]`,
+    //   mapLevels[0],
+    //   `mapLevels[0].scene`,
+    //   mapLevels[0].scene,
+    //   `const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak)`
+    // );
+
+    //--------
+    // console.log(
+    //   `[!!!]newState.game.map`,
+    //   newState.game.map,
+    //   `nextLevelState.current.level`,
+    //   nextLevelState.current.level,
+    // );
+
+    // let enemyTrainers = []
+
+    // newState.game.map[nextLevelState.current.level].forEach((option, index) => {
+    //   if (option === SCENES.BATTLE) {
+    //     console.log(`pos: option is ${option}`);
+    //     enemyTrainers[index] = hikerBrak
+    //         //     const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak);
+    //             //     newState.opponent = stateWithEnemyParty.opponent;
+    //   } else {
+    //     console.log(`neg: option is ${option}`);
+    //   }
+    // })
+
+    // applyEnemyMonstersToParty(someState, enemyMonstersForParty)
+
+
+    //------------
+
+    // newState.game.map[nextLevelState.current.level].forEach((option, index) => {
+    //   if (option === SCENES.BATTLE) {
+    //     // Load new opponent
+    //     logWithColor("Loading a new opponent...", "blue");
+    //     const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak);
+
+    //     logWithColor("[!]State before dispatch:", "blue");
+    //     console.log(newState);
+
+    //     // Update the newState with the new opponent party
+    //     newState.opponent = stateWithEnemyParty.opponent;
+
+    //     logWithColor("[!]State after adding an opponent:", "blue");
+    //     console.log(newState);
+    //   }
+    // });
+
+    //
+    // Dispatch the updated state
     contextualDispatch({
       type: ACTIONS.UPDATEGAMEDATA,
-      payload: nextLevelState,
+      payload: newState,
     });
-    console.log(`state after adding user monster, changing level:`, nextLevelState);
+
+    // contextualDispatch({
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    //   payload: nextLevelState,
+    // });
+    // console.log(
+    //   `state after adding user monster, changing level:`,
+    //   nextLevelState
+    // );
   };
 
   return (
@@ -212,29 +290,12 @@ const ChibipalsSelection = () => {
                     <span>Def:</span>
                     <span>{selectedMonster.stats.defense}</span>
                   </div>
-                  {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>SpAtk:</span>
-                    <span>{selectedMonster.stats.special_attack}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>SpDef:</span>
-                    <span>{selectedMonster.stats.special_defense}</span>
-                  </div> */}
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <span>Speed:</span>
                     <span>{selectedMonster.stats.speed}</span>
                   </div>
-                  {/* Uncomment and customize as needed
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Size:</span>
-                    <span>{selectedMonster.size}</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>Weight:</span>
-                    <span>{selectedMonster.weight}</span>
-                  </div> */}
                 </div>
                 {selectedMonster.elemental_type}
                 {"-"}
@@ -242,7 +303,6 @@ const ChibipalsSelection = () => {
                 {selectedMonster.specialty_group}]
               </div>{" "}
             </div>
-
             <div>
               <span style={{ marginRight: "10px" }}>
                 Lvl: {selectedMonster.level}
@@ -275,11 +335,7 @@ const ChibipalsSelection = () => {
               <p style={{ padding: "10px" }}>
                 <span>{selectedMonster.description}</span>
               </p>
-              {/* <span style={{ marginRight: "10px" }}>
-                Quirks: {selectedMonster.quirks.join(", ")}
-              </span> */}
             </div>
-            <div>{/* <span>Stats:</span> */}</div>
             <div
               style={{
                 display: "flex",
@@ -288,11 +344,6 @@ const ChibipalsSelection = () => {
                 gap: "4px",
               }}
             >
-              {/* <div style={{ display: "flex", gap: "4px" }}>
-                <button>Stats</button>
-                <button>Moves</button>
-                <button>Passives</button>
-              </div> */}
               <div>Moves: </div>
               <div
                 style={{
@@ -366,7 +417,6 @@ const ChibipalsSelection = () => {
                 </span>
               </span>
             </div>
-            {/* <p style={{ margin: "4px 0" }}>Lore: {selectedMonster.lore}</p> */}
             <div style={{ padding: "4px" }}>
               <button onClick={() => handleSelect(selectedMonster)}>
                 Select

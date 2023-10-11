@@ -1,5 +1,5 @@
 // different screens
-import React from "react";
+import React, { useEffect } from "react";
 // import { SCENES } from "../scenes";
 import { SCENES } from "../handlers/sceneHandlers_new";
 // All of our scenes are below
@@ -45,8 +45,12 @@ const Screen = ({ gameData, dispatch, map }) => {
   const contextualState = useStateContext();
   const contextualDispatch = useDispatchContext();
 
+  // const logWithColor = (message, color) => {
+  //   console.log(`%c${message}`, `color: ${color}; font-weight: bold;`);
+  // };
+
   // const levelToSet = gameData.curScene.scene;
-  const levelToSet = contextualState.current.scene;
+  const levelToSet = contextualState.current.scene.screen;
 
   switch (levelToSet) {
     case TRANSITION:
@@ -64,29 +68,6 @@ const Screen = ({ gameData, dispatch, map }) => {
       console.log("map Screen Case");
 
 
-      // If the scene is a battle, add a new opponent to the opponent
-
-      // const stateWithTrainers = contextualState.game.map[
-      //   contextualState.current.level
-      // ].map((option, index) => {
-      //   if (option === SCENES.BATTLE) {
-      //     // load new
-      //     const stateWithEnemyParty = generateEnemyParty(
-      //       contextualState,
-      //       hikerBrak
-      //     );
-      //     contextualDispatch({
-      //       type: ACTIONS.UPDATEGAMEDATA,
-      //       payload: stateWithEnemyParty,
-      //     });
-
-      //     console.log(
-      //       `[!]state after adding an opponent:`,
-      //       contextualState,
-      //       contextualState.opponent
-      //     );
-      //   }
-      // });
       return <Map />;
     // return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:
@@ -127,11 +108,11 @@ const Screen = ({ gameData, dispatch, map }) => {
       console.log("victory Screen Case");
       return <Victory gameData={gameData} dispatch={dispatch} />;
     default:
-      console.log("no scene (Screen Case) selected");
+      console.log("no scene (Screen Case) selected. Your _levelToSet_ was", levelToSet);
       return (
         <h1>
           404 Yo. Something went wrong with selecting a Screen to display.
-          likely something related to the switch case, dawg.
+          likely something related to the switch case, dawg.Your _levelToSet_ was: {levelToSet}
         </h1>
       );
   }

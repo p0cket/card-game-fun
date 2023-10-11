@@ -25,17 +25,30 @@
 import { basicTrainers } from "../../consts/party/trainers";
 import { hikerBrak } from "../../consts/party/trainers";
 
+// Add enemy pals to their party and add on the additional Details
+// like level and what results from that
+// add monster details to the monster. addDetailsToEnemyPal = (monsterName, monsterDetails) => {
+  // take monster and add like level and the magnified stats (magnified stats = monster level * monster stats)
+// also at different levels they have more abilities, so give them those, or choose which ones if theres
+// too many. 
+// give U-ID,  }
+
+// Define a function to log colored messages
+const logWithColor = (message, color) => {
+  console.log(`%c${message}`, `color: ${color}; font-weight: bold;`);
+};
 
 // what this does is generate a new party for the enemy based on the trainer's monsters.
 export const generateEnemyParty = (state, trainer) => {
-  // const enemyParty = { ...opponent };
   const newState = { ...state };
-
 
   // Iterate through the trainer's monsters and assign them to enemyParty slots
   trainer.monsters.forEach((monster, index) => {
     const slot = Object.keys(newState.opponent)[index]; // Get the slot name (e.g., Party.SLOT_1)
     newState.opponent[slot] = { ...monster };
+
+    // Log the assignment with color
+    logWithColor(`Assigned ${monster.name} to ${slot}`, 'green');
   });
 
   return newState;
@@ -47,4 +60,7 @@ export const startBattle = (trainer) => {
   // Perform other battle-related actions here
   // For example, you can set the state to trigger the battle screen
   // or perform any other logic you need for your game.
+
+  // Log the start of the battle with color
+  logWithColor(`Battle started with ${trainer.name}`, 'blue');
 };

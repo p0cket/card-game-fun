@@ -10,14 +10,15 @@ export function generateNextLevelOptions() {
     const randomValue = Math.random(); // Generate a random number between 0 and 1
 
     if (randomValue < 0.5) {
-      options.push(BATTLE); // 50% chance for Monster      
+      // would be better with {screen: "battle", details: null}
+      options.push({screen: BATTLE, details: null}); // 50% chance for Monster      
     } else if (randomValue < 0.7) {
-      options.push(EVENT); // 20% chance for Event
+      options.push({screen: EVENT, details: null}); // 20% chance for Event
     // }
     //  else if (randomValue < 0.8) {
     //   options.push("Mystery"); // 10% chance for Mystery
     } else {
-      options.push(REST); // 20% chance for Rest
+      options.push({screen: REST, details: null}); // 20% chance for Rest
     }
   }
 

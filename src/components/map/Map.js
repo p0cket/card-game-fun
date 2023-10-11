@@ -94,7 +94,9 @@ function Map() {
       type: ACTIONS.UPDATEGAMEDATA,
       payload: stateWithChangedLevel,
     });
-    console.log(`state after changing level:`, contextualState);
+    console.log(`state after changing level:`, stateWithChangedLevel);
+
+    // console.log(`state after changing level:`, contextualState);
   };
 
   const ourParty = contextualState.userParty;
@@ -194,16 +196,25 @@ function Map() {
                 return (
                   <button
                     key={index}
-                    onClick={() => handleChangeLevel(contextualState, option)}
+                    onClick={() =>
+                      handleChangeLevel(contextualState, 
+                        option
+                      )
+                    }
                     style={buttonStyle}
                   >
-                    {option}
+                    {option.screen}
                   </button>
                 );
               }
             )}
             <button
-              onClick={() => handleChangeLevel(contextualState, SCENES.BATTLE)}
+              onClick={() =>
+                handleChangeLevel(contextualState, {
+                  screen: SCENES.BATTLE,
+                  details: null,
+                })
+              }
             >
               •Battle•
             </button>
