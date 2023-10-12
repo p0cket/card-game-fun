@@ -1,57 +1,57 @@
-import React from "react";
+import React from 'react'
 
 const UserPartyDisplay = () => {
   // Placeholder data for party members (with made-up creature names)
   const partyMembers = [
     {
-      name: "Sparklepaw",
+      name: 'Sparklepaw',
       health: 80,
-      image: "./creatures/Squirrely.png",
+      image: './creatures/Squirrely.png',
     },
     {
-      name: "Firebreath",
+      name: 'Firebreath',
       health: 70,
-      image: "./creatures/Squirrely.png",
+      image: './creatures/Squirrely.png',
     },
     {
-      name: "Leafywing",
+      name: 'Leafywing',
       health: 90,
-      image: "./creatures/Squirrely.png",
+      image: './creatures/Squirrely.png',
     },
     {
-      name: "Bubblesnout",
+      name: 'Bubblesnout',
       health: 60,
-      image: "./creatures/Squirrely.png",
+      image: './creatures/Squirrely.png',
     },
     {
-      name: "Aquaflare",
+      name: 'Aquaflare',
       health: 75,
-      image: "./creatures/Squirrely.png",
+      image: './creatures/Squirrely.png',
     },
     {
-        name: "Aquaflare",
-        health: 75,
-        image: "./creatures/Squirrely.png",
-      },
-  ];
+      name: 'Aquaflare',
+      health: 75,
+      image: './creatures/Squirrely.png',
+    },
+  ]
 
   return (
-    <div style={{ textAlign: "center", fontFamily: "Silkscreen" }}>
+    <div style={{ textAlign: 'center', fontFamily: 'Silkscreen' }}>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          color: "green",
+          display: 'flex',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          color: 'green',
         }}
       >
         {partyMembers.map((member, index) => (
           <div
             key={index}
             style={{
-              margin: "5px",
-              border: "2px solid green",
-              borderRadius: "2%",
+              margin: '5px',
+              border: '2px solid green',
+              borderRadius: '2%',
             }}
           >
             <div>{member.name}</div>
@@ -59,28 +59,28 @@ const UserPartyDisplay = () => {
               src={member.image}
               alt={`Party Member ${index + 1}`}
               style={{
-                width: "50px",
-                height: "50px",
+                width: '50px',
+                height: '50px',
               }}
             />
             <div>
               Health: {member.health}
               <div
                 style={{
-                  backgroundColor: "green",
+                  backgroundColor: 'green',
                   width: `${(member.health / 100) * 60}px`,
-                  height: "10px",
+                  height: '10px',
                 }}
-              ></div>
+              />
             </div>
           </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserPartyDisplay;
+export default UserPartyDisplay
 
 // import React from "react";
 

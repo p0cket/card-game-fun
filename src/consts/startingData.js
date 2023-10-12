@@ -1,11 +1,11 @@
-import { startingDeck } from "./consts";
-import { EFFECTS } from "../effects";
-import { SCENES } from "../handlers/sceneHandlers_new";
-import { opponent, userParty } from "./party/parties";
-import { generateMap } from "./mapGenerator_new";
-import { placeholderTrainer } from "./party/trainers";
+import { startingDeck } from './consts'
+import { EFFECTS } from '../effects'
+import { SCENES } from '../handlers/sceneHandlers_new'
+import { opponent, userParty } from './party/parties'
+import { generateMap } from './mapGenerator_new'
+import { placeholderTrainer } from './party/trainers'
 
-const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS;
+const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 //
 
 // On load generate:
@@ -83,50 +83,21 @@ export const newStartingData = {
   // a party of one commander monster that has a strat - and a party of 5 monsters
   userParty: userParty,
   opponent: placeholderTrainer,
-  // enemyParty: [
-  //   {
-  //     name: "Sample Guy",
-  //     health: 30,
-  //     maxHP: 30,
-  //     energy: 6,
-  //     status: "None",
-  //     attacks: [
-  //       {
-  //         name: "Sample Attack",
-  //         type: "magical",
-  //         damage: 10,
-  //       },
-  //       // Add more enemy attacks as needed
-  //     ],
-  //     quirks: {
-  //       // Quirks that affect this enemy's behavior or abilities
-  //     },
-  //     stats: {
-  //       // Stats that influence the enemy's performance
-  //     },
-  //     nature: "Neutral",
-  //     // Add more attributes as needed
-  //   },
-  //   // Add more enemy party members as needed
-  // ],
-
-  // Game state for various variables
   battleManager: {
     turn: 1, // Current turn number
-    currentPlayer: "player", // Current player's turn ("player" or "enemy")
+    currentPlayer: 'player', // Current player's turn ("player" or "enemy")
     // Add more game state variables as needed
   },
   current: {
     level: 0,
     act: 1,
-    scene: {screen: SCENES.INTRO, details: null},
+    scene: { screen: SCENES.INTRO, details: null },
     curEvent: null,
     incomingLevels: [
       {
-        scene: "battle",
-        trainer: "hikerNed",
+        scene: 'battle',
+        trainer: 'hikerNed',
         // level based on our progression
-
       },
     ],
   },
@@ -147,10 +118,10 @@ export const newStartingData = {
     // Event system (placeholder)
     events: {
       introEvent: {
-        text: "Welcome to the game!",
+        text: 'Welcome to the game!',
         options: [
           {
-            text: "Start the adventure",
+            text: 'Start the adventure',
             action: () => {
               // Handle action when this option is chosen
               // For example, transition to the first map node
@@ -168,7 +139,7 @@ export const newStartingData = {
     // Development mode flag
     devMode: false,
   },
-};
+}
 
 export const startingData = {
   deck: startingDeck,
@@ -176,7 +147,7 @@ export const startingData = {
   hero: {
     health: 100,
     energy: 5,
-    status: "Feeling Fine",
+    status: 'Feeling Fine',
     effects: {
       buff: null,
       buildup: 1,
@@ -188,23 +159,23 @@ export const startingData = {
   },
   battle: {
     enemy: {
-      name: "sample guy",
-      bio: "just a standaard enemy",
-      health: "30",
-      maxHP: "30",
+      name: 'sample guy',
+      bio: 'just a standaard enemy',
+      health: '30',
+      maxHP: '30',
       energy: 6,
-      status: "none",
-      nextAttack: "none",
+      status: 'none',
+      nextAttack: 'none',
       attacks: [
         {
-          name: "sample atk hitting you",
-          type: "hit",
+          name: 'sample atk hitting you',
+          type: 'hit',
           damage: 20,
           status: STUN,
         },
         {
-          name: "sample atk hitting again",
-          type: "hit",
+          name: 'sample atk hitting again',
+          type: 'hit',
           damage: 40,
           status: null,
         },
@@ -216,12 +187,12 @@ export const startingData = {
     beginning: false,
     dialog: null,
   },
-  curScene: { scene: "intro", lvl: 1, act: 1 },
+  curScene: { scene: 'intro', lvl: 1, act: 1 },
   curEvent: null,
   availableRewards: [],
-  alert: "",
+  alert: '',
 
   // alert: "--- Cards PERMANENTLY go away. They can only be used once ---",
   eventResultObj: null,
   devMode: false,
-};
+}
