@@ -212,7 +212,12 @@ function Map() {
               onClick={() =>
                 handleChangeLevel(contextualState, {
                   screen: SCENES.BATTLE,
-                  details: null,
+                  details: {
+                    type: "trainer",
+                    trainer: hikerBrak,
+                    area: "tranquil forest",
+                    difficulty: "easy",
+                  },
                 })
               }
             >

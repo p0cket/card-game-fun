@@ -4,7 +4,7 @@ import { basicTrainers } from "./party/trainers";
 export function generateNextLevelOptions() {
   const options = [];
 
-  const {BATTLE, EVENT, REST } = SCENES
+  const { BATTLE, EVENT, REST } = SCENES;
 
   // Generate 3 options
   for (let i = 0; i < 3; i++) {
@@ -12,16 +12,25 @@ export function generateNextLevelOptions() {
 
     if (randomValue < 0.5) {
       // would be better with {screen: "battle", details: null}
-      const randomTrainer = basicTrainers[Math.floor(Math.random() * basicTrainers.length)];
-      options.push({screen: BATTLE, details: randomTrainer}); // 50% chance for Battle encounter  
-      // options.push({screen: BATTLE, details: null});    
+      const randomTrainer =
+        basicTrainers[Math.floor(Math.random() * basicTrainers.length)];
+      options.push({
+        screen: BATTLE,
+        details: {
+          type: "trainer",
+          trainer: randomTrainer,
+          area: "tranquil forest",
+          difficulty: "easy",
+        },
+      }); // 50% chance for Battle encounter
+      // options.push({screen: BATTLE, details: null});
     } else if (randomValue < 0.7) {
-      options.push({screen: EVENT, details: null}); // 20% chance for Event
-    // }
-    //  else if (randomValue < 0.8) {
-    //   options.push("Mystery"); // 10% chance for Mystery
+      options.push({ screen: EVENT, details: null }); // 20% chance for Event
+      // }
+      //  else if (randomValue < 0.8) {
+      //   options.push("Mystery"); // 10% chance for Mystery
     } else {
-      options.push({screen: REST, details: null}); // 20% chance for Rest
+      options.push({ screen: REST, details: null }); // 20% chance for Rest
     }
   }
 
@@ -33,8 +42,6 @@ export function generateNextLevelOptions() {
 // a place catching fire so a fire battle is up ahead
 // a place freezing over because of so much ice moves so ice battle up ahead
 // theives steal from you so you fight them later on to get your stuff back
-
-
 
 export function generateMap() {
   const results = [];
