@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { QuickStrike, SolarSpiritBlast, Teleport } from "../allAttacks";
 
 // Energy/Mana (MP): Resource used for monster abilities.
 // Level: The monster's level.
@@ -476,7 +477,8 @@ export const Ticklefairy = {
   cost: 400,
   lvl: 40,
   experience: 4000,
-  moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
+  moves: [QuickStrike, SolarSpiritBlast, Teleport],
+  // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ["Laughter Explosion", "Tickle Dance", "Happy Hug"],
   passive_ability: "Joyful Aura",
 };

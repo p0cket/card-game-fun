@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { dmgEmoji, energyEmoji, goldEmoji } from "../../consts/consts";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 
@@ -7,10 +7,72 @@ import "./../common/Button.css";
 import { useDispatchContext, useStateContext } from "../../MainContext";
 import { placeholderTrainer } from "../../consts/party/trainers";
 import { Ticklefairy } from "../../consts/pals/pals";
+import AttackPopup from "../common/AttackPopup";
 
 export default function BattleTopDisplay({ gameData }) {
-  const { name, status, poison, health, maxHP, img, nextAttack } =
-    gameData.battle.enemy;
+  const attackPopupStyles = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "rgba(0, 0, 0, 0.5)",
+      // background: "lightgreen",
+
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    },
+    container: {
+      // background: "#fff",
+      background: "lightgreen",
+
+      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+      padding: "20px",
+      borderRadius: "2px",
+    },
+  };
+
+  
+  const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false);
+
+  const contextualState = useStateContext();
+  const contextualDispatch = useDispatchContext();
+
+  const handleAttackClick = (name) => {
+    // Dispatch an action to perform the selected attack
+    contextualDispatch({
+      type: "PERFORM_ATTACK",
+      payload: { attackName: name },
+    });
+  };
+
+  const [isAttackPopupVisible, setAttackPopupVisible] = useState(false);
+
+  const openAttackPopup = () => {
+    setAttackPopupVisible(true);
+  };
+
+  const closeAttackPopup = () => {
+    setAttackPopupVisible(false);
+  };
+
+  const renderAttack = (name, damage, description, energyCost) => {
+    return (
+      <AttackPopup
+        name={name}
+        damage={damage}
+        description={description}
+        energyCost={energyCost}
+        onAttackClick={() => handleAttackClick(name)}
+      />
+    );
+  };
+
+  // const { name, status, poison, health, maxHP, img, nextAttack } =
+  //   gameData.battle.enemy;
 
   const yourVariants = {
     visible: {
@@ -24,12 +86,15 @@ export default function BattleTopDisplay({ gameData }) {
     },
   };
 
-  const contextualState = useStateContext();
-  const contextualDispatch = useDispatchContext();
-
+  // Def work on this later
   const currentMonDetails = contextualState.opponent.monsters[0];
-  const currentMon = Ticklefairy;
+
+  const currentMon =
+    contextualState.current.scene.details.trainer.monsters[0].obj; // .level
+  console.log(`currentMon:`, currentMon);
+  // const currentMon = Ticklefairy;
   const {
+    name,
     lore,
     image,
     elemental_type,
@@ -55,15 +120,15 @@ export default function BattleTopDisplay({ gameData }) {
       <div className="battleTopLeft">
         <div></div>
         <div className="battleTLname" style={{ fontSize: "25px" }}>
-          {/* {name} */}
-          {currentMonDetails
+          {name}
+          {/* {currentMonDetails
             ? currentMonDetails.name
-            : placeholderTrainer.monsters[0].name}
+            : placeholderTrainer.monsters[0].name} */}
           <span style={{ color: "gray", fontSize: "12px" }}>
-            lvl{" "}
-            {currentMonDetails
+            lvl {lvl}
+            {/* {currentMonDetails
               ? currentMonDetails.level
-              : placeholderTrainer.monsters[0].level}
+              : placeholderTrainer.monsters[0].level} */}
           </span>
         </div>
         <div></div>
@@ -90,7 +155,25 @@ export default function BattleTopDisplay({ gameData }) {
           </span>
           , will use:
         </div>
-        <button> {moves[0]}</button>
+        <div>
+        <button onClick={openAttackPopup}>{moves[0].name}</button>
+      </div>
+
+      {isAttackPopupVisible && (
+        <div style={attackPopupStyles.overlay} onClick={closeAttackPopup}>
+          <div style={attackPopupStyles.container}>
+            <AttackPopup
+              name={moves[0].name} // Pass the attack details here
+              damage="30"
+              description="An example attack description."
+              energyCost="10"
+              onAttackClick={closeAttackPopup}
+              closeAttackPopup={closeAttackPopup}
+              removeAttackButton={false}
+            />
+          </div>
+        </div>
+      )}
         <div></div>
       </div>{" "}
       <div className="battleTopRight">

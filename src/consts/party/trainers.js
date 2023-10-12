@@ -1,18 +1,22 @@
+import { Ticklefairy } from "../pals/pals";
+
 export const Trainer = {
   name: "Trainer Name",
   reward: {
     experience: 100,
     currency: 500,
     items: [
-      { name: "Potion", quantity: 3 },
-      { name: "Revive", quantity: 1 },
+      { obj: "Potion", quantity: 3 },
+      { obj: "Revive", quantity: 1 },
       // Add more items as needed
     ],
   },
   monsters: [
-    { name: "Bunbun", level: 2 },
-    { name: "FireDrake", level: 3 },
-    { name: "WaterSplash", level: 4 },
+    // { name: "Bunbun", level: 2 },
+    // { name: "FireDrake", level: 3 },
+    // { name: "WaterSplash", level: 4 },
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "I challenge you to a battle!",
@@ -33,8 +37,10 @@ export const hikerBrak = {
     items: [{ name: "Rock Candy", quantity: 2 }],
   },
   monsters: [
-    { name: "Bunbun", level: 6 },
-    { name: "Rockzilla", level: 8 },
+    // { name: "Bunbun", level: 6 },
+    // { name: "Rockzilla", level: 8 },
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "Prepare to be crushed under the weight of my mighty rocks!",
@@ -51,8 +57,10 @@ export const mysticWillow = {
     items: [{ name: "Enchanted Orb", quantity: 1 }],
   },
   monsters: [
-    { name: "Sparklefox", level: 10 },
-    { name: "Moonshadow", level: 12 },
+    // { name: "Sparklefox", level: 10 },
+    // { name: "Moonshadow", level: 12 },
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "Let the magic of nature guide our battle!",
@@ -69,8 +77,10 @@ export const acePilotSkyler = {
     items: [{ name: "Jet Fuel", quantity: 3 }],
   },
   monsters: [
-    { name: "Thunderhawk", level: 15 },
-    { name: "Cyclonejet", level: 17 },
+    // { name: "Thunderhawk", level: 15 },
+    // { name: "Cyclonejet", level: 17 },
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "Fasten your seatbelts! We're in for a turbulent battle!",
@@ -87,8 +97,10 @@ export const scientistTesla = {
     items: [{ name: "Tesla Coil", quantity: 1 }],
   },
   monsters: [
-    { name: "Electroray", level: 9 },
-    { name: "Voltorbolt", level: 11 },
+    // { name: "Electroray", level: 9 },
+    // { name: "Voltorbolt", level: 11 },
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "Witness the power of electricity, harnessed for battle!",
@@ -108,9 +120,11 @@ export const placeholderTrainer = {
     ],
   },
   monsters: [
-    { name: "Sillyslime", level: 1 }, // A slime that tells dad jokes
-    { name: "Pillowpet", level: 2 }, // Literally a fluffy pillow brought to life
-    { name: "Ticklefairy", level: 3 }, // Special move: Tickle Attack!
+    // { name: "Sillyslime", level: 1 }, // A slime that tells dad jokes
+    // { name: "Pillowpet", level: 2 }, // Literally a fluffy pillow brought to life
+    { obj: Ticklefairy, level: 3 }, // Special move: Tickle Attack!
+    { obj: Ticklefairy, level: 3 },
+    { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
     enter: "I challenge you to a tickle fight! Oops, I mean a battle!",
