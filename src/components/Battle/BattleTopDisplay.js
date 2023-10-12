@@ -1,63 +1,62 @@
-import React, { useState } from "react";
-import { dmgEmoji, energyEmoji, goldEmoji } from "../../consts/consts";
-import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
+import React, { useState } from 'react'
 
-import "./../scenes/Battle.css";
-import "./../common/Button.css";
-import { useDispatchContext, useStateContext } from "../../MainContext";
-import { placeholderTrainer } from "../../consts/party/trainers";
-import { Ticklefairy } from "../../consts/pals/pals";
-import AttackPopup from "../common/AttackPopup";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
 
-export default function BattleTopDisplay({ gameData }) {
+import './../scenes/Battle.css'
+import './../common/Button.css'
+import { useDispatchContext, useStateContext } from '../../MainContext'
+// eslint-disable-next-line no-unused-vars
+import AttackPopup from '../common/AttackPopup'
+
+export default function BattleTopDisplay() {
   const attackPopupStyles = {
     overlay: {
-      position: "fixed",
+      position: 'fixed',
       top: 0,
       left: 0,
-      width: "100%",
-      height: "100%",
-      background: "rgba(0, 0, 0, 0.5)",
+      width: '100%',
+      height: '100%',
+      background: 'rgba(0, 0, 0, 0.5)',
       // background: "lightgreen",
 
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       zIndex: 1000,
     },
     container: {
       // background: "#fff",
-      background: "lightgreen",
+      background: 'lightgreen',
 
-      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
-      padding: "20px",
-      borderRadius: "2px",
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+      padding: '20px',
+      borderRadius: '2px',
     },
-  };
+  }
 
-  
-  const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false);
+  // const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false)
 
-  const contextualState = useStateContext();
-  const contextualDispatch = useDispatchContext();
+  const contextualState = useStateContext()
+  const contextualDispatch = useDispatchContext()
 
   const handleAttackClick = (name) => {
     // Dispatch an action to perform the selected attack
     contextualDispatch({
-      type: "PERFORM_ATTACK",
+      type: 'PERFORM_ATTACK',
       payload: { attackName: name },
-    });
-  };
+    })
+  }
 
-  const [isAttackPopupVisible, setAttackPopupVisible] = useState(false);
+  const [isAttackPopupVisible, setAttackPopupVisible] = useState(false)
 
   const openAttackPopup = () => {
-    setAttackPopupVisible(true);
-  };
+    setAttackPopupVisible(true)
+  }
 
   const closeAttackPopup = () => {
-    setAttackPopupVisible(false);
-  };
+    setAttackPopupVisible(false)
+  }
 
   const renderAttack = (name, damage, description, energyCost) => {
     return (
@@ -68,8 +67,8 @@ export default function BattleTopDisplay({ gameData }) {
         energyCost={energyCost}
         onAttackClick={() => handleAttackClick(name)}
       />
-    );
-  };
+    )
+  }
 
   // const { name, status, poison, health, maxHP, img, nextAttack } =
   //   gameData.battle.enemy;
@@ -84,14 +83,14 @@ export default function BattleTopDisplay({ gameData }) {
         yoyo: Infinity,
       },
     },
-  };
+  }
 
   // Def work on this later
-  const currentMonDetails = contextualState.opponent.monsters[0];
+  const currentMonDetails = contextualState.opponent.monsters[0]
 
   const currentMon =
-    contextualState.current.scene.details.trainer.monsters[0].obj; // .level
-  console.log(`currentMon:`, currentMon);
+    contextualState.current.scene.details.trainer.monsters[0].obj // .level
+  console.log(`currentMon:`, currentMon)
   // const currentMon = Ticklefairy;
   const {
     name,
@@ -112,26 +111,16 @@ export default function BattleTopDisplay({ gameData }) {
     passive_ability,
     experience,
     lvl,
-  } = currentMon;
-  console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats);
+  } = currentMon
+  console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
 
   return (
     <div className="battleTop">
       <div className="battleTopLeft">
-        <div></div>
-        <div className="battleTLname" style={{ fontSize: "25px" }}>
+        <div className="battleTLname" style={{ fontSize: '25px' }}>
           {name}
-          {/* {currentMonDetails
-            ? currentMonDetails.name
-            : placeholderTrainer.monsters[0].name} */}
-          <span style={{ color: "gray", fontSize: "12px" }}>
-            lvl {lvl}
-            {/* {currentMonDetails
-              ? currentMonDetails.level
-              : placeholderTrainer.monsters[0].level} */}
-          </span>
+          <span style={{ color: 'gray', fontSize: '12px' }}>lvl{lvl}</span>
         </div>
-        <div></div>
         <div className="battleTLhealth">
           {stats.hp}HP
           <progress
@@ -139,43 +128,42 @@ export default function BattleTopDisplay({ gameData }) {
             value={stats.hp}
             max={stats.hp}
             style={{
-              backgroundColor: "#4caf50",
+              backgroundColor: '#4caf50',
             }}
-          ></progress>
+          />
         </div>
         <div className="battleTLnext">
           {/* <span style={{ color: "gray" }}>Next: </span> */}
-          <span style={{ color: "gray" }}>
-            In 10{" "}
+          <span style={{ color: 'gray' }}>
+            In 10{' '}
             <img
               src={`./icons/Seconds.png`}
               style={{ width: 20, height: 20 }}
               alt="Seconds Icon"
-            />{" "}
+            />{' '}
           </span>
           , will use:
         </div>
         <div>
-        <button onClick={openAttackPopup}>{moves[0].name}</button>
-      </div>
-
-      {isAttackPopupVisible && (
-        <div style={attackPopupStyles.overlay} onClick={closeAttackPopup}>
-          <div style={attackPopupStyles.container}>
-            <AttackPopup
-              name={moves[0].name} // Pass the attack details here
-              damage="30"
-              description="An example attack description."
-              energyCost="10"
-              onAttackClick={closeAttackPopup}
-              closeAttackPopup={closeAttackPopup}
-              removeAttackButton={false}
-            />
-          </div>
+          <button onClick={openAttackPopup}>{moves[0].name}</button>
         </div>
-      )}
-        <div></div>
-      </div>{" "}
+
+        {isAttackPopupVisible && (
+          <div style={attackPopupStyles.overlay} onClick={closeAttackPopup}>
+            <div style={attackPopupStyles.container}>
+              <AttackPopup
+                name={moves[0].name} // Pass the attack details here
+                damage="30"
+                description="An example attack description."
+                energyCost="10"
+                onAttackClick={closeAttackPopup}
+                closeAttackPopup={closeAttackPopup}
+                removeAttackButton={false}
+              />
+            </div>
+          </div>
+        )}
+      </div>{' '}
       <div className="battleTopRight">
         <motion.img
           style={{ width: 180, height: 150 }}
@@ -188,7 +176,5 @@ export default function BattleTopDisplay({ gameData }) {
         />
       </div>
     </div>
-  );
+  )
 }
-
-// export default BattleTopDisplay;

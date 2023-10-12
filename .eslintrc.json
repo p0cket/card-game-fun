@@ -1,7 +1,5 @@
-{
-  "extends":    
-    "react:recommended",
-  
+{   
+  "extends": "eslint-config-react",
   "env": {
     "browser": true,
     "commonjs": true,
@@ -23,7 +21,11 @@
     "no-console": "off",
     "strict": ["error", "global"],
     "curly": "warn",
-    "semi": ["error", "never"]
- 
+    "semi": ["error", "never"],
+    "indent": ["error", 2] ,
+    "comma-dangle": ["error", "always-multiline"],
+    "space-before-function-paren": "off" 
+    // if you want to remove prop validation:
+    // "react/prop-types": "off"
   }
 }
