@@ -8,6 +8,7 @@ import './../common/Button.css'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 // eslint-disable-next-line no-unused-vars
 import AttackPopup from '../common/AttackPopup'
+import Button from '../common/Button'
 
 export default function BattleTopDisplay() {
   const attackPopupStyles = {
@@ -134,7 +135,7 @@ export default function BattleTopDisplay() {
         </div>
         <div className="battleTLnext">
           {/* <span style={{ color: "gray" }}>Next: </span> */}
-          <span style={{ color: 'gray' }}>
+          <span style={{ color: 'gray', fontSize: '12px' }}>
             In 10{' '}
             <img
               src={`./icons/Seconds.png`}
@@ -142,11 +143,24 @@ export default function BattleTopDisplay() {
               alt="Seconds Icon"
             />{' '}
           </span>
-          , will use:
+          {/* , will use */}:
+          <button
+            onClick={openAttackPopup}
+            style={{
+              backgroundColor: 'green',
+              padding: '3px',
+              borderRadius: '3px',
+              color: 'white',
+            }}
+            attack={moves[0]}
+          >
+            {moves[0].name}
+          </button>
         </div>
-        <div>
-          <button onClick={openAttackPopup}>{moves[0].name}</button>
-        </div>
+        {/* <div> */}
+        {/* <Button onClick={openAttackPopup} text={moves[0].name} /> */}
+
+        {/* </div> */}
 
         {isAttackPopupVisible && (
           <div style={attackPopupStyles.overlay} onClick={closeAttackPopup}>
@@ -159,6 +173,7 @@ export default function BattleTopDisplay() {
                 onAttackClick={closeAttackPopup}
                 closeAttackPopup={closeAttackPopup}
                 removeAttackButton={false}
+                attack={moves[0]}
               />
             </div>
           </div>
