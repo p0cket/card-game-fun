@@ -3,7 +3,7 @@ export const SolarSpiritBlast = {
   type: 'elemental',
   damage: 45,
   speed: 8,
-  fuel: 7,
+  energyCost: 7,
   effect: {
     description: 'Requires charging, high damage',
     chance: '100%',
@@ -12,25 +12,64 @@ export const SolarSpiritBlast = {
   priority: 'slow',
 }
 
+// export const QuickStrike = {
+//   name: 'Quick Strike',
+//   type: 'physical',
+//   damage: 25,
+//   speed: 7,
+//   energyCost: 3,
+//   effect: {
+//     description: 'High critical hit chance',
+//     chance: '50%',
+//     result: 'critical_hit',
+//   },
+//   priority: 'fast',
+// }
 export const QuickStrike = {
   name: 'Quick Strike',
   type: 'physical',
   damage: 25,
   speed: 7,
-  fuel: 3,
+  energyCost: 3,
   effect: {
     description: 'High critical hit chance',
     chance: '50%',
     result: 'critical_hit',
   },
   priority: 'fast',
-}
+  targets: ['opponent', 'opponent_pals'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Nimble Dodge',
+    type: 'buff',
+    effect: {
+      description: 'Increase evasion for the next turn',
+      duration: '1 turn',
+      evasion_boost: 30, // Increase evasion for the user
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Rapid Fury',
+    type: 'physical',
+    damage: 40, // Enhanced damage for the Forceful aspect
+    speed: 9, // Slightly slower due to the added power
+    energyCost: 4, // Increased energyCost cost for the Forceful aspect
+    effect: {
+      description: 'Guaranteed critical hit and additional damage',
+      chance: '100%',
+      result: 'critical_hit',
+    },
+    targets: ['opponent', 'opponent_pals'],
+  },
+};
+
 
 export const WebTrap = {
   name: 'Web Trap',
   type: 'status',
   speed: 4,
-  fuel: 2,
+  energyCost: 2,
   effect: {
     description: 'Immobilizes target briefly',
     chance: '40%',
@@ -43,7 +82,7 @@ export const Teleport = {
   name: 'Teleport',
   type: 'utility',
   speed: 9,
-  fuel: 5,
+  energyCost: 5,
   effect: {
     description: 'Instantly move to another location',
     chance: '100%',
@@ -56,7 +95,7 @@ export const Mimicry = {
   name: 'Mimicry',
   type: 'utility',
   speed: 5,
-  fuel: 3,
+  energyCost: 3,
   effect: {
     description: "Copies the opponent's last move",
     chance: '100%',
@@ -69,7 +108,7 @@ export const DoubleStrike = {
   type: 'physical',
   damage: 15,
   speed: 7,
-  fuel: 3,
+  energyCost: 3,
   effect: {
     description: 'Goes again if the first attack is successful',
     chance: '100%',
@@ -82,7 +121,7 @@ export const LifeSwap = {
   name: 'Life Swap',
   type: 'heal',
   speed: 7,
-  fuel: 5,
+  energyCost: 5,
   effect: {
     description: 'Exchanges HP with the target',
     chance: '100%',
@@ -96,7 +135,7 @@ export const Thunderstorm = {
   type: 'elemental',
   damage: 40,
   speed: 8,
-  fuel: 6,
+  energyCost: 6,
   effect: {
     description: 'Chance to paralyze multiple targets',
     chance: '30%',
@@ -109,7 +148,7 @@ export const StealthyAmbush = {
   name: 'Stealthy Ambush',
   type: 'utility',
   speed: 6,
-  fuel: 4,
+  energyCost: 4,
   effect: {
     description: 'Hides for a turn and then appears. Good for poison.',
     chance: '100%',
@@ -122,7 +161,7 @@ export const MirrorImage = {
   name: 'Mirror Image',
   type: 'buff',
   speed: 6,
-  fuel: 3,
+  energyCost: 3,
   effect: {
     description: 'Creates illusion copies',
     chance: '100%',
@@ -135,7 +174,7 @@ export const MirrorImage = {
 //   name: 'Ice Wall',
 //   type: 'elemental',
 //   speed: 7,
-//   fuel: 5,
+//   energyCost: 5,
 //   effect: {
 //     description: 'Forms a protective ice wall',
 //     chance: '100%',
@@ -148,7 +187,7 @@ export const IceWall = {
   type: 'elemental',
   damage: 0,
   speed: 7,
-  fuel: 5,
+  energyCost: 5,
   effect: {
     description: 'Forms a protective ice wall',
     chance: '100%',
@@ -170,7 +209,7 @@ export const IceWall = {
     type: 'elemental',
     damage: 0,
     speed: 9,
-    fuel: 6,
+    energyCost: 6,
     effect: {
       description: 'Strengthen the Ice Wall and provide a protective barrier for pals',
       chance: '100%',
