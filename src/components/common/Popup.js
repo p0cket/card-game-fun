@@ -3,8 +3,9 @@ import Button from './Button'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { useMove } from '../../handlers/Battle/useMove'
 import { Party } from '../../consts/party/parties'
-import { IceWall } from '../../consts/allAttacks'
+import { IceWall } from '../../consts/allMoves'
 import Monster from '../info/Monster'
+import renderAttack from '../info/renderAttack'
 
 const { SLOT_1, SLOT_2, SLOT_3, SLOT_4, SLOT_5, SLOT_6 } = Party
 
@@ -36,16 +37,20 @@ function Popup(props) {
       {menuContent[menuOption].label}
     </div>
   )
+  const contextualState = useStateContext()
+  const contextualDispatch = useDispatchContext()
 
   const menuContent = {
     [MenuOptions.ATTACKS]: {
       label: 'Attacks',
       content: (
         <>
-          {renderAttack(IceWall)}
-          {renderAttack(IceWall)}
-          {renderAttack(IceWall)}
-          {renderAttack(IceWall)}
+          {/* {props.selectedPal.moves.map((move) => (
+            <Button key={move.name} move={move} />
+          ))} */}
+          {props.selectedPal.moves.map((move) =>
+            renderAttack(move, contextualDispatch),
+          )}
         </>
       ),
     },
@@ -133,98 +138,6 @@ function Popup(props) {
     ''
   )
 }
-
-function renderAttack(attack) {
-  const [attackSelected, setAttackSelected] = useState(false)
-
-  const {
-    name,
-    type,
-    damage,
-    speed,
-    fuel,
-    effect,
-    priority,
-    targets,
-    notSoFast,
-    forceful,
-  } = attack
-
-  return (
-    <div style={{ ...attackContainerStyle, backgroundColor: '#5a7d2a' }}>
-      <div style={{ display: 'flex' }}>
-        <div
-          style={{
-            backgroundColor: attackSelected ? '#4b770e' : '#5a7d2a',
-            color: attackSelected ? '#fff' : '#000',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-          }}
-          onClick={() => setAttackSelected(true)}
-        >
-          {attack.name}
-        </div>
-        <div
-          style={{
-            backgroundColor: attackSelected ? '#5a7d2a' : '#4b770e',
-            color: attackSelected ? '#000' : '#fff',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-          }}
-          onClick={() => setAttackSelected(false)}
-        >
-          {forceful.name}
-        </div>
-      </div>
-      <div style={attackInfoStyle}>
-        <div style={attackNameStyle}>{name}</div>
-        <div style={attackDamageStyle}>{damage}</div>
-      </div>
-      <div>Type: {type}</div>
-      <div>Speed: {speed}</div>
-      <div>Fuel: {fuel}</div>
-      <div>Effect: {effect.description}</div>
-      <div>Priority: {priority}</div>
-      <div>Targets: {targets.join(', ')}</div>
-      <div>Not So Fast: {notSoFast.name}</div>
-    </div>
-  )
-}
-
-// function renderMonster(name, abilities) {
-//   const monsterIcon = (
-//     <div
-//       style={{
-//         backgroundColor: 'green',
-//         width: '24px',
-//         height: '24px',
-//         marginRight: '10px',
-//       }}
-//     />
-//   )
-
-//   return (
-//     <div style={{ ...attackContainerStyle, backgroundColor: '#5a7d2a' }}>
-//       <div style={attackInfoStyle}>
-//         {monsterIcon}
-//         <div style={monsterNameStyle}>{name}</div>
-//       </div>
-//       <div style={monsterAbilitiesStyle}>
-//         {abilities.map((ability, index) => (
-//           <div key={index}>{ability}</div>
-//         ))}
-//       </div>
-//     </div>
-//   )
-// }
 
 const attackContainerStyle = {
   border: '1px solid #a5e54d',
