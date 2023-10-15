@@ -106,7 +106,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
                   style={{
                     backgroundColor: 'green',
                     padding: '5px',
-                    borderRadius: '5px',
+                    borderRadius: '2px',
                     color: 'white',
                   }}
                 >

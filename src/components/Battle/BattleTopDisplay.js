@@ -67,6 +67,8 @@ export default function BattleTopDisplay() {
         description={description}
         energyCost={energyCost}
         onAttackClick={() => handleAttackClick(name)}
+        // attack={moves[0]}
+
       />
     )
   }
@@ -152,7 +154,6 @@ export default function BattleTopDisplay() {
               borderRadius: '3px',
               color: 'white',
             }}
-            attack={moves[0]}
           >
             {moves[0].name}
           </button>
