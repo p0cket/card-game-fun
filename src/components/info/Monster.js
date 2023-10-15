@@ -19,7 +19,6 @@ const attackInfoStyle = {
 const attackNameStyle = {
   fontWeight: 'bold',
 }
-
 const attackDamageStyle = {
   flex: 1,
   textAlign: 'right',

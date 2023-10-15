@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useContext } from 'react'
 import './index.css'
 // import { startingData } from "./consts/consts";
