@@ -6,11 +6,9 @@ import { motion } from 'framer-motion/dist/framer-motion'
 
 import Dialog from '../common/Dialog'
 import Popup from '../common/Popup'
-// import HUDHeader from "../battle/HUDHeader";
 // import HUDHeader from "../battle/HUDHeader"
 // import EnemyDisplay from "../battle/BattleTopDisplay";
 import BattleTopDisplay from '../battle/BattleTopDisplay'
-
 import BattleBotDisplay from '../battle/BattleBotDisplay'
 import UserPartyDisplay from '../battle/UserPartyDisplay'
 import MenuButtonGroup from '../battle/MenuButtonGroup'

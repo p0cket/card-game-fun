@@ -112,7 +112,7 @@ export const Shadowstalker = {
     description:
       "Launches a surprise attack from the shadows, dealing massive damage and inflicting the 'Shadowed' status on the target, reducing their accuracy and evasion.",
   },
-  image: '/creatures/Chibipal.png',
+  image: 'creatures/Chibipal.png',
   description:
     'A stealthy panther-like creature that lurks in the dark, ambushing foes with precision.',
   size: 'Medium',
@@ -152,7 +152,7 @@ export const Infernodragon = {
     description:
       "Unleashes an apocalyptic firestorm, dealing massive area damage over time to all enemies and leaving them with the 'Burned' status effect.",
   },
-  image: '/creatures/Chibipal.png',
+  image: 'creatures/Chibipal.png',
   description:
     'A fearsome dragon that embodies the destructive power of fire, capable of causing infernos.',
   size: 'Large',
@@ -192,7 +192,7 @@ export const Aquaphoenix = {
     description:
       'Summons a massive tidal wave, healing the team to full health and removing all negative status effects while damaging enemies.',
   },
-  image: '/creatures/Chibipal.png',
+  image: 'creatures/Chibipal.png',
   description:
     'A majestic bird with the ability to control water, summoning rainstorms and quenching fires.',
   size: 'Large',
@@ -232,7 +232,7 @@ export const Verdantshifter = {
     description:
       'Calls upon the spirits of nature to bless the team, increasing their stats and granting temporary immunity to status effects.',
   },
-  image: '/pals/Luminowl_pxl.png',
+  image: 'pals/Luminowl_pxl.png',
   description:
     'A creature that can transform into various plant forms, aiding in environmental restoration.',
   size: 'Medium',
@@ -272,7 +272,7 @@ export const Technotitan = {
     description:
       'Overloads its advanced systems, releasing a powerful shockwave that damages all enemies and paralyzes them.',
   },
-  image: '/creatures/Chibipal.png',
+  image: 'creatures/Chibipal.png',
   description:
     'A colossal, mechanical giant armed with advanced weaponry, created to protect civilization.',
   size: 'Giant',
@@ -316,7 +316,7 @@ export const Glowbuggle = {
     description:
       'Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.',
   },
-  image: '/creatures/Chibipal.png',
+  image: 'creatures/Chibipal.png',
   description:
     'Small, firefly-like creatures with bioluminescent wings that emit a warm, comforting light.',
   size: 'Tiny',
@@ -356,7 +356,7 @@ export const Umbrabunny = {
     description:
       'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
   },
-  image: '/pals/Umbrabunny_pxl.png',
+  image: 'pals/Umbrabunny_pxl.png',
   description:
     'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
   size: 'Small',
@@ -404,6 +404,7 @@ export const Recycleroo = {
   lore: 'Recycleroo is known for its dedication to environmental protection, using recycled materials to defend nature.',
 }
 
+//this doesn't have and above and for shoe
 export const Shoe = {
   name: 'Shoe',
   lore: "A lost shoe that somehow became a commander. It doesn't have any special abilities or moves.",
@@ -467,7 +468,7 @@ export const Wolfjobb = {
 export const Ticklefairy = {
   name: 'Ticklefairy',
   lore: 'Ticklefairy is a mischievous fairy that spreads laughter and joy wherever it goes.',
-  image: './pals/Ticklefairy_pxl.png',
+  image: 'pals/Ticklefairy_pxl.png',
   elemental_type: 'Light',
   creature_type: 'Fairy',
   specialty_group: 'Joybringer',
