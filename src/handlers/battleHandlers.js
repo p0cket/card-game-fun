@@ -1,9 +1,58 @@
-import { dmgEmoji, energyEmoji } from "../consts/consts"
-import { EFFECTS } from "../effects"
-import { setAlertHandler } from "./dataHandlers"
-import { winBattleHandler } from "./sceneHandlers"
-import { setDialogHandler } from "./dataHandlers"
+/* eslint-disable indent */
+import { dmgEmoji, energyEmoji } from '../consts/consts'
+import { EFFECTS } from '../effects'
+import { setAlertHandler } from './dataHandlers'
+import { winBattleHandler } from './sceneHandlers'
+import { setDialogHandler } from './dataHandlers'
+import { SCENES } from './sceneHandlers_new'
+import { ACTIONS } from '../MainContext'
 
+// NEW AND TASTY Handlers
+// const contextualState = useStateContext()
+// const contextualDispatch = useDispatchContext()
+const changeTurn = (currentPlayer, contextualState, contextualDispatch) => {
+  const newPlayer = currentPlayer === 'player' ? 'opponent' : 'player'
+
+  const newState = {
+    battleManager: {
+      ...contextualState.battleManager,
+      turn: contextualState.battleManager.turn + 1,
+      currentPlayer: newPlayer,
+    },
+  }
+
+  contextualDispatch({
+    type: ACTIONS.UPDATEGAMEDATA,
+    payload: newState,
+  })
+}
+
+const endBattle = (win, contextualState, contextualDispatch) => {
+  // Implement logic to determine win or lose
+  const newState = { ...contextualState } // Create a copy of the current state
+
+  if (win) {
+    // Implement logic for winning the battle
+    newState.current.level++ // Increment the level
+    newState.current.scene = {
+      screen: SCENES.VICTORY, // Transition to the level screen
+      details: null, //VICTORY DETAILS, based on who you beat, etc. You can set details for the new level
+    }
+  } else {
+    // Implement logic for losing the battle
+    newState.current.scene = {
+      screen: SCENES.GAMEOVER, // Transition to the game over screen
+      details: null, // You can provide details for the game over
+    }
+  }
+
+  contextualDispatch({
+    type: ACTIONS.UPDATEGAMEDATA,
+    payload: newState,
+  })
+}
+
+// OLD AND YUCKY Deprecated because we switched to moves from cards
 export const playCardHandler = (state, { card, battlePayload }) => {
   console.log(`playCardHandler: payload&card`, card, battlePayload)
   let nextState = { ...state }
@@ -17,7 +66,7 @@ export const playCardHandler = (state, { card, battlePayload }) => {
   if (myEnergy < energyCost) {
     return setAlertHandler(
       nextState,
-      `Not enough energy to play that card :(. End turn to replenish Energy!`
+      `Not enough energy to play that card :(. End turn to replenish Energy!`,
     )
   }
   //if the USER can use the card:
@@ -104,7 +153,6 @@ export const discardCardHandler = (state, payload) => {
     },
   }
 }
-
 export const applyStatusHandler = (state, { card, battlePayload }) => {
   let nextState = { ...state }
   const statusEffect = card.effect
@@ -113,7 +161,7 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
   console.log(
     `card.effectChance: ${card.effectChance},atkSeed ${
       battlePayload.atkSeed
-    }, ${card.effectChance > battlePayload.atkSeed}`
+    }, ${card.effectChance > battlePayload.atkSeed}`,
   )
 
   // if a card has a percentage chance of having an effect work, try that before applying.
@@ -163,12 +211,12 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
             enemy: { ...nextState.battle.enemy, status: EFFECTS.SLEEP },
           },
         }
-      case "sheild":
+      case 'sheild':
         // temporary
         return {
           ...nextState,
         }
-      case "armor":
+      case 'armor':
         return {
           ...nextState,
         }
@@ -184,14 +232,14 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
         }
       case EFFECTS.DRAW:
         console.log(
-          `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`
+          `drawing ${card.qty}, hand length before:${nextState.battle.hand.length}`,
         )
         for (let i = 0; i < card.qty; i++) {
           nextState = drawCardHandler(nextState)
         }
         console.log(
           `drew ${card.qty} cards, now hand is ${nextState.battle.hand.length} cards`,
-          nextState
+          nextState,
         )
         return nextState
       case EFFECTS.LIFESTEAL:
@@ -204,7 +252,7 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
     }
   } else {
     console.log(
-      `percentage chance of effect landing was less than the seed, returning state`
+      `percentage chance of effect landing was less than the seed, returning state`,
     )
     // TODO no status applied, set Dialog to reflect this. This state must be mutating somehow
     // const newDialog = nextState.battle.dialog + ` no Effect applied`
@@ -215,7 +263,6 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
     return nextState
   }
 }
-
 export const drawCardHandler = (state) => {
   if (state.deck.length > 0) {
     console.log(`draw. Deck has ${state.deck.length} cards`)
@@ -230,7 +277,7 @@ export const drawCardHandler = (state) => {
   } else {
     return {
       ...state,
-      alert: "No cards left to draw :( ",
+      alert: 'No cards left to draw :( ',
     }
   }
 }

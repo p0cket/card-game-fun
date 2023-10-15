@@ -34,6 +34,11 @@ export default function App() {
           height: '100vh',
           maxWidth: '800px',
           maxHeight: '1000px',
+          // display this div in the center:
+          margin: 'auto',
+          center: 'true',
+        
+          
         }}
       >
         <Screen gameData={gameData} dispatch={dispatch} map={map} />
