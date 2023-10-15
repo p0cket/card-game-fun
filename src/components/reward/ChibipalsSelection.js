@@ -89,78 +89,12 @@ const ChibipalsSelection = () => {
     // Clone the current state into a new variable
     const newState = { ...nextLevelState }
     console.log(`[!!!]newState`, newState)
-    // lets log everything from the comments below in color
-    // console.log(
-    //   `[!!!]newState`,
-    //   newState,
-    //   `nextLevelState`,
-    //   nextLevelState,
-    //   `mapLevels`,
-    //   mapLevels,
-    //   `mapLevels[0]`,
-    //   mapLevels[0],
-    //   `mapLevels[0].scene`,
-    //   mapLevels[0].scene,
-    //   `const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak)`
-    // );
 
-    //--------
-    // console.log(
-    //   `[!!!]newState.game.map`,
-    //   newState.game.map,
-    //   `nextLevelState.current.level`,
-    //   nextLevelState.current.level,
-    // );
-
-    // let enemyTrainers = []
-
-    // newState.game.map[nextLevelState.current.level].forEach((option, index) => {
-    //   if (option === SCENES.BATTLE) {
-    //     console.log(`pos: option is ${option}`);
-    //     enemyTrainers[index] = hikerBrak
-    //         //     const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak);
-    //             //     newState.opponent = stateWithEnemyParty.opponent;
-    //   } else {
-    //     console.log(`neg: option is ${option}`);
-    //   }
-    // })
-
-    // applyEnemyMonstersToParty(someState, enemyMonstersForParty)
-
-    //------------
-
-    // newState.game.map[nextLevelState.current.level].forEach((option, index) => {
-    //   if (option === SCENES.BATTLE) {
-    //     // Load new opponent
-    //     logWithColor("Loading a new opponent...", "blue");
-    //     const stateWithEnemyParty = generateEnemyParty(newState, hikerBrak);
-
-    //     logWithColor("[!]State before dispatch:", "blue");
-    //     console.log(newState);
-
-    //     // Update the newState with the new opponent party
-    //     newState.opponent = stateWithEnemyParty.opponent;
-
-    //     logWithColor("[!]State after adding an opponent:", "blue");
-    //     console.log(newState);
-    //   }
-    // });
-
-    //
     // Dispatch the updated state
     contextualDispatch({
       type: ACTIONS.UPDATEGAMEDATA,
       payload: newState,
     })
-
-    // contextualDispatch({
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    //   payload: nextLevelState,
-    // });
-    // console.log(
-    //   `state after adding user monster, changing level:`,
-    //   nextLevelState
-    // );
   }
 
   return (
@@ -280,7 +214,7 @@ const ChibipalsSelection = () => {
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
                     <span>Atk:</span>
-                    <span>{selectedMonster.stats.attack}</span>
+                    <span>{selectedMonster.stats.attack.name}</span>
                   </div>
                   <div
                     style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -362,7 +296,7 @@ const ChibipalsSelection = () => {
                         color: 'darkgreen',
                       }}
                     >
-                      {move}
+                      {move.name}
                     </span>
                   </div>
                 ))}

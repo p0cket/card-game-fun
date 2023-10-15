@@ -34,8 +34,10 @@ const Intro = ({ dispatch }) => {
   const contextualDispatch = useDispatchContext()
 
   const loadNextLevel = () => {
+    // #TODO: remove?
     console.log(`loadNextLevel`)
     dispatch(setSceneAction())
+    // 
 
     const nextSceneState = updateScene(contextualState, {
       screen: SCENES.CHOOSECHARACTER,

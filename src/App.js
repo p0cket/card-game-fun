@@ -23,22 +23,21 @@ export default function App() {
   )
 
   return (
-    <div
-      className="App scanlines"
-      style={{
-        backgroundImage: 'url(backgrounds/gridBGdark.png)',
-        backgroundRepeat: 'repeat',
-        backgroundSize: '800px 500px',
-        width: '100vw',
-        height: '100vh',
-        maxWidth: '800px',
-        maxHeight: '1000px',
-      
-      }}
-    >
- 
-
-      <Screen gameData={gameData} dispatch={dispatch} map={map} />
+    <div style={{ backgroundColor: 'black' }}>
+      <div
+        className="App scanlines"
+        style={{
+          backgroundImage: 'url(backgrounds/gridBGdark.png)',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '800px 500px',
+          width: '100vw',
+          height: '100vh',
+          maxWidth: '800px',
+          maxHeight: '1000px',
+        }}
+      >
+        <Screen gameData={gameData} dispatch={dispatch} map={map} />
+      </div>
     </div>
     // #TODO: Test out why tailwind is broken here
     // <h1 className="text-3xl font-bold underline">Hello world!</h1>

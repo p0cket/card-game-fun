@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { QuickStrike, SolarSpiritBlast, Teleport } from '../allAttacks'
+import { ComfortingHug, CuteCharm, EmotionDrain, FeatherGlide, GlowingCharm, LightBeam, LuminousFlight, QuickStrike, SolarSpiritBlast, Teleport, WarmEmbrace, WiseGaze } from '../allMoves'
 
 // Energy/Mana (MP): Resource used for monster abilities.
 // Level: The monster's level.
@@ -64,7 +64,8 @@ export const Luminowl = {
   cost: 500,
   lvl: 50,
   experience: 5000,
-  moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
+  // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
+  moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
   passive_ability: 'Guiding Wisdom',
   commander_ability: {
@@ -304,7 +305,8 @@ export const Glowbuggle = {
   cost: 400,
   lvl: 40,
   experience: 4000,
-  moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
+  // moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
+  moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
   possible_moves: [
     'Bioluminescent Burst',
     'Soothing Radiance',
@@ -348,7 +350,8 @@ export const Umbrabunny = {
   cost: 450,
   lvl: 48,
   experience: 4800,
-  moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
+  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
+  moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
   passive_ability: 'Emotion Balance',
   commander_ability: {
