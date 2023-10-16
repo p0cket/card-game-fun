@@ -39,50 +39,45 @@
 
 import { Party } from '../consts/party/parties'
 
-const handlePlayerMoveSelection = (move, state, dispatch) => {
-  // Implement logic for selecting a move by the player
-  const user = state.userParty[Party.SLOT_1] // Get the user's party
-  const target = state.opponent[Party.SLOT_1] // Get the opponent's party
-  // const target = state.opponent; // Get the opponent's party
-  const result = executeMove(move, user, target) // Execute the selected move
-  // Handle the move's result (e.g., update UI, check for win/loss conditions)
-}
+export const executeMove = (
+  move,
+  contextualState,
+  contextualDispatch,
+  user,
+) => {
+  const userMonster = contextualState.userParty[Party.SLOT_1]
+  const targetMonster = contextualState.opponent.monsters[0].obj
 
-const handleOpponentMoveSelection = (state, dispatch) => {
-  // Implement logic for selecting a move by the opponent
-  const user = state.opponent // Get the opponent's party
-  const target = state.userParty // Get the user's party
-  // Implement AI logic to select a move
-  // Your AI logic here to choose a move
-  const selectedMove = //state.opponent.moves[0]; // Get the selected move
-    state.opponent.moves[
-      Math.floor(Math.random() * state.opponent.moves.length)
-    ] // Get the selected move
-  console.log(`opponent selected move: ${selectedMove.name}`)
-  const result = executeMove(selectedMove, user, target) // Execute the selected move
-  // Handle the move's result (e.g., update UI, check for win/loss conditions)
-}
-
-const executeMove = (move, userParty, targetParty) => {
-  const userMonster = userParty.activeMonster
-  const targetMonster = targetParty.activeMonster
+  console.log(
+    `userMonster and targetMonster are ${userMonster} and ${targetMonster} respectively`,
+    userMonster,
+    targetMonster,
+  )
 
   // Calculate the damage based on move and user's stats
   // also apply the enemy abilities and effects with this as well
   const damage = (userMonster.stats.attack * move.damage) / 100
+  console.log(
+    `The damage dealt is ${damage}. from ${userMonster.stats.attack} * ${
+      move.damage
+    } / 100. 
+    This will result in targetMonster.stats.hp (${
+      targetMonster.stats.hp
+    }) at: ${targetMonster.stats.hp - damage}`,
+  )
 
-  // Check if the move has a status effect
-  if (move.effect && Math.random() <= parseFloat(move.effect.chance) / 100) {
-    const effect = move.effect.result
-    // Implement logic to apply the status effect (e.g., set 'blind' status)
+  // // Check if the move has a status effect
+  // if (move.effect && Math.random() <= parseFloat(move.effect.chance) / 100) {
+  //   const effect = move.effect.result
+  //   // Implement logic to apply the status effect (e.g., set 'blind' status)
 
-    // if it has an effect, run it through the effects switch case
-    // abstract the logic out into its' own file
-    // For example:
-    if (effect === 'blind') {
-      targetMonster.status.blind = true
-    }
-  }
+  //   // if it has an effect, run it through the effects switch case
+  //   // abstract the logic out into its' own file
+  //   // For example:
+  //   if (effect === 'blind') {
+  //     targetMonster.status.blind = true
+  //   }
+  // }
 
   // Apply damage to the target
   targetMonster.stats.hp -= damage
@@ -98,12 +93,39 @@ const executeMove = (move, userParty, targetParty) => {
 
   // Return relevant data about the move's execution
   return {
-    damageDealt: damage,
-    statusEffect: move.effect ? move.effect.result : null,
-    // You can add more data as needed for your game
+    ...contextualState,
+    opponent: {
+      ...contextualState.opponent,
+      monsters: [targetMonster, ...contextualState.opponent.monsters.slice(1)],
+      // damageDealt: damage,
+      // statusEffect: move.effect ? move.effect.result : null,
+      // You can add more data as needed for your game
+    },
   }
 }
-
+export const handlePlayerMoveSelection = (move, state, dispatch) => {
+  // Implement logic for selecting a move by the player
+  const user = state.userParty[Party.SLOT_1] // Get the user's party
+  const target = state.opponent.monsters[0] // Get the opponent's party
+  // const target = state.opponent; // Get the opponent's party
+  const result = executeMove(move, user, target) // Execute the selected move
+  // Handle the move's result (e.g., update UI, check for win/loss conditions)
+  return result
+}
+export const handleOpponentMoveSelection = (state, dispatch) => {
+  // Implement logic for selecting a move by the opponent
+  const user = state.opponent // Get the opponent's party
+  const target = state.userParty // Get the user's party
+  // Implement AI logic to select a move
+  // Your AI logic here to choose a move
+  const selectedMove = //state.opponent.moves[0]; // Get the selected move
+    state.opponent.moves[
+      Math.floor(Math.random() * state.opponent.moves.length)
+    ] // Get the selected move
+  console.log(`opponent selected move: ${selectedMove.name}`)
+  const result = executeMove(selectedMove, user, target) // Execute the selected move
+  // Handle the move's result (e.g., update UI, check for win/loss conditions)
+}
 // const handleSelect = (selectedMonster) => {
 //   console.log(
 //     `you selected monster: ${selectedMonster.name}`,

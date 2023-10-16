@@ -49,7 +49,7 @@ function Popup(props) {
             <Button key={move.name} move={move} />
           ))} */}
           {props.selectedPal.moves.map((move) =>
-            renderAttack(move, contextualDispatch),
+            renderAttack(move, contextualState, contextualDispatch),
           )}
         </>
       ),

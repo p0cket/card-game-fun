@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
+import {
+  executeMove,
+  handlePlayerMoveSelection,
+} from '../../handlers/moveHandlers'
+import { ACTIONS } from '../../MainContext'
 
-function renderAttack(attack, contextualDispatch) {
+function renderAttack(attack, contextualState, contextualDispatch) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
 
@@ -18,8 +23,18 @@ function renderAttack(attack, contextualDispatch) {
     forceful,
   } = attack
 
-  const useMove = (move) => {
+  const useMove = (move, user) => {
     // const castResult = castMove(move)
+    // const targetsSelected = handlePlayerMoveSelection(
+    //   move,
+    //   contextualState,
+    //   contextualDispatch,
+    // )
+    console.log('ENTERED: useMove', move)
+    const resultState = executeMove(move, contextualState, contextualDispatch, user)
+    // const resultState = executeMove(move, targetsSelected, contextualDispatch)
+    contextualDispatch(resultState, ACTIONS.UPDATEGAMEDATA)
+
     //       const appliedCost is in cast
     // if (castResult.success) {
     //   const appliedEffect = applyEffect(castResult, move.effect)
@@ -58,7 +73,6 @@ function renderAttack(attack, contextualDispatch) {
             borderRadius: '4px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
-
           onClick={() => useMove(attack)}
         >
           Use
@@ -138,7 +152,7 @@ function renderAttack(attack, contextualDispatch) {
             backgroundColor: attackType === 'forceful' ? '#4b770e' : '#5a7d2a',
             color: attackType === 'forceful' ? '#fff' : '#000',
             cursor: 'pointer',
-            padding: '8px 8px', 
+            padding: '8px 8px',
             fontSize: '16px',
             fontWeight: 'bold',
             borderRadius: '4px',
