@@ -42,19 +42,6 @@ const Battle = () => {
     },
   }
 
-  // function renderUserAbility(name, damage, description, energyCost) {
-  //   return (
-  //     <div style={{ ...attackContainerStyle, backgroundColor: '#5a7d2a' }}>
-  //       <div style={attackInfoStyle}>
-  //         <div style={attackNameStyle}>{name}</div>
-  //         <div style={attackDamageStyle}>{damage}</div>
-  //       </div>
-  //       <div style={attackDescriptionStyle}>{description}</div>
-  //       <div style={attackEnergyCostStyle}>Energy Cost: {energyCost}</div>
-  //     </div>
-  //   )
-  // }
-
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
 
