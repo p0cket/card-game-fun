@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 
 import Dialog from '../common/Dialog'
 import ThemedButton from '../common/ThemedButton'
+import DialoguePopup from '../common/DialoguePopup'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { getRandomPALAcronym } from '../../consts/fun/pal'
 import {
@@ -92,6 +93,12 @@ const Intro = ({ dispatch }) => {
 
   const [explode, setExplode] = useState(false)
   const [startAnimation, setStartAnimation] = useState(false)
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleButtonClick = () => {
+    // Handle button click action here
+    setShowPopup(false)
+  }
 
   return (
     <>
@@ -126,6 +133,7 @@ const Intro = ({ dispatch }) => {
               myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
       In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
             />
+           />
             <br />
           </div>{' '}
           {/* <div style={{ position: "relative", height: "100vh" }}>
@@ -141,6 +149,15 @@ const Intro = ({ dispatch }) => {
             {' '}
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
+          <button onClick={() => setShowPopup(true)}>Show Popup</button>
+          <DialoguePopup
+            trigger={showPopup}
+            title="Sample Dialogue"
+            message="This is a sample dialogue popup. You can customize the message and button text as needed."
+            buttonText="OK"
+            buttonText2="Counter"
+            onButtonClick={handleButtonClick}
+          />
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
           <p className="text-3xl font-bold underline text-red-300 bg-blue-300">

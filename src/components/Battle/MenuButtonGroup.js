@@ -22,7 +22,7 @@ function MenuButtonGroup ({ togglePopup }) {
           padding: '4px',
         }}
       >
-        10{energyEmoji.repeat(10)}
+        10{energyEmoji}
       </div>
       <div
         style={{

@@ -59,8 +59,8 @@ const UserPartyDisplay = () => {
               src={member.image}
               alt={`Party Member ${index + 1}`}
               style={{
-                width: '50px',
-                height: '50px',
+                width: '30px',
+                height: '30px',
               }}
             />
             <div>
@@ -69,7 +69,7 @@ const UserPartyDisplay = () => {
                 style={{
                   backgroundColor: 'green',
                   width: `${(member.health / 100) * 60}px`,
-                  height: '10px',
+                  height: '5px',
                 }}
               />
             </div>

@@ -15,6 +15,8 @@ import MenuButtonGroup from '../battle/MenuButtonGroup'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { startingData } from '../../consts/startingData'
 import { Party } from '../../consts/party/parties'
+import DialoguePopup from '../common/DialoguePopup'
+import HUDHeader from '../battle/HUDHeader'
 
 // const Battle = ({ gameData, dispatch }) => {
 const Battle = () => {
@@ -51,6 +53,13 @@ const Battle = () => {
   const ourCurrentMon = ourParty[Party.SLOT_1]
   console.log(`ourCurrentMon`, ourCurrentMon, `curMON`, ourParty)
 
+  const [showPopup, setShowPopup] = useState(true)
+
+  const handleButtonClick = () => {
+    // Handle button click action here
+    setShowPopup(false)
+  }
+
   // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
     <div
@@ -59,28 +68,29 @@ const Battle = () => {
         flexDirection: 'column',
       }}
     >
-      <div style={{}}>
-        <div>
-          <div
-            style={{
-              fontFamily: 'Silkscreen',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-            }}
-          >
-            {/* <HUDHeader gameData={gameData} /> */}
-            <UserPartyDisplay />
-            <BattleTopDisplay gameData={gameData} />
-            <BattleBotDisplay
-              ourCurrentMon={ourCurrentMon}
-              // gameData={gameData}
-              // health={health}
-              // maxHP={maxHP}
-              // energy={energy}
-            />
-          </div>
+      <HUDHeader />
+      <div>
+        {/* <div> */}
+        <div
+          style={{
+            fontFamily: 'Silkscreen',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+          }}
+        >
+          {/* <HUDHeader gameData={gameData} /> */}
+          <UserPartyDisplay />
+          <BattleTopDisplay gameData={gameData} />
+          <BattleBotDisplay
+            ourCurrentMon={ourCurrentMon}
+            // gameData={gameData}
+            // health={health}
+            // maxHP={maxHP}
+            // energy={energy}
+          />
         </div>
+        {/* </div> */}
         {gameData.alert ? (
           <div
             style={{
@@ -97,17 +107,6 @@ const Battle = () => {
         )}
 
         <div style={{ display: 'flex' }}>
-          <div
-            style={{
-              color: '#a5e54d',
-              flex: 3,
-              fontFamily: 'Silkscreen',
-              backgroundColor: '#5a7d2a',
-            }}
-          >
-            {/* Oh man, the battle is on */}
-          </div>
-
           <MenuButtonGroup togglePopup={togglePopup} />
         </div>
         <UserPartyDisplay />
@@ -123,9 +122,16 @@ const Battle = () => {
             trigger={popupOpen}
             togglePopup={togglePopup}
             zIndex={1}
-          >
-            {' '}
-          </Popup>
+          />
+
+          <DialoguePopup
+            trigger={showPopup}
+            title="BATTLE START"
+            message="Mr. Yamashita wants to fight! Are you ready to battle?"
+            buttonText="OK"
+            buttonText2="Counter"
+            onButtonClick={handleButtonClick}
+          />
         </div>
       </div>
     </div>

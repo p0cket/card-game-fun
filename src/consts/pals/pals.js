@@ -1,5 +1,18 @@
 import PropTypes from 'prop-types'
-import { ComfortingHug, CuteCharm, EmotionDrain, FeatherGlide, GlowingCharm, LightBeam, LuminousFlight, QuickStrike, SolarSpiritBlast, Teleport, WarmEmbrace, WiseGaze } from '../allMoves'
+import {
+  ComfortingHug,
+  CuteCharm,
+  EmotionDrain,
+  FeatherGlide,
+  GlowingCharm,
+  LightBeam,
+  LuminousFlight,
+  QuickStrike,
+  SolarSpiritBlast,
+  Teleport,
+  WarmEmbrace,
+  WiseGaze,
+} from '../allMoves'
 
 // Energy/Mana (MP): Resource used for monster abilities.
 // Level: The monster's level.
@@ -64,6 +77,7 @@ export const Luminowl = {
   cost: 500,
   lvl: 50,
   experience: 5000,
+  status: {},
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
   moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
@@ -105,6 +119,8 @@ export const Shadowstalker = {
   cost: 500,
   lvl: 50,
   experience: 5000,
+  status: {},
+
   moves: ['Shadow Pounce', 'Stealth Strike', 'Dark Cloak'],
   possible_moves: ['Shadowmeld', 'Nightmare Slash', 'Ambush'],
   passive_ability: 'Cloaked in Shadows',
@@ -145,6 +161,8 @@ export const Infernodragon = {
   cost: 600,
   lvl: 55,
   experience: 5500,
+  status: {},
+
   moves: ['Inferno Roar', 'Dragon Blaze', 'Firestorm'],
   possible_moves: ['Magma Eruption', 'Dragon Rage', 'Heat Wave'],
   passive_ability: 'Scorching Scales',
@@ -185,6 +203,8 @@ export const Aquaphoenix = {
   cost: 550,
   lvl: 52,
   experience: 5200,
+  status: {},
+
   moves: ['Aqua Torrent', 'Phoenix Glide', 'Rain Dance'],
   possible_moves: ['Tidal Wave', 'Hydroburst', 'Aqua Healing'],
   passive_ability: 'Aqua Resurrection',
@@ -225,6 +245,8 @@ export const Verdantshifter = {
   cost: 450,
   lvl: 48,
   experience: 4800,
+  status: {},
+
   moves: ["Nature's Transformation", 'Shapeshift', 'Eco Restoration'],
   possible_moves: ['Plant Manipulation', 'Camouflage', 'Adaptive Form'],
   passive_ability: "Nature's Harmony",
@@ -265,6 +287,8 @@ export const Technotitan = {
   cost: 750,
   lvl: 60,
   experience: 6000,
+  status: {},
+
   moves: ['Mechanical Slam', 'Energy Beam', 'Defense Protocol'],
   possible_moves: ['Rocket Punch', 'Repair Mode', 'Techno Shield'],
   passive_ability: 'Guardian Armor',
@@ -305,6 +329,8 @@ export const Glowbuggle = {
   cost: 400,
   lvl: 40,
   experience: 4000,
+  status: {},
+
   // moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
   moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
   possible_moves: [
@@ -350,6 +376,8 @@ export const Umbrabunny = {
   cost: 450,
   lvl: 48,
   experience: 4800,
+  status: {},
+
   // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
   moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
@@ -391,6 +419,8 @@ export const Recycleroo = {
   cost: 550,
   lvl: 55,
   experience: 5500,
+  status: {},
+
   moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
   possible_moves: ['Trash Bash', "Nature's Wrath", 'Sorting Cyclone'],
   passive_ability: 'Eco-Warrior',
@@ -417,6 +447,8 @@ export const Shoe = {
   specialty_group: 'Ordinary',
   nature: 'Inanimate',
   quirks: ['Lost and Found'],
+  status: {},
+
   stats: {
     hp: 10,
     max_hp: 10,
@@ -447,6 +479,8 @@ export const Wolfjobb = {
   specialty_group: 'Industrious',
   nature: 'Diligent',
   quirks: ['Workaholic', 'Pack Leader'],
+  status: {},
+
   stats: {
     hp: 80,
     max_hp: 80,
@@ -493,11 +527,16 @@ export const Ticklefairy = {
   cost: 400,
   lvl: 40,
   experience: 4000,
+  status: {},
   moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
   passive_ability: 'Joyful Aura',
 }
+
+//types: Foodbased, Water, Earth, Fire, Air, 
+// Light, Dark, None, Physical, Magical, Nature
+// 
 
 export const testPals = [
   Luminowl,
