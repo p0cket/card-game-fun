@@ -14,7 +14,7 @@
  * Keywords for the React RPG game.
  * @type {Object<string, Keyword>}
  */
-const keywords = {
+export const keywords = {
   // Creature Keywords
   Flying: {
     description: "This creature can fly over obstacles and other creatures.",

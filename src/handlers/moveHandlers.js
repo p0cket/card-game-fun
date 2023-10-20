@@ -61,23 +61,37 @@ export const executeMove = (
     `The damage dealt is ${damage}. from ${userMonster.stats.attack} * ${
       move.damage
     } / 100. 
-    This will result in targetMonster.stats.hp (${
-      targetMonster.stats.hp
-    }) at: ${targetMonster.stats.hp - damage}`,
+    This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
+     at: ${targetMonster.stats.hp - damage}`,
   )
+  console.log(`move.effect is ${move.effect.result}`, `move`, move)
+  // Check if the move has a status effect
 
-  // // Check if the move has a status effect
-  // if (move.effect && Math.random() <= parseFloat(move.effect.chance) / 100) {
-  //   const effect = move.effect.result
-  //   // Implement logic to apply the status effect (e.g., set 'blind' status)
-
-  //   // if it has an effect, run it through the effects switch case
-  //   // abstract the logic out into its' own file
-  //   // For example:
-  //   if (effect === 'blind') {
-  //     targetMonster.status.blind = true
-  //   }
-  // }
+  const doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
+  console.log(`doesItLand is ${doesItLand}`)
+  if (move.effect && doesItLand) {
+    const effect = move.effect.result
+    // Implement logic to apply the status effect (e.g., set 'blind' status)
+    // if it has an effect, run it through the effects switch case
+    // abstract the logic out into its' own file
+    // For example:
+    switch (effect) {
+      case 'blind':
+        // apply blind
+        console.log(`applying blind to ${targetMonster.name}`)
+        //applyEffect("blind", targetMonster)
+        //evasion less
+        // acuracy less
+        // note the effect is applied to the target
+        targetMonster.status.blind = true
+        break
+      case 'buff':
+        // apply buff
+        targetMonster.stats.attack += 2
+      default:
+        console.log(`default case for hero buffs applied`)
+    }
+  }
 
   // Apply damage to the target
   targetMonster.stats.hp -= damage

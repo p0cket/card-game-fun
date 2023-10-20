@@ -132,6 +132,7 @@ export default function BattleTopDisplay() {
             max={stats.hp}
             style={{
               backgroundColor: '#4caf50',
+              color: '#9faf4c',
             }}
           />
         </div>
