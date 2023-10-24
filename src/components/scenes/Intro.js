@@ -38,7 +38,7 @@ const Intro = ({ dispatch }) => {
     // #TODO: remove?
     console.log(`loadNextLevel`)
     dispatch(setSceneAction())
-    // 
+    //
 
     const nextSceneState = updateScene(contextualState, {
       screen: SCENES.CHOOSECHARACTER,
@@ -93,7 +93,7 @@ const Intro = ({ dispatch }) => {
 
   const [explode, setExplode] = useState(false)
   const [startAnimation, setStartAnimation] = useState(false)
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false)
 
   const handleButtonClick = () => {
     // Handle button click action here
@@ -133,7 +133,6 @@ const Intro = ({ dispatch }) => {
               myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
       In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
             />
-           />
             <br />
           </div>{' '}
           {/* <div style={{ position: "relative", height: "100vh" }}>

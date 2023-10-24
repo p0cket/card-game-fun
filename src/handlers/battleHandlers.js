@@ -39,6 +39,7 @@ export const runBattlePhase = (contextualState, contextualDispatch) => {
   switch (phase) {
     case PHASES.BEGIN:
       console.log(`Battle: BEGIN`)
+      
       // do phase 1 stuff
       // slide in player and opponent.
       // other player wants to fight
