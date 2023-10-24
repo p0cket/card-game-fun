@@ -60,6 +60,15 @@ const Battle = () => {
     setShowPopup(false)
   }
 
+  const popupContent = {
+    trigger: showPopup,
+    title: 'BATTLE START',
+    message: 'Mr. Yamashita wants to fight! Are you ready to battle?',
+    buttonText: 'OK',
+    buttonText2: 'Counter',
+    onButtonClick: handleButtonClick,
+  }
+
   // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
     <div
@@ -68,7 +77,6 @@ const Battle = () => {
         flexDirection: 'column',
       }}
     >
-    
       <div>
         {/* <div> */}
         <div
@@ -82,9 +90,7 @@ const Battle = () => {
           <HUDHeader />
           <UserPartyDisplay />
           <BattleTopDisplay gameData={gameData} />
-          <BattleBotDisplay
-            ourCurrentMon={ourCurrentMon}
-          />
+          <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
         </div>
         {/* </div> */}
         {gameData.alert ? (
