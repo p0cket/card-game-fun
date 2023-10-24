@@ -9,6 +9,8 @@ import './scanlines.css'
 import './styles.css'
 import './index.css'
 import './input.css'
+// import ClickGlow from './components/effects/ClickGlow'
+// import Flashing from './components/effects/Flashing'
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData)
@@ -24,6 +26,7 @@ export default function App() {
 
   return (
     <div style={{ backgroundColor: 'black' }}>
+      {/* <Flashing /> */}
       <div
         className="App scanlines"
         style={{
@@ -37,10 +40,9 @@ export default function App() {
           // display this div in the center:
           margin: 'auto',
           center: 'true',
-        
-          
         }}
       >
+        {/* < ClickGlow /> */}
         <Screen gameData={gameData} dispatch={dispatch} map={map} />
       </div>
     </div>
