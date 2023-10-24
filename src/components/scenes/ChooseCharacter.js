@@ -4,8 +4,7 @@ import ChibipalsSelection from '../reward/ChibipalsSelection'
 function ChooseCharacter() {
   return (
     <div>
-        <ChibipalsSelection />
-
+      <ChibipalsSelection />
     </div>
   )
 }

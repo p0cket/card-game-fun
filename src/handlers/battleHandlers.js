@@ -5,11 +5,83 @@ import { setAlertHandler } from './dataHandlers'
 import { winBattleHandler } from './sceneHandlers'
 import { setDialogHandler } from './dataHandlers'
 import { SCENES } from './sceneHandlers_new'
-import { ACTIONS } from '../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../MainContext'
+// import { useDispatchContext, useStateContext } from '../../MainContext'
 
 // NEW AND TASTY Handlers
 // const contextualState = useStateContext()
 // const contextualDispatch = useDispatchContext()
+
+export const PHASES = {
+  BEGIN: 'begin',
+  START: 'start',
+  ATTACK: 'attack',
+  RESOLVE_ATTACK: 'resolveAttack',
+  CHANGE_TURN: 'changeTurn',
+  END_TURN: 'endTurn',
+  END_BATTLE: 'endBattle',
+  // REWARD: 'reward', //Yes?
+}
+
+//something like contextualState.battleManager.phase
+
+// const contextualState = useStateContext()
+// const contextualDispatch = useDispatchContext()
+
+export const runBattlePhase = (contextualState, contextualDispatch) => {
+  const phase = contextualState.battleManager.phase
+  // const phase = contextualState.battleManager.phase
+  // add a switch statement for phases. so it is like: switch(phase) { case phase1: do phase1 stuff; break; case phase2: do phase2 stuff; break; }
+
+  // should there be a separate switch statement for
+  // the different attack stuff like attack, resolve attack
+  // apply effects, etc?
+  switch (phase) {
+    case PHASES.BEGIN:
+      console.log(`Battle: BEGIN`)
+      // do phase 1 stuff
+      // slide in player and opponent.
+      // other player wants to fight
+      // Dialogue: Other Player sends out their monster,
+      // Effects apply from ETB
+      // Dialogue: You send out your monster
+      // Effects apply from ETB
+      // any other effects.
+      break
+    case PHASES.START:
+      console.log(`Battle: START`)
+      // do phase 2 stuff
+      // If turn start effects are there, note them
+      // otherwise, the user goes first
+      break
+    case PHASES.ATTACK:
+      console.log(`Battle: ATTACK`)
+      // do phase 3 stuff
+
+      break
+    case PHASES.RESOLVE_ATTACK:
+      console.log(`Battle: RESOLVE_ATTACK`)
+      // do phase 4 stuff
+      break
+    case PHASES.CHANGE_TURN:
+      // do phase 5 stuff
+      console.log(`Battle: CHANGE_TURN`)
+      break
+    case PHASES.END_TURN:
+      console.log(`Battle: END_TURN`) // do phase 5 stuff
+      break
+    case PHASES.REWARD:
+      console.log(`Battle: REWARD`) // do phase 5 stuff
+      break
+    case PHASES.END_BATTLE:
+      console.log(`Battle: END_BATTLE`) // do phase 5 stuff
+      break
+    default:
+      console.log(`Battle: Defaul case reached`) // do phase 5 stuff
+      break
+  }
+}
+
 const changeTurn = (currentPlayer, contextualState, contextualDispatch) => {
   const newPlayer = currentPlayer === 'player' ? 'opponent' : 'player'
 

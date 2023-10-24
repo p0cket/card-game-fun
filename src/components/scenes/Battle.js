@@ -68,7 +68,7 @@ const Battle = () => {
         flexDirection: 'column',
       }}
     >
-      <HUDHeader />
+    
       <div>
         {/* <div> */}
         <div
@@ -79,15 +79,11 @@ const Battle = () => {
             alignItems: 'center',
           }}
         >
-          {/* <HUDHeader gameData={gameData} /> */}
+          <HUDHeader />
           <UserPartyDisplay />
           <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay
             ourCurrentMon={ourCurrentMon}
-            // gameData={gameData}
-            // health={health}
-            // maxHP={maxHP}
-            // energy={energy}
           />
         </div>
         {/* </div> */}

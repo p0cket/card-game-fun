@@ -75,8 +75,6 @@ function DialoguePopup(props) {
           <Dialog
             size="20"
             myText={message}
-            //         myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements.
-            // In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
           />
         </div>
         {buttonText && (

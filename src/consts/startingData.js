@@ -86,6 +86,7 @@ export const newStartingData = {
   battleManager: {
     turn: 1, // Current turn number
     currentPlayer: 'player', // Current player's turn ("player" or "enemy")
+    phase: 'begin', // Current phase
     // Add more game state variables as needed
   },
   current: {
