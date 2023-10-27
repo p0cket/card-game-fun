@@ -10,11 +10,17 @@ import './styles.css'
 import './index.css'
 import './input.css'
 // import ClickGlow from './components/effects/ClickGlow'
-// import Flashing from './components/effects/Flashing'
+import Flashing from './components/effects/Flashing'
+import Confetti from './components/effects/Confetti'
+import DialoguePopup from './components/common/DialoguePopup'
+import SpinningBoxes from './components/effects/SpinningBoxes'
+import QuestionMarks from './components/effects/QuestionMarks'
+import CharacterAnims from './components/effects/CharacterAnims'
+
+const message = 'intro message'
 
 export default function App() {
   const [gameData, dispatch] = useReducer(reducer, startingData)
-  // const [screen, setScreen] = useState(null)
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
@@ -43,6 +49,17 @@ export default function App() {
         }}
       >
         {/* < ClickGlow /> */}
+
+        {/* Working animations */}
+        {/* <SpinningBoxes /> */}
+        {/* <QuestionMarks /> */}
+        {/* <Confetti amount={300} /> */}
+        {/* <CharacterAnims /> */}
+
+        {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
+        <DialoguePopup message={message} trigger={contextualState.dialog.isOpen} />
+        {/* <DialoguePopup message={message} /> */}
+
         <Screen gameData={gameData} dispatch={dispatch} map={map} />
       </div>
     </div>

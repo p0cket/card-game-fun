@@ -81,6 +81,7 @@ export const newStartingData = {
   //   // Add more party members as needed
   // ],
   // a party of one commander monster that has a strat - and a party of 5 monsters
+  
   userParty: userParty,
   opponent: placeholderTrainer,
   battleManager: {
@@ -102,7 +103,6 @@ export const newStartingData = {
       },
     ],
   },
-
   game: {
     player: {
       gold: 50,
@@ -110,6 +110,7 @@ export const newStartingData = {
       runes: [],
       inventory: [],
       effects: [],
+      energy: 6,
     },
     map: generateMap(),
     battlesAhead: [],
@@ -133,12 +134,28 @@ export const newStartingData = {
       },
       // Add more events as needed
     },
-
     // Error handling and alerts
     alerts: [],
     // ...
     // Development mode flag
     devMode: false,
+  },
+  dialog: {
+    isOpen: true,
+    message: 'startingData Message',
+    options: [
+      {
+        label: 'start',
+        onClick: () => {
+          // Handle action when this option is chosen
+          // For example, transition to the first map node
+        },
+        backgroundColor: '#4b770e',
+        color: '#fff',
+      },
+    ],
+    title: 'startingData Title',
+    header: 'startingData Header',
   },
 }
 

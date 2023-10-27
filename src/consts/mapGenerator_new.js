@@ -1,40 +1,40 @@
-import { SCENES } from "../scenes";
-import { basicTrainers } from "./party/trainers";
+import { SCENES } from '../scenes'
+import { basicTrainers } from './party/trainers'
 
 export function generateNextLevelOptions() {
-  const options = [];
+  const options = []
 
-  const { BATTLE, EVENT, REST } = SCENES;
+  const { BATTLE, EVENT, REST } = SCENES
 
   // Generate 3 options
   for (let i = 0; i < 3; i++) {
-    const randomValue = Math.random(); // Generate a random number between 0 and 1
+    const randomValue = Math.random() // Generate a random number between 0 and 1
 
     if (randomValue < 0.5) {
       // would be better with {screen: "battle", details: null}
       const randomTrainer =
-        basicTrainers[Math.floor(Math.random() * basicTrainers.length)];
+        basicTrainers[Math.floor(Math.random() * basicTrainers.length)]
       options.push({
         screen: BATTLE,
         details: {
-          type: "trainer",
+          type: 'trainer',
           trainer: randomTrainer,
-          area: "tranquil forest",
-          difficulty: "easy",
+          area: 'tranquil forest',
+          difficulty: 'easy',
         },
-      }); // 50% chance for Battle encounter
+      }) // 50% chance for Battle encounter
       // options.push({screen: BATTLE, details: null});
     } else if (randomValue < 0.7) {
-      options.push({ screen: EVENT, details: null }); // 20% chance for Event
+      options.push({ screen: EVENT, details: null }) // 20% chance for Event
       // }
       //  else if (randomValue < 0.8) {
       //   options.push("Mystery"); // 10% chance for Mystery
     } else {
-      options.push({ screen: REST, details: null }); // 20% chance for Rest
+      options.push({ screen: REST, details: null }) // 20% chance for Rest
     }
   }
 
-  return options;
+  return options
 }
 
 //it would be cool to have an in-game thing result in the board changing.
@@ -44,16 +44,16 @@ export function generateNextLevelOptions() {
 // theives steal from you so you fight them later on to get your stuff back
 
 export function generateMap() {
-  const results = [];
+  const results = []
 
   for (let i = 0; i < 8; i++) {
-    const options = generateNextLevelOptions(); // Generate options using the previous function
-    results.push(options); // Store the generated options in the results array
+    const options = generateNextLevelOptions() // Generate options using the previous function
+    results.push(options) // Store the generated options in the results array
   }
 
-  return results;
+  return results
 }
 
 // Run the function
-const multipleResults = generateMap();
-console.log(multipleResults);
+const multipleResults = generateMap()
+console.log(multipleResults)

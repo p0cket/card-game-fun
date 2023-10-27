@@ -45,7 +45,10 @@ const Intro = ({ dispatch }) => {
       details: null,
     })
     const nextLevelState = updateLevel(nextSceneState, 1)
-    contextualDispatch(nextLevelState, ACTIONS.UPDATEGAMEDATA)
+    contextualDispatch({
+      payload: nextLevelState,
+      type: ACTIONS.UPDATEGAMEDATA,
+    })
   }
 
   const circleVariants = {
@@ -149,14 +152,26 @@ const Intro = ({ dispatch }) => {
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
           <button onClick={() => setShowPopup(true)}>Show Popup</button>
-          <DialoguePopup
+          {/*  Replace DialoguePopup with some trigger to trigger the DialoguePopup
+          on App.js, passing in the needed values */}
+          {/* <DialoguePopup
             trigger={showPopup}
-            title="Sample Dialogue"
-            message="This is a sample dialogue popup. You can customize the message and button text as needed."
-            buttonText="OK"
-            buttonText2="Counter"
-            onButtonClick={handleButtonClick}
-          />
+            title="Intro Button Dialogue Text"
+            message="Such message. Wow."
+            // onButtonClick={handleButtonClick}
+            options={[
+              {
+                label: 'Intro Button 1',
+                onClick: () => {
+                  handleButtonClick()
+                  // Define the action for button 1
+                },
+                // helperText: 'Button 1 helper text', ?
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+            ]}
+          /> */}
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
           <p className="text-3xl font-bold underline text-red-300 bg-blue-300">
