@@ -1,18 +1,62 @@
 import React from 'react'
 import Dialog from './Dialog'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 function DialoguePopup(props) {
   const {
-    trigger,
-    title,
-    header,
+    // trigger,
+    // title,
+    // header,
     buttonText,
     buttonText2,
     onButtonClick,
-    message,
-    size,
-    speed,
+    // message,
+    // size,
+    // speed,
+
+    trigger,
+    title = 'Default dialogPopup.js Title',
+    header,
+    message = 'default dialogPopup.js message',
+    options = [
+      {
+        label: 'Button 1',
+        onClick: () => {
+          // Define the action for button 1
+        },
+        // helperText: 'Button 1 helper text', ?
+        backgroundColor: '#4b770e',
+        color: '#fff',
+      },
+    ],
+    // state,
+    // dispatch,
   } = props
+
+  const contextualState = useStateContext()
+  const contextualDispatch = useDispatchContext()
+
+  const closeDialogPopup = (button) => {
+    // if (dispatch) {
+    // You can use the state and dispatch here if needed.
+    // For example, you can dispatch an action based on the button clicked.
+    // dispatch(someAction(button));
+    // }
+    if (button.onClick) {
+      button.onClick()
+    }
+    const closeDialogueState = {
+      ...contextualState,
+      dialog: {
+        ...contextualState.dialog,
+        isOpen: false,
+      },
+    }
+    contextualDispatch({
+      payload: closeDialogueState,
+      type: ACTIONS.UPDATEGAMEDATA,
+    })
+  }
 
   return trigger ? (
     <div
@@ -72,12 +116,9 @@ function DialoguePopup(props) {
         >
           {' '}
           {/* <div> {header || 'Default header'}</div> */}
-          <Dialog
-            size="20"
-            myText={message}
-          />
+          <Dialog size="20" myText={message} />
         </div>
-        {buttonText && (
+        {/* {buttonText && (
           <button
             style={{
               backgroundColor: '#4b770e',
@@ -106,7 +147,23 @@ function DialoguePopup(props) {
           >
             {buttonText2}
           </button>
-        )}
+        )} */}
+        {options.map((button, index) => (
+          <button
+            key={index}
+            onClick={() => closeDialogPopup(button)}
+            style={{
+              backgroundColor: button.backgroundColor || '#4b770e',
+              border: 'none',
+              color: button.color || '#fff',
+              padding: '10px 20px',
+              margin: '0px 4px',
+              cursor: 'pointer',
+            }}
+          >
+            {button.label}
+          </button>
+        ))}
       </div>
     </div>
   ) : null

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import Button from './Button'
 import { useDispatchContext, useStateContext } from '../../MainContext'
-import { useMove } from '../../handlers/Battle/useMove'
 import { Party } from '../../consts/party/parties'
 import { IceWall } from '../../consts/allMoves'
 import Monster from '../info/Monster'
-import renderAttack from '../info/renderAttack'
+import RenderIndAttack from '../info/RenderIndAttack'
 
 const { SLOT_1, SLOT_2, SLOT_3, SLOT_4, SLOT_5, SLOT_6 } = Party
 
@@ -15,7 +14,7 @@ const MenuOptions = {
   DO_SOMETHING: 'doSomething',
 }
 
-function Popup(props) {
+function MenuPopup(props) {
   const [currentMenu, setCurrentMenu] = useState(MenuOptions.ATTACKS)
 
   const toggleMenu = (menu) => {
@@ -45,12 +44,13 @@ function Popup(props) {
       label: 'Attacks',
       content: (
         <>
-          {/* {props.selectedPal.moves.map((move) => (
-            <Button key={move.name} move={move} />
-          ))} */}
-          {props.selectedPal.moves.map((move) =>
-            renderAttack(move, contextualState, contextualDispatch),
-          )}
+          {props.selectedPal.moves.map((move) => (
+            <RenderIndAttack
+              attack={move}
+              contextualState={contextualState}
+              contextualDispatch={contextualDispatch}
+            />
+          ))}
         </>
       ),
     },
@@ -139,42 +139,6 @@ function Popup(props) {
   )
 }
 
-const attackContainerStyle = {
-  border: '1px solid #a5e54d',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'stretch',
-  padding: '12px',
-  margin: '8px 0',
-  backgroundColor: '#fff',
-}
-
-const attackInfoStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginBottom: '8px',
-}
-
-const attackNameStyle = {
-  fontWeight: 'bold',
-}
-
-const attackDamageStyle = {
-  flex: 1,
-  textAlign: 'right',
-}
-
-const attackDescriptionStyle = {
-  flex: 1,
-  textAlign: 'left',
-  color: 'black',
-}
-
-const attackEnergyCostStyle = {
-  alignSelf: 'flex-end',
-  textAlign: 'right',
-}
-
 const attackHeaderStyle = {
   display: 'flex',
   alignItems: 'center',
@@ -193,15 +157,4 @@ const attackLabelStyle = {
   fontWeight: 'bold',
 }
 
-const monsterNameStyle = {
-  fontWeight: 'bold',
-}
-
-const monsterAbilitiesStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  marginLeft: '34px', // To align with the monster icon
-}
-
-export default Popup
+export default MenuPopup

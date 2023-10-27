@@ -38,72 +38,159 @@
 // }
 
 import { Party } from '../consts/party/parties'
+export const ATK_PHASES = {
+  PAY_COST: 'pay',
+  CALCULATE_DAMAGE: 'calcDamage',
+  RESOLVE_EFFECT: 'effect',
+  APPLY_STATUSES: 'apply',
+  APPLY_DAMAGE: 'damage',
+  END: 'end',
+}
+
+//also check if dead along the way :P
 
 export const executeMove = (
   move,
   contextualState,
   contextualDispatch,
   user,
+  phase,
 ) => {
   const userMonster = contextualState.userParty[Party.SLOT_1]
   const targetMonster = contextualState.opponent.monsters[0].obj
-
   console.log(
     `userMonster and targetMonster are ${userMonster} and ${targetMonster} respectively`,
     userMonster,
     targetMonster,
   )
 
-  // Calculate the damage based on move and user's stats
-  // also apply the enemy abilities and effects with this as well
-  const damage = (userMonster.stats.attack * move.damage) / 100
-  console.log(
-    `The damage dealt is ${damage}. from ${userMonster.stats.attack} * ${
-      move.damage
-    } / 100. 
-    This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
-     at: ${targetMonster.stats.hp - damage}`,
-  )
-  console.log(`move.effect is ${move.effect.result}`, `move`, move)
-  // Check if the move has a status effect
+  // this is a function that gets called many times.
+  // at each point, we need do a phase and then 
+  // present to the player a dialog to decide what to do next
 
-  const doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
-  console.log(`doesItLand is ${doesItLand}`)
-  if (move.effect && doesItLand) {
-    const effect = move.effect.result
-    // Implement logic to apply the status effect (e.g., set 'blind' status)
-    // if it has an effect, run it through the effects switch case
-    // abstract the logic out into its' own file
-    // For example:
-    switch (effect) {
-      case 'blind':
-        // apply blind
-        console.log(`applying blind to ${targetMonster.name}`)
-        //applyEffect("blind", targetMonster)
-        //evasion less
-        // acuracy less
-        // note the effect is applied to the target
-        targetMonster.status.blind = true
-        break
-      case 'buff':
-        // apply buff
-        targetMonster.stats.attack += 2
-      default:
-        console.log(`default case for hero buffs applied`)
-    }
+  // the dialog has everything needed to run the function yet again,
+  // this continues until the full attack resolves
+
+// TODO: Finish this function
+  switch (phase) {
+    case ATK_PHASES.PAY_COST:
+      console.log(`begin phase`)
+      // 1. Pay cost. If you can't, return:
+
+      // Lets use player energy for this
+      // const playerEnergy = contextualState.game.player.energy
+
+
+      // const stateWithCostPaid = payCost(move, user) // switch(move.cost.type){}
+
+      // if (user.energy < move.energyCost) {
+      //   console.log('Not enough energy to perform the move')
+      //   // Dialogue: not enough energy
+      //   // return the original state
+      //   return
+      // } else {
+      //   user.energy -= move.energyCost
+      //   console.log(
+      //     `${move.energyCost} paid for ${move.name}. The energy is now ${user.energy}`,
+      //   )
+      //   // Dialogue: Paid x energy
+      // }
+
+      //changePhase() // just sets the phase to a different one.
+
+      //applyDialog() // Phase, options, message,
+      // applyDialog()
+      //dispatch( payload:  whatever to set the dialog with, rest of the obj
+      // type: ACTIONS.UPDATE SETDATA)
+
+      // Dialogue: ___ used ____ <-move
+      break
+    case ATK_PHASES.CALCULATE_DAMAGE:
+      console.log(`ATK: calculate damage phase`)
+      // Calculate the damage based on move and user's stats
+      // also apply the enemy abilities and effects with this as well
+      const ourDmg = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
+      console.log(
+        `The damage to be dealt is ${ourDmg}. from ${
+          userMonster.stats.attack
+        } * ${ourDmg} / 100. 
+    This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
+     at: ${targetMonster.stats.hp - ourDmg}`,
+      )
+      console.log(`move.effect is ${move.effect.result}`, `move`, move)
+      // Check if the move has a status effect
+      // 2. Calculate damage
+      // const stateWithDamageDealt = dealDamage(move, user)
+      // for all modifiers, switch(move.modifiers) go through every modifier.
+      break
+    case ATK_PHASES.APPLY_DAMAGE:
+      console.log(`ATK: Apply Damage Phase`)
+      const damage = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
+
+      // (Previously 5). Apply damage
+      // Apply dmg to the target
+      // Dialogue: ___ is dealt x damage
+      targetMonster.stats.hp -= damage
+      break
+    case ATK_PHASES.APPLY_STATUSES:
+      console.log(`ATK: apply statuses resolve phase`)
+      // 3. resolve effect?
+      const doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
+      console.log(`doesItLand is ${doesItLand}`)
+      // Dialogue: does/does not land
+
+      break
+    case ATK_PHASES.RESOLVE_EFFECTS:
+      // 4. Apply statuses
+      // const stateWithStatusesApplied = applyStatuses(move, user) // switch(move.statuses)
+      if (move.effect && doesItLand) {
+        const effect = move.effect.result
+        // Implement logic to apply the status effect (e.g., set 'blind' status)
+        // if it has an effect, run it through the effects switch case
+        // abstract the logic out into its' own file
+        // For example:
+        switch (effect) {
+          case 'blind':
+            // apply blind
+            // Dialogue: applying blind
+            console.log(`applying blind to ${targetMonster.name}`)
+            //applyEffect("blind", targetMonster)
+            //evasion less
+            // acuracy less
+            // note the effect is applied to the target
+            targetMonster.status.blind = true
+            break
+          case 'buff':
+            // apply buff
+            // Dialogue: applying buff
+            targetMonster.stats.attack += 2
+          default:
+            console.log(`default case for hero buffs applied`)
+        }
+        // 6. Resolve End Steps (is this taken care of here?)
+        // Dialogue: ___ is taking x poison damage (or any other effect)
+        // const stateWithEndStepsResolved = resolveEndSteps(move, user) // switch(move.endStepsTriggers)
+        // if theres poison, apply damage. it theres sleep, see if it wakes, etc.
+      }
+      break
+    case ATK_PHASES.END:
+      console.log(`ATK: end phase`)
+      break
+
+    default:
+      console.log(`ATK: default phase in switch reacted`)
   }
 
-  // Apply damage to the target
-  targetMonster.stats.hp -= damage
-
   // Check for target's fainting (if HP drops to 0 or below)
+  //this kinda happens all the time.
+  // Always. check death
   if (targetMonster.stats.hp <= 0) {
     // Implement logic for the target monster fainting (e.g., switch to the next monster)
     // Handle any other relevant logic like gaining experience, etc.
   }
 
-  // apply end of attack effects.
-  // if theres poison, apply damage. it theres sleep, see if it wakes, etc.
+  // 7. Change turns (Probably happens after this function)
+  // inititeOpponentTurn()
 
   // Return relevant data about the move's execution
   return {

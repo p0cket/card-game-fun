@@ -33,7 +33,7 @@ export const MainProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
 
   function reducer(state, action) {
-    console.log(`reducer HIT`)
+    console.log(`reducer HIT`, action.type, action)
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
         return { ...state, ...action.payload }

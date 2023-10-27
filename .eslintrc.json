@@ -21,10 +21,11 @@
     "no-console": "off",
     "strict": ["error", "global"],
     "curly": "warn",
-    "semi": ["error", "never"],
-    "indent": ["error", 2] ,
+    "semi": ["warn", "never"],
+    "indent": "off",
     "comma-dangle": ["error", "always-multiline"],
-    "space-before-function-paren": "off" 
+    "space-before-function-paren": "off" ,
+    "no-unused-vars": "off"
     // if you want to remove prop validation:
     // "react/prop-types": "off"
   }

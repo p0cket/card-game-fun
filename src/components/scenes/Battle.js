@@ -5,7 +5,7 @@ import { dmgEmoji, energyEmoji, goldEmoji } from '../../consts/consts'
 import { motion } from 'framer-motion/dist/framer-motion'
 
 import Dialog from '../common/Dialog'
-import Popup from '../common/Popup'
+import MenuPopup from '../common/MenuPopup'
 // import HUDHeader from "../battle/HUDHeader"
 // import EnemyDisplay from "../battle/BattleTopDisplay";
 import BattleTopDisplay from '../battle/BattleTopDisplay'
@@ -22,15 +22,11 @@ import HUDHeader from '../battle/HUDHeader'
 const Battle = () => {
   const gameData = startingData
 
+  //TODO: Make this contextual based on what is passed in
   const [popupOpen, setPopupOpen] = useState(false)
   const togglePopup = () => setPopupOpen(!popupOpen)
-  const playCard = (card) => {
-    // dispatch(playCardAction(card));
-  }
 
-  const endTurn = () => {
-    // dispatch(endTurnAction());
-  }
+  //Remove when ready. Breaks the old implementation
   const { health, energy, maxHP } = gameData.hero
   const yourVariants = {
     visible: {
@@ -56,7 +52,6 @@ const Battle = () => {
   const [showPopup, setShowPopup] = useState(true)
 
   const handleButtonClick = () => {
-    // Handle button click action here
     setShowPopup(false)
   }
 
@@ -78,7 +73,6 @@ const Battle = () => {
       }}
     >
       <div>
-        {/* <div> */}
         <div
           style={{
             fontFamily: 'Silkscreen',
@@ -92,7 +86,6 @@ const Battle = () => {
           <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
         </div>
-        {/* </div> */}
         {gameData.alert ? (
           <div
             style={{
@@ -109,6 +102,7 @@ const Battle = () => {
         )}
 
         <div style={{ display: 'flex' }}>
+          {/* #TODO: Give MenuPopup its' own toggle, and remove this - MenuPopup */}
           <MenuButtonGroup togglePopup={togglePopup} />
         </div>
         <UserPartyDisplay />
@@ -119,20 +113,40 @@ const Battle = () => {
             color: 'white',
           }}
         >
-          <Popup
+          <MenuPopup
             selectedPal={ourCurrentMon}
             trigger={popupOpen}
             togglePopup={togglePopup}
             zIndex={1}
           />
-
           <DialoguePopup
             trigger={showPopup}
             title="BATTLE START"
             message="Mr. Yamashita wants to fight! Are you ready to battle?"
-            buttonText="OK"
-            buttonText2="Counter"
             onButtonClick={handleButtonClick}
+            options={[
+              {
+                label: 'OK',
+                onClick: handleButtonClick,
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Counter',
+                buttonText2: 'Counter',
+                onClick: handleButtonClick,
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Relaxxx',
+                buttonText2: 'Counter',
+                // onButtonClick: handleButtonClick,
+                onClick: handleButtonClick,
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+            ]}
           />
         </div>
       </div>

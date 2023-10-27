@@ -6,9 +6,13 @@ import {
 } from '../../handlers/moveHandlers'
 import { ACTIONS } from '../../MainContext'
 
-function renderAttack(attack, contextualState, contextualDispatch) {
+function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
+
+  console.log('attack:', attack) // Log the value of the attack prop
+  console.log('contextualState:', contextualState) // Log the value of the contextualState prop
+  console.log('contextualDispatch:', contextualDispatch) // Log the value of the contextualDispatch prop
 
   const {
     name,
@@ -23,17 +27,17 @@ function renderAttack(attack, contextualState, contextualDispatch) {
     forceful,
   } = attack
 
-  const useMove = (move, user) => {
-    // const castResult = castMove(move)
-    // const targetsSelected = handlePlayerMoveSelection(
-    //   move,
-    //   contextualState,
-    //   contextualDispatch,
-    // )
-    console.log('ENTERED: useMove', move)
-    const resultState = executeMove(move, contextualState, contextualDispatch, user)
-    // const resultState = executeMove(move, targetsSelected, contextualDispatch)
-    contextualDispatch(resultState, ACTIONS.UPDATEGAMEDATA)
+  const runMove = (move, user) => {
+    console.log('ENTERED: runMove', move)
+    const resultState = executeMove(
+      move,
+      contextualState,
+      contextualDispatch,
+      user,
+    )
+    console.log('resultState [XXXX]:', resultState)
+
+    contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })
 
     //       const appliedCost is in cast
     // if (castResult.success) {
@@ -73,7 +77,7 @@ function renderAttack(attack, contextualState, contextualDispatch) {
             borderRadius: '4px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
-          onClick={() => useMove(attack)}
+          onClick={() => runMove(attack)} //pass in user right?
         >
           Use
         </button>
@@ -185,7 +189,7 @@ function renderAttack(attack, contextualState, contextualDispatch) {
   )
 }
 
-export default renderAttack
+export default RenderIndAttack
 
 const attackContainerStyle = {
   border: '1px solid #a5e54d',
