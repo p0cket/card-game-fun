@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import {
+  ATK_PHASES,
   executeMove,
   handlePlayerMoveSelection,
 } from '../../handlers/moveHandlers'
 import { ACTIONS } from '../../MainContext'
+import { Party } from '../../consts/party/parties'
 
 function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
@@ -12,7 +14,6 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
 
   console.log('attack:', attack) // Log the value of the attack prop
   console.log('contextualState:', contextualState) // Log the value of the contextualState prop
-  console.log('contextualDispatch:', contextualDispatch) // Log the value of the contextualDispatch prop
 
   const {
     name,
@@ -28,15 +29,15 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
   } = attack
 
   const runMove = (move, user) => {
-    console.log('ENTERED: runMove', move)
+    console.log('ENTERED: runMove', move, user)
     const resultState = executeMove(
       move,
       contextualState,
       contextualDispatch,
       user,
+      ATK_PHASES.PAY_COST
     )
     console.log('resultState [XXXX]:', resultState)
-
     contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })
 
     //       const appliedCost is in cast
@@ -77,7 +78,9 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
             borderRadius: '4px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
-          onClick={() => runMove(attack)} //pass in user right?
+          onClick={() =>
+            runMove(attack, contextualState.userParty[Party.SLOT_1])
+          }
         >
           Use
         </button>
