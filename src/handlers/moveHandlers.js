@@ -37,7 +37,9 @@
 //   },
 // }
 
+import { ACTIONS } from '../MainContext'
 import { Party } from '../consts/party/parties'
+// import { customLog } from '../utils/debugging-utils'
 export const ATK_PHASES = {
   PAY_COST: 'pay',
   CALCULATE_DAMAGE: 'calcDamage',
@@ -45,6 +47,25 @@ export const ATK_PHASES = {
   APPLY_STATUSES: 'apply',
   APPLY_DAMAGE: 'damage',
   END: 'end',
+}
+
+export const createPopupRemovedState = (prevState) => {
+  return {
+    ...prevState,
+    dialog: {
+      ...prevState.dialog,
+      isOpen: false,
+    },
+  }
+}
+export const createPopupVisibleState = (prevState) => {
+  return {
+    ...prevState,
+    dialog: {
+      ...prevState.dialog,
+      isOpen: true,
+    },
+  }
 }
 
 //also check if dead along the way :P
@@ -58,73 +79,204 @@ export const executeMove = (
 ) => {
   const userMonster = contextualState.userParty[Party.SLOT_1]
   const targetMonster = contextualState.opponent.monsters[0].obj
-  console.log(
-    `userMonster and targetMonster are ${userMonster} and ${targetMonster} respectively`,
-    userMonster,
-    targetMonster,
-  )
+ 
 
   // this is a function that gets called many times.
-  // at each point, we need do a phase and then 
+  // at each point, we need do a phase and then
   // present to the player a dialog to decide what to do next
 
   // the dialog has everything needed to run the function yet again,
   // this continues until the full attack resolves
 
-// TODO: Finish this function
+  // TODO: Finish this function
   switch (phase) {
     case ATK_PHASES.PAY_COST:
-      console.log(`begin phase`)
+      // customLog('info', `begin phase`)
       // 1. Pay cost. If you can't, return:
-
       // Lets use player energy for this
-      // const playerEnergy = contextualState.game.player.energy
+      const playerEnergy = contextualState.game.player.energy
+      // Add the type later, this is for another switch statement.
+      // They might have to pay health or gold or something else
+      // cosnt costType = move.cost.type
+      // customLog('info', `costType is ${costType}`)
+      const moveCost = move.cost
 
+      if (playerEnergy < moveCost) {
+        // customLog('error', 'Not enough energy to perform the move')
+        // Dialogue: not enough energy
+        const dialogState = {
+          ...contextualState,
+          'contextualState.dialog': {
+            isOpen: true,
+            message: 'Not enough energy to perform the move',
+            options: [
+              {
+                label: 'Oh dear',
+                onClick: () => {
+                  // customLog('info', `Pay: You can't pay Popup button clicked`)
 
-      // const stateWithCostPaid = payCost(move, user) // switch(move.cost.type){}
+                  // maybe a "i'm sorry button, that says,
+                  // I forgive you love, when clicked"
+                  // end the popup
 
-      // if (user.energy < move.energyCost) {
-      //   console.log('Not enough energy to perform the move')
-      //   // Dialogue: not enough energy
-      //   // return the original state
-      //   return
-      // } else {
-      //   user.energy -= move.energyCost
-      //   console.log(
-      //     `${move.energyCost} paid for ${move.name}. The energy is now ${user.energy}`,
-      //   )
-      //   // Dialogue: Paid x energy
-      // }
+                  const closedPopupState = createPopupRemovedState()
+                  return contextualDispatch({
+                    payload: closedPopupState,
+                    type: ACTIONS.UPDATEGAMEDATA,
+                  })
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+            ],
+            title: 'startingData Title',
+            header: 'startingData Header',
+          },
+        }
+        // customLog('info', 'Pay: CANT PAY, resulting state:', contextualState)
+        // return the original state
+        return contextualDispatch({
+          payload: dialogState,
+          type: ACTIONS.UPDATEGAMEDATA,
+        })
+      } else {
+        const playerEnergyAfterPayment = playerEnergy - moveCost
+        // customLog(
+        //   'success',
+        //   `${move.energyCost} paid for ${move.name}. The energy is now ${user.energy}`,
+        // )
+        const energyPaidState = {
+          ...contextualState,
+          game: {
+            ...contextualState.game,
+            player: {
+              ...contextualState.game.player,
+              energy: playerEnergyAfterPayment,
+            },
+          },
+        }
+        const costPaidDialogState = {
+          ...energyPaidState,
+          'contextualState.dialog': {
+            isOpen: true,
+            message: '___X___ Energy paid',
+            options: [
+              {
+                label: 'Okay',
+                onClick: () => {
+                  //replace here with our function create
+                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+                  // handle onClick logic here
+                  const closedPopupState = {
+                    ...energyPaidState,
+                    dialog: {
+                      ...energyPaidState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  executeMove(
+                    move,
+                    closedPopupState,
+                    contextualDispatch,
+                    user,
+                    ATK_PHASES.CALCULATE_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Enhance',
+                onClick: () => {
+                  //replace here with our function create
+                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+                  // handle onClick logic here
+                  const closedPopupState = {
+                    ...energyPaidState,
+                    dialog: {
+                      ...energyPaidState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  // -maybe just use the same executeMove
+                  // the button should change phase
+                  executeMove(
+                    move,
+                    closedPopupState,
+                    contextualDispatch,
+                    user,
+                    ATK_PHASES.CALCULATE_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Enhance',
+                onClick: () => {
+                  //replace here with our function create
+                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+                  // handle onClick logic here
+                  const closedPopupState = {
+                    ...energyPaidState,
+                    dialog: {
+                      ...energyPaidState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  // -maybe just use the same executeMove
+                  // the button should change phase
+                  executeMove(
+                    move, // move,
+                    // energyPaidState, // contextualState,
+                    closedPopupState,
+                    contextualDispatch, // contextualDispatch,
+                    user, // user,
+                    ATK_PHASES.CALCULATE_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+            ],
+            title: 'startingData Title',
+            header: 'startingData Header',
+          },
+          // Dialogue: Paid x energy
+        }
+        // customLog('info', 'Pay: PAID, resulting state:', contextualState)
+        return contextualDispatch({
+          payload: costPaidDialogState,
+          type: ACTIONS.UPDATEGAMEDATA,
+        })
+      }
 
-      //changePhase() // just sets the phase to a different one.
-
-      //applyDialog() // Phase, options, message,
-      // applyDialog()
       //dispatch( payload:  whatever to set the dialog with, rest of the obj
       // type: ACTIONS.UPDATE SETDATA)
 
       // Dialogue: ___ used ____ <-move
       break
     case ATK_PHASES.CALCULATE_DAMAGE:
-      console.log(`ATK: calculate damage phase`)
+      // customLog('info', `ATK: calculate damage phase`)
       // Calculate the damage based on move and user's stats
       // also apply the enemy abilities and effects with this as well
       const ourDmg = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
-      console.log(
-        `The damage to be dealt is ${ourDmg}. from ${
-          userMonster.stats.attack
-        } * ${ourDmg} / 100. 
-    This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
-     at: ${targetMonster.stats.hp - ourDmg}`,
-      )
-      console.log(`move.effect is ${move.effect.result}`, `move`, move)
+    //   customLog(
+    //     'info',
+    //     `The damage to be dealt is ${ourDmg}. from ${
+    //       userMonster.stats.attack
+    //     } * ${ourDmg} / 100. 
+    // This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
+    //  at: ${targetMonster.stats.hp - ourDmg}`,
+    //   )
+    //   customLog('info', `move.effect is ${move.effect.result}`, `move`, move)
       // Check if the move has a status effect
       // 2. Calculate damage
       // const stateWithDamageDealt = dealDamage(move, user)
       // for all modifiers, switch(move.modifiers) go through every modifier.
       break
     case ATK_PHASES.APPLY_DAMAGE:
-      console.log(`ATK: Apply Damage Phase`)
+      // customLog('info', `ATK: Apply Damage Phase`)
       const damage = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
 
       // (Previously 5). Apply damage
@@ -179,6 +331,7 @@ export const executeMove = (
 
     default:
       console.log(`ATK: default phase in switch reacted`)
+      return contextualState
   }
 
   // Check for target's fainting (if HP drops to 0 or below)

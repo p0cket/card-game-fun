@@ -1,4 +1,5 @@
 import { SCENES } from '../scenes'
+import { cusLog } from '../utils/debugging-utils'
 import { basicTrainers } from './party/trainers'
 
 export function generateNextLevelOptions() {
@@ -56,4 +57,5 @@ export function generateMap() {
 
 // Run the function
 const multipleResults = generateMap()
-console.log(multipleResults)
+// console.log(''multipleResults)
+cusLog('Loading data', 'info', undefined, multipleResults)

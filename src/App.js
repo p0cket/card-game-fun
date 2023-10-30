@@ -16,6 +16,7 @@ import DialoguePopup from './components/common/DialoguePopup'
 import SpinningBoxes from './components/effects/SpinningBoxes'
 import QuestionMarks from './components/effects/QuestionMarks'
 import CharacterAnims from './components/effects/CharacterAnims'
+import { cusLog } from './utils/debugging-utils'
 
 const message = 'intro message'
 
@@ -24,11 +25,6 @@ export default function App() {
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
-  console.log(
-    `[App.js ContextualState and ContextualDispatch]`,
-    contextualState,
-    contextualDispatch,
-  )
 
   return (
     <div style={{ backgroundColor: 'black' }}>

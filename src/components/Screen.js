@@ -19,6 +19,7 @@ import { ACTIONS, useDispatchContext, useStateContext } from '../MainContext'
 import ChooseCharacter from './scenes/ChooseCharacter'
 import { generateEnemyParty } from '../handlers/Battle/prepareBattle'
 import { hikerBrak } from '../consts/party/trainers'
+import { cusLog } from '../utils/debugging-utils'
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -40,7 +41,6 @@ const Screen = ({ gameData, dispatch, map }) => {
     VICTORY,
   } = SCENES
 
-  console.log(`levelToSet is:`, levelToSet)
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
@@ -51,6 +51,10 @@ const Screen = ({ gameData, dispatch, map }) => {
 
   // const levelToSet = gameData.curScene.scene;
   const levelToSet = contextualState.current.scene.screen
+
+  console.log(`levelToSet is:`, levelToSet)
+cusLog(`levelToSet is:`, 'level', undefined, levelToSet)
+
 
   switch (levelToSet) {
     case TRANSITION:

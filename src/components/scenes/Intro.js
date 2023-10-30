@@ -96,12 +96,11 @@ const Intro = ({ dispatch }) => {
 
   const [explode, setExplode] = useState(false)
   const [startAnimation, setStartAnimation] = useState(false)
-  const [showPopup, setShowPopup] = useState(false)
 
-  const handleButtonClick = () => {
-    // Handle button click action here
-    setShowPopup(false)
-  }
+  // const handleButtonClick = () => {
+  //   // Handle button click action here
+  //   setShowPopup(false)
+  // }
 
   return (
     <>
@@ -151,27 +150,6 @@ const Intro = ({ dispatch }) => {
             {' '}
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
-          <button onClick={() => setShowPopup(true)}>Show Popup</button>
-          {/*  Replace DialoguePopup with some trigger to trigger the DialoguePopup
-          on App.js, passing in the needed values */}
-          {/* <DialoguePopup
-            trigger={showPopup}
-            title="Intro Button Dialogue Text"
-            message="Such message. Wow."
-            // onButtonClick={handleButtonClick}
-            options={[
-              {
-                label: 'Intro Button 1',
-                onClick: () => {
-                  handleButtonClick()
-                  // Define the action for button 1
-                },
-                // helperText: 'Button 1 helper text', ?
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-            ]}
-          /> */}
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
           <p className="text-3xl font-bold underline text-red-300 bg-blue-300">

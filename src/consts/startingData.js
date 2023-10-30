@@ -141,7 +141,7 @@ export const newStartingData = {
     devMode: false,
   },
   dialog: {
-    isOpen: true,
+    isOpen: false,
     message: 'startingData Message',
     options: [
       {
