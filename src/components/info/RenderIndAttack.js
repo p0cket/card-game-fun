@@ -8,7 +8,7 @@ import {
 import { ACTIONS } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 
-function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
+function RenderIndAttack({ attack, contextualState, contextualDispatch, togglePopup }) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
 
@@ -29,13 +29,26 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch }) {
   } = attack
 
   const runMove = (move, user) => {
-    console.log('ENTERED: runMove', move, user)
+    // also turn off popup
+    togglePopup()
+
+    // console.log('renderIndAttack->runMove():', move, user)
+    console.log(
+      `renderIndAttack->runMove():
+      move,contextualState,contextualDispatch,user,ATK_PHASES.PAY,`,
+      move,
+      contextualState,
+      contextualDispatch,
+      user,
+      ATK_PHASES.PAY,
+    )
+
     const resultState = executeMove(
       move,
       contextualState,
       contextualDispatch,
       user,
-      ATK_PHASES.PAY_COST
+      ATK_PHASES.PAY,
     )
     console.log('resultState [XXXX]:', resultState)
     contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })

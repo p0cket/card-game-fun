@@ -63,10 +63,10 @@ export const setSceneHandler = (state, payload) => {
       })
       break
     default:
-      console.log(
-        `setSceneHandler type isn't battle, type is: ${nextLevel.scene}`,
-        nextLevel
-      )
+      // console.log(
+      //   `setSceneHandler type isn't battle, type is: ${nextLevel.scene}`,
+      //   nextLevel
+      // )
   }
 
   return {

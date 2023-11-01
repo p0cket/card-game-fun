@@ -53,7 +53,7 @@ export default function App() {
         {/* <CharacterAnims /> */}
 
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
-        <DialoguePopup message={message} trigger={contextualState.dialog.isOpen} />
+        <DialoguePopup message={message} />
         {/* <DialoguePopup message={message} /> */}
 
         <Screen gameData={gameData} dispatch={dispatch} map={map} />

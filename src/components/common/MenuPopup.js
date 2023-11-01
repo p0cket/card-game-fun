@@ -16,7 +16,6 @@ const MenuOptions = {
 
 function MenuPopup(props) {
   const [currentMenu, setCurrentMenu] = useState(MenuOptions.ATTACKS)
-
   const toggleMenu = (menu) => {
     setCurrentMenu(menu)
   }
@@ -49,6 +48,7 @@ function MenuPopup(props) {
               attack={move}
               contextualState={contextualState}
               contextualDispatch={contextualDispatch}
+              togglePopup={props.togglePopup}
             />
           ))}
         </>

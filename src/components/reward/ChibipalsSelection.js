@@ -56,8 +56,6 @@ const ChibipalsSelection = () => {
 
   const mapLevels = contextualState.game.map[0]
 
-  console.log('mapLevels', mapLevels)
-
   const handleSelect = (selectedMonster) => {
     console.log(
       `you selected monster: ${selectedMonster.name}`,
@@ -119,6 +117,7 @@ const ChibipalsSelection = () => {
                   src={monster.image}
                   alt={monster.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  key={monster.id} // Added key prop
                 />
               )}
             </div>

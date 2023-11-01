@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import './index.css'
 // import { startingData } from "./consts/consts";
 import { newStartingData } from './consts/startingData'
+import { cusLog } from './utils/debugging-utils'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -33,7 +34,8 @@ export const MainProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
 
   function reducer(state, action) {
-    console.log(`reducer HIT`, action.type, action)
+    cusLog(`dispatching:`, 'info', undefined, action)
+    // console.log(`reducer HIT`, action.type, action)
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
         return { ...state, ...action.payload }

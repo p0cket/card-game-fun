@@ -61,7 +61,7 @@ export function updateAct(newData, newAct) {
  */
 export function updateScene(newData, newScene) {
   console.log(
-    `[SC] newData, newScene`,
+    `[updateScene] newData, newScene`,
     newData,
     newScene,
     `newData.current.scene`,
