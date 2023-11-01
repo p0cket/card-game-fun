@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/card-game-fun/static/js/2.0442777b.chunk.js"
   },
   {
-    "revision": "dbe7e0475dcba2df1cc210088f6238f5",
+    "revision": "17f7167380bef6c29d2c9981b9914e2d",
     "url": "/card-game-fun/index.html"
   }
 ];
