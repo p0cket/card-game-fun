@@ -38,10 +38,11 @@
 // }
 
 import { ACTIONS } from '../MainContext'
-import { Party } from '../consts/party/parties'
+import { Party, opponent } from '../consts/party/parties'
+import { cusLog } from '../utils/debugging-utils'
 // import { customLog } from '../utils/debugging-utils'
 export const ATK_PHASES = {
-  PAY_COST: 'pay',
+  PAY: 'pay',
   CALCULATE_DAMAGE: 'calcDamage',
   RESOLVE_EFFECT: 'effect',
   APPLY_STATUSES: 'apply',
@@ -74,12 +75,14 @@ export const executeMove = (
   move,
   contextualState,
   contextualDispatch,
-  user,
+  user, // maybe change to add the other aspects, destructure after
   phase,
+  // ---
+  // player: AI , you, them
+  // target/s: AI, you, them
 ) => {
-  const userMonster = contextualState.userParty[Party.SLOT_1]
+  // user is the user
   const targetMonster = contextualState.opponent.monsters[0].obj
- 
 
   // this is a function that gets called many times.
   // at each point, we need do a phase and then
@@ -88,38 +91,48 @@ export const executeMove = (
   // the dialog has everything needed to run the function yet again,
   // this continues until the full attack resolves
 
+  // hmm, ATK_PHASES.PAY should match `phase`. Lets check that
+  // if (phase !== ATK_PHASES.PAY) {
+  //   cusLog(`Starting ${phase} phase`, 'info')
+  // } else {
+  //   cusLog(`Starting ${phase} phase, not pay phase`, 'pay')
+  // }
+
+  // this shows the difference between phase and ATK_PHASES.PAY
+
   // TODO: Finish this function
   switch (phase) {
-    case ATK_PHASES.PAY_COST:
-      // customLog('info', `begin phase`)
+    case ATK_PHASES.PAY:
+      console.log(`Starting PAY phase`, 'pay')
+      // cusLog(`Starting PAY phase`, 'pay')
       // 1. Pay cost. If you can't, return:
       // Lets use player energy for this
       const playerEnergy = contextualState.game.player.energy
       // Add the type later, this is for another switch statement.
       // They might have to pay health or gold or something else
       // cosnt costType = move.cost.type
-      // customLog('info', `costType is ${costType}`)
-      const moveCost = move.cost
+
+      const moveCost = move.cost.energy
+      console.log(`cost is ${moveCost} energy. Player has ${playerEnergy}`)
 
       if (playerEnergy < moveCost) {
-        // customLog('error', 'Not enough energy to perform the move')
+        console.log(
+          `${playerEnergy}<${moveCost} • Not enough energy to perform the move`,
+        )
         // Dialogue: not enough energy
         const dialogState = {
           ...contextualState,
-          'contextualState.dialog': {
+          dialog: {
+            ...contextualState.dialog,
             isOpen: true,
-            message: 'Not enough energy to perform the move',
+            message: `Not enough energy. ${user.name} to perform the move`,
             options: [
               {
                 label: 'Oh dear',
                 onClick: () => {
-                  // customLog('info', `Pay: You can't pay Popup button clicked`)
-
-                  // maybe a "i'm sorry button, that says,
-                  // I forgive you love, when clicked"
-                  // end the popup
-
-                  const closedPopupState = createPopupRemovedState()
+                  const closedPopupState =
+                    createPopupRemovedState(contextualState)
+                  console.log(closedPopupState)
                   return contextualDispatch({
                     payload: closedPopupState,
                     type: ACTIONS.UPDATEGAMEDATA,
@@ -129,11 +142,10 @@ export const executeMove = (
                 color: '#fff',
               },
             ],
-            title: 'startingData Title',
-            header: 'startingData Header',
+            title: 'Pay Phase',
+            header: 'Not enough energy to perform the move',
           },
         }
-        // customLog('info', 'Pay: CANT PAY, resulting state:', contextualState)
         // return the original state
         return contextualDispatch({
           payload: dialogState,
@@ -141,10 +153,9 @@ export const executeMove = (
         })
       } else {
         const playerEnergyAfterPayment = playerEnergy - moveCost
-        // customLog(
-        //   'success',
-        //   `${move.energyCost} paid for ${move.name}. The energy is now ${user.energy}`,
-        // )
+        console.log(
+          `Enough to use :), ${playerEnergy}-${moveCost} = ${playerEnergyAfterPayment}`,
+        )
         const energyPaidState = {
           ...contextualState,
           game: {
@@ -155,11 +166,15 @@ export const executeMove = (
             },
           },
         }
+        console.log('Pay: energyPaidState, resulting state:', energyPaidState)
+
         const costPaidDialogState = {
           ...energyPaidState,
-          'contextualState.dialog': {
+          dialog: {
+            ...energyPaidState.dialog,
             isOpen: true,
-            message: '___X___ Energy paid',
+            message: `${moveCost} Energy paid.
+            ${user.name} uses ${move.name}`,
             options: [
               {
                 label: 'Okay',
@@ -239,12 +254,12 @@ export const executeMove = (
                 color: '#fff',
               },
             ],
-            title: 'startingData Title',
-            header: 'startingData Header',
+            title: 'Pay Phase',
+            header: 'You can pay!',
           },
           // Dialogue: Paid x energy
         }
-        // customLog('info', 'Pay: PAID, resulting state:', contextualState)
+        console.log('Pay: PAID, resulting state:', costPaidDialogState)
         return contextualDispatch({
           payload: costPaidDialogState,
           type: ACTIONS.UPDATEGAMEDATA,
@@ -257,22 +272,34 @@ export const executeMove = (
       // Dialogue: ___ used ____ <-move
       break
     case ATK_PHASES.CALCULATE_DAMAGE:
-      // customLog('info', `ATK: calculate damage phase`)
+      console.log(`ATK: CALCULATE_DAMAGE phase`, contextualState)
       // Calculate the damage based on move and user's stats
       // also apply the enemy abilities and effects with this as well
       const ourDmg = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
-    //   customLog(
-    //     'info',
-    //     `The damage to be dealt is ${ourDmg}. from ${
-    //       userMonster.stats.attack
-    //     } * ${ourDmg} / 100. 
-    // This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
-    //  at: ${targetMonster.stats.hp - ourDmg}`,
-    //   )
-    //   customLog('info', `move.effect is ${move.effect.result}`, `move`, move)
-      // Check if the move has a status effect
+      console.log(
+        'info',
+        `The damage to be dealt is ${ourDmg}. from ${
+          user.stats.attack
+        } * ${ourDmg} / 100.
+      This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
+       at: ${targetMonster.stats.hp - ourDmg}`,
+      )
       // 2. Calculate damage
       // const stateWithDamageDealt = dealDamage(move, user)
+      //----------
+      // const damagedHP = ourDmg - antagonistHP
+
+      // if (user.player === 'user') {
+      //   // same as below but for user
+      // } else if (user.player === 'AI') {
+      //   const stateWithDamageDealt = {
+      //     ...contextualState,
+      //     userParty: {
+      //       // set the new HP
+      //     },
+      //   }
+      // }
+
       // for all modifiers, switch(move.modifiers) go through every modifier.
       break
     case ATK_PHASES.APPLY_DAMAGE:
@@ -284,7 +311,10 @@ export const executeMove = (
       // Dialogue: ___ is dealt x damage
       targetMonster.stats.hp -= damage
       break
+    // Check if the move has a status effect
     case ATK_PHASES.APPLY_STATUSES:
+      console.log(`move.effect is ${move.effect.result}`, `move`, move)
+
       console.log(`ATK: apply statuses resolve phase`)
       // 3. resolve effect?
       const doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100

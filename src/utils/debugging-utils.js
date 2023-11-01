@@ -1,68 +1,3 @@
-// function customLog(type, message) {
-//   let styles
-
-//   switch (type) {
-//     case 'error':
-//       styles =
-//         'background-color: darkred; color: white; padding: 4px; font-weight: bold'
-//       break
-//     case 'success':
-//       styles =
-//         'background-color: darkgreen; color: lightgreen; padding: 4px; font-weight: bold'
-//       break
-//     case 'info':
-//       styles =
-//         'background-color: darkblue; color: lightblue; padding: 4px; font-weight: bold'
-//       break
-//     case 'warning':
-//       styles =
-//         'background-color: darkorange; color: white; padding: 4px; font-weight: bold'
-//       break
-//     case 'debug':
-//       styles =
-//         'background-color: purple; color: white; padding: 4px; font-weight: bold'
-//       break
-//     default:
-//       styles =
-//         'background-color: darkgray; color: lightgray; padding: 4px; font-weight: bold'
-//       break
-//   }
-
-//   console.log(`%c${message}`, styles)
-// }
-// export function customLog(type, message, ...itemsToLog) {
-//   let styles
-
-//   switch (type) {
-//     case 'error':
-//       styles =
-//         'background-color: darkred; color: white; padding: 4px; font-weight: bold'
-//       break
-//     case 'success':
-//       styles =
-//         'background-color: darkgreen; color: lightgreen; padding: 4px; font-weight: bold'
-//       break
-//     case 'info':
-//       styles =
-//         'background-color: darkblue; color: lightblue; padding: 4px; font-weight: bold'
-//       break
-//     case 'warning':
-//       styles =
-//         'background-color: darkorange; color: white; padding: 4px; font-weight: bold'
-//       break
-//     case 'debug':
-//       styles =
-//         'background-color: purple; color: white; padding: 4px; font-weight: bold'
-//       break
-//     default:
-//       styles =
-//         'background-color: darkgray; color: lightgray; padding: 4px; font-weight: bold'
-//       break
-//   }
-//   console.log(`%c${message}`, styles, ...itemsToLog)
-// }
-
-// Colored Logs
 const emojis = {
   primary: '🌟',
   secondary: '🌙',
@@ -143,8 +78,17 @@ function format(message, type) {
 }
 
 export function cusLog(message, type, group, ...objects) {
+  // Get the stack trace
+  let stack = new Error().stack
+  // Parse the stack trace to get the file name and line number
+  let source = stack.split('\n')[2].trim()
+
   // call the format function to get the formatted string
   let formatted = format(message, type)
+
+  // Add the source information to the formatted message
+  formatted = `${formatted} (${source})`
+
   // check if the type is valid
   if (logTypes[type]) {
     // get the color, background and style of the type
@@ -175,7 +119,7 @@ export function cusLog(message, type, group, ...objects) {
   }
 }
 
-
+// // EXAMPLES:
 // // Example 1: Logging a simple message
 // // This is useful for logging general information or status updates.
 // cusLog('App started', 'info')

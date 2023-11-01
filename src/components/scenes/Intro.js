@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Intro.css'
 import { setSceneAction } from '../../actions'
 import { motion } from 'framer-motion/dist/framer-motion'
@@ -16,6 +16,7 @@ import {
   updateLevel,
   updateScene,
 } from '../../handlers/sceneHandlers_new'
+// import SparkleButton from '../common/SparkleButton'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -36,7 +37,7 @@ const Intro = ({ dispatch }) => {
 
   const loadNextLevel = () => {
     // #TODO: remove?
-    console.log(`loadNextLevel`)
+    console.log(`func: loadNextLevel()`)
     dispatch(setSceneAction())
     //
 
@@ -50,6 +51,40 @@ const Intro = ({ dispatch }) => {
       type: ACTIONS.UPDATEGAMEDATA,
     })
   }
+
+  // Viseral Resonance, Behavioral Resonance, Reflective Resonance
+  // Emotional Attachment
+  const [lastPlayedTime, setLastPlayedTime] = useState(null)
+  const [streak, setStreak] = useState(0)
+  const [longestStreak, setLongestStreak] = useState(0)
+
+  useEffect(() => {
+    const today = new Date().toDateString()
+    const lastPlayed = localStorage.getItem('lastPlayed')
+
+    if (lastPlayed !== today) {
+      const localStreak = localStorage.getItem('streak')
+      const localLongestStreak = localStorage.getItem('longestStreak')
+      let newStreak = 1
+      if (lastPlayed === new Date(Date.now() - 86400000).toDateString()) {
+        newStreak = localStreak ? Number(localStreak) + 1 : 1
+        localStorage.setItem('streak', newStreak)
+        setStreak(newStreak)
+      } else {
+        localStorage.setItem('streak', 1)
+        setStreak(1)
+      }
+      if (!localLongestStreak || newStreak > Number(localLongestStreak)) {
+        localStorage.setItem('longestStreak', newStreak)
+        setLongestStreak(newStreak)
+      }
+      localStorage.setItem('lastPlayed', today)
+    }
+
+    setLastPlayedTime(localStorage.getItem('lastPlayed'))
+    setStreak(Number(localStorage.getItem('streak')))
+    setLongestStreak(Number(localStorage.getItem('longestStreak')))
+  }, [])
 
   const circleVariants = {
     initial: { y: 0 },
@@ -150,11 +185,16 @@ const Intro = ({ dispatch }) => {
             {' '}
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
+          {/* <SparkleButton /> */}
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
-          <p className="text-3xl font-bold underline text-red-300 bg-blue-300">
-            Hello Tailwind World!
-          </p>
+          
+          <div style={{ backgroundColor: 'gray', padding: '5px' }}>
+            <p className="text-3xl font-bold underline text-red-300">
+              Hello Tailwind World! Streak: {streak} longestStreak {longestStreak}
+              , (Last Played: {lastPlayedTime})
+            </p>
+          </div>
           {/* <div style={{ color: 'white' }}>
             {JSON.stringify(contextualState)}
           </div> */}

@@ -30,7 +30,8 @@ export const QuickStrike = {
   type: 'physical',
   damage: 25,
   speed: 7,
-  energyCost: 3,
+  cost: { energy: 3 },
+  // energyCost: 3,
   effect: {
     description: 'High critical hit chance',
     chance: '50%',
@@ -54,6 +55,8 @@ export const QuickStrike = {
     type: 'physical',
     damage: 40, // Enhanced damage for the Forceful aspect
     speed: 9, // Slightly slower due to the added power
+    cost: { energy: 4 },
+
     energyCost: 4, // Increased energyCost cost for the Forceful aspect
     effect: {
       description: 'Guaranteed critical hit and additional damage',
@@ -68,6 +71,7 @@ export const WebTrap = {
   name: 'Web Trap',
   type: 'status',
   speed: 4,
+  cost: { energy: 2 },
   energyCost: 2,
   effect: {
     description: 'Immobilizes target briefly',
@@ -81,6 +85,7 @@ export const Teleport = {
   name: 'Teleport',
   type: 'utility',
   speed: 9,
+  cost: { energy: 5 },
   energyCost: 5,
   effect: {
     description: 'Instantly move to another location',
@@ -94,6 +99,7 @@ export const Mimicry = {
   name: 'Mimicry',
   type: 'utility',
   speed: 5,
+  cost: { energy: 3 },
   energyCost: 3,
   effect: {
     description: "Copies the opponent's last move",
@@ -107,6 +113,7 @@ export const DoubleStrike = {
   type: 'physical',
   damage: 15,
   speed: 7,
+  cost: { energy: 3 },
   energyCost: 3,
   effect: {
     description: 'Goes again if the first attack is successful',
@@ -120,6 +127,7 @@ export const LifeSwap = {
   name: 'Life Swap',
   type: 'heal',
   speed: 7,
+  cost: { energy: 4 },
   energyCost: 5,
   effect: {
     description: 'Exchanges HP with the target',
@@ -134,6 +142,7 @@ export const Thunderstorm = {
   type: 'elemental',
   damage: 40,
   speed: 8,
+  cost: { energy: 6 },
   energyCost: 6,
   effect: {
     description: 'Chance to paralyze multiple targets',
@@ -147,6 +156,7 @@ export const StealthyAmbush = {
   name: 'Stealthy Ambush',
   type: 'utility',
   speed: 6,
+  cost: { energy: 4 },
   energyCost: 4,
   effect: {
     description: 'Hides for a turn and then appears. Good for poison.',
@@ -160,6 +170,7 @@ export const MirrorImage = {
   name: 'Mirror Image',
   type: 'buff',
   speed: 6,
+  cost: { energy: 3 },
   energyCost: 3,
   effect: {
     description: 'Creates illusion copies',
@@ -186,6 +197,7 @@ export const IceWall = {
   type: 'elemental',
   damage: 0,
   speed: 7,
+  cost: { energy: 5 },
   energyCost: 5,
   effect: {
     description: 'Forms a protective ice wall',
@@ -208,6 +220,7 @@ export const IceWall = {
     type: 'elemental',
     damage: 0,
     speed: 9,
+    cost: { energy: 6 },
     energyCost: 6,
     effect: {
       description:
@@ -225,7 +238,8 @@ export const LightBeam = {
   type: 'elemental',
   damage: 40,
   speed: 12,
-  fuel: 5,
+  cost: { energy: 5 },
+  energyCost: 5,
   effect: {
     description: 'Fires a beam of blinding light at the opponent',
     chance: '30%',
@@ -249,7 +263,8 @@ export const LightBeam = {
     type: 'elemental',
     damage: 60,
     speed: 15,
-    fuel: 7,
+    cost: { energy: 4 },
+    energyCost: 5,
     effect: {
       description:
         'Unleash a blinding solar flare to guarantee blinding the opponent',
@@ -265,7 +280,8 @@ export const WiseGaze = {
   type: 'elemental',
   damage: 30,
   speed: 10,
-  fuel: 4,
+  cost: { energy: 5 },
+  energyCost: 5,
   effect: {
     description: 'Pierces the opponent with a wise and penetrating gaze',
     chance: '20%',
@@ -289,7 +305,8 @@ export const WiseGaze = {
     type: 'elemental',
     damage: 45,
     speed: 12,
-    fuel: 6,
+    cost: { energy: 4 },
+    energyCost: 5,
     effect: {
       description: 'Lock eyes with the opponent, ensuring confusion',
       chance: '100%',
@@ -304,7 +321,8 @@ export const FeatherGlide = {
   type: 'physical',
   damage: 35,
   speed: 8,
-  fuel: 5,
+  cost: { energy: 4 },
+  energyCost: 5,
   effect: {
     description:
       'Glide gracefully to deliver a swift and graceful physical attack',
@@ -329,7 +347,8 @@ export const FeatherGlide = {
     type: 'physical',
     damage: 50,
     speed: 10,
-    fuel: 6,
+    cost: { energy: 4 },
+    energyCost: 5,
     effect: {
       description:
         'Perform a celestial dive to guarantee stunning the opponent',
@@ -346,7 +365,8 @@ export const LuminousFlight = {
   type: 'elemental',
   damage: 40,
   speed: 11,
-  fuel: 5,
+  cost: { energy: 4 },
+  energyCost: 5,
   effect: {
     description: 'Take flight and emit a radiant glow',
     chance: '20%',
@@ -370,7 +390,8 @@ export const LuminousFlight = {
     type: 'elemental',
     damage: 55,
     speed: 14,
-    fuel: 7,
+    cost: { energy: 4 },
+    energyCost: 5,
     effect: {
       description: 'Emit blinding radiance, guaranteeing illumination',
       chance: '100%',
@@ -385,7 +406,8 @@ export const GlowingCharm = {
   type: 'elemental',
   damage: 0, // Glowing Charm doesn't deal damage
   speed: 9,
-  fuel: 4,
+  cost: { energy: 4 },
+  energyCost: 5,
   effect: {
     description: 'Emit a comforting and charming glow',
     chance: '100%',
@@ -409,7 +431,8 @@ export const GlowingCharm = {
     type: 'elemental',
     damage: 0, // Forceful aspect doesn't deal damage either
     speed: 10,
-    fuel: 5,
+    cost: { energy: 4 },
+    energyCost: 5,
     effect: {
       description: 'Radiate an enchanting aura to guarantee charm',
       chance: '100%',
@@ -424,7 +447,8 @@ export const WarmEmbrace = {
   type: 'healing',
   healing: 50, // Healing value
   speed: 8,
-  fuel: 6,
+  cost: { energy: 4 },
+  energyCost: 5,
   effect: {
     description: 'Offer a warm and comforting embrace, healing pals',
     chance: '100%',
@@ -448,7 +472,8 @@ export const WarmEmbrace = {
     type: 'healing',
     healing: 70, // Increased healing value
     speed: 10,
-    fuel: 8,
+    cost: { energy: 8 },
+    energyCost: 8,
     effect: {
       description: 'Channel a powerful healing glow to ensure maximum healing',
       chance: '100%',
@@ -464,7 +489,8 @@ export const EmotionDrain = {
   type: 'dark',
   damage: 40,
   speed: 12,
-  fuel: 5,
+  cost: { energy: 5 },
+  energyCost: 5,
   effect: {
     description: 'Drain the opponents emotions to weaken them',
     chance: '20%',
@@ -488,7 +514,8 @@ export const EmotionDrain = {
     type: 'dark',
     damage: 60,
     speed: 14,
-    fuel: 7,
+    cost: { energy: 7 },
+    energyCost: 7,
     effect: {
       description: 'Drain the opponents soul, guaranteeing debuffs',
       chance: '100%',
@@ -503,7 +530,8 @@ export const CuteCharm = {
   type: 'elemental',
   damage: 0, // Cute Charm doesn't deal damage
   speed: 9,
-  fuel: 4,
+  cost: { energy: 4 },
+  energyCost: 4,
   effect: {
     description: 'Exude an adorable and charming presence',
     chance: '100%',
@@ -527,7 +555,8 @@ export const CuteCharm = {
     type: 'elemental',
     damage: 0, // Forceful aspect doesn't deal damage either
     speed: 10,
-    fuel: 5,
+    cost: { energy: 5 },
+    energyCost: 5,
     effect: {
       description: 'Radiate an enchanting aura to guarantee charm',
       chance: '100%',
@@ -542,7 +571,8 @@ export const ComfortingHug = {
   type: 'healing',
   healing: 50, // Healing value
   speed: 8,
-  fuel: 6,
+  cost: { energy: 6 },
+  energyCost: 6,
   effect: {
     description: 'Offer a comforting hug to heal pals',
     chance: '100%',
@@ -566,7 +596,8 @@ export const ComfortingHug = {
     type: 'healing',
     healing: 70, // Increased healing value
     speed: 10,
-    fuel: 8,
+    cost: { energy: 8 },
+    energyCost: 8,
     effect: {
       description: 'Offer a profound and soothing embrace for maximum healing',
       chance: '100%',

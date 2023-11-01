@@ -41,7 +41,6 @@ const Screen = ({ gameData, dispatch, map }) => {
     VICTORY,
   } = SCENES
 
-
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
 
@@ -52,35 +51,37 @@ const Screen = ({ gameData, dispatch, map }) => {
   // const levelToSet = gameData.curScene.scene;
   const levelToSet = contextualState.current.scene.screen
 
-  console.log(`levelToSet is:`, levelToSet)
-cusLog(`levelToSet is:`, 'level', undefined, levelToSet)
-
+  // console.log(`levelToSet is:`, levelToSet)
+  cusLog(`levelToSet is: ${levelToSet}`, 'level', undefined, levelToSet)
 
   switch (levelToSet) {
     case TRANSITION:
-      console.log('transition Screen Case')
+      console.log('((screen: transition)')
       return <Trans gameData={gameData} dispatch={dispatch} />
     case INTRO:
+      console.log('(screen: intro)')
       // return <Intro dispatch={dispatch} />;
       return <Intro dispatch={dispatch} />
     case CHOOSECHARACTER:
+      console.log('(screen: choosecharacter )')
+
       return <ChooseCharacter />
     case SHOP:
-      console.log('shop Screen Case')
+      console.log('(screen: shop )')
       return <Shop gameData={gameData} dispatch={dispatch} />
     case MAP:
-      console.log('map Screen Case')
+      console.log('(screen: map )')
 
       return <Map />
     // return <Map gameData={gameData} dispatch={dispatch} map={map} />;
     case EVENT:
-      console.log('event Screen Case')
+      console.log('(screen: event )')
       return <Event gameData={gameData} dispatch={dispatch} />
     case REST:
-      console.log('rest Screen Case')
+      console.log('(screen: rest)')
       return <Rest gameData={gameData} dispatch={dispatch} />
     case REWARD:
-      console.log('reward Screen Case')
+      console.log('(screen: reward)')
       return (
         <Reward
           gameData={gameData}
@@ -89,30 +90,30 @@ cusLog(`levelToSet is:`, 'level', undefined, levelToSet)
         />
       )
     case PACKREWARD:
-      console.log('PackReward Screen Case')
+      console.log('(screen: PackReward)')
       return <PackReward gameData={gameData} dispatch={dispatch} />
     case CONVO:
-      console.log('Convo Screen Case')
+      console.log('(screen: Convo)')
       return <Convo gameData={gameData} dispatch={dispatch} />
     case BATTLE:
-      console.log('(battle Screen)')
+      console.log('(screen: battle)')
       return <Battle gameData={gameData} dispatch={dispatch} />
     case MINIBOSS:
-      console.log('miniboss Screen Case')
+      console.log('(screen: miniboss)')
       return <Battle gameData={gameData} dispatch={dispatch} />
     case BOSS:
-      console.log('boss Screen Case')
+      console.log('screen: boss')
       return <Battle gameData={gameData} dispatch={dispatch} />
     case GAMEOVER:
-      console.log('game over Screen Case')
+      console.log('screen: game over')
       // return <GAMEOVER gameData={gameData} dispatch={dispatch} />
       return <div>`game over`</div>
     case VICTORY:
-      console.log('victory Screen Case')
+      console.log('screen: victory')
       return <Victory gameData={gameData} dispatch={dispatch} />
     default:
       console.log(
-        'no scene (Screen Case) selected. Your _levelToSet_ was',
+        'screen: no scene (Screen Case) selected. Your _levelToSet_ was',
         levelToSet,
       )
       return (
