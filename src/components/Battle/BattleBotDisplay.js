@@ -28,7 +28,11 @@ function BattleBotDisplay({ ourCurrentMon }) {
 
   const contextualState = useStateContext()
   const ourParty = contextualState.userParty
- 
+  // const ourMain = ourParty[Party.SLOT_1]
+
+  // console.log(`X_ourParty:`, ourParty, `ourMain`, ourMain)
+
+  // const ourParty = contextualState.userParty.SLOT_1
   return (
     <div className="battleBot">
       {/* @TODO: reverse left and right here */}
@@ -62,7 +66,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
               <progress
                 id="health"
                 value={ourCurrentMon.stats.hp}
-                max={ourCurrentMon.maxHP}
+                max={ourCurrentMon.stats.max_hp}
                 style={{
                   backgroundColor: '#4caf50',
                 }}

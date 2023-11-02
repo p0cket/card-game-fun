@@ -1,8 +1,11 @@
 import React from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
+import { useStateContext } from '../../MainContext'
 
-function MenuButtonGroup ({ togglePopup }) {
+function MenuButtonGroup({ togglePopup }) {
+  const contextualState = useStateContext()
+
   return (
     <div
       style={{
@@ -22,7 +25,8 @@ function MenuButtonGroup ({ togglePopup }) {
           padding: '4px',
         }}
       >
-        10{energyEmoji}
+        {contextualState.game.player.energy} Energy
+        {energyEmoji}
       </div>
       <div
         style={{

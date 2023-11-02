@@ -46,7 +46,6 @@ const Battle = () => {
   const ourParty = contextualState.userParty
   console.log(`ourCurrentMonSHOULDBE`, ourParty)
 
-  // const ourCurrentMon = ourParty[Party.SLOT_1]
   const ourCurrentMon = ourParty[0]
 
   console.log(`ourCurrentMon`, ourCurrentMon, `curMON`, ourParty)

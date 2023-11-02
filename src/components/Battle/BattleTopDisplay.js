@@ -117,6 +117,8 @@ export default function BattleTopDisplay() {
   } = currentMon
   console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
 
+  console.log(`here is the currentMon HP and maxHP:`, stats.hp, stats.maxHP)
+
   return (
     <div className="battleTop">
       <div className="battleTopLeft">
@@ -129,7 +131,7 @@ export default function BattleTopDisplay() {
           <progress
             id="health"
             value={stats.hp}
-            max={stats.hp}
+            max={stats.max_hp}
             style={{
               backgroundColor: '#4caf50',
               color: '#9faf4c',
