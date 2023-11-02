@@ -62,8 +62,8 @@ export const Luminowl = {
   nature: 'Wise',
   quirks: ['Guiding Light', 'Soothing Feathers'],
   stats: {
-    hp: 100,
-    max_hp: 190,
+    hp: 91,
+    max_hp: 111,
     attack: 80,
     defense: 60,
     special_attack: 120,
