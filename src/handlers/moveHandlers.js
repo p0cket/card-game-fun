@@ -354,9 +354,9 @@ export const executeMove = (
                   // const closedPopupState = createRemovedState(whateverMakesSenseHere)
                   // handle onClick logic here
                   const closedPopupState = {
-                    ...energyPaidState,
+                    ...newState,
                     dialog: {
-                      ...energyPaidState.dialog,
+                      ...newState.dialog,
                       isOpen: false,
                     },
                   }
