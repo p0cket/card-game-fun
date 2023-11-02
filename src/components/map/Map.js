@@ -193,7 +193,7 @@ function Map() {
             justifyContent: 'space-between',
           }}
         >
-          {Object.values(ourParty).map((monster) =>
+          {ourParty.map((monster) =>
             renderMonsterDetails(monster),
           )}
         </div>

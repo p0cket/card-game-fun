@@ -275,7 +275,8 @@ const ChibipalsSelection = () => {
                 gap: '4px',
               }}
             >
-              <div>Moves: </div>
+              {/* weird bug below, don't keep it */}
+              {/* <div key={index}>Moves: </div> */}
               <div
                 style={{
                   display: 'flex',
@@ -285,9 +286,8 @@ const ChibipalsSelection = () => {
                 }}
               >
                 {selectedMonster.moves.map((move, index) => (
-                  <div style={{ padding: '1px' }}>
+                  <div key={index} style={{ padding: '1px' }}>
                     <span
-                      key={index}
                       style={{
                         backgroundColor: 'lightgreen',
                         borderRadius: '4px',
