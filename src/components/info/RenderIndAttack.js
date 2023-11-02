@@ -8,7 +8,12 @@ import {
 import { ACTIONS } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 
-function RenderIndAttack({ attack, contextualState, contextualDispatch, togglePopup }) {
+function RenderIndAttack({
+  attack,
+  contextualState,
+  contextualDispatch,
+  togglePopup,
+}) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
 
@@ -49,6 +54,8 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch, togglePo
       contextualDispatch,
       user,
       ATK_PHASES.PAY,
+      // player, "human"
+      // selectedTargets, [0]
     )
     console.log('resultState [XXXX]:', resultState)
     contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })
@@ -92,7 +99,8 @@ function RenderIndAttack({ attack, contextualState, contextualDispatch, togglePo
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
           onClick={() =>
-            runMove(attack, contextualState.userParty[Party.SLOT_1])
+            // runMove(attack, contextualState.userParty[Party.SLOT_1])
+            runMove(attack, contextualState.userParty[0])
           }
         >
           Use

@@ -81,8 +81,8 @@ export const newStartingData = {
   //   // Add more party members as needed
   // ],
   // a party of one commander monster that has a strat - and a party of 5 monsters
-  
-  userParty: userParty,
+
+  userParty: [],
   opponent: placeholderTrainer,
   battleManager: {
     turn: 1, // Current turn number

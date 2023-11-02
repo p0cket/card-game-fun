@@ -79,10 +79,19 @@ export const executeMove = (
   phase,
   // ---
   // player: AI , you, them
+  player = 'human',
+  selectedTargets = [0],
   // target/s: AI, you, them
 ) => {
+  let targetMonster = null
   // user is the user
-  const targetMonster = contextualState.opponent.monsters[0].obj
+  if (player === 'human') {
+    targetMonster = contextualState.opponent.monsters[0].obj
+  } else if (player === 'AI') {
+    targetMonster = contextualState.userParty[0].obj
+  } else {
+    console.error('executeMove: Player of attack not recognized')
+  }
 
   // this is a function that gets called many times.
   // at each point, we need do a phase and then
@@ -125,7 +134,7 @@ export const executeMove = (
           dialog: {
             ...contextualState.dialog,
             isOpen: true,
-            message: `Not enough energy. ${user.name} to perform the move`,
+            message: `Not enough energy. user.name of ${user.name} does not have enough energy to perform the move.`,
             options: [
               {
                 label: 'Oh dear',
@@ -177,7 +186,7 @@ export const executeMove = (
             ${user.name} uses ${move.name}`,
             options: [
               {
-                label: 'Okay',
+                label: 'Confirm',
                 onClick: () => {
                   //replace here with our function create
                   // const closedPopupState = createRemovedState(whateverMakesSenseHere)
@@ -287,23 +296,135 @@ export const executeMove = (
       // 2. Calculate damage
       // const stateWithDamageDealt = dealDamage(move, user)
       //----------
-      // const damagedHP = ourDmg - antagonistHP
+      const damagedHP = targetMonster.stats.hp - ourDmg
+      let newState = { ...contextualState }
 
-      // if (user.player === 'user') {
-      //   // same as below but for user
-      // } else if (user.player === 'AI') {
-      //   const stateWithDamageDealt = {
-      //     ...contextualState,
-      //     userParty: {
-      //       // set the new HP
-      //     },
-      //   }
-      // }
-
+      if (player === 'human') {
+        targetMonster.stats.hp = damagedHP
+        console.log(`AI's HP is now ${targetMonster.stats.hp}`)
+        newState = {
+          ...contextualState,
+          opponent: {
+            ...contextualState.opponent,
+            monsters: [
+              {
+                ...contextualState.opponent.monsters[0],
+                stats: {
+                  ...contextualState.opponent.monsters[0].stats,
+                  hp: damagedHP,
+                },
+              },
+              ...contextualState.opponent.monsters.slice(1),
+            ],
+          },
+          dialog: {
+            ...newState.dialog,
+            isOpen: true,
+            message: `${moveCost} Energy paid.
+            ${user.name} uses ${move.name}`,
+            options: [
+              {
+                label: 'Confirm',
+                onClick: () => {
+                  //replace here with our function create
+                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+                  // handle onClick logic here
+                  const closedPopupState = {
+                    ...newState,
+                    dialog: {
+                      ...newState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  executeMove(
+                    move,
+                    closedPopupState,
+                    contextualDispatch,
+                    user,
+                    ATK_PHASES.CALCULATE_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Enhance',
+                onClick: () => {
+                  //replace here with our function create
+                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+                  // handle onClick logic here
+                  const closedPopupState = {
+                    ...energyPaidState,
+                    dialog: {
+                      ...energyPaidState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  // -maybe just use the same executeMove
+                  // the button should change phase
+                  executeMove(
+                    move,
+                    newState,
+                    contextualDispatch,
+                    user,
+                    ATK_PHASES.APPLY_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+              {
+                label: 'Enhance',
+                onClick: () => {
+                  const closedPopupState = {
+                    ...newState,
+                    dialog: {
+                      ...newState.dialog,
+                      isOpen: false,
+                    },
+                  }
+                  executeMove(
+                    move,
+                    closedPopupState,
+                    contextualDispatch,
+                    user, // user,
+                    ATK_PHASES.APPLY_DAMAGE, // phase,
+                  )
+                },
+                backgroundColor: '#4b770e',
+                color: '#fff',
+              },
+            ],
+            title: 'Pay Phase',
+            header: 'You can pay!',
+          },
+        }
+      } else if (player === 'AI') {
+        user.stats.hp = damagedHP
+        console.log(`user's HP is now ${user.stats.hp}`)
+        newState = {
+          ...contextualState,
+          userParty: [
+            {
+              ...contextualState.userParty[0],
+              stats: {
+                ...contextualState.userParty[0].stats,
+                hp: damagedHP,
+              },
+            },
+            ...contextualState.userParty.slice(1),
+          ],
+        }
+      }
+      console.log(`ATK: CALCULATE_DAMAGE phase ending`, newState)
+      return contextualDispatch({
+        payload: newState,
+        type: ACTIONS.UPDATEGAMEDATA,
+      })
       // for all modifiers, switch(move.modifiers) go through every modifier.
       break
     case ATK_PHASES.APPLY_DAMAGE:
-      // customLog('info', `ATK: Apply Damage Phase`)
+      console.log(`ATK: Apply Damage Phase`)
       const damage = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
 
       // (Previously 5). Apply damage
@@ -389,7 +510,9 @@ export const executeMove = (
 }
 export const handlePlayerMoveSelection = (move, state, dispatch) => {
   // Implement logic for selecting a move by the player
-  const user = state.userParty[Party.SLOT_1] // Get the user's party
+  // const user = state.userParty[Party.SLOT_1] // Get the user's party
+  const user = state.userParty[0] // Get the user's party
+
   const target = state.opponent.monsters[0] // Get the opponent's party
   // const target = state.opponent; // Get the opponent's party
   const result = executeMove(move, user, target) // Execute the selected move
