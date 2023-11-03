@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-export const Dialog = ({ myText, size, speed = 0.05 }) => {
+export const Dialog = ({ myText, size, speed = 0.02 }) => {
   // const initialText = "Dialogue.js sample text. It is long so that it is noticable"
   //if newText, wait .5 seconds, and then run the text
 

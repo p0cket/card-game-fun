@@ -19,15 +19,12 @@ export default function BattleTopDisplay() {
       width: '100%',
       height: '100%',
       background: 'rgba(0, 0, 0, 0.5)',
-      // background: "lightgreen",
-
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1000,
     },
     container: {
-      // background: "#fff",
       background: 'lightgreen',
 
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
@@ -68,7 +65,6 @@ export default function BattleTopDisplay() {
         energyCost={energyCost}
         onAttackClick={() => handleAttackClick(name)}
         // attack={moves[0]}
-
       />
     )
   }
@@ -114,6 +110,7 @@ export default function BattleTopDisplay() {
     passive_ability,
     experience,
     lvl,
+    status,
   } = currentMon
   console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
 
@@ -160,6 +157,9 @@ export default function BattleTopDisplay() {
           >
             {moves[0].name}
           </button>
+          <div>
+            Current Statuses are: {JSON.stringify(status)}
+          </div>
         </div>
         {/* <div> */}
         {/* <Button onClick={openAttackPopup} text={moves[0].name} /> */}

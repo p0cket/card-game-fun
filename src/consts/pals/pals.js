@@ -77,7 +77,7 @@ export const Luminowl = {
   cost: 500,
   lvl: 50,
   experience: 5000,
-  status: {},
+  status: { test: true },
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
   moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
@@ -527,16 +527,16 @@ export const Ticklefairy = {
   cost: 400,
   lvl: 40,
   experience: 4000,
-  status: {},
+  status: { test: true },
   moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
   passive_ability: 'Joyful Aura',
 }
 
-//types: Foodbased, Water, Earth, Fire, Air, 
+//types: Foodbased, Water, Earth, Fire, Air,
 // Light, Dark, None, Physical, Magical, Nature
-// 
+//
 
 export const testPals = [
   Luminowl,

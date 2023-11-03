@@ -52,7 +52,7 @@ function MenuButtonGroup({ togglePopup }) {
           </div>
         </div>
         <div>
-          <div style={{ padding: '3px' }}>PaLs</div>
+          <div style={{ padding: '3px' }}>[(Locked)PaLs</div>
           <div style={{ padding: '3px' }}>Options</div>
         </div>
       </div>
