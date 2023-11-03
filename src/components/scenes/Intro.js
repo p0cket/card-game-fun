@@ -16,6 +16,7 @@ import {
   updateLevel,
   updateScene,
 } from '../../handlers/sceneHandlers_new'
+import { gameVersion } from '../../consts/consts'
 // import SparkleButton from '../common/SparkleButton'
 
 const Intro = ({ dispatch }) => {
@@ -144,7 +145,15 @@ const Intro = ({ dispatch }) => {
           className="font-silkscreen flex flex-col items-center
          bg-repeat bg-cover bg-white text-white p-5"
         >
-          <div style={{ color: 'gray' }}>Rebirth v0.21</div>
+          <div
+            style={{
+              color: 'white',
+              backgroundColor: 'black',
+              fontSize: '12px',
+            }}
+          >
+            {gameVersion}
+          </div>
           <div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -188,11 +197,10 @@ const Intro = ({ dispatch }) => {
           {/* <SparkleButton /> */}
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
-          
           <div style={{ backgroundColor: 'gray', padding: '5px' }}>
             <p className="text-3xl font-bold underline text-red-300">
-              Hello Tailwind World! Streak: {streak} longestStreak {longestStreak}
-              , (Last Played: {lastPlayedTime})
+              Hello Tailwind World! Streak: {streak} longestStreak{' '}
+              {longestStreak}, (Last Played: {lastPlayedTime})
             </p>
           </div>
           {/* <div style={{ color: 'white' }}>

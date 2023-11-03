@@ -3,6 +3,9 @@ import { EFFECTS } from "../effects"
 import { basicCards, stunCards } from "./allCards"
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
+export const gameVersion = "Rebirth: Pre-Alpha v0.29 - Atk Switch"
+
+// deprecated: previous iteration consts.
 export const startingDeck = [
   { ...basicCards.flame, id: 1 },
   { ...basicCards.flame, id: 2 },

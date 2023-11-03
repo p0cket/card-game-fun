@@ -9,8 +9,8 @@ import RenderIndAttack from '../info/RenderIndAttack'
 
 const MenuOptions = {
   ATTACKS: 'attacks',
-  BENCH_ATTACKS: 'benchAttacks',
-  DO_SOMETHING: 'doSomething',
+  // BENCH_ATTACKS: 'benchAttacks',
+  // DO_SOMETHING: 'doSomething',
 }
 
 function MenuPopup(props) {
