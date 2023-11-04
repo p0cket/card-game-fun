@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "../common/Card"
 import { addCardAction } from "../../actions"
-import { motion } from "framer-motion/dist/framer-motion"
+import { motion } from 'framer-motion'
 import ChibipalsSelection from "../reward/ChibipalsSelection"
 
 const Reward = () => {

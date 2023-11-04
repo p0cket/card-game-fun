@@ -44,11 +44,9 @@ import { cusLog } from '../utils/debugging-utils'
 export const ATK_PHASES = {
   PAY: 'pay',
   DAMAGE: 'damage',
-
   // DAMAGE: 'calcDamage',
   STATUSES: 'apply',
   EFFECTS: 'effect',
-
   // APPLY_DAMAGE: 'damage',
   END: 'end',
 }

@@ -67,7 +67,10 @@
   flex-grow: 2;
 
   /* background-color: #e6ecc3; */
-  background-image: url(/backgrounds/bg1.png);
+
+   /* replace this one */
+  /* background-image: url(backgrounds/bg1.png); */
+  
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -102,7 +105,13 @@
   align-items: center;
   /* padding: 10px; */
   /* background-color: #e6ecc3; */
-  background-image: url(/backgrounds/bg1.png);
+
+
+  /* replace this one */
+  /* background-image: url('backgrounds/bg1.png'); */
+
+
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

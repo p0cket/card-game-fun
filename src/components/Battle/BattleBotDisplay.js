@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
+// import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 // import { useDispatchContext, useStateContext } from "../../MainContext"
 
 import './../scenes/Battle.css'
