@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { endTurnAction, playCardAction } from '../../actions'
 import Card from '../common/Card'
 import { dmgEmoji, energyEmoji, goldEmoji } from '../../consts/consts'
-import { motion } from 'framer-motion/dist/framer-motion'
+import { motion } from 'framer-motion'
 
 import Dialog from '../common/Dialog'
 import MenuPopup from '../common/MenuPopup'

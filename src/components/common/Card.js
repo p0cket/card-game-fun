@@ -1,5 +1,5 @@
 import React from "react"
-import { motion } from "framer-motion/dist/framer-motion"
+import { motion } from 'framer-motion'
 import { EFFECTS } from "../../effects"
 
 const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {

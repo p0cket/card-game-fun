@@ -1,5 +1,5 @@
 import React from "react"
-import { motion } from "framer-motion/dist/framer-motion"
+import { motion } from 'framer-motion'
 import { setSceneAction, addPackAction } from "../../actions"
 import "./PackReward.css"
 import { allBasicPacks } from "../../consts/packs"

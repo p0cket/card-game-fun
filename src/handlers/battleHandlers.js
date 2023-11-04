@@ -22,9 +22,6 @@ export const PHASES = {
   END_BATTLE: 'endBattle',
   // REWARD: 'reward', //Yes?
 }
-
-//something like contextualState.battleManager.phase
-
 // const contextualState = useStateContext()
 // const contextualDispatch = useDispatchContext()
 

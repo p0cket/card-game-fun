@@ -9,7 +9,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(/backgrounds/gridBG1.png);
+
+  /* replace this one */
+  /* background-image: url(/backgrounds/gridBG1.png); */
+
   background-repeat: repeat;
   background-size: cover;
   color: white;
@@ -21,7 +24,6 @@
 .intro-images-container {
   background-color: #5a7d2a;
 }
-
 
 .content {
   /* display: flex; */

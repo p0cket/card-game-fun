@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Intro.css'
 import { setSceneAction } from '../../actions'
-import { motion } from 'framer-motion/dist/framer-motion'
+import { motion } from 'framer-motion'
 // @TODO: Add typewriter effect to text
 import '../common/Button.css'
 import { AnimatePresence } from 'framer-motion'
