@@ -16,10 +16,6 @@ function RenderIndAttack({
 }) {
   // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
-
-  console.log('attack:', attack) // Log the value of the attack prop
-  console.log('contextualState:', contextualState) // Log the value of the contextualState prop
-
   const {
     name,
     type,
@@ -57,7 +53,6 @@ function RenderIndAttack({
       // player, "human"
       // selectedTargets, [0]
     )
-    console.log('resultState [XXXX]:', resultState)
     contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })
 
     //       const appliedCost is in cast

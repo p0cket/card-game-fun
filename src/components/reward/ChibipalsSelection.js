@@ -86,7 +86,6 @@ const ChibipalsSelection = () => {
 
     // Clone the current state into a new variable
     const newState = { ...nextLevelState }
-    console.log(`[!!!]newState`, newState)
 
     // Dispatch the updated state
     contextualDispatch({

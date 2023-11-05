@@ -40,6 +40,8 @@
 import { ACTIONS } from '../MainContext'
 import { Party, opponent } from '../consts/party/parties'
 import { cusLog } from '../utils/debugging-utils'
+import { dmgPhase } from './attack/dmgPhase'
+import { payPhase } from './attack/payPhase'
 // import { customLog } from '../utils/debugging-utils'
 export const ATK_PHASES = {
   PAY: 'pay',
@@ -51,15 +53,6 @@ export const ATK_PHASES = {
   END: 'end',
 }
 
-export const createPopupRemovedState = (prevState) => {
-  return {
-    ...prevState,
-    dialog: {
-      ...prevState.dialog,
-      isOpen: false,
-    },
-  }
-}
 //
 // dialog: {
 //   ...contextualState.dialog,
@@ -84,6 +77,7 @@ export const createPopupRemovedState = (prevState) => {
 //     },
 //   ],
 
+//-----------
 const exampleOptions = [
   {
     label: 'Oh dear',
@@ -100,8 +94,17 @@ const exampleOptions = [
     color: '#fff',
   },
 ]
+export const createPopupRemovedState = (prevState) => {
+  return {
+    ...prevState,
+    dialog: {
+      ...prevState.dialog,
+      isOpen: false,
+    },
+  }
+}
 
-const createOption = (label, onClick, backgroundColor, color) => {
+export const createOption = (label, onClick, backgroundColor, color) => {
   return {
     label: label,
     onClick: onClick,
@@ -110,7 +113,7 @@ const createOption = (label, onClick, backgroundColor, color) => {
   }
 }
 
-const closeOption = (ourState) => {
+export const closeOption = (ourState) => {
   createOption(
     'Close',
     () => createPopupRemovedState(ourState),
@@ -143,7 +146,7 @@ export const createPopupVisibleState = ({
   }
 }
 
-const createUserEnergyPaidState = (resultingEnergy, ourState) => {
+export const createUserEnergyPaidState = (resultingEnergy, ourState) => {
   const energyPaidState = {
     ...ourState,
     game: {
@@ -153,9 +156,264 @@ const createUserEnergyPaidState = (resultingEnergy, ourState) => {
         energy: resultingEnergy,
       },
     },
-}
+  }
   return energyPaidState
 }
+
+export const createNotEnoughEnergyDialogState = (ourState, ourDispatch) => {
+  const dialogState = {
+    ...ourState,
+    dialog: {
+      ...ourState.dialog,
+      isOpen: true,
+      message: `Not enough energy. user.name of user's name does not have enough energy to perform the move.`,
+      title: 'Pay Phase',
+      header: 'Not enough energy to perform the move',
+      options: [
+        {
+          label: 'Oh dear',
+          onClick: () => {
+            const closedPopupState = createPopupRemovedState(ourState)
+            console.log(closedPopupState)
+            return ourDispatch({
+              payload: closedPopupState,
+              type: ACTIONS.UPDATEGAMEDATA,
+            })
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+      ],
+    },
+  }
+  return dialogState
+}
+
+export const createCostPaidDialogState = (
+  ourState,
+  contextualDispatch,
+  move,
+  user,
+) => {
+  const paidState = {
+    ...ourState,
+    dialog: {
+      ...ourState.dialog,
+      isOpen: true,
+      message: `${move.cost.energy} Energy paid.
+      ${user.name} uses ${move.name}`,
+      options: [
+        {
+          label: 'Confirm Pay',
+          onClick: () => {
+            console.log(`Clicked confirm pay`)
+            //replace here with our function create
+            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+            // handle onClick logic here
+
+            //close dialog maybe. add it in the other  side of the code,  not here
+            // const closedPopupState = {
+            //   ...ourState,
+            //   dialog: {
+            //     ...ourState.dialog,
+            //     isOpen: false,
+            //   },
+            // }
+
+            executeMove(
+              move,
+              ourState,
+              contextualDispatch,
+              user,
+              ATK_PHASES.DAMAGE, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'Enhance Pay',
+          onClick: () => {
+            //replace here with our function create
+            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+            // handle onClick logic here
+            const closedPopupState = {
+              ...ourState,
+              dialog: {
+                ...ourState.dialog,
+                isOpen: false,
+              },
+            }
+            // -maybe just use the same executeMove
+            // the button should change phase
+            executeMove(
+              move,
+              closedPopupState,
+              contextualDispatch,
+              user,
+              ATK_PHASES.DAMAGE, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'Enhance',
+          onClick: () => {
+            //replace here with our function create
+            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+            // handle onClick logic here
+            const closedPopupState = {
+              ...ourState,
+              dialog: {
+                ...ourState.dialog,
+                isOpen: false,
+              },
+            }
+            // -maybe just use the same executeMove
+            // the button should change phase
+            executeMove(
+              move, // move,
+              // ourState, // contextualState,
+              closedPopupState,
+              contextualDispatch, // contextualDispatch,
+              user, // user,
+              ATK_PHASES.DAMAGE, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+      ],
+      title: 'Pay Phase',
+      header: 'You can pay!',
+    },
+  }
+  return paidState
+}
+
+export const createAIDamagedState = (
+  ourState,
+  damagedHP,
+  moveCost,
+  move,
+  user,
+  contextualDispatch,
+) => {
+  console.log(
+    `ourState, damagedHP, moveCost, move, user, contextualDispatch`,
+    ourState,
+    damagedHP,
+    moveCost,
+    move,
+    user,
+    contextualDispatch,
+  )
+
+  const resultState = {
+    ...ourState,
+    opponent: {
+      ...ourState.opponent,
+      monsters: [
+        {
+          ...ourState.opponent.monsters[0],
+          stats: {
+            ...ourState.opponent.monsters[0].stats,
+            hp: damagedHP,
+          },
+        },
+        ...ourState.opponent.monsters.slice(1),
+      ],
+    },
+    dialog: {
+      ...ourState.dialog,
+      isOpen: true,
+      message: `${moveCost} Damage Dealt.
+      ${user.name} uses ${move.name}`,
+      options: [
+        {
+          label: 'Confirm D',
+          onClick: () => {
+            console.log(`confirm clicked:`)
+            //replace here with our function create
+            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+            // handle onClick logic here
+            const closedPopupState = createPopupRemovedState(ourState)
+            executeMove(
+              move,
+              closedPopupState,
+              contextualDispatch,
+              user,
+              ATK_PHASES.STATUSES, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'Enhance D',
+          onClick: () => {
+            console.log(`enhance clicked:`)
+            const closedPopupState = createPopupRemovedState(ourState)
+            executeMove(
+              move,
+              closedPopupState,
+              contextualDispatch,
+              user,
+              ATK_PHASES.STATUSES, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'Enhance2',
+          onClick: () => {
+            const closedPopupState = createPopupRemovedState(ourState)
+            // const closedPopupState = {
+            //   ...ourState,
+            //   dialog: {
+            //     ...ourState.dialog,
+            //     isOpen: false,
+            //   },
+            // }
+            executeMove(
+              move,
+              closedPopupState,
+              contextualDispatch,
+              user, // user,
+              ATK_PHASES.STATUSES, // phase,
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+      ],
+      title: 'Pay Phase',
+      header: 'You can pay!',
+    },
+  }
+
+  return resultState
+}
+
+export const createHumanDamagedState = (contextualState, damagedHP) => {
+  const damagedState = {
+    ...contextualState,
+    userParty: [
+      {
+        ...contextualState.userParty[0],
+        stats: {
+          ...contextualState.userParty[0].stats,
+          hp: damagedHP,
+        },
+      },
+      ...contextualState.userParty.slice(1),
+    ],
+  }
+  return damagedState
+}
+//------------
 
 // Here is an example of use of createPopupVisibleState
 // const popupState = createPopupVisibleState({
@@ -187,13 +445,32 @@ export const executeMove = (
   contextualDispatch,
   user, // maybe change to add the other aspects, destructure after
   phase,
-  // ---
-  // player: AI , you, them
-  player = 'human',
-  selectedTargets = [0],
-  // target/s: AI, you, them
+  player = 'human', // player: AI , you, them
+  selectedTargets = [0], // target/s: AI, you, them
 ) => {
+  console.log(
+    `📢 executeMove called:
+  move,
+  contextualState,
+  contextualDispatch,
+  user,
+  phase,
+  player = 'human',
+  selectedTargets = [0]`,
+    move,
+    contextualState,
+    contextualDispatch,
+    user,
+    phase,
+    player,
+    selectedTargets,
+  )
   let targetMonster = null
+  let moveCost
+  let playerEnergy
+  let ourDmg
+  let damagedHP
+  let doesItLand
   // user is the user
   if (player === 'human') {
     targetMonster = contextualState.opponent.monsters[0].obj
@@ -202,337 +479,34 @@ export const executeMove = (
   } else {
     console.error('executeMove: Player of attack not recognized')
   }
-
   // this is a function that gets called many times.
   // at each point, we need do a phase and then
   // present to the player a dialog to decide what to do next
   // the dialog has everything needed to run the function yet again,
   // this continues until the full attack resolves
-  let moveCost
+
   // TODO: Finish this function
   switch (phase) {
     case ATK_PHASES.PAY:
-      console.log(`Starting PAY phase`, 'pay')
-      // 1. Pay cost. If you can't, return:
-      // Lets use player energy for this
-      const playerEnergy = contextualState.game.player.energy
-      // Add the typ of costs later, this is for another switch statement.
-
-      moveCost = move.cost.energy
-      console.log(`cost is ${moveCost} energy. Player has ${playerEnergy}`)
-
-      if (playerEnergy < moveCost) {
-        console.log(
-          `${playerEnergy}<${moveCost} • Not enough energy to perform the move`,
-        )
-        // Dialogue: not enough energy
-        const dialogState = {
-          ...contextualState,
-          dialog: {
-            ...contextualState.dialog,
-            isOpen: true,
-            message: `Not enough energy. user.name of ${user.name} does not have enough energy to perform the move.`,
-            title: 'Pay Phase',
-            header: 'Not enough energy to perform the move',
-            options: [
-              {
-                label: 'Oh dear',
-                onClick: () => {
-                  const closedPopupState =
-                    createPopupRemovedState(contextualState)
-                  console.log(closedPopupState)
-                  return contextualDispatch({
-                    payload: closedPopupState,
-                    type: ACTIONS.UPDATEGAMEDATA,
-                  })
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-            ],
-          },
-        }
-        // return the original state
-        return contextualDispatch({
-          payload: dialogState,
-          type: ACTIONS.UPDATEGAMEDATA,
-        })
-      } else {
-        const playerEnergyAfterPayment = playerEnergy - moveCost
-        console.log(
-          `Enough to use :), ${playerEnergy}-${moveCost} = ${playerEnergyAfterPayment}`,
-        )
-        // const energyPaidState = {
-        //   ...contextualState,
-        //   game: {
-        //     ...contextualState.game,
-        //     player: {
-        //       ...contextualState.game.player,
-        //       energy: playerEnergyAfterPayment,
-        //     },
-        //   },
-        // }
-                const energyPaidState = createUserEnergyPaidState(playerEnergyAfterPayment, contextualState)
-
-        console.log('Pay: energyPaidState, resulting state:', energyPaidState)
-
-        const costPaidDialogState = {
-          ...energyPaidState,
-          dialog: {
-            ...energyPaidState.dialog,
-            isOpen: true,
-            message: `${moveCost} Energy paid.
-            ${user.name} uses ${move.name}`,
-            options: [
-              {
-                label: 'Confirm',
-                onClick: () => {
-                  //replace here with our function create
-                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-                  // handle onClick logic here
-                  const closedPopupState = {
-                    ...energyPaidState,
-                    dialog: {
-                      ...energyPaidState.dialog,
-                      isOpen: false,
-                    },
-                  }
-                  executeMove(
-                    move,
-                    closedPopupState,
-                    contextualDispatch,
-                    user,
-                    ATK_PHASES.DAMAGE, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-              {
-                label: 'Enhance',
-                onClick: () => {
-                  //replace here with our function create
-                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-                  // handle onClick logic here
-                  const closedPopupState = {
-                    ...energyPaidState,
-                    dialog: {
-                      ...energyPaidState.dialog,
-                      isOpen: false,
-                    },
-                  }
-                  // -maybe just use the same executeMove
-                  // the button should change phase
-                  executeMove(
-                    move,
-                    closedPopupState,
-                    contextualDispatch,
-                    user,
-                    ATK_PHASES.DAMAGE, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-              {
-                label: 'Enhance',
-                onClick: () => {
-                  //replace here with our function create
-                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-                  // handle onClick logic here
-                  const closedPopupState = {
-                    ...energyPaidState,
-                    dialog: {
-                      ...energyPaidState.dialog,
-                      isOpen: false,
-                    },
-                  }
-                  // -maybe just use the same executeMove
-                  // the button should change phase
-                  executeMove(
-                    move, // move,
-                    // energyPaidState, // contextualState,
-                    closedPopupState,
-                    contextualDispatch, // contextualDispatch,
-                    user, // user,
-                    ATK_PHASES.DAMAGE, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-            ],
-            title: 'Pay Phase',
-            header: 'You can pay!',
-          },
-          // Dialogue: Paid x energy
-        }
-        console.log('Pay: PAID, resulting state:', costPaidDialogState)
-        return contextualDispatch({
-          payload: costPaidDialogState,
-          type: ACTIONS.UPDATEGAMEDATA,
-        })
-      }
-      //dispatch( payload:  whatever to set the dialog with, rest of the obj
-      // type: ACTIONS.UPDATE SETDATA)
-      // Dialogue: ___ used ____ <-move
+      return payPhase(contextualState, contextualDispatch, move, user)
       break
     case ATK_PHASES.DAMAGE:
-      console.log(`DAMAGE: start`, contextualState)
-      // Calculate the damage based on move and user's stats
-      // also apply the enemy abilities and effects with this as well
-      const ourDmg = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
-      console.log(
-        'info',
-        `The damage to be dealt is ${ourDmg}. from ${
-          user.stats.attack
-        } * ${ourDmg} / 100.
-      This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
-       at: ${targetMonster.stats.hp - ourDmg}`,
+      return dmgPhase(
+        contextualState,
+        contextualDispatch,
+        user,
+        move,
+        targetMonster,
+        player,
+        moveCost,
       )
-      // 2. Calculate damage
-      // const stateWithDamageDealt = dealDamage(move, user)
-      //----------
-      const damagedHP = targetMonster.stats.hp - ourDmg
-      let newState = { ...contextualState }
-
-      if (player === 'human') {
-        targetMonster.stats.hp = damagedHP
-        console.log(`AI' pal's HP is now ${targetMonster.stats.hp}`)
-        newState = {
-          ...contextualState,
-          opponent: {
-            ...contextualState.opponent,
-            monsters: [
-              {
-                ...contextualState.opponent.monsters[0],
-                stats: {
-                  ...contextualState.opponent.monsters[0].stats,
-                  hp: damagedHP,
-                },
-              },
-              ...contextualState.opponent.monsters.slice(1),
-            ],
-          },
-          dialog: {
-            ...newState.dialog,
-            isOpen: true,
-            message: `${moveCost} Damage Dealt.
-            ${user.name} uses ${move.name}`,
-            options: [
-              {
-                label: 'Confirm',
-                onClick: () => {
-                  //replace here with our function create
-                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-                  // handle onClick logic here
-                  const closedPopupState = createPopupRemovedState(newState)
-                  executeMove(
-                    move,
-                    closedPopupState,
-                    contextualDispatch,
-                    user,
-                    ATK_PHASES.STATUSES, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-              {
-                label: 'Enhance',
-                onClick: () => {
-                  //replace here with our function create
-                  // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-                  // handle onClick logic here
-                  const closedPopupState = createPopupRemovedState(newState)
-
-                  // const closedPopupState = {
-                  //   ...newState,
-                  //   dialog: {
-                  //     ...newState.dialog,
-                  //     isOpen: false,
-                  //   },
-                  // }
-                  // -maybe just use the same executeMove
-                  // the button should change phase
-                  executeMove(
-                    move,
-                    closedPopupState,
-                    contextualDispatch,
-                    user,
-                    ATK_PHASES.STATUSES, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-              {
-                label: 'Enhance',
-                onClick: () => {
-                  const closedPopupState = createPopupRemovedState(newState)
-                  // const closedPopupState = {
-                  //   ...newState,
-                  //   dialog: {
-                  //     ...newState.dialog,
-                  //     isOpen: false,
-                  //   },
-                  // }
-                  executeMove(
-                    move,
-                    closedPopupState,
-                    contextualDispatch,
-                    user, // user,
-                    ATK_PHASES.STATUSES, // phase,
-                  )
-                },
-                backgroundColor: '#4b770e',
-                color: '#fff',
-              },
-            ],
-            title: 'Pay Phase',
-            header: 'You can pay!',
-          },
-        }
-      } else if (player === 'AI') {
-        user.stats.hp = damagedHP
-        console.log(`user's HP is now ${user.stats.hp}`)
-        newState = {
-          ...contextualState,
-          userParty: [
-            {
-              ...contextualState.userParty[0],
-              stats: {
-                ...contextualState.userParty[0].stats,
-                hp: damagedHP,
-              },
-            },
-            ...contextualState.userParty.slice(1),
-          ],
-        }
-      }
-      console.log(`ATK: DAMAGE phase ending`, newState)
-      return contextualDispatch({
-        payload: newState,
-        type: ACTIONS.UPDATEGAMEDATA,
-      })
-      // for all modifiers, switch(move.modifiers) go through every modifier.
       break
-    // case ATK_PHASES.APPLY_DAMAGE:
-    //   console.log(`ATK: Apply Damage Phase`)
-    //   const damage = move.damage //Apply pal's stats (userMonster.stats.attack * move.damage) / 100
-
-    //   // (Previously 5). Apply damage
-    //   // Apply dmg to the target
-    //   // Dialogue: ___ is dealt x damage
-    //   targetMonster.stats.hp -= damage
-    //   break
-    // Check if the move has a status effect
     case ATK_PHASES.STATUSES:
-      console.log(`ATK STATUSES PHASE: apply statuses resolve phase`)
+      console.log(`ATK STATUSES: apply statuses resolve phase`)
       console.log(`move.effect is ${move.effect.result}`, `move`, move)
 
       // 3. resolve effect?
-      const doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
+      doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
       console.log(
         `doesItLand is ${doesItLand}. the move.effect.chance is ${move.effect.chance}`,
       )
@@ -687,7 +661,13 @@ export const executeMove = (
       } else {
         console.log(`effect did not land`)
       }
-    // break
+      console.log(`ATK: STATUSES phase ending`, effectResultState)
+      return contextualDispatch({
+        payload: effectResultState,
+        type: ACTIONS.UPDATEGAMEDATA,
+      })
+
+      break
     case ATK_PHASES.EFFECTSS:
       // 4. Apply statuses
       // const stateWithStatusesApplied = applyStatuses(move, user) // switch(move.statuses)
