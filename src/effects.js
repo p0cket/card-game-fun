@@ -22,6 +22,6 @@ export const EFFECTS = {
   // STACKING: "stacking",
   ENERGIZE: "energize",
   // Gain more energy
-  AURA: "aura"
+  AURA: "aura",
   // If this card is in hand, apply effect on it to other cards in hand
 }

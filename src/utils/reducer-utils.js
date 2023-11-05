@@ -1,5 +1,5 @@
 // import { enemies } from "../consts/consts";
-import { allEnemies } from "../consts/enemies"
+import { allEnemies } from '../consts/enemies'
 // const { enemies } = enemyTypes;
 // actOne: [],
 // actOneMini: [],
@@ -16,7 +16,7 @@ export const shuffle = (a, s) => {
       }
       o[hash].push(n)
       return o
-    }, {})
+    }, {}),
   )
   obj.sort(([ahash], [bhash]) => ahash - bhash)
   return obj.reduce((f, [, v]) => [...f, ...v], [])
@@ -29,7 +29,7 @@ export const shuffle = (a, s) => {
 export const decideEnemyArr = (act, type) => {
   // acts would be Act1, Act2, Act3
   // types woul be regular, miniboss, boss
-  console.log("our data for act and type", act, type)
+  console.log('our data for act and type', act, type)
   return allEnemies[act][type]
 }
 
@@ -60,6 +60,5 @@ export const uniqueId = () => id++
 // export const uniquePackId = () => packId++
 export const applyUniqueId = (card) => {
   // return {...card, Id: uniqueId()}
-  return {...card, id: uniqueId()}
-
+  return { ...card, id: uniqueId() }
 }

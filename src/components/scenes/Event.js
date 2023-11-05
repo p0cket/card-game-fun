@@ -1,6 +1,6 @@
-import React from "react"
-import { eventChoiceAction } from "../../actions"
-import { possibleEvents } from "../../consts/allEvents"
+import React from 'react'
+import { eventChoiceAction } from '../../actions'
+import { possibleEvents } from '../../consts/allEvents'
 
 const Event = ({ dispatch }) => {
   const executeChoice = (choice) => {
@@ -17,9 +17,9 @@ const Event = ({ dispatch }) => {
       <h5>Event Name: {ourEvent.name} </h5>
       <div>{ourEvent.description}</div>
       <br />
-      {ourEvent.choices.map((choiceOBJ) => {
+      {ourEvent.choices.map((choiceOBJ, index) => {
         return (
-          <button onClick={() => executeChoice(choiceOBJ)}>
+          <button key={index} onClick={() => executeChoice(choiceOBJ)}>
             {choiceOBJ.choice}
           </button>
         )

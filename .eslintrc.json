@@ -15,7 +15,9 @@
     },
     "parser": "@babel/eslint-parser" // Lets hope this helps
   },
-  "rules": {
+  "rules": {  
+     "import/export": "off",
+     "import/first": "off",
     "react/prop-types": "off", //fix props validation later
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-vars": "off",
@@ -26,6 +28,7 @@
     "semi": ["warn", "never"],
     "indent": "off",
     "comma-dangle": ["error", "always-multiline"],
+ 
     "space-before-function-paren": "off",
     "no-unused-vars": "off"
 

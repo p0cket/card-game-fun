@@ -83,6 +83,7 @@ export const createPopupRemovedState = (prevState) => {
 //       color: '#fff',
 //     },
 //   ],
+
 const exampleOptions = [
   {
     label: 'Oh dear',
@@ -142,6 +143,20 @@ export const createPopupVisibleState = ({
   }
 }
 
+const createUserEnergyPaidState = (resultingEnergy, ourState) => {
+  const energyPaidState = {
+    ...ourState,
+    game: {
+      ...ourState.game,
+      player: {
+        ...ourState.game.player,
+        energy: resultingEnergy,
+      },
+    },
+}
+  return energyPaidState
+}
+
 // Here is an example of use of createPopupVisibleState
 // const popupState = createPopupVisibleState({
 //   message: 'Not enough energy. user.name of ${user.name} does not have enough energy to perform the move.',
@@ -193,7 +208,7 @@ export const executeMove = (
   // present to the player a dialog to decide what to do next
   // the dialog has everything needed to run the function yet again,
   // this continues until the full attack resolves
-
+  let moveCost
   // TODO: Finish this function
   switch (phase) {
     case ATK_PHASES.PAY:
@@ -203,7 +218,7 @@ export const executeMove = (
       const playerEnergy = contextualState.game.player.energy
       // Add the typ of costs later, this is for another switch statement.
 
-      const moveCost = move.cost.energy
+      moveCost = move.cost.energy
       console.log(`cost is ${moveCost} energy. Player has ${playerEnergy}`)
 
       if (playerEnergy < moveCost) {
@@ -247,16 +262,18 @@ export const executeMove = (
         console.log(
           `Enough to use :), ${playerEnergy}-${moveCost} = ${playerEnergyAfterPayment}`,
         )
-        const energyPaidState = {
-          ...contextualState,
-          game: {
-            ...contextualState.game,
-            player: {
-              ...contextualState.game.player,
-              energy: playerEnergyAfterPayment,
-            },
-          },
-        }
+        // const energyPaidState = {
+        //   ...contextualState,
+        //   game: {
+        //     ...contextualState.game,
+        //     player: {
+        //       ...contextualState.game.player,
+        //       energy: playerEnergyAfterPayment,
+        //     },
+        //   },
+        // }
+                const energyPaidState = createUserEnergyPaidState(playerEnergyAfterPayment, contextualState)
+
         console.log('Pay: energyPaidState, resulting state:', energyPaidState)
 
         const costPaidDialogState = {
@@ -356,10 +373,8 @@ export const executeMove = (
           type: ACTIONS.UPDATEGAMEDATA,
         })
       }
-
       //dispatch( payload:  whatever to set the dialog with, rest of the obj
       // type: ACTIONS.UPDATE SETDATA)
-
       // Dialogue: ___ used ____ <-move
       break
     case ATK_PHASES.DAMAGE:
