@@ -1,5 +1,7 @@
 import { ACTIONS } from "../../MainContext"
-import { createCostPaidDialogState, createNotEnoughEnergyDialogState, createUserEnergyPaidState } from "../moveHandlers"
+import { createNotEnoughEnergyDialogState } from "../dialog/energyDialogHandler"
+import { createCostPaidDialogState, createUserEnergyPaidState } from "../state/costStateHandlers"
+// import { createCostPaidDialogState, createNotEnoughEnergyDialogState, createUserEnergyPaidState } from "../moveHandlers"
 
 let playerEnergy
 let moveCost

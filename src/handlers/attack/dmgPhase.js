@@ -1,10 +1,28 @@
-import { ACTIONS } from "../../MainContext"
-import { createAIDamagedState, createHumanDamagedState } from "../moveHandlers"
+import { ACTIONS } from '../../MainContext'
+import { createAIDamagedState, createHumanDamagedState } from '../state/damageStateHandlers'
 
 let ourDmg
 let damagedHP
-export const dmgPhase = (contextualState, contextualDispatch, user, move, targetMonster, player, moveCost) => {
+export const dmgPhase = (
+  contextualState,
+  contextualDispatch,
+  user,
+  move,
+  targetMonster,
+  player,
+  moveCost,
+) => {
   console.group('💥 DAMAGE: start')
+  console.log(
+    `contextualState, contextualDispatch, user, move, targetMonster, player, moveCost`,
+    contextualState,
+    contextualDispatch,
+    user,
+    move,
+    targetMonster,
+    player,
+    moveCost,
+  )
   ourDmg = move.damage
   console.log(
     'info',
@@ -35,7 +53,6 @@ export const dmgPhase = (contextualState, contextualDispatch, user, move, target
   } else if (player === 'AI') {
     user.stats.hp = damagedHP
     console.log(`user's HP is now ${user.stats.hp}`)
-
     newState = createHumanDamagedState(contextualState, damagedHP)
   }
 
@@ -47,5 +64,5 @@ export const dmgPhase = (contextualState, contextualDispatch, user, move, target
     type: ACTIONS.UPDATEGAMEDATA,
   })
   // for all modifiers, switch(move.modifiers) go through every modifier.
-// case ATK_PHASES.APPLY_DAMAGE:// Check if the move has a status effect
+  // case ATK_PHASES.APPLY_DAMAGE:// Check if the move has a status effect
 }

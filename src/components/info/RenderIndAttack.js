@@ -34,15 +34,15 @@ function RenderIndAttack({
     togglePopup()
 
     // console.log('renderIndAttack->runMove():', move, user)
-    console.log(
-      `renderIndAttack->runMove():
-      move,contextualState,contextualDispatch,user,ATK_PHASES.PAY,`,
-      move,
-      contextualState,
-      contextualDispatch,
-      user,
-      ATK_PHASES.PAY,
-    )
+    // console.log(
+    //   `renderIndAttack->runMove():
+    //   move,contextualState,contextualDispatch,user,ATK_PHASES.PAY,`,
+    //   move,
+    //   contextualState,
+    //   contextualDispatch,
+    //   user,
+    //   ATK_PHASES.PAY,
+    // )
 
     const resultState = executeMove(
       move,
