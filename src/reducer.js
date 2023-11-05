@@ -1,4 +1,4 @@
-import { ACTIONS } from "./actions"
+import { DEPRECATED_ACTIONS} from "./actions"
 import {
   setMyDataHandler,
   healHandler,
@@ -36,50 +36,50 @@ export default function reducer(state, action) {
   //solving all problems of stale state
   const { payload } = action
   switch (action.type) {
-    case ACTIONS.SET_TRANS:
+    case DEPRECATED_ACTIONS.SET_TRANS:
       return setTransitionHandler(state, payload)
-    case ACTIONS.SET_SCENE:
+    case DEPRECATED_ACTIONS.SET_SCENE:
       return setSceneHandler(state, payload)
-    case ACTIONS.SET_MYDATA:
+    case DEPRECATED_ACTIONS.SET_MYDATA:
       return setMyDataHandler(state)
-    case ACTIONS.APPLY_HEAL:
+    case DEPRECATED_ACTIONS.APPLY_HEAL:
       return healHandler(state, payload)
-    case ACTIONS.SET_MYBALANCE:
+    case DEPRECATED_ACTIONS.SET_MYBALANCE:
       return setMyBalanceHandler(state, payload)
-    case ACTIONS.SET_ALERT:
+    case DEPRECATED_ACTIONS.SET_ALERT:
       return setAlertHandler(state, payload)
-    case ACTIONS.SET_DECK:
+    case DEPRECATED_ACTIONS.SET_DECK:
       return { ...state, deck: payload }
-    case ACTIONS.DRAW_CARD:
+    case DEPRECATED_ACTIONS.DRAW_CARD:
       return drawCardHandler(state, payload)
-    case ACTIONS.PLAY_CARD:
+    case DEPRECATED_ACTIONS.PLAY_CARD:
       return playCardHandler(state, payload)
-    case ACTIONS.DISCARD_CARD:
+    case DEPRECATED_ACTIONS.DISCARD_CARD:
       return discardCardHandler(state, payload)
-    case ACTIONS.SET_ENEMY:
+    case DEPRECATED_ACTIONS.SET_ENEMY:
       return setEnemyHandler(state, payload)
-    case ACTIONS.SET_ATK:
+    case DEPRECATED_ACTIONS.SET_ATK:
       return setAtkHandler(state, payload)
     // level handlers
-    case ACTIONS.EVENT_CHOICE:
+    case DEPRECATED_ACTIONS.EVENT_CHOICE:
       return eventChoiceHandler(state, payload)
-    case ACTIONS.GENERATE_REWARDS:
+    case DEPRECATED_ACTIONS.GENERATE_REWARDS:
       return generateRewardsHandler(state, payload)
-    case ACTIONS.SELECT_REWARD:
+    case DEPRECATED_ACTIONS.SELECT_REWARD:
       return setRewardHandler(state, payload)
-    case ACTIONS.PURCHASE_ITEM:
+    case DEPRECATED_ACTIONS.PURCHASE_ITEM:
       return purchaseHandler(state, payload)
-    case ACTIONS.SELECT_REST:
+    case DEPRECATED_ACTIONS.SELECT_REST:
       return restHandler(state)
-    case ACTIONS.BEGIN_BATTLE:
+    case DEPRECATED_ACTIONS.BEGIN_BATTLE:
       return beginBattleHandler(state, payload)
-    case ACTIONS.END_TURN:
+    case DEPRECATED_ACTIONS.END_TURN:
       return endTurnHandler(state, payload)
-    case ACTIONS.ADD_CARD:
+    case DEPRECATED_ACTIONS.ADD_CARD:
       return addCardHandler(state, payload)
-    case ACTIONS.SELECT_PACK:
+    case DEPRECATED_ACTIONS.SELECT_PACK:
       return addPackHandler(state, payload)
-    case ACTIONS.GAME_OVER:
+    case DEPRECATED_ACTIONS.GAME_OVER:
       return gameOverHandler(state)
     default:
       console.log(`no action type matched, returning state`)

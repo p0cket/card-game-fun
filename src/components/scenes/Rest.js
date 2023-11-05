@@ -1,5 +1,5 @@
 import React from "react"
-import { ACTIONS } from "../../actions"
+import {  DEPRECATED_ACTIONS } from "../../actions"
 import { setSceneAction } from "../../actions"
 
 const Rest = ({ gameData, dispatch }) => {
@@ -10,7 +10,8 @@ const Rest = ({ gameData, dispatch }) => {
 
   const healToFullHealth = () => {
     dispatch({
-      type: ACTIONS.SELECT_REST,
+      // type: ACTIONS.SELECT_REST,
+      type: DEPRECATED_ACTIONS.SELECT_REST,
     })
   }
   return (

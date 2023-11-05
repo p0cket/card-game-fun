@@ -111,9 +111,9 @@ export default function BattleTopDisplay() {
     lvl,
     status,
   } = currentMon
-  console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
+  // console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
 
-  console.log(`here is the currentMon HP and maxHP:`, stats.hp, stats.maxHP)
+  // console.log(`here is the currentMon HP and maxHP:`, stats.hp, stats.maxHP)
 
   return (
     <div className="battleTop">

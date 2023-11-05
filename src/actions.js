@@ -1,7 +1,7 @@
 import { uniqueId } from "./utils/reducer-utils"
 import { startHandCount } from "./consts/consts"
 
-export const ACTIONS = {
+export const DEPRECATED_ACTIONS = {
   SET_TRANS: "set-trans",
   SET_SCENE: "set_scene",
   SET_MYDATA: "set-mydata",
@@ -35,7 +35,7 @@ export const ENEMY_TYPES = {
 export const addCardAction = (card) => {
   const cardWithFreshID = { ...card, id: uniqueId() }
   return {
-    type: ACTIONS.SELECT_REWARD,
+    type: DEPRECATED_ACTIONS.SELECT_REWARD,
     payload: {
       card: cardWithFreshID,
       battlePayload: {
@@ -50,7 +50,7 @@ export const addCardAction = (card) => {
 
 export const addPackAction = (ourPack) => {
   return {
-    type: ACTIONS.SELECT_PACK,
+    type: DEPRECATED_ACTIONS.SELECT_PACK,
     payload: {
       pack: ourPack,
       battlePayload: {
@@ -65,7 +65,7 @@ export const addPackAction = (ourPack) => {
 
 export const playCardAction = (card) => {
   return {
-    type: ACTIONS.PLAY_CARD,
+    type: DEPRECATED_ACTIONS.PLAY_CARD,
     payload: {
       card,
       battlePayload: {
@@ -81,7 +81,7 @@ export const playCardAction = (card) => {
 export const endTurnAction = () => {
   console.log(`End Turn`)
   return {
-    type: ACTIONS.END_TURN,
+    type: DEPRECATED_ACTIONS.END_TURN,
     payload: {
       seed: Math.random(),
       enemySeed: Math.random(),
@@ -95,7 +95,7 @@ export const endTurnAction = () => {
 // @TODO finish or remove this Transition functionality
 export const transitionSceneAction = () => {
   return {
-    type: ACTIONS.SET_TRANS,
+    type: DEPRECATED_ACTIONS.SET_TRANS,
     payload: {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
@@ -107,7 +107,7 @@ export const transitionSceneAction = () => {
 
 export const setSceneAction = () => {
   return {
-    type: ACTIONS.SET_SCENE,
+    type: DEPRECATED_ACTIONS.SET_SCENE,
     payload: {
       enemySeed: Math.random(),
       atkSeed: Math.random(),
@@ -120,7 +120,7 @@ export const setSceneAction = () => {
 export const buyCardAction = (card) => {
   console.log(`adding this card:`, card)
   return {
-    type: ACTIONS.PURCHASE_ITEM,
+    type: DEPRECATED_ACTIONS.PURCHASE_ITEM,
     payload: {
       card,
       battlePayload: {
@@ -135,7 +135,7 @@ export const buyCardAction = (card) => {
 
 export const eventChoiceAction = (choice) => {
   return {
-    type: ACTIONS.EVENT_CHOICE,
+    type: DEPRECATED_ACTIONS.EVENT_CHOICE,
     payload: {
       choice,
       battlePayload: {

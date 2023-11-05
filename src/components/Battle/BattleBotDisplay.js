@@ -1,20 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-// eslint-disable-next-line no-unused-vars
-// import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
 import { motion, AnimatePresence } from 'framer-motion'
 // import { useDispatchContext, useStateContext } from "../../MainContext"
-
 import './../scenes/Battle.css'
 import './../common/Button.css'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 import Button from '../common/Button'
 
-// function BattleBotDisplay({ gameData, health, maxHP, energy }) {
 function BattleBotDisplay({ ourCurrentMon }) {
-  console.log(`battleBot currentMon`, ourCurrentMon)
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],
@@ -27,16 +21,8 @@ function BattleBotDisplay({ ourCurrentMon }) {
     },
   }
 
-  const contextualState = useStateContext()
-  const ourParty = contextualState.userParty
-  // const ourMain = ourParty[Party.SLOT_1]
-
-  // console.log(`X_ourParty:`, ourParty, `ourMain`, ourMain)
-
-  // const ourParty = contextualState.userParty.SLOT_1
   return (
     <div className="battleBot">
-      {/* @TODO: reverse left and right here */}
       <div className="battleBotRight">
         <motion.img
           style={{ width: 180, height: 150 }}
@@ -84,25 +70,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
                 flexDirection: 'column',
               }}
             >
-              {/* <li>Commander Ability: {ourCurrentMon.commander_ability.name}</li>
-              <li>Cost: {ourCurrentMon.cost}</li>
-              <li>Creature Type: {ourCurrentMon.creature_type}</li>
-              <li>Description: {ourCurrentMon.description}</li>
-              <li>Elemental Type: {ourCurrentMon.elemental_type}</li>
-              <li>Enter Ability: {ourCurrentMon.enterAbility}</li>
-              <li>Experience: {ourCurrentMon.experience}</li>
-              <li>ID: {ourCurrentMon.id}</li> */}
-              {/* <li>Lore: {ourCurrentMon.lore}</li> */}
-              {/* <li>
-                Moves:{' '}
-                {ourCurrentMon.moves.map((move, index) => (
-                  <span key={index}>{move}, </span>
-                ))}
-              </li> */}
-              {/* <li>Name: {ourCurrentMon.name}</li> */}
-              {/* <li>Nature: {ourCurrentMon.nature}</li> */}
               <li>
-                {/* Passive: <Button text={ourCurrentMon.passive_ability} /> */}
                 <button
                   style={{
                     backgroundColor: 'green',
@@ -114,30 +82,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
                   {ourCurrentMon.passive_ability}
                 </button>
               </li>
-              {/* <li> */}
-              {/* Possible Moves:{' '} */}
-              {/* {ourCurrentMon.possible_moves.map((move, index) => (
-                  <span key={index}>{move}, </span>
-                )} */}
-              {/* </li> */}
-              {/* <li> */}
-              {/* Quirks:{' '} */}
-              {/* {ourCurrentMon.quirks.map((quirk, index) => (
-                  <span key={index}>{quirk}, </span>
-                )} */}
-              {/* </li> */}
-              {/* <li>Size: {ourCurrentMon.size}</li> */}
               <li>Group: {ourCurrentMon.specialty_group}</li>
-              {/* <li>
-                Stats:
-                <ul>
-                  <li>HP: {ourCurrentMon.stats.hp}</li>
-                  <li>Max HP: {ourCurrentMon.stats.max_hp}</li>
-                  <li>Attack: {ourCurrentMon.stats.attack}</li>
-                  <li>Defense: {ourCurrentMon.stats.defense}</li>
-                  <li>Special Attack: {ourCurrentMon.stats.special_attack}</li>
-                </ul>
-              </li> */}
               <li>
                 +{' '}
                 {ourCurrentMon.strengths.map((strength, index) => (
@@ -150,14 +95,13 @@ function BattleBotDisplay({ ourCurrentMon }) {
                   <span key={index}>{weakness}, </span>
                 ))}
               </li>
-              {/* <li>Weight: {ourCurrentMon.weight}</li> */}
             </ul>
           </div>
         </div>
       </div>
     </div>
   )
-
+}
   BattleBotDisplay.propTypes = {
     ourCurrentMon: PropTypes.shape({
       name: PropTypes.string,
@@ -189,6 +133,4 @@ function BattleBotDisplay({ ourCurrentMon }) {
       // Add other expected prop types here
     }).isRequired,
   }
-}
-
 export default BattleBotDisplay
