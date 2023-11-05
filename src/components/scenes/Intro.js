@@ -18,6 +18,7 @@ import {
 } from '../../handlers/sceneHandlers_new'
 import { gameVersion } from '../../consts/consts'
 // import SparkleButton from '../common/SparkleButton'
+import Chibipal from '../../assets/Chibipal.png'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -143,7 +144,7 @@ const Intro = ({ dispatch }) => {
       <div>
         <div
           className="font-silkscreen flex flex-col items-center
-         bg-repeat bg-cover bg-black text-white p-5"
+         bg-repeat bg-cover bg-green-800 text-white"
         >
           <div
             style={{
@@ -168,10 +169,12 @@ const Intro = ({ dispatch }) => {
           <div>
             <img
               style={{ width: 240, height: 200, padding: '20px' }}
-   src="/creatures/Chibipal.png"
+              // src="creatures/Chibipal.png"
+              src={Chibipal}
               alt="Chibipal Backside"
+
             />
-        </div>
+          </div>
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             {/* <div style={{color: 'white'}}>  Hi Lisa, I made this game for you to play</div> */}
             <Dialog
