@@ -8,14 +8,14 @@ import {
   stunCards,
   shopCards,
   rewardCards,
-} from "./allCards"
+} from './allCards'
 
 export const poisonPackBasic = {
-  title: "Poison",
+  title: 'Poison',
   desc: `These attacks will Poison the enemy for the amount it says. 
   Poison stacks with each one used.`,
-  buttonText: "Professor, inject me",
-  img: "/packImages/Poison.png",
+  buttonText: 'Professor, inject me',
+  img: '/packImages/Poison.png',
   id: 1,
   pack: [
     poisonCards.ToxicGas,
@@ -28,11 +28,11 @@ export const poisonPackBasic = {
 }
 
 export const doubledamagePackBasic = {
-  title: "DoubleDamage",
+  title: 'DoubleDamage',
   desc: `These attacks will apply a buff that doubles your damage 
   for the full turn`,
-  buttonText: "Lets get buff!",
-  img: "/packImages/DoubleDamage.png",
+  buttonText: 'Lets get buff!',
+  img: '/packImages/DoubleDamage.png',
   id: 2,
   pack: [
     ddamageCards.focus,
@@ -46,10 +46,10 @@ export const doubledamagePackBasic = {
 
 //Nerf slightly
 export const stunPackBasic = {
-  title: "Stun",
+  title: 'Stun',
   desc: `Stun will disable an enemy from attacking for coming attack`,
-  buttonText: "Show me how you stunned them",
-  img: "/packImages/Stun.png",
+  buttonText: 'Show me how you stunned them',
+  img: '/packImages/Stun.png',
   id: 3,
   pack: [
     stunCards.throwFist,
@@ -63,11 +63,11 @@ export const stunPackBasic = {
 
 //nerf
 export const sleepPackBasic = {
-  title: "Sleep",
+  title: 'Sleep',
   desc: `Puts enemies to sleep, disabling them from attacking.
    They chance to wake up at the end of the turn`,
-  buttonText: "Teach me hypnosis",
-  img: "/packImages/Sleep.png",
+  buttonText: 'Teach me hypnosis',
+  img: '/packImages/Sleep.png',
   id: 4,
   pack: [
     sleepCards.hypnosis,
@@ -80,10 +80,10 @@ export const sleepPackBasic = {
 }
 
 export const buildupPackBasic = {
-  title: "BuildUp",
+  title: 'BuildUp',
   desc: `Each time you play a card, your BuildUp card's damage increases permanently if it is in your hand.`,
-  buttonText: "I want to grow",
-  img: "/packImages/Buildup.png",
+  buttonText: 'I want to grow',
+  img: '/packImages/Buildup.png',
   id: 4,
   pack: [
     buildupCards.channel,
@@ -131,7 +131,7 @@ export const shopPack = [
   shopCards.StrongHit,
   shopCards.ThunderFist,
   shopCards.ToxicFog,
-  shopCards.VenomousFang
+  shopCards.VenomousFang,
 ]
 
 export const allBasicPacks = [

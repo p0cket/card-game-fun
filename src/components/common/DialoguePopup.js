@@ -3,34 +3,7 @@ import Dialog from './Dialog'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 function DialoguePopup(props) {
-  const {
-    // trigger,
-    // title,
-    // header,
-    // buttonText,
-    // buttonText2,
-    // onButtonClick,
-    // message,
-    // size,
-    // speed,
-    // trigger,
-    // title = 'Default dialogPopup.js Title',
-    // header,
-    // message = 'default dialogPopup.js message',
-    // options = [
-    //   {
-    //     label: 'Button 1',
-    //     onClick: () => {
-    //       // Define the action for button 1
-    //     },
-    //     // helperText: 'Button 1 helper text', ?
-    //     backgroundColor: '#4b770e',
-    //     color: '#fff',
-    //   },
-    // ],
-    // state,
-    // dispatch,
-  } = props
+
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()

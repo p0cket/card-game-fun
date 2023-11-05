@@ -6,7 +6,6 @@ import { IceWall } from '../../consts/allMoves'
 import Monster from '../info/Monster'
 import RenderIndAttack from '../info/RenderIndAttack'
 
-
 const MenuOptions = {
   ATTACKS: 'attacks',
   // BENCH_ATTACKS: 'benchAttacks',
@@ -42,9 +41,10 @@ function MenuPopup(props) {
       label: 'Attacks',
       content: (
         <>
-          {props.selectedPal.moves.map((move) => (
+          {props.selectedPal.moves.map((move, index) => (
             <RenderIndAttack
               attack={move}
+              key={index}
               contextualState={contextualState}
               contextualDispatch={contextualDispatch}
               togglePopup={props.togglePopup}
@@ -68,7 +68,7 @@ function MenuPopup(props) {
     [MenuOptions.DO_SOMETHING]: {
       label: 'Do Something',
       content: (
-        <div>This is the "Do Something" menu. Add your content here.</div>
+        <div>{`This is the "Do Something" menu. Add your content here.`}</div>
       ),
     },
   }

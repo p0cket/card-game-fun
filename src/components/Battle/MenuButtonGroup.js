@@ -58,9 +58,9 @@ function MenuButtonGroup({ togglePopup }) {
       </div>
     </div>
   )
-  MenuButtonGroup.propTypes = {
-    togglePopup: PropTypes.func.isRequired,
-  }
 }
 
+MenuButtonGroup.propTypes = {
+  togglePopup: PropTypes.func.isRequired,
+}
 export default MenuButtonGroup
