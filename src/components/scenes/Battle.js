@@ -44,11 +44,11 @@ const Battle = () => {
   const contextualDispatch = useDispatchContext()
 
   const ourParty = contextualState.userParty
-  console.log(`ourCurrentMonSHOULDBE`, ourParty)
+  // console.log(`ourCurrentMonSHOULDBE`, ourParty)
 
   const ourCurrentMon = ourParty[0]
 
-  console.log(`ourCurrentMon`, ourCurrentMon, `curMON`, ourParty)
+  // console.log(`ourCurrentMon`, ourCurrentMon, `curMON`, ourParty)
 
   const [showPopup, setShowPopup] = useState(true)
 

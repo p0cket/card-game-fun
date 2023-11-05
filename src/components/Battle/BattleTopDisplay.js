@@ -90,8 +90,6 @@ export default function BattleTopDisplay() {
 
   const currentMon =
     contextualState.current.scene.details.trainer.monsters[0].obj // .level
-  console.log(`currentMon:`, currentMon)
-  // const currentMon = Ticklefairy;
   const {
     name,
     lore,
