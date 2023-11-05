@@ -1,5 +1,5 @@
-{   
-  "extends": "eslint-config-react",
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -11,10 +11,12 @@
     "sourceType": "module",
     "ecmaVersion": 2018,
     "ecmaFeatures": {
-        "jsx": true
-      }
+      "jsx": true
+    },
+    "parser": "@babel/eslint-parser" // Lets hope this helps
   },
   "rules": {
+    "react/prop-types": "off", //fix props validation later
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-vars": "off",
     "react/jsx-uses-react": "off",
@@ -24,8 +26,9 @@
     "semi": ["warn", "never"],
     "indent": "off",
     "comma-dangle": ["error", "always-multiline"],
-    "space-before-function-paren": "off" ,
+    "space-before-function-paren": "off",
     "no-unused-vars": "off"
+
     // if you want to remove prop validation:
     // "react/prop-types": "off"
   }
