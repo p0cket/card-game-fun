@@ -2,8 +2,8 @@ import {
   healHandler,
   setMyBalanceHandler,
   addCardHandler,
-} from "./dataHandlers"
-import { setSceneHandler, setTransitionHandler } from "./sceneHandlers"
+} from './dataHandlers'
+import { setSceneHandler, setTransitionHandler } from './sceneHandlers'
 
 // GameEvent Handlers
 export const restHandler = (state) => {
@@ -19,28 +19,28 @@ export const eventChoiceHandler = (state, { choice, battlePayload }) => {
   let newState = { ...state }
 
   switch (choice.resultType) {
-    case "health":
+    case 'health':
       console.log(`health choice`)
       newState = healHandler(newState, choice.resultNum)
       // newState = setEventResultOBJ(newState, choice)
       break
-    case "money":
+    case 'money':
       console.log(`money choice`)
       if (choice.resultNum !== 0) {
         newState = setMyBalanceHandler(newState, choice.resultNum)
         // newState = setEventResultOBJ(newState, choice)
       }
       break
-    case "cards":
+    case 'cards':
       console.log(`cards choice`)
       break
-    case "enemy":
+    case 'enemy':
       console.log(`enemy choice`)
       break
-    case "story":
+    case 'story':
       console.log(`story choice`)
       break
-    case "exit":
+    case 'exit':
       console.log(`exit choice`)
       break
     default:
@@ -72,7 +72,7 @@ export const purchaseHandler = (state, payload) => {
   if (!card.price) {
     console.warn(
       `card.price does not exist here. card.price = ${card.price}. fullcard:`,
-      card
+      card,
     )
   }
   if (nextState.gold >= card.price) {

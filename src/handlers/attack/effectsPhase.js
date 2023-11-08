@@ -24,6 +24,7 @@ export const effectsPhase = (move, doesItLand, targetMonster) => {
         // apply buff
         // Dialogue: applying buff
         targetMonster.stats.attack += 2
+        break
       default:
         console.log(`default case for hero buffs applied`)
     }
