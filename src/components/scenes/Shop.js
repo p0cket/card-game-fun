@@ -38,7 +38,7 @@ const Shop = ({ gameData, dispatch }) => {
       <br />
       <h3>Its dangerous to go alone, give me money</h3>
       <div>
-        Items for sale (Just attacks for now. I'm too busy for this), also you
+        Items for sale (Just attacks for now. I`m too busy for this), also you
         can only buy 1 right now :P
       </div>
       <div

@@ -223,6 +223,8 @@ export const discardCardHandler = (state, payload) => {
     },
   }
 }
+
+let healAmount
 export const applyStatusHandler = (state, { card, battlePayload }) => {
   let nextState = { ...state }
   const statusEffect = card.effect
@@ -313,7 +315,7 @@ export const applyStatusHandler = (state, { card, battlePayload }) => {
         )
         return nextState
       case EFFECTS.LIFESTEAL:
-        const healAmount = card.num
+        healAmount = card.num
         nextState.hero.health = nextState.hero.health + healAmount
         return { ...nextState }
       default:

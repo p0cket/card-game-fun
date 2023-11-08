@@ -74,9 +74,10 @@ const Convo = ({ gameData, dispatch, conversation }) => {
             <div className="convo-actions">
               <div className="action-buttons">
                 {convo[line].actions
-                  ? convo[line].actions.map((action) => {
+                  ? convo[line].actions.map((action, index) => {
                       return (
                         <ThemedButton
+                          key={index}
                           text={action.text}
                           onClick={() => executeChoice(action)}
                         />

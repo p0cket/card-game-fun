@@ -1,15 +1,15 @@
-import { shuffle } from "../utils/reducer-utils"
-import { EFFECTS } from "../effects"
-import { allAvailableRewards } from "../consts/allAvailableRewards"
-import { startingDeck, fullEnergyAmount } from "../consts/consts"
-import { decideEnemy, decideEnemyATK } from "../utils/reducer-utils"
-import { drawCardHandler } from "./battleHandlers"
-import { addCardHandler, setAlertHandler } from "./dataHandlers"
+import { shuffle } from '../utils/reducer-utils'
+import { EFFECTS } from '../effects'
+import { allAvailableRewards } from '../consts/allAvailableRewards'
+import { startingDeck, fullEnergyAmount } from '../consts/consts'
+import { decideEnemy, decideEnemyATK } from '../utils/reducer-utils'
+import { drawCardHandler } from './battleHandlers'
+import { addCardHandler, setAlertHandler } from './dataHandlers'
 import {
   setSceneHandler,
   gameOverHandler,
   winBattleHandler,
-} from "./sceneHandlers"
+} from './sceneHandlers'
 
 export const endTurnHandler = (state, payload) => {
   const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
@@ -56,11 +56,13 @@ export const endTurnHandler = (state, payload) => {
     }
   }
 
+  let enemyWithoutStatusState
+  let decision
   // Then the rest of the status effects
   switch (enemyStatus) {
     case EFFECTS.STUN:
       console.log(`stunned, so don't attack, set status to _null_`)
-      const enemyWithoutStatusState = {
+      enemyWithoutStatusState = {
         ...nextState,
         battle: {
           ...nextState.battle,
@@ -71,10 +73,10 @@ export const endTurnHandler = (state, payload) => {
       break
     case EFFECTS.SLEEP:
       console.log(
-        `Sleep. 50% chance wakes up - status is removed, no damage applies while active`
+        `Sleep. 50% chance wakes up - status is removed, no damage applies while active`,
       )
       // @TODO: replace Math.random() with Seed
-      const decision = Math.floor(Math.random() * 2)
+      decision = Math.floor(Math.random() * 2)
       if (decision === 1) {
         const enemyAppliedSleepState = {
           ...nextState,
@@ -88,7 +90,7 @@ export const endTurnHandler = (state, payload) => {
       break
     case null:
       console.log(
-        ` enemyStatus of null matched, returning a hero-damaged state`
+        ` enemyStatus of null matched, returning a hero-damaged state`,
       )
       finalHealth = finalHealth - battle.enemy.nextAttack.damage
       break
@@ -115,7 +117,7 @@ export const endTurnHandler = (state, payload) => {
     }
     default:
       console.log(
-        `endTurnHandler: default case reached while checking heroBuff of: ${heroBuff}`
+        `endTurnHandler: default case reached while checking heroBuff of: ${heroBuff}`,
       )
   }
 
@@ -196,7 +198,7 @@ export const generateRewardsHandler = (state, payload) => {
     `generateRewardsHandler running:`,
     state,
     `payload (currently none)`,
-    payload
+    payload,
   )
   // take list of rewards, use a seed for the randomization
   // FIXME: Make this function pure
@@ -218,12 +220,12 @@ export const setRewardHandler = (state, payload) => {
   const newState = addCardHandler(state, payload)
 
   const newStateWithFreshRewards = generateRewardsHandler(
-    newState
+    newState,
     // ,payload (seed, level)
   )
   const nextSceneState = setSceneHandler(
     newStateWithFreshRewards,
-    payload.battlePayload
+    payload.battlePayload,
   )
   return nextSceneState
   // return newState;
