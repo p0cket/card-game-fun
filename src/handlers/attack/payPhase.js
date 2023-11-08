@@ -23,10 +23,11 @@ export const payPhase = (contextualState, contextualDispatch, move, user) => {
       contextualDispatch,
     )
     console.groupEnd()
-    return contextualDispatch({
-      payload: dialogState,
-      type: ACTIONS.UPDATEGAMEDATA,
-    })
+    // contextualDispatch({
+    //   payload: dialogState,
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    // })
+    return dialogState
   } else {
     const playerEnergyAfterPayment = playerEnergy - moveCost
     console.log(
@@ -45,9 +46,10 @@ export const payPhase = (contextualState, contextualDispatch, move, user) => {
     )
     console.log('Pay: PAID, resulting state:', costPaidDialogState)
     console.groupEnd()
-    return contextualDispatch({
-      payload: costPaidDialogState,
-      type: ACTIONS.UPDATEGAMEDATA,
-    })
+    //  contextualDispatch({
+    //   payload: costPaidDialogState,
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    // })
+    return costPaidDialogState
   }
 }

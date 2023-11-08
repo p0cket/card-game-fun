@@ -1,4 +1,6 @@
 import { ACTIONS } from '../../MainContext'
+import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
+import { ATK_PHASES, executeMove } from '../moveHandlers'
 import { createAIDamagedState, createHumanDamagedState } from '../state/damageStateHandlers'
 
 let ourDmg
@@ -10,19 +12,18 @@ export const dmgPhase = (
   move,
   targetMonster,
   player,
-  moveCost,
 ) => {
   console.group('💥 DAMAGE: start')
   console.log(
-    `contextualState, contextualDispatch, user, move, targetMonster, player, moveCost`,
+    `contextualState, contextualDispatch, user, move, targetMonster, player`,
     contextualState,
     contextualDispatch,
     user,
     move,
     targetMonster,
     player,
-    moveCost,
   )
+  const moveCost = move.cost.energy
   ourDmg = move.damage
   console.log(
     'info',
@@ -41,6 +42,7 @@ export const dmgPhase = (
     targetMonster.stats.hp = damagedHP
     console.log(`'AI' pal's HP is now ${targetMonster.stats.hp}`)
 
+    console.log(`dmg b4 the createAIDamagedState:`, newState)
     newState = createAIDamagedState(
       newState,
       damagedHP,
@@ -49,6 +51,27 @@ export const dmgPhase = (
       user,
       contextualDispatch,
     )
+    newState =  createPopupVisibleState({
+      prevState: newState,
+      message: `${moveCost} Damage Dealt.`,
+      options: [
+        {
+          label: 'Confirm',
+          onClick: () => {
+            console.log('Confirm clicked')
+            executeMove(
+              move,
+              newState,
+              contextualDispatch,
+              user,
+              ATK_PHASES.STATUSES,
+            )
+          },
+        },
+      ],
+    })
+
+    console.log(`dmg after the createAIDamagedState:`, newState)
     // dialog open state here?
   } else if (player === 'AI') {
     user.stats.hp = damagedHP
@@ -56,13 +79,13 @@ export const dmgPhase = (
     newState = createHumanDamagedState(contextualState, damagedHP)
   }
 
+  //////----
+
   console.log(`ATK: DAMAGE phase ending:`, newState)
   //
   console.groupEnd()
-  return contextualDispatch({
-    payload: newState,
-    type: ACTIONS.UPDATEGAMEDATA,
-  })
+
+  return newState
   // for all modifiers, switch(move.modifiers) go through every modifier.
   // case ATK_PHASES.APPLY_DAMAGE:// Check if the move has a status effect
 }

@@ -42,12 +42,17 @@ export const executeMove = (
     player,
     selectedTargets,
   )
-  let targetMonster = null
-  let moveCost
-  let playerEnergy
-  let ourDmg
-  let damagedHP
-  let doesItLand
+  let targetMonster = null,
+    moveCost,
+    playerEnergy,
+    ourDmg,
+    damagedHP,
+    doesItLand,
+    payResult,
+    dmgResult,
+    statusResult,
+    effectsResult,
+    endResult
   // user is the user
   if (player === 'human') {
     targetMonster = contextualState.opponent.monsters[0].obj
@@ -61,26 +66,38 @@ export const executeMove = (
   // TODO: Finish this function
   switch (phase) {
     case ATK_PHASES.PAY:
-      return payPhase(contextualState, contextualDispatch, move, user)
+      payResult = payPhase(contextualState, contextualDispatch, move, user)
+      contextualDispatch({ payload: payResult, type: ACTIONS.UPDATEGAMEDATA })
       break
     case ATK_PHASES.DAMAGE:
-      return dmgPhase(
+      dmgResult = dmgPhase(
         contextualState,
         contextualDispatch,
         user,
         move,
         targetMonster,
         player,
-        moveCost,
       )
+      contextualDispatch({ payload: dmgResult, type: ACTIONS.UPDATEGAMEDATA })
       break
     case ATK_PHASES.STATUSES:
-      return statusPhase(contextualState, contextualDispatch, user, move)
+      // Continue here with dispatching the Status too
+      statusResult = statusPhase(
+        contextualState,
+        contextualDispatch,
+        user,
+        move,
+      )
+      contextualDispatch({ payload: statusResult, type: ACTIONS.UPDATEGAMEDATA })
       break
-    case ATK_PHASES.EFFECTSS:
-      return effectsPhase()
+    case ATK_PHASES.EFFECTS:
+      effectsResult = effectsPhase()
+      contextualDispatch({ payload: effectsResult, type: ACTIONS.UPDATEGAMEDATA })
+      break
     case ATK_PHASES.END:
       console.log(`ATK: end phase`)
+      endResult = "well man, do all the endResult stuff and then pass it in here"
+      contextualDispatch({ payload: endResult, type: ACTIONS.UPDATEGAMEDATA })
       break
 
     default:

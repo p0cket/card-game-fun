@@ -37,8 +37,9 @@ export default function App() {
           backgroundSize: '800px 500px',
           width: '100vw',
           height: '100vh',
-          maxWidth: '800px',
-          maxHeight: '1000px',
+          // Shrink display to mimic mobile
+          maxWidth: '500px',
+          maxHeight: '850px',
           // display this div in the center:
           margin: 'auto',
           center: 'true',

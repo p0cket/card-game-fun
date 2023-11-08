@@ -1,3 +1,5 @@
+import LuminowlImg from './../../assets/pals/Luminowl_pxl.png'
+
 import PropTypes from 'prop-types'
 import {
   ComfortingHug,
@@ -87,7 +89,7 @@ export const Luminowl = {
     description:
       "Creates a blinding explosion of light, damaging all enemies and boosting the team's accuracy and evasion.",
   },
-  image: 'pals/Luminowl_pxl.png',
+  image: LuminowlImg,
   description:
     'A wise owl with feathers that emit a soothing light, guiding lost travelers.',
   size: 'Medium',

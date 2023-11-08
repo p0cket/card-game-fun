@@ -38,7 +38,6 @@ const Intro = ({ dispatch }) => {
   const contextualDispatch = useDispatchContext()
 
   const loadNextLevel = () => {
-    // #TODO: remove?
     console.log(`func: loadNextLevel()`)
     dispatch(setSceneAction())
     //
@@ -200,9 +199,11 @@ const Intro = ({ dispatch }) => {
           {/* <SparkleButton /> */}
           <ThemedButton text={`Options`} onClick={loadNextLevel} />
           <ThemedButton text={`Museum`} onClick={loadNextLevel} />
-          <div style={{ backgroundColor: 'gray', padding: '5px' }}>
-            <p className="text-3xl font-bold underline text-red-300">
-              Hello Tailwind World! Streak: {streak} longestStreak{' '}
+          {/* <div style={{ backgroundColor: 'gray', padding: '5px' }}> */}
+          <div className='bg-green-100 p-1'>
+
+            <p className=" font-bold text-green-800">
+              Streak: {streak} longestStreak{' '}
               {longestStreak}, (Last Played: {lastPlayedTime})
             </p>
           </div>

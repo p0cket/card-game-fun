@@ -136,16 +136,16 @@ export default function BattleTopDisplay() {
         </div>
         <div className="battleTLnext">
           {/* <span style={{ color: "gray" }}>Next: </span> */}
-          <span style={{ color: 'gray', fontSize: '12px' }}>
+          {/* <span style={{ color: 'gray', fontSize: '12px' }}>
             In 10{' '}
             <img
               src={`./icons/Seconds.png`}
               style={{ width: 20, height: 20 }}
               alt="Seconds Icon"
             />{' '}
-          </span>
-          {/* , will use */}:
-          <button
+          </span> */}
+          {/*  "will use". Similar to an `intent` system in Slay */}
+          {/* <button
             onClick={openAttackPopup}
             style={{
               backgroundColor: 'green',
@@ -155,7 +155,7 @@ export default function BattleTopDisplay() {
             }}
           >
             {moves[0].name}
-          </button>
+          </button> */}
           <div>
             Current Statuses are: {JSON.stringify(status)}
           </div>

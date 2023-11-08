@@ -33,18 +33,7 @@ function RenderIndAttack({
     // also turn off popup
     togglePopup()
 
-    // console.log('renderIndAttack->runMove():', move, user)
-    // console.log(
-    //   `renderIndAttack->runMove():
-    //   move,contextualState,contextualDispatch,user,ATK_PHASES.PAY,`,
-    //   move,
-    //   contextualState,
-    //   contextualDispatch,
-    //   user,
-    //   ATK_PHASES.PAY,
-    // )
-
-    const resultState = executeMove(
+    executeMove(
       move,
       contextualState,
       contextualDispatch,
@@ -53,35 +42,22 @@ function RenderIndAttack({
       // player, "human"
       // selectedTargets, [0]
     )
-    contextualDispatch({ payload: resultState, type: ACTIONS.UPDATEGAMEDATA })
-
-    //       const appliedCost is in cast
-    // if (castResult.success) {
-    //   const appliedEffect = applyEffect(castResult, move.effect)
-    //   const appliedDamage = applyDamage(appliedEffect, move.damage)
-    //   contextualDispatch(castResult.state, ACTIONS.UPDATEGAMEDATA)
-    // }
-    // or apply the results here:
-    // contextualDispatch(castResult.state, ACTIONS.UPDATEGAMEDATA)
-    // ------------------------------------
-    // const nextLevelState = updateLevel(nextSceneState, 1)
-    // contextualDispatch(nextLevelState, ACTIONS.UPDATEGAMEDATA)
   }
   const renderBasic = (move) => {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex' }}>
-          <div>
+          <div className='px-2'>
             {fuel}
             {energyEmoji}
           </div>
-          <div>S {speed}</div>
-          <div>{damage}</div>
-          <div>{type}</div>
+          <div className='px-2'>{speed}speed</div>
+          <div className='px-2'>{damage}dmg</div>
+          <div className='px-2'>type:{type}</div>
         </div>
-        <div>Effect: {effect.description}</div>
-        <div>Priority: {priority}</div>
-        <div>Targets: {targets.join(', ')}</div>
+        <div className='px-2'>Effect: {effect.description}</div>
+        <div className='px-2'>Priority: {priority}</div>
+        <div className='px-2'>Targets: {targets.join(', ')}</div>
         <button
           style={{
             backgroundColor: '#4b770e',
@@ -94,7 +70,6 @@ function RenderIndAttack({
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
           onClick={() =>
-            // runMove(attack, contextualState.userParty[Party.SLOT_1])
             runMove(attack, contextualState.userParty[0])
           }
         >
@@ -103,7 +78,6 @@ function RenderIndAttack({
       </div>
     )
   }
-
   const renderForceful = (move) => {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
