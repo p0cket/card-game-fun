@@ -1,5 +1,72 @@
-import { executeMove } from "../moveHandlers"
+import {
+  createPopupRemovedState,
+  createPopupVisibleState,
+} from '../dialog/basicDialogHandlers'
+import { ATK_PHASES, executeMove } from '../moveHandlers'
 
+// export const createAIDamagedState = (
+//   ourState,
+//   damagedHP,
+//   moveCost,
+//   move,
+//   user,
+//   contextualDispatch,
+// ) => {
+//   console.log(
+//     `entered createAIDamagedState:🙀 ourState, damagedHP, moveCost, move, user, contextualDispatch`,
+//     ourState,
+//     damagedHP,
+//     moveCost,
+//     move,
+//     user,
+//     contextualDispatch,
+//   )
+
+//   let resultState = {
+//     ...ourState,
+//     opponent: {
+//       ...ourState.opponent,
+//       monsters: [
+//         {
+//           ...ourState.opponent.monsters[0],
+//           stats: {
+//             ...ourState.opponent.monsters[0].stats,
+//             hp: damagedHP,
+//           },
+//         },
+//         ...ourState.opponent.monsters.slice(1),
+//       ],
+//     },
+//   }
+//   console.log(`resultState after damaged - is this undefined?:`, resultState)
+//   const otherState = createPopupVisibleState(
+//     resultState,
+//     `${moveCost} Damage Dealt.`,
+//     [
+//       {
+//         label: 'Confirm',
+//         onClick: () => {
+//           console.log(`confirm clicked:`)
+//           executeMove(
+//             move,
+//             resultState,
+//             contextualDispatch,
+//             user,
+//             ATK_PHASES.STATUSES, // phase,
+//           )
+//         },
+//       },
+//     ],
+//   )
+//   console.log(`resultState after createPopupVisibleState:`, otherState)
+
+//   contextualDispatch({
+//     payload: otherState,
+//     type: 'UPDATEGAMEDATA',
+//   })
+
+//   return otherState
+// }
 export const createAIDamagedState = (
   ourState,
   damagedHP,
@@ -9,16 +76,22 @@ export const createAIDamagedState = (
   contextualDispatch,
 ) => {
   console.log(
-    `ourState, damagedHP, moveCost, move, user, contextualDispatch`,
+    'Entered createAIDamagedState:',
+    'ourState:',
     ourState,
+    'damagedHP:',
     damagedHP,
+    'moveCost:',
     moveCost,
+    'move:',
     move,
+    'user:',
     user,
+    'contextualDispatch:',
     contextualDispatch,
   )
 
-  const resultState = {
+  let resultState = {
     ...ourState,
     opponent: {
       ...ourState.opponent,
@@ -33,80 +106,35 @@ export const createAIDamagedState = (
         ...ourState.opponent.monsters.slice(1),
       ],
     },
-    dialog: {
-      ...ourState.dialog,
-      isOpen: true,
-      message: `${moveCost} Damage Dealt.
-      ${user.name} uses ${move.name}`,
-      options: [
-        {
-          label: 'Confirm D',
-          onClick: () => {
-            console.log(`confirm clicked:`)
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
-            const closedPopupState = createPopupRemovedState(ourState)
-            executeMove(
-              move,
-              closedPopupState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.STATUSES, // phase,
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-        {
-          label: 'Enhance D',
-          onClick: () => {
-            console.log(`enhance clicked:`)
-            const closedPopupState = createPopupRemovedState(ourState)
-            executeMove(
-              move,
-              closedPopupState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.STATUSES, // phase,
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-        {
-          label: 'Enhance2',
-          onClick: () => {
-            const closedPopupState = createPopupRemovedState(ourState)
-            // const closedPopupState = {
-            //   ...ourState,
-            //   dialog: {
-            //     ...ourState.dialog,
-            //     isOpen: false,
-            //   },
-            // }
-            executeMove(
-              move,
-              closedPopupState,
-              contextualDispatch,
-              user, // user,
-              ATK_PHASES.STATUSES, // phase,
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-      ],
-      title: 'Pay Phase',
-      header: 'You can pay!',
-    },
   }
+  console.log('resultState after damaged:', resultState)
 
+  // const otherState = createPopupVisibleState({
+  //   prevState: resultState,
+  //   message: `${moveCost} Damage Dealt.`,
+  //   options: [
+  //     {
+  //       label: 'Confirm',
+  //       onClick: () => {
+  //         console.log('Confirm clicked')
+  //         executeMove(
+  //           move,
+  //           resultState,
+  //           contextualDispatch,
+  //           user,
+  //           ATK_PHASES.STATUSES,
+  //         )
+
+  //       },
+  //     },
+  //   ],
+  // })
+  console.log('resultState after createPopupVisibleState:', resultState)
   return resultState
 }
 
-
 export const createHumanDamagedState = (contextualState, damagedHP) => {
+  console.log(`createHumanDamagedState:`, damagedHP)
   const damagedState = {
     ...contextualState,
     userParty: [

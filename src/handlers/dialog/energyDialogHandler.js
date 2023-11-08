@@ -17,10 +17,7 @@ export const createNotEnoughEnergyDialogState = (ourState, ourDispatch) => {
           onClick: () => {
             const closedPopupState = createPopupRemovedState(ourState)
             console.log(closedPopupState)
-            return ourDispatch({
-              payload: closedPopupState,
-              type: ACTIONS.UPDATEGAMEDATA,
-            })
+            return closedPopupState
           },
           backgroundColor: '#4b770e',
           color: '#fff',

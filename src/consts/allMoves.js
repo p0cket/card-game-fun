@@ -12,19 +12,6 @@ export const SolarSpiritBlast = {
   priority: 'slow',
 }
 
-// export const QuickStrike = {
-//   name: 'Quick Strike',
-//   type: 'physical',
-//   damage: 25,
-//   speed: 7,
-//   energyCost: 3,
-//   effect: {
-//     description: 'High critical hit chance',
-//     chance: '50%',
-//     result: 'critical_hit',
-//   },
-//   priority: 'fast',
-// }
 export const QuickStrike = {
   name: 'Quick Strike',
   type: 'physical',

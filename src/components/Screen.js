@@ -1,5 +1,5 @@
 // different screens
-import React, { useEffect } from 'react'
+import React from 'react'
 // import { SCENES } from "../scenes";
 import { SCENES } from '../handlers/sceneHandlers_new'
 // All of our scenes are below

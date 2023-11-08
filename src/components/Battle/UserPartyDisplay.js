@@ -1,4 +1,5 @@
 import React from 'react'
+import Squirrely from './../../assets/creatures/Squirrely.png'
 
 const UserPartyDisplay = () => {
   // Placeholder data for party members (with made-up creature names)
@@ -6,32 +7,32 @@ const UserPartyDisplay = () => {
     {
       name: 'Sparklepaw',
       health: 80,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
     {
       name: 'Firebreath',
       health: 70,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
     {
       name: 'Leafywing',
       health: 90,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
     {
       name: 'Bubblesnout',
       health: 60,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
     {
       name: 'Aquaflare',
       health: 75,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
     {
       name: 'Aquaflare',
       health: 75,
-      image: './creatures/Squirrely.png',
+      image: Squirrely,
     },
   ]
 
@@ -64,7 +65,7 @@ const UserPartyDisplay = () => {
               }}
             />
             <div>
-              Health: {member.health}
+              HP: {member.health}
               <div
                 style={{
                   backgroundColor: 'green',
@@ -87,11 +88,11 @@ export default UserPartyDisplay
 // const UserPartyDisplay = () => {
 //   // Placeholder image URLs (you can replace these with actual image URLs)
 //   const placeholderImages = [
-//     './creatures/Squirrely.png',
-//     './creatures/Squirrely.png',
-//     './creatures/Squirrely.png',
-//     './creatures/Squirrely.png',
-//     './creatures/Squirrely.png',
+//     Squirrely,
+//     Squirrely,
+//     Squirrely,
+//     Squirrely,
+//     Squirrely,
 //   ];
 
 //   return (

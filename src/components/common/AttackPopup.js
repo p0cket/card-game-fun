@@ -6,6 +6,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
+    maxWidth: '90%',
     padding: '12px',
     margin: '8px 0',
     backgroundColor: '#fff',
