@@ -25,9 +25,10 @@
     "no-console": "off",
     "strict": ["error", "global"],
     "curly": "warn",
+    // "curly": ["warn", "multi-line", "consistent"],
     "semi": ["warn", "never"],
     "indent": "off",
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["warn", "always-multiline"],
  
     "space-before-function-paren": "off",
     "no-unused-vars": "off"

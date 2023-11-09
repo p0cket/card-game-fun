@@ -1,7 +1,10 @@
 import { ACTIONS } from '../../MainContext'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
-import { createAIDamagedState, createHumanDamagedState } from '../state/damageStateHandlers'
+import {
+  createAIDamagedState,
+  createHumanDamagedState,
+} from '../state/damageStateHandlers'
 
 let ourDmg
 let damagedHP
@@ -13,7 +16,9 @@ export const dmgPhase = (
   targetMonster,
   player,
 ) => {
-  console.group('💥 DAMAGE: start')
+  console.groupCollapsed('💥 DAMAGE: start')
+  console.log('Initial contextualState:', contextualState)
+
   console.log(
     `contextualState, contextualDispatch, user, move, targetMonster, player`,
     contextualState,
@@ -51,8 +56,11 @@ export const dmgPhase = (
       user,
       contextualDispatch,
     )
-    newState =  createPopupVisibleState({
+    console.log(`dmg after the createAIDamagedState:`, newState)
+
+    newState = createPopupVisibleState({
       prevState: newState,
+      title: `Successful Attack`,
       message: `${moveCost} Damage Dealt.`,
       options: [
         {
@@ -77,6 +85,7 @@ export const dmgPhase = (
     user.stats.hp = damagedHP
     console.log(`user's HP is now ${user.stats.hp}`)
     newState = createHumanDamagedState(contextualState, damagedHP)
+    console.log(`After createHumanDamagedState:`, newState)
   }
 
   //////----

@@ -125,57 +125,29 @@ function Map() {
       </div>
     )
   }
-
   // const testMapData = {
   //   levels: [
   //     {
+  //       nodes: [{ id: 'start', type: 'Start', leadsTo: ['battle1', 'shop1'] }],
+  //     },
+  //     {
   //       nodes: [
-  //         { type: 'Start', isCurrent: true, isVisited: false },
+  //         { id: 'battle1', type: 'Battle', leadsTo: ['rest1', 'event1'] },
+  //         { id: 'shop1', type: 'Shop', leadsTo: ['event1', 'mystery1'] },
   //       ],
   //     },
   //     {
   //       nodes: [
-  //         { type: 'Battle', isCurrent: false, isVisited: false },
-  //         { type: 'Shop', isCurrent: false, isVisited: false },
+  //         { id: 'rest1', type: 'Rest', leadsTo: ['boss'] },
+  //         { id: 'event1', type: 'Event', leadsTo: ['boss'] },
+  //         { id: 'mystery1', type: 'Mystery', leadsTo: ['boss'] },
   //       ],
   //     },
   //     {
-  //       nodes: [
-  //         { type: 'Rest', isCurrent: false, isVisited: false },
-  //         { type: 'Event', isCurrent: false, isVisited: false },
-  //         { type: 'Mystery', isCurrent: false, isVisited: false },
-  //       ],
-  //     },
-  //     {
-  //       nodes: [
-  //         { type: 'Boss', isCurrent: false, isVisited: false },
-  //       ],
+  //       nodes: [{ id: 'boss', type: 'Boss', leadsTo: [] }],
   //     },
   //   ],
-  // };
-  const testMapData = {
-    levels: [
-      {
-        nodes: [{ id: 'start', type: 'Start', leadsTo: ['battle1', 'shop1'] }],
-      },
-      {
-        nodes: [
-          { id: 'battle1', type: 'Battle', leadsTo: ['rest1', 'event1'] },
-          { id: 'shop1', type: 'Shop', leadsTo: ['event1', 'mystery1'] },
-        ],
-      },
-      {
-        nodes: [
-          { id: 'rest1', type: 'Rest', leadsTo: ['boss'] },
-          { id: 'event1', type: 'Event', leadsTo: ['boss'] },
-          { id: 'mystery1', type: 'Mystery', leadsTo: ['boss'] },
-        ],
-      },
-      {
-        nodes: [{ id: 'boss', type: 'Boss', leadsTo: [] }],
-      },
-    ],
-  }
+  // }
 
   const handleNodeClick = (node) => {
     console.log(`node clicked:`, node)
@@ -188,15 +160,14 @@ function Map() {
       {/* <h1 style={titleStyle}>New Map Component</h1> */}
       <div style={sectionStyle}>
         <div style={sectionStyle}>
-          <h2 style={headingStyle}>Map to the Elites</h2>
-          <p>Choose your path:</p>
+          <h2 style={headingStyle}>Map to the Elites: Choose your path</h2>
           {/* <MapComponent
             mapData={testMapData}
             currentLevel={0}
             onNodeClick={handleNodeClick}
           /> */}
 
-<LevelList levels={levels} />
+          <LevelList levels={levels} />
           <div className="flex flex-col">
             {' '}
             {/* you see a shadowy figure, you can feed it or not. "feed me"
@@ -250,7 +221,7 @@ function Map() {
           </button>
           <button style={buttonStyle}>Explore</button> */}
         </div>
-        <h2 style={headingStyle}>Prepare Your Party</h2>
+        <p style={headingStyle}> Party:</p>
         <div
           style={{
             display: 'flex',

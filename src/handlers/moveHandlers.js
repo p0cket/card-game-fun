@@ -2,7 +2,8 @@ import { ACTIONS } from '../MainContext'
 import { Party, opponent } from '../consts/party/parties'
 import { cusLog } from '../utils/debugging-utils'
 import { dmgPhase } from './attack/dmgPhase'
-import { effectsPhase } from './attack/effectsPhase'
+import { cleanupPhase } from './attack/effectsPhase'
+import { endPhase } from './attack/endPhase'
 import { payPhase } from './attack/payPhase'
 import { statusPhase } from './attack/statusPhase'
 // import { customLog } from '../utils/debugging-utils'
@@ -20,10 +21,12 @@ export const executeMove = (
   move,
   contextualState,
   contextualDispatch,
-  user, // maybe change to add the other aspects, destructure after
+  user, // maybe change to add the other aspects like which slot the user is in, destructure after
   phase,
   player = 'human', // player: AI , you, them
   selectedTargets = [0], // target/s: AI, you, them
+  origin = null, //ex:  {pal: user (replace user with pal?), palSlot: 0, trainerPlayer: human }
+  //or ex: {pal: luminowl, palSlot: 3, trainerPlayer: AI }
 ) => {
   console.log(
     `📢 executeMove called:
@@ -88,18 +91,28 @@ export const executeMove = (
         user,
         move,
       )
-      contextualDispatch({ payload: statusResult, type: ACTIONS.UPDATEGAMEDATA })
+      contextualDispatch({
+        payload: statusResult,
+        type: ACTIONS.UPDATEGAMEDATA,
+      })
       break
     case ATK_PHASES.EFFECTS:
-      effectsResult = effectsPhase()
-      contextualDispatch({ payload: effectsResult, type: ACTIONS.UPDATEGAMEDATA })
+      effectsResult = cleanupPhase(
+        contextualState,
+        contextualDispatch,
+        user,
+        move,
+      )
+      contextualDispatch({
+        payload: effectsResult,
+        type: ACTIONS.UPDATEGAMEDATA,
+      })
       break
     case ATK_PHASES.END:
       console.log(`ATK: end phase`)
-      endResult = "well man, do all the endResult stuff and then pass it in here"
+      endResult = endPhase(contextualState, contextualDispatch, user, move)
       contextualDispatch({ payload: endResult, type: ACTIONS.UPDATEGAMEDATA })
       break
-
     default:
       console.log(`ATK: default phase in switch reacted`)
       return contextualState

@@ -13,6 +13,11 @@ export function useStateContext() {
 }
 
 export function useDispatchContext() {
+  // const dispatch = useContext(dispatchContext)
+  // return function(action){
+  //   console.error(`dispatching check:`, action)
+  //   dispatch(action)
+  // }
   return useContext(dispatchContext)
 }
 
@@ -38,6 +43,7 @@ export const MainProvider = ({ children }) => {
     // console.log(`reducer HIT`, action.type, action)
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
+        
         return { ...state, ...action.payload }
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload }

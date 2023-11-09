@@ -19,6 +19,8 @@ function DialoguePopup(props) {
     if (button.onClick) {
       button.onClick()
     }
+
+    // Close the dialogue if it isn't already closed
     const closeDialogueState = {
       ...contextualState,
       dialog: {
@@ -26,10 +28,10 @@ function DialoguePopup(props) {
         isOpen: false,
       },
     }
-    contextualDispatch({
-      payload: closeDialogueState,
-      type: ACTIONS.UPDATEGAMEDATA,
-    })
+    // contextualDispatch({
+    //   payload: closeDialogueState,
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    // })
   }
 
   return trigger ? (
@@ -97,7 +99,7 @@ function DialoguePopup(props) {
           {contextualState.dialog.options.map((button, index) => (
             <button
               key={index}
-              onClick={() => closeDialogPopup(button)}
+              onClick={() => {closeDialogPopup(button)}}
               style={{
                 backgroundColor: button.backgroundColor || '#4b770e',
                 border: 'none',
