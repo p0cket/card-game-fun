@@ -4,69 +4,6 @@ import {
 } from '../dialog/basicDialogHandlers'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
-// export const createAIDamagedState = (
-//   ourState,
-//   damagedHP,
-//   moveCost,
-//   move,
-//   user,
-//   contextualDispatch,
-// ) => {
-//   console.log(
-//     `entered createAIDamagedState:🙀 ourState, damagedHP, moveCost, move, user, contextualDispatch`,
-//     ourState,
-//     damagedHP,
-//     moveCost,
-//     move,
-//     user,
-//     contextualDispatch,
-//   )
-
-//   let resultState = {
-//     ...ourState,
-//     opponent: {
-//       ...ourState.opponent,
-//       monsters: [
-//         {
-//           ...ourState.opponent.monsters[0],
-//           stats: {
-//             ...ourState.opponent.monsters[0].stats,
-//             hp: damagedHP,
-//           },
-//         },
-//         ...ourState.opponent.monsters.slice(1),
-//       ],
-//     },
-//   }
-//   console.log(`resultState after damaged - is this undefined?:`, resultState)
-//   const otherState = createPopupVisibleState(
-//     resultState,
-//     `${moveCost} Damage Dealt.`,
-//     [
-//       {
-//         label: 'Confirm',
-//         onClick: () => {
-//           console.log(`confirm clicked:`)
-//           executeMove(
-//             move,
-//             resultState,
-//             contextualDispatch,
-//             user,
-//             ATK_PHASES.STATUSES, // phase,
-//           )
-//         },
-//       },
-//     ],
-//   )
-//   console.log(`resultState after createPopupVisibleState:`, otherState)
-
-//   contextualDispatch({
-//     payload: otherState,
-//     type: 'UPDATEGAMEDATA',
-//   })
-
-//   return otherState
-// }
 export const createAIDamagedState = (
   ourState,
   damagedHP,
@@ -90,23 +27,27 @@ export const createAIDamagedState = (
     'contextualDispatch:',
     contextualDispatch,
   )
+  console.log('ourState.opponent.monsters[0]:', ourState.opponent.monsters[0])
 
   let resultState = {
     ...ourState,
     opponent: {
       ...ourState.opponent,
-      monsters: [
-        {
-          ...ourState.opponent.monsters[0],
-          stats: {
-            ...ourState.opponent.monsters[0].stats,
-            hp: damagedHP,
+      monsters: ourState.opponent.monsters.map((monster, index) => 
+        index === 0 ? {
+          ...monster,
+          obj: {
+            ...monster.obj,
+            stats: {
+              ...monster.obj.stats,
+              hp: damagedHP,
+            },
           },
-        },
-        ...ourState.opponent.monsters.slice(1),
-      ],
+        } : monster
+      ),
     },
-  }
+  };
+  
   console.log('resultState after damaged:', resultState)
 
   // const otherState = createPopupVisibleState({

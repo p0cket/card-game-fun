@@ -18,19 +18,6 @@ export const createCostPaidDialogState = (
           label: 'Confirm Pay',
           onClick: () => {
             console.log(`Clicked confirm pay`)
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
-
-            //close dialog maybe. add it in the other  side of the code,  not here
-            // const closedPopupState = {
-            //   ...ourState,
-            //   dialog: {
-            //     ...ourState.dialog,
-            //     isOpen: false,
-            //   },
-            // }
-
             executeMove(
               move,
               ourState,
