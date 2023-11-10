@@ -30,14 +30,12 @@ export function calculateDoesItLand(move) {
 }
 
 export function applyStatusEffect(contextualState, player, move) {
-  console.log('applyStatusEffect called')
+  console.log('applyStatusEffect: contextualState, player, move', contextualState, player, move)
   if (player === 'human') {
-    console.log('player is human')
-    console.log('calling updateStatusState with contextualState, player, and move.effect.result')
+    console.log(`'player === human', calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}`, player)
     return updateStatusState(contextualState, player, move.effect.result)
   } else if (player === 'AI') {
-    console.log('player is AI')
-    console.log('calling updateStatusState with contextualState, player, and move.effect.result')
+    console.log(`'player === AI' ,calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}'`, player)
     return updateStatusState(contextualState, player, move.effect.result)
   }
 }

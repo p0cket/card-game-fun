@@ -3,7 +3,6 @@ import { energyEmoji } from '../../consts/consts'
 import {
   ATK_PHASES,
   executeMove,
-  handlePlayerMoveSelection,
 } from '../../handlers/moveHandlers'
 import { ACTIONS } from '../../MainContext'
 import { Party } from '../../consts/party/parties'

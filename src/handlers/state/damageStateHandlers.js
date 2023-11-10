@@ -1,6 +1,6 @@
 import {
   createPopupRemovedState,
-  createPopupVisibleState,
+  // createPopupVisibleState,
 } from '../dialog/basicDialogHandlers'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
@@ -70,7 +70,7 @@ export const createAIDamagedState = (
   //     },
   //   ],
   // })
-  console.log('resultState after createPopupVisibleState:', resultState)
+  // console.log('resultState after createPopupVisibleState:', resultState)
   return resultState
 }
 

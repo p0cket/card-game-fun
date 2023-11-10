@@ -5,13 +5,6 @@ import {
 } from '../../utils/battle-utils'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
-// import { createStatusEffectDialogState } from '../dialog/basicDialogHandlers'
-import {
-  createStatusAppliedDialogState,
-  createStatusNotAppliedDialogState,
-} from '../state/statusStateHandlers'
-
-
 
 export const statusPhase = (
   contextualState,
@@ -23,6 +16,7 @@ export const statusPhase = (
   damagedHP,
 ) => {
   console.group(`😵‍💫 STATUS: start`)
+  // console.trace('Trace at the start of statusPhase');
   let doesItLand = calculateDoesItLand(move)
   let newState = contextualState
 
@@ -30,6 +24,8 @@ export const statusPhase = (
     {
       label: `ok, cool thing`,
       onClick: () => {
+        console.log('statusOptions onClick: start')
+      
         console.log(`Clicked status did land`)
         //doesn't need to return anything because it runs again
         executeMove(
@@ -39,6 +35,8 @@ export const statusPhase = (
           user,
           ATK_PHASES.EFFECTS, // phase,
         )
+          // ... rest of the function body here...
+          console.log('statusOptions onClick: end')
       },
       backgroundColor: '#4b770e',
       color: '#fff',
@@ -62,11 +60,12 @@ export const statusPhase = (
       color: '#fff',
     },
   ]
-  
   const statusNotLandOptions = [
     {
       label: `sad, not cool thing`,
       onClick: () => {
+        console.log('statusNotLandOptions onClick: start')
+
         console.log(`Clicked status not land`)
         //doesn't need to return anything because it runs again
         executeMove(
@@ -76,6 +75,7 @@ export const statusPhase = (
           user,
           ATK_PHASES.EFFECTS, // phase,
         )
+          console.log('statusNotLandOptions onClick: end')
       },
       backgroundColor: '#4b770e',
       color: '#fff',
@@ -84,8 +84,9 @@ export const statusPhase = (
 
   if (doesItLand) {
     console.log(`effect lands`)
+    
     newState = applyStatusEffect(newState, player, move)
-    // newState = createStatusEffectDialogState(newState, `Status of ${move.effect.result} lands`)
+    console.log('Before calling createPopupVisibleState, contextualState:', contextualState);
 
     newState = createPopupVisibleState({
       prevState: newState,
@@ -95,19 +96,9 @@ export const statusPhase = (
       header: `ok, cool thing`,
       title: 'status applied',
     })
+    // console.trace('Trace after first call to createPopupVisibleState in statusPhase');
 
-    // newState = createStatusAppliedDialogState(
-    //   newState,
-    //   contextualDispatch,
-    //   move,
-    //   user,
-    // )
 
-    // Assign the button actions
-    // newState.dialog.buttons[0].onClick = () =>
-    //   handleOkButton(newState, move, contextualDispatch, user)
-    // newState.dialog.buttons[1].onClick = () =>
-    //   handleNotSoFastButton(newState, move, contextualDispatch, user)
 
     console.groupEnd()
     return contextualDispatch({
@@ -117,6 +108,8 @@ export const statusPhase = (
   } else {
     // Handle the case where the effect does not land
     console.log(`effect did not land`)
+    console.log('Before calling createPopupVisibleState, contextualState on did not land:', contextualState);
+
     newState = createPopupVisibleState({
       prevState: newState,
       message: `${move?.effect?.result} did not land.
@@ -125,12 +118,8 @@ export const statusPhase = (
       header: `oh no, cool thing`,
       title: 'status not applied',
     })
-    // newState = createStatusNotAppliedDialogState(
-    //   newState,
-    //   contextualDispatch,
-    //   move,
-    //   user,
-    // )
+    // console.trace('Trace after second call to createPopupVisibleState in statusPhase');
+
 
     console.log(`statusPhase: ending, newState`, newState)
     console.groupEnd()
@@ -140,197 +129,3 @@ export const statusPhase = (
     })
   }
 }
-
-// import { ACTIONS } from '../../MainContext'
-// import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
-// import { ATK_PHASES, executeMove } from '../moveHandlers'
-
-// let doesItLand
-// let newState
-
-// export const statusPhase = (
-//   contextualState,
-//   contextualDispatch,
-//   user,
-//   move,
-//   targetMonster,
-//   player,
-//   damagedHP,
-// ) => {
-//   console.group(`😵‍💫 STATUS: start`)
-//   console.log(
-//     `ATK STATUSES: apply statuses resolve phase.
-//   Here is   contextualState,
-//   contextualDispatch,
-//   user,
-//   move,
-//   targetMonster,
-//   player,
-//   damagedHP,`,
-//     contextualState,
-//     contextualDispatch,
-//     user,
-//     move,
-//     targetMonster,
-//     player,
-//     damagedHP,
-//   )
-//   console.log(`move.effect is ${move.effect.result}`, `move`, move)
-
-//   // 3. resolve effect?
-//   doesItLand = Math.random() <= parseFloat(move.effect.chance) / 100
-//   console.log(
-//     `doesItLand is ${doesItLand}. the move.effect.chance is ${move.effect.chance}`,
-//   )
-//   let effectResultState = null
-//   if (doesItLand) {
-//     console.log(`effect lands`)
-//     if (player === 'human') {
-//       // targetMonster.stats.status = move.effect.result
-//       // console.log(`AI's HP is now ${move.effect.result}`)
-//       // newState = {
-//       //   ...contextualState,
-//       //   opponent: {
-//       //     ...contextualState.opponent,
-//       //     monsters: [
-//       //       {
-//       //         ...contextualState.opponent.monsters[0],
-//       //         stats: {
-//       //           ...contextualState.opponent.monsters[0].stats,
-//       //           status: damagedHP,
-//       //         },
-//       //       },
-//       //       ...contextualState.opponent.monsters.slice(1),
-//       //     ],
-//       //   },
-//       //   dialog: {
-//       //     ...newState.dialog,
-//       //     isOpen: true,
-//       //     message: `${move.effect.result} lands successfully!`,
-//       //     title: `${move.effect.result} lands`,
-//       //     header: `${move.effect.result} landed`,
-//       //     buttons: [
-//       //       {
-//       //         label: 'OK',
-//       //         onClick: () => {
-//       //           // replace here with our function create
-//       //           // Here will be actual new logic for ok
-//       //           // continuing on with the new status
-//       //           const closedPopupState =
-//       //             createPopupRemovedState(effectResultState)
-//       //           executeMove(
-//       //             move,
-//       //             closedPopupState,
-//       //             contextualDispatch,
-//       //             user,
-//       //             ATK_PHASES.EFFECTS, // phase,
-//       //           )
-//       //         },
-//       //         backgroundColor: '#4b770e',
-//       //         color: '#fff',
-//       //       },
-//       //       {
-//       //         label: 'Not So Fast',
-//       //         onClick: () => {
-//       //           //replace here with our function create
-//       //           // Here will be actual new logic for not so fast
-//       //           const closedPopupState =
-//       //             createPopupRemovedState(effectResultState)
-//       //           executeMove(
-//       //             move,
-//       //             closedPopupState,
-//       //             contextualDispatch,
-//       //             user,
-//       //             ATK_PHASES.EFFECTS, // phase,
-//       //           )
-//       //         },
-//       //         backgroundColor: '#4b770e',
-//       //         color: '#fff',
-//       //       },
-//       //     ],
-//       //   },
-//       // }
-//     } else if (player === 'AI') {
-//       user.stats.status = move.effect.result
-//       // console.log(`user's status is now ${user.stats.status}`)
-//       // newState = {
-//       //   ...contextualState,
-//       //   userParty: [
-//       //     {
-//       //       ...contextualState.userParty[0],
-//       //       stats: {
-//       //         ...contextualState.userParty[0].stats,
-//       //         status: damagedHP,
-//       //       },
-//       //     },
-//       //     ...contextualState.userParty.slice(1),
-//       //   ],
-//       // }
-//     }
-//     //
-//     // Dialogue: ___ lands
-//     // Dialogue: ___ is taking x poison damage (or any other effect)
-//     console.log(`STATUSES: ending - effect landed, returning effectResultState`, effectResultState)
-//     console.groupEnd()
-//     return effectResultState = {
-//       // ...contextualState,
-//       // dialog: {
-//       //   ...contextualState.dialog,
-//       //   isOpen: true,
-//       //   message: `${move.effect.result} lands successfully!`,
-//       //   title: `${move.effect.result} lands`,
-//       //   header: `${move.effect.result} landed`,
-//       //   buttons: [
-//       //     {
-//       //       label: 'OK',
-//       //       onClick: () => {
-//       //         //replace here with our function create
-//       //         // Here will be actual new logic for ok
-//       //         // continuing on with the new status
-//       //         effectResultState = {
-//       //           ...effectResultState,
-//       //         }
-
-//       //         const closedPopupState =
-//       //           createPopupRemovedState(effectResultState)
-//       //         executeMove(
-//       //           move,
-//       //           closedPopupState,
-//       //           contextualDispatch,
-//       //           user,
-//       //           ATK_PHASES.EFFECTS, // phase,
-//       //         )
-//       //       },
-//       //       backgroundColor: '#4b770e',
-//       //       color: '#fff',
-//       //     },
-//       //     {
-//       //       label: 'Not So Fast',
-//       //       onClick: () => {
-//       //         //replace here with our function create
-//       //         // Here will be actual new logic for not so fast
-//       //         const closedPopupState =
-//       //           createPopupRemovedState(effectResultState)
-//       //         executeMove(
-//       //           move,
-//       //           closedPopupState,
-//       //           contextualDispatch,
-//       //           user,
-//       //           ATK_PHASES.EFFECTS, // phase,
-//       //         )
-//       //       },
-//       //       backgroundColor: '#4b770e',
-//       //       color: '#fff',
-//       //     },
-//       //   ],
-//       // },
-//     }
-//   } else {
-//     console.log(`STATUSES: ending - effect did not land, returning effectResultState`, effectResultState)
-//     console.groupEnd()
-//     return effectResultState = {
-//       //but with did not land
-//     }
-//   }
-
-// }

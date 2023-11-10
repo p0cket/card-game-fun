@@ -13,12 +13,12 @@ export function useStateContext() {
 }
 
 export function useDispatchContext() {
-  // const dispatch = useContext(dispatchContext)
-  // return function(action){
-  //   console.error(`dispatching check:`, action)
-  //   dispatch(action)
-  // }
-  return useContext(dispatchContext)
+  const dispatch = useContext(dispatchContext)
+  return function(action){
+    console.error(`dispatching check:`, action)
+    dispatch(action)
+  }
+  // return useContext(dispatchContext)
 }
 
 export const ACTIONS = {
