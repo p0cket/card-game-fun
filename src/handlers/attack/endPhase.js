@@ -12,9 +12,10 @@ export const endPhase = (move, ourState, contextualDispatch, user, phase) => {
   )
   let newState = ourState
 
+
   // const switchTurns
 
-  newState = createPopupRemovedState(newState) 
+  // newState = createPopupRemovedState(newState) 
 
 console.log(`END: phase ending. newState`, newState)
   return newState

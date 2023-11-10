@@ -28,6 +28,7 @@ export const executeMove = (
   origin = null, //ex:  {pal: user (replace user with pal?), palSlot: 0, trainerPlayer: human }
   //or ex: {pal: luminowl, palSlot: 3, trainerPlayer: AI }
 ) => {
+  console.log('executeMove: start')
   console.log(
     `📢 executeMove called:
   move,
@@ -117,19 +118,12 @@ export const executeMove = (
       console.log(`ATK: default phase in switch reacted`)
       return contextualState
   }
-
-  // Check for target's fainting (if HP drops to 0 or below)
-  //this kinda happens all the time.
   // Always. check death
   if (targetMonster.stats.hp <= 0) {
     // Implement logic for the target monster fainting (e.g., switch to the next monster)
     // Handle any other relevant logic like gaining experience, etc.
   }
-
-  // 7. Change turns (Probably happens after this function)
-  // inititeOpponentTurn()
-
-  // Return relevant data about the move's execution
+  console.log('executeMove: end')
   return {
     ...contextualState,
     opponent: {
@@ -141,17 +135,45 @@ export const executeMove = (
     },
   }
 }
-export const handlePlayerMoveSelection = (move, state, dispatch) => {
-  // Implement logic for selecting a move by the player
-  // const user = state.userParty[Party.SLOT_1] // Get the user's party
-  const user = state.userParty[0] // Get the user's party
 
-  const target = state.opponent.monsters[0] // Get the opponent's party
-  // const target = state.opponent; // Get the opponent's party
-  const result = executeMove(move, user, target) // Execute the selected move
-  // Handle the move's result (e.g., update UI, check for win/loss conditions)
-  return result
+export const executeAITurn = (state, dispatch, user) => {
+  // Implement logic for the AI's turn
+  // Your AI logic here to choose a move
+  const details = null
+  const move = determineAIMove(user, state, details)
+  const result = executeMove(move, state, dispatch, user, ATK_PHASES.PAY, 'AI', [0], null)
+  // return result
+  // return { ...state, opponent: { ...state.opponent, monsters: [monster, ...state.opponent.monsters] } 
 }
+
+export const determineAIMove = (user, state, details) => {
+  console.log(`user, state, details`, user, state, details)
+  // Implement AI logic to determine a move
+  // Your AI logic here to choose a move rnadomly
+  // but start with only the first move
+  // const move = //state.opponent.monsters[0];
+  // return move
+}
+
+// export const handlePlayerMoveSelection = (move, state, dispatch) => {
+//   // Implement logic for selecting a move by the player
+//   // const user = state.userParty[Party.SLOT_1] // Get the user's party
+//   const user = state.userParty[0] // Get the user's party
+
+//   const target = state.opponent.monsters[0] // Get the opponent's party
+//   // const target = state.opponent; // Get the opponent's party
+//   const result = executeMove(move, user, target) // Execute the selected move
+//   // Handle the move's result (e.g., update UI, check for win/loss conditions)
+//   return result
+// }
+// export const handlePlayerMoveSelection = (move, state, dispatch) => {
+//   const user = state.userParty[0];
+//   const target = state.opponent.monsters[0];
+//   const result = executeMove(move, state, dispatch, user, null, 'human', [0], null);
+//   return result;
+// }
+
+
 export const handleOpponentMoveSelection = (state, dispatch) => {
   // Implement logic for selecting a move by the opponent
   const user = state.opponent // Get the opponent's party

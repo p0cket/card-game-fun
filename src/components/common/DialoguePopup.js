@@ -28,10 +28,6 @@ function DialoguePopup(props) {
         isOpen: false,
       },
     }
-    // contextualDispatch({
-    //   payload: closeDialogueState,
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    // })
   }
 
   return trigger ? (
