@@ -85,18 +85,15 @@ export const createPopupVisibleState = ({
   color = '#000',
   background = '#fff',
 }) => {
-  console.trace('createPopupVisibleState')
-  console.log('Entered createPopupVisibleState')
-  console.log('prevState:', prevState)
-  console.log('message:', message)
-  // console.log('options:', options)
-  console.log('header:', header)
-  console.log('title:', title)
-  console.log('color:', color)
-  console.log('background:', background)
-  console.log('Entered createPopupVisibleState')
-  console.log('prevState:', prevState)
   // console.trace('createPopupVisibleState trace')
+  console.log('Entered createPopupVisibleState', {
+    prevState,
+    message,
+    header,
+    title,
+    color,
+    background,
+  })
   if (!prevState) {
     console.error('createPopupVisibleState called with undefined prevState')
     return // Handle the error as needed
@@ -185,6 +182,5 @@ export function populateButton(
     color: '#fff',
   }
 }
-
 
 //
