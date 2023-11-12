@@ -37,13 +37,6 @@ export const cleanupPhase = (
       color: '#fff',
     },
   ]
-
-  // nextState = createCleanupDialogState(
-  //   nextState,
-  //   contextualDispatch,
-  //   user,
-  //   move,
-  // )
   nextState = createPopupVisibleState({
     prevState: nextState,
     message: `cleaning up..

@@ -25,10 +25,18 @@ export const executeMove = (
   phase,
   player = 'human', // player: AI , you, them
   selectedTargets = [0], // target/s: AI, you, them
-  origin = null, //ex:  {pal: user (replace user with pal?), palSlot: 0, trainerPlayer: human }
-  //or ex: {pal: luminowl, palSlot: 3, trainerPlayer: AI }
+  details = {}, // ex: {pal: luminowl, palSlot: 3, trainerPlayer: AI,
+  // targets: [0,1,2], origin: {pal: user, palSlot: 0, trainerPlayer: human}}
+  // does each target obj need to have {pal, palSlot, trainerPlayer}?
+    // origin = null, //ex:  {pal: user (replace user with pal?), palSlot: 0, trainerPlayer: human }
+    // {
+    //   user: user,
+    //   userslot: 0,
+    //   move: move,
+    //   targets: [0],
+    //   trainerType: 'human',
+    // },
 ) => {
-  console.log('executeMove: start')
   console.log(
     `📢 executeMove called:
   move,
@@ -37,26 +45,9 @@ export const executeMove = (
   user,
   phase,
   player = 'human',
-  selectedTargets = [0]`,
-    move,
-    contextualState,
-    contextualDispatch,
-    user,
-    phase,
-    player,
-    selectedTargets,
-  )
-  let targetMonster = null,
-    moveCost,
-    playerEnergy,
-    ourDmg,
-    damagedHP,
-    doesItLand,
-    payResult,
-    dmgResult,
-    statusResult,
-    effectsResult,
-    endResult
+  selectedTargets = [0]`,move,contextualState,contextualDispatch,user, phase,player,selectedTargets)
+  let targetMonster = null,moveCost,playerEnergy,ourDmg,damagedHP,
+    doesItLand,payResult,dmgResult,statusResult,effectsResult,endResult
   // user is the user
   if (player === 'human') {
     targetMonster = contextualState.opponent.monsters[0].obj
@@ -65,9 +56,20 @@ export const executeMove = (
   } else {
     console.error('executeMove: Player of attack not recognized')
   }
+
   // this is a function that gets called many times.at each point, we need do a phase and then present to the player a dialog to decide what to do nextthe dialog has everything needed to run the function yet again, this continues until the full attack resolves
 
-  // TODO: Finish this function
+  /**
+   * Check what phase the attack is in. For each phase, we call a dedicated function.
+   * - payPhase: Manages the payment phase, determining if the player can afford the move.
+   * - dmgPhase: Handles the damage calculation and application to the target.
+   * - statusPhase: Manages the application of status effects from the move.
+   * - cleanupPhase: Handles any cleanup or lingering effects post-attack.
+   * - endPhase: Concludes the attack phase and prepares for the next game state.
+   *
+   *  checks if the target monster's HP is 0 or less, indicating it has fainted.
+   *
+   */
   switch (phase) {
     case ATK_PHASES.PAY:
       payResult = payPhase(contextualState, contextualDispatch, move, user)
@@ -136,22 +138,34 @@ export const executeMove = (
   }
 }
 
-export const executeAITurn = (state, dispatch, user) => {
+export const executeAITurn = (state, dispatch, user, deets = null) => {
   // Implement logic for the AI's turn
   // Your AI logic here to choose a move
-  const details = null
-  const move = determineAIMove(user, state, details)
-  const result = executeMove(move, state, dispatch, user, ATK_PHASES.PAY, 'AI', [0], null)
-  // return result
-  // return { ...state, opponent: { ...state.opponent, monsters: [monster, ...state.opponent.monsters] } 
+  console.log(`executeAITurn: state, dispatch, user`, state, dispatch, user)
+  const move = determineAIMove(user, state, deets)
+  const result = executeMove(
+    move,
+    state,
+    dispatch,
+    user,
+    ATK_PHASES.PAY,
+    'AI',
+    [0],
+    null,
+  )
+  return result
+  // return { ...state, opponent: { ...state.opponent, monsters: [monster, ...state.opponent.monsters] }
 }
 
-export const determineAIMove = (user, state, details) => {
-  console.log(`user, state, details`, user, state, details)
+export const determineAIMove = (state, details, user, deets = null) => {
+  console.log(`determineAIMove: user, state, details`, user, state, deets)
+  const result = state.opponent.monsters[0].moves[0]
+
   // Implement AI logic to determine a move
   // Your AI logic here to choose a move rnadomly
   // but start with only the first move
   // const move = //state.opponent.monsters[0];
+  return result
   // return move
 }
 
@@ -172,7 +186,6 @@ export const determineAIMove = (user, state, details) => {
 //   const result = executeMove(move, state, dispatch, user, null, 'human', [0], null);
 //   return result;
 // }
-
 
 export const handleOpponentMoveSelection = (state, dispatch) => {
   // Implement logic for selecting a move by the opponent

@@ -84,10 +84,8 @@ export const statusPhase = (
 
   if (doesItLand) {
     console.log(`effect lands`)
-    
     newState = applyStatusEffect(newState, player, move)
-    console.log('Before calling createPopupVisibleState, contextualState:', contextualState);
-
+    console.log('b4 calling createPopupVisibleState, contextualState:', contextualState);
     newState = createPopupVisibleState({
       prevState: newState,
       message: `${move?.effect?.result} applied.
@@ -97,19 +95,15 @@ export const statusPhase = (
       title: 'status applied',
     })
     // console.trace('Trace after first call to createPopupVisibleState in statusPhase');
-
-
-
     console.groupEnd()
-    return contextualDispatch({
-      payload: newState,
-      type: ACTIONS.UPDATEGAMEDATA,
-    })
+    // return contextualDispatch({
+    //   payload: newState,
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    // })
+    return newState
   } else {
     // Handle the case where the effect does not land
-    console.log(`effect did not land`)
-    console.log('Before calling createPopupVisibleState, contextualState on did not land:', contextualState);
-
+    console.log(`effect did not land. statusPhase: b4 calling createPopupVisibleState, contextualState on did not land:', contextualState`)
     newState = createPopupVisibleState({
       prevState: newState,
       message: `${move?.effect?.result} did not land.
@@ -123,9 +117,10 @@ export const statusPhase = (
 
     console.log(`statusPhase: ending, newState`, newState)
     console.groupEnd()
-    return contextualDispatch({
-      payload: newState, // No update if effect did not land
-      type: ACTIONS.UPDATEGAMEDATA,
-    })
+    // return contextualDispatch({
+    //   payload: newState, // No update if effect did not land
+    //   type: ACTIONS.UPDATEGAMEDATA,
+    // })
+    return newState
   }
 }

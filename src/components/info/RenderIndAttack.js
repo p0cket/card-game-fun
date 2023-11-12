@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
-import {
-  ATK_PHASES,
-  executeMove,
-} from '../../handlers/moveHandlers'
+import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import { ACTIONS } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 
@@ -38,25 +35,33 @@ function RenderIndAttack({
       contextualDispatch,
       user,
       ATK_PHASES.PAY,
-      // player, "human"
-      // selectedTargets, [0]
+      'human',
+      [0],
+      // You used Move on this (what other details)
+      {
+        user: user,
+        userslot: 0,
+        move: move,
+        targets: [0],
+        trainerType: 'human',
+      },
     )
   }
   const renderBasic = (move) => {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex' }}>
-          <div className='px-2'>
+          <div className="px-2">
             {fuel}
             {energyEmoji}
           </div>
-          <div className='px-2'>{speed}speed</div>
-          <div className='px-2'>{damage}dmg</div>
-          <div className='px-2'>type:{type}</div>
+          <div className="px-2">{speed}speed</div>
+          <div className="px-2">{damage}dmg</div>
+          <div className="px-2">type:{type}</div>
         </div>
-        <div className='px-2'>Effect: {effect.description}</div>
-        <div className='px-2'>Priority: {priority}</div>
-        <div className='px-2'>Targets: {targets.join(', ')}</div>
+        <div className="px-2">Effect: {effect.description}</div>
+        <div className="px-2">Priority: {priority}</div>
+        <div className="px-2">Targets: {targets.join(', ')}</div>
         <button
           style={{
             backgroundColor: '#4b770e',
@@ -68,9 +73,7 @@ function RenderIndAttack({
             borderRadius: '4px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
-          onClick={() =>
-            runMove(attack, contextualState.userParty[0])
-          }
+          onClick={() => runMove(attack, contextualState.userParty[0])}
         >
           Use
         </button>
