@@ -1,29 +1,53 @@
-import { ATK_PHASES, executeMove } from "../moveHandlers"
+import { ATK_PHASES, executeMove } from '../moveHandlers'
 
 export const createCostPaidDialogState = (
   ourState,
   contextualDispatch,
   move,
-  user,
+  pal,
+  player,
+  targets,
 ) => {
+  console.groupCollapsed(
+    `createCostPaidDialogState called:`,
+    ourState,
+    contextualDispatch,
+    move,
+    pal,
+    player,
+    targets,
+  )
   const paidState = {
     ...ourState,
     dialog: {
       ...ourState.dialog,
       isOpen: true,
       message: `${move.cost.energy} Energy paid.
-      ${user.name} uses ${move.name}`,
+      ${pal.name} uses ${move.name}`,
       options: [
         {
           label: 'Confirm Pay',
           onClick: () => {
             console.log(`Clicked confirm pay`)
             executeMove(
-              move,
-              ourState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.DAMAGE, // phase,
+              // move,
+              // ourState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.DAMAGE,
+              {
+                state: ourState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',
@@ -45,11 +69,24 @@ export const createCostPaidDialogState = (
             // -maybe just use the same executeMove
             // the button should change phase
             executeMove(
-              move,
-              closedPopupState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.DAMAGE, // phase,
+              // move,
+              // closedPopupState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.DAMAGE,
+              {
+                state: closedPopupState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',
@@ -71,12 +108,25 @@ export const createCostPaidDialogState = (
             // -maybe just use the same executeMove
             // the button should change phase
             executeMove(
-              move, // move,
-              // ourState, // contextualState,
-              closedPopupState,
-              contextualDispatch, // contextualDispatch,
-              user, // user,
-              ATK_PHASES.DAMAGE, // phase,
+              // move,
+              // // ourState,
+              // closedPopupState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.DAMAGE,
+              {
+                state: closedPopupState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',
@@ -87,20 +137,31 @@ export const createCostPaidDialogState = (
       header: 'You can pay!',
     },
   }
+  console.log(`createCostPaidDialogState returning:`, paidState)
+  console.groupEnd()
   return paidState
 }
 
-
-export const createUserEnergyPaidState = (resultingEnergy, ourState) => {
+export const createUserEnergyPaidState = (
+  playerEnergyAfterPayment,
+  ourState,
+) => {
+  console.groupCollapsed(
+    `createUserEnergyPaidState called:`,
+    playerEnergyAfterPayment,
+    ourState,
+  )
   const energyPaidState = {
     ...ourState,
     game: {
       ...ourState.game,
       player: {
         ...ourState.game.player,
-        energy: resultingEnergy,
+        energy: playerEnergyAfterPayment,
       },
     },
   }
+  console.log(`createUserEnergyPaidState returning:`, energyPaidState)
+  console.groupEnd()
   return energyPaidState
 }

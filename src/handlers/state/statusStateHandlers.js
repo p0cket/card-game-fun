@@ -73,8 +73,13 @@ export const applyParalysis = (target, effectValue) => {
 // ... }
 // in status is where we should store the status if it is applied
 // to the monster. so like status: {test: true, poison: {active: true, damage: 10}} etc.
-export const updateStatusState = (contextualState, player, statusResult) => {
-  console.log('Updating status state')
+export const updateStatusState = (contextualState, player, statusResult, statusValue = true) => {
+  console.log(
+    'updateStatusState: contextualState, player, statusResult',
+    contextualState,
+    player,
+    statusResult,
+  )
   if (player === 'human') {
     console.log('Updating opponent monster status')
     return {
@@ -87,7 +92,7 @@ export const updateStatusState = (contextualState, player, statusResult) => {
             console.log('Updating status for opponent monster at index 0')
             return {
               ...monster,
-              stats: { ...monster.stats, status: statusResult },
+              status: { ...monster.status, [statusResult]: statusValue },
             }
           } else {
             return monster
@@ -96,16 +101,16 @@ export const updateStatusState = (contextualState, player, statusResult) => {
       },
     }
   } else if (player === 'AI') {
-    console.log('Updating user party monster status')
+    console.log('Updating userParty monster status')
     return {
       ...contextualState,
       userParty: contextualState.userParty.map((monster, index) => {
-        console.log(`Checking user party monster at index ${index}`)
+        console.log(`Checking userParty monster at index ${index}`)
         if (index === 0) {
-          console.log('Updating status for user party monster at index 0')
+          console.log('Updating status for userParty monster at index 0')
           return {
             ...monster,
-            stats: { ...monster.stats, status: statusResult },
+            status: { ...monster.status, [statusResult]: statusValue },
           }
         } else {
           return monster
@@ -113,7 +118,7 @@ export const updateStatusState = (contextualState, player, statusResult) => {
       }),
     }
   }
-  console.log('Returning contextual state')
+  console.log('updateStatusState: went too far: Returning contextual state')
   return contextualState // In case player is neither 'human' nor 'AI'
 }
 
@@ -121,15 +126,15 @@ export const createStatusAppliedDialogState = (
   ourState,
   contextualDispatch,
   move,
-  user,
+  pal,
 ) => {
   console.log(
     `createStatusAppliedDialogState called:
-   ourState, contextualDispatch, move, user`,
+   ourState, contextualDispatch, move, pal`,
     ourState,
     contextualDispatch,
     move,
-    user,
+    pal,
   )
   const paidState = {
     ...ourState,
@@ -137,7 +142,7 @@ export const createStatusAppliedDialogState = (
       ...ourState.dialog,
       isOpen: true,
       message: `${move?.effect?.result} applied.
-      ${user.name} ${move?.effect?.result}'d the opponent`,
+      ${pal.name} ${move?.effect?.result}'d the opponent`,
       options: [
         {
           label: `ok, cool thing`,
@@ -145,11 +150,24 @@ export const createStatusAppliedDialogState = (
             console.log(`Clicked confirm pay`)
             //doesn't need to return anything because it runs again
             executeMove(
-              move,
-              ourState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.EFFECTS, // phase,
+              // move,
+              // ourState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.EFFECTS, // phase,
+              {
+                state: ourState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.EFFECTS,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',
@@ -184,15 +202,15 @@ export const createStatusNotAppliedDialogState = (
   ourState,
   contextualDispatch,
   move,
-  user,
+  pal,
 ) => {
   console.log(
     `createStatusNotAppliedDialogState called:
-   ourState, contextualDispatch, move, user`,
+   ourState, contextualDispatch, move, pal`,
     ourState,
     contextualDispatch,
     move,
-    user,
+    pal,
     ourState.dialog,
   )
 
@@ -202,7 +220,7 @@ export const createStatusNotAppliedDialogState = (
       ...ourState.dialog,
       isOpen: true,
       message: `${move?.effect?.result} NOT applied.
-      ${user.name} failed to ${move?.effect?.result} the opponent`,
+      ${pal.name} failed to ${move?.effect?.result} the opponent`,
       options: [
         {
           label: `oh no, cool thing`,
@@ -210,11 +228,24 @@ export const createStatusNotAppliedDialogState = (
             console.log(`Clicked confirm 'oh no' in effect not applied`)
             //doesn't need to return anything because it runs again
             executeMove(
-              move,
-              ourState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.EFFECTS, 
+              // move,
+              // ourState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.EFFECTS,
+              {
+                state: ourState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.EFFECTS,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',
@@ -250,15 +281,15 @@ export const createCleanupDialogState = (
   ourState,
   contextualDispatch,
   move,
-  user,
+  pal,
 ) => {
   console.log(
     `createCleanupDialogState called:
-   ourState, contextualDispatch, move, user`,
+   ourState, contextualDispatch, move, pal`,
     ourState,
     contextualDispatch,
     move,
-    user,
+    pal,
     ourState.dialog,
   )
 
@@ -275,11 +306,24 @@ export const createCleanupDialogState = (
             console.log(`Clicked confirm 'go to end' in effect not applied`)
             //doesn't need to return anything because it runs again
             executeMove(
-              move,
-              ourState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.END, 
+              // move,
+              // ourState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.END,
+              {
+                state: ourState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.END,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
           backgroundColor: '#4b770e',

@@ -241,3 +241,20 @@ export function cusLog(message, type, group, ...objects) {
 
 // // // Game End
 // cusLog('Game End', 'primary', 'end')
+
+/**
+ * Checks if any of the parameters are undefined and logs an error message if so.
+ *
+ * @param {object} params - An object where the keys are the parameter names and the values are the parameter values.
+ */
+export const checkForUndefined = (params) => {
+  let undefinedParams = []
+  for (let param in params) {
+    if (params[param] === undefined) {
+      undefinedParams.push(param)
+    }
+  }
+  if (undefinedParams.length > 0) {
+    console.error('😿:Undefined parameters:', undefinedParams.join(', '))
+  }
+}

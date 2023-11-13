@@ -25,27 +25,23 @@ function RenderIndAttack({
     forceful,
   } = attack
 
-  const runMove = (move, user) => {
-    // also turn off popup
+  const runMove = (move, pal) => {
     togglePopup()
 
-    executeMove(
-      move,
-      contextualState,
-      contextualDispatch,
-      user,
-      ATK_PHASES.PAY,
-      'human',
-      [0],
-      // You used Move on this (what other details)
-      {
-        user: user,
-        userslot: 0,
-        move: move,
-        targets: [0],
-        trainerType: 'human',
-      },
-    )
+    executeMove({
+      // context:
+      state: contextualState,
+      dispatch: contextualDispatch,
+      // command:
+      pal: pal,
+      move: move,
+      phase: ATK_PHASES.PAY,
+      // actionDetails:
+      userSlot: 0,
+      targets: { ally: null, enemy: [0] },
+      player: 'human',
+      possessed: false,
+    })
   }
   const renderBasic = (move) => {
     return (

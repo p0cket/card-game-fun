@@ -171,13 +171,34 @@ export function populateButton(
   contextualState,
   move,
   contextualDispatch,
-  user,
+  pal,
   phase = ATK_PHASES.DAMAGE,
+  player,
+  targets,
 ) {
   return {
     label: label,
     onClick: () =>
-      executeMove(move, contextualState, contextualDispatch, user, phase),
+      executeMove(
+        // move, 
+        // contextualState, 
+        // contextualDispatch, 
+        // user, 
+        // phase,
+        {
+          state: contextualState,
+          dispatch: contextualDispatch,
+
+          pal: pal,
+          move: move,
+          player: player,
+          phase: phase,
+          userSlot: 0,
+
+          targets: targets,
+          // possessed: false,
+        },
+        ),
     backgroundColor: '#4b770e',
     color: '#fff',
   }
