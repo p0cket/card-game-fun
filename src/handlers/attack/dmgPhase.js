@@ -1,6 +1,7 @@
 import { ACTIONS } from '../../MainContext'
+import { checkForUndefined } from '../../utils/debugging-utils'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
-import { ATK_PHASES, executeMove } from '../moveHandlers'
+import { ATK_PHASES, calculateTargets, executeMove } from '../moveHandlers'
 import {
   createAIDamagedState,
   createHumanDamagedState,
@@ -11,55 +12,88 @@ let damagedHP
 export const dmgPhase = (
   contextualState,
   contextualDispatch,
-  user,
+  // move details
+  pal,
   move,
-  targetMonster,
   player,
+  userSlot,
+  // target details
+  targets,
 ) => {
-  console.groupCollapsed('💥 DAMAGE: start')
-  console.log('Initial contextualState:', contextualState)
-
-  console.log(
-    `contextualState, contextualDispatch, user, move, targetMonster, player`,
+  console.groupCollapsed(
+    '💥 DAMAGE: start',
     contextualState,
     contextualDispatch,
-    user,
+    pal,
     move,
-    targetMonster,
+    player,
+    userSlot,
+    targets,
+  )
+  checkForUndefined({
+    contextualState,
+    contextualDispatch,
+    pal,
+    move,
+    player,
+    userSlot,
+    targets,
+  })
+  // const targetPals = calculateTargets( // this doesn't work, fix it
+  //   targets,
+  //   contextualState.userParty,
+  //   contextualState.opponent.monsters,
+  // )
+  let targetPal
+  console.log(
+    `contextualState, contextualDispatch, pal, move, targetPal, player`,
+    contextualState,
+    contextualDispatch,
+    pal,
+    move,
+    // targetPals,
     player,
   )
-  const moveCost = move.cost.energy
-  ourDmg = move.damage
-  console.log(
-    'info',
-    `The damage to be dealt is ${ourDmg}. from ${
-      user.stats.attack
-    } * ${ourDmg} / 100.
-  This will result in targetMonster.stats.hp (${targetMonster.stats.hp})
-   at: ${targetMonster.stats.hp - ourDmg}`,
-  )
-  damagedHP = targetMonster.stats.hp - ourDmg
-  let newState = { ...contextualState }
+  // this is being switched to targetPals from targetPal
+  // so use something later like:
+  // Iterate over each target monster
+  // targetPals.forEach((targetPal, index) => {
+  //   // Place your damage application logic here
+  // });
+  //   targetPal = contextualState.opponent.monsters[0].obj
 
   console.log(`🫠check if human or ai`)
   if (player === 'human') {
-    console.log(`🫠check passed as human`)
-    targetMonster.stats.hp = damagedHP
-    console.log(`'AI' pal's HP is now ${targetMonster.stats.hp}`)
+    targetPal = contextualState.opponent.monsters[0].obj
+    console.warn(`🫠check passed as human`, targetPal)
+    const moveCost = move.cost.energy
+    ourDmg = move.damage
+    console.log(
+      `The human damage to be dealt is ${ourDmg}.
+    This will result in targetPal.stats.hp (${targetPal.stats.hp})
+     at: ${targetPal.stats.hp - ourDmg}`,
+    )
+    damagedHP = targetPal.stats.hp - ourDmg
+    contextualState = { ...contextualState }
 
-    console.log(`dmg b4 the createAIDamagedState:`, newState)
-    newState = createAIDamagedState(
-      newState,
+   
+    console.log(`🫠check passed as human`)
+    targetPal.stats.hp = damagedHP
+    console.log(`'AI' pal's HP is now ${targetPal.stats.hp}`)
+
+    console.log(`dmg b4 the createAIDamagedState:`, contextualState)
+    contextualState = createAIDamagedState(
+      contextualState,
       damagedHP,
       moveCost,
       move,
-      user,
+      pal,
       contextualDispatch,
     )
-    console.log(`dmg after the createAIDamagedState:`, newState)
+    console.log(`dmg after the createAIDamagedState:`, contextualState)
 
-    newState = createPopupVisibleState({
-      prevState: newState,
+    contextualState = createPopupVisibleState({
+      prevState: contextualState,
       title: `Successful Attack`,
       message: `${moveCost} Damage Dealt.`,
       options: [
@@ -68,33 +102,52 @@ export const dmgPhase = (
           onClick: () => {
             console.log('Confirm clicked')
             executeMove(
-              move,
-              newState,
-              contextualDispatch,
-              user,
-              ATK_PHASES.STATUSES,
+              // move,
+              // contextualState,
+              // contextualDispatch,
+              // pal,
+              // ATK_PHASES.STATUSES,
+              {
+                state: contextualState,
+                dispatch: contextualDispatch,
+                //
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.STATUSES,
+                userSlot: 0,
+                //
+                targets: targets,
+                // possessed: false,
+              },
             )
           },
         },
       ],
     })
 
-    console.log(`dmg after the createAIDamagedState:`, newState)
+    console.log(`dmg after the createAIDamagedState:`, contextualState)
     // dialog open state here?
   } else if (player === 'AI') {
-    user.stats.hp = damagedHP
-    console.log(`user's HP is now ${user.stats.hp}`)
-    newState = createHumanDamagedState(contextualState, damagedHP)
-    console.log(`After createHumanDamagedState:`, newState)
+    const moveCost = move.cost.energy
+    ourDmg = move.damage
+    console.log(
+      `The AI damage to be dealt is ${ourDmg}.
+    This will result in targetPal.stats.hp (${targetPal.stats.hp})
+     at: ${targetPal.stats.hp - ourDmg}`,
+    )
+    damagedHP = targetPal.stats.hp - ourDmg
+    contextualState = { ...contextualState }
+
+    contextualState = createHumanDamagedState(contextualState, damagedHP)
+    console.log(`After createHumanDamagedState:`, contextualState)
   }
-
   //////----
-
-  console.log(`ATK: DAMAGE phase ending:`, newState)
+  console.log(`ATK: DAMAGE phase ending:`, contextualState)
   //
   console.groupEnd()
 
-  return newState
+  return contextualState
   // for all modifiers, switch(move.modifiers) go through every modifier.
   // case ATK_PHASES.APPLY_DAMAGE:// Check if the move has a status effect
 }

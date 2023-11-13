@@ -1,17 +1,44 @@
-import { ACTIONS } from "../../MainContext"
-import { createNotEnoughEnergyDialogState } from "../dialog/energyDialogHandler"
-import { createCostPaidDialogState, createUserEnergyPaidState } from "../state/costStateHandlers"
-// import { createCostPaidDialogState, createNotEnoughEnergyDialogState, createUserEnergyPaidState } from "../moveHandlers"
+import { ACTIONS } from '../../MainContext'
+import { checkForUndefined } from '../../utils/debugging-utils'
+import { createNotEnoughEnergyDialogState } from '../dialog/energyDialogHandler'
+import {
+  createCostPaidDialogState,
+  createUserEnergyPaidState,
+} from '../state/costStateHandlers'
 
 let playerEnergy
 let moveCost
 
-export const payPhase = (contextualState, contextualDispatch, move, user) => {
-  console.groupCollapsed(`💵 PAY: starting`)
+export const payPhase = (
+  contextualState,
+  contextualDispatch,
+  // move data
+  move,
+  pal,
+  player,
+  userSlot,
+  // target data
+  targets,
+) => {
+  console.groupCollapsed(
+    `💵 PAY: starting`,
+    contextualState,
+    contextualDispatch,
+    move,
+    pal,
+    player,
+  )
+  checkForUndefined({
+    contextualState,
+    contextualDispatch,
+    move,
+    pal,
+    player,
+  })
   // 1. Pay cost. If you can't, return:
   playerEnergy = contextualState.game.player.energy
   moveCost = move.cost.energy
-  console.log(`cost is ${moveCost} energy. Player has ${playerEnergy}`)
+  console.log(`cost is ${moveCost} energy. ${player} has ${playerEnergy}`)
 
   if (playerEnergy < moveCost) {
     console.log(
@@ -22,11 +49,8 @@ export const payPhase = (contextualState, contextualDispatch, move, user) => {
       contextualState,
       contextualDispatch,
     )
+    console.log(`dialogState: not enough dialog`, dialogState)
     console.groupEnd()
-    // contextualDispatch({
-    //   payload: dialogState,
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    // })
     return dialogState
   } else {
     const playerEnergyAfterPayment = playerEnergy - moveCost
@@ -38,18 +62,20 @@ export const payPhase = (contextualState, contextualDispatch, move, user) => {
       contextualState,
     )
     console.log('Pay: energyPaidState, resulting state:', energyPaidState)
+
+    // ------
     const costPaidDialogState = createCostPaidDialogState(
       energyPaidState,
       contextualDispatch,
       move,
-      user,
+      pal,
+      player,
+      targets,
     )
+    //-----
+
     console.log('Pay: PAID, resulting state:', costPaidDialogState)
     console.groupEnd()
-    //  contextualDispatch({
-    //   payload: costPaidDialogState,
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    // })
     return costPaidDialogState
   }
 }

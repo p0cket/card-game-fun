@@ -1,19 +1,32 @@
-import { createPopupRemovedState, createPopupVisibleState } from '../dialog/basicDialogHandlers'
-import { ATK_PHASES, executeAITurn, executeMove } from '../moveHandlers'
+import {
+  createPopupRemovedState,
+  createPopupVisibleState,
+} from '../dialog/basicDialogHandlers'
+import { ATK_PHASES, executeAITurn } from '../moveHandlers'
 
-export const endPhase = (move, ourState, contextualDispatch, user, phase) => {
+
+
+
+export const endPhase = (
+  contextualState,
+  contextualDispatch,
+  // move details
+  move,
+  pal,
+  player,
+  userSlot,
+  // target details
+  targets,
+) => {
   console.group(`END: start`)
   console.log(
-    `END: move, ourState, contextualDispatch, user, phase`,
+    `END: move, contextualState, contextualDispatch, pal, `,
     move,
-    ourState,
+    contextualState,
     contextualDispatch,
-    user,
-    phase,
+    pal,
   )
-  let newState = ourState
-
-
+  let newState = contextualState
 
   const endTurnOptions = [
     {
@@ -21,11 +34,7 @@ export const endPhase = (move, ourState, contextualDispatch, user, phase) => {
       onClick: () => {
         console.log(`Enemy gets to attack`)
         //doesn't need to return anything because it runs again
-        executeAITurn(
-          newState,
-          contextualDispatch,
-          user,
-        )
+        executeAITurn(newState, contextualDispatch)
       },
       backgroundColor: '#4b770e',
       color: '#fff',
@@ -42,15 +51,12 @@ export const endPhase = (move, ourState, contextualDispatch, user, phase) => {
     prevState: newState,
     message: `We are switching turns, the opponent can go now.`,
     options: endTurnOptions,
-    header: "End of Your Turn",
-    title: "Opponent gets to go now",
-    color: "#000",
-    background: "#fff",
+    header: 'End of Your Turn',
+    title: 'Opponent gets to go now',
+    color: '#000',
+    background: '#fff',
   })
 
-
-
-  
   console.log(`END: phase ending. newState`, newState)
   return newState
 }
