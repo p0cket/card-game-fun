@@ -3,23 +3,15 @@ import Dialog from './Dialog'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 function DialoguePopup(props) {
-
-
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
 
   const trigger = contextualState.dialog.isOpen
 
   const closeDialogPopup = (button) => {
-    // if (dispatch) {
-    // You can use the state and dispatch here if needed.
-    // For example, you can dispatch an action based on the button clicked.
-    // dispatch(someAction(button));
-    // }
     if (button.onClick) {
       button.onClick()
     }
-
     // Close the dialogue if it isn't already closed
     const closeDialogueState = {
       ...contextualState,
@@ -48,7 +40,7 @@ function DialoguePopup(props) {
       <div
         style={{
           position: 'relative',
-          padding: '20px',
+          padding: '10px',
           backgroundColor: '#5a7d2a',
           width: '80%',
           maxWidth: '640px',
@@ -59,7 +51,7 @@ function DialoguePopup(props) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '10px',
+            marginBottom: '2px',
           }}
         >
           <div
@@ -67,10 +59,11 @@ function DialoguePopup(props) {
               width: '24px',
               height: '24px',
               backgroundColor: 'green',
-              marginRight: '10px',
+              marginRight: '2px',
+              // margin: '2px',
             }}
           >
-            {'i'}
+            {'!'}
           </div>
           <div
             style={{
@@ -83,10 +76,9 @@ function DialoguePopup(props) {
         </div>
         <div
           style={{
-            marginBottom: '20px',
+            marginBottom: '8px',
           }}
         >
-          {' '}
         </div>
         <div>
           <div>
@@ -100,8 +92,8 @@ function DialoguePopup(props) {
                 backgroundColor: button.backgroundColor || '#4b770e',
                 border: 'none',
                 color: button.color || '#fff',
-                padding: '10px 20px',
-                margin: '0px 4px',
+                padding: '4px 4px',
+                margin: '2px',
                 cursor: 'pointer',
               }}
             >

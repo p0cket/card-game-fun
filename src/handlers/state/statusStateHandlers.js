@@ -1,5 +1,6 @@
 // damageStateHandlers.js
 
+import { PLAYERS } from '../../consts/consts'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
 // Apply poison effect to the target
@@ -73,52 +74,40 @@ export const applyParalysis = (target, effectValue) => {
 // ... }
 // in status is where we should store the status if it is applied
 // to the monster. so like status: {test: true, poison: {active: true, damage: 10}} etc.
-export const updateStatusState = (contextualState, player, statusResult, statusValue = true) => {
-  console.log(
-    'updateStatusState: contextualState, player, statusResult',
-    contextualState,
-    player,
-    statusResult,
-  )
-  if (player === 'human') {
-    console.log('Updating opponent monster status')
+export const updateStatusState = (
+  contextualState,
+  player,
+  statusResult,
+  statusValue = true,
+  index = 0,
+) => {
+  const { HUMAN, AI } = PLAYERS
+  if (player === HUMAN) {
+    let updatedMonsters = [...contextualState.opponent.monsters]
+    console.log(`updatedMonsters: ${JSON.stringify(updatedMonsters)}`)
+    console.log(`index: ${index}`)
+    updatedMonsters[index].obj.status = {
+      ...updatedMonsters[index].obj.status,
+      [statusResult]: statusValue,
+    }
     return {
       ...contextualState,
       opponent: {
         ...contextualState.opponent,
-        monsters: contextualState.opponent.monsters.map((monster, index) => {
-          console.log(`Checking opponent monster at index ${index}`)
-          if (index === 0) {
-            console.log('Updating status for opponent monster at index 0')
-            return {
-              ...monster,
-              status: { ...monster.status, [statusResult]: statusValue },
-            }
-          } else {
-            return monster
-          }
-        }),
+        monsters: updatedMonsters,
       },
     }
-  } else if (player === 'AI') {
-    console.log('Updating userParty monster status')
+  } else if (player === AI) {
+    let updatedMonsters = [...contextualState.userParty]
+    updatedMonsters[index].obj.status = {
+      ...updatedMonsters[index].obj.status,
+      [statusResult]: statusValue,
+    }
     return {
       ...contextualState,
-      userParty: contextualState.userParty.map((monster, index) => {
-        console.log(`Checking userParty monster at index ${index}`)
-        if (index === 0) {
-          console.log('Updating status for userParty monster at index 0')
-          return {
-            ...monster,
-            status: { ...monster.status, [statusResult]: statusValue },
-          }
-        } else {
-          return monster
-        }
-      }),
+      userParty: updatedMonsters,
     }
   }
-  console.log('updateStatusState: went too far: Returning contextual state')
   return contextualState // In case player is neither 'human' nor 'AI'
 }
 

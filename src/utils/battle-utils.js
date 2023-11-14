@@ -24,9 +24,11 @@ export const decideEnemyATK = (enemyAttacks) => {
 //   }
 // }
 
-//status helper. finish.
 export function calculateDoesItLand(move) {
-  return Math.random() <= parseFloat(move.effect.chance) / 100
+  const randomNum = Math.random() * 100
+  const result = parseFloat(move.effect.chance) >= randomNum
+  console.log(`math: ${parseFloat(move.effect.chance)}(chance of ${move.effect.chance}) >= rN ${randomNum}? ${result}`, move)  
+  return result
 }
 
 export function applyStatusEffect(contextualState, player, move) {

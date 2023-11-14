@@ -1,9 +1,9 @@
-import { uniqueId } from "../utils/reducer-utils"
-import { EFFECTS } from "../effects"
-import { basicCards, stunCards } from "./allCards"
+import { uniqueId } from '../utils/reducer-utils'
+import { EFFECTS } from '../effects'
+import { basicCards, stunCards } from './allCards'
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
-export const gameVersion = "Rebirth: Pre-Alpha v0.31 - Refactore Atk handlers"
+export const gameVersion = 'Rebirth: Pre-Alpha v0.33 - Human turn coded'
 
 // deprecated: previous iteration consts.
 export const startingDeck = [
@@ -20,8 +20,8 @@ export const startingDeck = [
   { ...basicCards.flamethrower, id: 11 },
   // { ...stunCards.chaoticBolt, id: 12},
   // { ...stunCards.chaoticBolt, id: 13},
-  { ...stunCards.chaoticBolt, id: 14},
-  { ...stunCards.chaoticBolt, id: 15},
+  { ...stunCards.chaoticBolt, id: 14 },
+  { ...stunCards.chaoticBolt, id: 15 },
   { ...stunCards.throwFist, id: 12 },
   { ...stunCards.throwFistPlus, id: 13 },
   // { ...buildupCards.channel, id: 14 },
@@ -33,32 +33,32 @@ export const startingDeck = [
 //Needs to be functions anyways so the deck format below won't work
 export const startingTestDeck = [
   {
-    type: "Psychic",
-    name: "Hypnosis",
+    type: 'Psychic',
+    name: 'Hypnosis',
     num: 0,
     cost: 2,
     id: uniqueId(),
     effect: SLEEP,
   },
   {
-    type: "Psychic",
-    name: "Hypnosis",
+    type: 'Psychic',
+    name: 'Hypnosis',
     num: 0,
     cost: 2,
     id: uniqueId(),
     effect: SLEEP,
   },
   {
-    type: "Psychic",
-    name: "Hypnosis+",
+    type: 'Psychic',
+    name: 'Hypnosis+',
     num: 0,
     cost: 1,
     id: uniqueId(),
     effect: SLEEP,
   },
   {
-    type: "Grass",
-    name: "Leaf Storm",
+    type: 'Grass',
+    name: 'Leaf Storm',
     num: 2,
     cost: 1,
     id: uniqueId(),
@@ -73,80 +73,80 @@ export const startingTestDeck = [
   //   effect: DOUBLEDAMAGE,
   // },
   {
-    type: "Fire",
-    name: "Flamethrower",
+    type: 'Fire',
+    name: 'Flamethrower',
     num: 4,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Fire",
-    name: "Flamethrower",
+    type: 'Fire',
+    name: 'Flamethrower',
     num: 4,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Fire",
-    name: "Flamethrower+",
+    type: 'Fire',
+    name: 'Flamethrower+',
     num: 8,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Water",
-    name: "Gush",
+    type: 'Water',
+    name: 'Gush',
     num: 2,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Water",
-    name: "Gush+",
+    type: 'Water',
+    name: 'Gush+',
     num: 6,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Poison",
-    name: "Sting",
+    type: 'Poison',
+    name: 'Sting',
     num: 2,
     cost: 1,
     id: uniqueId(),
     effect: POISON,
   },
   {
-    type: "Poison",
-    name: "Sting+",
+    type: 'Poison',
+    name: 'Sting+',
     num: 5,
     cost: 1,
     id: uniqueId(),
     effect: null,
   },
   {
-    type: "Physical",
-    name: "Throw Fist",
+    type: 'Physical',
+    name: 'Throw Fist',
     num: 3,
     cost: 2,
     id: uniqueId(),
     effect: STUN,
   },
   {
-    type: "Physical",
-    name: "Throw Fist+",
+    type: 'Physical',
+    name: 'Throw Fist+',
     num: 5,
     cost: 2,
     id: uniqueId(),
     effect: STUN,
   },
   {
-    type: "Psychic",
-    name: "Think",
+    type: 'Psychic',
+    name: 'Think',
     num: 0,
     cost: 0,
     id: uniqueId(),
@@ -154,8 +154,8 @@ export const startingTestDeck = [
     qty: 1,
   },
   {
-    type: "Psychic",
-    name: "Think+",
+    type: 'Psychic',
+    name: 'Think+',
     num: 0,
     cost: 0,
     id: uniqueId(),
@@ -163,8 +163,8 @@ export const startingTestDeck = [
     qty: 2,
   },
   {
-    type: "Psychic",
-    name: "Recollect Mind",
+    type: 'Psychic',
+    name: 'Recollect Mind',
     num: 0,
     cost: 1,
     id: uniqueId(),
@@ -172,8 +172,8 @@ export const startingTestDeck = [
     qty: 2,
   },
   {
-    type: "Psychic",
-    name: "Recollect Mind+",
+    type: 'Psychic',
+    name: 'Recollect Mind+',
     num: 0,
     cost: 1,
     id: uniqueId(),
@@ -182,8 +182,8 @@ export const startingTestDeck = [
   },
   //
   {
-    type: "Poison",
-    name: "Toxic Gas",
+    type: 'Poison',
+    name: 'Toxic Gas',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -191,8 +191,8 @@ export const startingTestDeck = [
     qty: 3,
   },
   {
-    type: "Poison",
-    name: "Venomous Bite",
+    type: 'Poison',
+    name: 'Venomous Bite',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -200,8 +200,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Poison Needle",
+    type: 'Poison',
+    name: 'Poison Needle',
     num: 0,
     cost: 1,
     id: uniqueId(),
@@ -209,8 +209,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Acid Spray",
+    type: 'Poison',
+    name: 'Acid Spray',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -218,8 +218,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Toxic Spores",
+    type: 'Poison',
+    name: 'Toxic Spores',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -227,8 +227,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Poisonous Touch",
+    type: 'Poison',
+    name: 'Poisonous Touch',
     num: 0,
     cost: 1,
     id: uniqueId(),
@@ -236,8 +236,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Toxic Ooze",
+    type: 'Poison',
+    name: 'Toxic Ooze',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -245,8 +245,8 @@ export const startingTestDeck = [
     qty: 6,
   },
   {
-    type: "Poison",
-    name: "Poisonous Cloud",
+    type: 'Poison',
+    name: 'Poisonous Cloud',
     num: 0,
     cost: 2,
     id: uniqueId(),
@@ -261,7 +261,7 @@ export const startingData = {
   hero: {
     health: 100,
     energy: 5,
-    status: "Feeling Fine",
+    status: 'Feeling Fine',
     effects: {
       buff: null,
       buildup: 1,
@@ -273,23 +273,23 @@ export const startingData = {
   },
   battle: {
     enemy: {
-      name: "sample guy",
-      bio: "just a standaard enemy",
-      health: "30",
-      maxHP: "30",
+      name: 'sample guy',
+      bio: 'just a standaard enemy',
+      health: '30',
+      maxHP: '30',
       energy: 6,
-      status: "none",
-      nextAttack: "none",
+      status: 'none',
+      nextAttack: 'none',
       attacks: [
         {
-          name: "sample atk hitting you",
-          type: "hit",
+          name: 'sample atk hitting you',
+          type: 'hit',
           damage: 20,
           status: STUN,
         },
         {
-          name: "sample atk hitting again",
-          type: "hit",
+          name: 'sample atk hitting again',
+          type: 'hit',
           damage: 40,
           status: null,
         },
@@ -301,10 +301,10 @@ export const startingData = {
     beginning: false,
     dialog: null,
   },
-  curScene: { scene: "intro", lvl: 1, act: 1 },
+  curScene: { scene: 'intro', lvl: 1, act: 1 },
   curEvent: null,
   availableRewards: [],
-  alert: "",
+  alert: '',
 
   // alert: "--- Cards PERMANENTLY go away. They can only be used once ---",
   eventResultObj: null,
@@ -313,8 +313,8 @@ export const startingData = {
 
 export const sampleItems = [
   {
-    name: "Wand of Gameleon",
-    desc: "+50 to total health",
+    name: 'Wand of Gameleon',
+    desc: '+50 to total health',
     boost: { health: 50 },
     flavortext: `"The Wand of Gameleon's power is has been spoken of 
           in historical texts to give life
@@ -323,7 +323,7 @@ export const sampleItems = [
   },
   {
     name: "Kamuk's Brute Sword",
-    desc: "-4 to total health, +3 to base damage",
+    desc: '-4 to total health, +3 to base damage',
     boost: { health: -50, baseDMG: 3 },
     flavortext: `Kamuk's prey never stood a chance.
      His rage radiated from him, 
@@ -333,8 +333,8 @@ export const sampleItems = [
   },
   {
     name: "Isiaac's Lucky tooth",
-    desc: "Every 3 turns, you get an extra energy",
-    boost: { rune: "RUNE.LUCKYTOOTH (@TODO: add this)" },
+    desc: 'Every 3 turns, you get an extra energy',
+    boost: { rune: 'RUNE.LUCKYTOOTH (@TODO: add this)' },
     flavortext: `Isiaac only knew pain, so he didn't realized this was missing`,
     price: 40,
   },
@@ -343,8 +343,12 @@ export const fullEnergyAmount = 5
 export const startHandCount = 8
 export const poisonDamage = 5
 
-export const energyEmoji = "🧪"
-export const goldEmoji = "💰"
-export const dmgEmoji = "👊"
-export const clockEmoji = "⏰"
+export const energyEmoji = '🧪'
+export const goldEmoji = '💰'
+export const dmgEmoji = '👊'
+export const clockEmoji = '⏰'
 
+export const PLAYERS = {
+  HUMAN: 'human',
+  AI: 'AI',
+}

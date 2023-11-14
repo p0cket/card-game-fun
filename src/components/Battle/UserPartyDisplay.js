@@ -1,38 +1,43 @@
 import React from 'react'
-import Squirrely from './../../assets/creatures/Squirrely.png'
+import SquirrelyImg from './../../assets/creatures/Squirrely.png'
+import LuminowlImg from './../../assets/pals/Luminowl_pxl.png'
+import RecyclerooImg from './../../assets/pals/recycleroo_pxl.png'
+import TicklefairyImg from './../../assets/pals/Ticklefairy_pxl.png'
+import UmbrabunnyImg from './../../assets/pals/Umbrabunny_pxl.png'
+import ChibipalDefaultImg from './../../assets/pals/Chibipal.png'
 
 const UserPartyDisplay = () => {
   // Placeholder data for party members (with made-up creature names)
   const partyMembers = [
     {
-      name: 'Sparklepaw',
-      health: 80,
-      image: Squirrely,
+      name: 'Recycleroo',
+      health: 75,
+      image: RecyclerooImg,
     },
     {
-      name: 'Firebreath',
+      name: 'Umbrabunny',
       health: 70,
-      image: Squirrely,
+      image: UmbrabunnyImg,
     },
     {
-      name: 'Leafywing',
+      name: 'DefaultPal',
       health: 90,
-      image: Squirrely,
+      image: ChibipalDefaultImg,
     },
     {
       name: 'Bubblesnout',
       health: 60,
-      image: Squirrely,
+      image: SquirrelyImg,
     },
     {
-      name: 'Aquaflare',
+      name: 'Squirrely',
       health: 75,
-      image: Squirrely,
+      image: SquirrelyImg,
     },
     {
-      name: 'Aquaflare',
-      health: 75,
-      image: Squirrely,
+      name: 'Sparklepaw',
+      health: 80,
+      image: SquirrelyImg,
     },
   ]
 
@@ -56,23 +61,25 @@ const UserPartyDisplay = () => {
             }}
           >
             <div>{member.name}</div>
-            <img
-              src={member.image}
-              alt={`Party Member ${index + 1}`}
-              style={{
-                width: '30px',
-                height: '30px',
-              }}
-            />
-            <div>
-              HP: {member.health}
-              <div
+            <div className="flex">
+              <img
+                src={member.image}
+                alt={`Party Member ${index + 1}`}
                 style={{
-                  backgroundColor: 'green',
-                  width: `${(member.health / 100) * 60}px`,
-                  height: '5px',
+                  width: '30px',
+                  height: '30px',
                 }}
               />
+              <div>
+                HP: {member.health}
+                <div
+                  style={{
+                    backgroundColor: 'green',
+                    width: `${(member.health / 100) * 60}px`,
+                    height: '5px',
+                  }}
+                />
+              </div>
             </div>
           </div>
         ))}
@@ -88,11 +95,11 @@ export default UserPartyDisplay
 // const UserPartyDisplay = () => {
 //   // Placeholder image URLs (you can replace these with actual image URLs)
 //   const placeholderImages = [
-//     Squirrely,
-//     Squirrely,
-//     Squirrely,
-//     Squirrely,
-//     Squirrely,
+//     SquirrelyImg,
+//     SquirrelyImg,
+//     SquirrelyImg,
+//     SquirrelyImg,
+//     SquirrelyImg,
 //   ];
 
 //   return (

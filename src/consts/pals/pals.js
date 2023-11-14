@@ -1,4 +1,8 @@
 import LuminowlImg from './../../assets/pals/Luminowl_pxl.png'
+import RecyclerooImg from './../../assets/pals/recycleroo_pxl.png'
+import TicklefairyImg from './../../assets/pals/Ticklefairy_pxl.png'
+import UmbrabunnyImg from './../../assets/pals/Umbrabunny_pxl.png'
+import ChibipalDefaultImg from './../../assets/pals/Chibipal.png'
 
 import PropTypes from 'prop-types'
 import {
@@ -346,7 +350,7 @@ export const Glowbuggle = {
     description:
       'Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.',
   },
-  image: 'creatures/Chibipal.png',
+  image: ChibipalDefaultImg,
   description:
     'Small, firefly-like creatures with bioluminescent wings that emit a warm, comforting light.',
   size: 'Tiny',
@@ -389,7 +393,7 @@ export const Umbrabunny = {
     description:
       'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
   },
-  image: 'pals/Umbrabunny_pxl.png',
+  image: UmbrabunnyImg,
   description:
     'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
   size: 'Small',
@@ -431,7 +435,7 @@ export const Recycleroo = {
     description:
       'Launches a barrage of eco-friendly projectiles, dealing damage to all enemies and reducing their attack power.',
   },
-  image: 'recycleroo_image.png',
+  image: RecyclerooImg,
   description:
     'A kangaroo that collects and sorts recyclables but throws them as projectiles.',
   size: 'Medium',
@@ -507,7 +511,7 @@ export const Wolfjobb = {
 export const Ticklefairy = {
   name: 'Ticklefairy',
   lore: 'Ticklefairy is a mischievous fairy that spreads laughter and joy wherever it goes.',
-  image: 'pals/Ticklefairy_pxl.png',
+  image: TicklefairyImg,
   elemental_type: 'Light',
   creature_type: 'Fairy',
   specialty_group: 'Joybringer',

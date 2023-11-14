@@ -229,7 +229,7 @@ export const LightBeam = {
   energyCost: 5,
   effect: {
     description: 'Fires a beam of blinding light at the opponent',
-    chance: '30%',
+    chance: '95%',
     result: 'blind',
   },
   priority: 'medium',
@@ -271,7 +271,7 @@ export const WiseGaze = {
   energyCost: 5,
   effect: {
     description: 'Pierces the opponent with a wise and penetrating gaze',
-    chance: '20%',
+    chance: '90%',
     result: 'confuse',
   },
   priority: 'medium',

@@ -36,24 +36,23 @@ function MenuButtonGroup({ togglePopup }) {
           flex: 2,
           backgroundColor: '#5a7d2a',
           color: 'white',
-          margin: '3px',
+          margin: '2px',
         }}
       >
         <div>
           <div
-            style={{ padding: '3px' }}
             onClick={togglePopup}
-            className="text-green-200"
+            className="p-1 text-green-200 text-sm"
           >
             Attack
           </div>
-          <div style={{ padding: '3px' }} className="text-blue-400">
-            Items
+          <div className="p-1 text-green-400 text-sm">
+            [(🔒)Items]
           </div>
         </div>
         <div>
-          <div style={{ padding: '3px' }}>[(Locked)PaLs</div>
-          <div style={{ padding: '3px' }}>Options</div>
+          <div className="p-1 text-sm">[(🔒)PaLs]</div>
+          <div className="p-1 text-sm">[(🔒)Options]</div>
         </div>
       </div>
     </div>
