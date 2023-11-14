@@ -86,10 +86,11 @@ export default function BattleTopDisplay() {
   }
 
   // Def work on this later
-  const currentMonDetails = contextualState.opponent.monsters[0]
+  const currentMonDetailsStatuses = contextualState.opponent.monsters[0].obj.status
 
   const currentMon =
     contextualState.current.scene.details.trainer.monsters[0].obj // .level
+  console.log(`currentMon & currentMonDetails:`, currentMon, currentMonDetailsStatuses)
   const {
     name,
     lore,
@@ -109,7 +110,7 @@ export default function BattleTopDisplay() {
     passive_ability,
     experience,
     lvl,
-    status,
+    // status,
   } = currentMon
   // console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
 
@@ -156,9 +157,9 @@ export default function BattleTopDisplay() {
           >
             {moves[0].name}
           </button> */}
-          <div>
-            Current Statuses are: {JSON.stringify(status)}
-          </div>
+          {/* <div className="text-sm">Statuses: {JSON.stringify(status)}</div> */}
+          <div className="text-[10px]">Statuses: {JSON.stringify(currentMonDetailsStatuses)}</div>
+
         </div>
         {/* <div> */}
         {/* <Button onClick={openAttackPopup} text={moves[0].name} /> */}
