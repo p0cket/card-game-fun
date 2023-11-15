@@ -34,12 +34,26 @@ export const cleanupPhase = (
       onClick: () => {
         console.log(`Clicked cleaning up'`)
         //doesn't need to return anything because it runs again
-        executeMove()
+        executeMove(
         // move,
         // nextState,
         // contextualDispatch,
         // pal,
         // ATK_PHASES.END, // phase,
+        {
+          state: contextualState,
+          dispatch: contextualDispatch,
+          //
+          pal: pal,
+          move: move,
+          player: player,
+          phase: ATK_PHASES.END,
+          userSlot: 0,
+          //
+          targets: targets,
+          // possessed: false,
+        },
+        )
       },
       backgroundColor: '#4b770e',
       color: '#fff',

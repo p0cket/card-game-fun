@@ -95,21 +95,22 @@ const ChibipalsSelection = () => {
   }
 
   return (
-    <div>
-      <h1 style={{ color: 'white' }}>Choose Your Chibipal</h1>
-      <div className="monster-list" style={monsterListStyle}>
+    <div className="text-white">
+      <h1 className="text-center text-3xl font-bold">Choose Your Chibipal</h1>
+      <div className="flex justify-center mt-4">
         {monsters.map((monster) => (
           <div
             key={monster.id}
-            className={`monster ${
-              selectedMonster === monster ? 'selected' : ''
+            className={`flex-1 m-2 cursor-pointer p-2 border border-transparent rounded-lg ${
+              selectedMonster === monster ? 'border-green-500' : ''
             }`}
             onClick={() => handleMonsterClick(monster)}
             style={{ flex: '1', margin: '10px', cursor: 'pointer' }}
           >
             <div
-              style={placeholderImageStyle}
-              className={monster.image ? 'with-image' : 'without-image'}
+              className={`w-full pb-full rounded-full ${
+                monster.image ? 'bg-cover' : 'bg-green-500'
+              }`}
             >
               {monster.image && (
                 <img

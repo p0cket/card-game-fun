@@ -7,6 +7,7 @@ import './../common/Button.css'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 import Button from '../common/Button'
+import bg1 from './../../assets/backgrounds/bg1.png'
 
 function BattleBotDisplay({ ourCurrentMon }) {
   const yourVariants = {
@@ -22,10 +23,13 @@ function BattleBotDisplay({ ourCurrentMon }) {
   }
 
   return (
-    <div className="battleBot">
-      <div className="battleBotRight">
+    <div className="flex px-2 mx-2 justify-around bg-boy-green text-8px">
+      <div
+        className="flex flex-col items-center flex-grow"
+        style={{backgroundImage: `url(${bg1})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}
+      >
         <motion.img
-          style={{ width: 180, height: 150 }}
+          className="w-45 h-38"
           animate="visible"
           whileHover="hover"
           variants={yourVariants}
@@ -33,52 +37,29 @@ function BattleBotDisplay({ ourCurrentMon }) {
           alt="Your Chibipal"
         />
       </div>
-      <div className="battleBotLeft">
-        <div className="battleBotLeftUpper">
+      <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
+        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
           <div>
-            <div className="battleBLname" style={{ fontSize: '25px' }}>
+            <div className="flex items-start text-2xl">
               {ourCurrentMon.name}
-              <span style={{ fontSize: '12px' }}>
-                <span style={{ color: 'gray' }}>lvl{ourCurrentMon.lvl}</span>
+              <span className="text-xs text-gray-500">
+                lvl{ourCurrentMon.lvl}
               </span>
             </div>
-
-            <div className="battleBLhealth">
+            <div className="flex items-start">
               {ourCurrentMon.stats.hp}HP
-              {/* <img
-                style={{ width: 10, height: 10 }}
-                src="./icons/heart.png"
-                alt="Health"
-              /> */}
               <progress
                 id="health"
                 value={ourCurrentMon.stats.hp}
                 max={ourCurrentMon.stats.max_hp}
-                style={{
-                  backgroundColor: '#4caf50',
-                }}
+                className="bg-boy-green"
               />
             </div>
           </div>
-          {/* <div className="battleBuffs"></div> */}
-          {/* <div className="battleBotLeftProperties"> */}
           <div>
-            <ul
-              style={{
-                fontSize: '14px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
+            <ul className="text-lg flex flex-col">
               <li>
-                <button
-                  style={{
-                    backgroundColor: 'green',
-                    padding: '5px',
-                    borderRadius: '2px',
-                    color: 'white',
-                  }}
-                >
+                <button className="bg-boy-green py-1 px-2 rounded text-white">
                   {ourCurrentMon.passive_ability}
                 </button>
               </li>

@@ -64,23 +64,12 @@ const Battle = () => {
     buttonText2: 'Counter',
     onButtonClick: handleButtonClick,
   }
-
-  // TODO Leverage the knowledge events to make victory scenes, and any scene that goes between another
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <div className="flex flex-col">
       <div>
         <div
-          style={{
-            fontFamily: 'Silkscreen',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-          }}
+          className="font-silkscreen flex flex-wrap items-center"
+          style={{ fontFamily: 'Silkscreen' }}
         >
           <HUDHeader />
           <UserPartyDisplay />
@@ -88,14 +77,7 @@ const Battle = () => {
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
         </div>
         {gameData.alert ? (
-          <div
-            style={{
-              color: 'Red',
-              padding: '10px 0px',
-              margin: '0px 30px',
-              backgroundColor: 'black',
-            }}
-          >
+          <div className="text-red-500 p-10 m-30 bg-black">
             {gameData.alert}
           </div>
         ) : (
@@ -108,11 +90,8 @@ const Battle = () => {
         </div>
         <UserPartyDisplay />
         <div
-          style={{
-            fontFamily: 'Silkscreen',
-            backgroundColor: '#5a7d2a',
-            color: 'white',
-          }}
+          className="font-silkscreen bg-green-500 text-white"
+          style={{ fontFamily: 'Silkscreen' }}
         >
           <MenuPopup
             selectedPal={ourCurrentMon}
@@ -142,7 +121,6 @@ const Battle = () => {
               {
                 label: 'Relaxxx',
                 buttonText2: 'Counter',
-                // onButtonClick: handleButtonClick,
                 onClick: handleButtonClick,
                 backgroundColor: '#4b770e',
                 color: '#fff',
@@ -154,47 +132,13 @@ const Battle = () => {
     </div>
   )
 }
-
-const attackContainerStyle = {
-  border: '1px solid #a5e54d',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'stretch',
-  padding: '12px',
-  margin: '8px 0',
-  backgroundColor: '#fff',
-}
-
-const attackInfoStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginBottom: '8px',
-}
-
-const attackNameStyle = {
-  fontWeight: 'bold',
-}
-
-const attackDamageStyle = {
-  flex: 1,
-  textAlign: 'right',
-}
-
-const attackDescriptionStyle = {
-  flex: 1,
-  textAlign: 'left',
-  color: 'black',
-}
-
-const attackEnergyCostStyle = {
-  alignSelf: 'flex-end',
-  textAlign: 'right',
-}
-
-const attackHeaderStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: '10px',
-}
-
+// Styles converted to Tailwind CSS
+const attackContainerStyle =
+  'border border-green-500 flex flex-col items-stretch p-3 m-2 bg-white'
+const attackInfoStyle = 'flex justify-between mb-2'
+const attackNameStyle = 'font-bold'
+const attackDamageStyle = 'flex-1 text-right'
+const attackDescriptionStyle = 'flex-1 text-left text-black'
+const attackEnergyCostStyle = 'self-end text-right'
+const attackHeaderStyle = 'flex items-center mb-2'
 export default Battle

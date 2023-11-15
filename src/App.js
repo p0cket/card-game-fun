@@ -34,15 +34,20 @@ export default function App() {
         style={{
           backgroundImage: 'url(backgrounds/gridBGdark.png)',
           backgroundRepeat: 'repeat',
-          backgroundSize: '800px 500px',
+          // backgroundSize: '800px 500px',
+          backgroundSize: 'cover',
           width: '100vw',
           height: '100vh',
           // Shrink display to mimic mobile
-          maxWidth: '500px',
-          maxHeight: '850px',
+          // maxWidth: '500px',
+          // maxHeight: '850px',
           // display this div in the center:
-          margin: 'auto',
-          center: 'true',
+          // margin: 'auto',
+          margin: '0 auto',
+          // center: 'true',
+          display: 'flex', // Added for potential flexbox centering
+          justifyContent: 'center', // Center content horizontally in a flex container
+          alignItems: 'center', // Center content vertically in a flex container
         }}
       >
         {/* < ClickGlow /> */}

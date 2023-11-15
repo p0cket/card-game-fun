@@ -10,6 +10,7 @@ import { useDispatchContext, useStateContext } from '../../MainContext'
 // eslint-disable-next-line no-unused-vars
 import AttackPopup from '../common/AttackPopup'
 import Button from '../common/Button'
+import bg1 from './../../assets/backgrounds/bg1.png'
 
 export default function BattleTopDisplay() {
   const attackPopupStyles = {
@@ -84,13 +85,16 @@ export default function BattleTopDisplay() {
       },
     },
   }
-
   // Def work on this later
-  const currentMonDetailsStatuses = contextualState.opponent.monsters[0].obj.status
-
+  const currentMonDetailsStatuses =
+    contextualState.opponent.monsters[0].obj.status
   const currentMon =
-    contextualState.current.scene.details.trainer.monsters[0].obj // .level
-  console.log(`currentMon & currentMonDetails:`, currentMon, currentMonDetailsStatuses)
+    contextualState.current.scene.details.trainer.monsters[0].obj
+  console.log(
+    `currentMon & currentMonDetails:`,
+    currentMon,
+    currentMonDetailsStatuses,
+  )
   const {
     name,
     lore,
@@ -112,18 +116,15 @@ export default function BattleTopDisplay() {
     lvl,
     // status,
   } = currentMon
-  // console.log(`currentMonDetails:`, currentMonDetails, currentMon, stats)
-
-  // console.log(`here is the currentMon HP and maxHP:`, stats.hp, stats.maxHP)
 
   return (
-    <div className="battleTop">
-      <div className="battleTopLeft">
-        <div className="battleTLname" style={{ fontSize: '25px' }}>
+    <div className="flex p-1 mx-2 bg-boy-green">
+      <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
+        <div className="text-2xl">
           {name}
-          <span style={{ color: 'gray', fontSize: '12px' }}>lvl{lvl}</span>
+          <span className="text-gray-500 text-sm">lvl{lvl}</span>
         </div>
-        <div className="battleTLhealth">
+        <div>
           {stats.hp}HP
           <progress
             id="health"
@@ -135,40 +136,32 @@ export default function BattleTopDisplay() {
             }}
           />
         </div>
-        <div className="battleTLnext">
-          {/* <span style={{ color: "gray" }}>Next: </span> */}
-          {/* <span style={{ color: 'gray', fontSize: '12px' }}>
-            In 10{' '}
-            <img
-              src={`./icons/Seconds.png`}
-              style={{ width: 20, height: 20 }}
-              alt="Seconds Icon"
-            />{' '}
-          </span> */}
-          {/*  "will use". Similar to an `intent` system in Slay */}
-          {/* <button
-            onClick={openAttackPopup}
-            style={{
-              backgroundColor: 'green',
-              padding: '3px',
-              borderRadius: '3px',
-              color: 'white',
-            }}
-          >
-            {moves[0].name}
-          </button> */}
-          {/* <div className="text-sm">Statuses: {JSON.stringify(status)}</div> */}
-          <div className="text-[10px]">Statuses: {JSON.stringify(currentMonDetailsStatuses)}</div>
-
+        <div className="text-xs">
+          Statuses:
+          {Object.keys(currentMonDetailsStatuses).map((key) => {
+            if (currentMonDetailsStatuses[key]) {
+              console.log(`${key} is true`)
+              return (
+                <span className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1" key={key}>
+                {key}
+              </span>
+              )
+            } else {
+              console.log(`${key} is false`)
+              return (
+                <span className="text-gray-500" key={key}>
+                  {key}
+                </span>
+              )
+            }
+          })}
         </div>
-        {/* <div> */}
-        {/* <Button onClick={openAttackPopup} text={moves[0].name} /> */}
-
-        {/* </div> */}
-
         {isAttackPopupVisible && (
-          <div style={attackPopupStyles.overlay} onClick={closeAttackPopup}>
-            <div style={attackPopupStyles.container}>
+          <div
+            className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10"
+            onClick={closeAttackPopup}
+          >
+            <div className="bg-lightgreen shadow-md p-5 rounded">
               <AttackPopup
                 name={moves[0].name} // Pass the attack details here
                 damage="30"
@@ -183,7 +176,10 @@ export default function BattleTopDisplay() {
           </div>
         )}
       </div>{' '}
-      <div className="battleTopRight">
+      <div
+        className="flex flex-col items-center mx-2 flex-grow-2 bg-center bg-no-repeat bg-cover"
+        style={{ backgroundImage: `url(${bg1})` }}
+      >
         <motion.img
           style={{ width: 180, height: 150 }}
           animate="visible"

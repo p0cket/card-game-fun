@@ -1,4 +1,5 @@
 import { ACTIONS } from '../MainContext'
+import { PLAYERS } from '../consts/consts'
 import { Party, opponent } from '../consts/party/parties'
 import { checkForUndefined, cusLog } from '../utils/debugging-utils'
 import { dmgPhase } from './attack/dmgPhase'
@@ -81,12 +82,12 @@ export const executeMove = (payload) => {
       payResult = payPhase(
         state,
         dispatch,
-        // move details 
+        // move details
         move,
         pal,
         player,
         userSlot,
-        // target details 
+        // target details
         targets,
       )
       dispatch({ payload: payResult, type: ACTIONS.UPDATEGAMEDATA })
@@ -146,24 +147,25 @@ export const executeMove = (payload) => {
       })
       break
     case ATK_PHASES.EFFECTS:
-      effectsResult = cleanupPhase(
-        state,
-        dispatch,
-        // move details
-        move,
-        pal,
-        player,
-        userSlot,
-        // target details
-        targets,
-      )
+      ;`ATK: EFFECTS (cleanup) phase`,
+        (effectsResult = cleanupPhase(
+          state,
+          dispatch,
+          // move details
+          move,
+          pal,
+          player,
+          userSlot,
+          // target details
+          targets,
+        ))
       dispatch({
         payload: effectsResult,
         type: ACTIONS.UPDATEGAMEDATA,
       })
       break
     case ATK_PHASES.END:
-      console.log(`ATK: end phase`)
+      console.log(`ATK: END phase`)
       endResult = endPhase(
         state,
         dispatch,
@@ -209,7 +211,7 @@ export const executeAITurn = (state, dispatch, details = null) => {
     details,
     pal,
   )
-  const move = determineAIMove(pal, state, details)
+  const move = determineAIMove(state, pal, details)
   const result = executeMove({
     state: state,
     dispatch: dispatch,
@@ -217,17 +219,19 @@ export const executeAITurn = (state, dispatch, details = null) => {
     move: move,
     phase: ATK_PHASES.DAMAGE,
     userSlot: 0,
-    targets: { ally: null, enemy: [0] },
-    player: 'AI',
+    targets: { ally: [0], enemy: null },
+    player: PLAYERS.AI,
     //possessed: false,
   })
   return result
   // return { ...state, opponent: { ...state.opponent, monsters: [monster, ...state.opponent.monsters] }
 }
 
-export const determineAIMove = (state, details, pal, deets = null) => {
-  console.log(`determineAIMove: pal, state, details`, pal, state, deets)
-  const result = state.opponent.monsters[0].moves[0]
+export const determineAIMove = (state, pal, details = null) => {
+  console.log(`determineAIMove: state, pal, details`, state, pal, details)
+  // const result = pal.moves[Math.floor(Math.random() * pal.moves.length)]
+  const result = pal.obj.moves[0]
+  console.log(`determineAIMove: resulting move - `, result)
 
   // Implement AI logic to determine a move
   // Your AI logic here to choose a move rnadomly
