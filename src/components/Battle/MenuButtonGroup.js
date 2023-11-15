@@ -1,39 +1,76 @@
-import React from 'react';
-import { energyEmoji } from '../../consts/consts';
-import PropTypes from 'prop-types';
-import { useStateContext } from '../../MainContext';
+import React, { useState } from 'react'
+import { energyEmoji } from '../../consts/consts'
+import PropTypes from 'prop-types'
+import { useStateContext } from '../../MainContext'
 
 function MenuButtonGroup({ togglePopup }) {
-  const contextualState = useStateContext();
+  const contextualState = useStateContext()
+  const [currentView, setCurrentView] = useState('menu')
 
-  return (
-    <div className="font-silkscreen flex w-full justify-between text-white bg-boy-green mx-2">
-      <div className="flex items-center justify-center flex-grow p-1">
+  const menuButtons = () => (
+    <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
+      <div className="flex items-center justify-center flex-grow p-1 text-sm">
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
-      <div className="flex flex-grow justify-around items-center m-1 bg-boy-green">
-        <div className="flex flex-col items-center">
+      <div className="flex flex-grow justify-around items-center m-1 bg-[#5a7d2a]">
+        <div className="grid grid-cols-2 grid-rows-2 w-full h-full bg-boy-green border border-gray-400 rounded-sm">
           <div
-            onClick={togglePopup}
-            className="p-1 text-green-200 text-sm cursor-pointer"
+            onClick={() => setCurrentView('attacks')}
+            className="text-[#ddf4c5] text-sm cursor-pointer p-1 flex items-center justify-center"
           >
             Attack
           </div>
-          <div className="p-1 text-green-400 text-sm">
-            [(🔒)Items]
+          <div className="text-[#ddf4c5] text-sm p-1 flex items-center justify-center">
+            🔒Items
           </div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="p-1 text-sm">[(🔒)PaLs]</div>
-          <div className="p-1 text-sm">[(🔒)Options]</div>
+          <div className="text-sm p-1 flex items-center justify-center">
+            🔒PaLs
+          </div>
+          <div
+            onClick={togglePopup}
+            className="text-sm p-1 flex items-center justify-center"
+          >
+            🔒Options
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
+
+  const attackButtons = () => (
+    <div className="flex flex-grow justify-around items-center  bg-[#5a7d2a]">
+      <div className="font-[silkscreen] flex-none w-1/4 items-center justify-center text-sm text-white">
+        {contextualState.game.player.energy} Energy {energyEmoji}
+      </div>
+      <div className="border border-gray-400 rounded-sm flex  flex-grow flex-col font-[silkscreen]">
+        <div className="cursor-pointer text-sm text-white">Firebeam</div>
+        <div className="cursor-pointer text-sm text-white">Icebeam</div>
+        <div className="cursor-pointer text-sm text-white">Thunder</div>
+        <div
+          className="cursor-pointer text-sm text-white"
+          onClick={() => setCurrentView('menu')}
+        >
+          Blizzard
+        </div>
+      </div>
+      {/* <div
+        onClick={() => setCurrentView('menu')}
+        className="p-2 cursor-pointer"
+      >
+        X
+      </div> */}
+    </div>
+  )
+
+  return (
+    <div className="w-full  mx-2 ">
+      {currentView === 'menu' ? menuButtons() : attackButtons()}
+    </div>
+  )
 }
 
 MenuButtonGroup.propTypes = {
   togglePopup: PropTypes.func.isRequired,
-};
+}
 
-export default MenuButtonGroup;
+export default MenuButtonGroup

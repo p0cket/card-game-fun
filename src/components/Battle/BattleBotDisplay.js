@@ -57,13 +57,13 @@ function BattleBotDisplay({ ourCurrentMon }) {
             </div>
           </div>
           <div>
-            <ul className="text-lg flex flex-col">
+            <ul className="text-sm flex flex-col justify-start align-start">
               <li>
                 <button className="bg-boy-green py-1 px-2 rounded text-white">
                   {ourCurrentMon.passive_ability}
                 </button>
               </li>
-              <li>Group: {ourCurrentMon.specialty_group}</li>
+              {/* <li>Group: {ourCurrentMon.specialty_group}</li>
               <li>
                 +{' '}
                 {ourCurrentMon.strengths.map((strength, index) => (
@@ -75,7 +75,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
                 {ourCurrentMon.weaknesses.map((weakness, index) => (
                   <span key={index}>{weakness}, </span>
                 ))}
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

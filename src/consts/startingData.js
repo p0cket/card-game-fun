@@ -115,6 +115,20 @@ export const newStartingData = {
     title: 'startingData Title',
     header: 'startingData Header',
   },
+  popup: {
+    isOpen: false,
+    message: 'startingData Popup Message',
+    options: [
+      {
+        label: 'start',
+        onClick: () => {},
+        backgroundColor: '#4b770e',
+        color: '#fff',
+      },
+    ],
+    title: 'startingData Title',
+    header: 'startingData Header',
+  },
 }
 
 export const startingData = {

@@ -21,14 +21,12 @@ function MenuPopup(props) {
   const renderTab = (menuOption) => (
     <div
       key={menuOption}
-      onClick={() => toggleMenu(menuOption)}
-      style={{
-        cursor: 'pointer',
-        padding: '10px',
-        backgroundColor: currentMenu === menuOption ? '#4b770e' : '#5a7d2a',
-        color: currentMenu === menuOption ? '#fff' : '#000',
-        marginRight: '10px',
-      }}
+      onClick={() => setCurrentMenu(menuOption)}
+      className={`cursor-pointer mr-1 ${
+        currentMenu === menuOption
+          ? 'bg-boy-green  text-white'
+          : 'bg-boy-lightgreen text-black'
+      }`}
     >
       {menuContent[menuOption].label}
     </div>
@@ -74,68 +72,33 @@ function MenuPopup(props) {
   }
 
   return props.trigger ? (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100vh',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 100,
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          padding: '20px',
-          backgroundColor: '#5a7d2a',
-          width: '80%',
-          maxWidth: '640px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-        }}
-      >
-        <div style={attackHeaderStyle}>
-          <div style={characterIconStyle}>{'i'}</div>
-          <div style={attackLabelStyle}>{menuContent[currentMenu].label}</div>
+    <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-20 flex justify-center items-center z-50">
+      <div className="relative p-2 bg-boy-green w-4/5 max-w-xl shadow-md">
+        <div className="flex items-center mb-2">
+          <div className="w-6 h-6 bg-boy-green mr-2"></div>{' '}
+          {/* Placeholder for character icon */}
+          <div className="text-2xl font-bold">
+            {menuContent[currentMenu].label}
+          </div>
         </div>
-        <div
-          style={{
-            maxHeight: '400px', // Set a maximum height for the scrollable content
-            overflowY: 'auto', // Enable vertical scrolling
-          }}
-        >
+        <div className="max-h-96 overflow-y-auto">
           {menuContent[currentMenu].content}
         </div>
-        <div style={{ marginTop: '20px' }}>
+        <div className="mt-5">
           {Object.values(MenuOptions).map((menuOption) =>
             renderTab(menuOption),
           )}
         </div>
-        <div style={{ marginTop: '20px' }}>
-          {/* Add any additional details here */}
-        </div>
+        <div className="mt-5">{/* Add any additional details here */}</div>
         <button
-          style={{
-            backgroundColor: '#4b770e',
-            border: 'none',
-            color: '#fff',
-            padding: '10px 20px',
-            cursor: 'pointer',
-            marginTop: '20px',
-          }}
+          className="bg-boy-green text-white p-2 mt-5 w-full text-center"
           onClick={() => props.togglePopup()}
         >
           Close
         </button>
       </div>
     </div>
-  ) : (
-    ''
-  )
+  ) : null
 }
 
 const attackHeaderStyle = {
