@@ -129,8 +129,11 @@ export const dmgPhase = (
     console.log(`dmg after the createAIDamagedState:`, contextualState)
     // dialog open state here?
   } else if (player === 'AI') {
+    console.log(`check passed as AI: contextualState.userParty`, contextualState.userParty)
+    targetPal = contextualState.userParty[0]
     const moveCost = move.cost.energy
     ourDmg = move.damage
+console.log(`ATK: DMG phase: targetPal, move`, targetPal, move)
     console.log(
       `The AI damage to be dealt is ${ourDmg}.
     This will result in targetPal.stats.hp (${targetPal.stats.hp})
@@ -139,7 +142,7 @@ export const dmgPhase = (
     damagedHP = targetPal.stats.hp - ourDmg
     contextualState = { ...contextualState }
 
-    contextualState = createHumanDamagedState(contextualState, damagedHP)
+    contextualState = createHumanDamagedState(contextualState, damagedHP, moveCost, move, pal, contextualDispatch)
     console.log(`After createHumanDamagedState:`, contextualState)
   }
   //////----

@@ -16,7 +16,7 @@ export const createAIDamagedState = (
   damagedHP,
   moveCost,
   move,
-  user,
+  pal,
   contextualDispatch,
 ) => {
   console.log(
@@ -29,8 +29,8 @@ export const createAIDamagedState = (
     moveCost,
     'move:',
     move,
-    'user:',
-    user,
+    'pal:',
+    pal,
     'contextualDispatch:',
     contextualDispatch,
   )
@@ -63,7 +63,7 @@ export const createHumanDamagedState = (
   damagedHP,
   moveCost,
   move,
-  user,
+  pal,
   contextualDispatch,
 ) => {
   console.log(
@@ -76,24 +76,21 @@ export const createHumanDamagedState = (
     moveCost,
     'move:',
     move,
-    'user:',
-    user,
+    'pal:',
+    pal,
     'contextualDispatch:',
     contextualDispatch,
   )
-  console.log('ourState.userParty[0]:', ourState.userParty[0])
+  console.log('ourState.userParty[0]:', ourState.userParty[0], ourState)
   let resultState = {
     ...ourState,
     userParty: ourState.userParty.map((partyMember, index) =>
       index === 0
         ? {
             ...partyMember,
-            obj: {
-              ...partyMember.obj,
-              stats: {
-                ...partyMember.obj.stats,
-                hp: damagedHP,
-              },
+            stats: {
+              ...partyMember.stats,
+              hp: damagedHP,
             },
           }
         : partyMember,

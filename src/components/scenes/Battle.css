@@ -2,62 +2,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* max-width: 800px; */
-  /* max-width: 850px; */
-  
 }
 
 .battleUIcontainer {
-  /* display: flex;
-  flex-direction: column; 
-  align-items: center; */
   max-width: 800px;
 }
 .battleUI {
   font-family: Silkscreen;
-  /* background-color: green; */
   display: flex;
-  /* flex-direction: column; */
   flex-wrap: wrap;
   align-items: center;
 
-  /* background-image: url(/backgrounds/gridBG1.png);
-  background-repeat: repeat;
-  background-size: cover;
-  width: "100vw";
-  height: "100vh"; */
-
-
-  /* margin-left: 7%;
-  margin-right: 7%; */
-  /* margin: 0px 30px; */
-  /* max-width: 600px; */
 }
-
-.battleTop {
-  display: flex;
-  padding: 0px 2px;
-  margin: 0px 6px;
-  background-color: #5a7d2a;
-}
-
 .battleTopLeft {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: #e6ecc3;
-
   flex-grow: 1;
 }
-.battleBotLeftUpper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  flex-direction: column;
-  background-color: #e6ecc3;
-  flex-grow: 1;
-}
-
 .battleTopRight {
   display: flex;
   flex-direction: column;
@@ -65,59 +28,10 @@
   /* padding: 2px; */
   margin: 0px 0px 0px 2px;
   flex-grow: 2;
-
-  /* background-color: #e6ecc3; */
-
-   /* replace this one */
-  /* background-image: url(backgrounds/bg1.png); */
-  
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.battleBot {
-  display: flex;
-  padding: 0px 2px;
-  margin: auto;
-  justify-content: space-around;
-  background-color: #5a7d2a;
-  font-size: '8px';
-}
-.battleBotLeft {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  /* padding: 2px; */
-  margin: 0px 0px 0px 2px;
-  /* width: 50%; */
-  flex-grow: 2;
-  background-color: #e6ecc3;
-}
-
-.battleBLname {
-  display:flex;
-  align-items: flex-start;
-}
-.battleBotRight {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  align-items: center;
-  /* padding: 10px; */
-  /* background-color: #e6ecc3; */
-
-
-  /* replace this one */
-  /* background-image: url('backgrounds/bg1.png'); */
-
-
-  
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .battleStats {
   display: flex;
   /* flex-direction: column; */
@@ -127,48 +41,11 @@
   background-color: #5a7d2a;
   color: white;
 }
-
 .battleDialog {
   background-color: #5a7d2a;
   /* max-width: 800px; */
   /* margin: 0px 30px; */
 }
-
-.battleUIhand {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: row;
-  /* align-items:  */
-  /* justify-content: space-around; */
-  /* justify-content: center; */
-  flex-wrap: wrap;
-
-  padding: 2px;
-  /* margin: 0px 30px; */
-  /* dark, medium, and light colors below */
-  background-color: rgb(75, 119, 13);
-  /* background-color: rgb(95, 143, 28); */
-  /*   background-color: rgb(124, 173, 55); */
-  /* background-image: url(/backgrounds/bg1.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
-}
-.battleUIdeck {
-  display: flex;
-  flex-grow: 1;
-  /* flex-direction: row; */
-  justify-content: center;
-  /* padding: 10px; */
-  background-color: #5a7d2a;
-  /* background-image: url(/backgrounds/bg1.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .simpleButton {
   font-family: Silkscreen;
 }

@@ -1,8 +1,5 @@
 // Replace the other functions of the same name
 // so you can use the functions in Battle.js
-
-// import { enemies } from '../components/consts'
-// import { startHandCount } from '../consts/consts'
 import { updateStatusState } from '../handlers/state/statusStateHandlers'
 
 export const decideEnemyATK = (enemyAttacks) => {
@@ -14,15 +11,6 @@ export const decideEnemyATK = (enemyAttacks) => {
     console.log(`no enemyAttacks passed into decideEnemyATK`)
   }
 }
-
-// export const getBattlePayloadRandomized = () => {
-//   return {
-//     enemySeed: Math.random(),
-//     atkSeed: Math.random(),
-//     beginBattleSeed: Math.random(),
-//     startingHandCount: startHandCount,
-//   }
-// }
 
 export function calculateDoesItLand(move) {
   const randomNum = Math.random() * 100

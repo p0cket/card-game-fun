@@ -1,48 +1,21 @@
-import React from 'react'
-import { energyEmoji } from '../../consts/consts'
-import PropTypes from 'prop-types'
-import { useStateContext } from '../../MainContext'
+import React from 'react';
+import { energyEmoji } from '../../consts/consts';
+import PropTypes from 'prop-types';
+import { useStateContext } from '../../MainContext';
 
 function MenuButtonGroup({ togglePopup }) {
-  const contextualState = useStateContext()
+  const contextualState = useStateContext();
 
   return (
-    <div
-      style={{
-        fontFamily: 'Silkscreen',
-        display: 'flex',
-        color: 'white',
-        backgroundColor: '#5a7d2a',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          fontSize: '20px',
-          alignContent: 'center',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          padding: '4px',
-        }}
-      >
-        {contextualState.game.player.energy} Energy
-        {energyEmoji}
+    <div className="font-silkscreen flex w-full justify-between text-white bg-boy-green mx-2">
+      <div className="flex items-center justify-center flex-grow p-1">
+        {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
-      <div
-        style={{
-          fontFamily: 'Silkscreen',
-          display: 'flex',
-          justifyContent: 'space-around',
-          flex: 2,
-          backgroundColor: '#5a7d2a',
-          color: 'white',
-          margin: '2px',
-        }}
-      >
-        <div>
+      <div className="flex flex-grow justify-around items-center m-1 bg-boy-green">
+        <div className="flex flex-col items-center">
           <div
             onClick={togglePopup}
-            className="p-1 text-green-200 text-sm"
+            className="p-1 text-green-200 text-sm cursor-pointer"
           >
             Attack
           </div>
@@ -50,16 +23,17 @@ function MenuButtonGroup({ togglePopup }) {
             [(🔒)Items]
           </div>
         </div>
-        <div>
+        <div className="flex flex-col items-center">
           <div className="p-1 text-sm">[(🔒)PaLs]</div>
           <div className="p-1 text-sm">[(🔒)Options]</div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 MenuButtonGroup.propTypes = {
   togglePopup: PropTypes.func.isRequired,
-}
-export default MenuButtonGroup
+};
+
+export default MenuButtonGroup;

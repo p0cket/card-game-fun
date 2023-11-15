@@ -132,18 +132,12 @@ const Intro = ({ dispatch }) => {
 
   const [explode, setExplode] = useState(false)
   const [startAnimation, setStartAnimation] = useState(false)
-
-  // const handleButtonClick = () => {
-  //   // Handle button click action here
-  //   setShowPopup(false)
-  // }
-
   return (
     <>
       <div>
         <div
           className="font-silkscreen flex flex-col items-center
-         bg-repeat bg-cover bg-green-800 text-white"
+         bg-repeat bg-cover bg-boy-green text-white"
         >
           <div
             style={{
