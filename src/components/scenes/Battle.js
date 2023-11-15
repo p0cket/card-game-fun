@@ -17,6 +17,7 @@ import { startingData } from '../../consts/startingData'
 import { Party } from '../../consts/party/parties'
 import DialoguePopup from '../common/DialoguePopup'
 import HUDHeader from '../battle/HUDHeader'
+import BattleCreatureTypes from '../battle/BattleCreatureTypes'
 
 // const Battle = ({ gameData, dispatch }) => {
 const Battle = () => {
@@ -75,6 +76,7 @@ const Battle = () => {
           <UserPartyDisplay />
           <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
+          <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
         </div>
         {gameData.alert ? (
           <div className="text-red-500 p-10 m-30 bg-black">
@@ -83,7 +85,6 @@ const Battle = () => {
         ) : (
           <></>
         )}
-
         <div style={{ display: 'flex' }}>
           {/* #TODO: Give MenuPopup its' own toggle, and remove this - MenuPopup */}
           <MenuButtonGroup togglePopup={togglePopup} />

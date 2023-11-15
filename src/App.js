@@ -17,6 +17,7 @@ import SpinningBoxes from './components/effects/SpinningBoxes'
 import QuestionMarks from './components/effects/QuestionMarks'
 import CharacterAnims from './components/effects/CharacterAnims'
 import { cusLog } from './utils/debugging-utils'
+import GeneralPopup from './components/common/GeneralPopup'
 
 const message = 'intro message'
 
@@ -60,6 +61,7 @@ export default function App() {
 
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         <DialoguePopup message={message} />
+        <GeneralPopup message={message} />
         {/* <DialoguePopup message={message} /> */}
 
         <Screen gameData={gameData} dispatch={dispatch} map={map} />

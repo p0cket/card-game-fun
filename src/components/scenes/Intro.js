@@ -8,7 +8,6 @@ import { AnimatePresence } from 'framer-motion'
 
 import Dialog from '../common/Dialog'
 import ThemedButton from '../common/ThemedButton'
-import DialoguePopup from '../common/DialoguePopup'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { getRandomPALAcronym } from '../../consts/fun/pal'
 import {
