@@ -1,12 +1,30 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
-import { useStateContext } from '../../MainContext'
+import { useDispatchContext, useStateContext } from '../../MainContext'
 
-function MenuButtonGroup({ togglePopup }) {
+function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   const contextualState = useStateContext()
+  const contextualDispatch = useDispatchContext()
   const [currentView, setCurrentView] = useState('menu')
 
+  const showTheAttack = (move, ourCurrentMon) => {
+  //   <RenderIndAttack
+  //   attack={move}
+  //   key={index}
+  //   contextualState={contextualState}
+  //   contextualDispatch={contextualDispatch}
+  //   togglePopup={props.togglePopup}
+  // />
+    console.log(`move`, move)
+    console.log(`ourCurrentMon`, ourCurrentMon)
+    contextualDispatch({
+      type: 'SHOW_ATTACK',
+      payload: { attack: move, ourCurrentMon: ourCurrentMon },
+    })
+  }
+
+  console.log(`ourCurrentMon!:D `, ourCurrentMon)
   const menuButtons = () => (
     <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
       <div className="flex items-center justify-center flex-grow p-1 text-sm">
@@ -42,10 +60,12 @@ function MenuButtonGroup({ togglePopup }) {
       <div className="font-[silkscreen] flex-none w-1/4 items-center justify-center text-sm text-white">
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
-      <div className="border border-gray-400 rounded-sm flex  flex-grow flex-col font-[silkscreen]">
-        <div className="cursor-pointer text-sm text-white">Firebeam</div>
-        <div className="cursor-pointer text-sm text-white">Icebeam</div>
-        <div className="cursor-pointer text-sm text-white">Thunder</div>
+      <div className="border border-gray-400 rounded-sm flex flex-grow flex-col font-[silkscreen]">
+        {ourCurrentMon.moves.map((move, index) => (
+          <div className="cursor-pointer text-sm text-white" key={index} onClick={() => showTheAttack(move, ourCurrentMon)}>
+            {move.name}
+          </div>
+        ))}
         <div
           className="cursor-pointer text-sm text-white"
           onClick={() => setCurrentView('menu')}

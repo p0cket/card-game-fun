@@ -4,6 +4,8 @@ import { SCENES } from '../handlers/sceneHandlers_new'
 import { opponent, userParty } from './party/parties'
 import { generateMap } from './mapGenerator_new'
 import { placeholderTrainer } from './party/trainers'
+import { LightBeam } from './allMoves'
+import { Luminowl } from './pals/pals'
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 //
@@ -117,17 +119,21 @@ export const newStartingData = {
   },
   popup: {
     isOpen: false,
-    message: 'startingData Popup Message',
-    options: [
-      {
-        label: 'start',
-        onClick: () => {},
-        backgroundColor: '#4b770e',
-        color: '#fff',
-      },
-    ],
-    title: 'startingData Title',
-    header: 'startingData Header',
+    // message: 'startingData Popup Message',
+    // options: [
+    //   {
+    //     label: 'start',
+    //     onClick: () => {},
+    //     backgroundColor: '#4b770e',
+    //     color: '#fff',
+    //   },
+    // ],
+    // title: 'startingData Title',
+    // header: 'startingData Header',
+    // isOpen: true,
+    type: 'attack',
+    attack: LightBeam,
+    ourCurrentMon: Luminowl,
   },
 }
 

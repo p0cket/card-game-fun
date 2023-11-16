@@ -39,13 +39,7 @@ export default function App() {
           backgroundSize: 'cover',
           width: '100vw',
           height: '100vh',
-          // Shrink display to mimic mobile
-          // maxWidth: '500px',
-          // maxHeight: '850px',
-          // display this div in the center:
-          // margin: 'auto',
           margin: '0 auto',
-          // center: 'true',
           display: 'flex', // Added for potential flexbox centering
           justifyContent: 'center', // Center content horizontally in a flex container
           alignItems: 'center', // Center content vertically in a flex container
@@ -58,11 +52,10 @@ export default function App() {
         {/* <QuestionMarks /> */}
         {/* <Confetti amount={300} /> */}
         {/* <CharacterAnims /> */}
-
+        
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         <DialoguePopup message={message} />
         <GeneralPopup message={message} />
-        {/* <DialoguePopup message={message} /> */}
 
         <Screen gameData={gameData} dispatch={dispatch} map={map} />
       </div>

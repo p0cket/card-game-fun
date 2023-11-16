@@ -6,6 +6,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@popmotion/popcorn": "^0.4.4",
     "core-js": "^3.33.0",
     "framer-motion": "^4.1.13",
     "node-sass": "^8.0.0",

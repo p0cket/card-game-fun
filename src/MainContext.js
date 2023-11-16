@@ -29,6 +29,8 @@ export const ACTIONS = {
   SET_INVENTORY: 'SET_INVENTORY',
   ATTACK: 'ATTACK',
   UPDATEGAMEDATA: 'UPDATEGAMEDATA',
+  SHOW_ATTACK: 'SHOW_ATTACK',
+  CLOSE_POPUP: 'CLOSE_POPUP',
 }
 
 export const MainProvider = ({ children }) => {
@@ -43,10 +45,31 @@ export const MainProvider = ({ children }) => {
     // console.log(`reducer HIT`, action.type, action)
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
-        
         return { ...state, ...action.payload }
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload }
+      case ACTIONS.SHOW_ATTACK:
+        return {
+          ...state,
+          popup: {
+            ...state.popup,
+            isOpen: true,
+            type: 'attack',
+            attack: action.payload.attack,
+            ourCurrentMon: action.payload.ourCurrentMon,
+          },
+          // attack: action.payload.attack,
+          // ourCurrentMon: action.payload.ourCurrentMon,
+        }
+      case ACTIONS.CLOSE_POPUP:
+        console.log('Reducer CLOSE_POPUP:', action)
+        return {
+          ...state,
+          popup: {
+            ...state.popup,
+            isOpen: false,
+          },
+        }
       case ACTIONS.ATTACK:
         return {
           ...state,
