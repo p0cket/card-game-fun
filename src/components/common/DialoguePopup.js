@@ -13,13 +13,13 @@ function DialoguePopup(props) {
       button.onClick()
     }
     // Close the dialogue if it isn't already closed
-    const closeDialogueState = {
-      ...contextualState,
-      dialog: {
-        ...contextualState.dialog,
-        isOpen: false,
-      },
-    }
+    // const closeDialogueState = {
+    //   ...contextualState,
+    //   dialog: {
+    //     ...contextualState.dialog,
+    //     isOpen: false,
+    //   },
+    // }
   }
 
   return trigger ? (
