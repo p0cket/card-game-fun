@@ -1,10 +1,10 @@
-// Function to add a monster to the party
-export const addMonsterToParty = (monster, userParty) => {
+// Function to add a pal to the party
+export const addPalToParty = (pal, userParty) => {
   // Check if the party is not full
   if (userParty.length < 6) {
-    // Add the monster to the party
-    userParty.push(monster)
-    console.log(`Added ${monster.name} to party.`)
+    // Add the pal to the party
+    userParty.push(pal)
+    console.log(`Added ${pal.name} to party.`)
     // Update the state or perform any necessary actions
     // For React, you would typically use setState or a state management library like Redux here
     return userParty

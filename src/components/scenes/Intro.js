@@ -20,7 +20,7 @@ import { gameVersion } from '../../consts/consts'
 import Chibipal from '../../assets/Chibipal.png'
 import Carousel from '../effects/Carousel'
 import { palImages } from '../../consts/pals/images'
-import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_2.png'
+import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_only_2_n.png'
 
 const Intro = ({ dispatch }) => {
   const styles = {

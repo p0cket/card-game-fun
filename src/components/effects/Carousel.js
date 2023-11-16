@@ -67,8 +67,6 @@ const Carousel = ({ ourImages = images }) => {
     }, interval * 1000)
   }, [page])
 
-  console.log(`ourImages`, ourImages)
-
   // Render the carousel component
   return (
     <div className="carousel-container relative w-full h-[200px] overflow-hidden">
