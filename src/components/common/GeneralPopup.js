@@ -1,117 +1,45 @@
 import React from 'react'
-import Dialog from './Dialog'
-import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import RenderIndAttack from '../info/RenderIndAttack'
 import { LightBeam } from '../../consts/allMoves'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 const GeneralPopup = (props) => {
-  const contextualState = useStateContext()
-  const contextualDispatch = useDispatchContext()
-  // const trigger = contextualState.popup.isOpen
-  const trigger = true
+  console.log('Before useStateContext in GeneralPopup')
+  const state = useStateContext()
+  console.log('Before useDispatchContext in GeneralPopup')
+  const dispatch = useDispatchContext()
+  // Or use the actual trigger condition
+  const { isOpen, type, attack, ourCurrentMon } = state.popup
 
-  const closeDialogPopup = (button) => {
-    if (button.onClick) {
-      button.onClick()
-    }
-    // Close the dialogue if it isn't already closed
-    const closeDialogueState = {
-      ...contextualState,
-      popup: {
-        ...contextualState.popup,
-        isOpen: false,
-      },
-    }
+  const trigger = isOpen
+  const closeDialogPopup = () => {
+    dispatch({
+      type: ACTIONS.CLOSE_POPUP,
+    })
   }
   return trigger ? (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100vh',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 100,
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          padding: '10px',
-          backgroundColor: '#5a7d2a',
-          width: '80%',
-          maxWidth: '640px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '2px',
-          }}
-        >
-          <div
-            style={{
-              width: '24px',
-              height: '24px',
-              backgroundColor: 'green',
-              marginRight: '2px',
-              // margin: '2px',
-            }}
-          >
-            {'!'}
-          </div>
-          <div
-            style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-            }}
-          >
-            <div>{contextualState.popup.title}</div>
+    <div className="font-[silkscreen] fixed top-0 left-0 w-full h-screen bg-black bg-opacity-20 flex justify-center items-center z-50">
+      <div className="relative p-1 bg-boy-green w-4/5 max-w-xl shadow">
+        <div className="flex items-center mb-1">
+          <div className="w-6 h-6 bg-boy-green mr-1">{'!'}</div>
+          <div className="font-bold text-white flex justify-between w-full">
+            <div>
+              {attack.name} ({attack.type})
+            </div>{' '}
+            <div onClick={() => closeDialogPopup()}>x</div>
           </div>
         </div>
-        <div
-          style={{
-            marginBottom: '8px',
-          }}
-        ></div>
         <div>
-          <div>
-            {RenderIndAttack({
-              attack: LightBeam,
-              contextualState: contextualState,
-              contextualDispatch: contextualDispatch,
-              togglePopup: () => {},
-            })}
-            {/* <Dialog size="20" myText={`sample message`} /> */}
-          </div>
-          {contextualState.popup.options.map((button, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                closeDialogPopup(button)
-              }}
-              style={{
-                backgroundColor: button.backgroundColor || '#4b770e',
-                border: 'none',
-                color: button.color || '#fff',
-                padding: '4px 4px',
-                margin: '2px',
-                cursor: 'pointer',
-              }}
-            >
-              {button.label}
-            </button>
-          ))}
+          {RenderIndAttack({
+            attack: attack,
+            contextualState: state,
+            contextualDispatch: dispatch, // Pass the actual dispatch
+            // we need to deprecate togglepopup, because it doesn't make sense here
+            togglePopup: () => {}, // Your toggle popup logic
+          })}
         </div>
       </div>
     </div>
-  ) : null
+  ) : <></>
 }
-
 export default GeneralPopup

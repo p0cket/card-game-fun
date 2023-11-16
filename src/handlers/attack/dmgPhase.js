@@ -145,9 +145,7 @@ console.log(`ATK: DMG phase: targetPal, move`, targetPal, move)
     contextualState = createHumanDamagedState(contextualState, damagedHP, moveCost, move, pal, contextualDispatch)
     console.log(`After createHumanDamagedState:`, contextualState)
   }
-  //////----
   console.log(`ATK: DAMAGE phase ending:`, contextualState)
-  //
   console.groupEnd()
 
   return contextualState

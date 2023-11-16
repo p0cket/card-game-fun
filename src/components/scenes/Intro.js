@@ -18,12 +18,14 @@ import {
 import { gameVersion } from '../../consts/consts'
 // import SparkleButton from '../common/SparkleButton'
 import Chibipal from '../../assets/Chibipal.png'
+import Carousel from '../effects/Carousel'
+import { palImages } from '../../consts/pals/images'
+import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_2.png'
 
 const Intro = ({ dispatch }) => {
   const styles = {
     fontStyle: {
       fontFamily: 'Silkscreen',
-      // fontSize: "100px",
       fontSize: '22px',
       color: 'white',
       padding: '20px',
@@ -139,11 +141,8 @@ const Intro = ({ dispatch }) => {
          bg-repeat bg-cover bg-boy-green text-white"
         >
           <div
-            style={{
-              color: 'white',
-              backgroundColor: 'black',
-              fontSize: '12px',
-            }}
+            className="font-[silkscreen] text-white bg-black text-xs
+          p-1 m-1"
           >
             {gameVersion}
           </div>
@@ -154,26 +153,21 @@ const Intro = ({ dispatch }) => {
               transition={{ delay: 1.1, duration: 2 }}
               style={styles.fontStyle}
             >
-              Super Chibipal Slayer!
-              <h5>{getRandomPALAcronym()}</h5>
+              {/* Super Chibipal Slayer! */}
+              <img src={ChibipalsLogo} alt="pal logo" />
+              <div className="text-sm">Tolerance Edition</div>
+              {/* <div className="text-sm italic">
+                {getRandomPALAcronym()}
+              </div> */}
             </motion.div>
           </div>
-          <div>
-            <img
-              style={{ width: 240, height: 200, padding: '20px' }}
-              // src="creatures/Chibipal.png"
-              src={Chibipal}
-              alt="Chibipal Backside"
-
-            />
-          </div>
+          <Carousel ourImages={palImages} />
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
-            {/* <div style={{color: 'white'}}>  Hi Lisa, I made this game for you to play</div> */}
-            <Dialog
+            {/* <Dialog
               size="20"
               myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
       In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
-            />
+            /> */}
             <br />
           </div>{' '}
           {/* <div style={{ position: "relative", height: "100vh" }}>
@@ -185,19 +179,20 @@ const Intro = ({ dispatch }) => {
           {/* <button onClick={() => setStartAnimation(true)}>
               Start Animation
             </button> */}
-          <div style={{ padding: '30px' }}>
+          <div style={{ padding: '10px' }}>
             {' '}
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
           {/* <SparkleButton /> */}
-          <ThemedButton text={`Options`} onClick={loadNextLevel} />
-          <ThemedButton text={`Museum`} onClick={loadNextLevel} />
+          <div className="flex">
+            <ThemedButton text={`Options`} onClick={loadNextLevel} />
+            <ThemedButton text={`Museum`} onClick={loadNextLevel} />
+          </div>
+          <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
           {/* <div style={{ backgroundColor: 'gray', padding: '5px' }}> */}
-          <div className='bg-green-100 p-1'>
-
-            <p className=" font-bold text-green-800">
-              Streak: {streak} longestStreak{' '}
-              {longestStreak}, (Last Played: {lastPlayedTime})
+          <div className="bg-boy-lightgreen p-1">
+            <p className="font-[silkscreen] font-bold text-green-800 text-sm">
+              Streak: {streak} Best: {longestStreak} (LP: {lastPlayedTime})
             </p>
           </div>
           {/* <div style={{ color: 'white' }}>

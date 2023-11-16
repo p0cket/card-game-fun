@@ -87,7 +87,7 @@ const Battle = () => {
         )}
         <div style={{ display: 'flex' }}>
           {/* #TODO: Give MenuPopup its' own toggle, and remove this - MenuPopup */}
-          <MenuButtonGroup togglePopup={togglePopup} />
+          <MenuButtonGroup togglePopup={togglePopup} ourCurrentMon={ourCurrentMon} />
         </div>
         <UserPartyDisplay />
         <div

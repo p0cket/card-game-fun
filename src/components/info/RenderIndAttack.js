@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import { ACTIONS } from '../../MainContext'
-import { Party } from '../../consts/party/parties'
+import stunImg from './../../assets/packImages/Stun.png'
 
 function RenderIndAttack({
   attack,
@@ -26,7 +26,9 @@ function RenderIndAttack({
   } = attack
 
   const runMove = (move, pal) => {
-    togglePopup()
+    if (togglePopup !== undefined) {
+      togglePopup()
+    }
 
     executeMove({
       // context:
@@ -43,43 +45,53 @@ function RenderIndAttack({
       possessed: false,
     })
   }
+
   const renderBasic = (move) => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex' }}>
-          <div className="px-2">
-            {fuel}
-            {energyEmoji}
+      <div className="bg-boy-lightgreen p-1 rounded shadow">
+        {/* <div className="text-left text-lg mb-2">
+          {move.name} ({move.type})
+        </div> */}
+        <div className="flex justify-between mb-2">
+          <div className="p-1 m-1 bg-green-600">
+            <img src={stunImg} alt={move.name} className="w-28" />
           </div>
-          <div className="px-2">{speed}speed</div>
-          <div className="px-2">{damage}dmg</div>
-          <div className="px-2">type:{type}</div>
+          <table>
+            <tbody>
+              <tr>
+                <td className="text-gray-600 text-left">Damage:</td>
+                <td>{move.damage}</td>
+              </tr>
+              <tr>
+                <td className="text-gray-600 text-left">Speed:</td>
+                <td>{move.speed}</td>
+              </tr>
+              <tr>
+                <td className="text-gray-600 text-left">Accuracy:</td>
+                <td>95%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div className="px-2">Effect: {effect.description}</div>
-        <div className="px-2">Priority: {priority}</div>
-        <div className="px-2">Targets: {targets.join(', ')}</div>
-        <button
-          style={{
-            backgroundColor: '#4b770e',
-            color: '#fff',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-          }}
-          onClick={() => runMove(attack, contextualState.userParty[0])}
-        >
-          Use
-        </button>
+        <div className="text-left">
+          <div className="mb-2">{move.effect.description}</div>
+          <div>{`May ${move.effect.result} (${move.effect.chance})`}</div>
+          <div>Targets: {move.targets.join(', ')}</div>
+        </div>
+        {/* <button
+        className="bg-boy-green text-white cursor-pointer py-2 px-4 text-lg font-bold rounded shadow"
+        onClick={() => runMove(move)}
+      >
+        Use
+      </button> */}
       </div>
     )
   }
+
   const renderForceful = (move) => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex' }}>
+      <div className="flex flex-col">
+        <div className="flex">
           <div>
             {forceful.fuel}
             {energyEmoji}
@@ -92,20 +104,6 @@ function RenderIndAttack({
         <div>chance: {forceful.effect.chance}</div>
         <div>result: {forceful.effect.result}</div>
         <div>Targets: {forceful.targets.join(', ')}</div>
-        <button
-          style={{
-            backgroundColor: '#4b770e',
-            color: '#fff',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-          }}
-        >
-          Use
-        </button>
       </div>
     )
   }
@@ -124,125 +122,39 @@ function RenderIndAttack({
     }
   }
   return (
-    <div style={{ ...attackContainerStyle, backgroundColor: '#5a7d2a' }}>
-      <div style={{ display: 'flex' }}>
+    <div className="border border-green-400 flex flex-col items-stretch p-1 my-1 bg-boy-lightgreen">
+      {/* <div className="flex">
         <div
-          style={{
-            backgroundColor: attackType === 'basic' ? '#4b770e' : '#5a7d2a',
-            color: attackType === 'basic' ? '#fff' : '#000',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-            margin: '0px 3px',
-          }}
+          className={`px-2 py-1 text-lg font-bold rounded shadow cursor-pointer mx-1 ${
+            attackType === 'basic'
+              ? 'bg-boy-green text-white'
+              : 'bg-gray-600 text-black'
+          }`}
           onClick={() => setAttackType('basic')}
         >
           {attack.name}
         </div>
-        <div
-          style={{
-            backgroundColor: attackType === 'forceful' ? '#4b770e' : '#5a7d2a',
-            color: attackType === 'forceful' ? '#fff' : '#000',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-            margin: '0px 3px',
-          }}
-          onClick={() => setAttackType('forceful')}
-        >
-          {forceful.name}
-        </div>
-        <div
-          style={{
-            backgroundColor: attackType === 'notSoFast' ? '#4b770e' : '#5a7d2a',
-            color: attackType === 'notSoFast' ? '#fff' : '#000',
-            cursor: 'pointer',
-            padding: '8px 8px',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: '4px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-            margin: '0px 3px',
-          }}
-          onClick={() => setAttackType('notSoFast')}
-        >
-          {notSoFast.name}
-        </div>
-      </div>
+      </div> */}
       {moveFormToRender(attack)}
+      <div className="flex gap-2">
+        <button
+          className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
+          onClick={() => runMove(attack)}
+        >
+          Use ({attack.cost.energy} {energyEmoji})
+        </button>{' '}
+        <button
+          className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow"
+          onClick={() => runMove(attack)}
+        >
+          +{/* (8 {energyEmoji}) */}
+        </button>
+      </div>
+      {/* <button className="bg-boy-green text-white cursor-pointer py-2 px-4 text-lg font-bold rounded shadow">
+          Use
+        </button> */}
     </div>
   )
 }
 
 export default RenderIndAttack
-
-const attackContainerStyle = {
-  border: '1px solid #a5e54d',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'stretch',
-  padding: '12px',
-  margin: '8px 0',
-  backgroundColor: '#fff',
-}
-
-const attackInfoStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginBottom: '8px',
-}
-
-const attackNameStyle = {
-  fontWeight: 'bold',
-}
-
-const attackDamageStyle = {
-  flex: 1,
-  textAlign: 'right',
-}
-
-const attackDescriptionStyle = {
-  flex: 1,
-  textAlign: 'left',
-  color: 'black',
-}
-
-const attackEnergyCostStyle = {
-  alignSelf: 'flex-end',
-  textAlign: 'right',
-}
-
-const attackHeaderStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: '10px',
-}
-
-const characterIconStyle = {
-  width: '24px',
-  height: '24px',
-  backgroundColor: 'green', // Blue circle (placeholder for character icon)
-  marginRight: '10px',
-}
-
-const attackLabelStyle = {
-  fontSize: '24px',
-  fontWeight: 'bold',
-}
-
-const monsterNameStyle = {
-  fontWeight: 'bold',
-}
-
-const monsterAbilitiesStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  marginLeft: '34px', // To align with the monster icon
-}
