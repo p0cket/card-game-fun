@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
-import { ACTIONS } from '../../MainContext'
 import stunImg from './../../assets/packImages/Stun.png'
 
 function RenderIndAttack({
@@ -9,8 +8,15 @@ function RenderIndAttack({
   contextualState,
   contextualDispatch,
   togglePopup,
+  pal,
 }) {
-  // const [basicAttackSelected, setBasicAttackSelected] = useState(true)
+  console.log(
+    `RenderIndAttack: attack, contextualState, contextualDispatch, pal`,
+    attack,
+    contextualState,
+    contextualDispatch,
+    pal,
+  )
   const [attackType, setAttackType] = useState('basic') // Default to 'basic' attack
   const {
     name,
@@ -24,11 +30,25 @@ function RenderIndAttack({
     notSoFast,
     forceful,
   } = attack
-
   const runMove = (move, pal) => {
-    if (togglePopup !== undefined) {
-      togglePopup()
-    }
+    // if (togglePopup !== undefined) {
+    //   togglePopup()
+    // }
+    console.log(`runMove:  togglePopup`, togglePopup)
+
+    togglePopup()
+
+    console.log('executeMove params:', {
+      state: contextualState,
+      dispatch: contextualDispatch,
+      pal: pal,
+      move: move,
+      phase: ATK_PHASES.PAY,
+      userSlot: 0,
+      targets: { ally: null, enemy: [0] },
+      player: 'human',
+      possessed: false,
+    })
 
     executeMove({
       // context:
@@ -45,13 +65,9 @@ function RenderIndAttack({
       possessed: false,
     })
   }
-
-  const renderBasic = (move) => {
+  const renderBasic = (move, pal) => {
     return (
       <div className="bg-boy-lightgreen p-1 rounded shadow">
-        {/* <div className="text-left text-lg mb-2">
-          {move.name} ({move.type})
-        </div> */}
         <div className="flex justify-between mb-2">
           <div className="p-1 m-1 bg-green-600">
             <img src={stunImg} alt={move.name} className="w-28" />
@@ -78,12 +94,17 @@ function RenderIndAttack({
           <div>{`May ${move.effect.result} (${move.effect.chance})`}</div>
           <div>Targets: {move.targets.join(', ')}</div>
         </div>
-        {/* <button
-        className="bg-boy-green text-white cursor-pointer py-2 px-4 text-lg font-bold rounded shadow"
-        onClick={() => runMove(move)}
-      >
-        Use
-      </button> */}
+        <div className="flex gap-2">
+          <button
+            className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
+            onClick={() => runMove(attack, pal)}
+          >
+            Use ({attack.cost.energy} {energyEmoji})
+          </button>{' '}
+          <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
+            +
+          </button>{' '}
+        </div>
       </div>
     )
   }
@@ -112,9 +133,9 @@ function RenderIndAttack({
     return <div>CounterAttack</div>
   }
 
-  const moveFormToRender = (move) => {
+  const moveFormToRender = (move, pal) => {
     if (attackType === 'basic') {
-      return renderBasic(move)
+      return renderBasic(move, pal)
     } else if (attackType === 'forceful') {
       return renderForceful(move)
     } else if (attackType === 'notSoFast') {
@@ -123,7 +144,14 @@ function RenderIndAttack({
   }
   return (
     <div className="border border-green-400 flex flex-col items-stretch p-1 my-1 bg-boy-lightgreen">
-      {/* <div className="flex">
+      {moveFormToRender(attack, pal)}
+    </div>
+  )
+}
+
+export default RenderIndAttack
+{
+  /* <div className="flex">
         <div
           className={`px-2 py-1 text-lg font-bold rounded shadow cursor-pointer mx-1 ${
             attackType === 'basic'
@@ -134,27 +162,5 @@ function RenderIndAttack({
         >
           {attack.name}
         </div>
-      </div> */}
-      {moveFormToRender(attack)}
-      <div className="flex gap-2">
-        <button
-          className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
-          onClick={() => runMove(attack)}
-        >
-          Use ({attack.cost.energy} {energyEmoji})
-        </button>{' '}
-        <button
-          className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow"
-          onClick={() => runMove(attack)}
-        >
-          +{/* (8 {energyEmoji}) */}
-        </button>
-      </div>
-      {/* <button className="bg-boy-green text-white cursor-pointer py-2 px-4 text-lg font-bold rounded shadow">
-          Use
-        </button> */}
-    </div>
-  )
+      </div> */
 }
-
-export default RenderIndAttack

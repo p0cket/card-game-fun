@@ -58,5 +58,6 @@ export const endPhase = (
   })
 
   console.log(`END: phase ending. newState`, newState)
+  console.groupEnd()
   return newState
 }

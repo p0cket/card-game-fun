@@ -30,11 +30,6 @@ export const createCostPaidDialogState = (
           onClick: () => {
             console.log(`Clicked confirm pay`)
             executeMove(
-              // move,
-              // ourState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.DAMAGE,
               {
                 state: ourState,
                 dispatch: contextualDispatch,
@@ -56,9 +51,6 @@ export const createCostPaidDialogState = (
         {
           label: 'Enhance Pay',
           onClick: () => {
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
             const closedPopupState = {
               ...ourState,
               dialog: {
@@ -66,14 +58,7 @@ export const createCostPaidDialogState = (
                 isOpen: false,
               },
             }
-            // -maybe just use the same executeMove
-            // the button should change phase
             executeMove(
-              // move,
-              // closedPopupState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.DAMAGE,
               {
                 state: closedPopupState,
                 dispatch: contextualDispatch,
@@ -95,9 +80,6 @@ export const createCostPaidDialogState = (
         {
           label: 'Enhance',
           onClick: () => {
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
             const closedPopupState = {
               ...ourState,
               dialog: {
@@ -105,15 +87,7 @@ export const createCostPaidDialogState = (
                 isOpen: false,
               },
             }
-            // -maybe just use the same executeMove
-            // the button should change phase
             executeMove(
-              // move,
-              // // ourState,
-              // closedPopupState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.DAMAGE,
               {
                 state: closedPopupState,
                 dispatch: contextualDispatch,
@@ -164,4 +138,120 @@ export const createUserEnergyPaidState = (
   console.log(`createUserEnergyPaidState returning:`, energyPaidState)
   console.groupEnd()
   return energyPaidState
+}
+
+export const createAIPaidState = (
+  ourState,
+  contextualDispatch,
+  move,
+  pal,
+  player,
+  targets,
+) => {
+  console.groupCollapsed(
+    `createCostPaidDialogState called:`,
+    ourState,
+    contextualDispatch,
+    move,
+    pal,
+    player,
+    targets,
+  )
+  const paidState = {
+    ...ourState,
+    dialog: {
+      ...ourState.dialog,
+      isOpen: true,
+      message: `${move.cost.energy} Energy paid.
+      AI's ${pal.name} uses ${move.name}`,
+      options: [
+        {
+          label: 'Okay',
+          onClick: () => {
+            console.log(`Clicked Okay`)
+            executeMove(
+              {
+                state: ourState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'Counter',
+          onClick: () => {
+            const closedPopupState = {
+              ...ourState,
+              dialog: {
+                ...ourState.dialog,
+                isOpen: false,
+              },
+            }
+            executeMove(
+              {
+                state: closedPopupState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+        {
+          label: 'something else',
+          onClick: () => {
+            const closedPopupState = {
+              ...ourState,
+              dialog: {
+                ...ourState.dialog,
+                isOpen: false,
+              },
+            }
+            executeMove(
+              {
+                state: closedPopupState,
+                dispatch: contextualDispatch,
+
+                pal: pal,
+                move: move,
+                player: player,
+                phase: ATK_PHASES.DAMAGE,
+                userSlot: 0,
+
+                targets: targets,
+                // possessed: false,
+              },
+            )
+          },
+          backgroundColor: '#4b770e',
+          color: '#fff',
+        },
+      ],
+      title: 'AI Pay Phase',
+      header: 'AI Paid!',
+    },
+  }
+  console.log(`createAICostPaidDialogState returning:`, paidState)
+  console.groupEnd()
+  return paidState
 }

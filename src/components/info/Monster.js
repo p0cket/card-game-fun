@@ -16,14 +16,6 @@ const attackInfoStyle = {
   marginBottom: '8px',
 }
 
-const attackNameStyle = {
-  fontWeight: 'bold',
-}
-const attackDamageStyle = {
-  flex: 1,
-  textAlign: 'right',
-}
-
 const monsterNameStyle = {
   fontWeight: 'bold',
 }

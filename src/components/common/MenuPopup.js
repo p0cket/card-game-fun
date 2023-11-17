@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import Button from './Button'
 import { useDispatchContext, useStateContext } from '../../MainContext'
-import { Party } from '../../consts/party/parties'
-import { IceWall } from '../../consts/allMoves'
 import Monster from '../info/Monster'
 import RenderIndAttack from '../info/RenderIndAttack'
 
 const MenuOptions = {
   ATTACKS: 'attacks',
-  // BENCH_ATTACKS: 'benchAttacks',
-  // DO_SOMETHING: 'doSomething',
 }
-
 function MenuPopup(props) {
   const [currentMenu, setCurrentMenu] = useState(MenuOptions.ATTACKS)
   const toggleMenu = (menu) => {
     setCurrentMenu(menu)
   }
-
   const renderTab = (menuOption) => (
     <div
       key={menuOption}
@@ -33,7 +26,7 @@ function MenuPopup(props) {
   )
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
-
+  console.log('props.selectedPal', props.selectedPal)
   const menuContent = {
     [MenuOptions.ATTACKS]: {
       label: 'Attacks',
@@ -46,27 +39,10 @@ function MenuPopup(props) {
               contextualState={contextualState}
               contextualDispatch={contextualDispatch}
               togglePopup={props.togglePopup}
+              pal={props.selectedPal}
             />
           ))}
         </>
-      ),
-    },
-    [MenuOptions.BENCH_ATTACKS]: {
-      label: 'Bench Attacks',
-      content: (
-        <>
-          <Monster name={'Monster 1'} abilities={['Tackle', 'Growl']} />
-          <Monster name={'Monster 2'} abilities={['Scratch']} />
-          <Monster name={'Monster 3'} abilities={['Tail Whip', 'Growl']} />
-          <Monster name={'Monster 4'} abilities={['Tail Whip']} />
-          <Monster name={'Monster 5'} abilities={['Tail Whip']} />
-        </>
-      ),
-    },
-    [MenuOptions.DO_SOMETHING]: {
-      label: 'Do Something',
-      content: (
-        <div>{`This is the "Do Something" menu. Add your content here.`}</div>
       ),
     },
   }

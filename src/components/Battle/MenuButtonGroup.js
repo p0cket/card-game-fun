@@ -16,13 +16,6 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       payload: { attack: move, ourCurrentMon: ourCurrentMon },
     })
   }
-   //   <RenderIndAttack
-    //   attack={move}
-    //   key={index}
-    //   contextualState={contextualState}
-    //   contextualDispatch={contextualDispatch}
-    //   togglePopup={props.togglePopup}
-    // />
   console.log(`ourCurrentMon!:D `, ourCurrentMon)
   const menuButtons = () => (
     <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
