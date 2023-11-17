@@ -10,9 +10,17 @@ const GeneralPopup = (props) => {
   const dispatch = useDispatchContext()
   // Or use the actual trigger condition
   const { isOpen, type, attack, ourCurrentMon } = state.popup
+  console.log(
+    'GeneralPopup: isOpen, type, attack, ourCurrentMon',
+    isOpen,
+    type,
+    attack,
+    ourCurrentMon,
+  )
 
   const trigger = isOpen
   const closeDialogPopup = () => {
+    console.log('closeDialogPopup running a dispatch of CLOSE_POPUP')
     dispatch({
       type: ACTIONS.CLOSE_POPUP,
     })
@@ -30,16 +38,18 @@ const GeneralPopup = (props) => {
           </div>
         </div>
         <div>
-          {RenderIndAttack({
-            attack: attack,
-            contextualState: state,
-            contextualDispatch: dispatch, // Pass the actual dispatch
-            // we need to deprecate togglepopup, because it doesn't make sense here
-            togglePopup: () => {}, // Your toggle popup logic
-          })}
+          <RenderIndAttack
+            attack={attack}
+            contextualState={state}
+            contextualDispatch={dispatch}
+            togglePopup={closeDialogPopup}
+            pal={ourCurrentMon}
+          />
         </div>
       </div>
     </div>
-  ) : <></>
+  ) : (
+    <></>
+  )
 }
 export default GeneralPopup

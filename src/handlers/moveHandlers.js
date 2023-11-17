@@ -27,7 +27,6 @@ export const calculateTargets = (targets, allyPals, enemyPals) => {
   const allTargets = [allyTargets, enemyTargets]
   return allTargets
 }
-
 /**
  * Executes a game move. This function manages the different phases of a move, including pay, damage, statuses, effects, and end.
  * At each phase, it calls a dedicated function to handle that phase.
@@ -212,19 +211,19 @@ export const executeAITurn = (state, dispatch, details = null) => {
     pal,
   )
   const move = determineAIMove(state, pal, details)
+  console.log(`AI executeAITurn: determined move`, move)
   const result = executeMove({
     state: state,
     dispatch: dispatch,
     pal: pal,
     move: move,
-    phase: ATK_PHASES.DAMAGE,
+    phase: ATK_PHASES.PAY,
     userSlot: 0,
     targets: { ally: [0], enemy: null },
     player: PLAYERS.AI,
     //possessed: false,
   })
   return result
-  // return { ...state, opponent: { ...state.opponent, monsters: [monster, ...state.opponent.monsters] }
 }
 
 export const determineAIMove = (state, pal, details = null) => {
@@ -232,7 +231,6 @@ export const determineAIMove = (state, pal, details = null) => {
   // const result = pal.moves[Math.floor(Math.random() * pal.moves.length)]
   const result = pal.obj.moves[0]
   console.log(`determineAIMove: resulting move - `, result)
-
   // Implement AI logic to determine a move
   // Your AI logic here to choose a move rnadomly
   // but start with only the first move
