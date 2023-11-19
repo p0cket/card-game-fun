@@ -1,16 +1,22 @@
 {
   "files": {
-    "main.css": "/card-game-fun/static/css/main.8380de32.css",
-    "main.js": "/card-game-fun/static/js/main.6fe2a743.js",
+    "main.css": "/card-game-fun/static/css/main.1c445b40.css",
+    "main.js": "/card-game-fun/static/js/main.4999e460.js",
     "static/media/Squirrely.png": "/card-game-fun/static/media/Squirrely.7f404466657a69445d35.png",
+    "static/media/Stun.png": "/card-game-fun/static/media/Stun.9cbe1432c908eaaa33b3.png",
     "static/media/Chibipal.png": "/card-game-fun/static/media/Chibipal.d378d5b1e13b78c3932c.png",
     "static/media/Luminowl_pxl.png": "/card-game-fun/static/media/Luminowl_pxl.568639ad3a53b7d598a7.png",
+    "static/media/Ticklefairy_pxl.png": "/card-game-fun/static/media/Ticklefairy_pxl.b4116e7e6a9b71458f1a.png",
+    "static/media/Umbrabunny_pxl.png": "/card-game-fun/static/media/Umbrabunny_pxl.2cb6ac533c253a57b7dd.png",
+    "static/media/bg1.png": "/card-game-fun/static/media/bg1.8480cf860b841f4b512e.png",
+    "static/media/recycleroo_pxl.png": "/card-game-fun/static/media/recycleroo_pxl.f9b3238e67ccf96247a2.png",
+    "static/media/Chibipals_Logo_only_2_n.png": "/card-game-fun/static/media/Chibipals_Logo_only_2_n.229662dff15e6d8022a9.png",
     "index.html": "/card-game-fun/index.html",
-    "main.8380de32.css.map": "/card-game-fun/static/css/main.8380de32.css.map",
-    "main.6fe2a743.js.map": "/card-game-fun/static/js/main.6fe2a743.js.map"
+    "main.1c445b40.css.map": "/card-game-fun/static/css/main.1c445b40.css.map",
+    "main.4999e460.js.map": "/card-game-fun/static/js/main.4999e460.js.map"
   },
   "entrypoints": [
-    "static/css/main.8380de32.css",
-    "static/js/main.6fe2a743.js"
+    "static/css/main.1c445b40.css",
+    "static/js/main.4999e460.js"
   ]
 }
