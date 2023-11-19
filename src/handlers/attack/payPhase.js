@@ -94,7 +94,7 @@ export const payPhase = (
     // aiEnergy =
     // const result =
     moveCost = move.cost.energy
-    console.log(`cost is ${moveCost} energy. ${player} has ${playerEnergy}`)
+    console.warn(`cost is ${moveCost} energy. ${player} has ${playerEnergy}. The pal is:`, pal)
     const paidDialogState = createAIPaidState(
       contextualState,
       contextualDispatch,
@@ -103,6 +103,7 @@ export const payPhase = (
       player,
       targets,
     )
+    console.groupEnd()
     return paidDialogState
     // create AIEnergyPaidState func
     // const energyPaidState = createUserEnergyPaidState(

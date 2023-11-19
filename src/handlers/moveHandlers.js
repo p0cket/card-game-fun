@@ -146,7 +146,7 @@ export const executeMove = (payload) => {
       })
       break
     case ATK_PHASES.EFFECTS:
-      ;`ATK: EFFECTS (cleanup) phase`,
+      `ATK: EFFECTS (cleanup) phase`,
         (effectsResult = cleanupPhase(
           state,
           dispatch,

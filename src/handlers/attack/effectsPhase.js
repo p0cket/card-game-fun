@@ -1,6 +1,7 @@
+import { cleanupStepHandler } from '../Battle/cleanupStepHandlers'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
-import { createCleanupDialogState } from '../state/statusStateHandlers'
+// import { createCleanupDialogState } from '../state/statusStateHandlers'
 
 export const cleanupPhase = (
   contextualState,
@@ -33,14 +34,7 @@ export const cleanupPhase = (
       label: `Cleaning up - end of turn effects`,
       onClick: () => {
         console.log(`Clicked cleaning up'`)
-        //doesn't need to return anything because it runs again
-        executeMove(
-        // move,
-        // nextState,
-        // contextualDispatch,
-        // pal,
-        // ATK_PHASES.END, // phase,
-        {
+        executeMove({
           state: contextualState,
           dispatch: contextualDispatch,
           //
@@ -52,13 +46,18 @@ export const cleanupPhase = (
           //
           targets: targets,
           // possessed: false,
-        },
-        )
+        })
       },
       backgroundColor: '#4b770e',
       color: '#fff',
     },
   ]
+
+  // DO ALL THE  END OF TURN THINGS HERE:
+  // 1. run through all the end of turn effects (poison damage, burn, sleep, stun, etc.)
+  // statusHandlers.js // statusStateHandlers.js // battleHandlers.js applyStatusHandler
+  // nextState = cleanupStepHandler(nextState)
+
   nextState = createPopupVisibleState({
     prevState: nextState,
     message: `cleaning up..
@@ -67,9 +66,6 @@ export const cleanupPhase = (
     header: `good turn`,
     title: 'Cleanup phase',
   })
-
-  // DO ALL THE  END OF TURN THINGS HERE:
-
   console.log(`effects: phase ending`)
   return nextState
 }

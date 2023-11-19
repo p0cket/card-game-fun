@@ -1,4 +1,5 @@
 import { ACTIONS } from '../../MainContext'
+import { PLAYERS } from '../../consts/consts'
 import {
   applyStatusEffect,
   calculateDoesItLand,
@@ -26,7 +27,7 @@ export const statusPhase = (
     pal,
     move,
     player,
-    // phase,
+    //
     userSlot,
     targets,
   })
@@ -36,32 +37,22 @@ export const statusPhase = (
 
   const statusOptions = [
     {
-      label: `ok, cool thing`,
+      label: `ok, status lands`,
       onClick: () => {
         console.log('statusOptions onClick: start')
-
-        console.log(`Clicked status did land`)
-        //doesn't need to return anything because it runs again
-        executeMove(
-          // move,
-          // newState,
-          // dispatch,
-          // pal,
-          // ATK_PHASES.EFFECTS, // phase,
-          {
-            state: newState,
-            dispatch: dispatch,
-            //
-            pal: pal,
-            move: move,
-            player: player,
-            phase: ATK_PHASES.EFFECTS,
-            userSlot: 0,
-            //
-            targets: targets,
-            // possessed: false,
-          },
-        )
+        executeMove({
+          state: newState,
+          dispatch: dispatch,
+          //
+          pal: pal,
+          move: move,
+          player: player,
+          phase: ATK_PHASES.EFFECTS,
+          userSlot: 0,
+          //
+          targets: targets,
+          // possessed: false,
+        })
 
         console.log('statusOptions onClick: end')
       },
@@ -77,7 +68,7 @@ export const statusPhase = (
         const closedPopupState = {
           ...newState,
           dialog: {
-            ...ourState.dialog,
+            ...newState.dialog,
             isOpen: false,
           },
         }
@@ -89,34 +80,22 @@ export const statusPhase = (
   ]
   const statusNotLandOptions = [
     {
-      label: `sad, not cool thing`,
+      label: `status not land. ok`,
       onClick: () => {
         console.log('statusNotLandOptions onClick: start')
+        executeMove({
+          state: newState,
+          dispatch: dispatch,
 
-        console.log(`Clicked status not land`)
-        //doesn't need to return anything because it runs again
-        executeMove(
-          // move,
-          // newState,
-          // dispatch,
-          // pal,
-          // ATK_PHASES.EFFECTS, // phase,
-          {
-            state: newState,
-            dispatch: dispatch,
+          pal: pal,
+          move: move,
+          player: player,
+          phase: ATK_PHASES.EFFECTS,
+          userSlot: 0,
 
-            pal: pal,
-            move: move,
-            player: player,
-            phase: ATK_PHASES.EFFECTS,
-            userSlot: 0,
-
-            targets: targets,
-            // possessed: false,
-          },
-        )
-
-        console.log('statusNotLandOptions onClick: end')
+          targets: targets,
+          // possessed: false,
+        })
       },
       backgroundColor: '#4b770e',
       color: '#fff',
@@ -124,55 +103,88 @@ export const statusPhase = (
   ]
 
   if (doesItLand) {
-    console.log(
-      `effect lands - now applyStatusEffect() with newState, player, move`,
-      newState,
-      player,
-      move,
-    )
-    newState = applyStatusEffect(newState, player, move)
-    console.log(
-      'b4 calling createPopupVisibleState, newState,player, move:',
-      newState,
-      player,
-      move,
-    )
-    newState = createPopupVisibleState({
-      prevState: newState,
-      message: `${move?.effect?.result} applied.
+    if (player === PLAYERS.HUMAN) {
+      console.log(
+        `effect lands - now applyStatusEffect() with newState, player, move`,
+        newState,
+        player,
+        move,
+      )
+      newState = applyStatusEffect(newState, player, move)
+      console.log(
+        'b4 calling createPopupVisibleState, newState,player, move:',
+        newState,
+        player,
+        move,
+      )
+      newState = createPopupVisibleState({
+        prevState: newState,
+        message: `${move?.effect?.result} applied.
       ${pal.name} ${move?.effect?.result}'d the opponent`,
-      options: statusOptions,
-      header: `ok, cool thing`,
-      title: 'status applied',
-    })
-    // console.trace('Trace after first call to createPopupVisibleState in statusPhase');
-    console.groupEnd()
-    // return dispatch({
-    //   payload: newState,
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    // })
-    return newState
+        options: statusOptions,
+        header: `ok, cool thing`,
+        title: 'status applied',
+      })
+      console.groupEnd()
+      return newState
+    } else if (player === PLAYERS.AI) {
+      console.log(
+        `statusPhase: AI applyStatusEffect(newState, player, move)`,
+        newState,
+        player,
+        move,
+      )
+      newState = applyStatusEffect(newState, player, move)
+      console.warn(
+        `statusPhase: b4 calling createPopupVisibleState, enemy landed effect'`,
+        newState,
+        player,
+        move,
+      )
+      const ourPal = pal.obj
+      console.warn(`move, ourPal`, move, ourPal)
+      newState = createPopupVisibleState({
+        prevState: newState,
+        message: `${move?.effect?.result} applied to human.
+      ${ourPal.name} ${move?.effect?.result}'d you pal`,
+        options: statusOptions,
+        header: `Status applied`,
+        title: 'status applied',
+      })
+      console.groupEnd()
+      return newState
+    }
   } else {
     // Handle the case where the effect does not land
     console.log(
       `effect did not land. statusPhase: b4 calling createPopupVisibleState, state on did not land:', state`,
     )
-    newState = createPopupVisibleState({
-      prevState: newState,
-      message: `${move?.effect?.result} did not land.
+    if (player === PLAYERS.HUMAN) {
+      newState = createPopupVisibleState({
+        prevState: newState,
+        message: `${move?.effect?.result} did not land.
       ${pal.name} failed to ${move?.effect?.result} the opponent`,
-      options: statusNotLandOptions,
-      header: `oh no, cool thing`,
-      title: 'status not applied',
-    })
-    // console.trace('Trace after second call to createPopupVisibleState in statusPhase');
-
-    console.log(`statusPhase: ending, newState`, newState)
-    console.groupEnd()
-    // return dispatch({
-    //   payload: newState, // No update if effect did not land
-    //   type: ACTIONS.UPDATEGAMEDATA,
-    // })
-    return newState
+        options: statusNotLandOptions,
+        header: `oh no, status #fail`,
+        title: 'status not applied',
+      })
+      console.log(`statusPhase: ending, newState`, newState)
+      console.groupEnd()
+      return newState
+    } else if (player === PLAYERS.AI) {
+      console.log(`enemy did not land. statusPhase: ending, newState`, newState)
+      const ourPal = pal.obj
+      console.warn(`move, ourPal`, move, ourPal)
+      newState = createPopupVisibleState({
+        prevState: newState,
+        message: `${move?.effect?.result} did not land.
+      ${ourPal.name} failed to ${move?.effect?.result} your pal`,
+        options: statusNotLandOptions,
+        header: `oh no, status #fail`,
+        title: 'status not applied to your pal',
+      })
+      console.groupEnd()
+      return newState
+    }
   }
 }

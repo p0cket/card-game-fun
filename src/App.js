@@ -18,6 +18,9 @@ import QuestionMarks from './components/effects/QuestionMarks'
 import CharacterAnims from './components/effects/CharacterAnims'
 import { cusLog } from './utils/debugging-utils'
 import GeneralPopup from './components/common/GeneralPopup'
+import SpiralTransition from './components/effects/transitions/GridPixel'
+import ChallengerScreen from './components/effects/ChallengerScreen'
+import { palImages } from './consts/pals/images'
 
 const message = 'intro message'
 
@@ -52,11 +55,12 @@ export default function App() {
         {/* <QuestionMarks /> */}
         {/* <Confetti amount={300} /> */}
         {/* <CharacterAnims /> */}
-        
+
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         <DialoguePopup message={message} />
         <GeneralPopup message={message} />
-
+        {/* <SpiralTransition delay={1} /> */}
+        {/* <ChallengerScreen challengerName={"Mr Steven"} challengerImage={palImages[2]} /> */}
         <Screen gameData={gameData} dispatch={dispatch} map={map} />
       </div>
     </div>

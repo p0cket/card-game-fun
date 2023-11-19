@@ -43,39 +43,6 @@ export const createPopupRemovedState = (prevState) => {
   }
 }
 
-// export const createPopupVisibleState = ({
-//   prevState,
-//   message = 'default message',
-//   options = exampleOptions,
-//   header = 'Default Header',
-//   title = 'default title',
-//   color = '#000',
-//   background = '#fff',
-// }) => {
-//   console.log(
-//     'createPopupVisibleState:',
-//     prevState,
-//     message,
-//     options,
-//     header,
-//     title,
-//     color,
-//     background,
-//   )
-//   return {
-//     ...prevState,
-//     dialog: {
-//       ...prevState.dialog,
-//       isOpen: true,
-//       options: options,
-//       message: message,
-//       title: title,
-//       header: header,
-//       color: color,
-//       background: background,
-//     },
-//   }
-// }
 export const createPopupVisibleState = ({
   prevState,
   message = 'default message',
@@ -114,58 +81,7 @@ export const createPopupVisibleState = ({
   }
 }
 
-// //statusDialogHandler, use theabove ones for inspiration
-// export const createStatusDialogState = (state, message, result) => ({
-//   ...state,
-//   dialog: {
-//     isOpen: true,
-//     message: `${result} lands successfully!`,
-//     title: `${result} lands`,
-//     header: `${result} landed`,
-//     buttons: [
-//       // ...buttons
-//     ],
-//   },
-// });
-
-// export const createStatusEffectDialogState = (
-//   contextualState,
-//   statusResult,
-// ) => {
-//   const buttons = [
-//     // okButton(),
-//     populateButtonProps('OK', handleOkButton),
-//     populateButtonProps('Not So Fast', handleNotSoFastButton),
-
-//     // {
-//     //   label: 'OK',
-//     //   onClick: () => {
-//     //     // Logic for OK button
-//     //   },
-//     //   backgroundColor: '#4b770e',
-//     //   color: '#fff',
-//     // },
-//     {
-//       label: 'Not So Fast',
-//       onClick: () => {
-//         // Logic for Not So Fast button
-//       },
-//       backgroundColor: '#4b770e',
-//       color: '#fff',
-//     },
-//   ]
-
-//   return createPopupVisibleState({
-//     prevState: contextualState,
-//     message: `${statusResult} lands successfully!`,
-//     options: buttons,
-//     header: `${statusResult} landed`,
-//     title: `${statusResult} lands`,
-//   })
-// }
-
 //butons:
-
 export function populateButton(
   label = 'default label',
   contextualState,
