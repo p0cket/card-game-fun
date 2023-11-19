@@ -1,3 +1,4 @@
+import { PLAYERS } from '../../consts/consts'
 import {
   createPopupRemovedState,
   createPopupVisibleState,
@@ -41,6 +42,9 @@ export const endPhase = (
     },
   ]
 
+  if(player === PLAYERS.HUMAN){
+
+  
   // const switchTurns
   // newState = createPopupRemovedState(newState)
 
@@ -59,5 +63,11 @@ export const endPhase = (
 
   console.log(`END: phase ending. newState`, newState)
   console.groupEnd()
-  return newState
+  return newState }
+  else if (player === PLAYERS.AI) {
+    console.log(`END: phase ending. newState`, newState)
+    newState = createPopupRemovedState(newState)
+    console.groupEnd()
+    return newState
+  }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const rainbowColors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff']
@@ -36,12 +36,21 @@ function ConfettiPiece({ amount = 500 }) {
   )
 }
 
-export default function Confetti({ amount = 500 }) {
+export default function Confetti({ amount = 500, duration = 5000 }) {
+  const [isActive, setIsActive] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsActive(false)
+    }, duration)
+
+    return () => clearTimeout(timer)
+  }, [duration])
+
   return (
     <div>
-      {Array.from({ length: amount }).map((_, i) => (
-        <ConfettiPiece key={i} />
-      ))}
+      {isActive &&
+        Array.from({ length: amount }).map((_, i) => <ConfettiPiece key={i} />)}
     </div>
   )
 }

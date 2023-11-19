@@ -98,9 +98,16 @@ export const updateStatusState = (
       },
     }
   } else if (player === AI) {
+    console.warn(
+      `updateStatusState: AI player: ${player} contextualState, player, statusResult, statusValue`,
+      contextualState,
+      player,
+      statusResult,
+      statusValue,
+    )
     let updatedMonsters = [...contextualState.userParty]
-    updatedMonsters[index].obj.status = {
-      ...updatedMonsters[index].obj.status,
+    updatedMonsters[index].status = {
+      ...updatedMonsters[index].status,
       [statusResult]: statusValue,
     }
     return {
@@ -111,235 +118,230 @@ export const updateStatusState = (
   return contextualState // In case player is neither 'human' nor 'AI'
 }
 
-export const createStatusAppliedDialogState = (
-  ourState,
-  contextualDispatch,
-  move,
-  pal,
-) => {
-  console.log(
-    `createStatusAppliedDialogState called:
-   ourState, contextualDispatch, move, pal`,
-    ourState,
-    contextualDispatch,
-    move,
-    pal,
-  )
-  const paidState = {
-    ...ourState,
-    dialog: {
-      ...ourState.dialog,
-      isOpen: true,
-      message: `${move?.effect?.result} applied.
-      ${pal.name} ${move?.effect?.result}'d the opponent`,
-      options: [
-        {
-          label: `ok, cool thing`,
-          onClick: () => {
-            console.log(`Clicked confirm pay`)
-            //doesn't need to return anything because it runs again
-            executeMove(
-              // move,
-              // ourState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.EFFECTS, // phase,
-              {
-                state: ourState,
-                dispatch: contextualDispatch,
+// // Appears to be unused
+// export const createStatusAppliedDialogState = (
+//   ourState,
+//   contextualDispatch,
+//   move,
+//   pal,
+//   player,
+//   targets,
+// ) => {
+//   console.log(
+//     `createStatusAppliedDialogState called:
+//    ourState, contextualDispatch, move, pal`,
+//     ourState,
+//     contextualDispatch,
+//     move,
+//     pal,
+//   )
+//   const paidState = {
+//     ...ourState,
+//     dialog: {
+//       ...ourState.dialog,
+//       isOpen: true,
+//       message: `${move?.effect?.result} applied.
+//       ${pal.name} ${move?.effect?.result}'d the opponent`,
+//       options: [
+//         {
+//           label: `ok, cool thing`,
+//           onClick: () => {
+//             console.log(`Clicked confirm pay`)
+//             //doesn't need to return anything because it runs again
+//             executeMove(
+//               {
+//                 state: ourState,
+//                 dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.EFFECTS,
-                userSlot: 0,
+//                 pal: pal,
+//                 move: move,
+//                 player: player,
+//                 phase: ATK_PHASES.EFFECTS,
+//                 userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-        {
-          label: 'Add on',
-          onClick: () => {
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
-            const closedPopupState = {
-              ...ourState,
-              dialog: {
-                ...ourState.dialog,
-                isOpen: false,
-              },
-            }
-            return closedPopupState
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-      ],
-      title: 'Effect Phase',
-      header: 'You can Effect!',
-    },
-  }
-  return paidState
-}
-export const createStatusNotAppliedDialogState = (
-  ourState,
-  contextualDispatch,
-  move,
-  pal,
-) => {
-  console.log(
-    `createStatusNotAppliedDialogState called:
-   ourState, contextualDispatch, move, pal`,
-    ourState,
-    contextualDispatch,
-    move,
-    pal,
-    ourState.dialog,
-  )
+//                 targets: targets,
+//                 // possessed: false,
+//               },
+//             )
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//         {
+//           label: 'Add on',
+//           onClick: () => {
+//             //replace here with our function create
+//             // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+//             // handle onClick logic here
+//             const closedPopupState = {
+//               ...ourState,
+//               dialog: {
+//                 ...ourState.dialog,
+//                 isOpen: false,
+//               },
+//             }
+//             return closedPopupState
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//       ],
+//       title: 'Effect Phase',
+//       header: 'You can Effect!',
+//     },
+//   }
+//   return paidState
+// }
 
-  const paidState = {
-    ...ourState,
-    dialog: {
-      ...ourState.dialog,
-      isOpen: true,
-      message: `${move?.effect?.result} NOT applied.
-      ${pal.name} failed to ${move?.effect?.result} the opponent`,
-      options: [
-        {
-          label: `oh no, cool thing`,
-          onClick: () => {
-            console.log(`Clicked confirm 'oh no' in effect not applied`)
-            //doesn't need to return anything because it runs again
-            executeMove(
-              // move,
-              // ourState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.EFFECTS,
-              {
-                state: ourState,
-                dispatch: contextualDispatch,
+// // Appears to be unused
+// export const createStatusNotAppliedDialogState = (
+//   ourState,
+//   contextualDispatch,
+//   move,
+//   pal,
+// ) => {
+//   console.log(
+//     `createStatusNotAppliedDialogState called:
+//    ourState, contextualDispatch, move, pal`,
+//     ourState,
+//     contextualDispatch,
+//     move,
+//     pal,
+//     ourState.dialog,
+//   )
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.EFFECTS,
-                userSlot: 0,
+//   const paidState = {
+//     ...ourState,
+//     dialog: {
+//       ...ourState.dialog,
+//       isOpen: true,
+//       message: `${move?.effect?.result} NOT applied.
+//       ${pal.name} failed to ${move?.effect?.result} the opponent`,
+//       options: [
+//         {
+//           label: `oh no, cool thing`,
+//           onClick: () => {
+//             console.log(`Clicked confirm 'oh no' in effect not applied`)
+//             //doesn't need to return anything because it runs again
+//             executeMove(
+//               {
+//                 state: ourState,
+//                 dispatch: contextualDispatch,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-        {
-          label: 'Add on',
-          onClick: () => {
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
-            const closedPopupState = {
-              ...ourState,
-              dialog: {
-                ...ourState.dialog,
-                isOpen: false,
-              },
-            }
-            return closedPopupState
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-      ],
-      title: 'Effect Phase',
-      header: 'You can Effect!',
-    },
-  }
-  return paidState
-}
+//                 pal: pal,
+//                 move: move,
+//                 player: player,
+//                 phase: ATK_PHASES.EFFECTS,
+//                 userSlot: 0,
 
-export const createCleanupDialogState = (
-  ourState,
-  contextualDispatch,
-  move,
-  pal,
-) => {
-  console.log(
-    `createCleanupDialogState called:
-   ourState, contextualDispatch, move, pal`,
-    ourState,
-    contextualDispatch,
-    move,
-    pal,
-    ourState.dialog,
-  )
+//                 targets: targets,
+//                 // possessed: false,
+//               },
+//             )
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//         {
+//           label: 'Add on',
+//           onClick: () => {
+//             //replace here with our function create
+//             // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+//             // handle onClick logic here
+//             const closedPopupState = {
+//               ...ourState,
+//               dialog: {
+//                 ...ourState.dialog,
+//                 isOpen: false,
+//               },
+//             }
+//             return closedPopupState
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//       ],
+//       title: 'Effect Phase',
+//       header: 'You can Effect!',
+//     },
+//   }
+//   return paidState
+// }
 
-  const paidState = {
-    ...ourState,
-    dialog: {
-      ...ourState.dialog,
-      isOpen: true,
-      message: `applying end of turn cleanup effects`,
-      options: [
-        {
-          label: `go to end`,
-          onClick: () => {
-            console.log(`Clicked confirm 'go to end' in effect not applied`)
-            //doesn't need to return anything because it runs again
-            executeMove(
-              // move,
-              // ourState,
-              // contextualDispatch,
-              // pal,
-              // ATK_PHASES.END,
-              {
-                state: ourState,
-                dispatch: contextualDispatch,
+// // Appears to be unused
+// export const createCleanupDialogState = (
+//   ourState,
+//   contextualDispatch,
+//   move,
+//   pal,
+//   player,
+//   targets,
+// ) => {
+//   console.log(
+//     `createCleanupDialogState called:
+//    ourState, contextualDispatch, move, pal`,
+//     ourState,
+//     contextualDispatch,
+//     move,
+//     pal,
+//     ourState.dialog,
+//     player,
+//     targets
+//   )
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.END,
-                userSlot: 0,
+//   const paidState = {
+//     ...ourState,
+//     dialog: {
+//       ...ourState.dialog,
+//       isOpen: true,
+//       message: `applying end of turn cleanup effects`,
+//       options: [
+//         {
+//           label: `go to end`,
+//           onClick: () => {
+//             console.log(`Clicked confirm 'go to end' in effect not applied`)
+//             //doesn't need to return anything because it runs again
+//             executeMove(
+//               {
+//                 state: ourState,
+//                 dispatch: contextualDispatch,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-        {
-          label: 'Add on',
-          onClick: () => {
-            //replace here with our function create
-            // const closedPopupState = createRemovedState(whateverMakesSenseHere)
-            // handle onClick logic here
-            const closedPopupState = {
-              ...ourState,
-              dialog: {
-                ...ourState.dialog,
-                isOpen: false,
-              },
-            }
-            return closedPopupState
-          },
-          backgroundColor: '#4b770e',
-          color: '#fff',
-        },
-      ],
-      title: 'Cleanup Phase',
-      header: 'Cleanup!',
-    },
-  }
-  return paidState
-}
+//                 pal: pal,
+//                 move: move,
+//                 player: player,
+//                 phase: ATK_PHASES.END,
+//                 userSlot: 0,
+
+//                 targets: targets,
+//                 // possessed: false,
+//               },
+//             )
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//         {
+//           label: 'Add on',
+//           onClick: () => {
+//             //replace here with our function create
+//             // const closedPopupState = createRemovedState(whateverMakesSenseHere)
+//             // handle onClick logic here
+//             const closedPopupState = {
+//               ...ourState,
+//               dialog: {
+//                 ...ourState.dialog,
+//                 isOpen: false,
+//               },
+//             }
+//             return closedPopupState
+//           },
+//           backgroundColor: '#4b770e',
+//           color: '#fff',
+//         },
+//       ],
+//       title: 'Cleanup Phase',
+//       header: 'Cleanup!',
+//     },
+//   }
+//   return paidState
+// }

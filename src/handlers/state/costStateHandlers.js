@@ -163,7 +163,7 @@ export const createAIPaidState = (
       ...ourState.dialog,
       isOpen: true,
       message: `${move.cost.energy} Energy paid.
-      AI's ${pal.name} uses ${move.name}`,
+      AI's ${pal.obj.name} uses ${move.name}`,
       options: [
         {
           label: 'Okay',
