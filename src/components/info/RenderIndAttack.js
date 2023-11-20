@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import stunImg from './../../assets/packImages/Stun.png'
+import { ACTIONS } from '../../MainContext'
 
 function RenderIndAttack({
   attack,
@@ -31,12 +32,9 @@ function RenderIndAttack({
     forceful,
   } = attack
   const runMove = (move, pal) => {
-    // if (togglePopup !== undefined) {
-    //   togglePopup()
-    // }
     console.log(`runMove:  togglePopup`, togglePopup)
-
     togglePopup()
+    // contextualDispatch({ type: ACTIONS.CLOSE_POPUP })
 
     console.log('executeMove params:', {
       state: contextualState,

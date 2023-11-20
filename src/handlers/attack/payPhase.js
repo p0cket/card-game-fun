@@ -56,6 +56,8 @@ export const payPhase = (
         `${playerEnergy}<${moveCost} • Not enough energy to perform the move`,
       )
       // Dialogue: not enough energy
+      // #TODO: remove dialoge state changes and turn them into react components
+      // switch which ones you are displaying based on context
       const dialogState = createNotEnoughEnergyDialogState(
         contextualState,
         contextualDispatch,
@@ -72,6 +74,7 @@ export const payPhase = (
         playerEnergyAfterPayment,
         contextualState,
       )
+      // newEnergy = playerEnergy < moveCost ? playerEnergy : playerEnergy - moveCost
       console.log('Pay: energyPaidState, resulting state:', energyPaidState)
 
       // ------
@@ -122,3 +125,18 @@ export const payPhase = (
     // )
   }
 }
+      // newEnergy = playerEnergy < moveCost ? playerEnergy : playerEnergy - moveCost
+//  GAMEPLAN:
+// move handlers actually  into reducer, and create dialogue component switch statement
+// with different versions for each type of dialog
+/*
+function reducer(state, action) {
+  if (state.player === PLAYER.HUMAN && state.playerEnergy >= action.moveCost) {
+    state.playerEnergy = state.playerEnergy = action.moveCost;
+    state.dialog = 'GREAT_ATTACK_DIALOG';
+  } else {
+    state.dialog = 'NO_BUENO_DIALOG';
+  }
+  return state;
+}
+*/

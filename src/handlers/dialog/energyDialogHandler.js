@@ -20,8 +20,10 @@ export const createNotEnoughEnergyDialogState = (ourState, ourDispatch) => {
           label: 'Oh dear',
           onClick: () => {
             const closedPopupState = createPopupRemovedState(ourState)
-            console.log(closedPopupState)
-            return closedPopupState
+            console.log(`closedPopupState after createPopupRemovedState: `,closedPopupState)
+            // ourDispatch({ type: ACTIONS.CLOSE_POPUP })
+            // ourDispatch({ type: ACTIONS.CLOSE_DIALOG})
+            // return closedPopupState
           },
           backgroundColor: '#4b770e',
           color: '#fff',

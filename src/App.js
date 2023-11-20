@@ -21,6 +21,8 @@ import GeneralPopup from './components/common/GeneralPopup'
 import SpiralTransition from './components/effects/transitions/GridPixel'
 import ChallengerScreen from './components/effects/ChallengerScreen'
 import { palImages } from './consts/pals/images'
+import { gameLog } from './utils/logFormatter'
+
 
 const message = 'intro message'
 
@@ -30,6 +32,7 @@ export default function App() {
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
 
+  
   return (
     <div style={{ backgroundColor: 'black' }}>
       {/* <Flashing /> */}

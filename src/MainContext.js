@@ -31,6 +31,7 @@ export const ACTIONS = {
   UPDATEGAMEDATA: 'UPDATEGAMEDATA',
   SHOW_ATTACK: 'SHOW_ATTACK',
   CLOSE_POPUP: 'CLOSE_POPUP',
+  CLOSE_DIALOG: 'CLOSE_DIALOG',
 }
 
 export const MainProvider = ({ children }) => {
@@ -45,6 +46,7 @@ export const MainProvider = ({ children }) => {
     // console.log(`reducer HIT`, action.type, action)
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
+        // within here do the handlers
         return { ...state, ...action.payload }
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload }
@@ -62,11 +64,21 @@ export const MainProvider = ({ children }) => {
           // ourCurrentMon: action.payload.ourCurrentMon,
         }
       case ACTIONS.CLOSE_POPUP:
+        // within here do the handlers
         console.log('Reducer CLOSE_POPUP:', action)
         return {
           ...state,
           popup: {
             ...state.popup,
+            isOpen: false,
+          },
+        }
+      case ACTIONS.CLOSE_DIALOG:
+        console.log('Reducer CLOSE_DIALOG:', action)
+        return {
+          ...state,
+          dialog: {
+            ...state.dialog,
             isOpen: false,
           },
         }
