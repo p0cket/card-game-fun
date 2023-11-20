@@ -33,7 +33,8 @@ function DialoguePopup(props) {
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
+        paddingBottom: '10vh',
         zIndex: 100,
       }}
     >
