@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HUDHeader ({ gameData }) {
+function HUDHeader({ gameData }) {
   return (
     <p
       style={{

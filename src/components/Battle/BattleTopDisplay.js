@@ -28,7 +28,6 @@ export default function BattleTopDisplay() {
     },
     container: {
       background: 'lightgreen',
-
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
       padding: '20px',
       borderRadius: '2px',
@@ -70,10 +69,8 @@ export default function BattleTopDisplay() {
       />
     )
   }
-
   // const { name, status, poison, health, maxHP, img, nextAttack } =
   //   gameData.battle.enemy;
-
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],

@@ -201,7 +201,6 @@ export const generateRewardsHandler = (state, payload) => {
     payload,
   )
   // take list of rewards, use a seed for the randomization
-  // FIXME: Make this function pure
   let randomizedCards = shuffle(allAvailableRewards, Math.random())
   // let randomizedCards = shuffle(rewardAttacks, Math.random() * seed)
   console.log(`reward card arr`, randomizedCards)

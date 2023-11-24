@@ -1,4 +1,4 @@
-import { startingDeck } from './consts'
+import { PLAYERS, startingDeck } from './consts'
 import { EFFECTS } from '../effects'
 import { SCENES } from '../handlers/sceneHandlers_new'
 import { opponent, userParty } from './party/parties'
@@ -6,6 +6,8 @@ import { generateMap } from './mapGenerator_new'
 import { placeholderTrainer } from './party/trainers'
 import { LightBeam } from './allMoves'
 import { Luminowl } from './pals/pals'
+import { DIALOGS } from '../components/dialog/DialogManager'
+import { ATK_PHASES } from '../handlers/moveHandlers'
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 //
@@ -105,6 +107,7 @@ export const newStartingData = {
   },
   dialog: {
     isOpen: false,
+    type: DIALOGS.TEMPLATE,
     message: 'startingData Message',
     options: [
       {
@@ -119,6 +122,9 @@ export const newStartingData = {
   },
   popup: {
     isOpen: false,
+    type: 'attack',
+    attack: LightBeam,
+    ourCurrentMon: Luminowl,
     // message: 'startingData Popup Message',
     // options: [
     //   {
@@ -131,13 +137,20 @@ export const newStartingData = {
     // title: 'startingData Title',
     // header: 'startingData Header',
     // isOpen: true,
-    type: 'attack',
-    attack: LightBeam,
-    ourCurrentMon: Luminowl,
+  },
+  attack: {
+    pal: Luminowl,
+    move: LightBeam,
+    phase: 'default null phase',
+    // actionDetails:
+    userSlot: 0,
+    targets: { ally: null, enemy: [0] },
+    player: 'default human player',
+    possessed: false,
   },
 }
 
-export const startingData = {
+export const startingDataOld = {
   deck: startingDeck,
   gold: 50,
   hero: {

@@ -47,12 +47,10 @@ export const calculateTargets = (targets, allyPals, enemyPals) => {
  *
  * @returns {Object} The updated state after the move execution.
  */
-export const executeMove = (payload) => {
+export const executeMove = (dispatch, payload) => {
   console.log(`📢 executeMove called: Payload`, payload)
-  const { state, dispatch, pal, move, player, phase, userSlot, targets } =
-    payload
+  const { pal, move, player, phase, userSlot, targets } = payload
   checkForUndefined({
-    state,
     dispatch,
     pal,
     move,
@@ -78,125 +76,42 @@ export const executeMove = (payload) => {
    *  checks if the target monster's HP is 0 or less, indicating it has fainted. */
   switch (phase) {
     case ATK_PHASES.PAY:
-      payResult = payPhase(
-        state,
-        dispatch,
-        // move details
-        move,
-        pal,
-        player,
-        userSlot,
-        // target details
-        targets,
-      )
-      dispatch({ payload: payResult, type: ACTIONS.UPDATEGAMEDATA })
+      dispatch({
+        type: ACTIONS.PAY_PHASE,
+        payload: { pal, move, phase, player, userSlot, targets },
+      })
       break
     case ATK_PHASES.DAMAGE:
-      console.log(
-        `ATK: DAMAGE phase`,
-        state,
-        dispatch,
-        move,
-        pal,
-        player,
-        userSlot,
-        targets,
-      )
-      dmgResult = dmgPhase(
-        state,
-        dispatch,
-        //
-        pal,
-        move,
-        player,
-        userSlot,
-        //
-        targets,
-        // allTargets,
-        // details.targets,
-        // targetMonster,
-      )
-      dispatch({ payload: dmgResult, type: ACTIONS.UPDATEGAMEDATA })
+      dispatch({
+        type: ACTIONS.DMG_PHASE,
+        payload: { pal, move, phase, player, userSlot, targets },
+      })
       break
     case ATK_PHASES.STATUSES:
-      console.log(
-        `ATK: STATUSES phase`,
-        state,
-        dispatch,
-        move,
-        pal,
-        player,
-        userSlot,
-        targets,
-      )
-      statusResult = statusPhase(
-        state,
-        dispatch,
-        // move details
-        move,
-        pal,
-        player,
-        userSlot,
-        // target details
-        targets,
-      )
       dispatch({
-        payload: statusResult,
-        type: ACTIONS.UPDATEGAMEDATA,
+        type: ACTIONS.STATUS_PHASE,
+        payload: { pal, move, phase, player, userSlot, targets },
       })
       break
     case ATK_PHASES.EFFECTS:
-      `ATK: EFFECTS (cleanup) phase`,
-        (effectsResult = cleanupPhase(
-          state,
-          dispatch,
-          // move details
-          move,
-          pal,
-          player,
-          userSlot,
-          // target details
-          targets,
-        ))
       dispatch({
-        payload: effectsResult,
-        type: ACTIONS.UPDATEGAMEDATA,
+        type: ACTIONS.EFFECTS_PHASE,
+        payload: { pal, move, phase, player, userSlot, targets },
       })
       break
     case ATK_PHASES.END:
-      console.log(`ATK: END phase`)
-      endResult = endPhase(
-        state,
-        dispatch,
-        // move details
-        move,
-        pal,
-        player,
-        userSlot,
-        // target details
-        targets,
-      )
-      dispatch({ payload: endResult, type: ACTIONS.UPDATEGAMEDATA })
+      dispatch({
+        type: ACTIONS.END_PHASE,
+        payload: { pal, move, phase, player, userSlot, targets },
+      })
       break
     default:
       console.log(`ATK: default phase in switch reacted`)
-      return state
   }
   // Always. check death
   // if (targetMonster.stats.hp <= 0) {
   // }
-
   console.log('executeMove: end (If you hit here, something prob went wrong)')
-  return {
-    ...state,
-    opponent: {
-      ...state.opponent,
-      monsters: [targetMonster, ...state.opponent.monsters.slice(1)],
-      // damageDealt: damage,
-      // statusEffect: move.effect ? move.effect.result : null,
-      // You can add more data as needed for your game
-    },
-  }
 }
 
 export const executeAITurn = (state, dispatch, details = null) => {

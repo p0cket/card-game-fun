@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { energyEmoji } from '../../consts/consts'
+import { PLAYERS, energyEmoji } from '../../consts/consts'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import stunImg from './../../assets/packImages/Stun.png'
 import { ACTIONS } from '../../MainContext'
@@ -33,33 +33,27 @@ function RenderIndAttack({
   } = attack
   const runMove = (move, pal) => {
     console.log(`runMove:  togglePopup`, togglePopup)
-    togglePopup()
+    // togglePopup()
     // contextualDispatch({ type: ACTIONS.CLOSE_POPUP })
 
-    console.log('executeMove params:', {
-      state: contextualState,
-      dispatch: contextualDispatch,
+    console.log('executeMove params:',contextualDispatch, {
       pal: pal,
       move: move,
       phase: ATK_PHASES.PAY,
       userSlot: 0,
       targets: { ally: null, enemy: [0] },
-      player: 'human',
+      player: PLAYERS.HUMAN,
       possessed: false,
     })
-
-    executeMove({
-      // context:
-      state: contextualState,
-      dispatch: contextualDispatch,
-      // command:
+    executeMove(contextualDispatch, {
+      // attack:
       pal: pal,
       move: move,
       phase: ATK_PHASES.PAY,
       // actionDetails:
       userSlot: 0,
       targets: { ally: null, enemy: [0] },
-      player: 'human',
+      player: PLAYERS.HUMAN,
       possessed: false,
     })
   }

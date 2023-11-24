@@ -29,21 +29,19 @@ export const createCostPaidDialogState = (
           label: 'Confirm Pay',
           onClick: () => {
             console.log(`Clicked confirm pay`)
-            executeMove(
-              {
-                state: ourState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: ourState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
@@ -58,21 +56,19 @@ export const createCostPaidDialogState = (
                 isOpen: false,
               },
             }
-            executeMove(
-              {
-                state: closedPopupState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: closedPopupState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
@@ -87,21 +83,19 @@ export const createCostPaidDialogState = (
                 isOpen: false,
               },
             }
-            executeMove(
-              {
-                state: closedPopupState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: closedPopupState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
@@ -116,21 +110,18 @@ export const createCostPaidDialogState = (
   return paidState
 }
 
-export const createUserEnergyPaidState = (
-  playerEnergyAfterPayment,
-  ourState,
-) => {
+export const createUserEnergyPaidState = (state, playerEnergyAfterPayment) => {
   console.groupCollapsed(
     `createUserEnergyPaidState called:`,
     playerEnergyAfterPayment,
-    ourState,
+    state,
   )
   const energyPaidState = {
-    ...ourState,
+    ...state,
     game: {
-      ...ourState.game,
+      ...state.game,
       player: {
-        ...ourState.game.player,
+        ...state.game.player,
         energy: playerEnergyAfterPayment,
       },
     },
@@ -169,21 +160,19 @@ export const createAIPaidState = (
           label: 'Okay',
           onClick: () => {
             console.log(`Clicked Okay`)
-            executeMove(
-              {
-                state: ourState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: ourState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
@@ -198,21 +187,19 @@ export const createAIPaidState = (
                 isOpen: false,
               },
             }
-            executeMove(
-              {
-                state: closedPopupState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: closedPopupState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
@@ -227,21 +214,19 @@ export const createAIPaidState = (
                 isOpen: false,
               },
             }
-            executeMove(
-              {
-                state: closedPopupState,
-                dispatch: contextualDispatch,
+            executeMove({
+              state: closedPopupState,
+              dispatch: contextualDispatch,
 
-                pal: pal,
-                move: move,
-                player: player,
-                phase: ATK_PHASES.DAMAGE,
-                userSlot: 0,
+              pal: pal,
+              move: move,
+              player: player,
+              phase: ATK_PHASES.DAMAGE,
+              userSlot: 0,
 
-                targets: targets,
-                // possessed: false,
-              },
-            )
+              targets: targets,
+              // possessed: false,
+            })
           },
           backgroundColor: '#4b770e',
           color: '#fff',
