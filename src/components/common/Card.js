@@ -117,7 +117,7 @@ const Card = ({ cardValue, useCard, isBattle, isOnSale }) => {
                 {effectString}
                 {/* {effect ? `Causes ${qty ? qty : ""} ${effect}` : ``}{" "} */}
               </div>
-              {/* TODO Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
+              {/* Add on sale stuff like this: {cardValue.price && isOnSale ? <div>price: {cardValue.price}</div> : <></>} */}
               {cardValue.price && isBattle !== true ? (
                 <div>price: {cardValue.price}</div>
               ) : (

@@ -1,7 +1,11 @@
 import { ACTIONS } from '../../MainContext'
+import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
-import { createNotEnoughEnergyDialogState } from '../dialog/energyDialogHandler'
+import {
+  createNotEnoughEnergyDialogState,
+  switchDialog,
+} from '../dialog/energyDialogHandler'
 import {
   createAIPaidState,
   createCostPaidDialogState,
@@ -11,56 +15,58 @@ import {
 let playerEnergy
 let moveCost
 
-export const payPhase = (
-  contextualState,
-  contextualDispatch,
-  // move data
-  move,
-  pal,
-  player,
-  userSlot,
-  // target data
-  targets,
-) => {
+export const payPhase = (state, attackPayload) => {
+  const { move, pal, phase, player, userSlot, targets } = attackPayload
   console.groupCollapsed(
     `💵 PAY: starting`,
-    contextualState,
-    contextualDispatch,
+    state,
     move,
     pal,
+    phase,
     player,
+    userSlot,
+    targets,
   )
   checkForUndefined({
-    contextualState,
-    contextualDispatch,
+    state,
     move,
     pal,
+    phase,
+
     player,
+    userSlot,
+    targets,
   })
-  if (player === PLAYERS.HUMAN) {
-    console.log(
-      `Pay: move, pal, player, userSlot, targets:`,
+
+  let newState = {
+    ...state,
+    attack: {
       move,
       pal,
+      phase,
+
       player,
       userSlot,
       targets,
+    },
+  }
+  console.log(
+      `Pay - attackPayload: move, pal, player, userSlot, targets,:`,
+      attackPayload,
     )
+  if (player === PLAYERS.HUMAN) {
+  
     // 1. Pay cost. If you can't, return:
-    playerEnergy = contextualState.game.player.energy
+    playerEnergy = newState.game.player.energy
     moveCost = move.cost.energy
-    console.log(`cost is ${moveCost} energy. ${player} has ${playerEnergy}`)
+    console.log(`cost's ${moveCost} energy. ${player} has ${playerEnergy}`)
 
     if (playerEnergy < moveCost) {
-      console.log(
-        `${playerEnergy}<${moveCost} • Not enough energy to perform the move`,
-      )
-      // Dialogue: not enough energy
-      // #TODO: remove dialoge state changes and turn them into react components
-      // switch which ones you are displaying based on context
-      const dialogState = createNotEnoughEnergyDialogState(
-        contextualState,
-        contextualDispatch,
+      console.log(`${playerEnergy}<${moveCost} • Not enough energy for move`)
+      const dialogState = switchDialog(
+        newState,
+        DIALOGS.NOT_ENOUGH_ENERGY,
+        attackPayload,
       )
       console.log(`dialogState: not enough dialog`, dialogState)
       console.groupEnd()
@@ -68,64 +74,33 @@ export const payPhase = (
     } else {
       const playerEnergyAfterPayment = playerEnergy - moveCost
       console.log(
-        `Enough energy :), ${playerEnergy}-${moveCost}=${playerEnergyAfterPayment}`,
+        `Enough Energy, ${playerEnergy}-${moveCost}=${playerEnergyAfterPayment}`,
       )
       const energyPaidState = createUserEnergyPaidState(
+        newState,
         playerEnergyAfterPayment,
-        contextualState,
       )
-      // newEnergy = playerEnergy < moveCost ? playerEnergy : playerEnergy - moveCost
       console.log('Pay: energyPaidState, resulting state:', energyPaidState)
-
-      // ------
-      const costPaidDialogState = createCostPaidDialogState(
+      const costPaidDialogState = switchDialog(
         energyPaidState,
-        contextualDispatch,
-        move,
-        pal,
-        player,
-        targets,
+        DIALOGS.ENERGY_PAID,
       )
-      //-----
-
       console.log('Pay: PAID, resulting state:', costPaidDialogState)
       console.groupEnd()
       return costPaidDialogState
     }
   } else if (player === PLAYERS.AI) {
-    // 2. Execute  AI move.
-    // aiEnergy =
-    // const result =
     moveCost = move.cost.energy
-    console.warn(`cost is ${moveCost} energy. ${player} has ${playerEnergy}. The pal is:`, pal)
-    const paidDialogState = createAIPaidState(
-      contextualState,
-      contextualDispatch,
-      move,
+    console.log(
+      `costs ${moveCost} e. ${player} has ${playerEnergy}. Pal is:`,
       pal,
-      player,
-      targets,
     )
+    const paidDialogState = switchDialog(newState, DIALOGS.AI_COST_PAID)
     console.groupEnd()
     return paidDialogState
-    // create AIEnergyPaidState func
-    // const energyPaidState = createUserEnergyPaidState(
-    //   playerEnergyAfterPayment,
-    //   contextualState,
-    // )
-    // console.log('Pay: energyPaidState, resulting state:', energyPaidState)
-    // -----
-    // const costPaidDialogState = createCostPaidDialogState(
-    //   energyPaidState,
-    //   contextualDispatch,
-    //   move,
-    //   pal,
-    //   player,
-    //   targets,
-    // )
   }
 }
-      // newEnergy = playerEnergy < moveCost ? playerEnergy : playerEnergy - moveCost
+// newEnergy = playerEnergy < moveCost ? playerEnergy : playerEnergy - moveCost
 //  GAMEPLAN:
 // move handlers actually  into reducer, and create dialogue component switch statement
 // with different versions for each type of dialog

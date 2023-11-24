@@ -4,6 +4,7 @@ import './index.css'
 // import { startingData } from "./consts/consts";
 import { newStartingData } from './consts/startingData'
 import { cusLog } from './utils/debugging-utils'
+import { payPhase } from './handlers/attack/payPhase'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -32,6 +33,8 @@ export const ACTIONS = {
   SHOW_ATTACK: 'SHOW_ATTACK',
   CLOSE_POPUP: 'CLOSE_POPUP',
   CLOSE_DIALOG: 'CLOSE_DIALOG',
+  PAY_PHASE: 'PAY_PHASE',
+  CHANGE_DIALOG: 'CHANGE_DIALOG',
 }
 
 export const MainProvider = ({ children }) => {
@@ -43,7 +46,8 @@ export const MainProvider = ({ children }) => {
 
   function reducer(state, action) {
     cusLog(`dispatching:`, 'info', undefined, action)
-    // console.log(`reducer HIT`, action.type, action)
+    let payState, dmgState, statusState, cleanupState, endState
+
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
         // within here do the handlers
@@ -98,6 +102,21 @@ export const MainProvider = ({ children }) => {
         return { ...state, level: action.payload }
       case ACTIONS.SET_INVENTORY:
         return { ...state, inventory: action.payload }
+      case ACTIONS.PAY_PHASE:
+        payState = payPhase(state, action.payload)
+        return payState
+      // payload: { move, pal, player, userSlot, targets },
+      case ACTIONS.CHANGE_DIALOG:
+        console.log('Reducer CHANGE_DIALOG:', action)
+        return {
+          ...state,
+          dialog: {
+            ...state.dialog,
+            isOpen: true,
+            type: action.payload.type, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
+          },
+        }
+
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state
