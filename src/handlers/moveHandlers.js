@@ -60,12 +60,7 @@ export const executeMove = (dispatch, payload) => {
     targets,
   })
   // Calculate targets
-  let targetMonster = null,
-    payResult,
-    dmgResult,
-    statusResult,
-    effectsResult,
-    endResult
+  let targetMonster = null
   // this is a function that gets called many times.at each point, we need do a phase and then present to the player a dialog to decide what to do nextthe dialog has everything needed to run the function yet again, this continues until the full attack resolves
   /** Check what phase the attack is in. For each phase, we call a dedicated function.
    * - payPhase: Manages the payment phase, determining if the player can afford the move.
@@ -82,12 +77,14 @@ export const executeMove = (dispatch, payload) => {
       })
       break
     case ATK_PHASES.DAMAGE:
+      console.log(`ATK_PHASES.DAMAGE reached in switch`)
       dispatch({
         type: ACTIONS.DMG_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
       })
       break
     case ATK_PHASES.STATUSES:
+      console.log(`ATK_PHASES.STATUSES reached in switch`)
       dispatch({
         type: ACTIONS.STATUS_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
@@ -111,7 +108,7 @@ export const executeMove = (dispatch, payload) => {
   // Always. check death
   // if (targetMonster.stats.hp <= 0) {
   // }
-  console.log('executeMove: end (If you hit here, something prob went wrong)')
+  console.log('executeMove: end. (If you hit here, something prob went wrong)')
 }
 
 export const executeAITurn = (state, dispatch, details = null) => {
@@ -152,6 +149,32 @@ export const determineAIMove = (state, pal, details = null) => {
   // const move = //state.opponent.monsters[0];
   return result
   // return move
+}
+
+export function createPayloadState(
+  state,
+  { move, pal, phase, player, userSlot, targets },
+) {
+  console.log(`createPayloadState: state, payload`, state, {
+    move,
+    pal,
+    phase,
+    player,
+    userSlot,
+    targets,
+  })
+  return {
+    ...state,
+    attack: {
+      move,
+      pal,
+      phase,
+
+      player,
+      userSlot,
+      targets,
+    },
+  }
 }
 
 // export const handleOpponentMoveSelection = (state, dispatch) => {
