@@ -6,6 +6,8 @@ import AICostPaid from './AI/AICostPaid'
 import CustomDialog from './CustomDialog'
 import TemplateDialog from './TemplateDialog'
 import DamagedPalAI from './DamagedPalAI'
+import DamagedPalHuman from './DamagedPalHuman'
+import StatusApplied from './StatusApplied'
 
 export const DIALOGS = {
   NOT_ENOUGH_ENERGY: 'NOT_ENOUGH_ENERGY',
@@ -51,6 +53,9 @@ const decideDialog = (current) => {
       case DIALOGS.DAMAGED_PAL_HUMAN:
         console.log('Dialog: Damage dealt to HUMAN Pal', current)
         return <DamagedPalHuman />
+        case DIALOGS.STATUS_APPLIED:
+          console.log('Dialog: Status applied', current)
+          return <StatusApplied />
 
 
     // [other]
