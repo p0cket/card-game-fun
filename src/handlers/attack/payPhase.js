@@ -6,6 +6,7 @@ import {
   createNotEnoughEnergyDialogState,
   switchDialog,
 } from '../dialog/energyDialogHandler'
+import { createPayloadState } from '../moveHandlers'
 import {
   createAIPaidState,
   createCostPaidDialogState,
@@ -15,11 +16,12 @@ import {
 let playerEnergy
 let moveCost
 
-export const payPhase = (state, attackPayload) => {
+export const payPhase = (state, attackPayload) => {  
+  let newState = createPayloadState(state, attackPayload)
   const { move, pal, phase, player, userSlot, targets } = attackPayload
   console.groupCollapsed(
-    `💵 PAY: starting`,
-    state,
+    `💵 payPhase: starting`,
+    newState,
     move,
     pal,
     phase,
@@ -28,7 +30,7 @@ export const payPhase = (state, attackPayload) => {
     targets,
   )
   checkForUndefined({
-    state,
+    newState,
     move,
     pal,
     phase,
@@ -37,25 +39,11 @@ export const payPhase = (state, attackPayload) => {
     userSlot,
     targets,
   })
-
-  let newState = {
-    ...state,
-    attack: {
-      move,
-      pal,
-      phase,
-
-      player,
-      userSlot,
-      targets,
-    },
-  }
   console.log(
-      `Pay - attackPayload: move, pal, player, userSlot, targets,:`,
-      attackPayload,
-    )
+    `Pay - attackPayload: move, pal, player, userSlot, targets,:`,
+    attackPayload,
+  )
   if (player === PLAYERS.HUMAN) {
-  
     // 1. Pay cost. If you can't, return:
     playerEnergy = newState.game.player.energy
     moveCost = move.cost.energy
@@ -66,7 +54,7 @@ export const payPhase = (state, attackPayload) => {
       const dialogState = switchDialog(
         newState,
         DIALOGS.NOT_ENOUGH_ENERGY,
-        attackPayload,
+        // attackPayload,
       )
       console.log(`dialogState: not enough dialog`, dialogState)
       console.groupEnd()

@@ -5,6 +5,10 @@ import './index.css'
 import { newStartingData } from './consts/startingData'
 import { cusLog } from './utils/debugging-utils'
 import { payPhase } from './handlers/attack/payPhase'
+import { dmgPhase } from './handlers/attack/dmgPhase'
+import { statusPhase } from './handlers/attack/statusPhase'
+import { cleanupPhase } from './handlers/attack/effectsPhase'
+import { endPhase } from './handlers/attack/endPhase'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -105,7 +109,18 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.PAY_PHASE:
         payState = payPhase(state, action.payload)
         return payState
-      // payload: { move, pal, player, userSlot, targets },
+      case ACTIONS.DAMAGE_PHASE:
+        dmgState = dmgPhase(state, action.payload)
+        return dmgState
+      case ACTIONS.STATUS_PHASE:
+        statusState = statusPhase(state, action.payload)
+        return statusState
+      case ACTIONS.CLEANUP_PHASE:
+        cleanupState = cleanupPhase(state, action.payload)
+        return cleanupState
+      case ACTIONS.END_PHASE:
+        endState = endPhase(state, action.payload)
+        return endState
       case ACTIONS.CHANGE_DIALOG:
         console.log('Reducer CHANGE_DIALOG:', action)
         return {

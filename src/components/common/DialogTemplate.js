@@ -53,9 +53,11 @@ function DialogTemplate({ title, message, options }) {
               height: '24px',
               backgroundColor: 'green',
               marginRight: '2px',
+
             }}
+            className='font-[silkscreen]'
           >
-            {'0'}
+            {'()'}
           </div>
           <div
             style={{

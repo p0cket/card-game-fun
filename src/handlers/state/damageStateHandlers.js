@@ -17,7 +17,6 @@ export const createAIDamagedState = (
   moveCost,
   move,
   pal,
-  contextualDispatch,
 ) => {
   console.log(
     'Entered createAIDamagedState:',
@@ -31,8 +30,6 @@ export const createAIDamagedState = (
     move,
     'pal:',
     pal,
-    'contextualDispatch:',
-    contextualDispatch,
   )
   console.log('ourState.opponent.monsters[0]:', ourState.opponent.monsters[0])
   let resultState = {
@@ -99,20 +96,3 @@ export const createHumanDamagedState = (
   console.log('resultState after damaged:', resultState)
   return resultState
 }
-// export const createHumanDamagedState = (contextualState, damagedHP) => {
-//   console.log(`createHumanDamagedState:`, damagedHP)
-//   const damagedState = {
-//     ...contextualState,
-//     userParty: [
-//       {
-//         ...contextualState.userParty[0],
-//         stats: {
-//           ...contextualState.userParty[0].stats,
-//           hp: damagedHP,
-//         },
-//       },
-//       ...contextualState.userParty.slice(1),
-//     ],
-//   }
-//   return damagedState
-// }

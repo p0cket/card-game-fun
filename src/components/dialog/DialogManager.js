@@ -3,13 +3,15 @@ import NotEnoughEnergy from './NotEnoughEnergy'
 import EnergyPaid from './EnergyPaid'
 import CostPaid from './CostPaid'
 import AICostPaid from './AI/AICostPaid'
-import DamageDealtToAI from './DamageDealtToAI'
 import CustomDialog from './CustomDialog'
 import TemplateDialog from './TemplateDialog'
+import DamagedPalAI from './DamagedPalAI'
 
 export const DIALOGS = {
   NOT_ENOUGH_ENERGY: 'NOT_ENOUGH_ENERGY',
   ENERGY_PAID: 'ENERGY_PAID',
+
+  DAMAGED_PAL_AI: 'DAMAGED_PAL_AI',
 
   COST_PAID_SUCCESS: 'COST_PAID_SUCCESS',
   AI_MOVE_COST_PAID: 'AI_COST_PAID',
@@ -43,9 +45,14 @@ const decideDialog = (current) => {
       console.log('Dialog: AI cost paid', current)
       return <AICostPaid />
     // [dmgPhase]
-    case DIALOGS.DAMAGE_DEALT_TO_AI:
-      console.log('Dialog: Damage dealt to AI', current)
-      return <DamageDealtToAI />
+    case DIALOGS.DAMAGED_PAL_AI:
+      console.log('Dialog: Damage dealt to AI Pal', current)
+      return <DamagedPalAI />
+      case DIALOGS.DAMAGED_PAL_HUMAN:
+        console.log('Dialog: Damage dealt to HUMAN Pal', current)
+        return <DamagedPalHuman />
+
+
     // [other]
     case DIALOGS.CUSTOM:
       console.log(`Dialog: Custom: ${current}`)
@@ -58,9 +65,7 @@ const decideDialog = (current) => {
   }
 }
 
-// function DialogManager({current}) {
-//   return <>{decideDialog(current)}</>
-// }
+// change to one
 function DialogManager({ current }) {
   return decideDialog(current)
 }
