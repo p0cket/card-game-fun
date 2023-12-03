@@ -3,7 +3,7 @@ import { PLAYERS } from '../consts/consts'
 import { Party, opponent } from '../consts/party/parties'
 import { checkForUndefined, cusLog } from '../utils/debugging-utils'
 import { dmgPhase } from './attack/dmgPhase'
-import { cleanupPhase } from './attack/effectsPhase'
+import { cleanupPhase } from './attack/cleanupPhase'
 import { endPhase } from './attack/endPhase'
 import { payPhase } from './attack/payPhase'
 import { statusPhase } from './attack/statusPhase'
@@ -90,7 +90,7 @@ export const executeMove = (dispatch, payload) => {
         payload: { pal, move, phase, player, userSlot, targets },
       })
       break
-    case ATK_PHASES.EFFECTS:
+    case ATK_PHASES.CLEANUP:
       dispatch({
         type: ACTIONS.EFFECTS_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
@@ -111,14 +111,13 @@ export const executeMove = (dispatch, payload) => {
   console.log('executeMove: end. (If you hit here, something prob went wrong)')
 }
 
-export const executeAITurn = (state, dispatch, details = null) => {
+export const executeAITurn = (state, details = null) => {
   // Implement logic for the AI's turn
   // Your AI logic here to choose a move
   const pal = state.opponent.monsters[0] // probably just userSlot?
   console.log(
-    `AI executeAITurn: state, dispatch, pal`,
+    `AI executeAITurn: state, pal`,
     state,
-    dispatch,
     details,
     pal,
   )
@@ -126,7 +125,6 @@ export const executeAITurn = (state, dispatch, details = null) => {
   console.log(`AI executeAITurn: determined move`, move)
   const result = executeMove({
     state: state,
-    dispatch: dispatch,
     pal: pal,
     move: move,
     phase: ATK_PHASES.PAY,
@@ -282,7 +280,7 @@ export function createPayloadState(
 //         type: ACTIONS.UPDATEGAMEDATA,
 //       })
 //       break
-//     case ATK_PHASES.EFFECTS:
+//     case ATK_PHASES.CLEANUP:
 //       effectsResult = cleanupPhase(
 //         state,
 //         dispatch,

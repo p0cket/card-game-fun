@@ -3,7 +3,7 @@ import DialogTemplate from '../common/DialogTemplate'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 
-const StatusApplied = () => {
+const StatusAppliedHuman = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
 
@@ -63,4 +63,16 @@ const StatusApplied = () => {
   return <DialogTemplate {...statusAppliedProps} />
 }
 
-export default StatusApplied
+export default StatusAppliedHuman
+
+
+// go to dialogManager, and create a component for StatusAppliedHuman
+      // instead of below:
+      // state = createPopupVisibleState({
+      //   prevState: state,
+      //   message: `${move?.effect?.result} applied to human.
+      // ${ourPal.name} ${move?.effect?.result}'d you pal`,
+      //   options: statusOptions,
+      //   header: `Status applied`,
+      //   title: 'status applied',
+      // })

@@ -7,7 +7,7 @@ import { cusLog } from './utils/debugging-utils'
 import { payPhase } from './handlers/attack/payPhase'
 import { dmgPhase } from './handlers/attack/dmgPhase'
 import { statusPhase } from './handlers/attack/statusPhase'
-import { cleanupPhase } from './handlers/attack/effectsPhase'
+import { cleanupPhase } from './handlers/attack/cleanupPhase'
 import { endPhase } from './handlers/attack/endPhase'
 
 const stateContext = React.createContext()
