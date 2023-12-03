@@ -156,7 +156,7 @@ export const updateStatusState = (
 //                 pal: pal,
 //                 move: move,
 //                 player: player,
-//                 phase: ATK_PHASES.EFFECTS,
+//                 phase: ATK_PHASES.CLEANUP,
 //                 userSlot: 0,
 
 //                 targets: targets,
@@ -231,7 +231,7 @@ export const updateStatusState = (
 //                 pal: pal,
 //                 move: move,
 //                 player: player,
-//                 phase: ATK_PHASES.EFFECTS,
+//                 phase: ATK_PHASES.CLEANUP,
 //                 userSlot: 0,
 
 //                 targets: targets,

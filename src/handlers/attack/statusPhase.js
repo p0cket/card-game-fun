@@ -1,4 +1,5 @@
 import { ACTIONS } from '../../MainContext'
+import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import {
   applyStatusEffect,
@@ -6,6 +7,7 @@ import {
 } from '../../utils/battle-utils'
 import { checkForUndefined } from '../../utils/debugging-utils'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
+import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
 export const statusPhase = (state, attackPayload) => {
@@ -57,7 +59,8 @@ export const statusPhase = (state, attackPayload) => {
       )
       const ourPal = pal.obj
       console.warn(`move, ourPal`, move, ourPal)
-      // #TODO: state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)
+      // #TODO: 
+      state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)
       // go to dialogManager, and create a component for StatusAppliedHuman
       // instead of below:
       // state = createPopupVisibleState({
@@ -77,17 +80,9 @@ export const statusPhase = (state, attackPayload) => {
       `effect did not land. statusPhase: b4 calling createPopupVisibleState, state on did not land:', state`,
     )
     if (player === PLAYERS.HUMAN) {
-      // #TODO: state = switchDialog(state, DIALOGS.STATUS_NOT_LAND)
-      // go to dialogManager, and create a component for StatusNotLand
-      // instead of below:
-      // state = createPopupVisibleState({
-      //   prevState: state,
-      //   message: `${move?.effect?.result} did not land.
-      // ${pal.name} failed to ${move?.effect?.result} the opponent`,
-      //   options: statusNotLandOptions,
-      //   header: `oh no, status #fail`,
-      //   title: 'status not applied',
-      // })
+      // #TODO: 
+      state = switchDialog(state, DIALOGS.STATUS_NOT_APPLIED)
+  
       console.log(`statusPhase: ending, state`, state)
       console.groupEnd()
       return state
@@ -95,17 +90,8 @@ export const statusPhase = (state, attackPayload) => {
       console.log(`enemy did not land. statusPhase: ending, state`, state)
       const ourPal = pal.obj
       console.warn(`move, ourPal`, move, ourPal)
-      // #TODO: state = switchDialog(state, DIALOGS.STATUS_NOT_LAND_HUMAN)
-      // go to dialogManager, and create a component for StatusNotLandHuman
-      // instead of below:
-      // state = createPopupVisibleState({
-      //   prevState: state,
-      //   message: `${move?.effect?.result} did not land.
-      // ${ourPal.name} failed to ${move?.effect?.result} your pal`,
-      //   options: statusNotLandOptions,
-      //   header: `oh no, status #fail`,
-      //   title: 'status not applied to your pal',
-      // })
+      // #TODO: state = 
+      switchDialog(state, DIALOGS.STATUS_NOT_APPLIED_HUMAN)
       console.groupEnd()
       return state
     }
