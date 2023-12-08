@@ -7,8 +7,8 @@ import CustomDialog from './CustomDialog'
 import TemplateDialog from './TemplateDialog'
 import DamagedPalAI from './DamagedPalAI'
 import DamagedPalHuman from './DamagedPalHuman'
-import StatusApplied from './StatusApplied'
-import StatusNotApplied from './StatusNotApplied'
+import StatusAppliedAI from './StatusAppliedAI'
+import StatusNotAppliedAI from './StatusNotAppliedAI'
 import StatusNotAppliedHuman from './StatusNotAppliedHuman'
 import StatusAppliedHuman from './StatusAppliedHuman'
 import Cleanup from './Cleanup'
@@ -23,12 +23,14 @@ export const DIALOGS = {
   DAMAGED_PAL_AI: 'DAMAGED_PAL_AI',
   DAMAGED_PAL_HUMAN: 'DAMAGED_PAL_HUMAN',
 
-  STATUS_APPLIED: 'STATUS_APPLIED',
+  STATUS_APPLIED_AI: 'STATUS_APPLIED_AI',
   STATUS_APPLIED_HUMAN: 'STATUS_APPLIED_HUMAN',
-  STATUS_NOT_APPLIED: 'STATUS_NOT_APPLIED',
+  STATUS_NOT_APPLIED_AI: 'STATUS_NOT_APPLIED_AI',
   STATUS_NOT_APPLIED_HUMAN: 'STATUS_NOT_APPLIED_HUMAN',
 
-  CLEANUP: 'CLEANUP',
+  CLEANUP_AI: 'CLEANUP_AI',
+  CLEANUP_HUMAN: 'CLEANUP_HUMAN',
+
   SWITCHTURNS_TO_AI: 'SWITCHTURNS_TO_AI',
   SWITCHINGTURNS_TO_HUMAN: 'SWITCHINGTURNS_TO_HUMAN',
 
@@ -55,11 +57,14 @@ const decideDialog = (current) => {
     AI_COST_PAID,
     DAMAGED_PAL_AI,
     DAMAGED_PAL_HUMAN,
-    STATUS_APPLIED,
+    STATUS_APPLIED_AI,
     STATUS_APPLIED_HUMAN,
-    STATUS_NOT_APPLIED,
+    STATUS_NOT_APPLIED_AI,
     STATUS_NOT_APPLIED_HUMAN,
-    CLEANUP,
+
+    CLEANUP_AI,
+    CLEANUP_HUMAN,
+    
     SWITCHTURNS_TO_AI,
     CUSTOM,
     TEMPLATE,
@@ -87,22 +92,25 @@ const decideDialog = (current) => {
       console.log('Dialog: Damage dealt to HUMAN Pal', current)
       return <DamagedPalHuman />
     // [statusPhase]
-    case STATUS_APPLIED:
+    case STATUS_APPLIED_AI:
       console.log('Dialog: Status applied', current)
-      return <StatusApplied />
+      return <StatusAppliedAI />
     case STATUS_APPLIED_HUMAN:
       console.log('Dialog: Status applied Human', current)
       return <StatusAppliedHuman />
-    case STATUS_NOT_APPLIED:
+    case STATUS_NOT_APPLIED_AI:
       console.log('Dialog: Status Not applied', current)
-      return <StatusNotApplied />
+      return <StatusNotAppliedAI />
     case STATUS_NOT_APPLIED_HUMAN:
       console.log('Dialog: Status Not applied Human', current)
       return <StatusNotAppliedHuman />
     // [cleanupPhase]
-    case CLEANUP:
+    case CLEANUP_AI:
       console.log('Dialog: Status applied', current)
-      return <Cleanup />
+      return <Cleanup player={PLAYERS.AI} />
+    case CLEANUP_HUMAN:
+      console.log('Dialog: Status applied', current)
+      return <Cleanup player={PLAYERS.HUMAN} />
     // [endPhase]
     case SWITCHTURNS_TO_AI:
       console.log('Dialog: Status applied', current)

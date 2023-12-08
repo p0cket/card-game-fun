@@ -9,7 +9,7 @@ function DialogTemplate({ title, message, options }) {
   const isOpen = contextualState.dialog.isOpen // For demonstration; replace with actual logic
 
   const closeDialogPopup = (button) => {
-    if (button.onClick) {
+    if (typeof button.onClick === 'function') {
       button.onClick()
     }
     // Additional logic to close the dialog goes here
@@ -53,9 +53,8 @@ function DialogTemplate({ title, message, options }) {
               height: '24px',
               backgroundColor: 'green',
               marginRight: '2px',
-
             }}
-            className='font-[silkscreen]'
+            className="font-[silkscreen]"
           >
             {'()'}
           </div>
@@ -65,27 +64,29 @@ function DialogTemplate({ title, message, options }) {
               fontWeight: 'bold',
             }}
           >
-            <div className='font-[silkscreen]'>{title}</div>
+            <div className="font-[silkscreen]">{title}</div>
           </div>
         </div>
         <Dialog size="20" myText={message} />
-        {options.map((button, index) => (
-          <button
-            key={index}
-            onClick={() => closeDialogPopup(button)}
-            style={{
-              backgroundColor: button.backgroundColor || '#4b770e',
-              border: 'none',
-              color: button.color || '#fff',
-              padding: '4px 4px',
-              margin: '2px',
-              cursor: 'pointer',
-            }}
-            className='font-[silkscreen]'
-          >
-            {button.label}
-          </button>
-        ))}
+        <div>
+          {options.map((button, index) => (
+            <button
+              key={index}
+              onClick={() => closeDialogPopup(button)}
+              style={{
+                backgroundColor: button.backgroundColor || '#4b770e',
+                border: 'none',
+                color: button.color || '#fff',
+                padding: '4px 4px',
+                margin: '2px',
+                cursor: 'pointer',
+              }}
+              className="font-[silkscreen]"
+            >
+              {button.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   ) : null

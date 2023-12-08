@@ -1,27 +1,16 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
+import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
 import { cleanupStepHandler } from '../Battle/cleanupStepHandlers'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
-// import { createCleanupDialogState } from '../state/statusStateHandlers'
-
-export const cleanupPhase = (
-  state, attackPayload
-  // state,
-  // ,
-  // // move details
-  // move,
-  // pal,
-  // player,
-  // userSlot,
-  // // target details
-  // targets,
-) => {
+export const cleanupPhase = (state, attackPayload) => {
   const { move, pal, phase, player, userSlot, targets } = attackPayload
   console.group(`😵‍💫 CLEANUP: start`)
   checkForUndefined({
     state,
+
     pal,
     move,
     phase,
@@ -30,43 +19,15 @@ export const cleanupPhase = (
     userSlot,
     targets,
   })
-  // const cleanupOptions = [
-  //   {
-  //     label: `Cleaning up - end of turn effects`,
-  //     onClick: () => {
-  //       console.log(`Clicked cleaning up'`)
-  //       executeMove({
-  //         state: state,
-  //         //
-  //         pal: pal,
-  //         move: move,
-  //         player: player,
-  //         phase: ATK_PHASES.END,
-  //         userSlot: 0,
-  //         //
-  //         targets: targets,
-  //         // possessed: false,
-  //       })
-  //     },
-  //     backgroundColor: '#4b770e',
-  //     color: '#fff',
-  //   },
-  // ]
-
   // DO ALL THE  END OF TURN THINGS HERE:
   // 1. run through all the end of turn effects (poison damage, burn, sleep, stun, etc.)
   // statusHandlers.js // statusStateHandlers.js // battleHandlers.js applyStatusHandler
   // state = cleanupStepHandler(state)
-
-  state = switchDialog(state, DIALOGS.CLEANUP)
-  // state = createPopupVisibleState({
-  //   prevState: state,
-  //   message: `cleaning up..
-  //   any status end of turn effects applied to the opponent`,
-  //   options: cleanupOptions,
-  //   header: `good turn`,
-  //   title: 'Cleanup phase',
-  // })
+  if (player === PLAYERS.HUMAN) {
+    state = switchDialog(state, DIALOGS.CLEANUP_HUMAN)
+  } else if (player === PLAYERS.AI) {
+    state = switchDialog(state, DIALOGS.CLEANUP_AI)
+  }
   console.log(`effects: phase ending`)
   return state
 }

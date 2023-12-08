@@ -36,12 +36,12 @@ export default function BattleTopDisplay() {
 
   // const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false)
 
-  const contextualState = useStateContext()
-  const contextualDispatch = useDispatchContext()
+  const state = useStateContext()
+  const dispatch = useDispatchContext()
 
   const handleAttackClick = (name) => {
     // Dispatch an action to perform the selected attack
-    contextualDispatch({
+    dispatch({
       type: 'PERFORM_ATTACK',
       payload: { attackName: name },
     })
@@ -84,9 +84,9 @@ export default function BattleTopDisplay() {
   }
   // Def work on this later
   const currentMonDetailsStatuses =
-    contextualState.opponent.monsters[0].obj.status
+    state.opponent.monsters[0].obj.status
   const currentMon =
-    contextualState.current.scene.details.trainer.monsters[0].obj
+    state.current.scene.details.trainer.monsters[0].obj
   console.log(
     `currentMon & currentMonDetails:`,
     currentMon,
@@ -121,11 +121,23 @@ export default function BattleTopDisplay() {
           {name}
           <span className="text-gray-500 text-sm">lvl{lvl}</span>
         </div>
-        <div>
+        {/* <div>
           {stats.hp}HP
           <progress
             id="health"
             value={stats.hp}
+            max={stats.max_hp}
+            style={{
+              backgroundColor: '#4caf50',
+              color: '#9faf4c',
+            }}
+          />
+        </div> */}
+         <div>
+          {state.opponent.monsters[0].obj.stats.hp}HP
+          <progress
+            id="health"
+            value={state.opponent.monsters[0].obj.stats.hp}
             max={stats.max_hp}
             style={{
               backgroundColor: '#4caf50',
@@ -137,7 +149,6 @@ export default function BattleTopDisplay() {
           Statuses:
           {Object.keys(currentMonDetailsStatuses).map((key) => {
             if (currentMonDetailsStatuses[key]) {
-              console.log(`${key} is true`)
               return (
                 <span className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1" key={key}>
                 {key}
@@ -172,7 +183,7 @@ export default function BattleTopDisplay() {
             </div>
           </div>
         )}
-      </div>{' '}
+      </div>
       <div
         className="flex flex-col items-center mx-2 flex-grow-2 bg-center bg-no-repeat bg-cover"
         style={{ backgroundImage: `url(${bg1})` }}

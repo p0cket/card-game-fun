@@ -42,7 +42,7 @@ const GeneralPopup = (props) => {
             attack={attack}
             contextualState={state}
             contextualDispatch={dispatch}
-            togglePopup={closeDialogPopup}
+            togglePopup={() => closeDialogPopup()}
             pal={ourCurrentMon}
           />
         </div>

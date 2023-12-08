@@ -33,7 +33,7 @@ function RenderIndAttack({
   } = attack
   const runMove = (move, pal) => {
     console.log(`runMove:  togglePopup`, togglePopup)
-    // togglePopup()
+    togglePopup()
     // contextualDispatch({ type: ACTIONS.CLOSE_POPUP })
 
     console.log('executeMove params:',contextualDispatch, {

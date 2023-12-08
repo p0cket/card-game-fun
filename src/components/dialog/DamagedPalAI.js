@@ -8,21 +8,24 @@ const DamagedPalAI = () => {
   const dispatch = useDispatchContext()
   const dmg_continueOption = {
     label: 'Continue',
-    onClick: executeMove(dispatch, {
-      pal: state.attack.pal,
-      move: state.attack.move,
-      phase: ATK_PHASES.STATUS,
+    onClick: () => {
+      console.warn('dmg_continueOption onClick: state.attack', state.attack)
+      executeMove(dispatch, {
+        pal: state.attack.pal,
+        move: state.attack.move,
+        phase: ATK_PHASES.STATUSES,
 
-      userSlot: state.attack.userSlot,
-      targets: state.attack.targets,
-      player: state.attack.player,
-      // possessed: false,
-    }),
+        userSlot: state.attack.userSlot,
+        targets: state.attack.targets,
+        player: state.attack.player,
+        // possessed: false,
+      })
+    },
   }
   const aiPalDamagedDialogProps = {
     title: 'AI Pal Damaged',
     header: 'AI Pal took damage',
-    message: `AI's Pal HP reduced to ${state.attack.pal.stats.hp}`,
+    message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage (AI reduced to ${state.opponent.monsters[0].obj.stats.hp})`,
     options: [dmg_continueOption],
   }
 
@@ -30,7 +33,6 @@ const DamagedPalAI = () => {
 }
 
 export default DamagedPalAI
-
 
 // import React, { useEffect, useState } from 'react'
 // import DialogTemplate from '../common/DialogTemplate'

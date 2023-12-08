@@ -6,13 +6,14 @@ import {
   executeMove,
 } from '../../handlers/moveHandlers'
 import { useDispatchContext, useStateContext } from '../../MainContext'
-const SwitchingTurns = (whosTurn) => {
+const SwitchingTurns = ({whosTurn}) => {
+  console.log(`SwitchingTurns: whosTurn`, whosTurn)
   const state = useStateContext()
   const dispatch = useDispatchContext()
   const switchingTurns_continueOption = {
     label: 'Continue',
     onClick: () => {
-      executeAITurn(state)
+      executeAITurn(state, dispatch)
     },
   }
 
