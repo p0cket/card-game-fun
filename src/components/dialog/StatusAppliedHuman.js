@@ -9,22 +9,23 @@ const StatusAppliedHuman = () => {
 
   const dmg_continueOption = {
     label: 'Continue',
-    onClick: executeMove(dispatch, {
-      pal: state.attack.pal,
-      move: state.attack.move,
-      phase: ATK_PHASES.CLEANUP,
+    onClick: () =>
+      executeMove(dispatch, {
+        pal: state.attack.pal,
+        move: state.attack.move,
+        phase: ATK_PHASES.CLEANUP,
 
-      userSlot: state.attack.userSlot,
-      targets: state.attack.targets,
-      player: state.attack.player,
-      // possessed: false,
-    }),
+        userSlot: state.attack.userSlot,
+        targets: state.attack.targets,
+        player: state.attack.player,
+        // possessed: false,
+      }),
   }
   const status_ok = {
     label: `ok, status lands`,
     onClick: () => {
-      console.log('statusOptions onClick')
-      executeMove({
+      console.log('statusOptions onClick: state.attack', state.attack)
+      executeMove(dispatch, {
         pal: state.attack.pal,
         move: state.attack.move,
         phase: ATK_PHASES.CLEANUP,
@@ -40,7 +41,7 @@ const StatusAppliedHuman = () => {
     label: `status not land. ok`,
     onClick: () => {
       console.log('statusNotLandOptions onClick: start')
-      executeMove({
+      executeMove(dispatch, {
         pal: state.attack.pal,
         move: state.attack.move,
         phase: ATK_PHASES.CLEANUP,
@@ -55,24 +56,11 @@ const StatusAppliedHuman = () => {
   const statusAppliedProps = {
     title: `Status Applied`,
     header: `Status Applied!`,
-    message: `Status applied. Pal's statuses are now reduced to ${JSON.stringify(
+    message: `Status applied to HUMAN. Pal's statuses are now to ${Object.keys(
       state.attack.pal.status,
-    )}`,
+    ).join(', ')}`,
     options: [status_ok],
   }
   return <DialogTemplate {...statusAppliedProps} />
 }
-
 export default StatusAppliedHuman
-
-
-// go to dialogManager, and create a component for StatusAppliedHuman
-      // instead of below:
-      // state = createPopupVisibleState({
-      //   prevState: state,
-      //   message: `${move?.effect?.result} applied to human.
-      // ${ourPal.name} ${move?.effect?.result}'d you pal`,
-      //   options: statusOptions,
-      //   header: `Status applied`,
-      //   title: 'status applied',
-      // })

@@ -19,8 +19,7 @@ export const createAIDamagedState = (
   pal,
 ) => {
   console.log(
-    'Entered createAIDamagedState:',
-    'ourState:',
+    'createAIDamagedState:',
     ourState,
     'damagedHP:',
     damagedHP,
@@ -31,7 +30,7 @@ export const createAIDamagedState = (
     'pal:',
     pal,
   )
-  console.log('ourState.opponent.monsters[0]:', ourState.opponent.monsters[0])
+  console.log('ourState.opponent.monsters[0], damagedHP', ourState.opponent.monsters[0], damagedHP)
   let resultState = {
     ...ourState,
     opponent: {

@@ -37,8 +37,15 @@ export const ACTIONS = {
   SHOW_ATTACK: 'SHOW_ATTACK',
   CLOSE_POPUP: 'CLOSE_POPUP',
   CLOSE_DIALOG: 'CLOSE_DIALOG',
-  PAY_PHASE: 'PAY_PHASE',
+
   CHANGE_DIALOG: 'CHANGE_DIALOG',
+  // Phases:
+  PAY_PHASE: 'PAY_PHASE',
+  DAMAGE_PHASE: 'DAMAGE_PHASE',
+  STATUS_PHASE: 'STATUS_PHASE',
+  CLEANUP_PHASE: 'CLEANUP_PHASE',
+  END_PHASE: 'END_PHASE',
+
 }
 
 export const MainProvider = ({ children }) => {
@@ -110,15 +117,19 @@ export const MainProvider = ({ children }) => {
         payState = payPhase(state, action.payload)
         return payState
       case ACTIONS.DAMAGE_PHASE:
+        console.log('Reducer DAMAGE_PHASE: action&state', action, state)
         dmgState = dmgPhase(state, action.payload)
         return dmgState
       case ACTIONS.STATUS_PHASE:
+        console.log('Reducer STATUS_PHASE: action&state', action, state)
         statusState = statusPhase(state, action.payload)
         return statusState
       case ACTIONS.CLEANUP_PHASE:
+        console.log('Reducer CLEANUP_PHASE: action&state', action, state)
         cleanupState = cleanupPhase(state, action.payload)
         return cleanupState
       case ACTIONS.END_PHASE:
+        console.log('Reducer END_PHASE: action&state', action, state)
         endState = endPhase(state, action.payload)
         return endState
       case ACTIONS.CHANGE_DIALOG:

@@ -40,7 +40,7 @@ export const statusPhase = (state, attackPayload) => {
         player,
         move,
       )
-      state = switchDialog(state, DIALOGS.STATUS_APP)
+      state = switchDialog(state, DIALOGS.STATUS_APPLIED_AI)
       console.groupEnd()
       return state
     } else if (player === PLAYERS.AI) {
@@ -59,39 +59,24 @@ export const statusPhase = (state, attackPayload) => {
       )
       const ourPal = pal.obj
       console.warn(`move, ourPal`, move, ourPal)
-      // #TODO: 
+      // #TODO:
       state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)
-      // go to dialogManager, and create a component for StatusAppliedHuman
-      // instead of below:
-      // state = createPopupVisibleState({
-      //   prevState: state,
-      //   message: `${move?.effect?.result} applied to human.
-      // ${ourPal.name} ${move?.effect?.result}'d you pal`,
-      //   options: statusOptions,
-      //   header: `Status applied`,
-      //   title: 'status applied',
-      // })
       console.groupEnd()
       return state
     }
   } else {
     // Handle the case where the effect does not land
-    console.log(
-      `effect did not land. statusPhase: b4 calling createPopupVisibleState, state on did not land:', state`,
-    )
+    console.log(`statusPhase b4 createPopupVisibleState: effect did not land`)
     if (player === PLAYERS.HUMAN) {
-      // #TODO: 
-      state = switchDialog(state, DIALOGS.STATUS_NOT_APPLIED)
-  
+      state = switchDialog(state, DIALOGS.STATUS_NOT_APPLIED_AI)
+
       console.log(`statusPhase: ending, state`, state)
       console.groupEnd()
       return state
     } else if (player === PLAYERS.AI) {
       console.log(`enemy did not land. statusPhase: ending, state`, state)
-      const ourPal = pal.obj
-      console.warn(`move, ourPal`, move, ourPal)
-      // #TODO: state = 
-      switchDialog(state, DIALOGS.STATUS_NOT_APPLIED_HUMAN)
+      console.warn(`move, ourPal`, move, pal)
+      state = switchDialog(state, DIALOGS.STATUS_NOT_APPLIED_HUMAN)
       console.groupEnd()
       return state
     }
