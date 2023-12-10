@@ -4,7 +4,9 @@ import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { SCENES, changeLevel } from '../../handlers/sceneHandlers_new'
 import { hikerBrak } from '../../consts/party/trainers'
 import MapComponent from './MapComponent'
-import { LevelList, levels } from './LevelList'
+import { LevelList } from './LevelList'
+import { levels } from '../../consts/mapGenerator_new'
+
 
 function Map() {
   const [selectedPal, setSelectedPal] = useState(null)
@@ -70,9 +72,9 @@ function Map() {
   return (
     <div className="font-[silkscreen] text-white m-1 text-center">
       <div className="bg-green-500 rounded p-1 mb-1">
-        <h2 className="text-2xl mb-1">Map to the Elites: Choose your path</h2>
+        <h2 className="text-2xl mb-1">Map to the top</h2>
         <LevelList levels={levels} />
-        <div className="flex">
+        {/* <div className="flex">
           {contextualState.game.map[contextualState.current.level].map(
             (option, index) => (
               <button
@@ -100,7 +102,7 @@ function Map() {
           >
             •Battle•
           </button>
-        </div>
+        </div> */}
       </div>
       <h3 className="text-sm">Party:</h3>
       <div className="flex flex-wrap justify-between">

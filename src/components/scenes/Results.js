@@ -27,7 +27,6 @@ function Results({ experience = 100 }) {
   }
 
   const onContinue = (selectedItem) => {
-    // Continue to next scene
     console.log('Continue to next scene')
     dispatch({
       type: ACTIONS.CHANGE_SCENE,
@@ -46,32 +45,7 @@ function Results({ experience = 100 }) {
       },
     })
   }
-  //   const loadNextLevel = () => {
-  //     //
-
-  //     const nextSceneState = updateScene(state, {
-  //       screen: SCENES.CHOOSECHARACTER,
-  //       details: null,
-  //     })
-  //     const nextLevelState = updateLevel(nextSceneState, 1)
-  //     dispatch({
-  //       payload: nextLevelState,
-  //       type: ACTIONS.UPDATEGAMEDATA,
-  //     })
-  //   }
-
-  //   state = updateScene(state, {
-  //     screen: SCENES.RESULTS,
-  //     details: {
-  //       type: 'win',
-  //       trainer: hikerBrak,
-  //       area: 'tranquil forest',
-  //       difficulty: 'easy',
-  //       achievement: 'flawless victory',
-  //       VIP: 'your pal',
-  //       // EXP: Difficulty * lvl of monster * 10
-  //     },
-  //   })
+ 
 
   return (
     <motion.div
