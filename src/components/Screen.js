@@ -85,7 +85,6 @@ const Screen = ({ gameData, dispatch, map }) => {
       case RESULTS:
         console.log('(screen: results)') 
       return <Results />
-
     case REWARD:
       console.log('(screen: reward)')
       return (

@@ -71,6 +71,7 @@ export const newStartingData = {
   current: {
     level: 0,
     act: 1,
+    completedLevels: [],
     scene: { screen: SCENES.INTRO, details: null },
     curEvent: null,
     incomingLevels: [
@@ -80,6 +81,7 @@ export const newStartingData = {
       },
     ],
   },
+
   game: {
     player: {
       gold: 50,
@@ -88,6 +90,7 @@ export const newStartingData = {
       inventory: [],
       effects: [],
       energy: 6,
+      maxEnergy:8,
     },
     map: generateMap(),
     battlesAhead: [],

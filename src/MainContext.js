@@ -30,7 +30,7 @@ export function useDispatchContext() {
 
 export const ACTIONS = {
   CHANGE_SCENE: 'CHANGE_SCENE',
-  
+
   SET_SCENE: 'SET_SCENE',
   SET_HEALTH: 'SET_HEALTH',
   SET_GOLD: 'SET_GOLD',
@@ -76,6 +76,44 @@ export const MainProvider = ({ children }) => {
         return { ...state, scene: action.payload }
       // same? Made this as a second attempt
       case ACTIONS.CHANGE_SCENE:
+        // if(state.game.player.maxEnergy < 0){
+        // }
+        if (action.payload.screen === SCENES.BATTLE) {
+          state = {
+            ...state,
+            game: {
+              ...state.game,
+              player: {
+                ...state.game.player,
+                energy: state.game.player.maxEnergy,
+              },
+            },
+          }
+          // now lets add the current level, or an increment to a
+          // varaible. we'll add it in completedLevels
+          state = {
+            // state.current is this below:
+            //   current: {
+            // level: 0,
+            // act: 1,
+            // completedLevels: [],
+            ...state,
+            current: {
+              ...state.current,
+              completedLevels: [
+                ...state.current.completedLevels,
+                [
+                  state.current.level,
+                  state.current.act,
+                  state.current.curEvent,
+                  state.current.scene,
+                  state.current.incomingLevels,
+                ],
+              ],
+            },
+          }
+        }
+
         nextSceneState = updateScene(state, {
           screen: action.payload.screen,
           details: action.payload.details,

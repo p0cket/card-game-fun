@@ -1,73 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { SCENES } from '../../scenes'
+import { changeLevel } from '../../handlers/sceneHandlers_new'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
+import { hikerBrak } from '../../consts/party/trainers'
+
+//state.current.completedLevels has how many and the details of the levels you've completed
+// should be checked and each entry is one level that we hacve completed
 
 // This is your levels configuration, where each level has an ID, a title, and a set of options.
-export const levels = [
-  {
-    id: 1,
-    title: 'The Path Begins',
-    options: [
-      { id: '1a', description: 'Fight a monster' },
-      { id: '1b', description: 'Visit a shop' },
-      { id: '1c', description: 'Rest' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'But you need more',
-    options: [
-      { id: '2a', description: 'Fight a harder monster' },
-      { id: '2b', description: 'Find a treasure' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'You venture deep',
-    options: [
-      { id: '3a', description: 'Fight an even harder monster' },
-      { id: '3b', description: 'Find another treasure' },
-    ],
-  },
-  {
-    id: 4,
-    title: 'You have found the treasure',
-    options: [
-      { id: '4a', description: 'Fight a thug' },
-      { id: '4b', description: 'Enter a shop' },
-      { id: '4c', description: 'Find another treasure' },
-    ],
-  },
-  {
-    id: 5,
-    title: 'You pay a great price',
-    options: [
-      { id: '5a', description: '???' },
-      { id: '5b', description: 'Enter a shop' },
-      { id: '5c', description: 'Find another treasure' },
-    ],
-  },
-  {
-    id: 6,
-    title: 'You return',
-    options: [
-      { id: '6a', description: 'Fight a thug' },
-      { id: '6b', description: '???' },
-      { id: '6c', description: 'Find another treasure' },
-    ],
-  },
-  {
-    id: 7,
-    title: 'Having changed',
-    options: [
-      { id: '7a', description: 'Fight a thug' },
-      { id: '7b', description: 'Enter a shop' },
-      { id: '7c', description: 'Find another treasure' },
-    ],
-  },
-]
 
 // The LevelList component is responsible for rendering the list of levels.
 // It takes 'levels' as a prop, which is the array of level objects defined above.
 export const LevelList = ({ levels }) => {
+  const dispatch = useDispatchContext()
+  const state = useStateContext()
   // 'currentLevel' keeps track of the level the player is currently on.
   const [currentLevel, setCurrentLevel] = useState(1)
   // 'completedLevels' is a Set that stores the IDs of the levels the player has completed.
@@ -75,16 +21,29 @@ export const LevelList = ({ levels }) => {
   // 'selectedOptions' keeps track of the options the player has selected for each level.
   const [selectedOptions, setSelectedOptions] = useState({})
 
-  // 'handleOptionSelect' is called when a player selects an option.
-  // It updates the 'selectedOptions' state and may also update 'currentLevel' and 'completedLevels'.
   const handleOptionSelect = (levelId, optionId) => {
-    // Update the selected option for the level.
     setSelectedOptions({ ...selectedOptions, [levelId]: optionId })
-
-    // Add the level to the set of completed levels and update the current level.
-    // This assumes completing any option in a level completes the level.
     setCompletedLevels(new Set([...completedLevels, levelId]))
     setCurrentLevel(Math.max(...Array.from(completedLevels)) + 1)
+  }
+
+  useEffect(() => {
+    if (state.current.completedLevels) {
+      const completedLevelIds = new Set(
+        state.current.completedLevels.map((level) => level.id),
+      )
+      setCompletedLevels(completedLevelIds)
+    }
+  }, [state.current.completedLevels])
+
+  const handleChangeLevel = (passedInState, payload) => {
+    dispatch({
+      type: ACTIONS.CHANGE_SCENE,
+      payload: {
+        screen: payload.screen,
+        details: payload.details,
+      },
+    })
   }
 
   // The Level component represents a single level.
@@ -94,12 +53,18 @@ export const LevelList = ({ levels }) => {
     const isCurrentLevel = level.id === currentLevel
     const isCompleted = completedLevels.has(level.id)
     const isLocked = level.id > currentLevel
+    
 
     // Conditional styling based on the level state.
-    let levelClass = ''
+    let levelClass = 'p-1 rounded-md my-1'
+    if (isCompleted) levelClass += ' bg-gray-500 text-gray-300'
+    else if (isLocked) levelClass += ' bg-gray-500 text-gray-300'
+    else if (level.id === currentLevel) levelClass += ' bg-green-800 text-white'
 
     // if (isCurrentLevel) levelClass = 'bg-blue-500 text-white'
-    if (isCurrentLevel) levelClass = 'bg-green-800 text-white'
+    if (isCurrentLevel) {
+      levelClass = 'bg-green-800 text-white'
+    }
     if (isCompleted) levelClass = 'bg-green-500 text-white'
     if (isLocked) levelClass = 'bg-gray-500 text-gray-300'
 
@@ -116,8 +81,30 @@ export const LevelList = ({ levels }) => {
               onSelect={() => onOptionSelect(level.id, option.id)}
               isLocked={isLocked}
             />
-          ))}
-        </div>
+          ))}{' '}
+          <Option
+            option={{ description: `Battle` }}
+            isSelected={false}
+            onSelect={
+              () => {
+                // onOptionSelect(level.id, level.options[0].id)
+                // onClick={() =>
+                handleChangeLevel(state, {
+                  screen: SCENES.BATTLE,
+                  details: {
+                    type: 'trainer',
+                    trainer: hikerBrak,
+                    area: 'tranquil forest',
+                    difficulty: 'easy',
+                    refillEnergy: true,
+                  },
+                })
+              }
+              // }
+            }
+            isLocked={isLocked}
+          />
+        </div>{' '}
       </div>
     )
   }
@@ -148,7 +135,7 @@ export const LevelList = ({ levels }) => {
   // We map over the 'levels' array and create a Level component for each one.
   return (
     <div>
-      {levels.map((level) => (
+      {[...levels].reverse().map((level) => (
         <Level
           key={level.id}
           level={level}
@@ -157,5 +144,15 @@ export const LevelList = ({ levels }) => {
         />
       ))}
     </div>
+    // <div>
+    //   {[...levels].reverse().map((level) => (
+    //     <Level
+    //       key={level.id}
+    //       level={level}
+    //       selectedOption={selectedOptions[level.id]}
+    //       onOptionSelect={handleOptionSelect}
+    //     />
+    //   ))}
+    // </div>
   )
 }
