@@ -21,6 +21,7 @@ import Chibipal from '../../assets/Chibipal.png'
 import Carousel from '../effects/Carousel'
 import { palImages } from '../../consts/pals/images'
 import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_only_2_n.png'
+import FlashingImage from '../effects/misc/FlashingImage'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -153,34 +154,23 @@ const Intro = ({ dispatch }) => {
               transition={{ delay: 1.1, duration: 2 }}
               style={styles.fontStyle}
             >
-              {/* Super Chibipal Slayer! */}
               <img src={ChibipalsLogo} alt="pal logo" />
-              <div className="text-sm">Tolerance Edition</div>
-              {/* <div className="text-sm italic">
-                {getRandomPALAcronym()}
-              </div> */}
+              <div className="text-sm">Joy Edition</div>
             </motion.div>
           </div>
           <Carousel ourImages={palImages} />
+          {/* <img src={palImages[0]} alt="pal logo" /> */}
+          <FlashingImage
+            src={palImages[0]}
+            flashTrigger={true}
+            flashCount={1} // Number of times to flash
+            glowTrigger={true}
+            shakeTrigger={true}
+          />{' '}
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
-            {/* <Dialog
-              size="20"
-              myText={`In 2025 - We discovered mystical creatures that harnessed the power of the elements. 
-      In 2030 - The incredible creatures revolutionized mankind. Today, you get yours.`}
-            /> */}
             <br />
           </div>{' '}
-          {/* <div style={{ position: "relative", height: "100vh" }}>
-            <AnimatePresence>
-              {!explode && <Circle onComplete={() => setExplode(true)} />}
-              {explode && <Explosion />}
-            </AnimatePresence>
-          </div> */}
-          {/* <button onClick={() => setStartAnimation(true)}>
-              Start Animation
-            </button> */}
           <div style={{ padding: '10px' }}>
-            {' '}
             <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
           </div>
           {/* <SparkleButton /> */}
@@ -189,15 +179,11 @@ const Intro = ({ dispatch }) => {
             <ThemedButton text={`Museum`} onClick={loadNextLevel} />
           </div>
           <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
-          {/* <div style={{ backgroundColor: 'gray', padding: '5px' }}> */}
           <div className="bg-boy-lightgreen p-1">
             <p className="font-[silkscreen] font-bold text-green-800 text-sm">
               Streak: {streak} Best: {longestStreak} (LP: {lastPlayedTime})
             </p>
           </div>
-          {/* <div style={{ color: 'white' }}>
-            {JSON.stringify(contextualState)}
-          </div> */}
         </div>
       </div>
     </>

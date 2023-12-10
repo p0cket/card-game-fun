@@ -1,6 +1,7 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
+import { checkIfDead } from '../Battle/deadHandlers'
 import { addUpKeepEffects } from '../Battle/upKeepEffects'
 import {
   createPopupRemovedState,
@@ -9,10 +10,7 @@ import {
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeAITurn } from '../moveHandlers'
 
-export const endPhase = (
-  state,
-  attackPayload,
-) => {
+export const endPhase = (state, attackPayload) => {
   const { move, pal, phase, player, userSlot, targets } = attackPayload
 
   console.group(`END: start`)
@@ -28,14 +26,31 @@ export const endPhase = (
   if (player === PLAYERS.HUMAN) {
     state = switchDialog(state, DIALOGS.SWITCHTURNS_TO_AI)
     console.log(`END: phase ending. state`, state)
+    // check if dead
+    state = checkIfDead(state)
+
+
     console.groupEnd()
     return state
   } else if (player === PLAYERS.AI) {
-    // Dialog here?
-    // state = switchDialog(state, DIALOGS.SWITCHTURNS_TO_HUMAN)
     console.log(`END: phase ending. state`, state)
     state = addUpKeepEffects(state)
     state = createPopupRemovedState(state)
+    // check if dead
+    state = checkIfDead(state)
+
+    // onClick={() =>
+    //   handleChangeLevel(contextualState, {
+    //     screen: SCENES.BATTLE,
+    //     details: {
+    //       type: 'trainer',
+    //       trainer: hikerBrak,
+    //       area: 'tranquil forest',
+    //       difficulty: 'easy',
+    //     },
+    //   })
+    // }
+
     console.groupEnd()
     return state
   }

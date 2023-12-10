@@ -121,18 +121,6 @@ export default function BattleTopDisplay() {
           {name}
           <span className="text-gray-500 text-sm">lvl{lvl}</span>
         </div>
-        {/* <div>
-          {stats.hp}HP
-          <progress
-            id="health"
-            value={stats.hp}
-            max={stats.max_hp}
-            style={{
-              backgroundColor: '#4caf50',
-              color: '#9faf4c',
-            }}
-          />
-        </div> */}
          <div>
           {state.opponent.monsters[0].obj.stats.hp}HP
           <progress

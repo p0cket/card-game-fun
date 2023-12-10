@@ -50,7 +50,6 @@ export const dmgPhase = (state, attackPayload) => {
     console.warn(
       `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
     )
-    // targetPal.stats.hp = damagedHP
     console.log(
       `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${targetPal.stats.hp}`,
       newState,
