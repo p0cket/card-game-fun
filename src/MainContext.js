@@ -9,6 +9,8 @@ import { dmgPhase } from './handlers/attack/dmgPhase'
 import { statusPhase } from './handlers/attack/statusPhase'
 import { cleanupPhase } from './handlers/attack/cleanupPhase'
 import { endPhase } from './handlers/attack/endPhase'
+import { updateLevel, updateScene } from './handlers/sceneHandlers_new'
+import { SCENES } from './scenes'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -27,6 +29,8 @@ export function useDispatchContext() {
 }
 
 export const ACTIONS = {
+  CHANGE_SCENE: 'CHANGE_SCENE',
+  
   SET_SCENE: 'SET_SCENE',
   SET_HEALTH: 'SET_HEALTH',
   SET_GOLD: 'SET_GOLD',
@@ -45,7 +49,6 @@ export const ACTIONS = {
   STATUS_PHASE: 'STATUS_PHASE',
   CLEANUP_PHASE: 'CLEANUP_PHASE',
   END_PHASE: 'END_PHASE',
-
 }
 
 export const MainProvider = ({ children }) => {
@@ -57,7 +60,13 @@ export const MainProvider = ({ children }) => {
 
   function reducer(state, action) {
     cusLog(`dispatching:`, 'info', undefined, action)
-    let payState, dmgState, statusState, cleanupState, endState
+    let payState,
+      dmgState,
+      statusState,
+      cleanupState,
+      endState,
+      nextSceneState,
+      nextLevelState
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -65,6 +74,18 @@ export const MainProvider = ({ children }) => {
         return { ...state, ...action.payload }
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload }
+      // same? Made this as a second attempt
+      case ACTIONS.CHANGE_SCENE:
+        nextSceneState = updateScene(state, {
+          screen: action.payload.screen,
+          details: action.payload.details,
+        })
+        nextLevelState = updateLevel(nextSceneState, 1)
+        // dispatch({
+        //   payload: nextLevelState,
+        //   type: ACTIONS.UPDATEGAMEDATA,
+        // })
+        return nextLevelState
       case ACTIONS.SHOW_ATTACK:
         return {
           ...state,

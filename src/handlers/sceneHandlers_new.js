@@ -16,6 +16,7 @@ export const SCENES = {
   EVENT: 'event',
   REST: 'rest',
   REWARD: 'reward',
+  RESULTS: 'results',
   PACKREWARD: 'pack-reward',
   CONVO: 'convo',
   BATTLE: 'battle',
@@ -74,9 +75,7 @@ export function updateScene(newData, newScene) {
 
 export const changeLevel = (state, scene) => {
   console.log(`state before changing level:`, state, `also scene:`, scene)
-
   let changesToBeMade = {}
-
   // now make any changes on the scene details before you return the new scene
   // ex: Which trainer is battling, which area, etc.
   // ex: Which event is happening
@@ -117,6 +116,10 @@ export const changeLevel = (state, scene) => {
     case SCENES.GAMEOVER:
       console.log(`[changeLevel] Game over case. Scene: ${scene}`, state)
       // when you're going to the game over, any changes that need to be ma
+      break
+    case SCENES.RESULTS:
+      console.log(`[changeLevel] RESULTS case. Scene: ${scene}`, state)
+      // when you're going to the RESULTS, any changes that need to be ma
       break
     case SCENES.VICTORY:
       console.log(`[changeLevel] Victory case. Scene: ${scene}`, state)
