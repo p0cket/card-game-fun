@@ -138,7 +138,7 @@ const Intro = ({ dispatch }) => {
     <>
       <div>
         <div
-          className="font-silkscreen flex flex-col items-center
+          className="font-[silkscreen] flex flex-col items-center
          bg-repeat bg-cover bg-boy-green text-white"
         >
           <div

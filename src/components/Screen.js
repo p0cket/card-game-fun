@@ -20,6 +20,7 @@ import ChooseCharacter from './scenes/ChooseCharacter'
 import { generateEnemyParty } from '../handlers/Battle/prepareBattle'
 import { hikerBrak } from '../consts/party/trainers'
 import { cusLog } from '../utils/debugging-utils'
+import Results from './scenes/Results'
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -33,6 +34,7 @@ const Screen = ({ gameData, dispatch, map }) => {
     EVENT,
     REST,
     REWARD,
+    RESULTS,
     PACKREWARD,
     CONVO,
     MINIBOSS,
@@ -80,6 +82,10 @@ const Screen = ({ gameData, dispatch, map }) => {
     case REST:
       console.log('(screen: rest)')
       return <Rest gameData={gameData} dispatch={dispatch} />
+      case RESULTS:
+        console.log('(screen: results)') 
+      return <Results />
+
     case REWARD:
       console.log('(screen: reward)')
       return (

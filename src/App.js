@@ -33,6 +33,9 @@ export default function App() {
   const state = useStateContext()
   const dispatch = useDispatchContext()
 
+  console.log(`flag`, state)
+  console.log(`flag 2`, state?.dialog)
+
   
   return (
     <div style={{ backgroundColor: 'black' }}>
@@ -53,7 +56,6 @@ export default function App() {
         }}
       >
         {/* < ClickGlow /> */}
-
         {/* Working animations */}
         {/* <SpinningBoxes /> */}
         {/* <QuestionMarks /> */}
@@ -63,7 +65,7 @@ export default function App() {
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         {/* <DialoguePopup message={message} /> */}
         {/* <NotEnoughEnergy /> */}
-        <DialogManager current={state.dialog.type} />
+       {state.dialog ? <DialogManager current={state.dialog.type} /> : ""}
         <GeneralPopup message={message} />
 
         
