@@ -160,13 +160,13 @@ const Intro = ({ dispatch }) => {
           </div>
           <Carousel ourImages={palImages} />
           {/* <img src={palImages[0]} alt="pal logo" /> */}
-          <FlashingImage
+          {/* <FlashingImage
             src={palImages[0]}
             flashTrigger={true}
             flashCount={1} // Number of times to flash
             glowTrigger={true}
             shakeTrigger={true}
-          />{' '}
+          />{' '} */}
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}

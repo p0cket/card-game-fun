@@ -32,10 +32,6 @@ export default function App() {
 
   const state = useStateContext()
   const dispatch = useDispatchContext()
-
-  console.log(`flag`, state)
-  console.log(`flag 2`, state?.dialog)
-
   
   return (
     <div style={{ backgroundColor: 'black' }}>

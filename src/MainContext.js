@@ -29,6 +29,7 @@ export function useDispatchContext() {
 }
 
 export const ACTIONS = {
+  CHANGE_LEVEL: 'CHANGE_LEVEL',
   CHANGE_SCENE: 'CHANGE_SCENE',
 
   SET_SCENE: 'SET_SCENE',
@@ -66,7 +67,8 @@ export const MainProvider = ({ children }) => {
       cleanupState,
       endState,
       nextSceneState,
-      nextLevelState
+      nextLevelState,
+      stateWithProgression
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -75,6 +77,15 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.SET_SCENE:
         return { ...state, scene: action.payload }
       // same? Made this as a second attempt
+      case ACTIONS.CHANGE_LEVEL:
+        stateWithProgression = {
+          ...state,
+          current: {
+            ...state.current,
+            mapLevel: state.current.mapLevel + 1,
+          },
+        }
+        return stateWithProgression
       case ACTIONS.CHANGE_SCENE:
         // if(state.game.player.maxEnergy < 0){
         // }

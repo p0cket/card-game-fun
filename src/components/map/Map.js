@@ -6,7 +6,7 @@ import { hikerBrak } from '../../consts/party/trainers'
 import MapComponent from './MapComponent'
 import { LevelList } from './LevelList'
 import { levels } from '../../consts/mapGenerator_new'
-
+import SimpleLevelList from './SimpleLevelList'
 
 function Map() {
   const [selectedPal, setSelectedPal] = useState(null)
@@ -73,36 +73,13 @@ function Map() {
     <div className="font-[silkscreen] text-white m-1 text-center">
       <div className="bg-green-500 rounded p-1 mb-1">
         <h2 className="text-2xl mb-1">Map to the top</h2>
-        <LevelList levels={levels} />
-        {/* <div className="flex">
-          {contextualState.game.map[contextualState.current.level].map(
-            (option, index) => (
-              <button
-                key={index}
-                onClick={() => handleChangeLevel(contextualState, option)}
-                className="bg-green-700 text-white border-none rounded p-1 m-1 cursor-pointer"
-              >
-                {option.screen}
-              </button>
-            ),
-          )}
-          <button
-            onClick={() =>
-              handleChangeLevel(contextualState, {
-                screen: SCENES.BATTLE,
-                details: {
-                  type: 'trainer',
-                  trainer: hikerBrak,
-                  area: 'tranquil forest',
-                  difficulty: 'easy',
-                },
-              })
-            }
-            className="bg-green-700 text-white border-none rounded p-1 m-1 cursor-pointer"
-          >
-            •Battle•
-          </button>
-        </div> */}
+        <SimpleLevelList levels={levels} />
+        {/* <LevelList levels={levels} />{' '} */}
+        <div>
+          {contextualState.current.completedLevels.map((lvl, index) => {
+            return <div key={index}>lvl: {JSON.stringify(lvl)}</div>
+          })}
+        </div>
       </div>
       <h3 className="text-sm">Party:</h3>
       <div className="flex flex-wrap justify-between">
@@ -110,6 +87,7 @@ function Map() {
       </div>
       <div className="bg-green-500 rounded p-1 mb-1">
         <h3 className="text-sm">Inventory</h3>
+        <div className='flex gap-2 p-2'><p>rune 1</p><p>rune 2</p><p>rune 3</p></div>
         {/* Add content for inventory management here */}
       </div>
     </div>

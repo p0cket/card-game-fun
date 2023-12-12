@@ -53,18 +53,10 @@ export const LevelList = ({ levels }) => {
     const isCurrentLevel = level.id === currentLevel
     const isCompleted = completedLevels.has(level.id)
     const isLocked = level.id > currentLevel
-    
 
     // Conditional styling based on the level state.
-    let levelClass = 'p-1 rounded-md my-1'
-    if (isCompleted) levelClass += ' bg-gray-500 text-gray-300'
-    else if (isLocked) levelClass += ' bg-gray-500 text-gray-300'
-    else if (level.id === currentLevel) levelClass += ' bg-green-800 text-white'
-
-    // if (isCurrentLevel) levelClass = 'bg-blue-500 text-white'
-    if (isCurrentLevel) {
-      levelClass = 'bg-green-800 text-white'
-    }
+    let levelClass = ''
+    if (isCurrentLevel) levelClass = 'bg-green-800 text-white'
     if (isCompleted) levelClass = 'bg-green-500 text-white'
     if (isLocked) levelClass = 'bg-gray-500 text-gray-300'
 
@@ -144,15 +136,5 @@ export const LevelList = ({ levels }) => {
         />
       ))}
     </div>
-    // <div>
-    //   {[...levels].reverse().map((level) => (
-    //     <Level
-    //       key={level.id}
-    //       level={level}
-    //       selectedOption={selectedOptions[level.id]}
-    //       onOptionSelect={handleOptionSelect}
-    //     />
-    //   ))}
-    // </div>
   )
 }
