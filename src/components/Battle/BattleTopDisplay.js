@@ -33,9 +33,7 @@ export default function BattleTopDisplay() {
       borderRadius: '2px',
     },
   }
-
   // const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false)
-
   const state = useStateContext()
   const dispatch = useDispatchContext()
 
@@ -85,6 +83,9 @@ export default function BattleTopDisplay() {
   // Def work on this later
   const currentMonDetailsStatuses =
     state.opponent.monsters[0].obj.status
+
+    //this is the current monster. We need to track this down and 
+    // assign it to the currentMon
   const currentMon =
     state.current.scene.details.trainer.monsters[0].obj
   console.log(
@@ -113,7 +114,6 @@ export default function BattleTopDisplay() {
     lvl,
     // status,
   } = currentMon
-
   return (
     <div className="flex p-1 mx-2 bg-boy-green">
       <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
