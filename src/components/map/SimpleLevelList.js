@@ -15,7 +15,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
 
     // possibly check if we can advance
     // if (levelId < levels.length) {
-      changeLevel()
+    changeLevel()
     // }
 
     // const nextLevelId = levelId < levels.length ? levelId + 1 : levelId
@@ -38,10 +38,9 @@ function SimpleLevelList({ levels, onOptionSelected }) {
       },
     })
   }
-
   const changeLevel = () => {
     const selectedTrainer = randomlySelectTrainer(allTrainers)
-    console.log(`selectedTrainer`,selectedTrainer, allTrainers)
+    console.log(`selectedTrainer`, selectedTrainer, allTrainers)
     console.table(selectedTrainer)
     handleChangeLevel(state, {
       screen: SCENES.BATTLE,
@@ -54,11 +53,6 @@ function SimpleLevelList({ levels, onOptionSelected }) {
       },
     })
   }
-  // add in onOptionSelected type func that
-  // takes in mapLevel and increases that
-  // this will be used in correleation with this page
-  // to show where we are in the game
-
   return (
     <div className="container mx-auto p-1 bg-gray-900 text-white">
       {[...levels].reverse().map((level) => (
