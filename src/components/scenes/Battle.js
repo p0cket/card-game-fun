@@ -65,6 +65,7 @@ const Battle = () => {
   return (
     <div className="flex flex-col">
       <div>
+        <div className="text-black bg-boy-green">rune 1 rune 2 rune 3 - map</div>
         <div
           className="font-silkscreen flex flex-wrap items-center"
           style={{ fontFamily: 'Silkscreen' }}

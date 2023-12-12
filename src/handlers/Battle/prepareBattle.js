@@ -66,3 +66,11 @@ export const startBattle = (trainer) => {
   // Log the start of the battle with color
   logWithColor(`Battle started with ${trainer.name}`, 'blue')
 }
+
+export const randomlySelectTrainer = (trainersToSelectFrom) => {
+  const chosenTrainer =
+    trainersToSelectFrom[
+      Math.floor(Math.random() * trainersToSelectFrom.length)
+    ]
+    return chosenTrainer
+}
