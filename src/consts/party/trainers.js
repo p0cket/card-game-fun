@@ -1,4 +1,4 @@
-import { Ticklefairy } from '../pals/pals'
+import { Luminowl, Recycleroo, Ticklefairy, Umbrabunny } from '../pals/pals'
 
 export const Trainer = {
   name: 'Trainer Name',
@@ -39,7 +39,7 @@ export const hikerBrak = {
   monsters: [
     // { name: "Bunbun", level: 6 },
     // { name: "Rockzilla", level: 8 },
-    { obj: Ticklefairy, level: 3 },
+    { obj: Umbrabunny, level: 3 },
     { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
@@ -59,7 +59,7 @@ export const mysticWillow = {
   monsters: [
     // { name: "Sparklefox", level: 10 },
     // { name: "Moonshadow", level: 12 },
-    { obj: Ticklefairy, level: 3 },
+    { obj: Recycleroo, level: 3 },
     { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
@@ -79,7 +79,7 @@ export const acePilotSkyler = {
   monsters: [
     // { name: "Thunderhawk", level: 15 },
     // { name: "Cyclonejet", level: 17 },
-    { obj: Ticklefairy, level: 3 },
+    { obj: Luminowl, level: 3 },
     { obj: Ticklefairy, level: 3 },
   ],
   dialogue: {
