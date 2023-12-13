@@ -6,40 +6,56 @@ import TicklefairyImg from './../../assets/pals/Ticklefairy_pxl.png'
 import UmbrabunnyImg from './../../assets/pals/Umbrabunny_pxl.png'
 import ChibipalDefaultImg from './../../assets/pals/Chibipal.png'
 
-const UserPartyDisplay = () => {
+const PartyDisplay = ({ party }) => {
   // Placeholder data for party members (with made-up creature names)
-  const partyMembers = [
-    {
-      name: 'Recycleroo',
-      health: 75,
-      image: RecyclerooImg,
-    },
-    {
-      name: 'Umbrabunny',
-      health: 70,
-      image: UmbrabunnyImg,
-    },
-    {
-      name: 'DefaultPal',
-      health: 90,
-      image: ChibipalDefaultImg,
-    },
-    {
-      name: 'Bubblesnout',
-      health: 60,
-      image: SquirrelyImg,
-    },
-    {
-      name: 'Squirrely',
-      health: 75,
-      image: SquirrelyImg,
-    },
-    {
-      name: 'Sparklepaw',
-      health: 80,
-      image: SquirrelyImg,
-    },
-  ]
+
+  const grabMembers = (party) => {
+    const convertedMembers = []
+    for (let i = 0; i < party.length; i++) {
+      party.map((member) => {
+        if (member.obj) {
+          convertedMembers.push(member)
+        } else {
+          console.log(`no obj in member ${member}`)
+        }
+      })
+    }
+    return convertedMembers
+  }
+  const partyMembers = grabMembers(party)
+
+  // const partyMembers = [
+  //   {
+  //     name: 'Recycleroo',
+  //     health: 75,
+  //     image: RecyclerooImg,
+  //   },
+  //   {
+  //     name: 'Umbrabunny',
+  //     health: 70,
+  //     image: UmbrabunnyImg,
+  //   },
+  //   {
+  //     name: 'DefaultPal',
+  //     health: 90,
+  //     image: ChibipalDefaultImg,
+  //   },
+  //   {
+  //     name: 'Bubblesnout',
+  //     health: 60,
+  //     image: SquirrelyImg,
+  //   },
+  //   {
+  //     name: 'Squirrely',
+  //     health: 75,
+  //     image: SquirrelyImg,
+  //   },
+  //   {
+  //     name: 'Sparklepaw',
+  //     health: 80,
+  //     image: SquirrelyImg,
+  //   },
+  // ]
 
   return (
     <div style={{ textAlign: 'center', fontFamily: 'Silkscreen' }}>
@@ -88,11 +104,11 @@ const UserPartyDisplay = () => {
   )
 }
 
-export default UserPartyDisplay
+export default PartyDisplay
 
 // import React from "react";
 
-// const UserPartyDisplay = () => {
+// const PartyDisplay = () => {
 //   // Placeholder image URLs (you can replace these with actual image URLs)
 //   const placeholderImages = [
 //     SquirrelyImg,
@@ -127,4 +143,4 @@ export default UserPartyDisplay
 //   );
 // };
 
-// export default UserPartyDisplay;
+// export default PartyDisplay;

@@ -8,13 +8,14 @@ import Dialog from '../common/Dialog'
 import MenuPopup from '../common/MenuPopup'
 import BattleTopDisplay from '../battle/BattleTopDisplay'
 import BattleBotDisplay from '../battle/BattleBotDisplay'
-import UserPartyDisplay from '../battle/UserPartyDisplay'
+import PartyDisplay from '../battle/PartyDisplay'
 import MenuButtonGroup from '../battle/MenuButtonGroup'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { startingDataOld } from '../../consts/startingData'
 import { Party } from '../../consts/party/parties'
 import HUDHeader from '../battle/HUDHeader'
 import BattleCreatureTypes from '../battle/BattleCreatureTypes'
+import HUDDetails from '../battle/HUDDetails'
 
 // const Battle = ({ gameData, dispatch }) => {
 const Battle = () => {
@@ -65,13 +66,13 @@ const Battle = () => {
   return (
     <div className="flex flex-col">
       <div>
-        <div className="text-black bg-boy-green">rune 1 rune 2 rune 3 - map</div>
+        <HUDDetails />
         <div
           className="font-silkscreen flex flex-wrap items-center"
           style={{ fontFamily: 'Silkscreen' }}
         >
           <HUDHeader />
-          <UserPartyDisplay />
+          <PartyDisplay party={ourParty} />
           <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
           <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
@@ -90,7 +91,7 @@ const Battle = () => {
             ourCurrentMon={ourCurrentMon}
           />
         </div>
-        <UserPartyDisplay />
+        <PartyDisplay party={contextualState.opponent.monsters} />
         <div
           className="font-silkscreen bg-green-500 text-white"
           style={{ fontFamily: 'Silkscreen' }}
