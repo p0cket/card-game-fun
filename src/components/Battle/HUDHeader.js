@@ -7,7 +7,11 @@ function HUDHeader({ gameData }) {
         margin: '4px',
         backgroundColor: '#5a7d2a',
         color: 'white',
-        flex: '1',
+        // center
+        display: 'flex',
+        justifyContent: 'center',
+        // make it take up the full width
+        width: '100%',
       }}
     >
       Simulation Room: No Effects

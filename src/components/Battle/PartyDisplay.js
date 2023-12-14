@@ -6,56 +6,35 @@ import TicklefairyImg from './../../assets/pals/Ticklefairy_pxl.png'
 import UmbrabunnyImg from './../../assets/pals/Umbrabunny_pxl.png'
 import ChibipalDefaultImg from './../../assets/pals/Chibipal.png'
 
-const PartyDisplay = ({ party }) => {
+const PartyDisplay = ({ party, userFlag }) => {
   // Placeholder data for party members (with made-up creature names)
 
   const grabMembers = (party) => {
-    const convertedMembers = []
-    for (let i = 0; i < party.length; i++) {
+    // console.warn(`party:`, party)
+
+    if (!userFlag) {
+      const convertedMembers = []
+      // for (let i = 0; i < party.length; i++) {
       party.map((member) => {
         if (member.obj) {
-          convertedMembers.push(member)
+          convertedMembers.push(member.obj)
         } else {
-          console.log(`no obj in member ${member}`)
+          console.log(`no obj in member ${member}`, member)
         }
       })
+      // }
+      // console.log(`convertedMembers:`, convertedMembers)
+      return convertedMembers
+    } else {
+      return party
     }
-    return convertedMembers
   }
   const partyMembers = grabMembers(party)
-
-  // const partyMembers = [
-  //   {
-  //     name: 'Recycleroo',
-  //     health: 75,
-  //     image: RecyclerooImg,
-  //   },
-  //   {
-  //     name: 'Umbrabunny',
-  //     health: 70,
-  //     image: UmbrabunnyImg,
-  //   },
-  //   {
-  //     name: 'DefaultPal',
-  //     health: 90,
-  //     image: ChibipalDefaultImg,
-  //   },
-  //   {
-  //     name: 'Bubblesnout',
-  //     health: 60,
-  //     image: SquirrelyImg,
-  //   },
-  //   {
-  //     name: 'Squirrely',
-  //     health: 75,
-  //     image: SquirrelyImg,
-  //   },
-  //   {
-  //     name: 'Sparklepaw',
-  //     health: 80,
-  //     image: SquirrelyImg,
-  //   },
-  // ]
+  const emptySlots = 5 - partyMembers.length
+  const emptySlotsArray = Array.from(
+    { length: emptySlots },
+    (_, index) => index,
+  )
 
   return (
     <div style={{ textAlign: 'center', fontFamily: 'Silkscreen' }}>
@@ -97,6 +76,24 @@ const PartyDisplay = ({ party }) => {
                 />
               </div>
             </div>
+          </div>
+        ))}
+        {emptySlotsArray.map((_, index) => (
+          <div
+            key={`empty-${index}`}
+            style={{
+              margin: '5px',
+              border: '2px dashed green',
+              borderRadius: '2%',
+              opacity: 0.5,
+              width: '60px', // Set width (and height if needed) to match your member cards
+              height: '80px', // Set height to match your member cards
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span>Empty</span>
           </div>
         ))}
       </div>

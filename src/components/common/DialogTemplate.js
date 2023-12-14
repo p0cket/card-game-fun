@@ -3,7 +3,7 @@ import Dialog from './Dialog'
 import { useStateContext } from '../../MainContext'
 
 function DialogTemplate({ title, message, options }) {
-  console.warn(`DialogTemplate: ${title}, ${message}, ${options}`, options)
+  // console.warn(`DialogTemplate: ${title}, ${message}, ${options}`, options)
   // You can include logic to handle the open/close state of the dialog here
   const contextualState = useStateContext()
   const isOpen = contextualState.dialog.isOpen // For demonstration; replace with actual logic

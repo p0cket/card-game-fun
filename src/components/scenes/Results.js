@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
 import { SCENES } from '../../scenes'
+import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
+import { allTrainers } from '../../consts/party/trainers'
 
 function Results({ experience = 100 }) {
   const [selectedItem, setSelectedItem] = useState(null)
@@ -27,25 +29,33 @@ function Results({ experience = 100 }) {
   }
 
   const onContinue = (selectedItem) => {
+    const randomizedTrainer = randomlySelectTrainer(allTrainers)
+
     console.log('Continue to next scene')
     dispatch({
       type: ACTIONS.CHANGE_SCENE,
       payload: {
         screen: SCENES.MAP,
-        details: null,
-        //   {
-        // type: 'win',
-        // trainer: hikerBrak,
-        // area: 'tranquil forest',
-        // difficulty: 'easy',
-        // achievement: 'flawless victory',
-        // VIP: 'your pal',
-        // EXP: Difficulty * lvl of monster * 10
-        //   }
+        details: {
+          type: 'win',
+          trainer: randomizedTrainer,
+          area: 'tranquil forest',
+          difficulty: 'easy',
+          achievement: 'flawless victory',
+          VIP: 'your pal',
+          EXP: `Difficulty * lvl of monster * 10`,
+        },
+
+        // details: {
+        //   type: 'trainer',
+        //   trainer: selectedTrainer,
+        //   area: 'tranquil forest',
+        //   difficulty: 'easy',
+        //   refillEnergy: true,
+        // }
       },
     })
   }
- 
 
   return (
     <motion.div

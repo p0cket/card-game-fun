@@ -87,7 +87,8 @@ export default function BattleTopDisplay() {
     //this is the current monster. We need to track this down and 
     // assign it to the currentMon
   const currentMon =
-    state.current.scene.details.trainer.monsters[0].obj
+    // state.current.scene.details.trainer.monsters[0].obj
+    state.opponent.monsters[0].obj
   console.log(
     `currentMon & currentMonDetails:`,
     currentMon,
@@ -126,7 +127,8 @@ export default function BattleTopDisplay() {
           <progress
             id="health"
             value={state.opponent.monsters[0].obj.stats.hp}
-            max={stats.max_hp}
+            // max={stats.max_hp}
+            max={state.opponent.monsters[0].obj.stats.max_hp}
             style={{
               backgroundColor: '#4caf50',
               color: '#9faf4c',
