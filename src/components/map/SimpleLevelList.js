@@ -3,6 +3,7 @@ import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { SCENES } from '../../scenes'
 import { allTrainers } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
+import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
 // import { hikerBrak } from '../../consts/party/trainers'
 
 function SimpleLevelList({ levels, onOptionSelected }) {
@@ -20,6 +21,23 @@ function SimpleLevelList({ levels, onOptionSelected }) {
 
     // const nextLevelId = levelId < levels.length ? levelId + 1 : levelId
     // setCurrentLevelId(nextLevelId)
+  }
+  const goToBoss = () => {
+      console.log('goToBoss')
+      //add in the logic to send to the boss level
+      const loadNextLevel = () => {
+        console.log(`func: loadNextLevel()`)
+    
+        const nextSceneState = updateScene(state, {
+          screen: SCENES.BOSS,
+          details: null,
+        })
+        const nextLevelState = updateLevel(nextSceneState, 1)
+        dispatch({
+          payload: nextLevelState,
+          type: ACTIONS.UPDATEGAMEDATA,
+        })
+      }
   }
 
   const handleChangeLevel = (passedInState, payload) => {
@@ -54,8 +72,45 @@ function SimpleLevelList({ levels, onOptionSelected }) {
       },
     })
   }
+
+  const bossLevelCard = () => {
+    // Boss level card
+    const bossLevel = levels[levels.length - 1] // Assuming the boss level is the last one
+    return (
+      <div
+        className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
+          bossLevel.id === state.current.mapLevel + 1
+            ? 'border-l-4 border-red-500 bg-gray-800'
+            : 'bg-gray-700'
+        }`}
+      >
+        <p className="font-bold">Boss Level {bossLevel.id}</p>
+        <div className="flex justify-between items-center">
+          <p>{bossLevel.name}</p>
+          <button
+            className={`px-2 py-1 rounded ${
+              bossLevel.id === state.current.mapLevel + 1
+                ? 'bg-red-600 hover:bg-red-700'
+                : 'bg-gray-600 cursor-not-allowed'
+            }`}
+            onClick={() => {
+              if (bossLevel.id === state.current.mapLevel + 1) {
+                // changeLevel()
+                goToBoss()
+              }
+            }}
+            disabled={bossLevel.id !== state.current.mapLevel + 1}
+          >
+            Challenge Boss
+          </button>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="container mx-auto p-1 bg-gray-900 text-white">
+      {/* boss level at the top of the map */}
+      {bossLevelCard()}
       {[...levels].reverse().map((level) => (
         <div
           key={level.id}

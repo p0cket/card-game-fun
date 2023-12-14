@@ -64,7 +64,7 @@ const Battle = () => {
     onButtonClick: handleButtonClick,
   }
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-[500px]">
       <div>
         <HUDDetails />
         <div
@@ -74,7 +74,7 @@ const Battle = () => {
           <HUDHeader />
           {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
           <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
-   <BattleTopDisplay gameData={gameData} />
+          <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
           <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
         </div>

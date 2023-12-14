@@ -3,11 +3,11 @@ import './Victory.css'
 // import devProfileImage from '/misc/Pocket.jpg';  // import victory image
 // import { Pocket } from "/misc/Pocket.js"
 // import {pocket2} from "./Pocket.png"
-const Victory = ({ gameData, dispatch }) => {
+const Victory = () => {
   return (
     <div className="victory-screen">
       {/* <img src={pocket2} alt="Developer of the game" /> */}
-      <h1>Congratulations, you have defeated the opponent!</h1>
+      <h1>Congratulations, you have defeated the (current) game!</h1>
       <p>Your victory is a testament to your skill and determination.</p>
       <div>Results</div>
       <div>This and this happened</div>
@@ -25,7 +25,6 @@ const Victory = ({ gameData, dispatch }) => {
     </div>
   )
 }
-
 // const Victory = ({gameData, dispatch}) => {
 //   return (
 //     <div className="victory-screen">
