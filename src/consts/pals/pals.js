@@ -11,9 +11,12 @@ import {
   EmotionDrain,
   FeatherGlide,
   GlowingCharm,
+  LeafShield,
   LightBeam,
   LuminousFlight,
+  ProjectileToss,
   QuickStrike,
+  RecycleRush,
   SolarSpiritBlast,
   Teleport,
   WarmEmbrace,
@@ -425,7 +428,8 @@ export const Recycleroo = {
   experience: 5500,
   status: {},
 
-  moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
+  // moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
+  moves: [RecycleRush, ProjectileToss, LeafShield],
   possible_moves: ['Trash Bash', "Nature's Wrath", 'Sorting Cyclone'],
   passive_ability: 'Eco-Warrior',
   commander_ability: {
