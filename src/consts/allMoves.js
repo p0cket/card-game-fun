@@ -593,3 +593,128 @@ export const ComfortingHug = {
     targets: ['user_pals'],
   },
 }
+
+// recycleroo attacks
+export const RecycleRush = {
+  name: 'Recycle Rush',
+  type: 'physical',
+  damage: 45,
+  speed: 10,
+  cost: { energy: 6 },
+  energyCost: 6,
+  effect: {
+    description: 'Charge at the opponent using recycled materials as armor',
+    chance: '80%',
+    result: 'damage_boost',
+  },
+  priority: 'high',
+  targets: ['opponent'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Reinforced Armor',
+    type: 'buff',
+    effect: {
+      description: 'Reinforce armor with extra recycled materials',
+      duration: '2 turns',
+      defense_boost: 30, // Increase defense for 2 turns
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Eco Smash',
+    type: 'physical',
+    damage: 60,
+    speed: 12,
+    cost: { energy: 5 },
+    energyCost: 6,
+    effect: {
+      description: 'Unleash a powerful smash with hardened recycled materials',
+      chance: '100%',
+      result: 'damage_boost',
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const ProjectileToss = {
+  name: 'Projectile Toss',
+  type: 'physical',
+  damage: 35,
+  speed: 14,
+  cost: { energy: 4 },
+  energyCost: 4,
+  effect: {
+    description: 'Toss recycled projectiles at the opponent',
+    chance: '70%',
+    result: 'slow',
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Rapid Reload',
+    type: 'buff',
+    effect: {
+      description: 'Quickly reload projectiles for a faster next attack',
+      duration: '1 turn',
+      speed_boost: 20, // Increase speed for next attack
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Debris Barrage',
+    type: 'physical',
+    damage: 50,
+    speed: 16,
+    cost: { energy: 4 },
+    energyCost: 5,
+    effect: {
+      description: 'Unleash a barrage of recycled debris, ensuring slowing the opponent',
+      chance: '100%',
+      result: 'slow',
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const LeafShield = {
+  name: 'Leaf Shield',
+  type: 'elemental',
+  damage: 0, // No damage, purely defensive
+  speed: 8,
+  cost: { energy: 5 },
+  energyCost: 5,
+  effect: {
+    description: 'Create a protective shield from leaves to reduce incoming damage',
+    chance: '90%',
+    result: 'damage_reduction',
+  },
+  priority: 'medium',
+  targets: ['self'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Photosynthesis Boost',
+    type: 'buff',
+    effect: {
+      description: 'Enhance the leaf shield by photosynthesis, regenerating health',
+      duration: '1 turn',
+      health_regeneration: 20, // Regenerate a portion of health for 1 turn
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Forest Guard',
+    type: 'elemental',
+    damage: 0,
+    speed: 10,
+    cost: { energy: 5 },
+    energyCost: 6,
+    effect: {
+      description: 'Fortify the leaf shield with the essence of the forest, ensuring damage reduction',
+      chance: '100%',
+      result: 'damage_reduction',
+    },
+    targets: ['self'],
+  },
+}
+

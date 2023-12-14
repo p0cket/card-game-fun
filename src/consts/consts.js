@@ -3,7 +3,7 @@ import { EFFECTS } from '../effects'
 import { basicCards, stunCards } from './allCards'
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
-export const gameVersion = 'Rebirth: P-A v0.35 - AI turn 30%, tw refactor'
+export const gameVersion = 'Rebirth: P-A v0.37 - Basic Game Flow 70%'
 
 // deprecated: previous iteration consts.
 export const startingDeck = [
