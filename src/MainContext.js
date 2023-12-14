@@ -9,7 +9,11 @@ import { dmgPhase } from './handlers/attack/dmgPhase'
 import { statusPhase } from './handlers/attack/statusPhase'
 import { cleanupPhase } from './handlers/attack/cleanupPhase'
 import { endPhase } from './handlers/attack/endPhase'
-import { updateLevel, updateScene } from './handlers/sceneHandlers_new'
+import {
+  setupOpponent,
+  updateLevel,
+  updateScene,
+} from './handlers/sceneHandlers_new'
 import { SCENES } from './scenes'
 
 const stateContext = React.createContext()
@@ -85,11 +89,20 @@ export const MainProvider = ({ children }) => {
             mapLevel: state.current.mapLevel + 1,
           },
         }
+        console.log(`stateWithProgression: `, stateWithProgression)
         return stateWithProgression
       case ACTIONS.CHANGE_SCENE:
         // if(state.game.player.maxEnergy < 0){
         // }
+        console.log(`CHANGE_SCENE. action.payload: `, action.payload)
         if (action.payload.screen === SCENES.BATTLE) {
+          // state.oppoonent = {
+
+          // }
+          // make the battle opponent object equal
+          // the on in current
+
+          // give max energy
           state = {
             ...state,
             game: {
@@ -100,6 +113,27 @@ export const MainProvider = ({ children }) => {
               },
             },
           }
+          // set hp to max
+          state = {
+            // state.opponent.monsters[0].obj.stats.hp
+            ...state,
+            opponent: {
+              ...state.opponent,
+              monsters: [
+                {
+                  ...state.opponent.monsters[0],
+                  obj: {
+                    ...state.opponent.monsters[0].obj,
+                    stats: {
+                      ...state.opponent.monsters[0].obj.stats,
+                      hp: state.opponent.monsters[0].obj.stats.max_hp,
+                    },
+                  },
+                },
+              ],
+            },
+          }
+
           // now lets add the current level, or an increment to a
           // varaible. we'll add it in completedLevels
           state = {
@@ -129,11 +163,20 @@ export const MainProvider = ({ children }) => {
           screen: action.payload.screen,
           details: action.payload.details,
         })
+        console.log(`nextSceneState b4 updateLevel: `, nextSceneState)
         nextLevelState = updateLevel(nextSceneState, 1)
-        // dispatch({
-        //   payload: nextLevelState,
-        //   type: ACTIONS.UPDATEGAMEDATA,
-        // })
+        console.log(`nextLevelState after updateLevel: `, nextLevelState)
+        // setup our opponent
+        console.log('action.payload:', action.payload)
+        console.log(
+          'action.payload.details nextLevelState:',
+          action.payload.details,
+          nextLevelState,
+        )
+        nextLevelState = setupOpponent(
+          nextLevelState,
+          action.payload.details.trainer,
+        )
         return nextLevelState
       case ACTIONS.SHOW_ATTACK:
         return {

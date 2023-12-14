@@ -72,8 +72,9 @@ const Battle = () => {
           style={{ fontFamily: 'Silkscreen' }}
         >
           <HUDHeader />
-          <PartyDisplay party={ourParty} />
-          <BattleTopDisplay gameData={gameData} />
+          {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
+          <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
+   <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
           <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
         </div>
@@ -91,7 +92,7 @@ const Battle = () => {
             ourCurrentMon={ourCurrentMon}
           />
         </div>
-        <PartyDisplay party={contextualState.opponent.monsters} />
+        <PartyDisplay party={ourParty.slice(1)} userFlag={true} />
         <div
           className="font-silkscreen bg-green-500 text-white"
           style={{ fontFamily: 'Silkscreen' }}

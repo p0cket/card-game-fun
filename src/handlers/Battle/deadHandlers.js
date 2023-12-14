@@ -47,21 +47,21 @@ export const checkIfDead = (state) => {
         ],
       },
     }
+    state = updateScene(state, {
+      screen: SCENES.RESULTS,
+      details: {
+        type: 'win',
+        trainer: hikerBrak,
+        area: 'tranquil forest',
+        difficulty: 'easy',
+        achievement: 'flawless victory',
+        VIP: 'your pal',
+        // EXP: Difficulty * lvl of monster * 10
+      },
+    })
+    state = createPopupRemovedState(state)
   }
-  state = createPopupRemovedState(state)
 
-  state = updateScene(state, {
-    screen: SCENES.RESULTS,
-    details: {
-      type: 'win',
-      trainer: hikerBrak,
-      area: 'tranquil forest',
-      difficulty: 'easy',
-      achievement: 'flawless victory',
-      VIP: 'your pal',
-      // EXP: Difficulty * lvl of monster * 10
-    },
-  })
   // const handleChangeLevel = (state, scene) => {
   //   const stateWithChangedLevel = changeLevel(state, scene)
   //   contextualDispatch({

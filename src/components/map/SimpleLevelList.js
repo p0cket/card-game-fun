@@ -23,6 +23,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
   }
 
   const handleChangeLevel = (passedInState, payload) => {
+    console.log(`handleChangeLevel payload: `, payload)
     dispatch({
       type: ACTIONS.CHANGE_LEVEL,
       payload: {

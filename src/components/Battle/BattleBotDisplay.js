@@ -34,7 +34,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
         }}
       >
         <motion.img
-          className="w-45 h-38"
+          // className="w-45 h-38"
           animate="visible"
           whileHover="hover"
           variants={yourVariants}

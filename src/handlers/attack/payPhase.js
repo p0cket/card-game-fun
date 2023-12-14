@@ -78,6 +78,9 @@ export const payPhase = (state, attackPayload) => {
       return costPaidDialogState
     }
   } else if (player === PLAYERS.AI) {
+    // Theres some undefined stuff here sometimes. I guess
+    // some moves need to be looked over to make sure
+    // they have a cost.
     moveCost = move.cost.energy
     console.log(
       `costs ${moveCost} e. ${player} has ${playerEnergy}. Pal is:`,

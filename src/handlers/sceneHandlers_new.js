@@ -162,3 +162,13 @@ export function updateCurEvent(newData, newEvent) {
   updatedData.current.curEvent = newEvent
   return updatedData
 }
+
+// Battle scene handler
+export const setupOpponent = (state, opponent) => {
+  const newState = {
+    ...state,
+    opponent: opponent,
+  }
+  console.warn(`newState with opponent`, opponent, newState)
+  return newState
+}
