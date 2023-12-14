@@ -21,6 +21,8 @@ import { generateEnemyParty } from '../handlers/Battle/prepareBattle'
 import { hikerBrak } from '../consts/party/trainers'
 import { cusLog } from '../utils/debugging-utils'
 import Results from './scenes/Results'
+import GameOver from './scenes/GameOver'
+import Boss from './scenes/Boss'
 // import MiniBoss from "./scenes/MiniBoss";
 
 const Screen = ({ gameData, dispatch, map }) => {
@@ -62,7 +64,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Trans gameData={gameData} dispatch={dispatch} />
     case INTRO:
       console.log('(screen: intro)')
-      // return <Intro dispatch={dispatch} />;
+      // return <GameOver />
       return <Intro dispatch={dispatch} />
     case CHOOSECHARACTER:
       console.log('(screen: choosecharacter )')
@@ -108,11 +110,15 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Battle gameData={gameData} dispatch={dispatch} />
     case BOSS:
       console.log('screen: boss')
-      return <Battle gameData={gameData} dispatch={dispatch} />
+      // Do regular bettle or boss?
+      // return <Battle gameData={gameData} dispatch={dispatch} />
+
+      return <Boss gameData={gameData} dispatch={dispatch} />
     case GAMEOVER:
       console.log('screen: game over')
       // return <GAMEOVER gameData={gameData} dispatch={dispatch} />
-      return <div>`game over`</div>
+      return <GameOver />
+      // return <div>`game over`</div>
     case VICTORY:
       console.log('screen: victory')
       return <Victory gameData={gameData} dispatch={dispatch} />

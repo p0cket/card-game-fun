@@ -26,12 +26,26 @@ export const checkIfDead = (state) => {
         },
       ],
     }
+    state = updateScene(state, {
+      screen: SCENES.GAMEOVER,
+      details: {
+        type: 'lose',
+        score: null,
+        progress: null,
+        unlocks: null,
+        // area: 'tranquil forest',
+        // difficulty: 'easy',
+        // achievement: 'flawless victory',
+        // VIP: 'your pal',
+        // EXP: Difficulty * lvl of monster * 10
+      },
+    })
 
+    state = createPopupRemovedState(state)
     // send to lose screen
   }
   if (state.opponent.monsters[0].obj.stats.hp <= 0) {
     // change state so opponent pal is dead
-    //  state.opponent.monsters[0].obj.dead = true
     state = {
       ...state,
       opponent: {
