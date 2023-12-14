@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/card-game-fun/static/css/main.77739436.css",
-    "main.js": "/card-game-fun/static/js/main.9edb76e0.js",
+    "main.js": "/card-game-fun/static/js/main.9d0285f7.js",
     "static/media/Squirrely.png": "/card-game-fun/static/media/Squirrely.7f404466657a69445d35.png",
     "static/media/Stun.png": "/card-game-fun/static/media/Stun.9cbe1432c908eaaa33b3.png",
     "static/media/Chibipal.png": "/card-game-fun/static/media/Chibipal.d378d5b1e13b78c3932c.png",
@@ -13,10 +13,10 @@
     "static/media/Chibipals_Logo_only_2_n.png": "/card-game-fun/static/media/Chibipals_Logo_only_2_n.229662dff15e6d8022a9.png",
     "index.html": "/card-game-fun/index.html",
     "main.77739436.css.map": "/card-game-fun/static/css/main.77739436.css.map",
-    "main.9edb76e0.js.map": "/card-game-fun/static/js/main.9edb76e0.js.map"
+    "main.9d0285f7.js.map": "/card-game-fun/static/js/main.9d0285f7.js.map"
   },
   "entrypoints": [
     "static/css/main.77739436.css",
-    "static/js/main.9edb76e0.js"
+    "static/js/main.9d0285f7.js"
   ]
 }
