@@ -87,7 +87,14 @@ function Map() {
       </div>
       <div className="bg-green-500 rounded p-1 mb-1">
         <h3 className="text-sm">Inventory</h3>
-        <div className='flex gap-2 p-2'><p>rune 1</p><p>rune 2</p><p>rune 3</p></div>
+        <div className="flex gap-2 p-2">
+          {contextualState.bag.runes.map((rune, index) => (
+            <div key={index}>{rune}</div>
+          ))}
+          <p>rune 1</p>
+          <p>rune 2</p>
+          <p>rune 3</p>
+        </div>
         {/* Add content for inventory management here */}
       </div>
     </div>

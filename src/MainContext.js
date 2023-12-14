@@ -36,6 +36,9 @@ export const ACTIONS = {
   CHANGE_LEVEL: 'CHANGE_LEVEL',
   CHANGE_SCENE: 'CHANGE_SCENE',
 
+  ADD_RUNE: 'ADD_RUNE',
+  ADD_ITEM: 'ADD_ITEM',
+
   SET_SCENE: 'SET_SCENE',
   SET_HEALTH: 'SET_HEALTH',
   SET_GOLD: 'SET_GOLD',
@@ -72,7 +75,9 @@ export const MainProvider = ({ children }) => {
       endState,
       nextSceneState,
       nextLevelState,
-      stateWithProgression
+      stateWithProgression,
+      stateWithRune,
+      stateWithItem
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -256,6 +261,30 @@ export const MainProvider = ({ children }) => {
           },
         }
 
+      case ACTIONS.ADD_RUNE:
+        // Maybe we'll have both an item and effect in
+        // the rune payload, so if theres a permanent
+        // effect we can handle it separately
+        console.log('Reducer ADD_RUNE:', action)
+        stateWithRune = {
+          ...state,
+          bag: {
+            ...state.bag,
+            runes: [...state.bag.runes, action.payload.item],
+          },
+        }
+        console.log(`stateWithRune: `, stateWithRune)
+        return stateWithRune
+      case ACTIONS.ADD_ITEM:
+        console.log('Reducer ADD_ITEM:', action)
+        stateWithItem = {
+          ...state,
+          bag: {
+            ...state.bag,
+            items: [...state.bag.items, action.payload.item],
+          },
+        }
+        return stateWithItem
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

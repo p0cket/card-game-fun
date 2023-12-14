@@ -82,7 +82,10 @@ export const newStartingData = {
       },
     ],
   },
-
+  bag: {
+    runes: ['Stick', `Coat of harms`],
+    items: [`apple`, `Pumpernickle Soda`],
+  },
   game: {
     player: {
       gold: 50,
@@ -91,7 +94,7 @@ export const newStartingData = {
       inventory: [],
       effects: [],
       energy: 6,
-      maxEnergy:8,
+      maxEnergy: 8,
     },
     map: generateMap(),
     battlesAhead: [],

@@ -29,6 +29,13 @@ function Results({ experience = 100 }) {
   }
 
   const onContinue = (selectedItem) => {
+    dispatch({
+      type: ACTIONS.ADD_RUNE,
+      payload: {
+        item: selectedItem,
+        permEffect: null,
+      }
+    })
     const randomizedTrainer = randomlySelectTrainer(allTrainers)
 
     console.log('Continue to next scene')
@@ -45,14 +52,6 @@ function Results({ experience = 100 }) {
           VIP: 'your pal',
           EXP: `Difficulty * lvl of monster * 10`,
         },
-
-        // details: {
-        //   type: 'trainer',
-        //   trainer: selectedTrainer,
-        //   area: 'tranquil forest',
-        //   difficulty: 'easy',
-        //   refillEnergy: true,
-        // }
       },
     })
   }
