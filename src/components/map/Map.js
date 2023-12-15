@@ -75,11 +75,11 @@ function Map() {
         <h2 className="text-2xl mb-1">Map to the top</h2>
         <SimpleLevelList levels={levels} />
         {/* <LevelList levels={levels} />{' '} */}
-        <div>
+        {/* <div>
           {contextualState.current.completedLevels.map((lvl, index) => {
             return <div key={index}>lvl: {JSON.stringify(lvl)}</div>
           })}
-        </div>
+        </div> */}
       </div>
       <h3 className="text-sm">Party:</h3>
       <div className="flex flex-wrap justify-between">

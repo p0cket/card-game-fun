@@ -4,6 +4,7 @@ import { SCENES } from '../../scenes'
 import { allTrainers } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
+import { MoltenScale } from '../../consts/pals/pals'
 // import { hikerBrak } from '../../consts/party/trainers'
 
 function SimpleLevelList({ levels, onOptionSelected }) {
@@ -23,21 +24,21 @@ function SimpleLevelList({ levels, onOptionSelected }) {
     // setCurrentLevelId(nextLevelId)
   }
   const goToBoss = () => {
-      console.log('goToBoss')
-      //add in the logic to send to the boss level
-      const loadNextLevel = () => {
-        console.log(`func: loadNextLevel()`)
-    
-        const nextSceneState = updateScene(state, {
-          screen: SCENES.BOSS,
-          details: null,
-        })
-        const nextLevelState = updateLevel(nextSceneState, 1)
-        dispatch({
-          payload: nextLevelState,
-          type: ACTIONS.UPDATEGAMEDATA,
-        })
-      }
+    console.log('goToBoss MoltenScale')
+    //add in the logic to send to the boss level
+    const loadNextLevel = () => {
+      console.log(`func: loadNextLevel()`)
+
+      const nextSceneState = updateScene(state, {
+        screen: SCENES.BOSS,
+        details: { boss: MoltenScale },
+      })
+      const nextLevelState = updateLevel(nextSceneState, 1)
+      dispatch({
+        payload: nextLevelState,
+        type: ACTIONS.UPDATEGAMEDATA,
+      })
+    }
   }
 
   const handleChangeLevel = (passedInState, payload) => {
@@ -84,9 +85,9 @@ function SimpleLevelList({ levels, onOptionSelected }) {
             : 'bg-gray-700'
         }`}
       >
-        <p className="font-bold">Boss Level {bossLevel.id}</p>
+        {/* <p className="font-bold">Boss Level {bossLevel.id}</p> */}
         <div className="flex justify-between items-center">
-          <p>{bossLevel.name}</p>
+          {/* <p>{bossLevel.name}</p> */}
           <button
             className={`px-2 py-1 rounded ${
               bossLevel.id === state.current.mapLevel + 1
