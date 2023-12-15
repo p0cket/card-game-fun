@@ -718,3 +718,125 @@ export const LeafShield = {
   },
 }
 
+export const SolarFlare = {
+  name: 'Solar Flare',
+  type: 'elemental',
+  damage: 80,
+  speed: 15,
+  cost: { energy: 8 },
+  energyCost: 8,
+  effect: {
+    description: 'Unleash a burst of intense solar energy',
+    chance: '85%',
+    result: 'burn',
+  },
+  priority: 'high',
+  targets: ['opponent'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Heat Wave',
+    type: 'debuff',
+    effect: {
+      description: 'Generate a wave of heat to reduce the opponent’s defense',
+      duration: '2 turns',
+      defense_reduction: 20, // Decrease opponent's defense for 2 turns
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Supernova Blast',
+    type: 'elemental',
+    damage: 100,
+    speed: 18,
+    cost: { energy: 10 },
+    energyCost: 10,
+    effect: {
+      description: 'Erupt in a powerful supernova, ensuring a burn on the opponent',
+      chance: '100%',
+      result: 'burn',
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const RadiantBeam = {
+  name: 'Radiant Beam',
+  type: 'elemental',
+  damage: 70,
+  speed: 12,
+  cost: { energy: 7 },
+  energyCost: 7,
+  effect: {
+    description: 'Emit a concentrated beam of radiant energy',
+    chance: '90%',
+    result: 'blind',
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Blinding Light',
+    type: 'debuff',
+    effect: {
+      description: 'Blind the opponent, reducing their accuracy',
+      duration: '1 turn',
+      accuracy_reduction: 30, // Decrease opponent's accuracy for 1 turn
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Solar Lance',
+    type: 'elemental',
+    damage: 85,
+    speed: 14,
+    cost: { energy: 7 },
+    energyCost: 8,
+    effect: {
+      description: 'Concentrate solar energy into a lance, ensuring blinding the opponent',
+      chance: '100%',
+      result: 'blind',
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const SunShield = {
+  name: 'Sun Shield',
+  type: 'elemental',
+  damage: 0, // No damage, defensive move
+  speed: 10,
+  cost: { energy: 6 },
+  energyCost: 6,
+  effect: {
+    description: 'Create a shield of solar energy to mitigate incoming damage',
+    chance: '95%',
+    result: 'damage_reduction',
+  },
+  priority: 'medium',
+  targets: ['self'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Solar Rejuvenation',
+    type: 'buff',
+    effect: {
+      description: 'Use solar energy to gradually restore health',
+      duration: '2 turns',
+      health_regeneration: 25, // Regenerate a portion of health for 2 turns
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Radiant Barrier',
+    type: 'elemental',
+    damage: 0,
+    speed: 12,
+    cost: { energy: 6 },
+    energyCost: 7,
+    effect: {
+      description: 'Fortify the shield with intense solar energy, ensuring damage reduction',
+      chance: '100%',
+      result: 'damage_reduction',
+    },
+    targets: ['self'],
+  },
+}
