@@ -77,7 +77,8 @@ export const MainProvider = ({ children }) => {
       nextLevelState,
       stateWithProgression,
       stateWithRune,
-      stateWithItem
+      stateWithItem,
+      stateWithHealth
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -285,6 +286,17 @@ export const MainProvider = ({ children }) => {
           },
         }
         return stateWithItem
+        // Change stats:
+        case ACTIONS.UPDATE_HEALTH:
+          // console.log('Reducer UPDATE_HEALTH:', action)
+          // stateWithHealth = {
+          //   ...state,
+          //   opponent: {
+          //     ...
+          //   }
+          // }
+          // return stateWithHealth
+          break
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state
