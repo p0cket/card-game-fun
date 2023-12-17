@@ -12,16 +12,18 @@ function MenuPopup(props) {
     setCurrentMenu(menu)
   }
   const renderTab = (menuOption) => (
-    <div
-      key={menuOption}
-      onClick={() => setCurrentMenu(menuOption)}
-      className={`cursor-pointer mr-1 ${
-        currentMenu === menuOption
-          ? 'bg-boy-green  text-white'
-          : 'bg-boy-lightgreen text-black'
-      }`}
-    >
-      {menuContent[menuOption].label}
+    <div>
+      <div
+        key={menuOption}
+        onClick={() => setCurrentMenu(menuOption)}
+        className={`cursor-pointer mr-1 ${
+          currentMenu === menuOption
+            ? 'bg-boy-green  text-white'
+            : 'bg-boy-lightgreen text-black'
+        }`}
+      >
+        {menuContent[menuOption].label}
+      </div>
     </div>
   )
   const contextualState = useStateContext()
@@ -58,6 +60,7 @@ function MenuPopup(props) {
           </div>
         </div>
         <div className="max-h-96 overflow-y-auto">
+          
           {menuContent[currentMenu].content}
         </div>
         <div className="mt-5">

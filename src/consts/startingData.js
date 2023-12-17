@@ -8,6 +8,7 @@ import { LightBeam } from './allMoves'
 import { Luminowl } from './pals/pals'
 import { DIALOGS } from '../components/dialog/DialogManager'
 import { ATK_PHASES } from '../handlers/moveHandlers'
+import { apple, hyperPotion, potion, pumpernickelSoda, superPotion } from './items/basicItems'
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 //
@@ -84,7 +85,14 @@ export const newStartingData = {
   },
   bag: {
     runes: ['Stick', `Coat of harms`],
-    items: [`apple`, `Pumpernickle Soda`],
+    items: [
+  { name: 'apple', quantity: 1, obj: apple },
+  { name: 'Pumpernickel Soda', quantity: 1, obj: pumpernickelSoda },
+  { name: 'Potion', quantity: 3, obj: potion },
+  { name: 'Super Potion', quantity: 1, obj: superPotion },
+  { name: 'Hyper Potion', quantity: 0, obj: hyperPotion },
+  // Add more items as needed
+],
   },
   game: {
     player: {
