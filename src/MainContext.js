@@ -15,6 +15,8 @@ import {
   updateScene,
 } from './handlers/sceneHandlers_new'
 import { SCENES } from './scenes'
+import { healAIPal, healHumanPal } from './handlers/state/healthStateHandlers'
+import { subtractItem } from './handlers/state/itemStateHandlers'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -38,6 +40,8 @@ export const ACTIONS = {
 
   ADD_RUNE: 'ADD_RUNE',
   ADD_ITEM: 'ADD_ITEM',
+  USE_ITEM: 'USE_ITEM',
+
 
   SET_SCENE: 'SET_SCENE',
   SET_HEALTH: 'SET_HEALTH',
@@ -78,7 +82,8 @@ export const MainProvider = ({ children }) => {
       stateWithProgression,
       stateWithRune,
       stateWithItem,
-      stateWithHealth
+      stateWithHealth,
+      stateAfterUse
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -286,17 +291,35 @@ export const MainProvider = ({ children }) => {
           },
         }
         return stateWithItem
-        // Change stats:
-        case ACTIONS.UPDATE_HEALTH:
-          // console.log('Reducer UPDATE_HEALTH:', action)
-          // stateWithHealth = {
+      // Change stats:
+      case ACTIONS.UPDATE_HEALTH:
+        // console.log('Reducer UPDATE_HEALTH:', action)
+        // stateWithHealth = {
+        //   ...state,
+        //   opponent: {
+        //     ...
+        //   }
+        // }
+        // return stateWithHealth
+        break
+      case ACTIONS.USE_ITEM:
+        console.log('Reducer USE_ITEM:', action)
+        // item's health effect. grab it
+        // effect: { hp: 20 },
+        // item.effect
+        if (action.payload.obj.effect.hp){
+          state = healHumanPal(state, action.payload.obj.effect.hp)
+          // state = {
           //   ...state,
-          //   opponent: {
-          //     ...
-          //   }
+          //   health: state.health + action.payload.obj.effect.hp
           // }
-          // return stateWithHealth
-          break
+          state = subtractItem(state, action.payload)
+        }
+
+        // stateAfterUse = {
+        //   ...state,
+        // }
+        return state
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

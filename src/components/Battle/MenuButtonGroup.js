@@ -9,21 +9,26 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   const [currentView, setCurrentView] = useState('menu')
 
   const [itemModalVisible, setItemModalVisible] = useState(false)
-  // const items = [
-  //   { name: 'Potion', quantity: 3 },
-  //   { name: 'Super Potion', quantity: 1 },
-  //   { name: 'Hyper Potion', quantity: 0 },
-  //   // Add more items as needed
-  // ]
-  const {items} = contextualState.bag
+  const { items } = contextualState.bag
 
   const ItemMenuModal = () => {
-    const useItem = (itemName) => {
-      console.log(`Using ${itemName}...`)
-      // Implement the logic to use an item here
-      //dispatch{type: USE_ITEM, payload: item}
+    // pass in the item to use. (item)
+    const useItem = (item) => {
+      if (item.qty > 0) {
+        console.log(`Using ${item.obj.name}...`)
+        //dispatch{type: USE_ITEM, payload: item}
+        // bag: {
+        //   runes: ['Stick', `Coat of harms`],
+        //   items: [
+        //     { obj: apple, quantity: 1 },
+        contextualDispatch({
+          type: 'USE_ITEM',
+          payload: item,
+        })
+      } else {
+        console.log(`You don't have any ${item.obj.name} left. QTy is ${item.qty}`)
+      }
     }
-
 
     return (
       <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-10 font-[silkscreen]">
@@ -42,11 +47,11 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
                 key={index}
                 className="flex justify-between items-center p-2"
               >
-                <span>{item.name}</span>
-                <span>{item.quantity}x</span>
+                <span>{item.obj.name}</span>
+                <span>{item.qty}x</span>
                 <button
-                  onClick={() => useItem(item.name)}
-                  disabled={item.quantity === 0}
+                  onClick={() => useItem(item)}
+                  disabled={item.qty === 0}
                   className={`ml-4 ${
                     item.quantity > 0 ? 'text-black' : 'text-gray-700'
                   }`}
@@ -66,8 +71,6 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       </div>
     )
   }
-
-
 
   const showTheAttack = (move, ourCurrentMon) => {
     console.log(`move`, move)
