@@ -17,6 +17,11 @@ import {
 import { SCENES } from './scenes'
 import { healAIPal, healHumanPal } from './handlers/state/healthStateHandlers'
 import { subtractItem } from './handlers/state/itemStateHandlers'
+import {
+  addAttackToPalInState,
+  addAttackToState,
+  addMoveToPalInState,
+} from './handlers/state/attackStateHandlers'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -26,11 +31,6 @@ export function useStateContext() {
 }
 
 export function useDispatchContext() {
-  // const dispatch = useContext(dispatchContext)
-  // return function(action){
-  //   console.error(`dispatching check:`, action)
-  //   dispatch(action)
-  // }
   return useContext(dispatchContext)
 }
 
@@ -40,8 +40,9 @@ export const ACTIONS = {
 
   ADD_RUNE: 'ADD_RUNE',
   ADD_ITEM: 'ADD_ITEM',
-  USE_ITEM: 'USE_ITEM',
+  ADD_MOVE: 'ADD_MOVE',
 
+  USE_ITEM: 'USE_ITEM',
 
   SET_SCENE: 'SET_SCENE',
   SET_HEALTH: 'SET_HEALTH',
@@ -83,7 +84,8 @@ export const MainProvider = ({ children }) => {
       stateWithRune,
       stateWithItem,
       stateWithHealth,
-      stateAfterUse
+      stateAfterUse,
+      stateWithAttack
 
     switch (action.type) {
       case ACTIONS.UPDATEGAMEDATA:
@@ -291,23 +293,31 @@ export const MainProvider = ({ children }) => {
           },
         }
         return stateWithItem
+      case ACTIONS.ADD_MOVE:
+        console.log('Reducer ADD_MOVE:', action)
+        state = addMoveToPalInState(
+          state,
+          action.payload.move,
+          action.payload.palIndex,
+        )
+        return state
       // Change stats:
-      case ACTIONS.UPDATE_HEALTH:
-        // console.log('Reducer UPDATE_HEALTH:', action)
-        // stateWithHealth = {
-        //   ...state,
-        //   opponent: {
-        //     ...
-        //   }
-        // }
-        // return stateWithHealth
-        break
+      // case ACTIONS.UPDATE_HEALTH:
+      // console.log('Reducer UPDATE_HEALTH:', action)
+      // stateWithHealth = {
+      //   ...state,
+      //   opponent: {
+      //     ...
+      //   }
+      // }
+      // return stateWithHealth
+      // break
       case ACTIONS.USE_ITEM:
         console.log('Reducer USE_ITEM:', action)
         // item's health effect. grab it
         // effect: { hp: 20 },
         // item.effect
-        if (action.payload.obj.effect.hp){
+        if (action.payload.obj.effect.hp) {
           state = healHumanPal(state, action.payload.obj.effect.hp)
           // state = {
           //   ...state,
@@ -320,6 +330,7 @@ export const MainProvider = ({ children }) => {
         //   ...state,
         // }
         return state
+
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

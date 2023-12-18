@@ -77,14 +77,33 @@ function Results({ experience = 100 }) {
     setSelectedMove(move)
   }
 
-  const onContinue = (selectedItem) => {
-    dispatch({
-      type: ACTIONS.ADD_RUNE,
-      payload: {
-        item: selectedItem,
-        permEffect: null,
-      },
-    })
+  const onContinue = (selected, type) => {
+    if (type === 'item') {
+      dispatch({
+        type: ACTIONS.ADD_RUNE,
+        payload: {
+          item: selected,
+          permEffect: null,
+        },
+      })
+    } else if (type === 'move') {
+      // here is what add_move looks like. Knowing this, lets add
+      // a index and move in the payload
+      // case ACTIONS.ADD_MOVE:
+      //   console.log('Reducer ADD_MOVE:', action)
+      //   state = addMoveToPalInState(
+      //     state,
+      //     action.payload.palIndex,
+      //     action.payload.move,
+      //   )
+      dispatch({
+        type: ACTIONS.ADD_MOVE,
+        payload: {
+          move: selected,
+          palIndex: 0,
+        },
+      })
+    }
     const randomizedTrainer = randomlySelectTrainer(allTrainers)
 
     console.log('Continue to next scene')
@@ -107,7 +126,10 @@ function Results({ experience = 100 }) {
 
   function DisplayModifications() {
     return (
-      <div id="modifications-container" className="modifications-container gap-2">
+      <div
+        id="modifications-container"
+        className="modifications-container gap-2"
+      >
         <h2>Available Modifications</h2>
         <button
           className="py-2 px-4 m-1 bg-blue-400 text-white rounded hover:bg-blue-700 transition duration-300"
@@ -174,7 +196,7 @@ function Results({ experience = 100 }) {
           <h4 className="font-bold">{selectedMove.name}</h4>
           <p>{selectedMove.effect.description}</p>
           <button
-            onClick={() => onContinue(selectedMove)}
+            onClick={() => onContinue(selectedMove, 'move')}
             className="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
             disabled={!selectedMove}
           >
@@ -203,7 +225,7 @@ function Results({ experience = 100 }) {
           <h4 className="font-bold">{selectedItem}</h4>
           <p>{itemsToChooseFrom[selectedItem]}</p>{' '}
           <button
-            onClick={() => onContinue(selectedItem)}
+            onClick={() => onContinue(selectedItem, 'item')}
             className="mt-4 py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
             disabled={!selectedItem}
           >
