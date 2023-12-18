@@ -3,7 +3,11 @@ export const addMoveToPalInState = (state, move, palIndex) => {
   // add move to pal
   const updatedPalWithNewMove = addMoveToPal(state.userParty[palIndex], move)
   // add pal (update) to state in correct location
-  state = updatePartyWithPal(state, updatedPalWithNewMove, palIndex)
+  const updatedPartyWithPal = updatePartyWithPal(state, updatedPalWithNewMove, palIndex)
+  state = {
+    ...state,
+    userParty: updatedPartyWithPal,
+  }
   return state
 }
 
