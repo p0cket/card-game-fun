@@ -62,12 +62,12 @@ export function updateAct(newData, newAct) {
  */
 export function updateScene(newData, newScene) {
   console.log(
-    `[updateScene] newData, newScene`,
+    `[updateScene] newData, newScene, newData.current.scene`,
     newData,
     newScene,
-    `newData.current.scene`,
     // newData?.current?.scene
   )
+  console.log(`newScene`, newScene)
   const updatedData = { ...newData }
   updatedData.current.scene = newScene
   return updatedData
