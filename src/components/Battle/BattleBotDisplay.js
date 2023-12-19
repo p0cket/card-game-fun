@@ -86,7 +86,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
             <ul className="text-sm flex flex-col justify-start align-start">
               <li>
                 <button className="bg-boy-green py-1 px-2 rounded text-white">
-                  {ourCurrentMon.passive_ability}
+                  {ourCurrentMon.passive_ability.name}
                 </button>
               </li>
               {/* <li>Group: {ourCurrentMon.specialty_group}</li>

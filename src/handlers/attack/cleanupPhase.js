@@ -1,7 +1,7 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
-import { cleanupStepHandler } from '../Battle/cleanupStepHandlers'
+import { applyPalPassive, cleanupPassivesHandler, cleanupStepHandler } from '../Battle/cleanupStepHandlers'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
@@ -23,6 +23,10 @@ export const cleanupPhase = (state, attackPayload) => {
   // 1. run through all the end of turn effects (poison damage, burn, sleep, stun, etc.)
   // statusHandlers.js // statusStateHandlers.js // battleHandlers.js applyStatusHandler
   // state = cleanupStepHandler(state)
+
+  // #TODO: Finish cleanupPassivesHandler and cleanupPassivesHandler
+  // state = cleanupPassivesHandler(state)
+
   if (player === PLAYERS.HUMAN) {
     state = switchDialog(state, DIALOGS.CLEANUP_HUMAN)
   } else if (player === PLAYERS.AI) {
