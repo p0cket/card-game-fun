@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import React, { useContext } from 'react'
 import './index.css'
-// import { startingData } from "./consts/consts";
 import { newStartingData } from './consts/startingData'
 import { cusLog } from './utils/debugging-utils'
 import { payPhase } from './handlers/attack/payPhase'
@@ -22,6 +21,12 @@ import {
   addAttackToState,
   addMoveToPalInState,
 } from './handlers/state/attackStateHandlers'
+import {
+  logLevelsCompletedData,
+  setMaxPalEnergy,
+  setPalEnergyToMax,
+  setPalHPToMax,
+} from './handlers/state/levelStateHandlers'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -50,7 +55,7 @@ export const ACTIONS = {
   SET_LEVEL: 'SET_LEVEL',
   SET_INVENTORY: 'SET_INVENTORY',
   ATTACK: 'ATTACK',
-  UPDATEGAMEDATA: 'UPDATEGAMEDATA',
+  UPDATE_GAMEDATA: 'UPDATE_GAMEDATA',
   SHOW_ATTACK: 'SHOW_ATTACK',
   CLOSE_POPUP: 'CLOSE_POPUP',
   CLOSE_DIALOG: 'CLOSE_DIALOG',
@@ -88,7 +93,7 @@ export const MainProvider = ({ children }) => {
       stateWithAttack
 
     switch (action.type) {
-      case ACTIONS.UPDATEGAMEDATA:
+      case ACTIONS.UPDATE_GAMEDATA:
         // within here do the handlers
         return { ...state, ...action.payload }
       case ACTIONS.SET_SCENE:
@@ -105,91 +110,43 @@ export const MainProvider = ({ children }) => {
         console.log(`stateWithProgression: `, stateWithProgression)
         return stateWithProgression
       case ACTIONS.CHANGE_SCENE:
-        // if(state.game.player.maxEnergy < 0){
-        // }
+        // here is the logic for changing to battle that
+        // is refactored. fix it.
         console.log(`CHANGE_SCENE. action.payload: `, action.payload)
-        if (action.payload.screen === SCENES.BATTLE) {
-          // state.oppoonent = {
 
-          // }
-          // make the battle opponent object equal
-          // the on in current
-
-          // give max energy
-          state = {
-            ...state,
-            game: {
-              ...state.game,
-              player: {
-                ...state.game.player,
-                energy: state.game.player.maxEnergy,
-              },
-            },
-          }
-          // set hp to max
-          state = {
-            // state.opponent.monsters[0].obj.stats.hp
-            ...state,
-            opponent: {
-              ...state.opponent,
-              monsters: [
-                {
-                  ...state.opponent.monsters[0],
-                  obj: {
-                    ...state.opponent.monsters[0].obj,
-                    stats: {
-                      ...state.opponent.monsters[0].obj.stats,
-                      hp: state.opponent.monsters[0].obj.stats.max_hp,
-                    },
-                  },
-                },
-              ],
-            },
-          }
-
-          // now lets add the current level, or an increment to a
-          // varaible. we'll add it in completedLevels
-          state = {
-            // state.current is this below:
-            //   current: {
-            // level: 0,
-            // act: 1,
-            // completedLevels: [],
-            ...state,
-            current: {
-              ...state.current,
-              completedLevels: [
-                ...state.current.completedLevels,
-                [
-                  state.current.level,
-                  state.current.act,
-                  state.current.curEvent,
-                  state.current.scene,
-                  state.current.incomingLevels,
-                ],
-              ],
-            },
-          }
+        switch (action.payload.screen) {
+          case SCENES.BATTLE:
+          case SCENES.BOSS:
+            state = setPalEnergyToMax(state)
+            state = setPalHPToMax(state)
+            state = logLevelsCompletedData(state)
+            break // This will prevent fall-through and continue with the rest of the function after the switch
+          // Other cases can be added here as needed
         }
-
         nextSceneState = updateScene(state, {
           screen: action.payload.screen,
           details: action.payload.details,
         })
-        console.log(`nextSceneState b4 updateLevel: `, nextSceneState)
         nextLevelState = updateLevel(nextSceneState, 1)
-        console.log(`nextLevelState after updateLevel: `, nextLevelState)
+        console.log(
+          `nextLevelState after updateLevel,  action.payload: `,
+          nextLevelState,
+          action.payload,
+        )
         // setup our opponent
-        console.log('action.payload:', action.payload)
         console.log(
           'action.payload.details nextLevelState:',
           action.payload.details,
           nextLevelState,
         )
+        // here is where we setup opponent.
+        // for a boss this needs to be modified or
+        // we need bosses that are trainers.
         nextLevelState = setupOpponent(
           nextLevelState,
           action.payload.details.trainer,
         )
+        console.log(`nextLevelState after setupOpponent: `, nextLevelState)
         return nextLevelState
       case ACTIONS.SHOW_ATTACK:
         return {

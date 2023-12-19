@@ -1,4 +1,4 @@
-import { Luminowl, Recycleroo, Ticklefairy, Umbrabunny } from '../pals/pals'
+import { Luminowl, MoltenScale, Recycleroo, Ticklefairy, Umbrabunny } from '../pals/pals'
 
 export const Trainer = {
   name: 'Trainer Name',
@@ -133,6 +133,24 @@ export const placeholderTrainer = {
   },
   spirit: 'The Ghost of Bad Puns', // Commander ability: Increases the likelihood of eye-rolls
   // Other properties like image, location, etc. are intentionally left blank because Mr. Placeholder is all about being generic!
+}
+
+export const bossBarry = {
+  name: 'Boss Barry',
+  reward: {
+    experience: 150,
+    currency: 300,
+    items: [{ name: 'dragon Candy', quantity: 2 }],
+  },
+  monsters: [
+    { obj: MoltenScale, level: 3 },
+    // { obj: Ticklefairy, level: 3 },
+  ],
+  dialogue: {
+    enter: 'Prepare to be crushed under the weight of my mighty dragon!',
+    win: "You're no match for my boulders!",
+    lose: "You've chipped away at my confidence. Well done.",
+  },
 }
 
 export const basicTrainers = [

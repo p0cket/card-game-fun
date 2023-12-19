@@ -92,7 +92,7 @@ const changeTurn = (currentPlayer, contextualState, contextualDispatch) => {
   }
 
   contextualDispatch({
-    type: ACTIONS.UPDATEGAMEDATA,
+    type: ACTIONS.UPDATE_GAMEDATA,
     payload: newState,
   })
 }
@@ -117,7 +117,7 @@ const endBattle = (win, contextualState, contextualDispatch) => {
   }
 
   contextualDispatch({
-    type: ACTIONS.UPDATEGAMEDATA,
+    type: ACTIONS.UPDATE_GAMEDATA,
     payload: newState,
   })
 }

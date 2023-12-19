@@ -26,7 +26,7 @@ function Map() {
   const handleChangeLevel = (state, scene) => {
     const stateWithChangedLevel = changeLevel(state, scene)
     contextualDispatch({
-      type: ACTIONS.UPDATEGAMEDATA,
+      type: ACTIONS.UPDATE_GAMEDATA,
       payload: stateWithChangedLevel,
     })
   }
@@ -68,13 +68,11 @@ function Map() {
       </div>
     )
   }
-
   return (
     <div className="font-[silkscreen] text-white m-1 text-center">
       <div className="bg-green-500 rounded p-1 mb-1">
         <h2 className="text-2xl mb-1">Map to the top</h2>
         <SimpleLevelList levels={levels} />
-        {/* <LevelList levels={levels} />{' '} */}
         {/* <div>
           {contextualState.current.completedLevels.map((lvl, index) => {
             return <div key={index}>lvl: {JSON.stringify(lvl)}</div>

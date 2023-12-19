@@ -79,7 +79,7 @@ export const checkIfDead = (state) => {
   // const handleChangeLevel = (state, scene) => {
   //   const stateWithChangedLevel = changeLevel(state, scene)
   //   contextualDispatch({
-  //     type: ACTIONS.UPDATEGAMEDATA,
+  //     type: ACTIONS.UPDATE_GAMEDATA,
   //     payload: stateWithChangedLevel,
   //   })
   // }

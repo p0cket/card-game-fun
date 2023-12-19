@@ -46,7 +46,7 @@ const ChibipalsSelection = () => {
     const newState = { ...nextLevelState }
     // Dispatch the updated state
     contextualDispatch({
-      type: ACTIONS.UPDATEGAMEDATA,
+      type: ACTIONS.UPDATE_GAMEDATA,
       payload: newState,
     })
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { SCENES } from '../../scenes'
-import { allTrainers } from '../../consts/party/trainers'
+import { allTrainers, bossBarry } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
 import { MoltenScale } from '../../consts/pals/pals'
@@ -26,19 +26,27 @@ function SimpleLevelList({ levels, onOptionSelected }) {
   const goToBoss = () => {
     console.log('goToBoss MoltenScale')
     //add in the logic to send to the boss level
-    const loadNextLevel = () => {
-      console.log(`func: loadNextLevel()`)
+    // const loadNextLevel = () => {
+    console.log(`func: loadNextLevel()`)
 
-      const nextSceneState = updateScene(state, {
-        screen: SCENES.BOSS,
-        details: { boss: MoltenScale },
-      })
-      const nextLevelState = updateLevel(nextSceneState, 1)
-      dispatch({
-        payload: nextLevelState,
-        type: ACTIONS.UPDATEGAMEDATA,
-      })
-    }
+    const nextSceneState = updateScene(state, {
+      screen: SCENES.BOSS,
+
+      details: {
+        trainer: bossBarry,
+        // pal: MoltenScale,
+        type: 'boss',
+        area: 'tranquil forest',
+        difficulty: 'easy',
+        refillEnergy: true,
+      },
+    })
+    const nextLevelState = updateLevel(nextSceneState, 1)
+    dispatch({
+      payload: nextLevelState,
+      type: ACTIONS.UPDATE_GAMEDATA,
+    })
+    // }
   }
 
   const handleChangeLevel = (passedInState, payload) => {

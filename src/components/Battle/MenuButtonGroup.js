@@ -98,7 +98,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
             className="text-[#ddf4c5] text-sm p-1 flex items-center justify-center"
             onClick={() => setItemModalVisible(true)}
           >
-            🔒Items
+            Items
           </div>
           <div className="text-sm p-1 flex items-center justify-center">
             🔒PaLs
@@ -133,12 +133,12 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
             {move.name}
           </div>
         ))}
-        <div
+        {/* <div
           className="cursor-pointer text-sm text-white"
           onClick={() => setCurrentView('menu')}
         >
           Blizzard
-        </div>
+        </div> */}
       </div>
     </div>
   )
