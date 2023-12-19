@@ -155,7 +155,8 @@ const Intro = ({ dispatch }) => {
               style={styles.fontStyle}
             >
               <img src={ChibipalsLogo} alt="pal logo" />
-              <div className="text-sm">Joy Edition</div>
+              <div className="text-sm">Plausibly Sentient Monster Slayer</div>
+              <div className="text-sm text-green-300">Friendship Edition</div>
             </motion.div>
           </div>
           <Carousel ourImages={palImages} />

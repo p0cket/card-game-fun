@@ -26,6 +26,11 @@ import {
   WarmEmbrace,
   WiseGaze,
 } from '../allMoves'
+import {
+  manaEcho,
+  mysticRegeneration,
+  shadowCamouflage,
+} from '../keywords/passives'
 // Energy/Mana (MP): Resource used for monster abilities.
 // Level: The monster's level.
 // Attack Power: Base damage dealt by the monster's attacks.
@@ -92,7 +97,8 @@ export const Luminowl = {
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
   moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
-  passive_ability: 'Guiding Wisdom',
+  // passive_ability: 'Guiding Wisdom',
+  passive_ability: mysticRegeneration,
   commander_ability: {
     name: 'Luminous Nova',
     description:
@@ -106,6 +112,98 @@ export const Luminowl = {
   lore: "Legends speak of Luminowl's ability to bring light and wisdom to those in need.",
 }
 
+export const Glowbuggle = {
+  id: 7,
+  name: 'Glowbuggle',
+  elemental_type: 'Light',
+  creature_type: 'Firefly',
+  specialty_group: 'Bioluminescent',
+  nature: 'Illuminating',
+  quirks: ['Warm Light Emission', 'Comforting Glow'],
+  stats: {
+    hp: 80,
+    max_hp: 90,
+    attack: 50,
+    defense: 40,
+    special_attack: 100,
+    special_defense: 70,
+    speed: 120,
+  },
+  enterAbility:
+    'on enter, does something cool. Otherwise no ability and have it stick around',
+  strengths: ['Dark'],
+  weaknesses: ['Electric', 'Ice'],
+  cost: 400,
+  lvl: 40,
+  experience: 4000,
+  status: {},
+
+  // moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
+  moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
+  possible_moves: [
+    'Bioluminescent Burst',
+    'Soothing Radiance',
+    'Glowing Trail',
+  ],
+  // passive_ability: 'Radiant Aura',
+  passive_ability: manaEcho,
+  commander_ability: {
+    name: 'Radiant Infusion',
+    description:
+      'Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.',
+  },
+  image: ChibipalDefaultImg,
+  description:
+    'Small, firefly-like creatures with bioluminescent wings that emit a warm, comforting light.',
+  size: 'Tiny',
+  weight: 'Light',
+  lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
+}
+
+export const Umbrabunny = {
+  id: 8,
+  name: 'Umbrabunny',
+  elemental_type: 'Dark',
+  creature_type: 'Bunny',
+  specialty_group: 'Emotion Absorber',
+  nature: 'Adorable',
+  quirks: ['Emotion Sponge', 'Reassuring Presence'],
+  stats: {
+    hp: 90,
+    max_hp: 90,
+    attack: 60,
+    defense: 70,
+    special_attack: 80,
+    special_defense: 110,
+    speed: 120,
+  },
+  enterAbility:
+    'on enter, does something cool. Otherwise no ability and have it stick around',
+  strengths: ['Light'],
+  weaknesses: ['Fighting', 'Psychic'],
+  cost: 450,
+  lvl: 48,
+  experience: 4800,
+  status: {},
+
+  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
+  moves: [EmotionDrain, CuteCharm, ComfortingHug],
+  possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
+  // passive_ability: 'Emotion Balance',
+  passive_ability: shadowCamouflage,
+  commander_ability: {
+    name: 'Harmony Embrace',
+    description:
+      'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
+  },
+  image: UmbrabunnyImg,
+  description:
+    'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
+  size: 'Small',
+  weight: 'Light',
+  lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
+}
+// ----
 export const Shadowstalker = {
   id: 2,
   name: 'Shadowstalker',
@@ -314,96 +412,6 @@ export const Technotitan = {
   size: 'Giant',
   weight: 'Heavy',
   lore: "Legends speak of Technotitan's ability to defend cities and civilizations from threats with its advanced technology.",
-}
-
-export const Glowbuggle = {
-  id: 7,
-  name: 'Glowbuggle',
-  elemental_type: 'Light',
-  creature_type: 'Firefly',
-  specialty_group: 'Bioluminescent',
-  nature: 'Illuminating',
-  quirks: ['Warm Light Emission', 'Comforting Glow'],
-  stats: {
-    hp: 80,
-    max_hp: 90,
-    attack: 50,
-    defense: 40,
-    special_attack: 100,
-    special_defense: 70,
-    speed: 120,
-  },
-  enterAbility:
-    'on enter, does something cool. Otherwise no ability and have it stick around',
-  strengths: ['Dark'],
-  weaknesses: ['Electric', 'Ice'],
-  cost: 400,
-  lvl: 40,
-  experience: 4000,
-  status: {},
-
-  // moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
-  moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
-  possible_moves: [
-    'Bioluminescent Burst',
-    'Soothing Radiance',
-    'Glowing Trail',
-  ],
-  passive_ability: 'Radiant Aura',
-  commander_ability: {
-    name: 'Radiant Infusion',
-    description:
-      'Radiates an intense aura of warmth and comfort, healing the team and increasing their resistance to status effects.',
-  },
-  image: ChibipalDefaultImg,
-  description:
-    'Small, firefly-like creatures with bioluminescent wings that emit a warm, comforting light.',
-  size: 'Tiny',
-  weight: 'Light',
-  lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
-}
-
-export const Umbrabunny = {
-  id: 8,
-  name: 'Umbrabunny',
-  elemental_type: 'Dark',
-  creature_type: 'Bunny',
-  specialty_group: 'Emotion Absorber',
-  nature: 'Adorable',
-  quirks: ['Emotion Sponge', 'Reassuring Presence'],
-  stats: {
-    hp: 90,
-    max_hp: 90,
-    attack: 60,
-    defense: 70,
-    special_attack: 80,
-    special_defense: 110,
-    speed: 120,
-  },
-  enterAbility:
-    'on enter, does something cool. Otherwise no ability and have it stick around',
-  strengths: ['Light'],
-  weaknesses: ['Fighting', 'Psychic'],
-  cost: 450,
-  lvl: 48,
-  experience: 4800,
-  status: {},
-
-  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
-  moves: [EmotionDrain, CuteCharm, ComfortingHug],
-  possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
-  passive_ability: 'Emotion Balance',
-  commander_ability: {
-    name: 'Harmony Embrace',
-    description:
-      'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
-  },
-  image: UmbrabunnyImg,
-  description:
-    'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
-  size: 'Small',
-  weight: 'Light',
-  lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
 }
 
 export const Recycleroo = {
