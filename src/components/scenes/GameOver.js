@@ -45,7 +45,7 @@ const GameOver = () => {
     const nextLevelState = updateLevel(nextSceneState, 1)
     dispatch({
       payload: nextLevelState,
-      type: ACTIONS.UPDATEGAMEDATA,
+      type: ACTIONS.UPDATE_GAMEDATA,
     })
   }
 

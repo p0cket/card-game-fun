@@ -51,7 +51,7 @@ const Intro = ({ dispatch }) => {
     const nextLevelState = updateLevel(nextSceneState, 1)
     contextualDispatch({
       payload: nextLevelState,
-      type: ACTIONS.UPDATEGAMEDATA,
+      type: ACTIONS.UPDATE_GAMEDATA,
     })
   }
 

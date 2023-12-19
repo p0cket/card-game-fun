@@ -44,7 +44,10 @@ export default function App() {
           // backgroundSize: '800px 500px',
           backgroundSize: 'cover',
           width: '100vw',
-          height: '100vh',
+          // uncommenting this causes the real estate to be too small
+          // to contain the contents.
+          // fix or make contents smaller
+          // height: '100vh',
           margin: '0 auto',
           display: 'flex', // Added for potential flexbox centering
           justifyContent: 'center', // Center content horizontally in a flex container
