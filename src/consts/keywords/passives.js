@@ -1,7 +1,31 @@
+export const PASSIVE_TYPES = {
+  EVASION: 'Evasion',
+  STEALTH: 'Stealth',
+  REGEN: 'Regen',
+  MANA: 'Mana',
+  COST_REDUCTION: 'Cost Reduction',
+  HEALTH: 'Health',
+  MANA_REGEN: 'Mana Regen',
+  CRIT: 'Crit',
+  CRIT_CHANCE: 'Crit Chance',
+  CRIT_DAMAGE: 'Crit Damage',
+  MANA_COST: 'Mana Cost',
+  MANA_COST_REDUCTION: 'Mana Cost Reduction',
+  DAMAGE: 'Damage',
+  DAMAGE_REDUCTION: 'Damage Reduction',
+  DAMAGE_MULTIPLIER: 'Damage Multiplier',
+  SPEED: 'Speed',
+  HEALTH_REGEN_MULTIPLIER: 'Health Regen Multiplier',
+  MANA_REGEN_MULTIPLIER: 'Mana Regen Multiplier',
+  HEALTH_REDUCTION: 'Health Reduction',
+  MANA_REDUCTION: 'Mana Reduction',
+  EVADE: 'Evade',
+}
+
 export const mysticRegeneration = {
   id: 101,
   name: 'Mystic Regeneration',
-  effects: [{ type: 'Regen', amt: 4 }],
+  effects: [{ type: PASSIVE_TYPES.REGEN, amt: 4 }],
   // effects: [{ type: 'health regeneration', amt: '2% per turn' }],
   details: 'Restores a small amount of health each turn.',
   reasoning: 'Encourages sustained battles and enhances survivability.',
@@ -10,8 +34,8 @@ export const shadowCamouflage = {
   id: 103,
   name: 'Shadow Camouflage',
   effects: [
-    { type: 'Evasion', amt: 20 },
-    { type: 'Stealth', amt: 10 },
+    { type: PASSIVE_TYPES.EVADE, amt: 20 },
+    { type: PASSIVE_TYPES.STEALTH, amt: 10 },
     // { type: 'evasion', amt: '20%' }, { type: 'stealth', amt: '10%' },
   ],
   details: 'Increases evasion by adapting to environments.',
@@ -19,15 +43,16 @@ export const shadowCamouflage = {
 }
 export const manaEcho = {
   id: 105,
+
   name: 'Mana Echo',
-  effects: [{ type: 'mana cost reduction', amt: '5% chance' }],
+  effects: [{ type: PASSIVE_TYPES.COST_REDUCTION, amt: '5% chance' }],
   details: 'Slight chance to cast a spell without using mana.',
   reasoning: 'Promotes frequent use of magic.',
 }
 export const criticalInsight = {
   id: 108,
   name: 'Critical Insight',
-  effects: [{ type: 'Crit Chance', amt: 5 }],
+  effects: [{ type: PASSIVE_TYPES.CRIT, amt: 5 }],
   details: 'Increases critical hit chance.',
   reasoning: 'Boosts damage output for luck-based strategies.',
 }

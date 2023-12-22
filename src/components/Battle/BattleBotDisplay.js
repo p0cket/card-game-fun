@@ -86,7 +86,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
             <ul className="text-sm flex flex-col justify-start align-start">
               <li>
                 <button className="bg-boy-green py-1 px-2 rounded text-white">
-                  {ourCurrentMon.passive_ability.name}
+                  {ourCurrentMon.passives.name}
                 </button>
               </li>
               {/* <li>Group: {ourCurrentMon.specialty_group}</li>
@@ -114,7 +114,7 @@ BattleBotDisplay.propTypes = {
     name: PropTypes.string,
     // health: PropTypes.number,
     stats: PropTypes.object,
-    passive_ability: PropTypes.string,
+    passives: PropTypes.string,
     moves: PropTypes.array,
     possible_moves: PropTypes.array,
     quirks: PropTypes.array,

@@ -101,7 +101,7 @@ function PalDetailsPopup({selectedPal, setShowDetails, handleSelect, handleGoBac
           // onClick={() => toggleShowPassiveDetails()}
           >
             {/* #TODO: Make this into a button that brings up the details */}
-           {selectedPal.passive_ability.name}
+           {selectedPal.passives.name}
             
           </span>
         </div>

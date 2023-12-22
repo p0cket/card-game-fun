@@ -110,7 +110,7 @@ export default function BattleTopDisplay() {
     cost,
     moves,
     possible_moves,
-    passive_ability,
+    passives,
     experience,
     lvl,
     // status,

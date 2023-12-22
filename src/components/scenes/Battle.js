@@ -92,7 +92,14 @@ const Battle = () => {
             ourCurrentMon={ourCurrentMon}
           />
         </div>
-        <PartyDisplay party={ourParty.slice(1)} userFlag={true} />
+        <PartyDisplay
+          party={
+            // () => { console.log(`ourParty where slice doesn't work`, ourParty)
+            ourParty.slice(1)
+          // }
+        }
+          userFlag={true}
+        />
         <div
           className="font-silkscreen bg-green-500 text-white"
           style={{ fontFamily: 'Silkscreen' }}
