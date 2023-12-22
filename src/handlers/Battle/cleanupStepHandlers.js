@@ -24,10 +24,10 @@ import {
 //           ? {
 //               ...monster,
 //               obj: {
-//                 ...monster.obj,
+//                 ...monster,
 //                 stats: {
-//                   ...monster.obj.stats,
-//                   hp: monster.obj.stats.hp + healAmount, // Increase HP by healAmount
+//                   ...monster.stats,
+//                   hp: monster.stats.hp + healAmount, // Increase HP by healAmount
 //                 },
 //               },
 //             }
@@ -113,8 +113,8 @@ export const cleanupStepHandler = (state, details) => {
   // status changes, status effects, item abilities, etc.
   // enemy first, then player
 
-  const aiCleanupPals = nextState.opponent.monsters[0].obj
-  const humanCleanupPals = nextState.userParty.monsters[0].obj
+  const aiCleanupPals = nextState.opponent.monsters[0]
+  const humanCleanupPals = nextState.userParty.monsters[0]
   // for all pals in an obj, apply whatever the status
   // lets go through all of the keys of the objects of aiCleanupPals and if the
 

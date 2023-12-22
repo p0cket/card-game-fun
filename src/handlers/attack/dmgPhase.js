@@ -42,7 +42,7 @@ export const dmgPhase = (state, attackPayload) => {
   })
   let targetPal
   if (player === PLAYERS.HUMAN) {
-    targetPal = newState.opponent.monsters[0].obj
+    targetPal = newState.opponent.monsters[0]
     console.warn(`🫠check passed as human`, targetPal)
     const moveCost = move.cost.energy
     ourDmg = move.damage

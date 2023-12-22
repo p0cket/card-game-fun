@@ -10,12 +10,9 @@ export const healAIPal = (state, healAmount) => {
         index === 0
           ? {
               ...monster,
-              obj: {
-                ...monster.obj,
-                stats: {
-                  ...monster.obj.stats,
-                  hp: monster.obj.stats.hp + healAmount, // Increase HP by healAmount
-                },
+              stats: {
+                ...monster.stats,
+                hp: monster.stats.hp + healAmount, // Increase HP by healAmount
               },
             }
           : monster,
@@ -57,7 +54,7 @@ export const healHumanPal = (ourState, healAmount) => {
 // This heals a pal but returns only that object.
 // the others return the full state
 export const healPal = (pal, healAmount) => {
-  console.log('healPal healAmount:', pal,  healAmount)
+  console.log('healPal healAmount:', pal, healAmount)
   const healedPal = {
     ...pal,
     stats: {

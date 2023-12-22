@@ -137,10 +137,4 @@ const Screen = ({ gameData, dispatch, map }) => {
   }
 }
 
-// Screen.propTypes = {
-//   gameData: PropTypes.object,
-//   dispatch: PropTypes.func,
-//   map: PropTypes.array
-// };
-
 export default Screen

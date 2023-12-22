@@ -57,7 +57,7 @@ export const statusPhase = (state, attackPayload) => {
         player,
         move,
       )
-      const ourPal = pal.obj
+      const ourPal = pal
       console.warn(`move, ourPal`, move, ourPal)
       // #TODO:
       state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)

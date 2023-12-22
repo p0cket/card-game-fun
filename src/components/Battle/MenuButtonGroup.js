@@ -15,18 +15,18 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
     // pass in the item to use. (item)
     const useItem = (item) => {
       if (item.qty > 0) {
-        console.log(`Using ${item.obj.name}...`)
+        console.log(`Using ${item.contents.name}...`)
         //dispatch{type: USE_ITEM, payload: item}
         // bag: {
         //   runes: ['Stick', `Coat of harms`],
         //   items: [
-        //     { obj: apple, quantity: 1 },
+        //     { contents: apple, quantity: 1 },
         contextualDispatch({
           type: 'USE_ITEM',
           payload: item,
         })
       } else {
-        console.log(`You don't have any ${item.obj.name} left. QTy is ${item.qty}`)
+        console.log(`You don't have any ${item.contents.name} left. QTy is ${item.qty}`)
       }
     }
 
@@ -47,7 +47,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
                 key={index}
                 className="flex justify-between items-center p-2"
               >
-                <span>{item.obj.name}</span>
+                <span>{item.contents.name}</span>
                 <span>{item.qty}x</span>
                 <button
                   onClick={() => useItem(item)}

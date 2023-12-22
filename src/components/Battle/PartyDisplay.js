@@ -16,10 +16,10 @@ const PartyDisplay = ({ party, userFlag }) => {
       const convertedMembers = []
       // for (let i = 0; i < party.length; i++) {
       party.map((member) => {
-        if (member.obj) {
-          convertedMembers.push(member.obj)
+        if (member) {
+          convertedMembers.push(member)
         } else {
-          console.log(`no obj in member ${member}`, member)
+          console.log(` member ${member}`, member)
         }
       })
       // }

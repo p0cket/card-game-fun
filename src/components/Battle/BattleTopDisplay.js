@@ -82,13 +82,13 @@ export default function BattleTopDisplay() {
   }
   // Def work on this later
   const currentMonDetailsStatuses =
-    state.opponent.monsters[0].obj.status
+    state.opponent.monsters[0].status
 
     //this is the current monster. We need to track this down and 
     // assign it to the currentMon
   const currentMon =
-    // state.current.scene.details.trainer.monsters[0].obj
-    state.opponent.monsters[0].obj
+    // state.current.scene.details.trainer.monsters[0]
+    state.opponent.monsters[0]
   console.log(
     `currentMon & currentMonDetails:`,
     currentMon,
@@ -123,12 +123,12 @@ export default function BattleTopDisplay() {
           <span className="text-gray-500 text-sm">lvl{lvl}</span>
         </div>
          <div>
-          {state.opponent.monsters[0].obj.stats.hp}HP
+          {state.opponent.monsters[0].stats.hp}HP
           <progress
             id="health"
-            value={state.opponent.monsters[0].obj.stats.hp}
+            value={state.opponent.monsters[0].stats.hp}
             // max={stats.max_hp}
-            max={state.opponent.monsters[0].obj.stats.max_hp}
+            max={state.opponent.monsters[0].stats.max_hp}
             style={{
               backgroundColor: '#4caf50',
               color: '#9faf4c',

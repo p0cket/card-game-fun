@@ -21,19 +21,16 @@ export const setPalEnergyToMax = (state) => {
 export const setPalHPToMax = (state) => {
   // set hp to max
   state = {
-    // state.opponent.monsters[0].obj.stats.hp
+    // state.opponent.monsters[0].stats.hp
     ...state,
     opponent: {
       ...state.opponent,
       monsters: [
         {
           ...state.opponent.monsters[0],
-          obj: {
-            ...state.opponent.monsters[0].obj,
-            stats: {
-              ...state.opponent.monsters[0].obj.stats,
-              hp: state.opponent.monsters[0].obj.stats.max_hp,
-            },
+          stats: {
+            ...state.opponent.monsters[0].stats,
+            hp: state.opponent.monsters[0].stats.max_hp,
           },
         },
       ],
