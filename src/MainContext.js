@@ -274,12 +274,8 @@ export const MainProvider = ({ children }) => {
         // item's health effect. grab it
         // effect: { hp: 20 },
         // item.effect
-        if (action.payload.obj.effect.hp) {
-          state = healHumanPal(state, action.payload.obj.effect.hp)
-          // state = {
-          //   ...state,
-          //   health: state.health + action.payload.obj.effect.hp
-          // }
+        if (action.payload.contents.effect.hp) {
+          state = healHumanPal(state, action.payload.contents.effect.hp)
           state = subtractItem(state, action.payload)
         }
 

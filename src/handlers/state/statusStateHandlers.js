@@ -85,8 +85,8 @@ export const updateStatusState = (
   if (player === HUMAN) {
     let updatedMonsters = [...contextualState.opponent.monsters]
     console.log(`index: ${index}`)
-    updatedMonsters[index].obj.status = {
-      ...updatedMonsters[index].obj.status,
+    updatedMonsters[index].status = {
+      ...updatedMonsters[index].status,
       [statusResult]: statusValue,
     }
     return {

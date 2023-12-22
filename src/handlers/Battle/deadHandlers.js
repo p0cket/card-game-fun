@@ -3,27 +3,17 @@ import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
 import { SCENES, changeLevel, updateScene } from '../sceneHandlers_new'
 
 export const checkIfDead = (state) => {
-  // if user pal is dead
-  console.warn(
-    'checking if user pal is dead',
-    state,
-    state.userParty,
-    state.userParty[0],
-  )
+  console.warn('checking if user pal is dead', state, state.userParty, state.userParty[0])
+
   if (state.userParty[0].stats.hp <= 0) {
-    // change state so user pal is dead
-    // state.userParty[0].obj.dead = true, but we need to create a
-    // new dead pal object
     state = {
       ...state,
       userParty: [
         {
           ...state.userParty[0],
-          obj: {
-            ...state.userParty[0].obj,
-            dead: true,
-          },
+          dead: true,
         },
+        ...state.userParty.slice(1),
       ],
     }
     state = updateScene(state, {
@@ -33,19 +23,12 @@ export const checkIfDead = (state) => {
         score: null,
         progress: null,
         unlocks: null,
-        // area: 'tranquil forest',
-        // difficulty: 'easy',
-        // achievement: 'flawless victory',
-        // VIP: 'your pal',
-        // EXP: Difficulty * lvl of monster * 10
       },
     })
-
     state = createPopupRemovedState(state)
-    // send to lose screen
   }
-  if (state.opponent.monsters[0].obj.stats.hp <= 0) {
-    // change state so opponent pal is dead
+
+  if (state.opponent.monsters[0].stats.hp <= 0) {
     state = {
       ...state,
       opponent: {
@@ -53,10 +36,7 @@ export const checkIfDead = (state) => {
         monsters: [
           {
             ...state.opponent.monsters[0],
-            obj: {
-              ...state.opponent.monsters[0].obj,
-              dead: true,
-            },
+            dead: true,
           },
         ],
       },
@@ -70,18 +50,10 @@ export const checkIfDead = (state) => {
         difficulty: 'easy',
         achievement: 'flawless victory',
         VIP: 'your pal',
-        // EXP: Difficulty * lvl of monster * 10
       },
     })
     state = createPopupRemovedState(state)
   }
 
-  // const handleChangeLevel = (state, scene) => {
-  //   const stateWithChangedLevel = changeLevel(state, scene)
-  //   contextualDispatch({
-  //     type: ACTIONS.UPDATE_GAMEDATA,
-  //     payload: stateWithChangedLevel,
-  //   })
-  // }
   return state
 }

@@ -56,7 +56,7 @@ const StatusAppliedAI = () => {
   const statusAppliedProps = {
     title: `Status Applied`,
     header: `Status Applied!`,
-    message: `Status applied to AI.  Pal's statuses are now: ${Object.keys(state.opponent.monsters[0].obj.status).join(', ')}`,
+    message: `Status applied to AI.  Pal's statuses are now: ${Object.keys(state.opponent.monsters[0].status).join(', ')}`,
     options: [status_ok],
   }
   return <DialogTemplate {...statusAppliedProps} />

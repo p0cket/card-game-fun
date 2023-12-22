@@ -31,6 +31,7 @@ export const createAIDamagedState = (
     pal,
   )
   console.log('ourState.opponent.monsters[0], damagedHP', ourState.opponent.monsters[0], damagedHP)
+  
   let resultState = {
     ...ourState,
     opponent: {
@@ -39,12 +40,9 @@ export const createAIDamagedState = (
         index === 0
           ? {
               ...monster,
-              obj: {
-                ...monster.obj,
-                stats: {
-                  ...monster.obj.stats,
-                  hp: damagedHP,
-                },
+              stats: {
+                ...monster.stats,
+                hp: damagedHP,
               },
             }
           : monster,

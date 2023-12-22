@@ -21,11 +21,11 @@ export const ATK_PHASES = {
 }
 
 export const calculateTargets = (targets, allyPals, enemyPals) => {
-  // const allyTargets = targets.ally.map(  (index) => state.opponent.monsters[index].obj )
-  // const enemyTargets = targets.enemy.map( (index) => state.userParty[index].obj )
+  // const allyTargets = targets.ally.map(  (index) => state.opponent.monsters[index] )
+  // const enemyTargets = targets.enemy.map( (index) => state.userParty[index] )
   // const allTargets = [allyTargets, enemyTargets]
-  const allyTargets = targets.ally.map((index) => allyPals[index].obj)
-  const enemyTargets = targets.enemy.map((index) => enemyPals[index].obj)
+  const allyTargets = targets.ally.map((index) => allyPals[index])
+  const enemyTargets = targets.enemy.map((index) => enemyPals[index])
   const allTargets = [allyTargets, enemyTargets]
   return allTargets
 }
@@ -123,7 +123,7 @@ export const executeAITurn = (state, dispatch, details = null) => {
     state.opponent.monsters,
     state.opponent.monsters[0],
   )
-  const pal = state.opponent.monsters[0].obj // probably just userSlot?
+  const pal = state.opponent.monsters[0] // probably just userSlot?
   console.log(`AI executeAITurn: state, pal`, state, details, pal)
   const move = determineAIMove(state, pal, details)
   console.log(`AI executeAITurn: determined move`, move)

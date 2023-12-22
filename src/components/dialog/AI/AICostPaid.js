@@ -28,7 +28,7 @@ const AICostPaid = ({ move, pal, onOkay, onCounter, onOtherAction }) => {
   const aiPaidDialogProps = {
     title: 'AI Pay Phase',
     header: 'AI Paid!',
-    // message: `${move.cost.energy} Energy paid. AI's ${pal.obj.name} uses ${move.name}`,
+    // message: `${move.cost.energy} Energy paid. AI's ${pal.name} uses ${move.name}`,
     // message: `AI's ${pal.name} paid for ${move.name}`,
     message: `AI's paid for thier move`,
     options: [costPaidContinue],

@@ -92,9 +92,9 @@ export const newStartingData = {
   bag: {
     runes: ['Stick', `Coat of harms`],
     items: [
-      { obj: apple, qty: 1 },
-      { obj: pumpernickelSoda, qty: 1 },
-      { obj: potion, qty: 3 },
+      { contents: apple, qty: 1 },
+      { contents: pumpernickelSoda, qty: 1 },
+      { contents: potion, qty: 3 },
     ],
   },
   game: {

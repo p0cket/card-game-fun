@@ -8,10 +8,10 @@ function HUDDetails() {
       rune 1 rune 2 rune 3 - map{' '}
       {JSON.stringify(state.current.scene.details.trainer.name)}
       {JSON.stringify(
-        state.current.scene.details.trainer.monsters.map((m) => m.obj.name),
+        state.current.scene.details.trainer.monsters.map((m) => m.name),
       )}
       but actually
-      {JSON.stringify(state.opponent.monsters.map((m) => m.obj.name))}
+      {JSON.stringify(state.opponent.monsters.map((m) => m.name))}
     </div>
   )
 }
