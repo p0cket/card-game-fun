@@ -1,11 +1,11 @@
-import { updatePartyWithPal } from "./partyStateHandlers"
+import { updateHumanPartyWithPal } from "./partyStateHandlers"
 
 export const addMoveToPalInState = (state, move, palIndex) => {
   console.log(`add moveToPalInState: state, move, palIndex`, state, move, palIndex)
   // add move to pal
   const updatedPalWithNewMove = addMoveToPal(state.userParty[palIndex], move)
   // add pal (update) to state in correct location
-  const updatedPartyWithPal = updatePartyWithPal(state, updatedPalWithNewMove, palIndex)
+  const updatedPartyWithPal = updateHumanPartyWithPal(state, updatedPalWithNewMove, palIndex)
   state = {
     ...state,
     userParty: updatedPartyWithPal,

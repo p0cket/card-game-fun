@@ -25,7 +25,7 @@ export const cleanupPhase = (state, attackPayload) => {
   // state = cleanupStepHandler(state)
 
   // #TODO: Finish cleanupPassivesHandler and cleanupPassivesHandler
-  // state = cleanupPassivesHandler(state)
+  state = cleanupPassivesHandler(state)  // may not need pal, userSlot
 
   if (player === PLAYERS.HUMAN) {
     state = switchDialog(state, DIALOGS.CLEANUP_HUMAN)

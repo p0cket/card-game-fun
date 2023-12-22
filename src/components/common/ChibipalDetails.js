@@ -85,7 +85,7 @@ const ChibipalDetails = ({ selectedMonster, handleSelect, handleGoBack }) => {
               color: "green",
             }}
           >
-            {selectedMonster.passive_ability}
+            {selectedMonster.passives}
           </span>
         </span>
       </div>

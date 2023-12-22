@@ -1,5 +1,6 @@
+// Full state change to heal a pal
 export const healAIPal = (state, healAmount) => {
-  console.log('healAIPal:', state, 'healAmount:', healAmount)
+  console.log('healAIPal,  healAmount:', state, healAmount)
 
   let resultState = {
     ...state,
@@ -25,7 +26,7 @@ export const healAIPal = (state, healAmount) => {
   console.log('resultState after healing:', resultState)
   return resultState
 }
-
+// Full state change to heal a pal
 export const healHumanPal = (ourState, healAmount) => {
   console.log(
     'Entered healHumanPal: ourState, healAmount',
@@ -52,87 +53,19 @@ export const healHumanPal = (ourState, healAmount) => {
   console.log('resultState after healing:', resultState)
   return resultState
 }
-// export const healAIPal = (
-//     ourState,
-//     damagedHP,
-//     moveCost,
-//     move,
-//     pal,
-//   ) => {
-//     console.log(
-//       'createAIDamagedState:',
-//       ourState,
-//       'damagedHP:',
-//       damagedHP,
-//       'moveCost:',
-//       moveCost,
-//       'move:',
-//       move,
-//       'pal:',
-//       pal,
-//     )
-//     console.log('ourState.opponent.monsters[0], damagedHP', ourState.opponent.monsters[0], damagedHP)
-//     let resultState = {
-//       ...ourState,
-//       opponent: {
-//         ...ourState.opponent,
-//         monsters: ourState.opponent.monsters.map((monster, index) =>
-//           index === 0
-//             ? {
-//                 ...monster,
-//                 obj: {
-//                   ...monster.obj,
-//                   stats: {
-//                     ...monster.obj.stats,
-//                     hp: damagedHP,
-//                   },
-//                 },
-//               }
-//             : monster,
-//         ),
-//       },
-//     }
-//     console.log('resultState after damaged:', resultState)
-//     return resultState
-//   }
-//   export const healHumanPal = (
-//     ourState,
-//     damagedHP,
-//     moveCost,
-//     move,
-//     pal,
-//     contextualDispatch,
-//   ) => {
-//     console.log(
-//       'Entered createHumanDamagedState:',
-//       'ourState:',
-//       ourState,
-//       'damagedHP:',
-//       damagedHP,
-//       'moveCost:',
-//       moveCost,
-//       'move:',
-//       move,
-//       'pal:',
-//       pal,
-//       'contextualDispatch:',
-//       contextualDispatch,
-//     )
-//     console.log('ourState.userParty[0]:', ourState.userParty[0], ourState)
-//     let resultState = {
-//       ...ourState,
-//       userParty: ourState.userParty.map((partyMember, index) =>
-//         index === 0
-//           ? {
-//               ...partyMember,
-//               stats: {
-//                 ...partyMember.stats,
-//                 hp: damagedHP,
-//               },
-//             }
-//           : partyMember,
-//       ),
-//     }
-//     console.log('resultState after damaged:', resultState)
-//     return resultState
-//   }
+
+// This heals a pal but returns only that object.
+// the others return the full state
+export const healPal = (pal, healAmount) => {
+  console.log('healPal healAmount:', pal,  healAmount)
+  const healedPal = {
+    ...pal,
+    stats: {
+      ...pal.stats,
+      hp: pal.stats.hp + healAmount, // Increase HP by healAmount
+    },
+  }
+
+  console.log('healPal healedPal:', healedPal)
+  return healedPal
+}

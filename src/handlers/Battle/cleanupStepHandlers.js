@@ -1,4 +1,11 @@
+import { PASSIVE_TYPES } from '../../consts/keywords/passives'
 import { EFFECTS } from '../../effects'
+import { healHumanPal, healPal } from '../state/healthStateHandlers'
+import {
+  updateHumanPartyWithPal,
+  updateHumanStateWithParty,
+  updateOpponentPartyWithPal,
+} from '../state/partyStateHandlers'
 
 // applyPalPassive here, cleanupPhase's changing of state by running it through
 // Here is some code to reference. We should make something
@@ -60,53 +67,44 @@ import { EFFECTS } from '../../effects'
 //   console.log(`updatePartyWithPal: updatedParty`, updatedParty)
 //   return updatedParty
 // }
-export const cleanupPassivesHandler = (state, pal) => {
-   state = {
-
-    ...state,
-    // userParty: 
-  }
+export const cleanupPassivesHandler = (state) => {
+  // Add opponent passives too
+  // update the pal object, add it to the party, 
+  // then update the state with it
+  const updatedHumanPal = applyPalPassive(state.userParty[0], 0)
+  const updatedParty = updateHumanPartyWithPal(state, updatedHumanPal, 0)
+  state = updateHumanStateWithParty(state, updatedParty, 0)
+  console.log(`cleanupPassivesHandler returning: state`, state)
   return state
 }
 
-export const applyPalPassive = (pal) => {
-  const passive = pal.passive // Assuming each pal has a single `passive` object, not an array
-  switch (
-    passive.uid // We're using uid instead of id
-  ) {
-    // case 'mystic-regeneration-uid':
-    //   // Apply health regeneration effect
-    //   pal.hp += passive.effects.find((effect) => effect.type === 'Regen').amt
-    //   break
-    // // case 'shadow-camouflage-uid':
-    // //   // Apply evasion and stealth effect
-    // //   const evasionEffect = passive.effects.find(
-    // //     (effect) => effect.type === 'Evasion',
-    // //   )
-    // //   if (evasionEffect) pal.evasion += evasionEffect.amt
-    // //   const stealthEffect = passive.effects.find(
-    // //     (effect) => effect.type === 'Stealth',
-    // //   )
-    // //   if (stealthEffect) pal.stealth += stealthEffect.amt
-    // //   break
-    // case 'mana-echo-uid':
-    //   // Implement mana cost reduction effect
-    //   // Logic for the chance to cast a spell without using mana
-    //   break
-    // case 'critical-insight-uid':
-    //   // Apply critical hit chance effect
-    //   pal.critChance += passive.effects.find(
-    //     (effect) => effect.type === 'Crit Chance',
-    //   ).amt
-    //   break
-    // Add cases for other passives as needed
+export const applyPalPassive = (pal, palIndex) => {
+  console.log(
+    `pal, pal.passives.effects`,
+    pal,
+    pal.passives,
+    pal.passives.effects,
+  )
+  const { passives } = pal // Assuming each pal has a single `passive` object, not an array
+  const { effects } = passives
+  const currentEffect = effects[0]
+  switch (currentEffect.type) {
+    //   effects: [{ type: 'Regen', amt: 4 }],
+    case PASSIVE_TYPES.REGEN:
+      console.log(`applyHumanPalPassive: pal, palIndex`, pal, palIndex)
+      // pal.stats.hp += passives.effects[0].amt
+      // healHumanPal(pal, passives.effects[0].amt)
+      pal = healPal(pal, currentEffect.amt)
+      console.log(`applyHumanPalPassive returning: pal`, pal)
+      return pal
     default:
       // Handle unknown passiveUid or passives without effects
       break
   }
-
   return pal
 }
+
+export const applyOpponentPalPassive = (pal, palIndex) => {}
 
 export const cleanupStepHandler = (state, details) => {
   let nextState = { ...state }
@@ -155,3 +153,30 @@ export const cleanupStepHandler = (state, details) => {
   }
   return nextState
 }
+
+// case 'mystic-regeneration-uid':
+//   // Apply health regeneration effect
+//   pal.hp += passive.effects.find((effect) => effect.type === 'Regen').amt
+//   break
+// // case 'shadow-camouflage-uid':
+// //   // Apply evasion and stealth effect
+// //   const evasionEffect = passive.effects.find(
+// //     (effect) => effect.type === 'Evasion',
+// //   )
+// //   if (evasionEffect) pal.evasion += evasionEffect.amt
+// //   const stealthEffect = passive.effects.find(
+// //     (effect) => effect.type === 'Stealth',
+// //   )
+// //   if (stealthEffect) pal.stealth += stealthEffect.amt
+// //   break
+// case 'mana-echo-uid':
+//   // Implement mana cost reduction effect
+//   // Logic for the chance to cast a spell without using mana
+//   break
+// case 'critical-insight-uid':
+//   // Apply critical hit chance effect
+//   pal.critChance += passive.effects.find(
+//     (effect) => effect.type === 'Crit Chance',
+//   ).amt
+//   break
+// Add cases for other passives as needed

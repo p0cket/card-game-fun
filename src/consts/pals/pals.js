@@ -62,7 +62,7 @@ export const monsterPropTypes = PropTypes.shape({
   experience: PropTypes.number.isRequired,
   moves: PropTypes.arrayOf(PropTypes.string).isRequired,
   possible_moves: PropTypes.arrayOf(PropTypes.string).isRequired,
-  passive_ability: PropTypes.string.isRequired,
+  passives: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
@@ -97,8 +97,8 @@ export const Luminowl = {
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
   moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
-  // passive_ability: 'Guiding Wisdom',
-  passive_ability: mysticRegeneration,
+  // passives: 'Guiding Wisdom',
+  passives: mysticRegeneration,
   commander_ability: {
     name: 'Luminous Nova',
     description:
@@ -145,8 +145,8 @@ export const Glowbuggle = {
     'Soothing Radiance',
     'Glowing Trail',
   ],
-  // passive_ability: 'Radiant Aura',
-  passive_ability: manaEcho,
+  // passives: 'Radiant Aura',
+  passives: manaEcho,
   commander_ability: {
     name: 'Radiant Infusion',
     description:
@@ -189,8 +189,8 @@ export const Umbrabunny = {
   // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
   moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
-  // passive_ability: 'Emotion Balance',
-  passive_ability: shadowCamouflage,
+  // passives: 'Emotion Balance',
+  passives: shadowCamouflage,
   commander_ability: {
     name: 'Harmony Embrace',
     description:
@@ -232,7 +232,7 @@ export const Shadowstalker = {
 
   moves: ['Shadow Pounce', 'Stealth Strike', 'Dark Cloak'],
   possible_moves: ['Shadowmeld', 'Nightmare Slash', 'Ambush'],
-  passive_ability: 'Cloaked in Shadows',
+  passives: 'Cloaked in Shadows',
   commander_ability: {
     name: 'Shadow Assault',
     description:
@@ -274,7 +274,7 @@ export const Infernodragon = {
 
   moves: ['Inferno Roar', 'Dragon Blaze', 'Firestorm'],
   possible_moves: ['Magma Eruption', 'Dragon Rage', 'Heat Wave'],
-  passive_ability: 'Scorching Scales',
+  passives: 'Scorching Scales',
   commander_ability: {
     name: 'Inferno Apocalypse',
     description:
@@ -316,7 +316,7 @@ export const Aquaphoenix = {
 
   moves: ['Aqua Torrent', 'Phoenix Glide', 'Rain Dance'],
   possible_moves: ['Tidal Wave', 'Hydroburst', 'Aqua Healing'],
-  passive_ability: 'Aqua Resurrection',
+  passives: 'Aqua Resurrection',
   commander_ability: {
     name: 'Deluge of Renewal',
     description:
@@ -358,7 +358,7 @@ export const Verdantshifter = {
 
   moves: ["Nature's Transformation", 'Shapeshift', 'Eco Restoration'],
   possible_moves: ['Plant Manipulation', 'Camouflage', 'Adaptive Form'],
-  passive_ability: "Nature's Harmony",
+  passives: "Nature's Harmony",
   commander_ability: {
     name: "Nature's Blessing",
     description:
@@ -400,7 +400,7 @@ export const Technotitan = {
 
   moves: ['Mechanical Slam', 'Energy Beam', 'Defense Protocol'],
   possible_moves: ['Rocket Punch', 'Repair Mode', 'Techno Shield'],
-  passive_ability: 'Guardian Armor',
+  passives: 'Guardian Armor',
   commander_ability: {
     name: 'Techno Overload',
     description:
@@ -443,7 +443,7 @@ export const Recycleroo = {
   // moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
   moves: [RecycleRush, ProjectileToss, LeafShield],
   possible_moves: ['Trash Bash', "Nature's Wrath", 'Sorting Cyclone'],
-  passive_ability: 'Eco-Warrior',
+  passives: 'Eco-Warrior',
   commander_ability: {
     name: 'Eco Barrage',
     description:
@@ -487,7 +487,7 @@ export const Shoeb = {
   experience: 0,
   moves: ['Tread Lightly'],
   possible_moves: [],
-  passive_ability: 'Forgotten',
+  passives: 'Forgotten',
   //   lore: "Really? A shoe?",
 }
 
@@ -520,7 +520,7 @@ export const Wolfjobb = {
   experience: 4000,
   moves: ['Workaholic Bite', 'Diligent Howl', 'Teamwork'],
   possible_moves: ['Overtime Strike', 'Efficiency Boost', 'Persistence'],
-  passive_ability: 'Leadership',
+  passives: 'Leadership',
 }
 
 export const Ticklefairy = {
@@ -552,7 +552,7 @@ export const Ticklefairy = {
   moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
-  passive_ability: 'Joyful Aura',
+  passives: 'Joyful Aura',
 }
 
 // bosses
@@ -583,7 +583,7 @@ export const MoltenScale = {
   // moves: ['Solar Flare', 'Radiant Beam', 'Sun Shield'],
   moves: [SolarFlare, RadiantBeam, SunShield],
   possible_moves: ['Light Burst', 'Solar Wind', 'Daybreak'],
-  passive_ability: 'Sunlit Aura',
+  passives: 'Sunlit Aura',
   commander_ability: {
     name: 'Solar Nova',
     description:
