@@ -1,7 +1,7 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
-import { applyPalPassive, cleanupPassivesHandler, cleanupStepHandler } from '../Battle/cleanupStepHandlers'
+import { applyPalPassive, cleanupAbilitiesHandler } from './phaseHelpers/cleanupPhaseHandlers'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
@@ -24,8 +24,8 @@ export const cleanupPhase = (state, attackPayload) => {
   // statusHandlers.js // statusStateHandlers.js // battleHandlers.js applyStatusHandler
   // state = cleanupStepHandler(state)
 
-  // #TODO: Finish cleanupPassivesHandler and cleanupPassivesHandler
-  state = cleanupPassivesHandler(state)  // may not need pal, userSlot
+  // #TODO: Finish cleanupAbilitiesHandler and cleanupAbilitiesHandler
+  state = cleanupAbilitiesHandler(state)  // may not need pal, userSlot
 
   if (player === PLAYERS.HUMAN) {
     state = switchDialog(state, DIALOGS.CLEANUP_HUMAN)
@@ -45,7 +45,7 @@ export const cleanupPhase = (state, attackPayload) => {
 //       console.log(`applying blind to ${targetMonster.name}`)
 //       //applyBlind(targetMonster)
 //       //evasion less
-//       // acuracy less
+//       // accuracy less
 //       // note the effect is applied to the target
 //       targetMonster.status.blind = true
 //       break

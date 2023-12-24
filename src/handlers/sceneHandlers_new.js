@@ -17,7 +17,10 @@ export const SCENES = {
   REST: 'rest',
   REWARD: 'reward',
   RESULTS: 'results',
-  PACKREWARD: 'pack-reward',
+  TREASURE: 'treasure',
+  MYSTERY: 'mystery',//Should it be mystery or secret?
+  // SECRET: 'secret',
+  ROBBER: 'robber',
   CONVO: 'convo',
   BATTLE: 'battle',
   MINIBOSS: 'miniboss',
@@ -25,6 +28,7 @@ export const SCENES = {
   GAMEOVER: 'game-over',
   VICTORY: 'victory',
   CHOOSECHARACTER: 'choose-character',
+  // PACKREWARD: 'pack-reward',
 }
 
 /**

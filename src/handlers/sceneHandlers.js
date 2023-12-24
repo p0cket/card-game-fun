@@ -1,5 +1,5 @@
 import { map } from "../consts/mapGenerator_old"
-import { SCENES } from "../scenes"
+// import { SCENES } from "../scenes"
 import { ENEMY_TYPES } from "../actions"
 import { decideEnemyArr } from "../utils/reducer-utils"
 import { startingData } from "../consts/consts"
@@ -10,6 +10,7 @@ import {
   beginBattleHandler,
   generateRewardsHandler,
 } from "./battleSetupHandlers"
+import { SCENES } from "./sceneHandlers_new"
 
 export const setSceneHandler = (state, payload) => {
   const { enemySeed, atkSeed, beginBattleSeed, startingHandCount } = payload
