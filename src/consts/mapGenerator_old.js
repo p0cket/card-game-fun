@@ -1,4 +1,6 @@
-import { SCENES } from "../scenes"
+// import { SCENES } from "../scenes"
+import { SCENES } from "../handlers/sceneHandlers_new"
+
 
 //As for the areas, you could also add more like a tutorial level, a challenge level, a puzzle level, a secret level, etc.
 const {

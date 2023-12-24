@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { SCENES, updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-// import { SCENES } from '../../scenes'
 
 const GameOver = () => {
   // const GameOver = ({}) => {

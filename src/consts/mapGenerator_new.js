@@ -1,4 +1,4 @@
-import { SCENES } from '../scenes'
+import { SCENES } from '../handlers/sceneHandlers_new'
 import { cusLog } from '../utils/debugging-utils'
 import { basicTrainers } from './party/trainers'
 
@@ -7,70 +7,70 @@ export const levels = [
     id: 1,
     title: 'The Path Begins',
     options: [
-      { id: '1a', description: 'Fight a monster' },
-      { id: '1b', description: 'Visit a shop' },
-      { id: '1c', description: 'Rest' },
+      { id: '1a', description: 'Fight a monster', scene: SCENES.BATTLE },
+      { id: '1b', description: 'Visit a shop', scene: SCENES.SHOP },
+      { id: '1c', description: 'Rest', scene: SCENES.REST },
     ],
   },
   {
     id: 2,
     title: 'But you need more',
     options: [
-      { id: '2a', description: 'Fight a harder monster' },
-      { id: '2b', description: 'Find a treasure' },
+      { id: '2a', description: 'Fight a harder monster', scene: SCENES.BATTLE },
+      { id: '2b', description: 'Find a treasure', scene: SCENES.TREASURE },
     ],
   },
   {
     id: 3,
     title: 'You venture deep',
     options: [
-      { id: '3a', description: 'Fight an even harder monster' },
-      { id: '3b', description: 'Find another treasure' },
+      { id: '3a', description: 'Fight an even harder monster', scene: SCENES.BATTLE },
+      { id: '3b', description: 'Find another treasure', scene: SCENES.TREASURE },
     ],
   },
   {
     id: 4,
     title: 'You have found the treasure',
     options: [
-      { id: '4a', description: 'Fight a thug' },
-      { id: '4b', description: 'Enter a shop' },
-      { id: '4c', description: 'Find another treasure' },
+      { id: '4a', description: 'Fight a thug', scene: SCENES.BATTLE },
+      { id: '4b', description: 'Enter a shop', scene: SCENES.SHOP },
+      { id: '4c', description: 'Find another treasure', scene: SCENES.TREASURE },
     ],
   },
   {
     id: 5,
     title: 'You pay a great price',
     options: [
-      { id: '5a', description: '???' },
-      { id: '5b', description: 'Enter a shop' },
-      { id: '5c', description: 'Find another treasure' },
+      { id: '5a', description: '???', scene: SCENES.MYSTERY }, // You may want to specify a different scene here.
+      { id: '5b', description: 'Enter a shop', scene: SCENES.SHOP },
+      { id: '5c', description: 'Find another treasure', scene: SCENES.TREASURE },
     ],
   },
   {
     id: 6,
     title: 'You return',
     options: [
-      { id: '6a', description: 'Fight a thug' },
-      { id: '6b', description: '???' },
-      { id: '6c', description: 'Find another treasure' },
+      { id: '6a', description: 'Fight a thug', scene: SCENES.BATTLE },
+      { id: '6b', description: '???', scene: SCENES.MYSTERY }, // You may want to specify a different scene here.
+      { id: '6c', description: 'Find another treasure', scene: SCENES.TREASURE },
     ],
   },
   {
     id: 7,
     title: 'Having changed',
     options: [
-      { id: '7a', description: 'Fight a thug' },
-      { id: '7b', description: 'Enter a shop' },
-      { id: '7c', description: 'Find another treasure' },
+      { id: '7a', description: 'Fight a thug', scene: SCENES.BATTLE },
+      { id: '7b', description: 'Enter a shop', scene: SCENES.SHOP },
+      { id: '7c', description: 'Find another treasure', scene: SCENES.TREASURE },
     ],
   },
-]
+];
+
+
 export function generateNextLevelOptions() {
   const options = []
 
   const { BATTLE, EVENT, REST } = SCENES
-
-  
 
   // Generate 3 options
   for (let i = 0; i < 3; i++) {

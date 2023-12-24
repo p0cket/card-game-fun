@@ -1,28 +1,26 @@
 import React, { useState } from 'react'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-import { SCENES } from '../../scenes'
+// import { SCENES } from '../../scenes'
 import { allTrainers, bossBarry } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
-import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
+import {
+  SCENES,
+  updateLevel,
+  updateScene,
+} from '../../handlers/sceneHandlers_new'
 import { MoltenScale } from '../../consts/pals/pals'
-// import { hikerBrak } from '../../consts/party/trainers'
+import {
+  battleConfig,
+  bossConfig,
+  eventConfig,
+  restConfig,
+} from '../../consts/level/levelConfigs'
 
 function SimpleLevelList({ levels, onOptionSelected }) {
   //   const [currentLevelId, setCurrentLevelId] = useState(1)
   const state = useStateContext()
   const dispatch = useDispatchContext()
 
-  const handleOptionClick = (levelId, optionId) => {
-    //   onOptionSelected(levelId, optionId);
-
-    // possibly check if we can advance
-    // if (levelId < levels.length) {
-    changeLevel()
-    // }
-
-    // const nextLevelId = levelId < levels.length ? levelId + 1 : levelId
-    // setCurrentLevelId(nextLevelId)
-  }
   const goToBoss = () => {
     console.log('goToBoss MoltenScale')
     //add in the logic to send to the boss level
@@ -31,15 +29,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
 
     const nextSceneState = updateScene(state, {
       screen: SCENES.BOSS,
-
-      details: {
-        trainer: bossBarry,
-        // pal: MoltenScale,
-        type: 'boss',
-        area: 'tranquil forest',
-        difficulty: 'easy',
-        refillEnergy: true,
-      },
+      details: bossConfig,
     })
     const nextLevelState = updateLevel(nextSceneState, 1)
     dispatch({
@@ -47,6 +37,42 @@ function SimpleLevelList({ levels, onOptionSelected }) {
       type: ACTIONS.UPDATE_GAMEDATA,
     })
     // }
+  }
+
+  const changeLevel = (level, option) => {
+    const selectedTrainer = randomlySelectTrainer(allTrainers)
+    console.log(`selectedTrainer`, selectedTrainer, allTrainers)
+    console.table(selectedTrainer)
+    // somewhere with level, option, theres enough info to create
+    // a switch statement to change the level to the right place. Heres the shape:
+    // export const levels = [
+    //   {
+    //     id: 1,
+    //     title: 'The Path Begins',
+    //    options: [
+    // { id: '1a', description: 'Fight a monster', scene: SCENES.BATTLE },
+    //  ],
+    //   },
+    console.log(`level, option`, level, option)
+    switch (option.scene) {
+      case SCENES.BATTLE:
+        handleChangeLevel(state, {
+          screen: SCENES.BATTLE,
+          details: battleConfig(),
+        })
+        break
+      case SCENES.REST:
+        handleChangeLevel(state, {
+          screen: SCENES.REST,
+          details: restConfig,
+        })
+        break
+      case SCENES.EVENT:
+        handleChangeLevel(state, {
+          screen: SCENES.EVENT,
+          details: eventConfig,
+        })
+    } 
   }
 
   const handleChangeLevel = (passedInState, payload) => {
@@ -66,20 +92,15 @@ function SimpleLevelList({ levels, onOptionSelected }) {
       },
     })
   }
-  const changeLevel = () => {
-    const selectedTrainer = randomlySelectTrainer(allTrainers)
-    console.log(`selectedTrainer`, selectedTrainer, allTrainers)
-    console.table(selectedTrainer)
-    handleChangeLevel(state, {
-      screen: SCENES.BATTLE,
-      details: {
-        type: 'trainer',
-        trainer: selectedTrainer,
-        area: 'tranquil forest',
-        difficulty: 'easy',
-        refillEnergy: true,
-      },
-    })
+  const handleOptionClick = (level, option) => {
+    // possibly check if we can advance
+    // if (levelId < levels.length) {
+    console.warn(`handleOptionClick: level,  option`, level, option)
+    changeLevel(level, option)
+    // }
+
+    // const nextLevelId = levelId < levels.length ? levelId + 1 : levelId
+    // setCurrentLevelId(nextLevelId)
   }
 
   const bossLevelCard = () => {
@@ -138,7 +159,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
                 <button
                   key={option.id}
                   className="flex-1 text-center bg-blue-600 text-white rounded p-1 mx-1 hover:bg-blue-700 focus:outline-none"
-                  onClick={() => handleOptionClick(level.id, option.id)}
+                  onClick={() => handleOptionClick(level, option)}
                 >
                   {option.description}
                 </button>

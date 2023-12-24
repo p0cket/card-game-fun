@@ -9,11 +9,12 @@ import { statusPhase } from './handlers/attack/statusPhase'
 import { cleanupPhase } from './handlers/attack/cleanupPhase'
 import { endPhase } from './handlers/attack/endPhase'
 import {
+  SCENES,
   setupOpponent,
   updateLevel,
   updateScene,
 } from './handlers/sceneHandlers_new'
-import { SCENES } from './scenes'
+// import { SCENES } from './scenes'
 import { healAIPal, healHumanPal } from './handlers/state/healthStateHandlers'
 import { subtractItem } from './handlers/state/itemStateHandlers'
 import {

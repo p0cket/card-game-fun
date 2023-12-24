@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { SCENES } from '../../scenes'
-import { changeLevel } from '../../handlers/sceneHandlers_new'
+// import { SCENES } from '../../scenes'
+// import { SCENES } from "../handlers/sceneHandlers_new"
+import { SCENES, changeLevel } from '../../handlers/sceneHandlers_new'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { hikerBrak } from '../../consts/party/trainers'
 
