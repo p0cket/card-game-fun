@@ -15,7 +15,13 @@ import {
   updateScene,
 } from './handlers/sceneHandlers_new'
 // import { SCENES } from './scenes'
-import { healAIPal, healHumanPal } from './handlers/state/healthStateHandlers'
+import {
+  healAIPal,
+  healHumanPal,
+  setEnemyPalEnergyToMax,
+  setEnemyPalHPToMax,
+  setPlayerPalHPToMax,
+} from './handlers/state/healthStateHandlers'
 import { subtractItem } from './handlers/state/itemStateHandlers'
 import {
   addAttackToPalInState,
@@ -51,6 +57,8 @@ export const ACTIONS = {
   USE_ITEM: 'USE_ITEM',
 
   SET_SCENE: 'SET_SCENE',
+
+  HEAL_PAL_FULL: 'HEAL_PAL_FULL',
   SET_HEALTH: 'SET_HEALTH',
   SET_GOLD: 'SET_GOLD',
   SET_LEVEL: 'SET_LEVEL',
@@ -115,15 +123,7 @@ export const MainProvider = ({ children }) => {
         // is refactored. fix it.
         console.log(`CHANGE_SCENE. action.payload: `, action.payload)
 
-        switch (action.payload.screen) {
-          case SCENES.BATTLE:
-          case SCENES.BOSS:
-            state = setPalEnergyToMax(state)
-            state = setPalHPToMax(state)
-            state = logLevelsCompletedData(state)
-            break // This will prevent fall-through and continue with the rest of the function after the switch
-          // Other cases can be added here as needed
-        }
+    
         nextSceneState = updateScene(state, {
           screen: action.payload.screen,
           details: action.payload.details,
@@ -146,7 +146,22 @@ export const MainProvider = ({ children }) => {
         nextLevelState = setupOpponent(
           nextLevelState,
           action.payload.details.trainer,
-        )
+        )   
+         switch (action.payload.screen) {
+          case SCENES.BATTLE:
+          case SCENES.BOSS:
+            // set the pal to max, probably should be setEnemyPalEnergyToMax,
+            // or pass in opponent/index as a param.
+         
+            nextLevelState = logLevelsCompletedData(nextLevelState)
+            nextLevelState = setEnemyPalEnergyToMax(nextLevelState)
+        nextLevelState = setEnemyPalHPToMax(nextLevelState)
+            break // This will prevent fall-through and continue with the rest of the function after the switch
+          // Other cases can be added here as needed
+        }
+        
+
+
         console.log(`nextLevelState after setupOpponent: `, nextLevelState)
         return nextLevelState
       case ACTIONS.SHOW_ATTACK:
@@ -279,12 +294,11 @@ export const MainProvider = ({ children }) => {
           state = healHumanPal(state, action.payload.contents.effect.hp)
           state = subtractItem(state, action.payload)
         }
-
-        // stateAfterUse = {
-        //   ...state,
-        // }
         return state
-
+      case ACTIONS.HEAL_PAL_FULL:
+        console.log('Reducer HEAL_PAL_FULL: action (should be later the Pal)', action)
+        state = setPlayerPalHPToMax(state)
+        return state
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

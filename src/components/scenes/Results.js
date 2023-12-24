@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-import { updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
-import { SCENES } from '../../scenes'
+import { SCENES, updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
+// import { SCENES } from '../../scenes'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import { allTrainers } from '../../consts/party/trainers'
 import {
