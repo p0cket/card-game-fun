@@ -83,7 +83,7 @@ const Screen = ({ gameData, dispatch, map }) => {
       return <Event gameData={gameData} dispatch={dispatch} />
     case REST:
       console.log('(screen: rest)')
-      return <Rest gameData={gameData} dispatch={dispatch} />
+      return <Rest  />
       case RESULTS:
         console.log('(screen: results)') 
       return <Results />

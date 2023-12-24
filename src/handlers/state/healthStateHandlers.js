@@ -66,3 +66,63 @@ export const healPal = (pal, healAmount) => {
   console.log('healPal healedPal:', healedPal)
   return healedPal
 }
+
+export const setPlayerPalHPToMax = (state) => {
+  // export const healHumanPal = (ourState, healAmount) => {
+  console.log('ourState.userParty[0]:', state.userParty[0])
+  state = {
+    ...state,
+    userParty: state.userParty.map((partyMember, index) =>
+      index === 0
+        ? {
+            ...partyMember,
+            stats: {
+              ...partyMember.stats,
+              hp: partyMember.stats.max_hp, // Increase HP by healAmount
+            },
+          }
+        : partyMember,
+    ),
+  }
+
+  console.log('state after healing:', state)
+  return state
+  // }
+}
+
+export const setEnemyPalEnergyToMax = (state) => {
+  // give max energy
+  state = {
+    ...state,
+    game: {
+      ...state.game,
+      player: {
+        ...state.game.player,
+        energy: state.game.player.maxEnergy,
+      },
+    },
+  }
+  return state
+}
+
+export const setEnemyPalHPToMax = (state) => {
+  console.warn(`setEnemyPalHPToMax: state`,state)
+  // set hp to max
+  state = {
+    // state.opponent.monsters[0].stats.hp
+    ...state,
+    opponent: {
+      ...state.opponent,
+      monsters: [
+        {
+          ...state.opponent.monsters[0],
+          stats: {
+            ...state.opponent.monsters[0].stats,
+            hp: state.opponent.monsters[0].stats.max_hp,
+          },
+        },
+      ],
+    },
+  }
+  return state
+}

@@ -4,14 +4,16 @@ import { useStateContext } from '../../MainContext'
 function HUDDetails() {
   const state = useStateContext()
   return (
-    <div className="text-black bg-boy-green">
-      rune 1 rune 2 rune 3 - map{' '}
+    <div className="flex gap-2 p-2 justify-center text-black bg-boy-green">
+      {state.bag.runes.map((rune, index) => (
+            <div key={index}>🏺 {rune}</div>
+          ))}
       {JSON.stringify(state.current.scene.details.trainer.name)}
-      {JSON.stringify(
+      {/* {JSON.stringify(
         state.current.scene.details.trainer.monsters.map((m) => m.name),
       )}
       but actually
-      {JSON.stringify(state.opponent.monsters.map((m) => m.name))}
+      {JSON.stringify(state.opponent.monsters.map((m) => m.name))} */}
     </div>
   )
 }
