@@ -10,6 +10,7 @@ import {
   createPayloadState,
   executeMove,
 } from '../moveHandlers'
+import { dmgEffectsHandler } from '../phaseHelpers/dmgPhaseHandlers'
 import {
   createAIDamagedState,
   createHumanDamagedState,
@@ -35,7 +36,6 @@ export const dmgPhase = (state, attackPayload) => {
     move,
     pal,
     phase,
-
     player,
     userSlot,
     targets,
@@ -43,7 +43,11 @@ export const dmgPhase = (state, attackPayload) => {
   let targetPal
   if (player === PLAYERS.HUMAN) {
     targetPal = newState.opponent.monsters[0]
-    console.warn(`🫠check passed as human`, targetPal)
+    console.warn(`🫠check attacker passed as human`, targetPal)
+
+    // add the Effects Handler here:
+    //  newState = dmgEffectsHandler(newState, pal, 0)
+
     const moveCost = move.cost.energy
     ourDmg = move.damage
     damagedHP = targetPal.stats.hp - ourDmg
@@ -51,7 +55,7 @@ export const dmgPhase = (state, attackPayload) => {
       `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
     )
     console.log(
-      `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${targetPal.stats.hp}`,
+      `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${damagedHP}`,
       newState,
     )
     newState = createAIDamagedState(newState, damagedHP, moveCost, move, pal)
