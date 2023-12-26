@@ -124,5 +124,6 @@ export const setEnemyPalHPToMax = (state) => {
       ],
     },
   }
+  
   return state
 }

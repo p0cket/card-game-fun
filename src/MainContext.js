@@ -152,7 +152,6 @@ export const MainProvider = ({ children }) => {
           case SCENES.BOSS:
             // set the pal to max, probably should be setEnemyPalEnergyToMax,
             // or pass in opponent/index as a param.
-         
             nextLevelState = logLevelsCompletedData(nextLevelState)
             nextLevelState = setEnemyPalEnergyToMax(nextLevelState)
         nextLevelState = setEnemyPalHPToMax(nextLevelState)

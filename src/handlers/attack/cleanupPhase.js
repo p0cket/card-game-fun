@@ -1,7 +1,7 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
-import { applyPalPassive, cleanupAbilitiesHandler } from './phaseHelpers/cleanupPhaseHandlers'
+import { applyPalPassive, cleanupAbilitiesHandler } from '../phaseHelpers/cleanupPhaseHandlers'
 import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES, executeMove } from '../moveHandlers'

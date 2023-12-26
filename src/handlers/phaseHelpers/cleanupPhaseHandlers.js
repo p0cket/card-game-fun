@@ -1,11 +1,11 @@
-import { PASSIVE_TYPES } from '../../../consts/keywords/passives'
-import { EFFECTS } from '../../../effects'
-import { healHumanPal, healPal } from '../../state/healthStateHandlers'
+import { PASSIVE_TYPES } from '../../consts/keywords/passives'
+import { EFFECTS } from '../../effects'
+import { healHumanPal, healPal } from '../state/healthStateHandlers'
 import {
   updateHumanPartyWithPal,
   updateHumanStateWithParty,
   updateOpponentPartyWithPal,
-} from '../../state/partyStateHandlers'
+} from '../state/partyStateHandlers'
 
 // applyPalPassive here, cleanupPhase's changing of state by running it through
 // Here is some code to reference. We should make something

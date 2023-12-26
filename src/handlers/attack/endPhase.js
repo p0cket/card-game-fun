@@ -2,7 +2,7 @@ import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
 import { checkIfDead } from '../Battle/deadHandlers'
-import { addUpKeepEffects } from '../Battle/upKeepEffects'
+import { upkeepEnergyRefill, upkeepPermanentEnergyIncrease } from '../Battle/upKeepEffects'
 import {
   createPopupRemovedState,
   createPopupVisibleState,
@@ -34,7 +34,10 @@ export const endPhase = (state, attackPayload) => {
     return state
   } else if (player === PLAYERS.AI) {
     console.log(`END: phase ending. state`, state)
-    state = addUpKeepEffects(state)
+    // refill 5 energy
+    state = upkeepEnergyRefill(state)
+    // increase permanently by 1
+    state = upkeepPermanentEnergyIncrease(state)
     state = createPopupRemovedState(state)
     // check if dead
     state = checkIfDead(state)

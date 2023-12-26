@@ -105,6 +105,7 @@ export const newStartingData = {
       inventory: [],
       effects: [],
       energy: 6,
+      energyRefillAmt: 5,
       maxEnergy: 8,
     },
     map: generateMap(),
