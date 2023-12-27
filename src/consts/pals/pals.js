@@ -94,7 +94,7 @@ export const Luminowl = {
   cost: 500,
   lvl: 50,
   experience: 5000,
-  status: { test: true },
+  status: {  },
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
   moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],

@@ -7,8 +7,9 @@ export const SolarSpiritBlast = {
   energyCost: 7,
   effect: {
     description: 'Requires charging, high damage',
-    chance: '100%',
+    chance: 100,
     result: 'damage',
+    // amt: 50, prob no amt for dmg
   },
   priority: 'slow',
 }
@@ -23,8 +24,9 @@ export const QuickStrike = {
   // energyCost: 3,
   effect: {
     description: 'High critical hit chance',
-    chance: '50%',
+    chance: 50,
     result: 'critical_hit',
+    amt: 10,
   },
   priority: 'fast',
   targets: ['opponent', 'opponent_pals'],
@@ -50,8 +52,9 @@ export const QuickStrike = {
     energyCost: 4, // Increased energyCost cost for the Forceful aspect
     effect: {
       description: 'Guaranteed critical hit and additional damage',
-      chance: '100%',
+      chance: 100,
       result: 'critical_hit',
+      amt: 20,
     },
     targets: ['opponent', 'opponent_pals'],
   },
@@ -66,8 +69,9 @@ export const WebTrap = {
   energyCost: 2,
   effect: {
     description: 'Immobilizes target briefly',
-    chance: '40%',
+    chance: 40,
     result: 'immobilize',
+    duration: '1 turn',
   },
   priority: 'normal',
 }
@@ -81,8 +85,9 @@ export const Teleport = {
   energyCost: 5,
   effect: {
     description: 'Instantly move to another location',
-    chance: '100%',
+    chance: 100,
     result: 'teleport',
+    location: 'opponent',
   },
   priority: 'fast',
 }
@@ -96,7 +101,7 @@ export const Mimicry = {
   energyCost: 3,
   effect: {
     description: "Copies the opponent's last move",
-    chance: '100%',
+    chance: 100,
     result: 'copy_move',
   },
   priority: 'normal',
@@ -111,7 +116,7 @@ export const DoubleStrike = {
   energyCost: 3,
   effect: {
     description: 'Goes again if the first attack is successful',
-    chance: '100%',
+    chance: 100,
     result: 'double_strike',
   },
   priority: 'fast',
@@ -126,8 +131,9 @@ export const LifeSwap = {
   energyCost: 5,
   effect: {
     description: 'Exchanges HP with the target',
-    chance: '100%',
+    chance: 100,
     result: 'life_swap',
+    amt: 80,
   },
   priority: 'slow',
 }
@@ -142,8 +148,9 @@ export const Thunderstorm = {
   energyCost: 6,
   effect: {
     description: 'Chance to paralyze multiple targets',
-    chance: '30%',
+    chance: 30,
     result: 'paralyze_multiple',
+    duration: '1 turn',
   },
   priority: 'slow',
 }
@@ -157,8 +164,9 @@ export const StealthyAmbush = {
   energyCost: 4,
   effect: {
     description: 'Hides for a turn and then appears. Good for poison.',
-    chance: '100%',
+    chance: 100,
     result: 'stealthy_ambush',
+    duration: '1 turn',
   },
   priority: 'fast',
 }
@@ -172,8 +180,9 @@ export const MirrorImage = {
   energyCost: 3,
   effect: {
     description: 'Creates illusion copies',
-    chance: '100%',
+    chance: 100,
     result: 'mirror_image',
+    duration: '1 turn',
   },
   priority: 'normal',
 }
@@ -185,7 +194,7 @@ export const MirrorImage = {
 //   energyCost: 5,
 //   effect: {
 //     description: 'Forms a protective ice wall',
-//     chance: '100%',
+//     chance: 100,
 //     result: 'ice_wall',
 //   },
 //   priority: 'slow',
@@ -200,8 +209,9 @@ export const IceWall = {
   energyCost: 5,
   effect: {
     description: 'Forms a protective ice wall',
-    chance: '100%',
+    chance: 100,
     result: 'ice_wall',
+    amt: 40,
   },
   priority: 'slow',
   targets: ['arena'],
@@ -212,7 +222,7 @@ export const IceWall = {
     effect: {
       description: 'Enhance the defensive capabilities of the Ice Wall',
       duration: '1 turn',
-      defense_boost: 30,
+      amt: 50,
     },
   },
   forceful: {
@@ -226,8 +236,9 @@ export const IceWall = {
     effect: {
       description:
         'Strengthen the Ice Wall and provide a protective barrier for pals',
-      chance: '100%',
+      chance: 100,
       result: 'ice_wall',
+      amt: 80,
     },
     targets: ['arena'],
   },
@@ -244,8 +255,10 @@ export const LightBeam = {
   energyCost: 5,
   effect: {
     description: 'Fires a beam of blinding light at the opponent',
-    chance: '95%',
+    chance: 95,
     result: 'blind',
+    duration: '1 turn',
+    amt: -20,
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -258,6 +271,9 @@ export const LightBeam = {
       description: 'Perform an evasive twirl to dodge incoming attacks',
       duration: '1 turn',
       evasion_boost: 50, // Increase evasion for 1 turn
+      chance: 100,
+      result: 'evade',
+      amt: 10,
     },
   },
   // "Forceful" aspect:
@@ -272,8 +288,10 @@ export const LightBeam = {
     effect: {
       description:
         'Unleash a blinding solar flare to guarantee blinding the opponent',
-      chance: '100%',
+      chance: 100,
       result: 'blind',
+      duration: '1 turn',
+      amt: -30,
     },
     targets: ['opponent'],
   },
@@ -289,8 +307,10 @@ export const WiseGaze = {
   energyCost: 5,
   effect: {
     description: 'Pierces the opponent with a wise and penetrating gaze',
-    chance: '90%',
+    chance: 90,
     result: 'confuse',
+    duration: '1 turn',
+    amt: 20,
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -302,6 +322,9 @@ export const WiseGaze = {
     effect: {
       description: 'Calm your mind to resist confusion',
       duration: '1 turn',
+      chance: 100,
+      result: 'confuse',
+      amt: 50,
       confusion_resist: 100, // Provides immunity to confusion for 1 turn
     },
   },
@@ -316,8 +339,10 @@ export const WiseGaze = {
     energyCost: 5,
     effect: {
       description: 'Lock eyes with the opponent, ensuring confusion',
-      chance: '100%',
+      chance: 100,
       result: 'confuse',
+      duration: '1 turn',
+      amt: 50,
     },
     targets: ['opponent'],
   },
@@ -334,8 +359,10 @@ export const FeatherGlide = {
   effect: {
     description:
       'Glide gracefully to deliver a swift and graceful physical attack',
-    chance: '10%',
+    chance: 10,
     result: 'stun',
+    duration: '1 turn', // Added duration
+    amt: 20, // Added amt (assuming 20 as an example value)
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -347,7 +374,8 @@ export const FeatherGlide = {
     effect: {
       description: 'Enhance your aerial agility to dodge incoming attacks',
       duration: '1 turn',
-      evasion_boost: 40, // Increase evasion for 1 turn
+      evasion_boost: 40,
+      // Assuming these fields are not required for buffs
     },
   },
   // "Forceful" aspect:
@@ -362,8 +390,10 @@ export const FeatherGlide = {
     effect: {
       description:
         'Perform a celestial dive to guarantee stunning the opponent',
-      chance: '100%',
+      chance: 100,
       result: 'stun',
+      duration: '1 turn', // Added duration
+      amt: 30, // Added amt (assuming 30 as an example value)
     },
     targets: ['opponent'],
   },
@@ -380,8 +410,10 @@ export const LuminousFlight = {
   energyCost: 5,
   effect: {
     description: 'Take flight and emit a radiant glow',
-    chance: '20%',
+    chance: 20,
     result: 'illuminate',
+    duration: '1 turn', // Added duration
+    amt: 25, // Added amt (assuming 25 as an example value)
   },
   priority: 'medium',
   targets: ['user_pals'],
@@ -393,7 +425,8 @@ export const LuminousFlight = {
     effect: {
       description: 'Emit a protective shield of light for your pals',
       duration: '1 turn',
-      shield_value: 40, // Create a protective shield
+      shield_value: 40,
+      // Assuming these fields are not required for buffs
     },
   },
   // "Forceful" aspect:
@@ -407,8 +440,10 @@ export const LuminousFlight = {
     energyCost: 5,
     effect: {
       description: 'Emit blinding radiance, guaranteeing illumination',
-      chance: '100%',
+      chance: 100,
       result: 'illuminate',
+      duration: '1 turn', // Added duration
+      amt: 35, // Added amt (assuming 35 as an example value)
     },
     targets: ['user_pals'],
   },
@@ -424,8 +459,10 @@ export const GlowingCharm = {
   energyCost: 5,
   effect: {
     description: 'Emit a comforting and charming glow',
-    chance: '100%',
+    chance: 100,
     result: 'charm',
+    duration: '1 turn', // Added duration
+    amt: 20, // Added amt (assuming 20 as an example value)
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -438,6 +475,7 @@ export const GlowingCharm = {
       description: 'Enhance your resistance to charm',
       duration: '1 turn',
       charm_resist: 100, // Provides immunity to charm for 1 turn
+      // Assuming these fields are not required for buffs
     },
   },
   // "Forceful" aspect:
@@ -451,8 +489,10 @@ export const GlowingCharm = {
     energyCost: 5,
     effect: {
       description: 'Radiate an enchanting aura to guarantee charm',
-      chance: '100%',
+      chance: 100,
       result: 'charm',
+      duration: '1 turn', // Added duration
+      amt: 30, // Added amt (assuming 30 as an example value)
     },
     targets: ['opponent'],
   },
@@ -461,19 +501,20 @@ export const GlowingCharm = {
 export const WarmEmbrace = {
   name: 'Warm Embrace',
   type: 'healing',
-  healing: 50, // Healing value
+  healing: 50,
   accuracy: 90,
   speed: 8,
   cost: { energy: 4 },
   energyCost: 5,
   effect: {
     description: 'Offer a warm and comforting embrace, healing pals',
-    chance: '100%',
+    chance: 100,
     result: 'heal',
+    duration: '1 turn',
+    amt: 50,
   },
   priority: 'medium',
   targets: ['user_pals'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Caring Touch',
     type: 'buff',
@@ -481,22 +522,26 @@ export const WarmEmbrace = {
     effect: {
       description: 'Strengthen the healing effect of Warm Embrace',
       duration: '1 turn',
-      healing_boost: 30, // Increase the healing effect
+      healing_boost: 30,
+      chance: 100,
+      result: 'heal',
+      amt: 30,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Glowing Restoration',
     type: 'healing',
-    healing: 70, // Increased healing value
-    speed: 10,
+    healing: 70,
     accuracy: 90,
+    speed: 10,
     cost: { energy: 8 },
     energyCost: 8,
     effect: {
       description: 'Channel a powerful healing glow to ensure maximum healing',
-      chance: '100%',
+      chance: 100,
       result: 'heal',
+      duration: '1 turn',
+      amt: 70,
     },
     targets: ['user_pals'],
   },
@@ -513,12 +558,13 @@ export const EmotionDrain = {
   energyCost: 5,
   effect: {
     description: 'Drain the opponents emotions to weaken them',
-    chance: '20%',
+    chance: 20,
     result: 'debuff',
+    duration: '1 turn',
+    amt: 20,
   },
   priority: 'medium',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Resilient Spirit',
     type: 'buff',
@@ -526,10 +572,12 @@ export const EmotionDrain = {
     effect: {
       description: 'Enhance your emotional resilience to resist debuffs',
       duration: '1 turn',
-      debuff_resist: 100, // Provides immunity to debuffs for 1 turn
+      debuff_resist: 100,
+      chance: 100,
+      result: 'resist',
+      amt: 100,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Soul Siphon',
     type: 'dark',
@@ -540,8 +588,10 @@ export const EmotionDrain = {
     energyCost: 7,
     effect: {
       description: 'Drain the opponents soul, guaranteeing debuffs',
-      chance: '100%',
+      chance: 100,
       result: 'debuff',
+      duration: '1 turn',
+      amt: 60,
     },
     targets: ['opponent'],
   },
@@ -557,12 +607,13 @@ export const CuteCharm = {
   energyCost: 4,
   effect: {
     description: 'Exude an adorable and charming presence',
-    chance: '100%',
+    chance: 100,
     result: 'charm',
+    duration: '1 turn',
+    amt: 20,
   },
   priority: 'medium',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Charming Aura',
     type: 'buff',
@@ -570,22 +621,26 @@ export const CuteCharm = {
     effect: {
       description: 'Enhance your charm to guarantee success',
       duration: '1 turn',
-      charm_resist: 100, // Provides immunity to charm for 1 turn
+      charm_resist: 100,
+      chance: 100,
+      result: 'charm',
+      amt: 50,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Enchanting Presence',
     type: 'elemental',
-    damage: 0, // Forceful aspect doesn't deal damage either
+    damage: 0,
     accuracy: 90,
     speed: 10,
     cost: { energy: 5 },
     energyCost: 5,
     effect: {
       description: 'Radiate an enchanting aura to guarantee charm',
-      chance: '100%',
+      chance: 100,
       result: 'charm',
+      duration: '1 turn',
+      amt: 50,
     },
     targets: ['opponent'],
   },
@@ -594,19 +649,20 @@ export const CuteCharm = {
 export const ComfortingHug = {
   name: 'Comforting Hug',
   type: 'healing',
-  healing: 50, // Healing value
+  healing: 50,
   accuracy: 90,
   speed: 8,
   cost: { energy: 6 },
   energyCost: 6,
   effect: {
     description: 'Offer a comforting hug to heal pals',
-    chance: '100%',
+    chance: 100,
     result: 'heal',
+    duration: '1 turn',
+    amt: 50,
   },
   priority: 'medium',
   targets: ['user_pals'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Reassuring Embrace',
     type: 'buff',
@@ -614,22 +670,26 @@ export const ComfortingHug = {
     effect: {
       description: 'Strengthen the healing effect of Comforting Hug',
       duration: '1 turn',
-      healing_boost: 30, // Increase the healing effect
+      healing_boost: 30,
+      chance: 100,
+      result: 'heal',
+      amt: 30,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Soothing Embrace',
     type: 'healing',
-    healing: 70, // Increased healing value
+    healing: 70,
     accuracy: 90,
     speed: 10,
     cost: { energy: 8 },
     energyCost: 8,
     effect: {
       description: 'Offer a profound and soothing embrace for maximum healing',
-      chance: '100%',
+      chance: 100,
       result: 'heal',
+      duration: '1 turn',
+      amt: 70,
     },
     targets: ['user_pals'],
   },
@@ -646,12 +706,13 @@ export const RecycleRush = {
   energyCost: 6,
   effect: {
     description: 'Charge at the opponent using recycled materials as armor',
-    chance: '80%',
+    chance: 80,
     result: 'damage_boost',
+    duration: '1 turn',
+    amt: 20,
   },
   priority: 'high',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Reinforced Armor',
     type: 'buff',
@@ -659,10 +720,12 @@ export const RecycleRush = {
     effect: {
       description: 'Reinforce armor with extra recycled materials',
       duration: '2 turns',
-      defense_boost: 30, // Increase defense for 2 turns
+      defense_boost: 30,
+      chance: 100,
+      result: 'defense',
+      amt: 30,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Eco Smash',
     type: 'physical',
@@ -673,8 +736,10 @@ export const RecycleRush = {
     energyCost: 6,
     effect: {
       description: 'Unleash a powerful smash with hardened recycled materials',
-      chance: '100%',
+      chance: 100,
       result: 'damage_boost',
+      duration: '1 turn',
+      amt: 40,
     },
     targets: ['opponent'],
   },
@@ -690,12 +755,13 @@ export const ProjectileToss = {
   energyCost: 4,
   effect: {
     description: 'Toss recycled projectiles at the opponent',
-    chance: '70%',
+    chance: 70,
     result: 'slow',
+    duration: '1 turn',
+    amt: 15,
   },
   priority: 'medium',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Rapid Reload',
     type: 'buff',
@@ -703,10 +769,12 @@ export const ProjectileToss = {
     effect: {
       description: 'Quickly reload projectiles for a faster next attack',
       duration: '1 turn',
-      speed_boost: 20, // Increase speed for next attack
+      speed_boost: 20,
+      chance: 100,
+      result: 'speed',
+      amt: 20,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Debris Barrage',
     type: 'physical',
@@ -718,8 +786,10 @@ export const ProjectileToss = {
     effect: {
       description:
         'Unleash a barrage of recycled debris, ensuring slowing the opponent',
-      chance: '100%',
+      chance: 100,
       result: 'slow',
+      duration: '1 turn',
+      amt: 30,
     },
     targets: ['opponent'],
   },
@@ -728,7 +798,7 @@ export const ProjectileToss = {
 export const LeafShield = {
   name: 'Leaf Shield',
   type: 'elemental',
-  damage: 0, // No damage, purely defensive
+  damage: 0,
   accuracy: 90,
   speed: 8,
   cost: { energy: 5 },
@@ -736,12 +806,13 @@ export const LeafShield = {
   effect: {
     description:
       'Create a protective shield from leaves to reduce incoming damage',
-    chance: '90%',
+    chance: 90,
     result: 'damage_reduction',
+    duration: '1 turn',
+    amt: 25,
   },
   priority: 'medium',
   targets: ['self'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Photosynthesis Boost',
     type: 'buff',
@@ -750,10 +821,12 @@ export const LeafShield = {
       description:
         'Enhance the leaf shield by photosynthesis, regenerating health',
       duration: '1 turn',
-      health_regeneration: 20, // Regenerate a portion of health for 1 turn
+      health_regeneration: 20,
+      chance: 100,
+      result: 'regeneration',
+      amt: 20,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Forest Guard',
     type: 'elemental',
@@ -765,8 +838,10 @@ export const LeafShield = {
     effect: {
       description:
         'Fortify the leaf shield with the essence of the forest, ensuring damage reduction',
-      chance: '100%',
+      chance: 100,
       result: 'damage_reduction',
+      duration: '1 turn',
+      amt: 30,
     },
     targets: ['self'],
   },
@@ -784,10 +859,11 @@ export const SolarFlare = {
     description: 'Unleash a burst of intense solar energy',
     chance: '85%',
     result: 'burn',
+    duration: '1 turn',
+    amt: 40,
   },
   priority: 'high',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Heat Wave',
     type: 'debuff',
@@ -795,10 +871,12 @@ export const SolarFlare = {
     effect: {
       description: 'Generate a wave of heat to reduce the opponent’s defense',
       duration: '2 turns',
-      defense_reduction: 20, // Decrease opponent's defense for 2 turns
+      defense_reduction: 20,
+      chance: 100,
+      result: 'defense',
+      amt: 20,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Supernova Blast',
     type: 'elemental',
@@ -810,8 +888,10 @@ export const SolarFlare = {
     effect: {
       description:
         'Erupt in a powerful supernova, ensuring a burn on the opponent',
-      chance: '100%',
+      chance: 100,
       result: 'burn',
+      duration: '1 turn',
+      amt: 50,
     },
     targets: ['opponent'],
   },
@@ -827,12 +907,13 @@ export const RadiantBeam = {
   energyCost: 7,
   effect: {
     description: 'Emit a concentrated beam of radiant energy',
-    chance: '90%',
+    chance: 90,
     result: 'blind',
+    duration: '1 turn',
+    amt: -35,
   },
   priority: 'medium',
   targets: ['opponent'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Blinding Light',
     type: 'debuff',
@@ -840,10 +921,12 @@ export const RadiantBeam = {
     effect: {
       description: 'Blind the opponent, reducing their accuracy',
       duration: '1 turn',
-      accuracy_reduction: 30, // Decrease opponent's accuracy for 1 turn
+      accuracy_reduction: 30,
+      chance: 100,
+      result: 'accuracy',
+      amt: -30,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Solar Lance',
     type: 'elemental',
@@ -855,8 +938,10 @@ export const RadiantBeam = {
     effect: {
       description:
         'Concentrate solar energy into a lance, ensuring blinding the opponent',
-      chance: '100%',
+      chance: 100,
       result: 'blind',
+      duration: '1 turn',
+      amt: -45,
     },
     targets: ['opponent'],
   },
@@ -865,19 +950,20 @@ export const RadiantBeam = {
 export const SunShield = {
   name: 'Sun Shield',
   type: 'elemental',
-  damage: 0, // No damage, defensive move
+  damage: 0,
   accuracy: 90,
   speed: 10,
   cost: { energy: 6 },
   energyCost: 6,
   effect: {
     description: 'Create a shield of solar energy to mitigate incoming damage',
-    chance: '95%',
+    chance: 95,
     result: 'damage_reduction',
+    duration: '1 turn',
+    amt: 30,
   },
   priority: 'medium',
   targets: ['self'],
-  // "NotSoFast" aspect:
   notSoFast: {
     name: 'Solar Rejuvenation',
     type: 'buff',
@@ -885,10 +971,12 @@ export const SunShield = {
     effect: {
       description: 'Use solar energy to gradually restore health',
       duration: '2 turns',
-      health_regeneration: 25, // Regenerate a portion of health for 2 turns
+      health_regeneration: 25,
+      chance: 100,
+      result: 'regeneration',
+      amt: 25,
     },
   },
-  // "Forceful" aspect:
   forceful: {
     name: 'Radiant Barrier',
     type: 'elemental',
@@ -900,8 +988,10 @@ export const SunShield = {
     effect: {
       description:
         'Fortify the shield with intense solar energy, ensuring damage reduction',
-      chance: '100%',
+      chance: 100,
       result: 'damage_reduction',
+      duration: '1 turn',
+      amt: 40,
     },
     targets: ['self'],
   },

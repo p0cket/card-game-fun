@@ -90,7 +90,7 @@ const AttackPopup = ({
   //     fuel: 4, // Increased fuel cost for the Forceful aspect
   //     effect: {
   //       description: 'Guaranteed critical hit and additional damage',
-  //       chance: '100%',
+  //       chance: 100,
   //       result: 'critical_hit',
   //     },
   //     targets: ['opponent', 'opponent_pals'],
