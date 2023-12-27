@@ -49,9 +49,13 @@ export const dmgPhase = (state, attackPayload) => {
 
   if (player === PLAYERS.HUMAN) {
     // Check if hit. based on accuracy stat of atk and user
-    //I guess target pal is the attacker here
+    // Figure out the user, we neeed their accuracy
+    let user = newState.userParty[0]
+    // user's accuracy stat
+    const palAccuracyStat = user.stats.accuracy
+
+    // targetPal is the reciever of the atk
     targetPal = newState.opponent.monsters[0]
-    const palAccuracyStat = targetPal.stats.accuracy
     const combinedAccuracy = (accuracy + palAccuracyStat) / 2
     console.warn(`🫠check attacker passed as human`, targetPal)
     console.log(
@@ -78,8 +82,11 @@ export const dmgPhase = (state, attackPayload) => {
       return newState
     }
   } else if (player === PLAYERS.AI) {
+    // Figure out the user, we neeed their accuracy
+    let user = newState.opponent.monsters[0]
+    const palAccuracyStat = user.stats.accuracy
+
     targetPal = newState.userParty[0]
-    const palAccuracyStat = targetPal.stats.accuracy
     const combinedAccuracy = (accuracy + palAccuracyStat) / 2
     console.log(
       `ATK: DMG phase: AI->  targetPal, move, pal`,
