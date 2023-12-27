@@ -65,7 +65,29 @@ export const dmgPhase = (state, attackPayload) => {
       move,
     )
     if (roll < combinedAccuracy) {
-      // Roll passes, apply damage
+      // Roll passes, apply weak if there is any,
+      // if(targetPal contains "weak"){
+      //   dmg is less by the amt of Weak
+      // }
+
+      //------
+      // TODO: Finish this by passing the runDmgHuman
+      // with another param for the amount to reduce dmg by
+      // let finalDmg = move.dmg
+      // finalDmg = checkAndApplyWeaknessToDmg(user, finalDmg)
+
+      //------------
+      // targetPal.status starts at   status: {}, then can contain weak
+      // weak:
+      //{description: 'Drain the opponents emotions to weaken them',
+      //   chance: 20,
+      //   result: 'weak',
+      //   duration: '1 turn',
+      //   amt: 20,}
+
+      // then apply sheild if there is any
+
+      // then apply dmg damage
       const damageAppliedFromHumanState = runDmgHuman(
         newState,
         targetPal,
@@ -153,4 +175,14 @@ This will result in targetPal.stats.hp (${targetPal.stats.hp})
   console.log(`After createHumanDamagedState:`, newState)
   console.log(`ATK: DAMAGE phase ending:`, newState)
   return newState
+}
+
+const checkAndApplyWeaknessToDmg = (userPal, dmg) => {
+  if (userPal.status && userPal.status.weak) {
+    console.log(
+      `Applying weakness, reducing damage by ${userPal.status.weak.amt}`,
+    )
+    dmg -= userPal.status.weak.amt
+  }
+  return dmg
 }
