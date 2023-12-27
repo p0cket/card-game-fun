@@ -8,6 +8,7 @@ import {
   updateScene,
 } from '../../handlers/sceneHandlers_new'
 import PalDetailsPopup from '../common/PalDetailsPopup'
+import selectStartImg from './../../assets/eventImages/SelectStarterImg.png'
 
 const ChibipalsSelection = () => {
   const [selectedPal, setSelectedPal] = useState(null)
@@ -53,6 +54,7 @@ const ChibipalsSelection = () => {
 
   return (
     <div className="font-[silkscreen] text-white m-1">
+      {!showDetails && <img src={selectStartImg} alt="select starter" />}
       <h1 className="text-center text-2xl font-bold">Adopt Your Chibipal</h1>
       <div className="flex justify-center ">
         {palStarters.map((monster) => (
@@ -64,7 +66,7 @@ const ChibipalsSelection = () => {
             onClick={() => handleMonsterClick(monster)}
             style={{ flex: '1', margin: '2px', cursor: 'pointer' }}
           >
-            <div
+            {/* <div
               className={`w-full pb-full rounded-full ${
                 monster.image ? 'bg-cover' : 'bg-green-500'
               }`}
@@ -77,8 +79,9 @@ const ChibipalsSelection = () => {
                   key={monster.id} // Added key prop
                 />
               )}
-            </div>
-            <p className="text-center text-sm pt-3">{monster.name}</p>
+            </div> */}
+            <button className="w-full h-full  bg-boy-green">{monster.name}</button>
+            {/* <p className="text-center text-sm pt-3">{monster.name}</p> */}
           </div>
         ))}
       </div>
