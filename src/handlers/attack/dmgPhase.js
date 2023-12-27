@@ -78,7 +78,7 @@ export const dmgPhase = (state, attackPayload) => {
       return newState
     }
   } else if (player === PLAYERS.AI) {
-    targetPal = newState.opponent.monsters[0]
+    targetPal = newState.userParty[0]
     const palAccuracyStat = targetPal.stats.accuracy
     const combinedAccuracy = (accuracy + palAccuracyStat) / 2
     console.log(
