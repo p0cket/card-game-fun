@@ -166,9 +166,9 @@ export const Umbrabunny = {
   id: 8,
   name: 'Umbrabunny',
   elemental_type: 'Dark',
-  creature_type: 'Bunny',
-  specialty_group: 'Emotion Absorber',
-  nature: 'Adorable',
+  creature_type: 'Mammal',
+  specialty_group: 'Cleric',
+  // nature: 'Adorable',
   quirks: ['Emotion Sponge', 'Reassuring Presence'],
   stats: {
     hp: 90,
@@ -183,7 +183,7 @@ export const Umbrabunny = {
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
   strengths: ['Light'],
-  weaknesses: ['Fighting', 'Psychic'],
+  weaknesses: ['Fighting'],
   cost: 450,
   lvl: 48,
   experience: 4800,
