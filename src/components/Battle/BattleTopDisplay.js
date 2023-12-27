@@ -81,11 +81,10 @@ export default function BattleTopDisplay() {
     },
   }
   // Def work on this later
-  const currentMonDetailsStatuses =
-    state.opponent.monsters[0].status
+  const currentMonDetailsStatuses = state.opponent.monsters[0].status
 
-    //this is the current monster. We need to track this down and 
-    // assign it to the currentMon
+  //this is the current monster. We need to track this down and
+  // assign it to the currentMon
   const currentMon =
     // state.current.scene.details.trainer.monsters[0]
     state.opponent.monsters[0]
@@ -122,7 +121,7 @@ export default function BattleTopDisplay() {
           {name}
           <span className="text-gray-500 text-sm">lvl{lvl}</span>
         </div>
-         <div>
+        <div>
           {state.opponent.monsters[0].stats.hp}HP
           <progress
             id="health"
@@ -136,13 +135,18 @@ export default function BattleTopDisplay() {
           />
         </div>
         <div className="text-xs">
-          Statuses:
           {Object.keys(currentMonDetailsStatuses).map((key) => {
             if (currentMonDetailsStatuses[key]) {
               return (
-                <span className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1" key={key}>
-                {key}
-              </span>
+                <span
+                  className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
+                  key={key}
+                >
+                  {key}
+                  <span className="text-green-100">
+                    {currentMonDetailsStatuses[key].amt}
+                  </span>
+                </span>
               )
             } else {
               console.log(`${key} is false`)

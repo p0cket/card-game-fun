@@ -6,8 +6,8 @@ import { ATK_PHASES, executeMove } from '../moveHandlers'
 // Apply poison effect to the target
 export const applyPoison = (target, effectValue) => {
   console.log(`applying poison to ${target.name}, damage: ${effectValue}`)
-  target.statuses = {
-    ...target.statuses,
+  target.status = {
+    ...target.status,
     poison: {
       active: true,
       damage: effectValue,
@@ -19,8 +19,8 @@ export const applyPoison = (target, effectValue) => {
 // Apply burn effect to the target
 export const applyBurn = (target, effectValue) => {
   console.log(`applying burn to ${target.name}, damage: ${effectValue}`)
-  target.statuses = {
-    ...target.statuses,
+  target.status = {
+    ...target.status,
     burn: {
       active: true,
       damage: effectValue,
@@ -32,8 +32,8 @@ export const applyBurn = (target, effectValue) => {
 // Apply freeze effect to the target
 export const applyFreeze = (target, effectValue) => {
   console.log(`applying freeze to ${target.name}, duration: ${effectValue}`)
-  target.statuses = {
-    ...target.statuses,
+  target.status = {
+    ...target.status,
     freeze: {
       active: true,
       duration: effectValue,
@@ -45,8 +45,8 @@ export const applyFreeze = (target, effectValue) => {
 // Apply paralysis effect to the target
 export const applyParalysis = (target, effectValue) => {
   console.log(`applying paralysis to ${target.name}, chance: ${effectValue}`)
-  target.statuses = {
-    ...target.statuses,
+  target.status = {
+    ...target.status,
     paralysis: {
       active: true,
       chance: effectValue,
@@ -57,14 +57,40 @@ export const applyParalysis = (target, effectValue) => {
 // Apply blind effect to the target
 export const applyBlind = (target, effectValue) => {
   console.log(`applying blind to ${target.name}, chance: ${effectValue}`)
-  target.statuses = {
-    ...target.statuses,
+  target.status = {
+    ...target.status,
     blind: {
       active: true,
-      chance: effectValue,
+      amt: effectValue,
     },
   }
+  console.log(`target after applying blind but not accuracy change: `,target)
+  target = modifyPalAccuracy(target, effectValue)
+  console.log(`target after accuracy change: `,target)
+
   return target
+}
+
+export const removeBlind = (target, effectValue) => {
+  // here we remove the blind status, and reverse the effects
+  target.status = {
+    ...target.status,
+    blind: {
+      active: false,
+      amt: effectValue,
+    },
+  }
+  target = modifyPalAccuracy(target, -effectValue)
+  return target
+}
+
+// this is probably elsewhere
+const modifyPalAccuracy = (pal, amt) => {
+  // could be increase + or decrease -
+  console.log(`modifying accuracy of ${pal.name} by ${amt}`, pal)
+  pal.stats.accuracy = pal.stats.accuracy + amt
+  console.log(`modified accuracy of ${pal.name} to ${pal.stats.accuracy}`, pal)
+  return pal
 }
 
 // fix this. All this does is apply the status to the array of statuses
@@ -81,6 +107,7 @@ export const applyBlind = (target, effectValue) => {
 //     special_attack: 120,
 //     special_defense: 90,
 //     speed: 110,
+// accuracy: 100,
 //   },
 //   status: { test: true },
 // ... }
@@ -143,7 +170,7 @@ export const updateStatusState = (
     //     break
     // }
     // const applyStatusToPal = (statusResult, updatedMonsters, statusValue, index) => {
-    updatedMonsters = applyStatusToPal(
+    updatedMonsters[index] = applyStatusToPal(
       statusResult,
       updatedMonsters,
       statusValue,
@@ -167,13 +194,20 @@ export const updateStatusState = (
       statusValue,
     )
     let updatedMonsters = [...contextualState.userParty]
-    updatedMonsters = applyStatusToPal(
+    updatedMonsters[index] = applyStatusToPal(
       statusResult,
       updatedMonsters,
       statusValue,
       index,
       PLAYERS.AI,
     )
+    // updatedMonsters = applyStatusToPal(
+    //   statusResult,
+    //   updatedMonsters,
+    //   statusValue,
+    //   index,
+    //   PLAYERS.AI,
+    // )
     return {
       ...contextualState,
       userParty: updatedMonsters,
@@ -189,52 +223,104 @@ const applyStatusToPal = (
   index,
   player,
 ) => {
+  let palToApplyTo = updatedMonsters[index]
   switch (statusResult) {
     // case 'poison':
-    //   console.log(`applying poison to ${updatedMonsters[index].name}`)
-    //   updatedMonsters[index] = applyPoison(
-    //     updatedMonsters[index],
+    //   console.log(`applying poison to ${palToApplyTo.name}`)
+    //   palToApplyTo = applyPoison(
+    //     palToApplyTo,
     //     statusValue,
     //   )
-    //   return updatedMonsters
+    //   return palToApplyTo
     // case 'burn':
-    //   console.log(`applying burn to ${updatedMonsters[index].name}`)
-    //   updatedMonsters[index] = applyBurn(updatedMonsters[index], statusValue)
-    //   return updatedMonsters
+    //   console.log(`applying burn to ${palToApplyTo.name}`)
+    //   palToApplyTo = applyBurn(palToApplyTo, statusValue)
+    //   return palToApplyTo
     // case 'freeze':
-    //   console.log(`applying freeze to ${updatedMonsters[index].name}`)
-    //   updatedMonsters[index] = applyFreeze(
-    //     updatedMonsters[index],
+    //   console.log(`applying freeze to ${palToApplyTo.name}`)
+    //   palToApplyTo = applyFreeze(
+    //     palToApplyTo,
     //     statusValue,
     //   )
-    //   return updatedMonsters
+    //   return palToApplyTo
     // case 'paralysis':
-    //   console.log(`applying paralysis to ${updatedMonsters[index].name}`)
-    //   updatedMonsters[index] = applyParalysis(
-    //     updatedMonsters[index],
+    //   console.log(`applying paralysis to ${palToApplyTo.name}`)
+    //   palToApplyTo = applyParalysis(
+    //     palToApplyTo,
     //     statusValue,
     //   )
-    //   return updatedMonsters
-    // case 'blind':
-    //   console.log(`Status result: ${statusResult}`)
-    //   console.log(
-    //     `Index: ${index}, Valid index: ${
-    //       index >= 0 && index < updatedMonsters.length
-    //     }`,
-    //   )
-    //   console.log(`Status value: ${statusValue}`)
-    //   console.log(`Monster before applying blind:`, updatedMonsters[index])
-    //   console.log(`applying blind to ${updatedMonsters[index].name}`)
-    //   updatedMonsters[index] = applyBlind(updatedMonsters[index], statusValue)
-    //   console.log(`Monster after applying blind:`, updatedMonsters[index])
-    //   return updatedMonsters
+    //   return palToApplyTo
+    case 'blind':
+      // only apply if 'blind' does not exist or 'blind.active' is not true
+      if (
+        !(
+          palToApplyTo.status &&
+          palToApplyTo.status.blind &&
+          palToApplyTo.status.blind.active
+        )
+      ) {
+        console.log(`Status result: ${statusResult} Status value: ${statusValue}`)
+        console.log(`Monster before applying blind to ${palToApplyTo.name}:`, palToApplyTo)
+        palToApplyTo = applyBlind(palToApplyTo, statusValue)
+        console.log(`Monster after applying blind:`, palToApplyTo)
+      }
+      return palToApplyTo
     default:
       // any other status to be applied
-      console.log(`applying ${statusResult} to ${updatedMonsters[index].name}`)
-      updatedMonsters[index].status = {
-        ...updatedMonsters[index].status,
+      console.log(`applying ${statusResult} to ${palToApplyTo.name}`)
+      palToApplyTo.status = {
+        ...palToApplyTo.status,
         [statusResult]: statusValue,
       }
-      return updatedMonsters
+      return palToApplyTo
   }
 }
+
+export const removeStatusFromPal = (statusResult, pal, statusValue) => {
+  // Create a copy of the pal object
+  let palCopy = { ...pal }
+
+  if (palCopy.status && palCopy.status[statusResult]) {
+    console.log(`Removing ${statusResult} from ${palCopy.name}`)
+    if (statusResult === 'blind') {
+      // Reverse the effect of blind status, assuming modifyPalAccuracy returns a new object
+      palCopy = modifyPalAccuracy(palCopy, -statusValue)
+    }
+    // Remove the status from the copy
+    delete palCopy.status[statusResult]
+  } else {
+    console.log(`No status ${statusResult} found on ${palCopy.name} to remove`)
+  }
+
+  return palCopy
+}
+// This function removes a specified status effect from a pal
+// export const removeStatusFromPal = (
+//   statusResult,
+//   updatedMonsters,
+//   statusValue,
+//   index,
+//   player,
+// ) => {
+//   if (
+//     updatedMonsters[index] &&
+//     updatedMonsters[index].status &&
+//     updatedMonsters[index].status[statusResult]
+//   ) {
+//     console.log(`Removing ${statusResult} from ${updatedMonsters[index].name}`)
+//     if (statusResult === 'blind') {
+//   // Reverse the effect of blind status
+//   updatedMonsters[index] = modifyPalAccuracy(
+//     updatedMonsters[index],
+//     -statusValue, // Assuming negative value reverses the effect
+//   )
+//   // Remove the 'blind' status from the pal
+//   delete updatedMonsters[index].status[statusResult]
+// }
+//   } else {
+//     console.log(
+//       `No status ${statusResult} found on ${updatedMonsters[index].name} to remove`,
+//     )
+//   }
+//   return updatedMonsters
+// }
