@@ -10,7 +10,8 @@ const AICostPaid = ({ move, pal, onOkay, onCounter, onOtherAction }) => {
   const costPaidContinue = {
     label: 'Continue',
     onClick: () => {
-      console.warn(`Clicked Continue`, state)
+      // console.warn(`Clicked Continue`, state)
+      console.log(`AICostPaid state, check state.attack`, state)
       executeMove(dispatch, {
         pal: state.attack.pal,
         move: state.attack.move,

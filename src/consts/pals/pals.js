@@ -85,6 +85,7 @@ export const Luminowl = {
     special_attack: 120,
     special_defense: 90,
     speed: 110,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -128,6 +129,7 @@ export const Glowbuggle = {
     special_attack: 100,
     special_defense: 70,
     speed: 120,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -176,6 +178,7 @@ export const Umbrabunny = {
     special_attack: 80,
     special_defense: 110,
     speed: 120,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -262,6 +265,7 @@ export const Infernodragon = {
     special_attack: 160,
     special_defense: 110,
     speed: 100,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -304,6 +308,7 @@ export const Aquaphoenix = {
     special_attack: 130,
     special_defense: 100,
     speed: 120,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -346,6 +351,7 @@ export const Verdantshifter = {
     special_attack: 100,
     special_defense: 120,
     speed: 110,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -388,6 +394,7 @@ export const Technotitan = {
     special_attack: 80,
     special_defense: 100,
     speed: 60,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -430,6 +437,7 @@ export const Recycleroo = {
     special_attack: 60,
     special_defense: 80,
     speed: 90,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -477,6 +485,7 @@ export const Shoeb = {
     special_attack: 1,
     special_defense: 1,
     speed: 1,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -510,6 +519,7 @@ export const Wolfjobb = {
     special_attack: 50,
     special_defense: 60,
     speed: 100,
+    accuracy: 100,
   },
   enterAbility:
     'on enter, does something cool. Otherwise no ability and have it stick around',
@@ -540,6 +550,7 @@ export const Ticklefairy = {
     special_attack: 120,
     special_defense: 100,
     speed: 150,
+    accuracy: 100,
   },
   enterAbility:
     'Ticklefairy enters with a burst of laughter, raising the spirits of its allies.',
@@ -572,6 +583,7 @@ export const MoltenScale = {
     special_attack: 180,
     special_defense: 160,
     speed: 100,
+    
   },
   enterAbility: 'Absorbs sunlight to power up its abilities',
   strengths: ['Dark', 'Water'],

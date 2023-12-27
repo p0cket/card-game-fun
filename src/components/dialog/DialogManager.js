@@ -14,6 +14,7 @@ import StatusAppliedHuman from './StatusAppliedHuman'
 import Cleanup from './Cleanup'
 import SwitchingTurns from './SwitchingTurns'
 import { PLAYERS } from '../../consts/consts'
+import MissedAttack from './MissedAttack'
 
 export const DIALOGS = {
   NOT_ENOUGH_ENERGY: 'NOT_ENOUGH_ENERGY',
@@ -22,6 +23,8 @@ export const DIALOGS = {
 
   DAMAGED_PAL_AI: 'DAMAGED_PAL_AI',
   DAMAGED_PAL_HUMAN: 'DAMAGED_PAL_HUMAN',
+  MISSED_ATTACK_AI: 'MISSED_ATTACK_AI',
+  MISSED_ATTACK_HUMAN: 'MISSED_ATTACK_HUMAN',
 
   STATUS_APPLIED_AI: 'STATUS_APPLIED_AI',
   STATUS_APPLIED_HUMAN: 'STATUS_APPLIED_HUMAN',
@@ -55,8 +58,12 @@ const decideDialog = (current) => {
     ENERGY_PAID,
     COST_PAID_SUCCESS,
     AI_COST_PAID,
+
     DAMAGED_PAL_AI,
     DAMAGED_PAL_HUMAN,
+    MISSED_ATTACK_AI,
+    MISSED_ATTACK_HUMAN,
+
     STATUS_APPLIED_AI,
     STATUS_APPLIED_HUMAN,
     STATUS_NOT_APPLIED_AI,
@@ -64,7 +71,7 @@ const decideDialog = (current) => {
 
     CLEANUP_AI,
     CLEANUP_HUMAN,
-    
+
     SWITCHTURNS_TO_AI,
     CUSTOM,
     TEMPLATE,
@@ -91,6 +98,12 @@ const decideDialog = (current) => {
     case DAMAGED_PAL_HUMAN:
       console.log('Dialog: Damage dealt to HUMAN Pal', current)
       return <DamagedPalHuman />
+    case MISSED_ATTACK_HUMAN:
+      console.log('Dialog: Missed attack', current)
+      return <MissedAttack player={PLAYERS.HUMAN} />
+    case MISSED_ATTACK_AI:
+      console.log('Dialog: Missed attack', current)
+      return <MissedAttack player={PLAYERS.AI} />
     // [statusPhase]
     case STATUS_APPLIED_AI:
       console.log('Dialog: Status applied', current)
