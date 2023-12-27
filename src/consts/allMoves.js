@@ -2,6 +2,7 @@ export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
   type: 'elemental',
   damage: 45,
+  accuracy: 90,
   speed: 8,
   energyCost: 7,
   effect: {
@@ -16,6 +17,7 @@ export const QuickStrike = {
   name: 'Quick Strike',
   type: 'physical',
   damage: 25,
+  accuracy: 90,
   speed: 7,
   cost: { energy: 3 },
   // energyCost: 3,
@@ -41,6 +43,7 @@ export const QuickStrike = {
     name: 'Rapid Fury',
     type: 'physical',
     damage: 40, // Enhanced damage for the Forceful aspect
+    accuracy: 90,
     speed: 9, // Slightly slower due to the added power
     cost: { energy: 4 },
 
@@ -57,6 +60,7 @@ export const QuickStrike = {
 export const WebTrap = {
   name: 'Web Trap',
   type: 'status',
+  accuracy: 90,
   speed: 4,
   cost: { energy: 2 },
   energyCost: 2,
@@ -72,6 +76,7 @@ export const Teleport = {
   name: 'Teleport',
   type: 'utility',
   speed: 9,
+  accuracy: 90,
   cost: { energy: 5 },
   energyCost: 5,
   effect: {
@@ -86,6 +91,7 @@ export const Mimicry = {
   name: 'Mimicry',
   type: 'utility',
   speed: 5,
+  accuracy: 90,
   cost: { energy: 3 },
   energyCost: 3,
   effect: {
@@ -99,6 +105,7 @@ export const DoubleStrike = {
   name: 'Double Strike',
   type: 'physical',
   damage: 15,
+  accuracy: 90,
   speed: 7,
   cost: { energy: 3 },
   energyCost: 3,
@@ -114,6 +121,7 @@ export const LifeSwap = {
   name: 'Life Swap',
   type: 'heal',
   speed: 7,
+  accuracy: 90,
   cost: { energy: 4 },
   energyCost: 5,
   effect: {
@@ -128,6 +136,7 @@ export const Thunderstorm = {
   name: 'Thunderstorm',
   type: 'elemental',
   damage: 40,
+  accuracy: 90,
   speed: 8,
   cost: { energy: 6 },
   energyCost: 6,
@@ -142,6 +151,7 @@ export const Thunderstorm = {
 export const StealthyAmbush = {
   name: 'Stealthy Ambush',
   type: 'utility',
+  accuracy: 90,
   speed: 6,
   cost: { energy: 4 },
   energyCost: 4,
@@ -156,6 +166,7 @@ export const StealthyAmbush = {
 export const MirrorImage = {
   name: 'Mirror Image',
   type: 'buff',
+  accuracy: 90,
   speed: 6,
   cost: { energy: 3 },
   energyCost: 3,
@@ -183,6 +194,7 @@ export const IceWall = {
   name: 'Ice Wall',
   type: 'elemental',
   damage: 0,
+  accuracy: 90,
   speed: 7,
   cost: { energy: 5 },
   energyCost: 5,
@@ -196,6 +208,7 @@ export const IceWall = {
   notSoFast: {
     name: 'Chilled Defenses',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Enhance the defensive capabilities of the Ice Wall',
       duration: '1 turn',
@@ -206,6 +219,7 @@ export const IceWall = {
     name: 'Glacial Fortress',
     type: 'elemental',
     damage: 0,
+    accuracy: 90,
     speed: 9,
     cost: { energy: 6 },
     energyCost: 6,
@@ -224,6 +238,7 @@ export const LightBeam = {
   name: 'Light Beam',
   type: 'elemental',
   damage: 40,
+  accuracy: 90,
   speed: 12,
   cost: { energy: 5 },
   energyCost: 5,
@@ -238,6 +253,7 @@ export const LightBeam = {
   notSoFast: {
     name: 'Evasive Twirl',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Perform an evasive twirl to dodge incoming attacks',
       duration: '1 turn',
@@ -249,6 +265,7 @@ export const LightBeam = {
     name: 'Solar Flare',
     type: 'elemental',
     damage: 60,
+    accuracy: 90,
     speed: 15,
     cost: { energy: 4 },
     energyCost: 5,
@@ -266,6 +283,7 @@ export const WiseGaze = {
   name: 'Wise Gaze',
   type: 'elemental',
   damage: 30,
+  accuracy: 90,
   speed: 10,
   cost: { energy: 5 },
   energyCost: 5,
@@ -280,6 +298,7 @@ export const WiseGaze = {
   notSoFast: {
     name: 'Clarity of Mind',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Calm your mind to resist confusion',
       duration: '1 turn',
@@ -291,6 +310,7 @@ export const WiseGaze = {
     name: 'Enlightened Stare',
     type: 'elemental',
     damage: 45,
+    accuracy: 90,
     speed: 12,
     cost: { energy: 4 },
     energyCost: 5,
@@ -307,6 +327,7 @@ export const FeatherGlide = {
   name: 'Feather Glide',
   type: 'physical',
   damage: 35,
+  accuracy: 90,
   speed: 8,
   cost: { energy: 4 },
   energyCost: 5,
@@ -322,6 +343,7 @@ export const FeatherGlide = {
   notSoFast: {
     name: 'Aerial Agility',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Enhance your aerial agility to dodge incoming attacks',
       duration: '1 turn',
@@ -333,6 +355,7 @@ export const FeatherGlide = {
     name: 'Celestial Dive',
     type: 'physical',
     damage: 50,
+    accuracy: 90,
     speed: 10,
     cost: { energy: 4 },
     energyCost: 5,
@@ -351,6 +374,7 @@ export const LuminousFlight = {
   name: 'Luminous Flight',
   type: 'elemental',
   damage: 40,
+  accuracy: 90,
   speed: 11,
   cost: { energy: 4 },
   energyCost: 5,
@@ -365,6 +389,7 @@ export const LuminousFlight = {
   notSoFast: {
     name: 'Luminous Shield',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Emit a protective shield of light for your pals',
       duration: '1 turn',
@@ -376,6 +401,7 @@ export const LuminousFlight = {
     name: 'Dazzling Radiance',
     type: 'elemental',
     damage: 55,
+    accuracy: 90,
     speed: 14,
     cost: { energy: 4 },
     energyCost: 5,
@@ -392,6 +418,7 @@ export const GlowingCharm = {
   name: 'Glowing Charm',
   type: 'elemental',
   damage: 0, // Glowing Charm doesn't deal damage
+  accuracy: 90,
   speed: 9,
   cost: { energy: 4 },
   energyCost: 5,
@@ -406,6 +433,7 @@ export const GlowingCharm = {
   notSoFast: {
     name: 'Radiant Resilience',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Enhance your resistance to charm',
       duration: '1 turn',
@@ -417,6 +445,7 @@ export const GlowingCharm = {
     name: 'Enchanting Aura',
     type: 'elemental',
     damage: 0, // Forceful aspect doesn't deal damage either
+    accuracy: 90,
     speed: 10,
     cost: { energy: 4 },
     energyCost: 5,
@@ -433,6 +462,7 @@ export const WarmEmbrace = {
   name: 'Warm Embrace',
   type: 'healing',
   healing: 50, // Healing value
+  accuracy: 90,
   speed: 8,
   cost: { energy: 4 },
   energyCost: 5,
@@ -447,6 +477,7 @@ export const WarmEmbrace = {
   notSoFast: {
     name: 'Caring Touch',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Strengthen the healing effect of Warm Embrace',
       duration: '1 turn',
@@ -459,6 +490,7 @@ export const WarmEmbrace = {
     type: 'healing',
     healing: 70, // Increased healing value
     speed: 10,
+    accuracy: 90,
     cost: { energy: 8 },
     energyCost: 8,
     effect: {
@@ -475,6 +507,7 @@ export const EmotionDrain = {
   name: 'Emotion Drain',
   type: 'dark',
   damage: 40,
+  accuracy: 90,
   speed: 12,
   cost: { energy: 5 },
   energyCost: 5,
@@ -489,6 +522,7 @@ export const EmotionDrain = {
   notSoFast: {
     name: 'Resilient Spirit',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Enhance your emotional resilience to resist debuffs',
       duration: '1 turn',
@@ -500,6 +534,7 @@ export const EmotionDrain = {
     name: 'Soul Siphon',
     type: 'dark',
     damage: 60,
+    accuracy: 90,
     speed: 14,
     cost: { energy: 7 },
     energyCost: 7,
@@ -516,6 +551,7 @@ export const CuteCharm = {
   name: 'Cute Charm',
   type: 'elemental',
   damage: 0, // Cute Charm doesn't deal damage
+  accuracy: 90,
   speed: 9,
   cost: { energy: 4 },
   energyCost: 4,
@@ -530,6 +566,7 @@ export const CuteCharm = {
   notSoFast: {
     name: 'Charming Aura',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Enhance your charm to guarantee success',
       duration: '1 turn',
@@ -541,6 +578,7 @@ export const CuteCharm = {
     name: 'Enchanting Presence',
     type: 'elemental',
     damage: 0, // Forceful aspect doesn't deal damage either
+    accuracy: 90,
     speed: 10,
     cost: { energy: 5 },
     energyCost: 5,
@@ -557,6 +595,7 @@ export const ComfortingHug = {
   name: 'Comforting Hug',
   type: 'healing',
   healing: 50, // Healing value
+  accuracy: 90,
   speed: 8,
   cost: { energy: 6 },
   energyCost: 6,
@@ -571,6 +610,7 @@ export const ComfortingHug = {
   notSoFast: {
     name: 'Reassuring Embrace',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Strengthen the healing effect of Comforting Hug',
       duration: '1 turn',
@@ -582,6 +622,7 @@ export const ComfortingHug = {
     name: 'Soothing Embrace',
     type: 'healing',
     healing: 70, // Increased healing value
+    accuracy: 90,
     speed: 10,
     cost: { energy: 8 },
     energyCost: 8,
@@ -599,6 +640,7 @@ export const RecycleRush = {
   name: 'Recycle Rush',
   type: 'physical',
   damage: 45,
+  accuracy: 90,
   speed: 10,
   cost: { energy: 6 },
   energyCost: 6,
@@ -613,6 +655,7 @@ export const RecycleRush = {
   notSoFast: {
     name: 'Reinforced Armor',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Reinforce armor with extra recycled materials',
       duration: '2 turns',
@@ -624,6 +667,7 @@ export const RecycleRush = {
     name: 'Eco Smash',
     type: 'physical',
     damage: 60,
+    accuracy: 90,
     speed: 12,
     cost: { energy: 5 },
     energyCost: 6,
@@ -640,6 +684,7 @@ export const ProjectileToss = {
   name: 'Projectile Toss',
   type: 'physical',
   damage: 35,
+  accuracy: 90,
   speed: 14,
   cost: { energy: 4 },
   energyCost: 4,
@@ -654,6 +699,7 @@ export const ProjectileToss = {
   notSoFast: {
     name: 'Rapid Reload',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Quickly reload projectiles for a faster next attack',
       duration: '1 turn',
@@ -665,11 +711,13 @@ export const ProjectileToss = {
     name: 'Debris Barrage',
     type: 'physical',
     damage: 50,
+    accuracy: 90,
     speed: 16,
     cost: { energy: 4 },
     energyCost: 5,
     effect: {
-      description: 'Unleash a barrage of recycled debris, ensuring slowing the opponent',
+      description:
+        'Unleash a barrage of recycled debris, ensuring slowing the opponent',
       chance: '100%',
       result: 'slow',
     },
@@ -681,11 +729,13 @@ export const LeafShield = {
   name: 'Leaf Shield',
   type: 'elemental',
   damage: 0, // No damage, purely defensive
+  accuracy: 90,
   speed: 8,
   cost: { energy: 5 },
   energyCost: 5,
   effect: {
-    description: 'Create a protective shield from leaves to reduce incoming damage',
+    description:
+      'Create a protective shield from leaves to reduce incoming damage',
     chance: '90%',
     result: 'damage_reduction',
   },
@@ -695,8 +745,10 @@ export const LeafShield = {
   notSoFast: {
     name: 'Photosynthesis Boost',
     type: 'buff',
+    accuracy: 90,
     effect: {
-      description: 'Enhance the leaf shield by photosynthesis, regenerating health',
+      description:
+        'Enhance the leaf shield by photosynthesis, regenerating health',
       duration: '1 turn',
       health_regeneration: 20, // Regenerate a portion of health for 1 turn
     },
@@ -706,11 +758,13 @@ export const LeafShield = {
     name: 'Forest Guard',
     type: 'elemental',
     damage: 0,
+    accuracy: 90,
     speed: 10,
     cost: { energy: 5 },
     energyCost: 6,
     effect: {
-      description: 'Fortify the leaf shield with the essence of the forest, ensuring damage reduction',
+      description:
+        'Fortify the leaf shield with the essence of the forest, ensuring damage reduction',
       chance: '100%',
       result: 'damage_reduction',
     },
@@ -722,6 +776,7 @@ export const SolarFlare = {
   name: 'Solar Flare',
   type: 'elemental',
   damage: 80,
+  accuracy: 90,
   speed: 15,
   cost: { energy: 8 },
   energyCost: 8,
@@ -736,6 +791,7 @@ export const SolarFlare = {
   notSoFast: {
     name: 'Heat Wave',
     type: 'debuff',
+    accuracy: 90,
     effect: {
       description: 'Generate a wave of heat to reduce the opponent’s defense',
       duration: '2 turns',
@@ -747,11 +803,13 @@ export const SolarFlare = {
     name: 'Supernova Blast',
     type: 'elemental',
     damage: 100,
+    accuracy: 90,
     speed: 18,
     cost: { energy: 10 },
     energyCost: 10,
     effect: {
-      description: 'Erupt in a powerful supernova, ensuring a burn on the opponent',
+      description:
+        'Erupt in a powerful supernova, ensuring a burn on the opponent',
       chance: '100%',
       result: 'burn',
     },
@@ -763,6 +821,7 @@ export const RadiantBeam = {
   name: 'Radiant Beam',
   type: 'elemental',
   damage: 70,
+  accuracy: 90,
   speed: 12,
   cost: { energy: 7 },
   energyCost: 7,
@@ -777,6 +836,7 @@ export const RadiantBeam = {
   notSoFast: {
     name: 'Blinding Light',
     type: 'debuff',
+    accuracy: 90,
     effect: {
       description: 'Blind the opponent, reducing their accuracy',
       duration: '1 turn',
@@ -788,11 +848,13 @@ export const RadiantBeam = {
     name: 'Solar Lance',
     type: 'elemental',
     damage: 85,
+    accuracy: 90,
     speed: 14,
     cost: { energy: 7 },
     energyCost: 8,
     effect: {
-      description: 'Concentrate solar energy into a lance, ensuring blinding the opponent',
+      description:
+        'Concentrate solar energy into a lance, ensuring blinding the opponent',
       chance: '100%',
       result: 'blind',
     },
@@ -804,6 +866,7 @@ export const SunShield = {
   name: 'Sun Shield',
   type: 'elemental',
   damage: 0, // No damage, defensive move
+  accuracy: 90,
   speed: 10,
   cost: { energy: 6 },
   energyCost: 6,
@@ -818,6 +881,7 @@ export const SunShield = {
   notSoFast: {
     name: 'Solar Rejuvenation',
     type: 'buff',
+    accuracy: 90,
     effect: {
       description: 'Use solar energy to gradually restore health',
       duration: '2 turns',
@@ -829,11 +893,13 @@ export const SunShield = {
     name: 'Radiant Barrier',
     type: 'elemental',
     damage: 0,
+    accuracy: 90,
     speed: 12,
     cost: { energy: 6 },
     energyCost: 7,
     effect: {
-      description: 'Fortify the shield with intense solar energy, ensuring damage reduction',
+      description:
+        'Fortify the shield with intense solar energy, ensuring damage reduction',
       chance: '100%',
       result: 'damage_reduction',
     },

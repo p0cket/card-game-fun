@@ -173,6 +173,6 @@ export const setupOpponent = (state, opponent) => {
     ...state,
     opponent: opponent,
   }
-  console.warn(`newState with opponent`, opponent, newState)
+  console.log(`sceneHandlers_new -> setupOpponent: newState with opponent`, opponent, newState)
   return newState
 }

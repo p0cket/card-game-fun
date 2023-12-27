@@ -8,7 +8,7 @@ const EnergyPaid = () => {
   const paid_continueOption = {
     label: 'Continue',
     onClick: () => {
-      console.warn(`Clicked Continue`, state)
+      console.log(`EnergyPaid: Clicked Continue, state`, state)
       executeMove(dispatch, {
         pal: state.attack.pal,
         move: state.attack.move,
@@ -22,7 +22,7 @@ const EnergyPaid = () => {
     },
   }
 
-  console.warn(`state, player`, state, state.game.player)
+  console.log(`EnergyPaid: state, player`, state, state.game.player)
   const dialogProps = {
     title: 'Energy Paid',
     message: `Your new energy level is ${state.game.player.energy}.`,
