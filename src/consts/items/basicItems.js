@@ -11,6 +11,11 @@
 //   // Add more items as needed
 // ],
 //   },
+import potionTestImg from '../../assets/items/item1.png'
+import item2 from '../../assets/items/item2.png'
+import item3 from '../../assets/items/item3.png'
+import item4 from '../../assets/items/item4.png'
+// import item5 from '../../assets/items/item5.png'
 
 export const stick = {
   name: 'Stick',
@@ -61,27 +66,47 @@ export const pumpernickelSoda = {
   description: 'A fizzy drink that restores 10 energy points.',
 }
 
-// const useItem = (itemName) => {
-//   // Find the item in the bag
-//   const item = bag.items.find((i) => i.name === itemName)
-//   if (item && item.quantity > 0) {
-//     console.log(`Using ${itemName}...`)
-//     // Apply the item's effect based on its type
-//     switch (item.type) {
-//       case 'healing':
-//         // Implement healing logic here
-//         break
-//       case 'rune':
-//         // Implement rune application logic here
-//         break
-//       // Handle other item types as needed
-//     }
-//     // Reduce the quantity of the item
-//     item.quantity -= 1
-//     // Update the game state with the new bag contents
-//     // This could involve dispatching a Redux action or
-//     // setting local state, depending on your setup
-//   } else {
-//     console.log(`You don't have any ${itemName} left.`)
-//   }
-// }
+export const sampleShopItems = [
+  {
+    id: 1,
+    name: 'Health Potion',
+    price: 50,
+    image: potionTestImg, // Replace with your image path
+    description: 'Restores 50 health points.',
+  },
+  {
+    id: 2,
+    name: 'Mana Potion',
+    price: 75,
+    image: item2,
+    description: 'Restores 30 mana points.',
+  },
+  {
+    id: 3,
+    name: 'Sword of Valor',
+    price: 200,
+    image: item3,
+    description: 'Increases attack power by 20.',
+  },
+  {
+    id: 4,
+    name: 'Shield of Fortitude',
+    price: 150,
+    image: item4,
+    description: 'Increases defense by 15.',
+  },
+  {
+    id: 5,
+    name: 'Mystic Orb',
+    price: 300,
+    image: item2,
+    description: 'Grants a 10% chance to dodge attacks.',
+  },
+  {
+    id: 6,
+    name: 'Phoenix Feather',
+    price: 500,
+    image: item3,
+    description: 'Revives a fallen monster with full health.',
+  },
+]

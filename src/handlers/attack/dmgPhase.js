@@ -59,31 +59,17 @@ export const dmgPhase = (state, attackPayload) => {
     const combinedAccuracy = (accuracy + palAccuracyStat) / 2
     console.warn(`🫠check attacker passed as human`, targetPal)
     console.log(
-      `Roll: ${roll} ${typeof roll} < ${accuracy} ${typeof accuracy} ${palAccuracyStat} ${typeof palAccuracyStat} / 2 = ${
+      `Roll: ${roll} < ${accuracy} ${palAccuracyStat} / 2 = ${
         roll < combinedAccuracy
       }. move:`,
       move,
     )
     if (roll < combinedAccuracy) {
       // Roll passes, apply weak if there is any,
-      // if(targetPal contains "weak"){
-      //   dmg is less by the amt of Weak
-      // }
 
-      //------
-      // TODO: Finish this by passing the runDmgHuman
-      // with another param for the amount to reduce dmg by
       let finalDmg = move.damage
+      // handle `weak` status
       finalDmg = ifWeakDoLessDamage(user, finalDmg)
-      //------------
-
-      // targetPal.status starts at   status: {}, then can contain weak
-      // weak:
-      //{description: 'Drain the opponents emotions to weaken them',
-      //   chance: 20,
-      //   result: 'weak',
-      //   duration: '1 turn',
-      //   amt: 20,}
 
       // then apply sheild if there is any
 

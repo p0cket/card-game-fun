@@ -22,6 +22,7 @@ import Carousel from '../effects/Carousel'
 import { palImages } from '../../consts/pals/images'
 import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_only_2_n.png'
 import FlashingImage from '../effects/misc/FlashingImage'
+import Shop from './Shop'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -147,6 +148,7 @@ const Intro = ({ dispatch }) => {
           >
             {gameVersion}
           </div>
+          {/* <Shop /> */}
           <div>
             <motion.div
               initial={{ opacity: 0 }}
