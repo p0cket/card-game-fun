@@ -1,12 +1,18 @@
 import React from 'react'
 import { useStateContext } from '../../MainContext'
 
+// /Users/pocket/Documents/Code/card-game-fun/src/assets/itemTestImages/itemsTone-4-column-3.png
+import runeImg_4_3 from '../../assets/itemTestImages/itemsTone-4-column-3.png'
+
 function HUDDetails() {
   const state = useStateContext()
   return (
-    <div className="flex gap-2 p-2 justify-center text-black bg-boy-green font-[silkscreen]">
+    <div className="flex gap-2 p-1 justify-center text-black bg-boy-green font-[silkscreen]">
       {state.bag.runes.map((rune, index) => (
-        <div key={index}>🏺{rune} </div>
+        <div key={index}>
+          {/* 🏺{rune} */}
+          <img src={runeImg_4_3} alt="rune"  className="w-6 h-6 border border-gray-200" />{' '}
+        </div>
       ))}
       {state.current.scene.details.trainer.name}
       {/* {JSON.stringify(

@@ -55,6 +55,7 @@ export const applyParalysis = (target, effectValue) => {
   return target
 }
 // Apply blind effect to the target
+
 export const applyBlind = (target, effectValue) => {
   console.log(`applying blind to ${target.name}, chance: ${effectValue}`)
   target.status = {
@@ -64,9 +65,9 @@ export const applyBlind = (target, effectValue) => {
       amt: effectValue,
     },
   }
-  console.log(`target after applying blind but not accuracy change: `,target)
+  console.log(`target after applying blind but not accuracy change: `, target)
   target = modifyPalAccuracy(target, effectValue)
-  console.log(`target after accuracy change: `,target)
+  console.log(`target after accuracy change: `, target)
 
   return target
 }
@@ -82,6 +83,33 @@ export const removeBlind = (target, effectValue) => {
   }
   target = modifyPalAccuracy(target, -effectValue)
   return target
+}
+
+// This function applies the 'weak' status to a pal
+const applyWeak = (pal, weakAmt) => {
+  if (!pal.status) {
+    pal.status = {}
+  }
+  pal.status.weak = {
+    active: true, // Indicating that the weak status is currently active.
+    amt: weakAmt, // The amount by which the damage will be reduced.
+  }
+  console.log(
+    `Applying 'weak' status, reducing damage by ${weakAmt} to ${pal.name}`,
+  )
+  return pal
+}
+
+// This function removes the 'weak' status from a pal
+const removeWeak = (pal) => {
+  if (pal.status && pal.status.weak) {
+    console.log(`Removing 'weak' status from ${pal.name}`)
+    delete pal.status.weak
+  } else {
+    console.log(`No 'weak' status found on ${pal.name} to remove`)
+  }
+
+  return pal
 }
 
 // this is probably elsewhere
@@ -250,6 +278,26 @@ const applyStatusToPal = (
     //     statusValue,
     //   )
     //   return palToApplyTo
+    case 'weak':
+      // only apply if 'weak' does not exist or 'weak.active' is not true
+      if (
+        !(
+          palToApplyTo.status &&
+          palToApplyTo.status.weak &&
+          palToApplyTo.status.weak.active
+        )
+      ) {
+        console.log(
+          `Status result: ${statusResult} Status value: ${statusValue}`,
+        )
+        console.log(
+          `Monster before applying weak to ${palToApplyTo.name}:`,
+          palToApplyTo,
+        )
+        palToApplyTo = applyWeak(palToApplyTo, statusValue) // Assuming applyWeak function exists
+        console.log(`Monster after applying weak:`, palToApplyTo)
+      }
+      return palToApplyTo
     case 'blind':
       // only apply if 'blind' does not exist or 'blind.active' is not true
       if (
@@ -259,8 +307,13 @@ const applyStatusToPal = (
           palToApplyTo.status.blind.active
         )
       ) {
-        console.log(`Status result: ${statusResult} Status value: ${statusValue}`)
-        console.log(`Monster before applying blind to ${palToApplyTo.name}:`, palToApplyTo)
+        console.log(
+          `Status result: ${statusResult} Status value: ${statusValue}`,
+        )
+        console.log(
+          `Monster before applying blind to ${palToApplyTo.name}:`,
+          palToApplyTo,
+        )
         palToApplyTo = applyBlind(palToApplyTo, statusValue)
         console.log(`Monster after applying blind:`, palToApplyTo)
       }

@@ -73,10 +73,10 @@ export const dmgPhase = (state, attackPayload) => {
       //------
       // TODO: Finish this by passing the runDmgHuman
       // with another param for the amount to reduce dmg by
-      // let finalDmg = move.dmg
-      // finalDmg = checkAndApplyWeaknessToDmg(user, finalDmg)
-
+      let finalDmg = move.damage
+      finalDmg = ifWeakDoLessDamage(user, finalDmg)
       //------------
+
       // targetPal.status starts at   status: {}, then can contain weak
       // weak:
       //{description: 'Drain the opponents emotions to weaken them',
@@ -92,7 +92,7 @@ export const dmgPhase = (state, attackPayload) => {
         newState,
         targetPal,
         move,
-        pal,
+        finalDmg,
       ) //stuff here
       console.groupEnd()
       return damageAppliedFromHumanState
@@ -123,8 +123,17 @@ export const dmgPhase = (state, attackPayload) => {
       move,
     )
     if (roll < combinedAccuracy) {
+      // We're getting rid of some dmg if buffed here
+      let finalDmg = move.damage
+      finalDmg = ifWeakDoLessDamage(user, finalDmg)
+
       // Roll passes, apply damage
-      const damageAppliedFromAIState = runDmgAI(newState, targetPal, move, pal) //stuff here
+      const damageAppliedFromAIState = runDmgAI(
+        newState,
+        targetPal,
+        move,
+        finalDmg,
+      ) //stuff here. pal
       console.groupEnd()
       return damageAppliedFromAIState
     } else {
@@ -137,12 +146,12 @@ export const dmgPhase = (state, attackPayload) => {
   }
 }
 
-const runDmgHuman = (newState, targetPal, move) => {
+const runDmgHuman = (newState, targetPal, move, dmgAmt) => {
   console.log(`ATK: DMG phase: targetPal, move`, targetPal, move)
   // add the Effects Handler here:
   //  newState = dmgEffectsHandler(newState, pal, 0)
   const moveCost = move.cost.energy
-  ourDmg = move.damage
+  ourDmg = dmgAmt
   damagedHP = targetPal.stats.hp - ourDmg
   console.warn(
     `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
@@ -151,33 +160,33 @@ const runDmgHuman = (newState, targetPal, move) => {
     `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${damagedHP}`,
     newState,
   )
-  newState = createAIDamagedState(newState, damagedHP, moveCost, move)
+  newState = createAIDamagedState(newState, damagedHP)
   console.log(`createAIDamagedState:`, newState)
 
   newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_AI)
   console.log(`dmg after the createAIDamagedState:`, newState)
   return newState
 }
-const runDmgAI = (newState, targetPal, move) => {
+const runDmgAI = (newState, targetPal, move, dmgAmt) => {
   console.log(`Player is AI: newState.userParty`, newState.userParty)
   const moveCost = move.cost.energy
   console.log(
     `ATK: DMG phase: targetPal, move`,
     targetPal,
     move,
-    `The AI damage to be dealt is ${move.damage}.
+    `The AI damage to be dealt is ${dmgAmt}.
 This will result in targetPal.stats.hp (${targetPal.stats.hp})
- at: ${targetPal.stats.hp - move.damage}`,
+ at: ${targetPal.stats.hp - dmgAmt}`,
   )
-  damagedHP = targetPal.stats.hp - move.damage
-  newState = createHumanDamagedState(newState, damagedHP, moveCost, move)
+  damagedHP = targetPal.stats.hp - dmgAmt
+  newState = createHumanDamagedState(newState, damagedHP)
   newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN)
   console.log(`After createHumanDamagedState:`, newState)
   console.log(`ATK: DAMAGE phase ending:`, newState)
   return newState
 }
 
-const checkAndApplyWeaknessToDmg = (userPal, dmg) => {
+const ifWeakDoLessDamage = (userPal, dmg) => {
   if (userPal.status && userPal.status.weak) {
     console.log(
       `Applying weakness, reducing damage by ${userPal.status.weak.amt}`,

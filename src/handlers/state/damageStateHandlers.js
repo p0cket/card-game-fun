@@ -14,22 +14,17 @@ import { ATK_PHASES } from '../moveHandlers'
 export const createAIDamagedState = (
   ourState,
   damagedHP,
-  moveCost,
-  move,
-  pal,
 ) => {
-  console.log(
-    'createAIDamagedState:',
-    ourState,
-    'damagedHP:',
-    damagedHP,
-    'moveCost:',
-    moveCost,
-    'move:',
-    move,
-    'pal:',
-    pal,
-  )
+  // console.log(
+  //   'createAIDamagedState:',
+  //   ourState,
+  //   'damagedHP:',
+  //   damagedHP,
+  //   'move:',
+  //   move,
+  //   'pal:',
+  //   pal,
+  // )
   console.log('ourState.opponent.monsters[0], damagedHP', ourState.opponent.monsters[0], damagedHP)
   
   let resultState = {
@@ -55,26 +50,20 @@ export const createAIDamagedState = (
 export const createHumanDamagedState = (
   ourState,
   damagedHP,
-  moveCost,
-  move,
-  pal,
-  contextualDispatch,
 ) => {
-  console.log(
-    'Entered createHumanDamagedState:',
-    'ourState:',
-    ourState,
-    'damagedHP:',
-    damagedHP,
-    'moveCost:',
-    moveCost,
-    'move:',
-    move,
-    'pal:',
-    pal,
-    'contextualDispatch:',
-    contextualDispatch,
-  )
+  // console.log(
+  //   'Entered createHumanDamagedState:',
+  //   'ourState:',
+  //   ourState,
+  //   'damagedHP:',
+  //   damagedHP,
+  //   'move:',
+  //   move,
+  //   'pal:',
+  //   pal,
+  //   'contextualDispatch:',
+  //   contextualDispatch,
+  // )
   console.log('ourState.userParty[0]:', ourState.userParty[0], ourState)
   let resultState = {
     ...ourState,
