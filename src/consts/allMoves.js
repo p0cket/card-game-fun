@@ -311,7 +311,7 @@ export const WiseGaze = {
     // result: 'confuse',
     result: 'weak',
     duration: '1 turn',
-    amt: 20,
+    amt: 8,
   },
   priority: 'medium',
   targets: ['opponent'],
