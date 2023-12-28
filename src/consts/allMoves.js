@@ -308,7 +308,8 @@ export const WiseGaze = {
   effect: {
     description: 'Pierces the opponent with a wise and penetrating gaze',
     chance: 90,
-    result: 'confuse',
+    // result: 'confuse',
+    result: 'weak',
     duration: '1 turn',
     amt: 20,
   },
@@ -559,7 +560,7 @@ export const EmotionDrain = {
   effect: {
     description: 'Drain the opponents emotions to weaken them',
     chance: 20,
-    result: 'debuff',
+    result: 'weak',
     duration: '1 turn',
     amt: 20,
   },

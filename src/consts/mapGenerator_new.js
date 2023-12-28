@@ -24,8 +24,16 @@ export const levels = [
     id: 3,
     title: 'You venture deep',
     options: [
-      { id: '3a', description: 'Fight an even harder monster', scene: SCENES.BATTLE },
-      { id: '3b', description: 'Find another treasure', scene: SCENES.TREASURE },
+      {
+        id: '3a',
+        description: 'Fight an even harder monster',
+        scene: SCENES.BATTLE,
+      },
+      {
+        id: '3b',
+        description: 'Find another treasure',
+        scene: SCENES.TREASURE,
+      },
     ],
   },
   {
@@ -34,16 +42,26 @@ export const levels = [
     options: [
       { id: '4a', description: 'Fight a thug', scene: SCENES.BATTLE },
       { id: '4b', description: 'Enter a shop', scene: SCENES.SHOP },
-      { id: '4c', description: 'Find another treasure', scene: SCENES.TREASURE },
+      {
+        id: '4c',
+        description: 'Find another treasure',
+        scene: SCENES.TREASURE,
+      },
     ],
   },
   {
     id: 5,
     title: 'You pay a great price',
     options: [
-      { id: '5a', description: '???', scene: SCENES.MYSTERY }, // You may want to specify a different scene here.
+      // { id: '5a', description: '???', scene: SCENES.MYSTERY }, // You may want to specify a different scene here.
+      { id: '5a', description: 'Fight a monster', scene: SCENES.BATTLE },
+
       { id: '5b', description: 'Enter a shop', scene: SCENES.SHOP },
-      { id: '5c', description: 'Find another treasure', scene: SCENES.TREASURE },
+      {
+        id: '5c',
+        description: 'Find another treasure',
+        scene: SCENES.TREASURE,
+      },
     ],
   },
   {
@@ -52,7 +70,11 @@ export const levels = [
     options: [
       { id: '6a', description: 'Fight a thug', scene: SCENES.BATTLE },
       { id: '6b', description: '???', scene: SCENES.MYSTERY }, // You may want to specify a different scene here.
-      { id: '6c', description: 'Find another treasure', scene: SCENES.TREASURE },
+      {
+        id: '6c',
+        description: 'Find another treasure',
+        scene: SCENES.TREASURE,
+      },
     ],
   },
   {
@@ -61,11 +83,14 @@ export const levels = [
     options: [
       { id: '7a', description: 'Fight a thug', scene: SCENES.BATTLE },
       { id: '7b', description: 'Enter a shop', scene: SCENES.SHOP },
-      { id: '7c', description: 'Find another treasure', scene: SCENES.TREASURE },
+      {
+        id: '7c',
+        description: 'Find another treasure',
+        scene: SCENES.TREASURE,
+      },
     ],
   },
-];
-
+]
 
 export function generateNextLevelOptions() {
   const options = []

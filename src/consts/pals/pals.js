@@ -559,7 +559,7 @@ export const Ticklefairy = {
   cost: 400,
   lvl: 40,
   experience: 4000,
-  status: { test: true },
+  status: {  },
   moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
