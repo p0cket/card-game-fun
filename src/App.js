@@ -47,7 +47,7 @@ export default function App() {
           // uncommenting this causes the real estate to be too small
           // to contain the contents.
           // fix or make contents smaller
-          // height: '100vh',
+          height: '100vh',
           margin: '0 auto',
           display: 'flex', // Added for potential flexbox centering
           justifyContent: 'center', // Center content horizontally in a flex container
@@ -66,11 +66,9 @@ export default function App() {
         {/* <NotEnoughEnergy /> */}
        {state.dialog ? <DialogManager current={state.dialog.type} /> : ""}
         <GeneralPopup message={message} />
-
-        
         {/* <SpiralTransition delay={1} /> */}
         {/* <ChallengerScreen challengerName={"Mr Steven"} challengerImage={palImages[2]} /> */}
-        <Screen gameData={gameDataOld} dispatch={dispatchOld} map={map} />
+        <div style={{width: "100%"}}><Screen gameData={gameDataOld} dispatch={dispatchOld} map={map} /></div>
       </div>
     </div>
   )

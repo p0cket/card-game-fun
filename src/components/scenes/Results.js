@@ -13,7 +13,7 @@ import {
   SunShield,
 } from '../../consts/allMoves'
 
-function Results({ experience = 100 }) {
+function Results({ experience = 100, pal, isBoss = false }) {
   const [selectedItem, setSelectedItem] = useState(null)
   const [selectedMove, setSelectedMove] = useState(null)
   const [selectedModification, setSelectedModification] = useState(null)

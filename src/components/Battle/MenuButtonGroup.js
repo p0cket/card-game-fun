@@ -16,11 +16,6 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
     const useItem = (item) => {
       if (item.qty > 0) {
         console.log(`Using ${item.contents.name}...`)
-        //dispatch{type: USE_ITEM, payload: item}
-        // bag: {
-        //   runes: ['Stick', `Coat of harms`],
-        //   items: [
-        //     { contents: apple, quantity: 1 },
         contextualDispatch({
           type: 'USE_ITEM',
           payload: item,

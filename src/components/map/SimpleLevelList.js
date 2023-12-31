@@ -28,7 +28,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
     console.log(`func: loadNextLevel()`)
 
     const nextSceneState = updateScene(state, {
-      screen: SCENES.BOSS,
+      screen: SCENES.BATTLE,
       details: bossConfig,
     })
     const nextLevelState = updateLevel(nextSceneState, 1)
@@ -43,16 +43,6 @@ function SimpleLevelList({ levels, onOptionSelected }) {
     const selectedTrainer = randomlySelectTrainer(allTrainers)
     console.log(`selectedTrainer`, selectedTrainer, allTrainers)
     console.table(selectedTrainer)
-    // somewhere with level, option, theres enough info to create
-    // a switch statement to change the level to the right place. Heres the shape:
-    // export const levels = [
-    //   {
-    //     id: 1,
-    //     title: 'The Path Begins',
-    //    options: [
-    // { id: '1a', description: 'Fight a monster', scene: SCENES.BATTLE },
-    //  ],
-    //   },
     console.log(`level, option`, level, option)
     switch (option.scene) {
       case SCENES.BATTLE:
