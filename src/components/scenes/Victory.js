@@ -5,23 +5,35 @@ import './Victory.css'
 // import {pocket2} from "./Pocket.png"
 const Victory = () => {
   return (
-    <div className="victory-screen">
-      {/* <img src={pocket2} alt="Developer of the game" /> */}
-      <h1>Congratulations, you have defeated the (current) game!</h1>
-      <p>Your victory is a testament to your skill and determination.</p>
-      <div>Results</div>
-      <div>This and this happened</div>
-      <div>Your recieved this and this and this for winning</div>
-      <div>
-        your pals ___ and ___ leveled up and or learnt a thing. You recieved a
-        TM or something
+    <div className="victory-screen bg-green-200 p-8 rounded-lg shadow-md max-w-2xl mx-auto text-center">
+      <h1 className="text-4xl font-bold text-green-800 mb-6">
+        Congratulations, Champion!
+      </h1>
+      <p className="text-lg text-green-600 mb-4">
+        Your strategic mastery has led you to victory!
+      </p>
+      <div className="font-medium text-green-700">
+        <p className="mb-2">Achievements:</p>
+        <ul className="list-disc list-inside">
+          <li>Completed Some challenges</li>
+          <li>Received exclusive rewards</li>
+          <li>Pal companions have grown stronger</li>
+        </ul>
       </div>
-      <div>prize choice 1</div>
-      <button>Claim prize</button>
-      <div>prize choice 2</div>
-      <button>Claim prize</button>
-      <div>prize choice 3</div>
-      <button>Claim prize</button>
+      <div className="mt-6">
+        <p className="font-semibold text-green-700 mb-2">Select your prize:</p>
+        <div className="flex flex-col space-y-4">
+          <button className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors">
+            Prize Option 1
+          </button>
+          <button className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors">
+            Prize Option 2
+          </button>
+          <button className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors">
+            Prize Option 3
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

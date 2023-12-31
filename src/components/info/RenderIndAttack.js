@@ -34,8 +34,6 @@ function RenderIndAttack({
   const runMove = (move, pal) => {
     console.log(`runMove:  togglePopup`, togglePopup)
     togglePopup()
-    // contextualDispatch({ type: ACTIONS.CLOSE_POPUP })
-
     console.log('executeMove params:',contextualDispatch, {
       pal: pal,
       move: move,
@@ -58,40 +56,42 @@ function RenderIndAttack({
     })
   }
   const renderBasic = (move, pal) => {
+    const {name, damage, speed, accuracy, effect, targets, cost} = move
+    // const {result, chance, duration, amt, description} = effect
     return (
       <div className="bg-boy-lightgreen p-1 rounded shadow">
         <div className="flex justify-between mb-2">
           <div className="p-1 m-1 bg-green-600">
-            <img src={stunImg} alt={move.name} className="w-28" />
+            <img src={stunImg} alt={name} className="w-28" />
           </div>
           <table>
             <tbody>
               <tr>
                 <td className="text-gray-600 text-left">Damage:</td>
-                <td>{move.damage}</td>
+                <td>{damage}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td className="text-gray-600 text-left">Speed:</td>
-                <td>{move.speed}</td>
-              </tr>
+                <td>{speed}</td>
+              </tr> */}
               <tr>
                 <td className="text-gray-600 text-left">Accuracy:</td>
-                <td>95%</td>
+                <td>{accuracy}%</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div className="text-left">
-          <div className="mb-2">{move.effect.description}</div>
-          <div>{`May ${move.effect.result} (${move.effect.chance})`}</div>
-          <div>Targets: {move.targets.join(', ')}</div>
+          <div className="mb-2">{effect.description}</div>
+          <div>{`${effect.chance}% Chance: May ${effect.result} attacks by ${effect.amt} `}</div>
+          <div>Targets: {targets.join(', ')}</div>
         </div>
         <div className="flex gap-2">
           <button
             className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
             onClick={() => runMove(attack, pal)}
           >
-            Use ({attack.cost.energy} {energyEmoji})
+            Use ({cost.energy} {energyEmoji})
           </button>{' '}
           <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
             +

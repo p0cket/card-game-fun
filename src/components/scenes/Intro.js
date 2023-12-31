@@ -21,6 +21,7 @@ import Chibipal from '../../assets/Chibipal.png'
 import Carousel from '../effects/Carousel'
 import { palImages } from '../../consts/pals/images'
 import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_only_2_n.png'
+import gashTrainerImg from '../../assets/actors/Gash.png'
 import FlashingImage from '../effects/misc/FlashingImage'
 import Shop from './Shop'
 
@@ -161,7 +162,10 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm text-green-300">Friendship Edition</div>
             </motion.div>
           </div>
-          <Carousel ourImages={palImages} />
+          <div className="grid grid-cols-2 items-center gap-4">
+            <Carousel ourImages={palImages} />
+            <img src={gashTrainerImg} alt="gash trainer" />
+          </div>
           {/* <img src={palImages[0]} alt="pal logo" /> */}
           {/* <FlashingImage
             src={palImages[0]}

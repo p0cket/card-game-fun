@@ -1,3 +1,5 @@
+import { EFFECTS } from "../effects"
+
 export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
   type: 'elemental',
@@ -310,6 +312,7 @@ export const WiseGaze = {
     chance: 90,
     // result: 'confuse',
     result: 'weak',
+    // resutl: EFFECTS.WEAK,
     duration: '1 turn',
     amt: 8,
   },
@@ -363,7 +366,7 @@ export const FeatherGlide = {
     chance: 10,
     result: 'stun',
     duration: '1 turn', // Added duration
-    amt: 20, // Added amt (assuming 20 as an example value)
+    amt: 12, // Added amt (assuming 20 as an example value)
   },
   priority: 'medium',
   targets: ['opponent'],

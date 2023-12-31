@@ -17,11 +17,15 @@ export const EFFECTS = {
   // Apply Battle-long effect that takes away some damage player will recieve
   EVADE: "evade",
   // Apply percentage chance that player does not receive damage
-  WEAKENED: "weakened",
+  WEAK: "weakened",
   // Apply a amt of damage that is weakens the enemy
   // STACKING: "stacking",
   ENERGIZE: "energize",
   // Gain more energy
   AURA: "aura",
   // If this card is in hand, apply effect on it to other cards in hand
+  STACKING: "stacking",
+  // If this card is in hand, apply effect on it to other cards in hand
+  BLIND: "blind",
+  // Apply blind effect to the target. Causes Accuracy to be lower
 }
