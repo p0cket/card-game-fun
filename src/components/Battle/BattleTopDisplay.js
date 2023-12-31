@@ -115,81 +115,66 @@ export default function BattleTopDisplay() {
     // status,
   } = currentMon
   return (
-    <div className="flex p-1 mx-2 bg-boy-green">
-      <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
-        <div className="text-2xl">
-          {name}
-          <span className="text-gray-500 text-sm">lvl{lvl}</span>
-        </div>
-        <div>
-          {state.opponent.monsters[0].stats.hp}HP
-          <progress
-            id="health"
-            value={state.opponent.monsters[0].stats.hp}
-            // max={stats.max_hp}
-            max={state.opponent.monsters[0].stats.max_hp}
-            style={{
-              backgroundColor: '#4caf50',
-              color: '#9faf4c',
-            }}
-          />
-        </div>
-        <div className="text-xs">
-          {Object.keys(currentMonDetailsStatuses).map((key) => {
-            if (currentMonDetailsStatuses[key]) {
-              return (
-                <span
-                  className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
-                  key={key}
-                >
-                  {key}
-                  <span className="text-green-100">
-                    {currentMonDetailsStatuses[key].amt}
-                  </span>
-                </span>
-              )
-            } else {
-              console.log(`${key} is false`)
-              return (
-                <span className="text-gray-500" key={key}>
-                  {key}
-                </span>
-              )
-            }
-          })}
-        </div>
-        {isAttackPopupVisible && (
-          <div
-            className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10"
-            onClick={closeAttackPopup}
-          >
-            <div className="bg-lightgreen shadow-md p-5 rounded">
-              <AttackPopup
-                name={moves[0].name} // Pass the attack details here
-                damage="30"
-                description="An example attack description."
-                energyCost="10"
-                onAttackClick={closeAttackPopup}
-                closeAttackPopup={closeAttackPopup}
-                removeAttackButton={false}
-                attack={moves[0]}
+    <div className="flex px-2 mx-2 justify-around bg-boy-green text-8px">
+      <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
+        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
+          <div>
+            <div className="flex items-start text-2xl">
+              {currentMon.name}
+              <span className="text-xs text-gray-500">lvl{currentMon.lvl}</span>
+            </div>
+            <div className="flex items-start">
+              {currentMon.stats.hp}HP
+              <progress
+                id="health"
+                value={currentMon.stats.hp}
+                max={currentMon.stats.max_hp}
+                className="bg-boy-green"
               />
             </div>
           </div>
-        )}
+          <div>
+            <div>
+              {Object.keys(currentMon.status).map((key) => {
+                if (currentMon.status[key]) {
+                  return (
+                    <span
+                      className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
+                      key={key}
+                    >
+                      {key}
+                    </span>
+                  )
+                } else {
+                  console.log(`${key} is false`)
+                  return (
+                    <span className="text-gray-500" key={key}>
+                      {key}
+                    </span>
+                  )
+                }
+              })}
+            </div>
+            <ul className="text-sm flex flex-col justify-start align-start"></ul>
+          </div>
+        </div>
       </div>
       <div
-        className="flex flex-col items-center mx-2 flex-grow-2 bg-center bg-no-repeat bg-cover"
-        style={{ backgroundImage: `url(${bg1})` }}
+        className="flex flex-col items-center flex-grow"
+        style={{
+          backgroundImage: `url(${bg1})`,
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+        }}
       >
         <motion.img
-          style={{ width: 180, height: 150 }}
+          // className="w-45 h-38"
           animate="visible"
           whileHover="hover"
           variants={yourVariants}
-          // src={img}
-          src={image}
-          alt="Enemy Frontside"
+          src={currentMon.image}
+          alt="Your Chibipal"
         />
       </div>
     </div>

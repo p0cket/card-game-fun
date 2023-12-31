@@ -66,14 +66,13 @@ const Battle = () => {
   return (
     <div className="flex flex-col max-w-[500px]">
       <div>
-        <HUDDetails />
+        <HUDDetails /> <HUDHeader />
+        {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
+        <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
         <div
           className="font-silkscreen flex flex-wrap items-center"
           style={{ fontFamily: 'Silkscreen' }}
         >
-          <HUDHeader />
-          {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
-          <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
           <BattleTopDisplay gameData={gameData} />
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
           <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
@@ -96,8 +95,8 @@ const Battle = () => {
           party={
             // () => { console.log(`ourParty where slice doesn't work`, ourParty)
             ourParty.slice(1)
-          // }
-        }
+            // }
+          }
           userFlag={true}
         />
         <div
