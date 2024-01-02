@@ -73,7 +73,7 @@ const Battle = () => {
           className="font-silkscreen flex flex-wrap items-center"
           style={{ fontFamily: 'Silkscreen' }}
         >
-          <BattleTopDisplay gameData={gameData} />
+          <BattleTopDisplay gameData={gameData}/>
           <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
           <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
         </div>

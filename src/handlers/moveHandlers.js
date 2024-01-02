@@ -137,7 +137,7 @@ export const executeAITurn = (state, dispatch, details = null) => {
     //possessed: false,
   }
 
-console.warn(`payload bfore execute`, result)
+console.log(`payload bfore executing AI move`, result)
   executeMove(dispatch, result)
 }
 

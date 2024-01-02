@@ -1,6 +1,7 @@
 // damageStateHandlers.js
 
 import { PLAYERS } from '../../consts/consts'
+import { EFFECTS } from '../../effects'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
 // Apply poison effect to the target
@@ -79,6 +80,7 @@ export const removeBlind = (target, effectValue) => {
     blind: {
       active: false,
       amt: effectValue,
+      name: EFFECTS.BLIND,
     },
   }
   target = modifyPalAccuracy(target, -effectValue)
@@ -93,9 +95,10 @@ const applyWeak = (pal, weakAmt) => {
   pal.status.weak = {
     active: true, // Indicating that the weak status is currently active.
     amt: weakAmt, // The amount by which the damage will be reduced.
+    name: EFFECTS.WEAK,
   }
   console.log(
-    `Applying 'weak' status, reducing damage by ${weakAmt} to ${pal.name}`,
+    `Applying 'weak' status, now damage dealt by ${pal.name} will be reduced by ${weakAmt}`,
   )
   return pal
 }

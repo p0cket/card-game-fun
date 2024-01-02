@@ -20,9 +20,9 @@ const Cleanup = () => {
     }),
   }
   const cleanupProps = {
-    title: `___ cleanup (to human)`,
-    header: `___ cleanup (to human)`,
-    message: `cleanup of ____ to human`,
+    title: `Cleanup`,
+    header: `Cleanup`,
+    message: `any end turn effects resolve now.`,
     options: [cleanup_continueOption],
   }
   return <DialogTemplate {...cleanupProps} />

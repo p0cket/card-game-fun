@@ -56,7 +56,7 @@ const StatusAppliedHuman = () => {
   const statusAppliedProps = {
     title: `Status Applied`,
     header: `Status Applied!`,
-    message: `Status applied to HUMAN. Pal's statuses are now to ${Object.keys(
+    message: `Status applied to you. Your Pal's statuses are now to ${Object.keys(
       state.attack.pal.status,
     ).join(', ')}`,
     options: [status_ok],

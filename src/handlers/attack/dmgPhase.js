@@ -69,7 +69,12 @@ export const dmgPhase = (state, attackPayload) => {
 
       let finalDmg = move.damage
       // handle `weak` status
+      console.log(
+        `HUMAN hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`,
+      )
       finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      newState = lowerAttackDamageInState(newState, user, finalDmg)
+      console.log(` dmg is ${finalDmg} after ifWeakDoLessDamage`)
 
       // then apply sheild if there is any
 
@@ -111,7 +116,11 @@ export const dmgPhase = (state, attackPayload) => {
     if (roll < combinedAccuracy) {
       // We're getting rid of some dmg if buffed here
       let finalDmg = move.damage
+      console.log(`AI hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`)
+      // #TODO:  consolidate these two
       finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      newState = lowerAttackDamageInState(newState, user, finalDmg)
+      console.log(`dmg is ${finalDmg} after ifWeakDoLessDamage`)
 
       // Roll passes, apply damage
       const damageAppliedFromAIState = runDmgAI(
@@ -175,9 +184,54 @@ This will result in targetPal.stats.hp (${targetPal.stats.hp})
 const ifWeakDoLessDamage = (userPal, dmg) => {
   if (userPal.status && userPal.status.weak) {
     console.log(
-      `Applying weakness, reducing damage by ${userPal.status.weak.amt}`,
+      `Applying weakness, reducing damage (${dmg}) by ${
+        userPal.status.weak.amt
+      }. Dmg is now ${dmg - userPal.status.weak.amt}`,
     )
     dmg -= userPal.status.weak.amt
   }
+  console.log(`dmg result: ifWeakDoLessDamage: ${dmg}`)
   return dmg
+}
+
+const lowerAttackDamageInState = (newState, userPal, newDmgAmt) => {
+  // Adjusts the damage in the state and returns the updated state object.
+  if (userPal.status && userPal.status.weak) {
+    console.log(
+      `Applying weakness, reducing damage (${newDmgAmt}) by ${
+        userPal.status.weak.amt
+      }. newDmgAmt is now ${newDmgAmt - userPal.status.weak.amt}`,
+    )
+    // newDmgAmt -= userPal.status.weak.amt
+    newState = {
+      ...newState,
+      attack: {
+        ...newState.attack,
+        move: {
+          ...newState.attack.move,
+          damage: newDmgAmt - userPal.status.weak.amt,
+        },
+      },
+    }
+  }
+  // apply the weak to the attack itself
+  newState = appendAttackDebuffState(newState, userPal.status.weak)
+  console.log(`newDmgAmt result sate after lowerDamageByWeak`, newState)
+  return newState // Returns the full state object with the new damage applied.
+}
+const appendAttackDebuffState = (newState, debuff) => {
+  newState = {
+    ...newState,
+    attack: {
+      ...newState.attack,
+      debuffs: newState.attack.debuffs
+        ? [...newState.attack.debuffs, debuff]
+        : [debuff],
+    },
+  }
+  console.log(
+    `newState result after appending debuff: appendAttackDebuffState`,
+    newState,
+  )
+  return newState
 }

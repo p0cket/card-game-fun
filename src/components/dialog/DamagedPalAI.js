@@ -9,7 +9,7 @@ const DamagedPalAI = () => {
   const dmg_continueOption = {
     label: 'Continue',
     onClick: () => {
-      console.warn('dmg_continueOption onClick: state.attack', state.attack)
+      console.log('dmg_continueOption onClick: state.attack', state.attack)
       executeMove(dispatch, {
         pal: state.attack.pal,
         move: state.attack.move,
@@ -25,7 +25,7 @@ const DamagedPalAI = () => {
   const aiPalDamagedDialogProps = {
     title: 'AI Pal Damaged',
     header: 'AI Pal took damage',
-    message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage (AI reduced to ${state.opponent.monsters[0].stats.hp})`,
+    message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage. Result: ${state.opponent.monsters[0].stats.hp}HP`,
     options: [dmg_continueOption],
   }
 

@@ -115,7 +115,7 @@ export default function BattleTopDisplay() {
     // status,
   } = currentMon
   return (
-    <div className="flex px-2 mx-2 justify-around bg-boy-green text-8px">
+    <div className="flex px-2 mx-2 pb-1 justify-around bg-boy-green text-8px ">
       <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
         <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
           <div>
