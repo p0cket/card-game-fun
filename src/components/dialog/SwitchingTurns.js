@@ -6,7 +6,8 @@ import {
   executeMove,
 } from '../../handlers/moveHandlers'
 import { useDispatchContext, useStateContext } from '../../MainContext'
-const SwitchingTurns = ({whosTurn}) => {
+import { PLAYERS } from '../../consts/consts'
+const SwitchingTurns = ({ whosTurn }) => {
   console.log(`SwitchingTurns: whosTurn`, whosTurn)
   const state = useStateContext()
   const dispatch = useDispatchContext()
@@ -31,9 +32,11 @@ const SwitchingTurns = ({whosTurn}) => {
   //   ]
 
   const switchingTurnsProps = {
-    title: ` switchingTurns to ${whosTurn}`,
-    header: ` switchingTurns to ${whosTurn}`,
-    message: `switchingTurns to ${whosTurn}`,
+    title: `Switching Turns to ${whosTurn === PLAYERS.AI ? 'them' : 'You'}`,
+    header: `Switching Turns to ${whosTurn}`,
+    message: `Turn over. next up is ${
+      whosTurn === PLAYERS.AI ? 'the Enemy' : 'your turn'
+    }`,
     options: [switchingTurns_continueOption],
   }
   //   newState = createPopupVisibleState({

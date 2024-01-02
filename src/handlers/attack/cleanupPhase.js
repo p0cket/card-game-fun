@@ -33,6 +33,7 @@ export const cleanupPhase = (state, attackPayload) => {
     state = switchDialog(state, DIALOGS.CLEANUP_AI)
   }
   console.log(`effects: phase ending`)
+  console.groupEnd()
   return state
 }
 // const stateWithStatusesApplied = applyStatuses(move, pal) // switch(move.statuses)

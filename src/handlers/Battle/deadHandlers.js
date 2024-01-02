@@ -3,7 +3,7 @@ import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
 import { SCENES, changeLevel, updateScene } from '../sceneHandlers_new'
 
 export const checkIfDead = (state) => {
-  console.warn('checking if user pal is dead', state, state.userParty, state.userParty[0])
+  console.log('checking if user pal is dead', state, state.userParty, state.userParty[0])
 
   if (state.userParty[0].stats.hp <= 0) {
     state = {

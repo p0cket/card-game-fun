@@ -22,7 +22,7 @@ const StatusAppliedAI = () => {
       }),
   }
   const status_ok = {
-    label: `ok, status lands on AI`,
+    label: `Great! I landed a status`,
     onClick: () => {
       console.log('statusOptions onClick: state.attack', state.attack)
       executeMove(dispatch, {
@@ -54,9 +54,9 @@ const StatusAppliedAI = () => {
     },
   }
   const statusAppliedProps = {
-    title: `Status Applied`,
-    header: `Status Applied!`,
-    message: `Status applied to AI.  Pal's statuses are now: ${Object.keys(state.opponent.monsters[0].status).join(', ')}`,
+    title: `Status Applied to enemy`,
+    header: `You applied Statuses!`,
+    message: `Status applied! Enemy Pal's statuses are now: ${Object.keys(state.opponent.monsters[0].status).join(', ')}`,
     options: [status_ok],
   }
   return <DialogTemplate {...statusAppliedProps} />
