@@ -68,28 +68,27 @@ function Map() {
     )
   }
   return (
-    <div className="font-[silkscreen] text-white m-1 text-center">
-      <div className="bg-green-500 rounded p-1 mb-1">
-        <h2 className="text-2xl mb-1">Map to the top</h2>
-        <SimpleLevelList levels={levels} />
-        {/* <div>
-          {contextualState.current.completedLevels.map((lvl, index) => {
-            return <div key={index}>lvl: {JSON.stringify(lvl)}</div>
-          })}
-        </div> */}
-      </div>
-      <h3 className="text-sm">Party:</h3>
-      <div className="flex flex-wrap justify-between">
-        {ourParty.map((monster) => renderMonsterDetails(monster))}
-      </div>
-      <div className="bg-green-500 rounded p-1 mb-1">
-        <h3 className="text-sm">Inventory</h3>
-        <div className="flex gap-2 p-2">
-          {contextualState.bag.runes.map((rune, index) => (
-            <div key={index}>🏺 {rune}</div>
-          ))}
+    <div className='flex justify-center'>
+      <div className="font-[silkscreen] text-white m-1 text-center max-w-[500px]">
+        <div className="bg-green-500 rounded p-1 mb-1">
+          <h2 className="text-2xl mb-1">Map to the top</h2>
+          <SimpleLevelList levels={levels} />
+          {/* <div> {contextualState.current.completedLevels.map((lvl, index) => {
+            return <div key={index}>lvl: {JSON.stringify(lvl)}</div> })}</div> */}
         </div>
-        {/* Add content for inventory management here */}
+        <h3 className="text-sm">Party:</h3>
+        <div className="flex flex-wrap justify-between">
+          {ourParty.map((monster) => renderMonsterDetails(monster))}
+        </div>
+        <div className="bg-green-500 rounded p-1 mb-1">
+          <h3 className="text-sm">Inventory</h3>
+          <div className="flex gap-2 p-2">
+            {contextualState.bag.runes.map((rune, index) => (
+              <div key={index}>🏺 {rune}</div>
+            ))}
+          </div>
+          {/* Add content for inventory management here */}
+        </div>
       </div>
     </div>
   )

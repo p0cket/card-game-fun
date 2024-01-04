@@ -182,8 +182,9 @@ const Intro = ({ dispatch }) => {
           </div>
           {/* <SparkleButton /> */}
           <div className="flex">
-            <ThemedButton text={`Options`} onClick={loadNextLevel} />
-            <ThemedButton text={`Museum`} onClick={loadNextLevel} />
+            {/* TODO: Implement options and museum */}
+            {/* <ThemedButton text={`Options`} onClick={loadNextLevel} />
+            <ThemedButton text={`Museum`} onClick={loadNextLevel} /> */}
           </div>
           <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
           <div className="bg-boy-lightgreen p-1">

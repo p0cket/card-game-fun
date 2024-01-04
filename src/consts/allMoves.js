@@ -1,4 +1,4 @@
-import { EFFECTS } from "../effects"
+import { EFFECTS } from '../effects'
 
 export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
@@ -905,7 +905,7 @@ export const RadiantBeam = {
   name: 'Radiant Beam',
   type: 'elemental',
   damage: 70,
-  accuracy: 90,
+  accuracy: 20,
   speed: 12,
   cost: { energy: 7 },
   energyCost: 7,
@@ -998,5 +998,170 @@ export const SunShield = {
       amt: 40,
     },
     targets: ['self'],
+  },
+}
+
+export const ThunderousRoar = {
+  name: 'Thunderous Roar',
+  type: 'elemental',
+  damage: 60,
+  accuracy: 85,
+  speed: 7,
+  cost: { energy: 6 },
+  effect: {
+    description: 'Unleashes a deafening roar causing elemental damage',
+    chance: 30,
+    result: 'disorient',
+    duration: '1 turn',
+    amt: 30,
+  },
+  priority: 'high',
+  targets: ['opponent'],
+  notSoFast: {
+    name: "Roar's Resilience",
+    type: 'buff',
+    effect: {
+      description: 'Boosts resistance against elemental attacks',
+      duration: '2 turns',
+      resistance_increase: 20,
+    },
+  },
+  forceful: {
+    name: 'Deafening Roar',
+    type: 'elemental',
+    damage: 80,
+    accuracy: 85,
+    speed: 9,
+    cost: { energy: 8 },
+    effect: {
+      description: 'A louder roar that guarantees disorientation',
+      chance: 100,
+      result: 'disorient',
+      duration: '2 turns',
+      amt: 40,
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const ColossalSlam = {
+  name: 'Colossal Slam',
+  type: 'physical',
+  damage: 50,
+  accuracy: 80,
+  speed: 5,
+  cost: { energy: 5 },
+  effect: {
+    description: 'Slams the ground, causing physical damage',
+    chance: 25,
+    result: 'stun',
+    duration: '1 turn',
+    amt: 20,
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+  notSoFast: {
+    name: 'Focused Impact',
+    type: 'buff',
+    effect: {
+      description: 'Increases accuracy for the next attack',
+      duration: 'next attack',
+      accuracy_boost: 15,
+    },
+  },
+  forceful: {
+    name: 'Earthquake Slam',
+    type: 'physical',
+    damage: 70,
+    accuracy: 80,
+    speed: 6,
+    cost: { energy: 7 },
+    effect: {
+      description: 'A more powerful slam with a guaranteed stun effect',
+      chance: 100,
+      result: 'stun',
+      duration: '1 turn',
+      amt: 30,
+    },
+    targets: ['opponent'],
+  },
+}
+
+export const ProtectiveBarrier = {
+  name: 'Protective Barrier',
+  type: 'defensive',
+  accuracy: 100,
+  speed: 10,
+  cost: { energy: 4 },
+  effect: {
+    description: 'Creates a barrier to protect allies',
+    chance: 100,
+    result: 'shield',
+    duration: '2 turns',
+    shield_value: 40,
+  },
+  priority: 'high',
+  targets: ['user_pals'],
+  notSoFast: {
+    name: 'Healing Barrier',
+    type: 'healing',
+    effect: {
+      description: 'Barrier also heals allies for a small amount',
+      duration: '2 turns',
+      healing: 20,
+    },
+  },
+  forceful: {
+    name: 'Fortified Barrier',
+    type: 'defensive',
+    effect: {
+      description: 'An enhanced barrier that provides more protection',
+      duration: '3 turns',
+      shield_value: 60,
+    },
+    targets: ['user_pals'],
+  },
+}
+
+export const MeteorStrike = {
+  name: 'Meteor Strike',
+  type: 'elemental/physical',
+  damage: 190,
+  accuracy: 75,
+  speed: 4,
+  cost: { energy: 5 },
+  effect: {
+    description: 'Calls down a meteor causing massive area damage',
+    chance: 40,
+    result: 'burn',
+    duration: '2 turns',
+    burn_damage: 15,
+  },
+  priority: 'ultimate',
+  targets: ['all_opponents'],
+  notSoFast: {
+    name: 'Meteor Shockwave',
+    type: 'debuff',
+    effect: {
+      description: 'Reduces speed of all opponents',
+      duration: '2 turns',
+      speed_reduction: 10,
+    },
+  },
+  forceful: {
+    name: 'Apocalyptic Meteor',
+    type: 'elemental/physical',
+    damage: 120,
+    accuracy: 75,
+    speed: 5,
+    cost: { energy: 12 },
+    effect: {
+      description: 'Increases the area and damage of the meteor strike',
+      chance: 50,
+      result: 'burn',
+      duration: '3 turns',
+      burn_damage: 20,
+    },
+    targets: ['all_opponents'],
   },
 }

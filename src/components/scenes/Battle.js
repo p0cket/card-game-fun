@@ -64,51 +64,55 @@ const Battle = () => {
     onButtonClick: handleButtonClick,
   }
   return (
-    <div className="flex flex-col max-w-[500px]">
-      <div>
-        <HUDDetails /> <HUDHeader />
-        {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
-        <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
-        <div
-          className="font-silkscreen flex flex-wrap items-center"
-          style={{ fontFamily: 'Silkscreen' }}
-        >
-          <BattleTopDisplay gameData={gameData}/>
-          <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
-          <BattleCreatureTypes ourCurrentMon={ourCurrentMon} />
-        </div>
-        {gameData.alert ? (
-          <div className="text-red-500 p-10 m-30 bg-black">
-            {gameData.alert}
+    <div className="flex justify-center">
+      <div className="flex flex-col max-w-[500px]">
+        <div>
+          <HUDDetails />
+          {/* TODO: Add in the heading of the area you are in */}
+          {/* <HUDHeader /> */}
+          {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
+          <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
+          <div className="font-[silkscreen] flex flex-wrap items-center">
+            <BattleTopDisplay gameData={gameData} />
+            {/* TODO: Add in battle types */}
+            {/* <BattleCreatureTypes ourCurrentMon={contextualState.opponent.monsters[0]} /> */}
+            <BattleBotDisplay ourCurrentMon={ourCurrentMon} />
+            {/* Add in battle types here too */}
+            {/* <BattleCreatureTypes ourCurrentMon={ourCurrentMon} /> */}
           </div>
-        ) : (
-          <></>
-        )}
-        <div style={{ display: 'flex' }}>
-          {/* #TODO: Give MenuPopup its' own toggle, and remove this - MenuPopup */}
-          <MenuButtonGroup
-            togglePopup={togglePopup}
-            ourCurrentMon={ourCurrentMon}
+          {gameData.alert ? (
+            <div className="text-red-500 p-10 m-30 bg-black">
+              {gameData.alert}
+            </div>
+          ) : (
+            <></>
+          )}
+          <div style={{ display: 'flex' }}>
+            {/* #TODO: Give MenuPopup its' own toggle, and remove this - MenuPopup */}
+            <MenuButtonGroup
+              togglePopup={togglePopup}
+              ourCurrentMon={ourCurrentMon}
+            />
+          </div>
+          <PartyDisplay
+            party={
+              // () => { console.log(`ourParty where slice doesn't work`, ourParty)
+              ourParty.slice(1)
+              // }
+            }
+            userFlag={true}
           />
-        </div>
-        <PartyDisplay
-          party={
-            // () => { console.log(`ourParty where slice doesn't work`, ourParty)
-            ourParty.slice(1)
-            // }
-          }
-          userFlag={true}
-        />
-        <div
-          className="font-silkscreen bg-green-500 text-white"
-          style={{ fontFamily: 'Silkscreen' }}
-        >
-          <MenuPopup
-            selectedPal={ourCurrentMon}
-            trigger={popupOpen}
-            togglePopup={togglePopup}
-            zIndex={1}
-          />
+          <div
+            className="font-silkscreen bg-green-500 text-white"
+            style={{ fontFamily: 'Silkscreen' }}
+          >
+            <MenuPopup
+              selectedPal={ourCurrentMon}
+              trigger={popupOpen}
+              togglePopup={togglePopup}
+              zIndex={1}
+            />
+          </div>
         </div>
       </div>
     </div>

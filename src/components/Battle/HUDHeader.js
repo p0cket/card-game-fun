@@ -13,6 +13,7 @@ function HUDHeader({ gameData }) {
         // make it take up the full width
         width: '100%',
       }}
+      className='font-[silkscreen]'
     >
       Simulation Room: No Effects
     </p>

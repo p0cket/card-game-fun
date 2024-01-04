@@ -3,7 +3,7 @@ import ChibipalsSelection from '../reward/ChibipalsSelection'
 
 function ChooseCharacter() {
   return (
-    <div>
+    <div className='flex justify-center'>
       <ChibipalsSelection />
     </div>
   )
