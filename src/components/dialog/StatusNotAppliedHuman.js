@@ -20,9 +20,9 @@ const StatusNotAppliedHuman = () => {
     }),
   }
   const statusNotAppliedProps = {
-    title: `___ Status not Applied (to human)`,
-    header: `___ Status not Applied (to human)`,
-    message: `Status not Applied of ____ to human`,
+    title: `Status not Applied`,
+    header: `Status not Applied`,
+    message: `No status applied to your pal.`,
     options: [status_continueOption],
   }
 

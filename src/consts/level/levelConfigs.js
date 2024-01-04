@@ -1,4 +1,5 @@
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
+import { SCENES } from '../../handlers/sceneHandlers_new'
 import { allTrainers, bossBarry } from '../party/trainers'
 
 export const battleConfig = () => {
@@ -11,6 +12,7 @@ export const battleConfig = () => {
     area: 'tranquil forest',
     difficulty: 'easy',
     refillEnergy: true,
+    sceneType: SCENES.BATTLE,
   }
 }
 export const bossConfig = {
@@ -20,6 +22,7 @@ export const bossConfig = {
   area: 'tranquil forest',
   difficulty: 'easy',
   refillEnergy: true,
+  sceneType: SCENES.BOSS,
 }
 export const restConfig = {
   type: 'rest',
@@ -27,6 +30,7 @@ export const restConfig = {
   // area: 'tranquil forest',
   difficulty: 'easy',
   refillEnergy: true,
+  sceneType: SCENES.REST,
 }
 export const eventConfig = {
   type: 'event',
@@ -34,6 +38,7 @@ export const eventConfig = {
   // area: 'tranquil forest',
   difficulty: 'easy',
   refillEnergy: true,
+  sceneType: SCENES.EVENT,
 }
 
 // if clicked rest:
