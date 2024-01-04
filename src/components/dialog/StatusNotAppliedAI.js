@@ -20,9 +20,9 @@ const StatusNotAppliedAI = () => {
     }),
   }
   const statusNotAppliedProps = {
-    title: `___ Status not Applied`,
-    header: `___ Status not Applied`,
-    message: `Status not Applied of ____`,
+    title: `Status not Applied`,
+    header: `Status not Applied`,
+    message: `No status has been applied.`,
     options: [status_continueOption],
   }
 

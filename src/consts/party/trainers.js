@@ -148,7 +148,6 @@ export const bossBarry = {
   },
   monsters: [
     MoltenScale,
-    //  Ticklefairy,
   ],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty dragon!',

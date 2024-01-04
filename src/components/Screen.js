@@ -112,8 +112,9 @@ const Screen = ({ gameData, dispatch, map }) => {
       console.log('screen: boss')
       // Do regular bettle or boss?
       // return <Battle gameData={gameData} dispatch={dispatch} />
+      return <Battle gameData={gameData} dispatch={dispatch} />
 
-      return <Boss gameData={gameData} dispatch={dispatch} />
+      // return <Boss gameData={gameData} dispatch={dispatch} />
     case GAMEOVER:
       console.log('screen: game over')
       // return <GAMEOVER gameData={gameData} dispatch={dispatch} />
