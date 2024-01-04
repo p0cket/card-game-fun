@@ -123,7 +123,6 @@ export const MainProvider = ({ children }) => {
         // is refactored. fix it.
         console.log(`CHANGE_SCENE. action.payload: `, action.payload)
 
-    
         nextSceneState = updateScene(state, {
           screen: action.payload.screen,
           details: action.payload.details,
@@ -146,20 +145,18 @@ export const MainProvider = ({ children }) => {
         nextLevelState = setupOpponent(
           nextLevelState,
           action.payload.details.trainer,
-        )   
-         switch (action.payload.screen) {
+        )
+        switch (action.payload.screen) {
           case SCENES.BATTLE:
           case SCENES.BOSS:
             // set the pal to max, probably should be setEnemyPalEnergyToMax,
             // or pass in opponent/index as a param.
             nextLevelState = logLevelsCompletedData(nextLevelState)
             nextLevelState = setEnemyPalEnergyToMax(nextLevelState)
-        nextLevelState = setEnemyPalHPToMax(nextLevelState)
+            nextLevelState = setEnemyPalHPToMax(nextLevelState)
             break // This will prevent fall-through and continue with the rest of the function after the switch
           // Other cases can be added here as needed
         }
-        
-
 
         console.log(`nextLevelState after setupOpponent: `, nextLevelState)
         return nextLevelState
@@ -171,7 +168,10 @@ export const MainProvider = ({ children }) => {
             isOpen: true,
             type: 'attack',
             attack: action.payload.attack,
-            ourCurrentMon: action.payload.ourCurrentMon,
+            canUse: action.payload.canUse,
+            ourCurrentMon: action.payload.ourCurrentMon
+              ? action.payload.ourCurrentMon
+              : null,
           },
           // attack: action.payload.attack,
           // ourCurrentMon: action.payload.ourCurrentMon,
@@ -295,7 +295,10 @@ export const MainProvider = ({ children }) => {
         }
         return state
       case ACTIONS.HEAL_PAL_FULL:
-        console.log('Reducer HEAL_PAL_FULL: action (should be later the Pal)', action)
+        console.log(
+          'Reducer HEAL_PAL_FULL: action (should be later the Pal)',
+          action,
+        )
         state = setPlayerPalHPToMax(state)
         return state
       default:

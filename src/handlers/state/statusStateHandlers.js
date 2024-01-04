@@ -64,6 +64,7 @@ export const applyBlind = (target, effectValue) => {
     blind: {
       active: true,
       amt: effectValue,
+      name: EFFECTS.BLIND,
     },
   }
   console.log(`target after applying blind but not accuracy change: `, target)

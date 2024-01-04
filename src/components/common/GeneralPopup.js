@@ -9,7 +9,7 @@ const GeneralPopup = (props) => {
   console.log('Before useDispatchContext in GeneralPopup')
   const dispatch = useDispatchContext()
   // Or use the actual trigger condition
-  const { isOpen, type, attack, ourCurrentMon } = state.popup
+  const { isOpen, type, attack, ourCurrentMon, canUse } = state.popup
   console.log(
     'GeneralPopup: isOpen, type, attack, ourCurrentMon',
     isOpen,
@@ -44,6 +44,7 @@ const GeneralPopup = (props) => {
             contextualDispatch={dispatch}
             togglePopup={() => closeDialogPopup()}
             pal={ourCurrentMon}
+            canUse={canUse}
           />
         </div>
       </div>

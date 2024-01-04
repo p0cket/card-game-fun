@@ -136,6 +136,7 @@ export default function BattleTopDisplay() {
           <div>
             <div>
               {Object.keys(currentMon.status).map((key) => {
+                console.warn(`currentMon.status`, currentMon.status)
                 if (currentMon.status[key]) {
                   return (
                     <span

@@ -10,6 +10,7 @@ function RenderIndAttack({
   contextualDispatch,
   togglePopup,
   pal,
+  canUse,
 }) {
   console.log(
     `RenderIndAttack: attack, contextualState, contextualDispatch, pal`,
@@ -34,7 +35,7 @@ function RenderIndAttack({
   const runMove = (move, pal) => {
     console.log(`runMove:  togglePopup`, togglePopup)
     togglePopup()
-    console.log('executeMove params:',contextualDispatch, {
+    console.log('executeMove params:', contextualDispatch, {
       pal: pal,
       move: move,
       phase: ATK_PHASES.PAY,
@@ -56,7 +57,7 @@ function RenderIndAttack({
     })
   }
   const renderBasic = (move, pal) => {
-    const {name, damage, speed, accuracy, effect, targets, cost} = move
+    const { name, damage, speed, accuracy, effect, targets, cost } = move
     // const {result, chance, duration, amt, description} = effect
     return (
       <div className="bg-boy-lightgreen p-1 rounded shadow">
@@ -86,17 +87,21 @@ function RenderIndAttack({
           <div>{`${effect.chance}% Chance: May ${effect.result} attacks by ${effect.amt} `}</div>
           <div>Targets: {targets.join(', ')}</div>
         </div>
-        <div className="flex gap-2">
-          <button
-            className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
-            onClick={() => runMove(attack, pal)}
-          >
-            Use ({cost.energy} {energyEmoji})
-          </button>{' '}
-          <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
-            +
-          </button>{' '}
-        </div>
+        {canUse ? (
+          <div className="flex gap-2">
+            <button
+              className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
+              onClick={() => runMove(attack, pal)}
+            >
+              Use ({cost.energy} {energyEmoji})
+            </button>{' '}
+            <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
+              +
+            </button>{' '}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     )
   }

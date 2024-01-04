@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
 import { useDispatchContext, useStateContext } from '../../MainContext'
+import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
 
 function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   const contextualState = useStateContext()
@@ -21,7 +22,9 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           payload: item,
         })
       } else {
-        console.log(`You don't have any ${item.contents.name} left. QTy is ${item.qty}`)
+        console.log(
+          `You don't have any ${item.contents.name} left. QTy is ${item.qty}`,
+        )
       }
     }
 
@@ -66,15 +69,14 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       </div>
     )
   }
-
-  const showTheAttack = (move, ourCurrentMon) => {
-    console.log(`move`, move)
-    console.log(`ourCurrentMon`, ourCurrentMon)
-    contextualDispatch({
-      type: 'SHOW_ATTACK',
-      payload: { attack: move, ourCurrentMon: ourCurrentMon },
-    })
-  }
+  // const showTheAttack = (move, contextualDispatch, ourCurrentMon) => {
+  //   console.log(`move`, move)
+  //   console.log(`ourCurrentMon`, ourCurrentMon)
+  //   contextualDispatch({
+  //     type: 'SHOW_ATTACK',
+  //     payload: { attack: move, ourCurrentMon: ourCurrentMon },
+  //   })
+  // }
   console.log(`ourCurrentMon!:D `, ourCurrentMon)
   const menuButtons = () => (
     <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
@@ -99,7 +101,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
             🔒PaLs
           </div>
           <div
-            onClick={togglePopup}
+            // onClick={togglePopup}
             className="text-sm p-1 flex items-center justify-center"
           >
             🔒Options
@@ -123,7 +125,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           <div
             className="cursor-pointer text-sm text-white"
             key={index}
-            onClick={() => showTheAttack(move, ourCurrentMon)}
+            onClick={() => showTheAttack(move, contextualDispatch, true, ourCurrentMon)}
           >
             {move.name}
           </div>

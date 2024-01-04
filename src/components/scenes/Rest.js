@@ -78,7 +78,6 @@ const Rest = () => {
           <p>
             As you step into the Hospital, a sense of relief washes over you.
           </p>
-          <p>Chansey welcomes you with a warm smile, ready to assist.</p>
           <p>
             Nurse Becky, with her expert care, ensures your pals will be
             fighting fit in no time.

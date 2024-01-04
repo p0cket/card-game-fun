@@ -55,14 +55,15 @@ export const hyperPotion = {
 export const apple = {
   name: 'Apple',
   type: 'food',
-  effect: { hp: 5 },
+  effect: { hp: 8 },
   description: 'A tasty apple that heals 5 HP.',
 }
 
 export const pumpernickelSoda = {
   name: 'Pumpernickel Soda',
   type: 'drink',
-  effect: { energy: 10 },
+  // effect: { energy: 10 },
+  effect: { hp: 30 },
   description: 'A fizzy drink that restores 10 energy points.',
 }
 
