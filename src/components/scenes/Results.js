@@ -33,7 +33,9 @@ function Results({ experience = 100, pal, isBoss = false }) {
   useEffect(() => {
     setEnemyDialog(randomlySelect(enemyDefeatedResponses))
     setRewardDialog(randomlySelect(rewardDialogs))
-    setRewardNum(Math.floor(Math.random() * 3))
+    setRewardNum(Math.floor(Math.random() * 2))
+
+    // setRewardNum(Math.floor(Math.random() * 3))
   }, [])
   const [selectedModification, setSelectedModification] = useState(null)
 
@@ -44,9 +46,9 @@ function Results({ experience = 100, pal, isBoss = false }) {
   const runesToChooseFrom = {
     'Sword of Destiny': 'A powerful sword that grants strength and courage.',
     'Shield of Valor': 'A sturdy shield that can withstand any attack.',
-    'Potion of Healing': 'A magical potion that heals all wounds.',
+    'Enchanted Cloak':
+      'A cloak woven with magical threads. It conceals the wearer from plain sight.',
   }
-
   const itemsToChooseFrom = [pumpernickelSoda]
 
   const movesToChooseFrom = [
@@ -309,9 +311,9 @@ function Results({ experience = 100, pal, isBoss = false }) {
       {/* storytelling note: Matt and Trey's method - and so, as opposed to and then */}
       {/* TODO: Add display of Modifications
       {DisplayModifications()} */}
-      {rewardNum === 0 ? displayMoves() : ""}
-      {rewardNum === 1 ? displayRunes() : ""}
-      {rewardNum === 2 ? displayItems() : ""}
+      {rewardNum === 0 ? displayMoves() : ''}
+      {rewardNum === 1 ? displayItems() : ''}
+      {rewardNum === 2 ? displayRunes() : ''}
       {/* TODO: Add display of Runes */}
     </motion.div>
   )
