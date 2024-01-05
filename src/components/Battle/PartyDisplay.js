@@ -93,7 +93,7 @@ const PartyDisplay = ({ party, userFlag }) => {
               justifyContent: 'center',
             }}
           >
-            <span>Empty</span>
+            <span>Locked</span>
           </div>
         ))}
       </div>
