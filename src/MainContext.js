@@ -100,7 +100,8 @@ export const MainProvider = ({ children }) => {
       stateWithItem,
       stateWithHealth,
       stateAfterUse,
-      stateWithAttack
+      stateWithAttack,
+      countersState
 
     switch (action.type) {
       case ACTIONS.UPDATE_GAMEDATA:
@@ -167,7 +168,7 @@ export const MainProvider = ({ children }) => {
           popup: {
             ...state.popup,
             isOpen: true,
-            type: 'attack',
+            popupType: 'attack',
             attack: action.payload.attack,
             canUse: action.payload.canUse,
             ourCurrentMon: action.payload.ourCurrentMon
@@ -198,7 +199,16 @@ export const MainProvider = ({ children }) => {
         }
       case ACTIONS.SHOW_COUNTERS:
         //show the counter menu
-        return state
+        countersState = {
+          ...state,
+          popup: {
+            ...state.popup,
+            isOpen: true,
+            popupType: 'counters',
+            // pal: action.payload.pal,
+          },
+        }
+        return countersState
       case ACTIONS.ATTACK:
         return {
           ...state,

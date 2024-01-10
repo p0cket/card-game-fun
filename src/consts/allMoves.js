@@ -278,6 +278,19 @@ export const LightBeam = {
       amt: 10,
     },
   },
+  counter: {
+    name: 'Evasive Twirl',
+    type: 'buff',
+    accuracy: 90,
+    effect: {
+      description: 'Perform an evasive twirl to dodge incoming attacks',
+      duration: '1 turn',
+      evasion_boost: 50, // Increase evasion for 1 turn
+      chance: 100,
+      result: 'evade',
+      amt: 10,
+    },
+  },
   // "Forceful" aspect:
   forceful: {
     name: 'Solar Flare',

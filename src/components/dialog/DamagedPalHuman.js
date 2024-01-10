@@ -1,7 +1,7 @@
 import React from 'react'
 import DialogTemplate from '../common/DialogTemplate'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
-import { useDispatchContext, useStateContext } from '../../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 const DamagedPalHuman = () => {
   const state = useStateContext()
@@ -24,7 +24,7 @@ const DamagedPalHuman = () => {
     label: 'Counter',
     onClick: () => {
       dispatch({
-        type: 'SHOW_COUNTER',
+        type: ACTIONS.SHOW_COUNTERS,
         payload: {
           pal: state.attack.pal,
           move: state.attack.move,
@@ -33,8 +33,10 @@ const DamagedPalHuman = () => {
           userSlot: state.attack.userSlot,
           targets: state.attack.targets,
           player: state.attack.player,
+          popupType: 'counters',
         },
       })
+      dispatch({ type: ACTIONS.CLOSE_DIALOG })
     },
   }
 
@@ -44,7 +46,7 @@ const DamagedPalHuman = () => {
     header: `Your Pal took damage`,
     message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
     `,
-    options: [dmg_continueOption],
+    options: [dmg_continueOption, dmg_counterOption],
   }
 
   return <DialogTemplate {...damagedPalHumanProps} />

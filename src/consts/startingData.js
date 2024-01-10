@@ -141,7 +141,7 @@ export const newStartingData = {
   },
   popup: {
     isOpen: false,
-    type: 'attack',
+    popupType: 'attack',
     attack: LightBeam,
     ourCurrentMon: Luminowl,
     // message: 'startingData Popup Message',
