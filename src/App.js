@@ -23,16 +23,28 @@ import { gameLog } from './utils/logFormatter'
 import NotEnoughEnergy from './components/dialog/NotEnoughEnergy'
 import DialogManager, { DIALOGS } from './components/dialog/DialogManager'
 import { startingDataOld } from './consts/startingData'
-
+import mixpanel from 'mixpanel-browser'
 
 const message = 'intro message'
+mixpanel.init('0fb23b493c97c7adebe65da13eae29eb', {//c4fe5b40d30af0dd541fff1414cf8f07
+  debug: true,
+  track_pageview: true,
+  persistence: 'localStorage',
+})
 
+// Set this to a unique identifier for the user performing the event.
+mixpanel.identify('USER_ID')
+
+// Track an event. It can be anything, but in this example, we're tracking a Sign Up event.
+mixpanel.track('Loaded main page', {
+  'Signup Type': 'Referral',
+})
 export default function App() {
   const [gameDataOld, dispatchOld] = useReducer(reducer, startingDataOld)
 
   const state = useStateContext()
   const dispatch = useDispatchContext()
-  
+
   return (
     <div style={{ backgroundColor: 'black' }}>
       {/* <Flashing /> */}
@@ -64,11 +76,13 @@ export default function App() {
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         {/* <DialoguePopup message={message} /> */}
         {/* <NotEnoughEnergy /> */}
-       {state.dialog ? <DialogManager current={state.dialog.type} /> : ""}
+        {state.dialog ? <DialogManager current={state.dialog.type} /> : ''}
         <GeneralPopup message={message} />
         {/* <SpiralTransition delay={1} /> */}
         {/* <ChallengerScreen challengerName={"Mr Steven"} challengerImage={palImages[2]} /> */}
-        <div style={{width: "100%"}}><Screen gameData={gameDataOld} dispatch={dispatchOld} map={map} /></div>
+        <div style={{ width: '100%' }}>
+          <Screen gameData={gameDataOld} dispatch={dispatchOld} map={map} />
+        </div>
       </div>
     </div>
   )
