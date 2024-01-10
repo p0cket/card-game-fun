@@ -7,7 +7,7 @@ const DamagedPalHuman = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
   const dmg_continueOption = {
-    label: 'Continue',
+    label: 'Okay',
     onClick: () =>
       executeMove(dispatch, {
         pal: state.attack.pal,
@@ -20,14 +20,29 @@ const DamagedPalHuman = () => {
         // possessed: false,
       }),
   }
+  const dmg_counterOption = {
+    label: 'Counter',
+    onClick: () => {
+      dispatch({
+        type: 'SHOW_COUNTER',
+        payload: {
+          pal: state.attack.pal,
+          move: state.attack.move,
+          phase: ATK_PHASES.STATUSES,
+
+          userSlot: state.attack.userSlot,
+          targets: state.attack.targets,
+          player: state.attack.player,
+        },
+      })
+    },
+  }
 
   console.log(`DamagedPalHuman: state.attack`, state.attack)
   const damagedPalHumanProps = {
     title: `Your Pal Damaged`,
     header: `Your Pal took damage`,
-    message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${
-      state.attack.move.damage
-    } damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
+    message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
     `,
     options: [dmg_continueOption],
   }

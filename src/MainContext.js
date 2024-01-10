@@ -70,6 +70,7 @@ export const ACTIONS = {
   CLOSE_DIALOG: 'CLOSE_DIALOG',
 
   CHANGE_DIALOG: 'CHANGE_DIALOG',
+  SHOW_COUNTERS: 'SHOW_COUNTERS',
   // Phases:
   PAY_PHASE: 'PAY_PHASE',
   DAMAGE_PHASE: 'DAMAGE_PHASE',
@@ -195,6 +196,9 @@ export const MainProvider = ({ children }) => {
             isOpen: false,
           },
         }
+      case ACTIONS.SHOW_COUNTERS:
+        //show the counter menu
+        return state
       case ACTIONS.ATTACK:
         return {
           ...state,
