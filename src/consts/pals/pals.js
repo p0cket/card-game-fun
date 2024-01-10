@@ -611,46 +611,6 @@ export const MoltenScale = {
   lore: 'Legends tell of a dragon born from the heart of the sun, bringing light and power to civilizations.',
 }
 
-// export const MoltenScale = {
-//   id: 10,
-//   elemental_type: 'Light',
-//   image: MoltenScaleImg,
-//   creature_type: 'Dragon',
-//   specialty_group: 'Energy Conductor',
-//   nature: 'Radiant',
-//   quirks: ['Solar Power Absorption', 'Radiant Flight'],
-//   stats: {
-//     hp: 200,
-//     max_hp: 200,
-//     attack: 150,
-//     defense: 130,
-//     special_attack: 180,
-//     special_defense: 160,
-//     speed: 100,
-//   },
-//   enterAbility: 'Absorbs sunlight to power up its abilities',
-//   strengths: ['Dark', 'Water'],
-//   weaknesses: ['Electric', 'Shadow'],
-//   cost: 1000,
-//   lvl: 70,
-//   experience: 10000,
-//   status: {},
-//   // moves: ['Solar Flare', 'Radiant Beam', 'Sun Shield'],
-//   moves: [SolarFlare, RadiantBeam, SunShield],
-//   possible_moves: ['Light Burst', 'Solar Wind', 'Daybreak'],
-//   passives: 'Sunlit Aura',
-//   commander_ability: {
-//     name: 'Solar Nova',
-//     description:
-//       'Unleashes a powerful burst of solar energy, damaging all enemies and energizing allies.',
-//   },
-//   description:
-//     'A slender and majestic dragon that harnesses and emits solar energy, vital for sustaining and powering society.',
-//   size: 'Large',
-//   weight: 'Heavy',
-//   lore: 'Legends tell of a dragon born from the heart of the sun, bringing light and power to civilizations.',
-// }
-
 //types: Foodbased, Water, Earth, Fire, Air,
 // Light, Dark, None, Physical, Magical, Nature
 //
