@@ -13,7 +13,13 @@ const NotEnoughEnergy = (props) => {
     backgroundColor: '#4b770e',
     color: '#fff',
   }
-
+  const endTurnButton = {
+    label: 'End Turn',
+    onClick: () => {
+      console.log('End Turn clicked')
+      // dispatch({ type: ACTIONS.END_TURN })
+    }, 
+  }
   // export const createPayOption = (pal, move, player, targets, attackPhase) => {
 
   // Prepare the specific props for the NotEnoughEnergy scenario
@@ -22,7 +28,7 @@ const NotEnoughEnergy = (props) => {
     title: 'Not Enough Energy',
     message:
       'Your character does not have enough energy to perform this action.',
-    options: [closeButton],
+    options: [closeButton, endTurnButton],
     // Include any other props specific to the NotEnoughEnergy situation
   }
   // Render the DialoguePopup with these specific props

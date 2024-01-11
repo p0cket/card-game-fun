@@ -205,6 +205,7 @@ export const MainProvider = ({ children }) => {
             ...state.popup,
             isOpen: true,
             popupType: 'counters',
+            previousDialog: action.payload.previousDialog,
             // pal: action.payload.pal,
           },
         }
@@ -251,9 +252,22 @@ export const MainProvider = ({ children }) => {
           dialog: {
             ...state.dialog,
             isOpen: true,
-            type: action.payload.type, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
+            // type: action.payload.type, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
+            type: action.payload.dialog, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
           },
         }
+      //
+      // export const switchDialog = (ourState, dialogToShow) => {
+      //   console.log(`switchDialog: ourState, dialogToShow`, ourState, dialogToShow)
+      //   return {
+      //     ...ourState,
+      //     dialog: {
+      //       ...ourState.dialog,
+      //       isOpen: true,
+      //       type: dialogToShow,
+      //     },
+      //   }
+      //
 
       case ACTIONS.ADD_RUNE:
         // Maybe we'll have both an item and effect in
