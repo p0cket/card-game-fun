@@ -2,6 +2,7 @@ import React from 'react'
 import DialogTemplate from '../common/DialogTemplate'
 import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
+import { DIALOGS } from './DialogManager'
 
 const DamagedPalHuman = () => {
   const state = useStateContext()
@@ -25,6 +26,10 @@ const DamagedPalHuman = () => {
     onClick: () => {
       dispatch({
         type: ACTIONS.SHOW_COUNTERS,
+        //add the way to show which dialog it came from, 
+        // and what the dialog needs to show
+        // this is the dialog we were at:
+        // newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN) 
         payload: {
           pal: state.attack.pal,
           move: state.attack.move,
@@ -33,6 +38,7 @@ const DamagedPalHuman = () => {
           userSlot: state.attack.userSlot,
           targets: state.attack.targets,
           player: state.attack.player,
+          previousDialog: DIALOGS.DAMAGED_PAL_HUMAN,
           popupType: 'counters',
         },
       })
