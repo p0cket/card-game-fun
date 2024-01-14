@@ -2,7 +2,10 @@ import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
 import { checkIfDead } from '../Battle/deadHandlers'
-import { upkeepEnergyRefill, upkeepPermanentEnergyIncrease } from '../Battle/upKeepEffects'
+import {
+  upkeepEnergyRefill,
+  upkeepPermanentEnergyIncrease,
+} from '../Battle/upKeepEffects'
 import {
   createPopupRemovedState,
   createPopupVisibleState,
@@ -12,6 +15,11 @@ import { ATK_PHASES, executeAITurn } from '../moveHandlers'
 
 export const endPhase = (state, attackPayload) => {
   const { move, pal, phase, player, userSlot, targets } = attackPayload
+
+  const type = move.isCounter ? 'counter' : 'normal'
+  if (type === 'counter') {
+   return
+  }
 
   console.group(`END: start`)
   checkForUndefined({
@@ -28,7 +36,6 @@ export const endPhase = (state, attackPayload) => {
     console.log(`END: phase ending. state`, state)
     // check if dead
     state = checkIfDead(state)
-
 
     console.groupEnd()
     return state

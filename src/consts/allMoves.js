@@ -267,6 +267,7 @@ export const LightBeam = {
   // "NotSoFast" aspect:
   notSoFast: {
     name: 'Evasive Twirl',
+    isCounter: true,
     type: 'buff',
     accuracy: 90,
     effect: {
