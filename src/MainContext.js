@@ -204,8 +204,9 @@ export const MainProvider = ({ children }) => {
           popup: {
             ...state.popup,
             isOpen: true,
-            popupType: 'counters',
+            popupType: action.payload.popupType,
             previousDialog: action.payload.previousDialog,
+            previousPayload: action.payload.previousPayload,
             // pal: action.payload.pal,
           },
         }
@@ -256,7 +257,6 @@ export const MainProvider = ({ children }) => {
             type: action.payload.dialog, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
           },
         }
-      //
       // export const switchDialog = (ourState, dialogToShow) => {
       //   console.log(`switchDialog: ourState, dialogToShow`, ourState, dialogToShow)
       //   return {

@@ -135,6 +135,7 @@ function RenderIndAttack({
       return renderBasic(move, pal)
     } else if (attackType === 'forceful') {
       return renderForceful(move)
+      // counter
     } else if (attackType === 'notSoFast') {
       return renderCounter(move)
     }

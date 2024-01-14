@@ -26,18 +26,20 @@ const DamagedPalHuman = () => {
     onClick: () => {
       dispatch({
         type: ACTIONS.SHOW_COUNTERS,
-        //add the way to show which dialog it came from, 
+        //add the way to show which dialog it came from,
         // and what the dialog needs to show
         // this is the dialog we were at:
-        // newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN) 
+        // newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN)
         payload: {
-          pal: state.attack.pal,
-          move: state.attack.move,
-          phase: ATK_PHASES.STATUSES,
+          previousPayload: {
+            pal: state.attack.pal,
+            move: state.attack.move,
+            phase: ATK_PHASES.STATUSES,
 
-          userSlot: state.attack.userSlot,
-          targets: state.attack.targets,
-          player: state.attack.player,
+            userSlot: state.attack.userSlot,
+            targets: state.attack.targets,
+            player: state.attack.player,
+          },
           previousDialog: DIALOGS.DAMAGED_PAL_HUMAN,
           popupType: 'counters',
         },

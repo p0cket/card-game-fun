@@ -69,14 +69,6 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       </div>
     )
   }
-  // const showTheAttack = (move, contextualDispatch, ourCurrentMon) => {
-  //   console.log(`move`, move)
-  //   console.log(`ourCurrentMon`, ourCurrentMon)
-  //   contextualDispatch({
-  //     type: 'SHOW_ATTACK',
-  //     payload: { attack: move, ourCurrentMon: ourCurrentMon },
-  //   })
-  // }
   console.log(`ourCurrentMon!:D `, ourCurrentMon)
   const menuButtons = () => (
     <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
