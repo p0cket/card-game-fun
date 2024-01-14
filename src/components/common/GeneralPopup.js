@@ -4,6 +4,7 @@ import { LightBeam } from '../../consts/allMoves'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { executeMove } from '../../handlers/moveHandlers'
 import RenderCounter from './RenderCounter'
+import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
 
 const GeneralPopup = (props) => {
   const state = useStateContext()
@@ -95,8 +96,54 @@ const GeneralPopup = (props) => {
           </div>
           <div>
             <div className="text-sm bg">
-              {moves.map((move) => (
-                <RenderCounter move={move} pal={pal} key={move.name} />
+              {/* {ourCurrentMon.moves.map((move, index) => (
+          <div
+            className="cursor-pointer text-sm text-white"
+            key={index}
+            onClick={() => showTheAttack(move, contextualDispatch, true, ourCurrentMon)}
+          >
+            {move.name}
+          </div>
+        ))} */}
+
+              {moves.map((move, index) => (
+                <div
+                  className="cursor-pointer text-sm text-white"
+                  key={index}
+                  onClick={() =>
+                    showTheAttack(move, dispatch, true, ourCurrentMon)
+                    // SHOW_COUNTERS
+                  }
+                >
+                  {move.name}
+                  {/*    
+                   onClick: () => {
+                    dispatch({
+                      type: ACTIONS.SHOW_COUNTERS,
+                      //add the way to show which dialog it came from,
+                      // and what the dialog needs to show
+                      // this is the dialog we were at:
+                      // newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN)
+                      payload: {
+                        previousPayload: {
+                          pal: state.attack.pal,
+                          move: state.attack.move,
+                          phase: ATK_PHASES.STATUSES,
+
+                          userSlot: state.attack.userSlot,
+                          targets: state.attack.targets,
+                          player: state.attack.player,
+                        },
+                        previousDialog: DIALOGS.DAMAGED_PAL_HUMAN,
+                        popupType: 'counters',
+                      },
+                    })
+                    dispatch({ type: ACTIONS.CLOSE_DIALOG })
+                  },
+                }
+                */}
+                </div>
+                // <RenderCounter move={move} pal={pal} key={move.name} />
               ))}
             </div>
           </div>

@@ -2,7 +2,10 @@ const ShopItem = ({ item, onPurchase }) => (
   <div className="border rounded border-green-100 shadow-lg flex flex-col items-center">
     <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
     {/* <h3 className=" font-medium  mr-2">{item.name}</h3> */}
-    <p className="mb-2"> <span className="font-semibold">{item.price}</span>$</p>
+    <p className="mb-2">
+      {' '}
+      <span className="font-semibold">{item.price}</span>$
+    </p>
     <button
       onClick={() => onPurchase(item)}
       className="bg-blue-500 text-white   rounded hover:bg-blue-600 transition duration-200 mb-2"
@@ -10,8 +13,7 @@ const ShopItem = ({ item, onPurchase }) => (
       Buy
     </button>
   </div>
-);
-
+)
 
 // const ShopItem = ({ item, onPurchase }) => {
 //   return (
