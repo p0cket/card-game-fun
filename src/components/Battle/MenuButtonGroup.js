@@ -93,10 +93,10 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
             🔒PaLs
           </div>
           <div
-            // onClick={togglePopup}
+            // onClick={togglePopup} maybe options button?
             className="text-sm p-1 flex items-center justify-center"
-          >
-            🔒Options
+          > 
+            🔒End Turn 
           </div>
         </div>
       </div>

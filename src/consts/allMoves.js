@@ -1,4 +1,5 @@
 import { EFFECTS } from '../effects'
+import { EvasiveTwirl, SolarBlast } from './allCounters'
 
 export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
@@ -266,8 +267,8 @@ export const LightBeam = {
   targets: ['opponent'],
   // "NotSoFast" aspect:
   notSoFast: {
-    name: 'Evasive Twirl',
-    isCounter: true,
+    name: 'Evasive Twirl nsf',
+    // isCounter: true,
     type: 'buff',
     accuracy: 90,
     effect: {
@@ -279,38 +280,43 @@ export const LightBeam = {
       amt: 10,
     },
   },
-  counter: {
-    name: 'Evasive Twirl',
-    type: 'buff',
-    accuracy: 90,
-    effect: {
-      description: 'Perform an evasive twirl to dodge incoming attacks',
-      duration: '1 turn',
-      evasion_boost: 50, // Increase evasion for 1 turn
-      chance: 100,
-      result: 'evade',
-      amt: 10,
-    },
-  },
+  counter: EvasiveTwirl,
+  //  {
+  //   name: 'Evasive Twirl c',
+  //   type: 'buff',
+  //   isCounter: true,
+  //   accuracy: 90,
+  //   cost: { energy: 2 },
+  //   energyCost: 2,
+  //   effect: {
+  //     description: 'Perform an evasive twirl to dodge incoming attacks',
+  //     duration: '1 turn',
+  //     evasion_boost: 50, // Increase evasion for 1 turn
+  //     chance: 100,
+  //     result: 'evade',
+  //     amt: 10,
+  //   },
+  // },
   // "Forceful" aspect:
-  forceful: {
-    name: 'Solar Flare',
-    type: 'elemental',
-    damage: 60,
-    accuracy: 90,
-    speed: 15,
-    cost: { energy: 4 },
-    energyCost: 5,
-    effect: {
-      description:
-        'Unleash a blinding solar flare to guarantee blinding the opponent',
-      chance: 100,
-      result: 'blind',
-      duration: '1 turn',
-      amt: -30,
-    },
-    targets: ['opponent'],
-  },
+  forceful: SolarBlast,
+  // {
+  //   name: 'Solar Flare',
+  //   type: 'elemental',
+  //   damage: 60,
+  //   accuracy: 90,
+  //   speed: 15,
+  //   cost: { energy: 4 },
+  //   energyCost: 5,
+  //   effect: {
+  //     description:
+  //       'Unleash a blinding solar flare to guarantee blinding the opponent',
+  //     chance: 100,
+  //     result: 'blind',
+  //     duration: '1 turn',
+  //     amt: -30,
+  //   },
+  //   targets: ['opponent'],
+  // },
 }
 
 export const WiseGaze = {
@@ -987,7 +993,8 @@ export const InfernoWing = {
     type: 'debuff',
     accuracy: 85,
     effect: {
-      description: 'Create a gust of scorching wind, reducing the opponents’ attack power',
+      description:
+        'Create a gust of scorching wind, reducing the opponents’ attack power',
       duration: '2 turns',
       attack_reduction: 15,
       chance: 100,
@@ -1004,7 +1011,8 @@ export const InfernoWing = {
     cost: { energy: 12 },
     energyCost: 12,
     effect: {
-      description: 'Dive onto the opponent with the force of a phoenix, ensuring a burn',
+      description:
+        'Dive onto the opponent with the force of a phoenix, ensuring a burn',
       chance: 100,
       result: 'burn',
       duration: '2 turns',
@@ -1035,7 +1043,8 @@ export const SunstoneSmash = {
     type: 'debuff',
     accuracy: 80,
     effect: {
-      description: 'Generate a quake of solar energy, reducing the opponent’s speed',
+      description:
+        'Generate a quake of solar energy, reducing the opponent’s speed',
       duration: '1 turn',
       speed_reduction: 25,
       chance: 100,
@@ -1052,7 +1061,8 @@ export const SunstoneSmash = {
     cost: { energy: 12 },
     energyCost: 12,
     effect: {
-      description: 'Crush the opponent with a corona of solar energy, ensuring a daze',
+      description:
+        'Crush the opponent with a corona of solar energy, ensuring a daze',
       chance: 100,
       result: 'daze',
       duration: '2 turns',
@@ -1061,7 +1071,6 @@ export const SunstoneSmash = {
     targets: ['opponent'],
   },
 }
-
 
 export const SunShield = {
   name: 'Sun Shield',
