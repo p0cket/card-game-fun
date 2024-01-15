@@ -130,17 +130,18 @@ function PalDetailsPopup({
           </div>
         </div>
         <div className="mt-6 flex justify-between">
-          <button
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => handleSelect(selectedPal)}
-          >
-            Select
-          </button>
+         
           <button
             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
             onClick={handleGoBack}
           >
             Go Back
+          </button>
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleSelect(selectedPal)}
+          >
+            Select
           </button>
         </div>
       </div>

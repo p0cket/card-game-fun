@@ -106,17 +106,91 @@ const GeneralPopup = (props) => {
           </div>
         ))} */}
 
-              {moves.map((move, index) => (
-                <div
-                  className="cursor-pointer text-sm text-white"
-                  key={index}
-                  onClick={() =>
-                    showTheAttack(move, dispatch, true, ourCurrentMon)
-                    // SHOW_COUNTERS
-                  }
-                >
-                  {move.name}
-                  {/*    
+              {/* 
+                      {moves.map((move, index) => (
+  move.counter ? (
+    <div
+      className="cursor-pointer text-sm text-white"
+      key={index}
+      onClick={() => {
+        showTheAttack(move.counter, dispatch, true, ourCurrentMon);
+        dispatch({
+          type: ACTIONS.SHOW_COUNTERS,
+          payload: {
+            previousPayload: {
+              pal: state.attack.pal,
+              move: state.attack.move,
+              phase: ATK_PHASES.STATUSES,
+              userSlot: state.attack.userSlot,
+              targets: state.attack.targets,
+              player: state.attack.player,
+            },
+            previousDialog: DIALOGS.DAMAGED_PAL_HUMAN,
+            popupType: 'counters',
+          },
+        });
+        dispatch({ type: ACTIONS.CLOSE_DIALOG });
+      }}
+    >
+      {move.name}
+    </div>
+  ) : (
+    <div key={index}>No Counter</div>
+  )
+))} */}
+
+              {moves.map((move, index) =>
+                move.counter ? (
+                  <div
+                    className="cursor-pointer text-sm text-white"
+                    key={index}
+                    onClick={() =>
+                      showTheAttack(move.counter, dispatch, true, ourCurrentMon)
+                    }
+                  >
+                    {move.name}
+                  </div>
+                ) : (
+                  <div key={index}>No Counter</div>
+                ),
+                //null
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return trigger ? (
+    <>
+      {popupType === 'attack' && attackMenu()}
+      {popupType === 'counters' && countersMenu()}
+    </>
+  ) : (
+    <></>
+  )
+}
+export default GeneralPopup
+
+// //
+// {moves.map((move, index) => {
+//   // move.counter ?
+//   <div
+//     className="cursor-pointer text-sm text-white"
+//     key={index}
+//     onClick={
+//       () =>
+//         showTheAttack(move.counter, dispatch, true, ourCurrentMon)
+//       // SHOW_COUNTERS
+//     }
+//   >
+//     {move.name}
+//   </div>
+//   // <RenderCounter move={move} pal={pal} key={move.name} />
+// })}
+{
+  /*    
                    onClick: () => {
                     dispatch({
                       type: ACTIONS.SHOW_COUNTERS,
@@ -141,24 +215,5 @@ const GeneralPopup = (props) => {
                     dispatch({ type: ACTIONS.CLOSE_DIALOG })
                   },
                 }
-                */}
-                </div>
-                // <RenderCounter move={move} pal={pal} key={move.name} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return trigger ? (
-    <>
-      {popupType === 'attack' && attackMenu()}
-      {popupType === 'counters' && countersMenu()}
-    </>
-  ) : (
-    <></>
-  )
+                */
 }
-export default GeneralPopup

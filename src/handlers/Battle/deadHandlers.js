@@ -46,10 +46,9 @@ export const checkIfDead = (state) => {
         ],
       },
     }
-
+    
     // if the boss is dead, change level to victory
     //  lets find where the type of level is assigned
-    //
     const { sceneType } = state.current.scene.details
     switch (sceneType) {
       case SCENES.BATTLE:

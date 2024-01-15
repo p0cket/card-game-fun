@@ -18,7 +18,13 @@ export const endPhase = (state, attackPayload) => {
 
   const type = move.isCounter ? 'counter' : 'normal'
   if (type === 'counter') {
-   return
+    // remove the current popup.
+    state = createPopupRemovedState(state)
+    // if theres a previous popup, continue from where we left off
+    // if there isn't, go to the next dialog
+    // state = switchDialog(state, state.previousDialog)
+
+   return state
   }
 
   console.group(`END: start`)
