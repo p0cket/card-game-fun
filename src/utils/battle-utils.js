@@ -1,5 +1,6 @@
 // Replace the other functions of the same name
 // so you can use the functions in Battle.js
+import { ATK_PHASES } from '../handlers/moveHandlers'
 import { updateStatusState } from '../handlers/state/statusStateHandlers'
 
 export const decideEnemyATK = (enemyAttacks) => {
@@ -31,5 +32,28 @@ export function applyStatusEffect(contextualState, player, move) {
     const updatedStatusState =  updateStatusState(contextualState, player, move.effect.result,move.effect.amt)
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
+  }
+}
+
+/**
+ * Determines the next attack phase based on the current phase.
+ * @param {string} phase - The current phase.
+ * @returns {string} The next phase.
+ */
+export function nextPhase(phase) {
+  switch (phase) {
+    case ATK_PHASES.PAY:
+      return ATK_PHASES.DAMAGE
+    case ATK_PHASES.DAMAGE:
+      return ATK_PHASES.STATUSES
+    case ATK_PHASES.STATUSES:
+      return ATK_PHASES.CLEANUP
+    case ATK_PHASES.CLEANUP:
+      return ATK_PHASES.END
+    case ATK_PHASES.END:
+      // Assuming there is no phase after END, return null or start over as per game logic
+      return null
+    default:
+      throw new Error('Unknown phase')
   }
 }

@@ -17,7 +17,7 @@ function HUDDetails() {
       //   </div>
       // ))
       }
-      You vs Trainer: {state.current.scene.details.trainer.name}
+      Trainer Battle: {state.current.scene.details.trainer.name}
       {/* {JSON.stringify(
         state.current.scene.details.trainer.monsters.map((m) => m.name),
       )}

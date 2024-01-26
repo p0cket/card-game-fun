@@ -19,7 +19,16 @@ let ourDmg
 let damagedHP
 export const dmgPhase = (state, attackPayload) => {
   let newState = createPayloadState(state, attackPayload)
-  const { move, pal, phase, player, userSlot, targets } = attackPayload
+  const { phase} = attackPayload
+
+  // const { move, pal, phase, player, userSlot, targets } = attackPayload
+    const { move, pal, player, userSlot, targets } = state.attack
+  // pal: state.attack.pal,
+  // move: state.attack.move,
+  // phase: ATK_PHASES.CLEANUP,
+  // userSlot: state.attack.userSlot,
+  // targets: state.attack.targets,
+  // player: state.attack.player,
   console.groupCollapsed(
     `💵 dmgPhase: starting`,
     newState,

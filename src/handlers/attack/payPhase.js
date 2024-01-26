@@ -1,4 +1,4 @@
-import { ACTIONS } from '../../MainContext'
+import { ACTIONS, useStateContext } from '../../MainContext'
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
@@ -16,9 +16,26 @@ import {
 let playerEnergy
 let moveCost
 
-export const payPhase = (state, attackPayload) => {  
+// export const payPhase = (state, attackPayload) => {
+export const payPhase = (state, attackPayload) => {
+  //fix.below
+  console.log(`state, attackPayload: bird`, state, attackPayload)
   let newState = createPayloadState(state, attackPayload)
-  const { move, pal, phase, player, userSlot, targets } = attackPayload
+  const { phase } = attackPayload
+  const { pal, move, player, userSlot, targets } = newState.attack
+  // pal: state.attack.pal,
+  // move: state.attack.move,
+  // phase: ATK_PHASES.CLEANUP,
+  // userSlot: state.attack.userSlot,
+  // targets: state.attack.targets,
+  // player: state.attack.player,
+
+  //maybe this is taken care of already in the attack dispatch
+  // if (move.isCounter) {
+  //   console.log(`move is a counter`)
+  //   newState = { ...newState, moveStack: [...newState.moveStack, move] }
+  //   console.log(`newState with counter:`, newState)
+  // }
   console.groupCollapsed(
     `💵 payPhase: starting`,
     newState,
@@ -39,9 +56,12 @@ export const payPhase = (state, attackPayload) => {
     userSlot,
     targets,
   })
-  console.log(
+  console.warn(
     `Pay - attackPayload: move, pal, player, userSlot, targets,:`,
-    attackPayload,
+    // attackPayload,
+    newState,
+    newState.game,
+    newState.game.player,
   )
   if (player === PLAYERS.HUMAN) {
     // 1. Pay cost. If you can't, return:

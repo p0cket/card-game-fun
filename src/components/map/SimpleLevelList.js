@@ -141,7 +141,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
           className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
             // level.id === currentLevelId
             level.id === state.current.mapLevel + 1
-              ? 'border-l-4 border-blue-500 bg-gray-800'
+              ? 'border-l-4 border-boy-green bg-gray-800'
               : 'bg-gray-700'
           }`}
         >
@@ -152,7 +152,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
               {level.options.map((option) => (
                 <button
                   key={option.id}
-                  className="flex-1 text-center bg-blue-600 text-white rounded p-1 mx-1 hover:bg-blue-700 focus:outline-none"
+                  className="flex-1 text-center bg-boy-green text-white rounded p-1 mx-1 hover:bg-green-700 focus:outline-none"
                   onClick={() => handleOptionClick(level, option)}
                 >
                   {option.description}

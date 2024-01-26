@@ -20,6 +20,26 @@ export const ATK_PHASES = {
   END: 'end',
 }
 
+
+
+const checkAndDispatchStack = (state) => {
+  let prevMove = null
+  if (state.moveStack.length > 0) {
+    // 1 this
+    prevMove = state.moveStack[state.moveStack.length - 1]
+    // 2 this
+    const poppedState = {
+      ...state,
+      //take the last item in the moveStack of the moveStack and remove it
+      moveStack: state.moveStack.slice(0, state.moveStack.length - 1),
+    }
+    //not that this will change the state but still
+  }
+  if (prevMove) {
+    prevMove()
+  }
+}
+
 export const calculateTargets = (targets, allyPals, enemyPals) => {
   // const allyTargets = targets.ally.map(  (index) => state.opponent.monsters[index] )
   // const enemyTargets = targets.enemy.map( (index) => state.userParty[index] )
@@ -48,7 +68,7 @@ export const calculateTargets = (targets, allyPals, enemyPals) => {
  *
  * @returns {Object} The updated state after the move execution.
  */
-
+//Do I just need to add state here?
 export const executeMove = (dispatch, payload) => {
   console.log(`📢 executeMove called: Payload`, payload)
   const { pal, move, player, phase, userSlot, targets } = payload
@@ -78,11 +98,17 @@ export const executeMove = (dispatch, payload) => {
         type: ACTIONS.PAY_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
       })
+      // dispatch({
+      // })
+      //  checkAndDispatchStack(state)
       break
     case ATK_PHASES.DAMAGE:
       console.log(`ATK_PHASES.DAMAGE reached in switch`)
       dispatch({
         type: ACTIONS.DAMAGE_PHASE,
+        //
+        //dont need to pass this stuff in the state
+        //
         payload: { pal, move, phase, player, userSlot, targets },
       })
       break
@@ -137,7 +163,7 @@ export const executeAITurn = (state, dispatch, details = null) => {
     //possessed: false,
   }
 
-console.log(`payload bfore executing AI move`, result)
+  console.log(`payload bfore executing AI move`, result)
   executeMove(dispatch, result)
 }
 
@@ -166,7 +192,7 @@ export function createPayloadState(
     userSlot,
     targets,
   })
-  return {
+  const payloadState = {
     ...state,
     attack: {
       move,
@@ -178,4 +204,6 @@ export function createPayloadState(
       targets,
     },
   }
+  console.log(`createPayloadState: payloadState`, payloadState)
+  return payloadState
 }
