@@ -99,7 +99,7 @@ export const Luminowl = {
   experience: 5000,
   status: {},
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
-  moves: [MeteorStrike, LightBeam, WiseGaze, FeatherGlide],
+  moves: [ LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
   // passives: 'Guiding Wisdom',
   passives: mysticRegeneration,

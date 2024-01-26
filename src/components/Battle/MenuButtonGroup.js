@@ -1,16 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
+import { MeteorStrike } from '../../consts/allMoves'
 
 function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
   const [currentView, setCurrentView] = useState('menu')
+  const [debugMenuOpen, setDebugMenuOpen] = useState(false)
 
   const [itemModalVisible, setItemModalVisible] = useState(false)
   const { items } = contextualState.bag
+  //   useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     if (event.shiftKey && event.key === 'D') {
+  //       setDebugMenuOpen((prev) => !prev)
+  //     }
+  //   }
+
+  //   document.addEventListener('keydown', handleKeyDown)
+
+  //   // Clean up to avoid memory leak
+  //   return () => document.removeEventListener('keydown', handleKeyDown)
+  // }, [])
 
   const ItemMenuModal = () => {
     // pass in the item to use. (item)
@@ -95,8 +109,8 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           <div
             // onClick={togglePopup} maybe options button?
             className="text-sm p-1 flex items-center justify-center"
-          > 
-            🔒End Turn 
+          >
+            🔒End Turn
           </div>
         </div>
       </div>
@@ -109,26 +123,41 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
       <div className="border border-gray-400 rounded-sm flex p-2 flex-grow flex-col font-[silkscreen]">
-       
-
         {ourCurrentMon.moves.map((move, index) => (
           <div
             className="cursor-pointer text-sm text-white"
             key={index}
-            onClick={() => showTheAttack(move, contextualDispatch, true, ourCurrentMon)}
+            onClick={() =>
+              showTheAttack(move, contextualDispatch, true, ourCurrentMon)
+            }
           >
             {move.name}
           </div>
         ))}
-         <div onClick={() => setCurrentView('menu')}>
+        {contextualState.debug && contextualState.debug.isOpen ? (
+          <div>DEBUG</div>
+        ) : (
+          ''
+        )}
+        {/*  */}
+        {contextualState.debug && contextualState.debug.isOpen && (
+          <div
+            className="cursor-pointer text-sm text-white"
+            onClick={() =>
+              showTheAttack(
+                MeteorStrike,
+                contextualDispatch,
+                true,
+                ourCurrentMon,
+              )
+            }
+          >
+            {MeteorStrike.name}
+          </div>
+        )}
+        <div onClick={() => setCurrentView('menu')}>
           <div className="text-white bg-boy-green-500 flex justify-end">x</div>
         </div>
-        {/* <div
-          className="cursor-pointer text-sm text-white"
-          onClick={() => setCurrentView('menu')}
-        >
-          Blizzard
-        </div> */}
       </div>
     </div>
   )

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Screen from './components/Screen'
 import { useReducer } from 'react'
 import { map } from './consts/mapGenerator_old'
 import reducer from './reducer'
-import { useDispatchContext, useStateContext } from './MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from './MainContext'
 import './scanlines.css'
 import './styles.css'
 import './index.css'
@@ -25,6 +25,9 @@ import DialogManager, { DIALOGS } from './components/dialog/DialogManager'
 import { startingDataOld } from './consts/startingData'
 import mixpanel from 'mixpanel-browser'
 
+
+
+
 const message = 'intro message'
 mixpanel.init('0fb23b493c97c7adebe65da13eae29eb', {//c4fe5b40d30af0dd541fff1414cf8f07
   debug: true,
@@ -44,6 +47,20 @@ export default function App() {
 
   const state = useStateContext()
   const dispatch = useDispatchContext()
+  //Debug Menu Toggle
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.shiftKey && event.key === 'D') {
+        // setDebugMenuOpen((prev) => !prev)
+        dispatch({ type: ACTIONS.TOGGLE_DEBUG })
+      }
+    }
+  
+    document.addEventListener('keydown', handleKeyDown)
+  
+    // Clean up to avoid memory leak
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <div style={{ backgroundColor: 'black' }}>
