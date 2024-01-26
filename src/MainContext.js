@@ -78,6 +78,7 @@ export const ACTIONS = {
   CLEANUP_PHASE: 'CLEANUP_PHASE',
   END_PHASE: 'END_PHASE',
   ADD_MOVE_TO_STACK: 'ADD_MOVE_TO_STACK',
+  TOGGLE_DEBUG: 'TOGGLE_DEBUG',
 }
 
 export const MainProvider = ({ children }) => {
@@ -424,6 +425,17 @@ export const MainProvider = ({ children }) => {
         )
         state = setPlayerPalHPToMax(state)
         return state
+        case ACTIONS.TOGGLE_DEBUG:
+          console.log('Reducer TOGGLE_DEBUG:', action)
+          
+          state = {
+            ...state,
+            debug: {
+              ...state.debug || {}, // Ensures that state.debug is an object if it was undefined
+              isOpen: !(state.debug && state.debug.isOpen), // Correctly toggles isOpen between true and false
+            },
+          }
+          return state
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state
