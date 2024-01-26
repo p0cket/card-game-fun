@@ -54,7 +54,8 @@ function RenderIndAttack({
       targets: { ally: null, enemy: [0] },
       player: PLAYERS.HUMAN,
       possessed: false,
-    })
+    },
+    contextualState)
   }
   const renderBasic = (move, pal) => {
     const { name, damage, speed, accuracy, effect, targets, cost } = move
@@ -88,16 +89,16 @@ function RenderIndAttack({
           <div>Targets: {targets.join(', ')}</div>
         </div>
         {canUse ? (
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center">
             <button
               className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
               onClick={() => runMove(attack, pal)}
             >
               Use ({cost.energy} {energyEmoji})
-            </button>{' '}
-            <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
+            </button>
+            {/* <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
               +
-            </button>{' '}
+            </button>{' '} */}
           </div>
         ) : (
           ''

@@ -167,6 +167,11 @@ export const newStartingData = {
     player: 'default human player',
     possessed: false,
   },
+  previous: {
+    dialog: null,
+    movePayload: null,
+  },
+  moveStack: [],
 }
 
 export const startingDataOld = {
@@ -219,7 +224,6 @@ export const startingDataOld = {
   curEvent: null,
   availableRewards: [],
   alert: '',
-
   // alert: "--- Cards PERMANENTLY go away. They can only be used once ---",
   eventResultObj: null,
   devMode: false,

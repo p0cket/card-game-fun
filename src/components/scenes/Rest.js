@@ -86,13 +86,13 @@ const Rest = () => {
         </article>
         <div className="flex flex-col space-y-4 my-6">
           <button
-            className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300"
+            className="bg-boy-green text-white font-semibold py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300"
             onClick={healToFullHealth}
           >
             Heal
           </button>
           <button
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+            className="bg-boy-green text-white font-semibold py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300"
             onClick={proceedToMapScene}
           >
             Proceed to next

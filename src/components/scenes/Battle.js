@@ -70,8 +70,7 @@ const Battle = () => {
           <HUDDetails />
           {/* TODO: Add in the heading of the area you are in */}
           {/* <HUDHeader /> */}
-          {/* <PartyDisplay party={contextualState.current.scene.details.trainer.monsters.slice(1)} /> */}
-          <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
+          {/* <PartyDisplay party={contextualState.opponent.monsters.slice(1)} /> */}
           <div className="font-[silkscreen] flex flex-wrap items-center">
             <BattleTopDisplay gameData={gameData} />
             {/* TODO: Add in battle types */}
@@ -94,14 +93,7 @@ const Battle = () => {
               ourCurrentMon={ourCurrentMon}
             />
           </div>
-          <PartyDisplay
-            party={
-              // () => { console.log(`ourParty where slice doesn't work`, ourParty)
-              ourParty.slice(1)
-              // }
-            }
-            userFlag={true}
-          />
+          {/* <PartyDisplay party={ourParty.slice(1)} userFlag={true} /> */}
           <div
             className="font-silkscreen bg-green-500 text-white"
             style={{ fontFamily: 'Silkscreen' }}

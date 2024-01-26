@@ -77,6 +77,7 @@ export const ACTIONS = {
   STATUS_PHASE: 'STATUS_PHASE',
   CLEANUP_PHASE: 'CLEANUP_PHASE',
   END_PHASE: 'END_PHASE',
+  ADD_MOVE_TO_STACK: 'ADD_MOVE_TO_STACK',
 }
 
 export const MainProvider = ({ children }) => {
@@ -101,7 +102,9 @@ export const MainProvider = ({ children }) => {
       stateWithHealth,
       stateAfterUse,
       stateWithAttack,
-      countersState
+      countersState,
+      newMoveStack,
+      newStateWithStack
 
     switch (action.type) {
       case ACTIONS.UPDATE_GAMEDATA:
@@ -205,12 +208,28 @@ export const MainProvider = ({ children }) => {
             ...state.popup,
             isOpen: true,
             popupType: action.payload.popupType,
-            previousDialog: action.payload.previousDialog,
-            previousPayload: action.payload.previousPayload,
+            //deprecated?
+            prevDialog: action.payload.prevDialog,
+            prevPayload: action.payload.prevPayload,
+            prevMoveFunc: action.payload.prevMove,
             // pal: action.payload.pal,
+          },
+          previous: {
+            ...state.previous,
+            dialog: action.payload.prevDialog,
+            movePayload: action.payload.prevPayload,
+            moveFunc: action.payload.prevMove,
           },
         }
         return countersState
+      // case ACTIONS.ADD_TO_MOVE_STACK:
+      //   newMoveStack = [...state.moveStack, action.payload.prevMove]
+      //   newStateWithStack = {
+      //     ...state,
+      //     moveStack: newMoveStack,
+      //   }
+      //   return newStateWithStack
+
       case ACTIONS.ATTACK:
         return {
           ...state,
@@ -228,24 +247,100 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.SET_INVENTORY:
         return { ...state, inventory: action.payload }
       case ACTIONS.PAY_PHASE:
+        //
+        console.log('Reducer PAY_PHASE: action & state', action, state)
+
+        payState = { ...state }
+        // if the attack is a counter, add the stashed move to the move stack
+        // if (action.payload.attack.isCounter) {
+        //   payState = {
+        //     ...payState,
+        //     stack: {
+        //       ...payState.stack,
+        //       pal: payState.attack.pal,
+        //       move: payState.attack.move,
+        //       // phase: payState.attack.phase
+        //       //phase is in the payload
+        //       // phase: action.payload.phase,
+        //       userSlot: payState.attack.userSlot,
+        //       targets: payState.attack.targets,
+        //       player: payState.attack.player,
+        //     },
+        //   }
+        // }
+        // now overwrite the attack with the new payload
+        payState = {
+          ...payState,
+          attack: {
+            ...payState.attack,
+            ...action.payload,
+          },
+        }
         payState = payPhase(state, action.payload)
         return payState
       case ACTIONS.DAMAGE_PHASE:
         console.log('Reducer DAMAGE_PHASE: action&state', action, state)
+        dmgState = {
+          ...state,
+          attack: {
+            ...state.attack,
+            ...action.payload,
+          },
+        }
         dmgState = dmgPhase(state, action.payload)
         return dmgState
       case ACTIONS.STATUS_PHASE:
         console.log('Reducer STATUS_PHASE: action&state', action, state)
+        statusState = {
+          ...state,
+          attack: {
+            ...state.attack,
+            ...action.payload,
+          },
+        }
         statusState = statusPhase(state, action.payload)
         return statusState
       case ACTIONS.CLEANUP_PHASE:
         console.log('Reducer CLEANUP_PHASE: action&state', action, state)
+        cleanupState = {
+          ...state,
+          attack: {
+            ...state.attack,
+            ...action.payload,
+          },
+        }
         cleanupState = cleanupPhase(state, action.payload)
         return cleanupState
       case ACTIONS.END_PHASE:
+        // seems like I have the state here already
         console.log('Reducer END_PHASE: action&state', action, state)
+        endState = {
+          ...state,
+          attack: {
+            ...state.attack,
+            ...action.payload,
+          },
+        }
         endState = endPhase(state, action.payload)
         return endState
+        case ACTIONS.ADD_MOVE_TO_STACK:
+          console.log('Reducer ADD_MOVE_TO_STACK: action&state', action, state)
+          newMoveStack = [...state.moveStack, action.payload.prevMove]
+          console.log('Reducer ADD_MOVE_TO_STACK: newMoveStack', newMoveStack)
+          state = {
+            ...state,
+            moveStack: newMoveStack,
+          }
+          console.log('Reducer ADD_MOVE_TO_STACK: state', state)
+          return state
+      case ACTIONS.COUNTER_PHASE:
+        // get the state after whatever phase, then run the next phase
+        // at the end, run the next phase
+        // runCounter(state, action.payload)
+        //after everything is done,
+        // runNextPhase(state, action.payload)
+        break
+      // return state
       case ACTIONS.CHANGE_DIALOG:
         console.log('Reducer CHANGE_DIALOG:', action)
         return {

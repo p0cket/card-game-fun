@@ -104,14 +104,12 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   )
 
   const attackButtons = () => (
-    <div className="flex flex-grow justify-around items-center  bg-[#5a7d2a]">
+    <div className="flex flex-grow justify-around items-center bg-[#5a7d2a]">
       <div className="font-[silkscreen] flex-none w-1/4 items-center justify-center text-sm text-white">
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
-      <div className="border border-gray-400 rounded-sm flex flex-grow flex-col font-[silkscreen]">
-        <div onClick={() => setCurrentView('menu')}>
-          <div className="text-white bg-boy-green-500 flex justify-end">x</div>
-        </div>
+      <div className="border border-gray-400 rounded-sm flex p-2 flex-grow flex-col font-[silkscreen]">
+       
 
         {ourCurrentMon.moves.map((move, index) => (
           <div
@@ -122,6 +120,9 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
             {move.name}
           </div>
         ))}
+         <div onClick={() => setCurrentView('menu')}>
+          <div className="text-white bg-boy-green-500 flex justify-end">x</div>
+        </div>
         {/* <div
           className="cursor-pointer text-sm text-white"
           onClick={() => setCurrentView('menu')}

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import RenderIndAttack from '../info/RenderIndAttack'
 import { LightBeam } from '../../consts/allMoves'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-import { executeMove } from '../../handlers/moveHandlers'
 import RenderCounter from './RenderCounter'
 import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
 
