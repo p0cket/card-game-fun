@@ -92,9 +92,12 @@ export const newStartingData = {
   bag: {
     runes: ['Stick', `Coat of harms`],
     items: [
-      { contents: apple, qty: 1 },
-      { contents: pumpernickelSoda, qty: 1 },
-      { contents: potion, qty: 3 },
+      { ...apple, qty: 1 },
+      { ...pumpernickelSoda, qty: 1 },
+      { ...potion, qty: 1 },
+      // { name: 'Apple', type: 'food',
+      // description: 'A tasty apple that heals 5 HP.',
+      // effect: {hp: 5}, qty: 1 },
     ],
   },
   game: {
@@ -174,6 +177,7 @@ export const newStartingData = {
   moveStack: [],
 }
 
+// DEPRECATED!
 export const startingDataOld = {
   deck: startingDeck,
   gold: 50,

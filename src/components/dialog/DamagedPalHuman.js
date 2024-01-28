@@ -7,6 +7,7 @@ import { DIALOGS } from './DialogManager'
 const DamagedPalHuman = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
+  const inDebug =  state.debug && state.debug.isOpen
   const movePayload = {
     
       pal: state.attack.pal,
@@ -61,14 +62,15 @@ const DamagedPalHuman = () => {
       dispatch({ type: ACTIONS.CLOSE_DIALOG })
     },
   }
-
   console.log(`DamagedPalHuman: state.attack`, state.attack)
   const damagedPalHumanProps = {
     title: `Your Pal Damaged`,
     header: `Your Pal took damage`,
     message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
     `,
-    options: [dmg_continueOption, dmg_counterOption],
+    // options: [dmg_continueOption, dmg_counterOption],
+
+    options: [dmg_continueOption, inDebug ? dmg_counterOption : null],
   }
 
   return <DialogTemplate {...damagedPalHumanProps} />

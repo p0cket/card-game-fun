@@ -324,16 +324,16 @@ export const MainProvider = ({ children }) => {
         }
         endState = endPhase(state, action.payload)
         return endState
-        case ACTIONS.ADD_MOVE_TO_STACK:
-          console.log('Reducer ADD_MOVE_TO_STACK: action&state', action, state)
-          newMoveStack = [...state.moveStack, action.payload.prevMove]
-          console.log('Reducer ADD_MOVE_TO_STACK: newMoveStack', newMoveStack)
-          state = {
-            ...state,
-            moveStack: newMoveStack,
-          }
-          console.log('Reducer ADD_MOVE_TO_STACK: state', state)
-          return state
+      case ACTIONS.ADD_MOVE_TO_STACK:
+        console.log('Reducer ADD_MOVE_TO_STACK: action&state', action, state)
+        newMoveStack = [...state.moveStack, action.payload.prevMove]
+        console.log('Reducer ADD_MOVE_TO_STACK: newMoveStack', newMoveStack)
+        state = {
+          ...state,
+          moveStack: newMoveStack,
+        }
+        console.log('Reducer ADD_MOVE_TO_STACK: state', state)
+        return state
       case ACTIONS.COUNTER_PHASE:
         // get the state after whatever phase, then run the next phase
         // at the end, run the next phase
@@ -379,16 +379,46 @@ export const MainProvider = ({ children }) => {
         }
         console.log(`stateWithRune: `, stateWithRune)
         return stateWithRune
-      case ACTIONS.ADD_ITEM:
+      case ACTIONS.ADD_ITEM: {
         console.log('Reducer ADD_ITEM:', action)
-        stateWithItem = {
+        // Find the index of the item in the inventory, if it exists
+        const itemIndex = state.bag.items.findIndex(
+          (item) => item.name === action.payload.item.name,
+        )
+        let updatedItems = []
+        if (itemIndex >= 0) {
+          // Item exists, update quantity
+          updatedItems = state.bag.items.map((item, index) =>
+            index === itemIndex ? { ...item, qty: item.qty + 1 } : item,
+          )
+        } else {
+          // Item does not exist, add new item with qty
+          updatedItems = [
+            ...state.bag.items,
+            { ...action.payload.item, qty: 1 },
+          ]
+        }
+        const stateWithItemUpdated = {
           ...state,
           bag: {
             ...state.bag,
-            items: [...state.bag.items, action.payload.item],
+            items: updatedItems,
           },
         }
-        return stateWithItem
+        console.log(`stateWithItemUpdated: `, stateWithItemUpdated)
+        return stateWithItemUpdated
+      }
+
+      // console.log('Reducer ADD_ITEM:', action)
+      // stateWithItem = {
+      //   ...state,
+      //   bag: {
+      //     ...state.bag,
+      //     items: [...state.bag.items, action.payload.item],
+      //   },
+      // }
+      // console.log(`stateWithItem: `, stateWithItem)
+      // return stateWithItem
       case ACTIONS.ADD_MOVE:
         console.log('Reducer ADD_MOVE:', action)
         state = addMoveToPalInState(
@@ -410,13 +440,20 @@ export const MainProvider = ({ children }) => {
       // break
       case ACTIONS.USE_ITEM:
         console.log('Reducer USE_ITEM:', action)
-        // item's health effect. grab it
-        // effect: { hp: 20 },
-        // item.effect
-        if (action.payload.contents.effect.hp) {
-          state = healHumanPal(state, action.payload.contents.effect.hp)
-          state = subtractItem(state, action.payload)
+        // Check for the effect property directly in the payload
+        // const { effect } = action.payload;
+
+        // Handle HP effects
+        if (action.payload.effect && action.payload.effect.hp) {
+          state = healHumanPal(state, action.payload.effect.hp)
         }
+        // Example: Handle energy effects
+        // if (effect && effect.energy) {
+        //   // Assuming you have a function to handle energy increases
+        //   state = increaseEnergy(state, effect.energy);
+        // }
+        // Subtract the item after applying its effect
+        state = subtractItem(state, action.payload)
         return state
       case ACTIONS.HEAL_PAL_FULL:
         console.log(
@@ -425,17 +462,17 @@ export const MainProvider = ({ children }) => {
         )
         state = setPlayerPalHPToMax(state)
         return state
-        case ACTIONS.TOGGLE_DEBUG:
-          console.log('Reducer TOGGLE_DEBUG:', action)
-          
-          state = {
-            ...state,
-            debug: {
-              ...state.debug || {}, // Ensures that state.debug is an object if it was undefined
-              isOpen: !(state.debug && state.debug.isOpen), // Correctly toggles isOpen between true and false
-            },
-          }
-          return state
+      case ACTIONS.TOGGLE_DEBUG:
+        console.log('Reducer TOGGLE_DEBUG:', action)
+
+        state = {
+          ...state,
+          debug: {
+            ...(state.debug || {}), // Ensures that state.debug is an object if it was undefined
+            isOpen: !(state.debug && state.debug.isOpen), // Correctly toggles isOpen between true and false
+          },
+        }
+        return state
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state
