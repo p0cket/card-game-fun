@@ -52,7 +52,7 @@ export const dmgPhase = (state, attackPayload) => {
   let targetPal
 
   // get move's accuracy
-  const accuracy = move.accuracy
+  const accuracy = move.accuracy / 100
   // roll random
   const roll = Math.floor(Math.random() * 100)
 
@@ -61,14 +61,15 @@ export const dmgPhase = (state, attackPayload) => {
     // Figure out the user, we neeed their accuracy
     let user = newState.userParty[0]
     // user's accuracy stat
-    const palAccuracyStat = user.stats.accuracy
+    const palAccuracyStat = user.stats.accuracy / 100
 
     // targetPal is the reciever of the atk
     targetPal = newState.opponent.monsters[0]
-    const combinedAccuracy = (accuracy + palAccuracyStat) / 2
+    // (1-.2) * .2 = 
+    const combinedAccuracy = accuracy * palAccuracyStat * 100 
     console.warn(`🫠check attacker passed as human`, targetPal)
     console.log(
-      `Roll: ${roll} < ${accuracy} ${palAccuracyStat} / 2 = ${
+      `Roll: ${roll} < ((${accuracy} * ${palAccuracyStat}) * 100 ) = ${combinedAccuracy} ${
         roll < combinedAccuracy
       }. move:`,
       move,

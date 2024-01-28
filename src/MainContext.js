@@ -79,6 +79,8 @@ export const ACTIONS = {
   END_PHASE: 'END_PHASE',
   ADD_MOVE_TO_STACK: 'ADD_MOVE_TO_STACK',
   TOGGLE_DEBUG: 'TOGGLE_DEBUG',
+
+  RESET_DATA: 'RESET_DATA',
 }
 
 export const MainProvider = ({ children }) => {
@@ -250,7 +252,6 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.PAY_PHASE:
         //
         console.log('Reducer PAY_PHASE: action & state', action, state)
-
         payState = { ...state }
         // if the attack is a counter, add the stashed move to the move stack
         // if (action.payload.attack.isCounter) {
@@ -473,6 +474,9 @@ export const MainProvider = ({ children }) => {
           },
         }
         return state
+        case ACTIONS.RESET_DATA:
+          console.log('Reducer RESET_DATA:', action)
+          return {...newStartingData}
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

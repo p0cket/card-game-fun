@@ -80,7 +80,7 @@ const Rest = () => {
           </p>
           <p>
             Nurse Becky, with her expert care, ensures your pals will be
-            fighting fit in no time.
+            100% in no time.
           </p>
           {/* <p className="text-sm">( all pals at full health )</p> */}
         </article>

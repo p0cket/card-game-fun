@@ -50,6 +50,7 @@ export const statusPhase = (state, attackPayload) => {
         player,
         move,
       )
+      // state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)
       state = switchDialog(state, DIALOGS.STATUS_APPLIED_AI)
       console.groupEnd()
       return state
@@ -70,6 +71,7 @@ export const statusPhase = (state, attackPayload) => {
       const ourPal = pal
       console.warn(`move, ourPal`, move, ourPal)
       // #TODO:
+      // state = switchDialog(state, DIALOGS.STATUS_APPLIED_AI)
       state = switchDialog(state, DIALOGS.STATUS_APPLIED_HUMAN)
       console.groupEnd()
       return state

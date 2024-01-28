@@ -10,6 +10,8 @@ function PalDetailsPopup({
 }) {
   const state = useStateContext()
   const dispatch = useDispatchContext()
+  const inDebug = state.debug && state.debug.isOpen
+
   return (
     <div className="relative bg-gray-900 rounded-lg shadow-lg overflow-hidden">
       <div className="p-1">
@@ -57,7 +59,8 @@ function PalDetailsPopup({
             <span>Speed:</span>
             <span>{selectedPal.stats.speed}</span>
           </div> */}
-            <div className="flex px-1">Moves:</div>
+          {/* TODO: Get rid */}
+         { inDebug ? <> <div className="flex px-1">Moves:</div>
             <div className="flex flex-wrap gap-1">
               {selectedPal.moves.map((move, index) => (
                 <div key={index} className="p-1">
@@ -69,7 +72,9 @@ function PalDetailsPopup({
                   </span>
                 </div>
               ))}
-            </div>
+            </div></> : ''}<div className="mt-2">
+          <p className="w-full max-w-xs">{selectedPal.description}</p>
+        </div>
           </div>
         </div>
         {/* <div className="mt-4">
@@ -84,9 +89,7 @@ function PalDetailsPopup({
           </div>
         </div> */}
 
-        <div className="mt-2">
-          <p>{selectedPal.description}</p>
-        </div>
+        
         {/* <div>
           {`Types: ${selectedPal.elemental_type} ${selectedPal.creature_type} ${selectedPal.specialty_group}`}
         </div> */}
