@@ -41,6 +41,7 @@ const Battle = () => {
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
+  const inDebug = contextualState.debug && contextualState.debug.isOpen
 
   const ourParty = contextualState.userParty
   // console.log(`ourCurrentMonSHOULDBE`, ourParty)
@@ -69,8 +70,12 @@ const Battle = () => {
         <div>
           <HUDDetails />
           {/* TODO: Add in the heading of the area you are in */}
-          {/* <HUDHeader /> */}
-          {/* <PartyDisplay party={contextualState.opponent.monsters.slice(1)} /> */}
+          {inDebug ? <HUDHeader /> : ''}
+          {inDebug ? (
+            <PartyDisplay party={contextualState.opponent.monsters.slice(1)} />
+          ) : (
+            ''
+          )}{' '}
           <div className="font-[silkscreen] flex flex-wrap items-center">
             <BattleTopDisplay gameData={gameData} />
             {/* TODO: Add in battle types */}
@@ -93,7 +98,11 @@ const Battle = () => {
               ourCurrentMon={ourCurrentMon}
             />
           </div>
-          {/* <PartyDisplay party={ourParty.slice(1)} userFlag={true} /> */}
+          {inDebug ? (
+            <PartyDisplay party={ourParty.slice(1)} userFlag={true} />
+          ) : (
+            ''
+          )}{' '}
           <div
             className="font-silkscreen bg-green-500 text-white"
             style={{ fontFamily: 'Silkscreen' }}

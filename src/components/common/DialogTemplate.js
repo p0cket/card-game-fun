@@ -69,14 +69,14 @@ function DialogTemplate({ title, message, options }) {
         </div>
         <Dialog size="20" myText={message} />
         <div>
-          {options.map((button, index) => (
+          {options.map((button, index) => button && (
             <button
               key={index}
               onClick={() => closeDialogPopup(button)}
               style={{
-                backgroundColor: button.backgroundColor || '#4b770e',
+                backgroundColor: (button.backgroundColor || '#4b770e'),
                 border: 'none',
-                color: button.color || '#fff',
+                color: (button.color || '#fff'),
                 padding: '4px 4px',
                 margin: '2px',
                 cursor: 'pointer',
@@ -85,7 +85,7 @@ function DialogTemplate({ title, message, options }) {
             >
               {button.label}
             </button>
-          ))}
+          )).filter(Boolean)}
         </div>
       </div>
     </div>

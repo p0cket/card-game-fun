@@ -13,6 +13,7 @@ import Button from '../common/Button'
 import bg1 from './../../assets/backgrounds/bg1.png'
 
 export default function BattleTopDisplay() {
+  const [showTooltip, setShowTooltip] = useState(false)
   const attackPopupStyles = {
     overlay: {
       position: 'fixed',
@@ -134,7 +135,23 @@ export default function BattleTopDisplay() {
             </div>
           </div>
           <div>
+            
+          
             <div>
+              {/*  */}
+            {showTooltip && (
+                    <div className="absolute bottom-full mb-2 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
+                      <button
+                        className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
+                        onClick={() => setShowTooltip(false)}
+                      >
+                        {/* &times; */}
+                      </button>
+                      <div>Passive: ourCurrentMon.passives.details </div>
+                      <div className='text-xs text-gray-900'> ourCurrentMon.passives.reasoning</div>x
+                    </div>
+                  )}
+                  {/*  */}
               {Object.keys(currentMon.status).map((key) => {
                 console.warn(`currentMon.status`, currentMon.status)
                 if (currentMon.status[key]) {

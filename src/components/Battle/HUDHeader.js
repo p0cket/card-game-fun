@@ -4,7 +4,7 @@ function HUDHeader({ gameData }) {
   return (
     <p
       style={{
-        margin: '4px',
+        // margin: '1px',
         backgroundColor: '#5a7d2a',
         color: 'white',
         // center

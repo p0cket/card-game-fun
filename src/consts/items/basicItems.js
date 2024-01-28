@@ -1,16 +1,3 @@
-// Here we list all the items in the game
-// lets flesh out these items in our bag:
-// bag: {
-//     runes: ['Stick', `Coat of harms`],
-//     items: [
-//   { name: 'apple', quantity: 1 },
-//   { name: 'Pumpernickel Soda', quantity: 1 },
-//   { name: 'Potion', quantity: 3 },
-//   { name: 'Super Potion', quantity: 1 },
-//   { name: 'Hyper Potion', quantity: 0 },
-//   // Add more items as needed
-// ],
-//   },
 import potionTestImg from '../../assets/items/item1.png'
 import item2 from '../../assets/items/item2.png'
 import item3 from '../../assets/items/item3.png'
@@ -64,7 +51,7 @@ export const pumpernickelSoda = {
   type: 'drink',
   // effect: { energy: 10 },
   effect: { hp: 30 },
-  description: 'A fizzy drink that restores 10 energy points.',
+  description: 'A fizzy drink that restores 30 health points.',
 }
 
 export const sampleShopItems = [
