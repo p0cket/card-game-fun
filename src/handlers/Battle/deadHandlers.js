@@ -1,6 +1,7 @@
 import { bossBarry, hikerBrak } from '../../consts/party/trainers'
 import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
 import { SCENES, changeLevel, updateScene } from '../sceneHandlers_new'
+import { applyLevelUpBonus, updateUserPartyStats } from '../state/partyStateHandlers'
 
 export const checkIfDead = (state) => {
   console.log(
@@ -46,7 +47,16 @@ export const checkIfDead = (state) => {
         ],
       },
     }
-    
+
+
+
+
+    // increase user pal's level
+    state = applyLevelUpBonus(state)
+    // state.userParty[0].stats.hp
+
+    // possibly increase enemy pal's level if your pal is dead too
+
     // if the boss is dead, change level to victory
     //  lets find where the type of level is assigned
     const { sceneType } = state.current.scene.details

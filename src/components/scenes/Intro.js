@@ -180,7 +180,7 @@ const Intro = ({ dispatch }) => {
             <br />
           </div>{' '}
           <div style={{ padding: '10px' }}>
-            <ThemedButton text={`Lets Adventure!`} onClick={loadNextLevel} />
+            <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
           </div>
           {/* <SparkleButton /> */}
           <div className="flex">

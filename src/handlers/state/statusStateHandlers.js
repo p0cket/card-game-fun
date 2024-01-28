@@ -324,11 +324,11 @@ const applyStatusToPal = (
       return palToApplyTo
     default:
       // any other status to be applied
-      console.log(`applying ${statusResult} to ${palToApplyTo.name}`)
-      palToApplyTo.status = {
-        ...palToApplyTo.status,
-        [statusResult]: statusValue,
-      }
+      console.log(`default status case reached for  ${statusResult} to ${palToApplyTo.name}`)
+      // palToApplyTo.status = {
+      //   ...palToApplyTo.status,
+      //   [statusResult]: statusValue,
+      // }
       return palToApplyTo
   }
 }

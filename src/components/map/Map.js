@@ -30,6 +30,7 @@ function Map() {
     })
   }
 
+  
   const ourParty = contextualState.userParty
 
   const renderMonsterDetails = (monster) => {
@@ -39,19 +40,22 @@ function Map() {
         className="mb-2 border border-lightgreen w-full"
       >
         {monster ? (
-          <div className="flex items-center w-full">
-            <motion.img
-              src={monster.image}
-              alt={monster.name}
-              className="max-w-[35px] max-h-[35px] object-cover"
-              animate={imageControls}
-            />
-            <div>{monster.name}</div>
-            <p className="p-1">
-              HP: {monster.stats.hp}/{monster.stats.max_hp}
-            </p>
-            <div className="bg-gray-900 w-full h-2 rounded mt-1">
+          <>
+            <div className="flex items-center justify-between w-full">
+              <motion.img
+                src={monster.image}
+                alt={monster.name}
+                className="max-w-[35px] max-h-[35px] object-cover"
+                animate={imageControls}
+              />
+              <div>{monster.name}</div>
+              <p className="p-1">
+                HP: {monster.stats.hp}/{monster.stats.max_hp}
+              </p>
+            </div>
+            <div className="relative bg-gray-900 w-full h-2 px-2 pb-1 rounded mt-1">
               <div
+                className="absolute left-0 top-0"
                 style={{
                   width: `${(monster.stats.hp / monster.stats.max_hp) * 100}%`,
                   height: '100%',
@@ -59,8 +63,17 @@ function Map() {
                   backgroundColor: 'darkgreen',
                 }}
               ></div>
+              <div
+                className="absolute right-0 top-0"
+                style={{
+                  width: `${(1 - (monster.stats.hp / monster.stats.max_hp)) * 100}%`,
+                  height: '100%',
+                  // borderRadius: '5px',
+                  backgroundColor: '#5c5c5c',
+                }}
+              ></div>
             </div>
-          </div>
+          </>
         ) : (
           <p>Empty Slot</p>
         )}

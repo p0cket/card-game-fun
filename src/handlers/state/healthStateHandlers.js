@@ -136,6 +136,8 @@ export const setEnemyPalEnergyToMax = (state) => {
 
 export const setEnemyPalHPToMax = (state) => {
   console.warn(`setEnemyPalHPToMax: state`, state)
+  const randomizedLevel = Math.floor(Math.random() * 12)  + state.current.mapLevel * 10
+  console.log(`setEnemyPalHPToMax: randomizedLevel`, randomizedLevel)
   // set hp to max
   state = {
     // state.opponent.monsters[0].stats.hp
@@ -147,8 +149,9 @@ export const setEnemyPalHPToMax = (state) => {
           ...state.opponent.monsters[0],
           stats: {
             ...state.opponent.monsters[0].stats,
-            hp: state.opponent.monsters[0].stats.max_hp,
+            hp: state.opponent.monsters[0].stats.max_hp + randomizedLevel,
           },
+          lvl: randomizedLevel,
         },
       ],
     },

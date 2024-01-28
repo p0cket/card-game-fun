@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { SCENES, updateLevel, updateScene } from '../../handlers/sceneHandlers_new'
+import {
+  SCENES,
+  updateLevel,
+  updateScene,
+} from '../../handlers/sceneHandlers_new'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 
 const GameOver = () => {
@@ -35,16 +39,20 @@ const GameOver = () => {
   }
 
   const loadChooseCharacterScene = () => {
-    console.log(`func: loadNextLevel()`)
+    console.log(`loadChooseCharacterScene():`)
     // dispatch(setSceneAction())
-    const nextSceneState = updateScene(state, {
+    let refreshedState = dispatch({
+      type: ACTIONS.RESET_DATA,
+    })
+    const nextSceneState = updateScene(refreshedState, {
       screen: SCENES.CHOOSECHARACTER,
       details: null,
     })
     const nextLevelState = updateLevel(nextSceneState, 1)
     dispatch({
-      payload: nextLevelState,
       type: ACTIONS.UPDATE_GAMEDATA,
+
+      payload: nextLevelState,
     })
   }
 
@@ -64,12 +72,13 @@ const GameOver = () => {
         <p className="font-bold col-span-2">Achievements</p>
         <p className="col-span-2">{playerData.achievements.join(', ')}</p>
       </div>
-      <button
+      <div>Please refresh to restart</div>
+      {/* <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
         onClick={handleRetry}
       >
         Try Again
-      </button>
+      </button> */}
       <button
         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 m-2 rounded"
         onClick={handleShare}

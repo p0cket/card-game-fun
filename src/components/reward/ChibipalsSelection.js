@@ -66,20 +66,6 @@ const ChibipalsSelection = () => {
             onClick={() => handleMonsterClick(monster)}
             style={{ flex: '1', margin: '2px', cursor: 'pointer' }}
           >
-            {/* <div
-              className={`w-full pb-full rounded-full ${
-                monster.image ? 'bg-cover' : 'bg-green-500'
-              }`}
-            >
-              {monster.image && (
-                <img
-                  src={monster.image}
-                  alt={monster.name}
-                  className="w-[100px] h-[100px] object-cover"
-                  key={monster.id} // Added key prop
-                />
-              )}
-            </div> */}
             <button className="w-full h-full  bg-boy-green">{monster.name}</button>
             {/* <p className="text-center text-sm pt-3">{monster.name}</p> */}
           </div>

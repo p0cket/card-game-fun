@@ -95,7 +95,7 @@ export const Luminowl = {
   strengths: ['Dark'],
   weaknesses: ['Fire'],
   cost: 500,
-  lvl: 50,
+  lvl: 5,
   experience: 5000,
   status: {},
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
@@ -139,7 +139,7 @@ export const Glowbuggle = {
   strengths: ['Dark'],
   weaknesses: ['Electric', 'Ice'],
   cost: 400,
-  lvl: 40,
+  lvl:5,
   experience: 4000,
   status: {},
 
@@ -188,7 +188,7 @@ export const Umbrabunny = {
   strengths: ['Light'],
   weaknesses: ['Fighting'],
   cost: 450,
-  lvl: 48,
+  lvl: 5,
   experience: 4800,
   status: {},
 
