@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 // import { useDispatchContext, useStateContext } from "../../MainContext"
@@ -8,9 +8,10 @@ import { useDispatchContext, useStateContext } from '../../MainContext'
 import { Party } from '../../consts/party/parties'
 import Button from '../common/Button'
 import bg1 from './../../assets/backgrounds/bg1.png'
+import TooltipButton from '../common/Tooltip'
 
 function BattleBotDisplay({ ourCurrentMon }) {
-  const [showTooltip, setShowTooltip] = useState(false)
+  const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
   const yourVariants = {
     visible: {
       x: [0, 2, -3, 5, -1, 5, -3, 0],
@@ -22,6 +23,22 @@ function BattleBotDisplay({ ourCurrentMon }) {
       },
     },
   }
+  const toggleTooltip = (key) => {
+    setShowTooltip((prevState) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }))
+  }
+  const [showTooltip, setShowTooltip] = useState({})
+
+  useEffect(() => {
+    const statusKeys = Object.keys(ourCurrentMon.status)
+    const tooltipState = statusKeys.reduce((acc, key) => {
+      acc[key] = false // Initialize all tooltips as not shown
+      return acc
+    }, {})
+    setShowTooltip(tooltipState)
+  }, [ourCurrentMon.status])
 
   return (
     <div className="flex px-2 mx-2 justify-around bg-boy-green text-8px">
@@ -67,11 +84,53 @@ function BattleBotDisplay({ ourCurrentMon }) {
               {Object.keys(ourCurrentMon.status).map((key) => {
                 if (ourCurrentMon.status[key]) {
                   return (
+                    <TooltipButton
+                      key={key}
+                      title="Effect"
+                      // details={JSON.stringify(ourCurrentMon.status[key])}
+                      details={ourCurrentMon.status[key].type.description}
+                      // explanation={JSON.stringify(ourCurrentMon.status[key])}
+                      name={key}
+                      ourCurrentMon={ourCurrentMon}
+                      showTooltip={showTooltip[key]}
+                      setShowTooltip={() => toggleTooltip(key)}
+                      amt={ourCurrentMon.status[key].effect}
+                    />
+                    //   <span
+                    //   className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
+                    //   key={key}
+                    // >
+                    //   {key} {JSON.stringify(ourCurrentMon.status[key])}
+                    // </span>
+                  )
+                } else {
+                  console.log(`${key} is false`)
+                  return (
+                    <span className="text-gray-500" key={key}>
+                      {key} {ourCurrentMon.status[key].effect}
+                    </span>
+                  )
+                }
+              })}
+
+              {/* {Object.keys(ourCurrentMon.status).map((key) => {
+                if (ourCurrentMon.status[key]) {
+                  return (
+                  //   <TooltipButton
+                  //   key={key}
+                  //   title="effect"
+                  //   details={ourCurrentMon.passives.details}
+                  //   explanation={ourCurrentMon.passives.reasoning}
+                  //   name={ourCurrentMon.passives.name}
+                  //   ourCurrentMon={ourCurrentMon}
+                  //   showTooltip={showTooltip}
+                  //   setShowTooltip={setShowTooltip}
+                  // />
                     <span
                       className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
                       key={key}
                     >
-                      {key}
+                      {key} {JSON.stringify(ourCurrentMon.status[key])}
                     </span>
                   )
                 } else {
@@ -82,29 +141,18 @@ function BattleBotDisplay({ ourCurrentMon }) {
                     </span>
                   )
                 }
-              })}
+              })} */}
             </div>
             <ul className="text-sm flex flex-col justify-start align-start">
-              <li>
-                <button
-                  className="bg-boy-green py-1 px-2 rounded text-white relative"
-                  onClick={() => setShowTooltip(!showTooltip)}
-                >
-                  {ourCurrentMon.passives.name}
-                  {showTooltip && (
-                    <div className="absolute bottom-full mb-2 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
-                      <button
-                        className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
-                        onClick={() => setShowTooltip(false)}
-                      >
-                        {/* &times; */}
-                      </button>
-                      <div>Passive: {ourCurrentMon.passives.details} </div>
-                      <div className='text-xs text-gray-900'> {ourCurrentMon.passives.reasoning}</div>x
-                    </div>
-                  )}
-                </button>
-              </li>
+              <TooltipButton
+                title="Passive"
+                details={ourCurrentMon.passives.details}
+                explanation={ourCurrentMon.passives.reasoning}
+                name={ourCurrentMon.passives.name}
+                ourCurrentMon={ourCurrentMon}
+                showTooltip={showPassiveTooltip}
+                setShowTooltip={setShowPassiveTooltip}
+              />
               {/* <li>Group: {ourCurrentMon.specialty_group}</li>
               <li>
                 +{' '}

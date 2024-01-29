@@ -7,7 +7,7 @@ import {
 } from '../pals/pals'
 
 export const Trainer = {
-  name: 'Trainer Name',
+  name: 'Miles Trainer',
   reward: {
     experience: 100,
     currency: 500,

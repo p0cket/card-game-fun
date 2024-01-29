@@ -46,30 +46,3 @@ export const cleanupPhase = (state, attackPayload) => {
   console.groupEnd()
   return state
 }
-// const stateWithStatusesApplied = applyStatuses(move, pal) // switch(move.statuses)
-// if (move.effect && doesItLand) {
-//   console.log(`move.effect is ${move.effect.result} && lands`, move)
-//   const effect = move.effect.result
-//   switch (effect) {
-//     case 'blind':
-//       // Dialogue: applying blind
-//       console.log(`applying blind to ${targetMonster.name}`)
-//       //applyBlind(targetMonster)
-//       //evasion less
-//       // accuracy less
-//       // note the effect is applied to the target
-//       targetMonster.status.blind = true
-//       break
-//     case 'buff':
-//       // applyBuff(targetMonster)
-//       // Dialogue: applying buff
-//       targetMonster.stats.attack += 2
-//       break
-//     default:
-//       console.log(`default case for hero buffs applied`)
-//   }
-//   // 6. Resolve End Steps (is this taken care of here?)
-//   // Dialogue: ___ is taking x poison damage (or any other effect)
-//   // const stateWithEndStepsResolved = resolveEndSteps(move, pal) // switch(move.endStepsTriggers)
-// }
-// This currently means nothing but we'll add the effects and send back

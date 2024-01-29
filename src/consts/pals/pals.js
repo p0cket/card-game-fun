@@ -115,7 +115,51 @@ export const Luminowl = {
   weight: 'Light',
   lore: "Legends speak of Luminowl's ability to bring light and wisdom to those in need.",
 }
+export const Umbrabunny = {
+  id: 8,
+  name: 'Umbrabunny',
+  elemental_type: 'Dark',
+  creature_type: 'Mammal',
+  specialty_group: 'Cleric',
+  // nature: 'Adorable',
+  quirks: ['Emotion Sponge', 'Reassuring Presence'],
+  stats: {
+    hp: 90,
+    max_hp: 90,
+    attack: 60,
+    defense: 70,
+    special_attack: 80,
+    special_defense: 110,
+    speed: 120,
+    accuracy: 100,
+  },
+  enterAbility:
+    'on enter, does something cool. Otherwise no ability and have it stick around',
+  strengths: ['Light'],
+  weaknesses: ['Fighting'],
+  cost: 450,
+  lvl: 5,
+  experience: 4800,
+  status: {},
 
+  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
+  moves: [LightBeam, WiseGaze],
+  // moves: [EmotionDrain, CuteCharm, ComfortingHug],
+  possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
+  // passives: 'Emotion Balance',
+  passives: shadowCamouflage,
+  commander_ability: {
+    name: 'Harmony Embrace',
+    description:
+      'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
+  },
+  image: UmbrabunnyImg,
+  description:
+    'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
+  size: 'Small',
+  weight: 'Light',
+  lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
+}
 export const Glowbuggle = {
   id: 7,
   name: 'Glowbuggle',
@@ -165,50 +209,7 @@ export const Glowbuggle = {
   lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
 }
 
-export const Umbrabunny = {
-  id: 8,
-  name: 'Umbrabunny',
-  elemental_type: 'Dark',
-  creature_type: 'Mammal',
-  specialty_group: 'Cleric',
-  // nature: 'Adorable',
-  quirks: ['Emotion Sponge', 'Reassuring Presence'],
-  stats: {
-    hp: 90,
-    max_hp: 90,
-    attack: 60,
-    defense: 70,
-    special_attack: 80,
-    special_defense: 110,
-    speed: 120,
-    accuracy: 100,
-  },
-  enterAbility:
-    'on enter, does something cool. Otherwise no ability and have it stick around',
-  strengths: ['Light'],
-  weaknesses: ['Fighting'],
-  cost: 450,
-  lvl: 5,
-  experience: 4800,
-  status: {},
 
-  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
-  moves: [EmotionDrain, CuteCharm, ComfortingHug],
-  possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
-  // passives: 'Emotion Balance',
-  passives: shadowCamouflage,
-  commander_ability: {
-    name: 'Harmony Embrace',
-    description:
-      'Radiates an aura of emotional harmony, calming all foes and allies. Reduces the power of enemy attacks and status effects.',
-  },
-  image: UmbrabunnyImg,
-  description:
-    'Adorable, bunny-like creatures with the ability to absorb and dispel negative emotions.',
-  size: 'Small',
-  weight: 'Light',
-  lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
-}
 // ----
 export const Shadowstalker = {
   id: 2,
@@ -433,8 +434,8 @@ export const Recycleroo = {
   nature: 'Medic',
   quirks: ['Recycling Expert', 'Projectile Thrower'],
   stats: {
-    hp: 110,
-    max_hp: 190,
+    hp: 80,
+    max_hp: 100,
     attack: 100,
     defense: 80,
     special_attack: 60,
@@ -452,7 +453,9 @@ export const Recycleroo = {
   status: {},
 
   // moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
-  moves: [RecycleRush, ProjectileToss, LeafShield],
+  // moves: [RecycleRush, ProjectileToss, LeafShield],
+  moves: [LightBeam, WiseGaze],
+
   possible_moves: ['Trash Bash', "Nature's Wrath", 'Sorting Cyclone'],
   passives: 'Eco-Warrior',
   commander_ability: {

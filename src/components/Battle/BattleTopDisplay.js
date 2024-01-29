@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // eslint-disable-next-line no-unused-vars
 // import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
@@ -11,9 +11,10 @@ import { useDispatchContext, useStateContext } from '../../MainContext'
 import AttackPopup from '../common/AttackPopup'
 import Button from '../common/Button'
 import bg1 from './../../assets/backgrounds/bg1.png'
+import TooltipButton from '../common/Tooltip'
 
 export default function BattleTopDisplay() {
-  const [showTooltip, setShowTooltip] = useState(false)
+  const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
   const attackPopupStyles = {
     overlay: {
       position: 'fixed',
@@ -37,6 +38,56 @@ export default function BattleTopDisplay() {
   // const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false)
   const state = useStateContext()
   const dispatch = useDispatchContext()
+
+  const toggleTooltip = (key) => {
+    setShowTooltip((prevState) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }))
+  }
+  const [showTooltip, setShowTooltip] = useState({})
+  // Def work on this later
+  const currentMonDetailsStatuses = state.opponent.monsters[0].status
+
+  //this is the current monster. We need to track this down and
+  // assign it to the currentMon
+  const currentMon =
+    // state.current.scene.details.trainer.monsters[0]
+    state.opponent.monsters[0]
+  console.log(
+    `currentMon & currentMonDetails:`,
+    currentMon,
+    currentMonDetailsStatuses,
+  )
+  const {
+    name,
+    lore,
+    image,
+    elemental_type,
+    creature_type,
+    specialty_group,
+    nature,
+    quirks,
+    stats,
+    enterAbility,
+    strengths,
+    weaknesses,
+    cost,
+    moves,
+    possible_moves,
+    passives,
+    experience,
+    lvl,
+    // status,
+  } = currentMon
+  useEffect(() => {
+    const statusKeys = Object.keys(currentMon.status)
+    const tooltipState = statusKeys.reduce((acc, key) => {
+      acc[key] = false // Initialize all tooltips as not shown
+      return acc
+    }, {})
+    setShowTooltip(tooltipState)
+  }, [currentMon.status])
 
   const handleAttackClick = (name) => {
     // Dispatch an action to perform the selected attack
@@ -81,40 +132,7 @@ export default function BattleTopDisplay() {
       },
     },
   }
-  // Def work on this later
-  const currentMonDetailsStatuses = state.opponent.monsters[0].status
 
-  //this is the current monster. We need to track this down and
-  // assign it to the currentMon
-  const currentMon =
-    // state.current.scene.details.trainer.monsters[0]
-    state.opponent.monsters[0]
-  console.log(
-    `currentMon & currentMonDetails:`,
-    currentMon,
-    currentMonDetailsStatuses,
-  )
-  const {
-    name,
-    lore,
-    image,
-    elemental_type,
-    creature_type,
-    specialty_group,
-    nature,
-    quirks,
-    stats,
-    enterAbility,
-    strengths,
-    weaknesses,
-    cost,
-    moves,
-    possible_moves,
-    passives,
-    experience,
-    lvl,
-    // status,
-  } = currentMon
   return (
     <div className="flex px-2 mx-2 pb-1 justify-around bg-boy-green text-8px ">
       <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
@@ -135,24 +153,50 @@ export default function BattleTopDisplay() {
             </div>
           </div>
           <div>
-            
-          
             <div>
               {/*  */}
-            {showTooltip && (
-                    <div className="absolute bottom-full mb-2 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
-                      <button
-                        className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
-                        onClick={() => setShowTooltip(false)}
-                      >
-                        {/* &times; */}
-                      </button>
-                      <div>Passive: ourCurrentMon.passives.details </div>
-                      <div className='text-xs text-gray-900'> ourCurrentMon.passives.reasoning</div>x
-                    </div>
-                  )}
-                  {/*  */}
+              {showPassiveTooltip && (
+                <div className="absolute bottom-full mb-2 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
+                  <button
+                    className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
+                    onClick={() => setShowPassiveTooltip(false)}
+                  >
+                    {/* &times; */}
+                  </button>
+                  <div>Passive: {currentMon.passives.details} </div>
+                  <div className="text-xs text-gray-900">
+                    {' '}
+                    {currentMon.passives.reasoning}
+                  </div>
+                  x
+                </div>
+              )}
+              {/*  */}
               {Object.keys(currentMon.status).map((key) => {
+                if (currentMon.status[key]) {
+                  return (
+                    <TooltipButton
+                      key={key}
+                      title="Effect"
+                      details={currentMon.status[key].type.description}
+                      // explanation={JSON.stringify(currentMon.status[key])}
+                      name={key}
+                      ourCurrentMon={currentMon}
+                      showTooltip={showTooltip[key]}
+                      setShowTooltip={() => toggleTooltip(key)}
+                      amt={currentMon.status[key].effect}
+                    />
+                  )
+                } else {
+                  console.log(`${key} is false`)
+                  return (
+                    <span className="text-gray-500" key={key}>
+                      {key} {currentMon.status[key].effect}
+                    </span>
+                  )
+                }
+              })}
+              {/* {Object.keys(currentMon.status).map((key) => {
                 console.warn(`currentMon.status`, currentMon.status)
                 if (currentMon.status[key]) {
                   return (
@@ -160,7 +204,7 @@ export default function BattleTopDisplay() {
                       className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
                       key={key}
                     >
-                      {key}
+                      {key} {JSON.stringify(currentMon.status[key])}
                     </span>
                   )
                 } else {
@@ -171,7 +215,7 @@ export default function BattleTopDisplay() {
                     </span>
                   )
                 }
-              })}
+              })} */}
             </div>
             <ul className="text-sm flex flex-col justify-start align-start"></ul>
           </div>
