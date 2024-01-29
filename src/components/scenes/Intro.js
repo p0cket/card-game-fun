@@ -24,6 +24,8 @@ import ChibipalsLogo from '../../assets/icons/Chibipals_Logo_only_2_n.png'
 import gashTrainerImg from '../../assets/actors/Gash.png'
 import FlashingImage from '../effects/misc/FlashingImage'
 import Shop from './Shop'
+import CanvasSquare from '../canvas/CanvasSquare'
+import Tilemap from '../canvas/Tilemap'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -40,6 +42,7 @@ const Intro = ({ dispatch }) => {
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
+  const inDebug = contextualState.debug && contextualState.debug.isOpen
 
   const loadNextLevel = () => {
     console.log(`func: loadNextLevel()`)
@@ -164,6 +167,14 @@ const Intro = ({ dispatch }) => {
               <div>友情編</div>
             </motion.div>
           </div>
+         {inDebug ? <><CanvasSquare />
+          <Tilemap
+            src="path/to/your/tilemap.json"
+            tilesetSrc="path/to/your/tileset/image.png"
+            tileWidth={32} // Adjust based on your tileset
+            tileHeight={32} // Adjust based on your tileset
+          /> </>: ''}
+
           <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
             <img src={gashTrainerImg} alt="gash trainer" />

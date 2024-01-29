@@ -1,5 +1,6 @@
 import { EFFECTS } from '../effects'
 import { EvasiveTwirl, SolarBlast } from './allCounters'
+import { Blind, Weak } from './keywords/allStatuses'
 
 export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
@@ -262,6 +263,7 @@ export const LightBeam = {
     result: 'blind',
     duration: '1 turn',
     amt: -20,
+    type: Blind,
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -314,6 +316,7 @@ export const LightBeam = {
   //     result: 'blind',
   //     duration: '1 turn',
   //     amt: -30,
+  // type: Blind,
   //   },
   //   targets: ['opponent'],
   // },
@@ -335,6 +338,8 @@ export const WiseGaze = {
     // resutl: EFFECTS.WEAK,
     duration: '1 turn',
     amt: 8,
+    type: Weak,
+
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -586,6 +591,7 @@ export const EmotionDrain = {
     result: 'weak',
     duration: '1 turn',
     amt: 20,
+    type: Weak,
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -935,6 +941,7 @@ export const RadiantBeam = {
     result: 'blind',
     duration: '1 turn',
     amt: -35,
+    type: Blind,
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -949,6 +956,7 @@ export const RadiantBeam = {
       chance: 100,
       result: 'accuracy',
       amt: -30,
+      type: Blind,
     },
   },
   forceful: {
@@ -966,6 +974,7 @@ export const RadiantBeam = {
       result: 'blind',
       duration: '1 turn',
       amt: -45,
+      type: Blind,
     },
     targets: ['opponent'],
   },

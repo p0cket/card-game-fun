@@ -23,13 +23,18 @@ export function calculateDoesItLand(move) {
 export function applyStatusEffect(contextualState, player, move) {
   console.log('applyStatusEffect: contextualState, player, move', contextualState, player, move)
   if (player === 'human') {
-    console.log(`'player === human', calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}`,contextualState, player, move.effect.result)
-    const updatedStatusState = updateStatusState(contextualState, player, move.effect.result, move.effect.amt)
+    console.log(`'player === human', calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type`,contextualState, player, move.effect.result, move.effect.type)
+    console.log(`move`, move)
+    console.log(`move.effect.type`,move.effect.type)
+    const updatedStatusState = updateStatusState(contextualState, player, move.effect.result, move.effect.amt, move.effect.type)
+
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
   } else if (player === 'AI') {
-    console.log(`'player === AI' ,calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}'`, player)
-    const updatedStatusState =  updateStatusState(contextualState, player, move.effect.result,move.effect.amt)
+    console.log(`'player === AI' ,calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type'`, player,move.effect.result, move.effect.type)
+    console.log(`move`, move)
+    console.log(`move.effect.type`,move.effect.type)
+    const updatedStatusState =  updateStatusState(contextualState, player, move.effect.result,move.effect.amt, move.effect.type)
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
   }

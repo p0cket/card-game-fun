@@ -57,14 +57,19 @@ export const applyParalysis = (target, effectValue) => {
 }
 // Apply blind effect to the target
 
-export const applyBlind = (target, effectValue) => {
-  console.log(`applying blind to ${target.name}, chance: ${effectValue}`)
+export const applyBlind = (target, effectValue, effect, type) => {
+  console.log(
+    `applying blind to ${target.name}, chance: ${effectValue}. effect:`,
+    effect,
+  )
   target.status = {
     ...target.status,
     blind: {
       active: true,
       amt: effectValue,
       name: EFFECTS.BLIND,
+      effect: effect,
+      type: type,
     },
   }
   console.log(`target after applying blind but not accuracy change: `, target)
@@ -75,6 +80,7 @@ export const applyBlind = (target, effectValue) => {
 }
 
 export const removeBlind = (target, effectValue) => {
+  //TODO: add in the effect?
   // here we remove the blind status, and reverse the effects
   target.status = {
     ...target.status,
@@ -82,6 +88,7 @@ export const removeBlind = (target, effectValue) => {
       active: false,
       amt: effectValue,
       name: EFFECTS.BLIND,
+      // effect: effect,
     },
   }
   target = modifyPalAccuracy(target, -effectValue)
@@ -89,7 +96,8 @@ export const removeBlind = (target, effectValue) => {
 }
 
 // This function applies the 'weak' status to a pal
-const applyWeak = (pal, weakAmt) => {
+export const applyWeak = (pal, weakAmt, effect, type) => {
+  console.log(`DUCK: applyWeak, amt: ${weakAmt}, effect, pal:`, effect, pal)
   if (!pal.status) {
     pal.status = {}
   }
@@ -97,6 +105,8 @@ const applyWeak = (pal, weakAmt) => {
     active: true, // Indicating that the weak status is currently active.
     amt: weakAmt, // The amount by which the damage will be reduced.
     name: EFFECTS.WEAK,
+    effect: effect,
+    type: type,
   }
   console.log(
     `Applying 'weak' status, now damage dealt by ${pal.name} will be reduced by ${weakAmt}`,
@@ -106,6 +116,7 @@ const applyWeak = (pal, weakAmt) => {
 
 // This function removes the 'weak' status from a pal
 const removeWeak = (pal) => {
+  // Remove the 'weak' status from the pal. need the obj?
   if (pal.status && pal.status.weak) {
     console.log(`Removing 'weak' status from ${pal.name}`)
     delete pal.status.weak
@@ -124,91 +135,48 @@ const modifyPalAccuracy = (pal, amt) => {
   console.log(`modified accuracy of ${pal.name} to ${pal.stats.accuracy}`, pal)
   return pal
 }
-
-// fix this. All this does is apply the status to the array of statuses
-// in the monster's stats.
-// the shape for this looks like:
-//  pal = {
-//   name: 'Luminowl',
-//   quirks: ['Guiding Light', 'Soothing Feathers'],
-//   stats: {
-//     hp: 91,
-//     max_hp: 111,
-//     attack: 80,
-//     defense: 60,
-//     special_attack: 120,
-//     special_defense: 90,
-//     speed: 110,
-// accuracy: 100,
-//   },
-//   status: { test: true },
-// ... }
-// in status is where we should store the status if it is applied
-// to the monster. so like status: {test: true, poison: {active: true, damage: 10}} etc.
 export const updateStatusState = (
-  contextualState,
-  player,
-  statusResult,
+  // updateStatusState(, , ,
+  //, move.effect.type)
+  contextualState, //contextualState
+  player, //player
+  statusResult, //move.effect.result
+  effect, //amt//move.effect.amt
+  type,
+  //, move.effect.type)
   statusValue = true,
   index = 0,
 ) => {
   const { HUMAN, AI } = PLAYERS
+  console.log(
+    `DUCK: updateStatusState:   contextualState,
+    player,
+    statusResult,
+    effect,
+    type,
+    statusValue,
+    index,`,
+    contextualState,
+    player,
+    statusResult, //name of status
+    effect,
+    type,
+    statusValue,
+    index,
+  )
   if (player === HUMAN) {
     let updatedMonsters = [...contextualState.opponent.monsters]
     console.log(`index: ${index}`)
-
-    // check if already has the status,
-    // if it doesn't, add it and apply effect
-    // apply any general effects as well
-    // switch (statusResult) {
-    //   case 'poison':
-    //     console.log(`applying poison to ${updatedMonsters[index].name}`)
-    //     updatedMonsters[index] = applyPoison(
-    //       updatedMonsters[index],
-    //       statusValue,
-    //     )
-    //     break
-    //   case 'burn':
-    //     console.log(`applying burn to ${updatedMonsters[index].name}`)
-    //     updatedMonsters[index] = applyBurn(updatedMonsters[index], statusValue)
-    //     break
-    //   case 'freeze':
-    //     console.log(`applying freeze to ${updatedMonsters[index].name}`)
-    //     updatedMonsters[index] = applyFreeze(
-    //       updatedMonsters[index],
-    //       statusValue,
-    //     )
-    //     break
-    //   case 'paralysis':
-    //     console.log(`applying paralysis to ${updatedMonsters[index].name}`)
-    //     updatedMonsters[index] = applyParalysis(
-    //       updatedMonsters[index],
-    //       statusValue,
-    //     )
-    //     break
-    //   case 'blind':
-    //     console.log(`applying blind to ${updatedMonsters[index].name}`)
-    //     updatedMonsters[index] = applyBlind(updatedMonsters[index], statusValue)
-    //     break
-    //   default:
-    //     // any other status to be applied
-    //     console.log(
-    //       `applying ${statusResult} to ${updatedMonsters[index].name}`,
-    //     )
-    //     updatedMonsters[index].status = {
-    //       ...updatedMonsters[index].status,
-    //       [statusResult]: statusValue,
-    //     }
-    //     break
-    // }
-    // const applyStatusToPal = (statusResult, updatedMonsters, statusValue, index) => {
     updatedMonsters[index] = applyStatusToPal(
+      effect,
       statusResult,
       updatedMonsters,
       statusValue,
       index,
       PLAYERS.HUMAN,
+      type,
     )
+    console.log(`DUCK: updatedMonsters: `, updatedMonsters)
     const nextState = {
       ...contextualState,
       opponent: {
@@ -222,16 +190,18 @@ export const updateStatusState = (
       `updateStatusState: AI player: ${player} contextualState, player, statusResult, statusValue`,
       contextualState,
       player,
-      statusResult,
+      statusResult, //name of status
       statusValue,
     )
     let updatedMonsters = [...contextualState.userParty]
     updatedMonsters[index] = applyStatusToPal(
+      effect,
       statusResult,
       updatedMonsters,
       statusValue,
       index,
       PLAYERS.AI,
+      type
     )
     // updatedMonsters = applyStatusToPal(
     //   statusResult,
@@ -249,41 +219,27 @@ export const updateStatusState = (
 }
 
 const applyStatusToPal = (
+  effect,
   statusResult,
   updatedMonsters,
   statusValue,
   index,
   player,
+  type,
 ) => {
   let palToApplyTo = updatedMonsters[index]
+  console.log(
+    `DUCK: applyStatusToPal: effect, statusResult, updatedMonsters, statusValue, index, player, type`,
+    effect,
+    statusResult,
+    updatedMonsters,
+    statusValue,
+    index,
+    player,
+    type,
+  )
   switch (statusResult) {
-    // case 'poison':
-    //   console.log(`applying poison to ${palToApplyTo.name}`)
-    //   palToApplyTo = applyPoison(
-    //     palToApplyTo,
-    //     statusValue,
-    //   )
-    //   return palToApplyTo
-    // case 'burn':
-    //   console.log(`applying burn to ${palToApplyTo.name}`)
-    //   palToApplyTo = applyBurn(palToApplyTo, statusValue)
-    //   return palToApplyTo
-    // case 'freeze':
-    //   console.log(`applying freeze to ${palToApplyTo.name}`)
-    //   palToApplyTo = applyFreeze(
-    //     palToApplyTo,
-    //     statusValue,
-    //   )
-    //   return palToApplyTo
-    // case 'paralysis':
-    //   console.log(`applying paralysis to ${palToApplyTo.name}`)
-    //   palToApplyTo = applyParalysis(
-    //     palToApplyTo,
-    //     statusValue,
-    //   )
-    //   return palToApplyTo
     case 'weak':
-      // only apply if 'weak' does not exist or 'weak.active' is not true
       if (
         !(
           palToApplyTo.status &&
@@ -292,13 +248,14 @@ const applyStatusToPal = (
         )
       ) {
         console.log(
-          `Status result: ${statusResult} Status value: ${statusValue}`,
+          `Status result: ${statusResult} Status value: ${statusValue}. Effect:`,
+          effect,
         )
         console.log(
           `Monster before applying weak to ${palToApplyTo.name}:`,
           palToApplyTo,
         )
-        palToApplyTo = applyWeak(palToApplyTo, statusValue) // Assuming applyWeak function exists
+        palToApplyTo = applyWeak(palToApplyTo, statusValue, effect, type) // Assuming applyWeak function exists
         console.log(`Monster after applying weak:`, palToApplyTo)
       }
       return palToApplyTo
@@ -318,13 +275,15 @@ const applyStatusToPal = (
           `Monster before applying blind to ${palToApplyTo.name}:`,
           palToApplyTo,
         )
-        palToApplyTo = applyBlind(palToApplyTo, statusValue)
+        palToApplyTo = applyBlind(palToApplyTo, statusValue, effect, type)
         console.log(`Monster after applying blind:`, palToApplyTo)
       }
       return palToApplyTo
     default:
       // any other status to be applied
-      console.log(`default status case reached for  ${statusResult} to ${palToApplyTo.name}`)
+      console.log(
+        `default status case reached for  ${statusResult} to ${palToApplyTo.name}`,
+      )
       // palToApplyTo.status = {
       //   ...palToApplyTo.status,
       //   [statusResult]: statusValue,
@@ -351,33 +310,3 @@ export const removeStatusFromPal = (statusResult, pal, statusValue) => {
 
   return palCopy
 }
-// This function removes a specified status effect from a pal
-// export const removeStatusFromPal = (
-//   statusResult,
-//   updatedMonsters,
-//   statusValue,
-//   index,
-//   player,
-// ) => {
-//   if (
-//     updatedMonsters[index] &&
-//     updatedMonsters[index].status &&
-//     updatedMonsters[index].status[statusResult]
-//   ) {
-//     console.log(`Removing ${statusResult} from ${updatedMonsters[index].name}`)
-//     if (statusResult === 'blind') {
-//   // Reverse the effect of blind status
-//   updatedMonsters[index] = modifyPalAccuracy(
-//     updatedMonsters[index],
-//     -statusValue, // Assuming negative value reverses the effect
-//   )
-//   // Remove the 'blind' status from the pal
-//   delete updatedMonsters[index].status[statusResult]
-// }
-//   } else {
-//     console.log(
-//       `No status ${statusResult} found on ${updatedMonsters[index].name} to remove`,
-//     )
-//   }
-//   return updatedMonsters
-// }

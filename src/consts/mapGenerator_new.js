@@ -9,7 +9,7 @@ export const levels = [
     options: [
       { id: '1a', description: 'Fight a monster', scene: SCENES.BATTLE },
       // { id: '1b', description: 'Visit a shop', scene: SCENES.SHOP },
-      { id: '1c', description: 'Rest', scene: SCENES.REST },
+  
       // { id: '1c', description: 'boss', scene: SCENES.BOSS }, // You may want to specify a different scene here.
     ],
   },
@@ -19,6 +19,7 @@ export const levels = [
     options: [
       { id: '2a', description: 'Fight a harder monster', scene: SCENES.BATTLE },
       // { id: '2b', description: 'Find a treasure', scene: SCENES.TREASURE },
+      { id: '2c', description: 'Rest', scene: SCENES.REST },
     ],
   },
   {

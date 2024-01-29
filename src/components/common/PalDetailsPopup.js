@@ -59,22 +59,46 @@ function PalDetailsPopup({
             <span>Speed:</span>
             <span>{selectedPal.stats.speed}</span>
           </div> */}
-          {/* TODO: Get rid */}
-         { inDebug ? <> <div className="flex px-1">Moves:</div>
-            <div className="flex flex-wrap gap-1">
-              {selectedPal.moves.map((move, index) => (
-                <div key={index} className="p-1">
-                  <span
-                    className="bg-green-200 rounded p-1 text-green-700"
-                    onClick={() => showTheAttack(move, dispatch, false)}
-                  >
-                    {move.name}
-                  </span>
+            {/* TODO: Get rid */}
+            {inDebug ? (
+              <>
+                {' '}
+                <div className="flex px-1">Moves:</div>
+                <div className="flex flex-wrap gap-1">
+                  {selectedPal.moves.map((move, index) => (
+                    <div key={index} className="p-1">
+                      <span
+                        className="bg-green-200 rounded p-1 text-green-700"
+                        onClick={() => showTheAttack(move, dispatch, false)}
+                      >
+                        {move.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div></> : ''}<div className="mt-2">
-          <p className="w-full max-w-xs">{selectedPal.description}</p>
-        </div>
+              </>
+            ) : (
+              ''
+            )}
+            <div className="mt-2">
+              <p className="w-full max-w-xs">{selectedPal.description}</p>
+              <div className='flex justify-start'>Types</div>
+              <div className="flex">
+                <div className="flex-grow">
+                  <div className="flex gap-2 p-1 justify-start">
+                    <button className="bg-green-200 rounded px-1 text-green-700">
+                      {selectedPal.elemental_type}
+                    </button>
+                    <button className="bg-green-200 rounded px-1 text-green-700">
+                      {selectedPal.creature_type}
+                    </button>
+                    <button className="bg-green-200 rounded px-1  text-green-700">
+                      {selectedPal.specialty_group}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {/* <div className="mt-4">
@@ -89,23 +113,10 @@ function PalDetailsPopup({
           </div>
         </div> */}
 
-        
         {/* <div>
           {`Types: ${selectedPal.elemental_type} ${selectedPal.creature_type} ${selectedPal.specialty_group}`}
         </div> */}
-        <div className="flex gap-2 p-1 justify-center">
-          <button className="bg-green-200 rounded px-1  text-green-700">
-            {' '}
-            {selectedPal.elemental_type}
-          </button>
-          <button className="bg-green-200 rounded px-1  text-green-700">
-            {' '}
-            {selectedPal.creature_type}
-          </button>
-          <button className="bg-green-200 rounded px-1  text-green-700">
-            {selectedPal.specialty_group}
-          </button>
-        </div>
+
         <div className="space-y-2 mt-1">
           {/* <div>
             <div>Possible Moves:</div>
@@ -132,8 +143,7 @@ function PalDetailsPopup({
             </span>
           </div>
         </div>
-        <div className="mt-6 flex justify-between">
-         
+        <div className="mt-6 p-6 flex justify-between">
           <button
             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
             onClick={handleGoBack}
