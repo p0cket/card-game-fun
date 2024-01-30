@@ -409,17 +409,6 @@ export const MainProvider = ({ children }) => {
         console.log(`stateWithItemUpdated: `, stateWithItemUpdated)
         return stateWithItemUpdated
       }
-
-      // console.log('Reducer ADD_ITEM:', action)
-      // stateWithItem = {
-      //   ...state,
-      //   bag: {
-      //     ...state.bag,
-      //     items: [...state.bag.items, action.payload.item],
-      //   },
-      // }
-      // console.log(`stateWithItem: `, stateWithItem)
-      // return stateWithItem
       case ACTIONS.ADD_MOVE:
         console.log('Reducer ADD_MOVE:', action)
         state = addMoveToPalInState(

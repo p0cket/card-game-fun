@@ -6,14 +6,14 @@ const TooltipButton = ({
   ourCurrentMon,
   showTooltip,
   setShowTooltip,
-  amt
+  amt,
 }) => {
   return (
     <button
-      className="bg-boy-green py-1 px-2 rounded text-white relative"
+      className="bg-boy-green py-1 px-1 mr-1 rounded text-white relative"
       onClick={() => setShowTooltip(!showTooltip)}
     >
-        {name} {amt}
+      {name} <span className="text-green-200">{amt}</span>
       {/* {ourCurrentMon.passives.name} */}
       {showTooltip && (
         <div className="absolute bottom-full mb-2 px-4 py-1 border-2 border-green-200 bg-boy-green text-white text-xs shadow-lg">
@@ -34,7 +34,6 @@ const TooltipButton = ({
           <div className="text-xs text-gray-900">{explanation}</div>
           <div>x</div>
         </div>
-        
       )}
     </button>
   )

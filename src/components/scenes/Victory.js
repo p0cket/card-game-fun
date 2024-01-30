@@ -1,10 +1,13 @@
 import React from 'react'
 import './Victory.css'
 import emblemBug from '../../assets/emblems/emblem_bug2.png'
+import { useStateContext } from '../../MainContext'
 // import devProfileImage from '/misc/Pocket.jpg';  // import victory image
 // import { Pocket } from "/misc/Pocket.js"
 // import {pocket2} from "./Pocket.png"
 const Victory = () => {
+  const state = useStateContext()
+  const inDebug = state.debug && state.debug.isOpen
   return (
     <div className="victory-screen bg-green-200 p-8 rounded-lg shadow-md max-w-2xl mx-auto text-center font-[silkscreen]">
       <h1 className="text-4xl font-bold text-green-800 mb-6">
@@ -24,9 +27,9 @@ const Victory = () => {
       </div> */}
       <div className="mt-6">
         <h2 className="text-2xl font-bold text-green-800">
-          Thanks for playing! Badges hopefully would
-          be equipped in future runs.
-        </h2><div className=" text-green-800 mb-4">-Pocket</div>
+          Thanks for playing! Badges hopefully would be equipped in future runs.
+        </h2>
+        <div className=" text-green-800 mb-4">-Pocket</div>
         <div className=" text-green-800">Elevation Badge</div>
         <img src={emblemBug} />
         {/* <p className="font-semibold text-green-700 mb-2">Select your prize:</p>
@@ -41,6 +44,21 @@ const Victory = () => {
             Prize Option 3
           </button>
         </div> */}
+
+        {inDebug && (
+          <>
+            Share with friends: Meet my Dream Team! 
+            🐲🔥 Lv.15, 🌿🐉 Lv.12, 🌊🐍
+            Lv.10. Team Power: 2500 💪. 
+            Build your own unstoppable team [Game
+            Link]{' '}
+            Just conquered the Tower! 
+            🐉5 (dragons caught) 🌟Lvl 10 Hydra 
+            🗝️3 (rare artifacts found). 
+            Can you top this? [Game Link]
+            <div>Give feedback: Google forms link</div>
+          </>
+        )}
       </div>
     </div>
   )

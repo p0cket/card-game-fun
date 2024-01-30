@@ -9,12 +9,12 @@ export const SolarSpiritBlast = {
   accuracy: 90,
   speed: 8,
   energyCost: 7,
-  effect: {
-    description: 'Requires charging, high damage',
-    chance: 100,
-    result: 'damage',
-    // amt: 50, prob no amt for dmg
-  },
+  // effect: {
+  //   description: 'Requires charging, high damage',
+  //   chance: 100,
+  //   result: 'damage',
+  //   // amt: 50, prob no amt for dmg
+  // },
   priority: 'slow',
 }
 
@@ -26,12 +26,12 @@ export const QuickStrike = {
   speed: 7,
   cost: { energy: 3 },
   // energyCost: 3,
-  effect: {
-    description: 'High critical hit chance',
-    chance: 50,
-    result: 'critical_hit',
-    amt: 10,
-  },
+  // effect: {
+  //   description: 'High critical hit chance',
+  //   chance: 50,
+  //   result: 'critical_hit',
+  //   amt: 10,
+  // },
   priority: 'fast',
   targets: ['opponent', 'opponent_pals'],
   // "NotSoFast" aspect:
@@ -87,12 +87,12 @@ export const Teleport = {
   accuracy: 90,
   cost: { energy: 5 },
   energyCost: 5,
-  effect: {
-    description: 'Instantly move to another location',
-    chance: 100,
-    result: 'teleport',
-    location: 'opponent',
-  },
+  // effect: {
+  //   description: 'Instantly move to another location',
+  //   chance: 100,
+  //   result: 'teleport',
+  //   location: 'opponent',
+  // },
   priority: 'fast',
 }
 
@@ -113,17 +113,19 @@ export const Mimicry = {
 export const DoubleStrike = {
   name: 'Double Strike',
   type: 'physical',
-  damage: 15,
-  accuracy: 90,
+  damage: 45,
+  accuracy: 70,
   speed: 7,
   cost: { energy: 3 },
   energyCost: 3,
   effect: {
     description: 'Goes again if the first attack is successful',
-    chance: 100,
-    result: 'double_strike',
+    // chance: 100,
+    // result: 'double_strike',
   },
   priority: 'fast',
+  targets: ['opponent', 'opponent_pals'],
+
 }
 
 export const LifeSwap = {
@@ -437,13 +439,13 @@ export const LuminousFlight = {
   speed: 11,
   cost: { energy: 4 },
   energyCost: 5,
-  effect: {
-    description: 'Take flight and emit a radiant glow',
-    chance: 20,
-    result: 'illuminate',
-    duration: '1 turn', // Added duration
-    amt: 25, // Added amt (assuming 25 as an example value)
-  },
+  // effect: {
+  //   description: 'Take flight and emit a radiant glow',
+  //   chance: 20,
+  //   result: 'illuminate',
+  //   duration: '1 turn', // Added duration
+  //   amt: 25, // Added amt (assuming 25 as an example value)
+  // },
   priority: 'medium',
   targets: ['user_pals'],
   // "NotSoFast" aspect:
@@ -486,13 +488,13 @@ export const GlowingCharm = {
   speed: 9,
   cost: { energy: 4 },
   energyCost: 5,
-  effect: {
-    description: 'Emit a comforting and charming glow',
-    chance: 100,
-    result: 'charm',
-    duration: '1 turn', // Added duration
-    amt: 20, // Added amt (assuming 20 as an example value)
-  },
+  // effect: {
+  //   description: 'Emit a comforting and charming glow',
+  //   chance: 100,
+  //   result: 'charm',
+  //   duration: '1 turn', // Added duration
+  //   amt: 20, // Added amt (assuming 20 as an example value)
+  // },
   priority: 'medium',
   targets: ['opponent'],
   // "NotSoFast" aspect:
@@ -535,13 +537,13 @@ export const WarmEmbrace = {
   speed: 8,
   cost: { energy: 4 },
   energyCost: 5,
-  effect: {
-    description: 'Offer a warm and comforting embrace, healing pals',
-    chance: 100,
-    result: 'heal',
-    duration: '1 turn',
-    amt: 50,
-  },
+  // effect: {
+  //   description: 'Offer a warm and comforting embrace, healing pals',
+  //   chance: 100,
+  //   result: 'heal',
+  //   duration: '1 turn',
+  //   amt: 50,
+  // },
   priority: 'medium',
   targets: ['user_pals'],
   notSoFast: {
@@ -635,13 +637,13 @@ export const CuteCharm = {
   speed: 9,
   cost: { energy: 4 },
   energyCost: 4,
-  effect: {
-    description: 'Exude an adorable and charming presence',
-    chance: 100,
-    result: 'charm',
-    duration: '1 turn',
-    amt: 20,
-  },
+  // effect: {
+  //   description: 'Exude an adorable and charming presence',
+  //   chance: 100,
+  //   result: 'charm',
+  //   duration: '1 turn',
+  //   amt: 20,
+  // },
   priority: 'medium',
   targets: ['opponent'],
   notSoFast: {
@@ -684,13 +686,13 @@ export const ComfortingHug = {
   speed: 8,
   cost: { energy: 6 },
   energyCost: 6,
-  effect: {
-    description: 'Offer a comforting hug to heal pals',
-    chance: 100,
-    result: 'heal',
-    duration: '1 turn',
-    amt: 50,
-  },
+  // effect: {
+  //   description: 'Offer a comforting hug to heal pals',
+  //   chance: 100,
+  //   result: 'heal',
+  //   duration: '1 turn',
+  //   amt: 50,
+  // },
   priority: 'medium',
   targets: ['user_pals'],
   notSoFast: {
@@ -734,13 +736,13 @@ export const RecycleRush = {
   speed: 10,
   cost: { energy: 6 },
   energyCost: 6,
-  effect: {
-    description: 'Charge at the opponent using recycled materials as armor',
-    chance: 80,
-    result: 'damage_boost',
-    duration: '1 turn',
-    amt: 20,
-  },
+  // effect: {
+  //   description: 'Charge at the opponent using recycled materials as armor',
+  //   chance: 80,
+  //   result: 'damage_boost',
+  //   duration: '1 turn',
+  //   amt: 20,
+  // },
   priority: 'high',
   targets: ['opponent'],
   notSoFast: {
@@ -783,13 +785,13 @@ export const ProjectileToss = {
   speed: 14,
   cost: { energy: 4 },
   energyCost: 4,
-  effect: {
-    description: 'Toss recycled projectiles at the opponent',
-    chance: 70,
-    result: 'slow',
-    duration: '1 turn',
-    amt: 15,
-  },
+  // effect: {
+  //   description: 'Toss recycled projectiles at the opponent',
+  //   chance: 70,
+  //   result: 'slow',
+  //   duration: '1 turn',
+  //   amt: 15,
+  // },
   priority: 'medium',
   targets: ['opponent'],
   notSoFast: {
@@ -833,14 +835,14 @@ export const LeafShield = {
   speed: 8,
   cost: { energy: 5 },
   energyCost: 5,
-  effect: {
-    description:
-      'Create a protective shield from leaves to reduce incoming damage',
-    chance: 90,
-    result: 'damage_reduction',
-    duration: '1 turn',
-    amt: 25,
-  },
+  // effect: {
+  //   description:
+  //     'Create a protective shield from leaves to reduce incoming damage',
+  //   chance: 90,
+  //   result: 'damage_reduction',
+  //   duration: '1 turn',
+  //   amt: 25,
+  // },
   priority: 'medium',
   targets: ['self'],
   notSoFast: {
@@ -885,13 +887,13 @@ export const SolarFlare = {
   speed: 15,
   cost: { energy: 8 },
   energyCost: 8,
-  effect: {
-    description: 'Unleash a burst of intense solar energy',
-    chance: '85%',
-    result: 'burn',
-    duration: '1 turn',
-    amt: 40,
-  },
+  // effect: {
+  //   description: 'Unleash a burst of intense solar energy',
+  //   chance: '85%',
+  //   result: 'burn',
+  //   duration: '1 turn',
+  //   amt: 40,
+  // },
   priority: 'high',
   targets: ['opponent'],
   notSoFast: {
@@ -988,13 +990,13 @@ export const InfernoWing = {
   speed: 10,
   cost: { energy: 9 },
   energyCost: 9,
-  effect: {
-    description: 'Sweep the battlefield with fiery wings',
-    chance: '75%',
-    result: 'burn',
-    duration: '2 turns',
-    amt: 30,
-  },
+  // effect: {
+  //   description: 'Sweep the battlefield with fiery wings',
+  //   chance: '75%',
+  //   result: 'burn',
+  //   duration: '2 turns',
+  //   amt: 30,
+  // },
   priority: 'medium',
   targets: ['all opponents'],
   notSoFast: {
@@ -1038,13 +1040,13 @@ export const SunstoneSmash = {
   speed: 12,
   cost: { energy: 10 },
   energyCost: 10,
-  effect: {
-    description: 'Unleash the power of sunstones upon the opponent',
-    chance: '80%',
-    result: 'daze',
-    duration: '1 turn',
-    amt: -20,
-  },
+  // effect: {
+  //   description: 'Unleash the power of sunstones upon the opponent',
+  //   chance: '80%',
+  //   result: 'daze',
+  //   duration: '1 turn',
+  //   amt: -20,
+  // },
   priority: 'high',
   targets: ['opponent'],
   notSoFast: {

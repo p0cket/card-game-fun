@@ -43,11 +43,12 @@ const Intro = ({ dispatch }) => {
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
   const inDebug = contextualState.debug && contextualState.debug.isOpen
+  const isNewGamePlus = contextualState.userData && contextualState.userData.newGamePlus 
+  // const newGamePlus = contextualState.newGamePlus
 
   const loadNextLevel = () => {
     console.log(`func: loadNextLevel()`)
     dispatch(setSceneAction())
-    //
 
     const nextSceneState = updateScene(contextualState, {
       screen: SCENES.CHOOSECHARACTER,
@@ -165,6 +166,7 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm">Plausibly Sentient Monster Slayer</div>
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
+              
             </motion.div>
           </div>
          {inDebug ? <><CanvasSquare />
@@ -199,6 +201,7 @@ const Intro = ({ dispatch }) => {
             {/* <ThemedButton text={`Options`} onClick={loadNextLevel} />
             <ThemedButton text={`Museum`} onClick={loadNextLevel} /> */}
           </div>
+          {isNewGamePlus && <div>Coming Features</div>}
           <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
           <div className="bg-boy-lightgreen p-1">
             <p className="font-[silkscreen] font-bold text-green-800 text-sm">

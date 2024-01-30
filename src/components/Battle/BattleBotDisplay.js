@@ -14,8 +14,8 @@ function BattleBotDisplay({ ourCurrentMon }) {
   const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
   const yourVariants = {
     visible: {
-      x: [0, 2, -3, 5, -1, 5, -3, 0],
-      y: [0, 3, -1],
+      x: [0, 2, -3, 5, -1, 5, -3, 1],
+      y: [0, 3, -1, 4],
       transition: {
         // delay: 0.5,
         duration: 15,

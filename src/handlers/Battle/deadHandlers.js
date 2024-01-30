@@ -47,10 +47,6 @@ export const checkIfDead = (state) => {
         ],
       },
     }
-
-
-
-
     // increase user pal's level
     state = applyLevelUpBonus(state)
     // state.userParty[0].stats.hp

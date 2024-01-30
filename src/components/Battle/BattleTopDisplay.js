@@ -123,8 +123,8 @@ export default function BattleTopDisplay() {
   //   gameData.battle.enemy;
   const yourVariants = {
     visible: {
-      x: [0, 2, -3, 5, -1, 5, -3, 0],
-      y: [0, 3, -1],
+      x: [0, 1, -3, 4, -1, 5, -3, 2],
+      y: [0, 3, -1, 4],
       transition: {
         // delay: 0.5,
         duration: 15,
@@ -156,7 +156,7 @@ export default function BattleTopDisplay() {
             <div>
               {/*  */}
               {showPassiveTooltip && (
-                <div className="absolute bottom-full mb-2 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
+                <div className="absolute bottom-full mb-1 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
                   <button
                     className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
                     onClick={() => setShowPassiveTooltip(false)}

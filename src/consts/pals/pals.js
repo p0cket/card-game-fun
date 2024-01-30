@@ -141,9 +141,7 @@ export const Umbrabunny = {
   lvl: 5,
   experience: 4800,
   status: {},
-
-  // moves: ['Emotion Drain', 'Cute Charm', 'Comforting Hug'],
-  moves: [LightBeam, WiseGaze],
+  moves: [LightBeam, EmotionDrain],
   // moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
   // passives: 'Emotion Balance',
@@ -186,9 +184,8 @@ export const Glowbuggle = {
   lvl:5,
   experience: 4000,
   status: {},
-
-  // moves: ['Luminous Flight', 'Glowing Charm', 'Warm Embrace'],
-  moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
+  moves: [LuminousFlight,  WarmEmbrace],
+  // moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
   possible_moves: [
     'Bioluminescent Burst',
     'Soothing Radiance',
@@ -452,9 +449,8 @@ export const Recycleroo = {
   experience: 5500,
   status: {},
 
-  // moves: ['Recycle Rush', 'Projectile Toss', 'Leaf Shield'],
-  // moves: [RecycleRush, ProjectileToss, LeafShield],
-  moves: [LightBeam, WiseGaze],
+  moves: [RecycleRush, ProjectileToss, LeafShield],
+  // moves: [LightBeam, WiseGaze],
 
   possible_moves: ['Trash Bash', "Nature's Wrath", 'Sorting Cyclone'],
   passives: 'Eco-Warrior',
@@ -566,7 +562,9 @@ export const Ticklefairy = {
   lvl: 40,
   experience: 4000,
   status: {},
-  moves: [QuickStrike, SolarSpiritBlast, Teleport],
+  moves: [QuickStrike, SolarSpiritBlast],
+
+  // moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
   passives: 'Joyful Aura',
