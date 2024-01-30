@@ -3,6 +3,7 @@ import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import {
   applyStatusEffect,
+  calculateDoesEffectLand,
   calculateDoesItLand,
 } from '../../utils/battle-utils'
 import { checkForUndefined } from '../../utils/debugging-utils'
@@ -33,7 +34,9 @@ export const statusPhase = (state, attackPayload) => {
     userSlot,
     targets,
   })
-  let doesItLand = calculateDoesItLand(move)
+
+  //skip everything if theres no effect on move
+  let doesItLand = calculateDoesEffectLand(move)
 
   if (doesItLand) {
     if (player === PLAYERS.HUMAN) {

@@ -44,18 +44,21 @@ function RenderIndAttack({
       player: PLAYERS.HUMAN,
       possessed: false,
     })
-    executeMove(contextualDispatch, {
-      // attack:
-      pal: pal,
-      move: move,
-      phase: ATK_PHASES.PAY,
-      // actionDetails:
-      userSlot: 0,
-      targets: { ally: null, enemy: [0] },
-      player: PLAYERS.HUMAN,
-      possessed: false,
-    },
-    contextualState)
+    executeMove(
+      contextualDispatch,
+      {
+        // attack:
+        pal: pal,
+        move: move,
+        phase: ATK_PHASES.PAY,
+        // actionDetails:
+        userSlot: 0,
+        targets: { ally: null, enemy: [0] },
+        player: PLAYERS.HUMAN,
+        possessed: false,
+      },
+      contextualState,
+    )
   }
   const renderBasic = (move, pal) => {
     const { name, damage, speed, accuracy, effect, targets, cost } = move
@@ -84,9 +87,13 @@ function RenderIndAttack({
           </table>
         </div>
         <div className="text-left">
-          <div className="mb-2">{effect.description}</div>
-          <div>{`${effect.chance}% Chance: May ${effect.result} attacks by ${effect.amt} `}</div>
-          <div>Targets: {targets.join(', ')}</div>
+          <div className="mb-2 text-gray-600">{effect.description}</div>
+          <div>
+            {effect.chance && effect.result && effect.amt && (
+              <div>{`${effect.chance}% Chance: May ${effect.result} ${effect.amt} `}</div>
+            )}{' '}
+            <div>Targets: {targets.join(', ')}</div>
+          </div>
         </div>
         {canUse ? (
           <div className="flex gap-2 justify-center">

@@ -52,11 +52,11 @@ function Results({ experience = 100, pal, isBoss = false }) {
   const itemsToChooseFrom = [pumpernickelSoda]
 
   const movesToChooseFrom = [
-    CuteCharm,
-    SunShield,
+    // CuteCharm,
+    // SunShield,
     RadiantBeam,
-    // LuminousFlight,
-    // DoubleStrike,
+    LuminousFlight,
+    DoubleStrike,
   ]
 
   // move modifications
@@ -70,21 +70,29 @@ function Results({ experience = 100, pal, isBoss = false }) {
       },
     },
     {
-      name: 'Speed Boost',
-      description: "Increases the move's speed by 20.",
+      name: 'Accuracy Boost',
+      description: "Increases the move's accuracy by 25%.",
       applyModification: (move) => {
-        move.speed += 20
+        move.accuracy = Math.ceil(move.accuracy * 1.25)
         return move
       },
     },
     {
-      name: 'Energy Saver',
-      description: "Reduces the move's energy cost by 1.",
+      name: 'Effect Boost',
+      description: "Increases the move's effect amount by 25%.",
       applyModification: (move) => {
-        move.energyCost = Math.max(1, move.energyCost - 1)
+        move.effectChance = Math.ceil(move.effect.amt * 1.25)
         return move
       },
     },
+    // {
+    //   name: 'Energy Saver',
+    //   description: "Reduces the move's energy cost by 1.",
+    //   applyModification: (move) => {
+    //     move.energyCost = Math.max(1, move.energyCost - 1)
+    //     return move
+    //   },
+    // },
   ]
 
   // Define animation variants for Framer Motion

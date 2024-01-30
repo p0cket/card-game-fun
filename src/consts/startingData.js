@@ -147,18 +147,6 @@ export const newStartingData = {
     popupType: 'attack',
     attack: LightBeam,
     ourCurrentMon: Luminowl,
-    // message: 'startingData Popup Message',
-    // options: [
-    //   {
-    //     label: 'start',
-    //     onClick: () => {},
-    //     backgroundColor: '#4b770e',
-    //     color: '#fff',
-    //   },
-    // ],
-    // title: 'startingData Title',
-    // header: 'startingData Header',
-    // isOpen: true,
   },
   attack: {
     pal: Luminowl,
@@ -175,6 +163,17 @@ export const newStartingData = {
     movePayload: null,
   },
   moveStack: [],
+  userData: {
+    newGamePlus: false,
+    pals:[],
+    items:[],
+    gold: 0,
+    medals:[],
+    runes:[],
+    inventory: [],
+    badges: [],
+    
+  },
 }
 
 // DEPRECATED!

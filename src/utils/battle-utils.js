@@ -13,28 +13,83 @@ export const decideEnemyATK = (enemyAttacks) => {
   }
 }
 
-export function calculateDoesItLand(move) {
+export function calculateDoesEffectLand(move) {
   const randomNum = Math.random() * 100
-  const result = parseFloat(move.effect.chance) >= randomNum
-  console.log(`math: ${parseFloat(move.effect.chance)}(chance of ${move.effect.chance}) >= rN ${randomNum}? ${result}`, move)  
+  const hasEffectChance = move.effect && typeof move.effect.chance === 'number'
+  let rollResult =
+    hasEffectChance && parseFloat(move.effect.chance) >= randomNum
+  let result
+  if (hasEffectChance) {
+    console.log(
+      `math: ${parseFloat(move.effect.chance)}(chance of ${
+        move.effect.chance
+      }) >= rN ${randomNum}? ${rollResult}`,
+      move,
+    )
+    result = rollResult
+    // result = true
+  } else {
+    console.log('No effect chance to calculate.', move)
+    result = false
+  }
   return result
 }
 
 export function applyStatusEffect(contextualState, player, move) {
-  console.log('applyStatusEffect: contextualState, player, move', contextualState, player, move)
+  console.log(
+    'applyStatusEffect: contextualState, player, move',
+    contextualState,
+    player,
+    move,
+  )
   if (player === 'human') {
-    console.log(`'player === human', calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type`,contextualState, player, move.effect.result, move.effect.type)
+    console.log(
+      `DUCK: contextualState, player, move`,
+      contextualState,
+      player,
+      move,
+    )
+    console.log(
+      `'player === human', calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type`,
+      contextualState,
+      player,
+      move.effect.result,
+      move.effect.type,
+    )
     console.log(`move`, move)
-    console.log(`move.effect.type`,move.effect.type)
-    const updatedStatusState = updateStatusState(contextualState, player, move.effect.result, move.effect.amt, move.effect.type)
+    console.log(`move.effect.type`, move.effect.type)
+    const updatedStatusState = updateStatusState(
+      contextualState,
+      player,
+      move.effect.result,
+      move.effect.amt,
+      move.effect.type,
+    )
+    console.log(
+      `DUCK: after updatedStatusState - contextualState, player, move`,
+      contextualState,
+      player,
+      move,
+    )
 
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
   } else if (player === 'AI') {
-    console.log(`'player === AI' ,calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type'`, player,move.effect.result, move.effect.type)
+    console.log(
+      `'player === AI' ,calling updateStatusState with contextualState, player, and move.effect.result of ${move.effect.result}, and move.effect.type'`,
+      player,
+      move.effect.result,
+      move.effect.type,
+    )
     console.log(`move`, move)
-    console.log(`move.effect.type`,move.effect.type)
-    const updatedStatusState =  updateStatusState(contextualState, player, move.effect.result,move.effect.amt, move.effect.type)
+    console.log(`move.effect.type`, move.effect.type)
+    const updatedStatusState = updateStatusState(
+      contextualState,
+      player,
+      move.effect.result,
+      move.effect.amt,
+      move.effect.type,
+    )
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
   }
