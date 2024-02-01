@@ -441,10 +441,10 @@ export const Smash = {
   effect: {
     description:
       'Hit with the power of your body weight',
-    chance: 10,
-    result: 'stun',
+    // chance: 10,
+    // result: 'stun',
     duration: '1 turn', // Added duration
-    amt: 12, // Added amt (assuming 20 as an example value)
+    // amt: 12, // Added amt (assuming 20 as an example value)
   },
   priority: 'medium',
   targets: ['opponent'],

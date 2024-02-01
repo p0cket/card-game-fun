@@ -146,7 +146,7 @@ export const Umbrabunny = {
   // moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
   // passives: 'Emotion Balance',
-  passives: shadowCamouflage,
+  // passives: shadowCamouflage,
   commander_ability: {
     name: 'Harmony Embrace',
     description:
@@ -193,7 +193,7 @@ export const Glowbuggle = {
     'Glowing Trail',
   ],
   // passives: 'Radiant Aura',
-  passives: manaEcho,
+  // passives: manaEcho,
   commander_ability: {
     name: 'Radiant Infusion',
     description:

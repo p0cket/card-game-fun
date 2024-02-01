@@ -82,7 +82,7 @@ function PalDetailsPopup({
             )}
             <div className="mt-2">
               <p className="w-full max-w-xs">{selectedPal.description}</p>
-              <div className='flex justify-start'>Types</div>
+              <div className="flex justify-start">Types</div>
               <div className="flex">
                 <div className="flex-grow">
                   <div className="flex gap-2 p-1 justify-start">
@@ -133,14 +133,15 @@ function PalDetailsPopup({
             </div>
           </div> */}
           <div>
-            <div className="p-1">Passive:</div>
-            <span
-              className="bg-green-200 rounded p-1 text-green-700"
-              // onClick={() => toggleShowPassiveDetails()}
-            >
-              {/* #TODO: Make this into a button that brings up the details */}
-              {selectedPal.passives.name}
-            </span>
+            {/* #TODO: Make this into a button that brings up the details */}
+            {selectedPal.passives && (
+              <div>
+                <div className="p-1">Passive:</div>
+                <span className="bg-green-200 rounded p-1 text-green-700">
+                  {selectedPal.passives.name}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-6 p-6 flex justify-between">
