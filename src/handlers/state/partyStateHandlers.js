@@ -113,3 +113,51 @@ export const adToUserPartyLvl = (state, amt) => {
   }
   return state
 }
+
+export const swapPals = (
+  state,
+  pal,
+  palLocation,
+  palToSwapWith,
+  palToSwapWithLocation,
+  //later use player to determine for enemy party instead
+  player,
+) => {
+  // we take the location of the first pal, and put the second pal
+  // we then take the second pal slot, and put the first pal there
+console.log( state,
+  `pal,
+  palLocation,
+  palToSwapWith,
+  palToSwapWithLocation,
+  player`,pal,
+  palLocation,
+  palToSwapWith,
+  palToSwapWithLocation,
+  player)
+  console.log(`swapPals: original userParty`, state.userParty)
+  const updatedParty = [...state.userParty]
+  console.log(
+    `swapPals: putting palToSwapWith in updatedParty[${palLocation}]`,
+    palToSwapWith,
+    updatedParty,
+  )
+  updatedParty[palLocation] = palToSwapWith
+  console.log(
+    `swapPals: updated party after placing palToSwapWith`,
+    updatedParty,
+  )
+  console.log(
+    `swapPals: placing pal in updatedParty[${palToSwapWithLocation}]`,
+    pal,
+    updatedParty,
+  )
+  updatedParty[palToSwapWithLocation] = pal
+  console.log(`swapPals: final updated party`, updatedParty)
+  state = {
+    ...state,
+    userParty: updatedParty,
+  }
+  console.log(`swapPals: full state - returning`, state)
+  return state
+}

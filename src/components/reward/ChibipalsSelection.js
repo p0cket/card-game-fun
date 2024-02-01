@@ -23,6 +23,7 @@ const ChibipalsSelection = () => {
   }
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
+  const inDebug = contextualState.debug && contextualState.debug.isOpen
 
   const handleSelect = (selectedPal) => {
     console.log(`you selected monster: ${selectedPal.name}`, selectedPal)
@@ -52,6 +53,21 @@ const ChibipalsSelection = () => {
     })
   }
 
+  const addPalManually = (selectedPal) => {
+    const partyWithPalAdded = addPalToParty(
+      selectedPal,
+      contextualState.userParty,
+    )
+    const stateWithParty = {
+      ...contextualState,
+      userParty: partyWithPalAdded,
+    }
+    contextualDispatch({
+      type: ACTIONS.UPDATE_GAMEDATA,
+      payload: stateWithParty,
+    })
+  }
+
   return (
     <div className="font-[silkscreen] text-white m-1">
       {!showDetails && <img src={selectStartImg} alt="select starter" />}
@@ -66,19 +82,28 @@ const ChibipalsSelection = () => {
             onClick={() => handleMonsterClick(monster)}
             style={{ flex: '1', margin: '2px', cursor: 'pointer' }}
           >
-            <button className="w-full h-full  bg-boy-green">{monster.name}</button>
+            <button className="w-full h-full  bg-boy-green">
+              {monster.name}
+            </button>
             {/* <p className="text-center text-sm pt-3">{monster.name}</p> */}
           </div>
         ))}
       </div>
 
       {showDetails && (
-        <PalDetailsPopup
-          selectedPal={selectedPal}
-          setShowDetails={setShowDetails}
-          handleSelect={handleSelect}
-          handleGoBack={handleGoBack}
-        />
+        <>
+          <PalDetailsPopup
+            selectedPal={selectedPal}
+            setShowDetails={setShowDetails}
+            handleSelect={handleSelect}
+            handleGoBack={handleGoBack}
+          />
+          {inDebug && (
+            <button onClick={() => addPalManually(selectedPal)}>
+              Manually Add Pal
+            </button>
+          )}
+        </>
       )}
     </div>
   )

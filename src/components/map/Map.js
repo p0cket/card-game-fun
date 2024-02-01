@@ -6,6 +6,7 @@ import MapComponent from './MapComponent'
 import { LevelList } from './LevelList'
 import { levels } from '../../consts/mapGenerator_new'
 import SimpleLevelList from './SimpleLevelList'
+import PartyMenu from '../battle/PartyMenu'
 
 function Map() {
   const [selectedPal, setSelectedPal] = useState(null)
@@ -91,7 +92,7 @@ function Map() {
         </div>
         <h3 className="text-sm">Party:</h3>
         <div className="flex flex-wrap justify-between">
-          {ourParty.map((monster) => renderMonsterDetails(monster))}
+          <PartyMenu party={ourParty} type={'display'} />
         </div>
         {/* <div className="bg-green-500 rounded p-1 mb-1"> */}
           {/* #TODO: Implement inventory here */}

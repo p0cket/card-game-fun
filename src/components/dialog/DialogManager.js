@@ -15,6 +15,7 @@ import Cleanup from './Cleanup'
 import SwitchingTurns from './SwitchingTurns'
 import { PLAYERS } from '../../consts/consts'
 import MissedAttack from './MissedAttack'
+import SwapPal from './SwapPal'
 
 export const DIALOGS = {
   NOT_ENOUGH_ENERGY: 'NOT_ENOUGH_ENERGY',
@@ -49,6 +50,8 @@ export const DIALOGS = {
   STATUS_EFFECT_FAILED: 'STATUS_EFFECT_FAILED',
   CLEANUP_EFFECTS: 'CLEANUP_EFFECTS',
 
+  SWAP_PAL: 'SWAP_PAL',
+
   CUSTOM: 'CUSTOM',
   TEMPLATE: 'TEMPLATE',
 }
@@ -73,6 +76,9 @@ const decideDialog = (current) => {
     CLEANUP_HUMAN,
 
     SWITCHTURNS_TO_AI,
+
+    SWAP_PAL,
+
     CUSTOM,
     TEMPLATE,
   } = DIALOGS
@@ -119,16 +125,20 @@ const decideDialog = (current) => {
       return <StatusNotAppliedHuman />
     // [cleanupPhase]
     case CLEANUP_AI:
-      console.log('Dialog: Status applied', current)
+      console.log('Dialog: Cleanup AI', current)
       return <Cleanup player={PLAYERS.AI} />
     case CLEANUP_HUMAN:
-      console.log('Dialog: Status applied', current)
+      console.log('Dialog: Cleanup Human', current)
       return <Cleanup player={PLAYERS.HUMAN} />
     // [endPhase]
     case SWITCHTURNS_TO_AI:
-      console.log('Dialog: Status applied', current)
+      console.log('Dialog: Switching turns to AI', current)
       return <SwitchingTurns whosTurn={PLAYERS.AI} />
     // [other]
+    case SWAP_PAL:
+      console.log('Dialog: Swap Pal', current)
+      return <SwapPal />
+
     case CUSTOM:
       console.log(`Dialog: Custom: ${current}`)
       return <CustomDialog />

@@ -21,6 +21,7 @@ import {
   QuickStrike,
   RadiantBeam,
   RecycleRush,
+  Smash,
   SolarFlare,
   SolarSpiritBlast,
   SunShield,
@@ -124,8 +125,8 @@ export const Umbrabunny = {
   // nature: 'Adorable',
   quirks: ['Emotion Sponge', 'Reassuring Presence'],
   stats: {
-    hp: 90,
-    max_hp: 90,
+    hp: 10,
+    max_hp: 10,
     attack: 60,
     defense: 70,
     special_attack: 80,
@@ -184,7 +185,7 @@ export const Glowbuggle = {
   lvl:5,
   experience: 4000,
   status: {},
-  moves: [LuminousFlight,  WarmEmbrace],
+  moves: [Smash,  EmotionDrain],
   // moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
   possible_moves: [
     'Bioluminescent Burst',
@@ -562,7 +563,8 @@ export const Ticklefairy = {
   lvl: 40,
   experience: 4000,
   status: {},
-  moves: [QuickStrike, SolarSpiritBlast],
+  moves: [ LightBeam, WiseGaze, FeatherGlide],
+  // moves: [QuickStrike, SolarSpiritBlast],
 
   // moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],

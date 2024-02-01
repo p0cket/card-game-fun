@@ -69,6 +69,7 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
  */
 export const newStartingData = {
   userParty: [],
+  // opponentParty: [], // TODO move opponent party here
   opponent: placeholderTrainer,
   battleManager: {
     turn: 1,
@@ -126,7 +127,19 @@ export const newStartingData = {
     },
     alerts: [],
     devMode: false,
+  }, 
+   userData: {
+    newGamePlus: false,
+    pals:[],
+    items:[],
+    gold: 0,
+    medals:[],
+    runes:[],
+    inventory: [],
+    badges: [],
+    
   },
+  events: {},
   dialog: {
     isOpen: false,
     type: DIALOGS.TEMPLATE,
@@ -163,17 +176,7 @@ export const newStartingData = {
     movePayload: null,
   },
   moveStack: [],
-  userData: {
-    newGamePlus: false,
-    pals:[],
-    items:[],
-    gold: 0,
-    medals:[],
-    runes:[],
-    inventory: [],
-    badges: [],
-    
-  },
+
 }
 
 // DEPRECATED!

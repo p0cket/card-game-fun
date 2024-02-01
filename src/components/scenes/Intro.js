@@ -43,7 +43,8 @@ const Intro = ({ dispatch }) => {
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
   const inDebug = contextualState.debug && contextualState.debug.isOpen
-  const isNewGamePlus = contextualState.userData && contextualState.userData.newGamePlus 
+  const isNewGamePlus =
+    contextualState.userData && contextualState.userData.newGamePlus
   // const newGamePlus = contextualState.newGamePlus
 
   const loadNextLevel = () => {
@@ -166,17 +167,21 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm">Plausibly Sentient Monster Slayer</div>
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
-              
             </motion.div>
           </div>
-         {inDebug ? <><CanvasSquare />
-          <Tilemap
-            src="path/to/your/tilemap.json"
-            tilesetSrc="path/to/your/tileset/image.png"
-            tileWidth={32} // Adjust based on your tileset
-            tileHeight={32} // Adjust based on your tileset
-          /> </>: ''}
-
+          {inDebug ? (
+            <>
+              <CanvasSquare />
+              <Tilemap
+                src="path/to/your/tilemap.json"
+                tilesetSrc="path/to/your/tileset/image.png"
+                tileWidth={32} // Adjust based on your tileset
+                tileHeight={32} // Adjust based on your tileset
+              />{' '}
+            </>
+          ) : (
+            ''
+          )}
           <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
             <img src={gashTrainerImg} alt="gash trainer" />
@@ -192,6 +197,15 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
+          <div>
+            Credits: (People who have supported the project)
+            <>splatfest in credits based on the team people backed</>
+          </div>
+          <div>
+            spend gems from run on bonuses. (bonuses must balance), catch
+          </div>
+          <div>difficulty: enemyHealth, pain runes</div>
+          <div>randomized shop options: 1,2,3</div>
           <div style={{ padding: '10px' }}>
             <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
           </div>
@@ -201,7 +215,20 @@ const Intro = ({ dispatch }) => {
             {/* <ThemedButton text={`Options`} onClick={loadNextLevel} />
             <ThemedButton text={`Museum`} onClick={loadNextLevel} /> */}
           </div>
-          {isNewGamePlus && <div>Coming Features</div>}
+          {isNewGamePlus && (
+            <>
+              {' '}
+              <div>Coming Features</div>{' '}
+              <div>Defeated runs: defeatedRuns on version: gameversion</div>
+              <div>Previous wins: wins</div>
+              <div>Badges: badges</div>
+              <div>difficulty: 1,2,3,4,5,6, --------slider</div>
+              <div>try modified vals: ---------</div>
+              {/* This gets hooked up to our code, and we can allow users
+              to submit their own takes on difficulty
+              */}
+            </>
+          )}
           <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
           <div className="bg-boy-lightgreen p-1">
             <p className="font-[silkscreen] font-bold text-green-800 text-sm">

@@ -2,6 +2,7 @@ import React from 'react'
 import './Victory.css'
 import emblemBug from '../../assets/emblems/emblem_bug2.png'
 import { useStateContext } from '../../MainContext'
+import Button from '../common/Button'
 // import devProfileImage from '/misc/Pocket.jpg';  // import victory image
 // import { Pocket } from "/misc/Pocket.js"
 // import {pocket2} from "./Pocket.png"
@@ -47,16 +48,13 @@ const Victory = () => {
 
         {inDebug && (
           <>
-            Share with friends: Meet my Dream Team! 
-            🐲🔥 Lv.15, 🌿🐉 Lv.12, 🌊🐍
-            Lv.10. Team Power: 2500 💪. 
-            Build your own unstoppable team [Game
-            Link]{' '}
-            Just conquered the Tower! 
-            🐉5 (dragons caught) 🌟Lvl 10 Hydra 
-            🗝️3 (rare artifacts found). 
-            Can you top this? [Game Link]
+            Share with friends: Meet my Dream Team! 🐲🔥 Lv.15, 🌿🐉 Lv.12, 🌊🐍
+            Lv.10. Team Power: 2500 💪. Build your own unstoppable team [Game
+            Link] Just conquered the Tower! 🐉5 (dragons caught) 🌟Lvl 10 Hydra
+            🗝️3 (rare artifacts found). Can you top this? [Game Link]
             <div>Give feedback: Google forms link</div>
+            <Button>Donate</Button>
+            <div>Donate if you like the game, and Ill make it better :) </div>
           </>
         )}
       </div>
