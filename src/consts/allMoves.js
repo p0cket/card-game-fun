@@ -430,6 +430,57 @@ export const FeatherGlide = {
   },
 }
 
+export const Smash = {
+  name: 'Smash',
+  type: 'physical',
+  damage: 45,
+  accuracy: 80,
+  speed: 8,
+  cost: { energy: 4 },
+  energyCost: 5,
+  effect: {
+    description:
+      'Hit with the power of your body weight',
+    chance: 10,
+    result: 'stun',
+    duration: '1 turn', // Added duration
+    amt: 12, // Added amt (assuming 20 as an example value)
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+  // "NotSoFast" aspect:
+  notSoFast: {
+    name: 'Aerial Agility',
+    type: 'buff',
+    accuracy: 90,
+    effect: {
+      description: 'Enhance your aerial agility to dodge incoming attacks',
+      duration: '1 turn',
+      evasion_boost: 40,
+      // Assuming these fields are not required for buffs
+    },
+  },
+  // "Forceful" aspect:
+  forceful: {
+    name: 'Celestial Dive',
+    type: 'physical',
+    damage: 50,
+    accuracy: 90,
+    speed: 10,
+    cost: { energy: 4 },
+    energyCost: 5,
+    effect: {
+      description:
+        'Perform a celestial dive to guarantee stunning the opponent',
+      chance: 100,
+      result: 'stun',
+      duration: '1 turn', // Added duration
+      amt: 30, // Added amt (assuming 30 as an example value)
+    },
+    targets: ['opponent'],
+  },
+}
+
 // all Glowbuggle moves
 export const LuminousFlight = {
   name: 'Luminous Flight',

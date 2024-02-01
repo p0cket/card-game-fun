@@ -1,7 +1,12 @@
+import { DIALOGS } from '../../components/dialog/DialogManager'
 import { bossBarry, hikerBrak } from '../../consts/party/trainers'
 import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
+import { switchDialog } from '../dialog/energyDialogHandler'
 import { SCENES, changeLevel, updateScene } from '../sceneHandlers_new'
-import { applyLevelUpBonus, updateUserPartyStats } from '../state/partyStateHandlers'
+import {
+  applyLevelUpBonus,
+  updateUserPartyStats,
+} from '../state/partyStateHandlers'
 
 export const checkIfDead = (state) => {
   console.log(
@@ -11,6 +16,9 @@ export const checkIfDead = (state) => {
     state.userParty[0],
   )
 
+  // check if user pal is dead, if so, swap with a living pal
+
+  // if your pal is dead, mark dead
   if (state.userParty[0].stats.hp <= 0) {
     state = {
       ...state,
@@ -22,16 +30,37 @@ export const checkIfDead = (state) => {
         ...state.userParty.slice(1),
       ],
     }
-    state = updateScene(state, {
-      screen: SCENES.GAMEOVER,
-      details: {
-        type: 'lose',
-        score: null,
-        progress: null,
-        unlocks: null,
-      },
-    })
-    state = createPopupRemovedState(state)
+
+    // if theres no living pal, change level to gameover
+    // if there is a living pal,
+    // show a dialog for the user to choose a new pal
+
+    // if we go through state.userParty, and none of the pals are alive,
+    // change level to gameover
+    const alivePals = state.userParty.filter((pal) => !pal.dead)
+    if (alivePals.length === 0) {
+      console.log(`switching to gameover`)
+      state = updateScene(state, {
+        screen: SCENES.GAMEOVER,
+        details: {
+          type: 'lose',
+          score: null,
+          progress: null,
+          unlocks: null,
+        },
+      })
+      state = createPopupRemovedState(state)
+      // if we go through state.userParty, and one or more pals are alive,
+      // show a dialog for the user to choose a new pal
+    } else if (alivePals.length > 0) {
+      // show a dialog for the user to choose a new pal
+      // state = createPopupRemovedState(state)
+      console.log(`switching dialog to swapPal`)
+      state = switchDialog(state, DIALOGS.SWAP_PAL)
+    }
+
+    // state = updateUserPartyStats(state, alivePals[0])
+    // state = createPopupRemovedState(state)
   }
 
   if (state.opponent.monsters[0].stats.hp <= 0) {

@@ -19,10 +19,10 @@ let ourDmg
 let damagedHP
 export const dmgPhase = (state, attackPayload) => {
   let newState = createPayloadState(state, attackPayload)
-  const { phase} = attackPayload
+  const { phase } = attackPayload
 
   // const { move, pal, phase, player, userSlot, targets } = attackPayload
-    const { move, pal, player, userSlot, targets } = state.attack
+  const { move, pal, player, userSlot, targets } = state.attack
   // pal: state.attack.pal,
   // move: state.attack.move,
   // phase: ATK_PHASES.CLEANUP,
@@ -65,8 +65,16 @@ export const dmgPhase = (state, attackPayload) => {
 
     // targetPal is the reciever of the atk
     targetPal = newState.opponent.monsters[0]
-    // (1-.2) * .2 = 
-    const combinedAccuracy = accuracy * palAccuracyStat * 100 
+    // CRITS????
+    // Determine if the roll is a critical hit (in the lowest 5%)
+    const isCrit = roll < 5
+    let crit = false
+    if (isCrit) {
+      crit = true
+      console.log('Critical hit!')
+    }
+    //
+    const combinedAccuracy = accuracy * palAccuracyStat * 100
     console.warn(`🫠check attacker passed as human`, targetPal)
     console.log(
       `Roll: ${roll} < ((${accuracy} * ${palAccuracyStat}) * 100 ) = ${combinedAccuracy} ${

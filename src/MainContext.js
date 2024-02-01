@@ -34,6 +34,7 @@ import {
   setPalEnergyToMax,
   setPalHPToMax,
 } from './handlers/state/levelStateHandlers'
+import { swapPals } from './handlers/state/partyStateHandlers'
 
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
@@ -71,6 +72,8 @@ export const ACTIONS = {
 
   CHANGE_DIALOG: 'CHANGE_DIALOG',
   SHOW_COUNTERS: 'SHOW_COUNTERS',
+
+  SWAP_PALS: 'SWAP_PALS',
   // Phases:
   PAY_PHASE: 'PAY_PHASE',
   DAMAGE_PHASE: 'DAMAGE_PHASE',
@@ -78,6 +81,7 @@ export const ACTIONS = {
   CLEANUP_PHASE: 'CLEANUP_PHASE',
   END_PHASE: 'END_PHASE',
   ADD_MOVE_TO_STACK: 'ADD_MOVE_TO_STACK',
+
   TOGGLE_DEBUG: 'TOGGLE_DEBUG',
 
   RESET_DATA: 'RESET_DATA',
@@ -452,6 +456,17 @@ export const MainProvider = ({ children }) => {
         )
         state = setPlayerPalHPToMax(state)
         return state
+      case ACTIONS.SWAP_PALS:
+        console.log('Reducer SWAP_PALS:', action)
+        state = swapPals(
+          state,
+          action.payload.palToSwap,
+          action.payload.palLocation,
+          action.payload.palToSwapWith,
+          action.payload.palToSwapWithLocation,
+          action.payload.player,
+        )
+        return state
       case ACTIONS.TOGGLE_DEBUG:
         console.log('Reducer TOGGLE_DEBUG:', action)
 
@@ -463,9 +478,9 @@ export const MainProvider = ({ children }) => {
           },
         }
         return state
-        case ACTIONS.RESET_DATA:
-          console.log('Reducer RESET_DATA:', action)
-          return {...newStartingData}
+      case ACTIONS.RESET_DATA:
+        console.log('Reducer RESET_DATA:', action)
+        return { ...newStartingData }
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

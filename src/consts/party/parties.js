@@ -16,3 +16,8 @@
 // // Other properties of the party member...
 // //   };
 // // Example usage:
+
+export const PARTY_VIEWS = {
+    FAINTED: 'fainted',
+    DISPLAY: 'display',
+  }

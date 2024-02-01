@@ -14,6 +14,7 @@ import {
   DoubleStrike,
   LuminousFlight,
   RadiantBeam,
+  Smash,
   SunShield,
 } from '../../consts/allMoves'
 import { apple, potion, pumpernickelSoda } from '../../consts/items/basicItems'
@@ -55,7 +56,8 @@ function Results({ experience = 100, pal, isBoss = false }) {
     // CuteCharm,
     // SunShield,
     RadiantBeam,
-    LuminousFlight,
+    // LuminousFlight,
+    Smash,
     DoubleStrike,
   ]
 
