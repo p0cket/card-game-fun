@@ -112,47 +112,19 @@ function BattleBotDisplay({ ourCurrentMon }) {
                   )
                 }
               })}
-
-              {/* {Object.keys(ourCurrentMon.status).map((key) => {
-                if (ourCurrentMon.status[key]) {
-                  return (
-                  //   <TooltipButton
-                  //   key={key}
-                  //   title="effect"
-                  //   details={ourCurrentMon.passives.details}
-                  //   explanation={ourCurrentMon.passives.reasoning}
-                  //   name={ourCurrentMon.passives.name}
-                  //   ourCurrentMon={ourCurrentMon}
-                  //   showTooltip={showTooltip}
-                  //   setShowTooltip={setShowTooltip}
-                  // />
-                    <span
-                      className="inline-block bg-boy-green text-white text-xs px-2 py-1 rounded m-1"
-                      key={key}
-                    >
-                      {key} {JSON.stringify(ourCurrentMon.status[key])}
-                    </span>
-                  )
-                } else {
-                  console.log(`${key} is false`)
-                  return (
-                    <span className="text-gray-500" key={key}>
-                      {key}
-                    </span>
-                  )
-                }
-              })} */}
             </div>
             <ul className="text-sm flex flex-col justify-start align-start">
-              <TooltipButton
-                title="Passive"
-                details={ourCurrentMon.passives.details}
-                explanation={ourCurrentMon.passives.reasoning}
-                name={ourCurrentMon.passives.name}
-                ourCurrentMon={ourCurrentMon}
-                showTooltip={showPassiveTooltip}
-                setShowTooltip={setShowPassiveTooltip}
-              />
+              {ourCurrentMon.passives && (
+  <TooltipButton
+    title="Passive"
+    details={ourCurrentMon.passives.details}
+    explanation={ourCurrentMon.passives.reasoning}
+    name={ourCurrentMon.passives.name}
+    ourCurrentMon={ourCurrentMon}
+    showTooltip={showPassiveTooltip}
+    setShowTooltip={setShowPassiveTooltip}
+  />
+)}
               {/* <li>Group: {ourCurrentMon.specialty_group}</li>
               <li>
                 +{' '}
