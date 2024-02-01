@@ -197,15 +197,7 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
-          <div>
-            Credits: (People who have supported the project)
-            <>splatfest in credits based on the team people backed</>
-          </div>
-          <div>
-            spend gems from run on bonuses. (bonuses must balance), catch
-          </div>
-          <div>difficulty: enemyHealth, pain runes</div>
-          <div>randomized shop options: 1,2,3</div>
+         
           <div style={{ padding: '10px' }}>
             <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
           </div>
@@ -217,7 +209,15 @@ const Intro = ({ dispatch }) => {
           </div>
           {isNewGamePlus && (
             <>
-              {' '}
+              {' '} <div>
+            Credits: (People who have supported the project)
+            <>splatfest in credits based on the team people backed</>
+          </div>
+          <div>
+            spend gems from run on bonuses. (bonuses must balance), catch
+          </div>
+          <div>difficulty: enemyHealth, pain runes</div>
+          <div>randomized shop options: 1,2,3</div>
               <div>Coming Features</div>{' '}
               <div>Defeated runs: defeatedRuns on version: gameversion</div>
               <div>Previous wins: wins</div>
