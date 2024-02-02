@@ -1,7 +1,7 @@
 /* eslint-disable indent */
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './index.css'
-import { newStartingData } from './consts/startingData'
+import { getFreshStartingData, newStartingData, startingDataBackup } from './consts/startingData'
 import { cusLog } from './utils/debugging-utils'
 import { payPhase } from './handlers/attack/payPhase'
 import { dmgPhase } from './handlers/attack/dmgPhase'
@@ -110,7 +110,8 @@ export const MainProvider = ({ children }) => {
       stateWithAttack,
       countersState,
       newMoveStack,
-      newStateWithStack
+      newStateWithStack,
+      freshData
 
     switch (action.type) {
       case ACTIONS.UPDATE_GAMEDATA:
@@ -479,7 +480,26 @@ export const MainProvider = ({ children }) => {
         return state
       case ACTIONS.RESET_DATA:
         console.log('Reducer RESET_DATA:', action)
-        return { ...newStartingData }
+        console.log('resetData: state, newStartingData', state, newStartingData)
+        //       state.current: {
+        //   level: 0,
+        //   mapLevel: 0,
+        //   act: 1,
+        //   completedLevels: [],
+        //   scene: { screen: SCENES.INTRO, details: null },
+        //   curEvent: null,
+        //   incomingLevels: [
+        //     {
+        //       scene: 'battle',
+        //       trainer: 'hikerNed',
+        //     },
+        //   ],
+        // },
+        freshData = getFreshStartingData()
+        freshData.userData = state.userData
+        return freshData
+        // return { ...newStartingData }
+      // return {...startingDataCopy}
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

@@ -103,6 +103,107 @@ export const levels = [
     ],
   },
 ]
+export const gymLevels = [
+  {
+    id: 1,
+    title: 'The Gym Entrance',
+    options: [
+      { id: '1a', description: 'Battle the first trainer', scene: SCENES.BATTLE, trainer: 'Rookie Trainer' },
+    ],
+  },
+  {
+    id: 2,
+    title: 'The Training Hall',
+    options: [
+      { id: '2a', description: 'Face off against a seasoned fighter', scene: SCENES.BATTLE, trainer: 'Seasoned Fighter' },
+      { id: '2b', description: 'Take a moment to strategize', scene: SCENES.REST },
+    ],
+  },
+  {
+    id: 3,
+    title: 'The Strategy Room',
+    options: [
+      { id: '3a', description: 'Test your tactics against a tactical genius', scene: SCENES.BATTLE, trainer: 'Tactical Genius' },
+      { id: '3b', description: 'Rest and recover', scene: SCENES.REST },
+    ],
+  },
+  {
+    id: 4,
+    title: 'The Elemental Zone',
+    options: [
+      { id: '4a', description: 'Overcome an elemental challenge', scene: SCENES.BATTLE, trainer: 'Elemental Specialist' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'The Veteran\'s Court',
+    options: [
+      { id: '5a', description: 'Prove your worth against a gym veteran', scene: SCENES.BATTLE, trainer: 'Gym Veteran' },
+      { id: '5b', description: 'Catch your breath', scene: SCENES.REST },
+    ],
+  },
+  {
+    id: 6,
+    title: 'The Final Test',
+    options: [
+      { id: '6a', description: 'The ultimate challenge before the leader', scene: SCENES.BATTLE, trainer: 'The Gatekeeper' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'The Leader\'s Arena',
+    options: [
+      { id: '7a', description: 'Face the Gym Leader', scene: SCENES.BOSS, leader: 'Gym Leader' },
+    ],
+  },
+];
+
+// Assuming SCENES.BATTLE and SCENES.BOSS are predefined to handle battles and the final boss encounter
+// "trainer" and "leader" would be references to specific trainer and leader objects defined elsewhere
+
+// const trainerTiers = {
+//   beginner: [hikerBrak, gardenerFern],
+//   intermediate: [mysticWillow, chefGumbo, pirateCoral],
+//   advanced: [acePilotSkyler, knightGallant],
+//   elite: [scientistTesla, wizardMerlin],
+// };
+
+// // Optionally, categorize by themes if your game progression is more thematic than linear
+// const trainerThemes = {
+//   forest: [gardenerFern, mysticWillow],
+//   sky: [acePilotSkyler, wizardMerlin],
+//   ocean: [pirateCoral, chefGumbo],
+//   technology: [scientistTesla, hikerBrak],
+// };
+
+// function selectTrainerForCurrentTier(playerTier) {
+//   const availableTrainers = trainerTiers[playerTier];
+//   return availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
+// }
+// function selectTrainerForCurrentTheme(currentTheme) {
+//   const availableTrainers = trainerThemes[currentTheme];
+//   return availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
+// }
+// function advancePlayerTier(player) {
+//   // Conceptual function to advance player tier based on in-game logic
+//   if (player.hasDefeatedCurrentTierBoss) {
+//     player.currentTier = getNextTier(player.currentTier);
+//     // Potentially reset or modify game state to reflect new challenges
+//   }
+// }
+// const progressionTiers = ['beginner', 'intermediate', 'advanced', 'elite'];
+// function getNextTier(currentTier) {
+//   const currentIndex = progressionTiers.indexOf(currentTier);
+//   // Ensure there is a next tier to progress to
+//   if (currentIndex >= 0 && currentIndex < progressionTiers.length - 1) {
+//     return progressionTiers[currentIndex + 1];
+//   }
+//   // Return the current tier if already at the last tier
+//   return currentTier;
+// }
+
+
+
 
 export function generateNextLevelOptions() {
   const options = []

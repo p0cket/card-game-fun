@@ -67,7 +67,7 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
  * The starting data for the game.
  * @type {StartingData}
  */
-export const newStartingData = {
+export const getFreshStartingData = () => ({
   userParty: [],
   // opponentParty: [], // TODO move opponent party here
   opponent: placeholderTrainer,
@@ -177,7 +177,8 @@ export const newStartingData = {
   },
   moveStack: [],
 
-}
+})
+export const newStartingData = getFreshStartingData()
 
 // DEPRECATED!
 export const startingDataOld = {

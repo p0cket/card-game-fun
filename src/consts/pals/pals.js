@@ -168,8 +168,8 @@ export const Glowbuggle = {
   nature: 'Illuminating',
   quirks: ['Warm Light Emission', 'Comforting Glow'],
   stats: {
-    hp: 80,
-    max_hp: 90,
+    hp: 0,
+    max_hp: 0,
     attack: 50,
     defense: 40,
     special_attack: 100,

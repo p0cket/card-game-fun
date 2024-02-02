@@ -170,7 +170,6 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
             </motion.div>
-            <SpinningBall />
             <TreasureChest />
           </div>
           {inDebug ? (

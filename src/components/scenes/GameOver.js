@@ -29,7 +29,10 @@ const GameOver = () => {
   const handleRetry = () => {
     // Implement game state reset logic here
     // alert('Starting a new game...')
-    loadChooseCharacterScene()
+    // loadChooseCharacterScene()
+    dispatch({
+      type: ACTIONS.RESET_DATA,
+    })
   }
 
   // Function to share on social media
@@ -38,27 +41,31 @@ const GameOver = () => {
     setShareUrl('https://your-game-website.com/game-over') // Replace with your game's URL
   }
 
-  const loadChooseCharacterScene = () => {
-    console.log(`loadChooseCharacterScene():`)
-    // dispatch(setSceneAction())
-    let refreshedState = dispatch({
-      type: ACTIONS.RESET_DATA,
-    })
-    const nextSceneState = updateScene(refreshedState, {
-      screen: SCENES.CHOOSECHARACTER,
-      details: null,
-    })
-    const nextLevelState = updateLevel(nextSceneState, 1)
-    dispatch({
-      type: ACTIONS.UPDATE_GAMEDATA,
+  // const loadChooseCharacterScene = () => {
+  //   console.log(`loadChooseCharacterScene():`)
+  //   // dispatch(setSceneAction())
+  //   // let refreshedState = dispatch({
+  //   //   type: ACTIONS.RESET_DATA,
+  //   // })
+  //   dispatch({
+  //     type: ACTIONS.RESET_DATA,
+  //   })
 
-      payload: nextLevelState,
-    })
-  }
+  //   // const nextSceneState = updateScene(refreshedState, {
+  //   //   screen: SCENES.CHOOSECHARACTER,
+  //   //   details: null,
+  //   // })
+  //   // const nextLevelState = updateLevel(nextSceneState, 1)
+  //   // dispatch({
+  //   //   type: ACTIONS.UPDATE_GAMEDATA,
+
+  //   //   payload: nextLevelState,
+  //   // })
+  // }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-800 font-[silkscreen]">
-      <h1 className="text-4xl font-bold text-red-600 mb-8">Game Over</h1>
+      <h1 className="text-4xl font-bold text-green-500 mb-8">Game Over</h1>
       <div className="text-white mb-6 grid grid-cols-2 gap-4">
         <h2 className="col-span-2">Character Summary</h2>
         <p className="font-bold">Name</p>
@@ -73,12 +80,12 @@ const GameOver = () => {
         <p className="col-span-2">{playerData.achievements.join(', ')}</p>
       </div>
       <div>Please refresh to restart</div>
-      {/* <button
+      <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
         onClick={handleRetry}
       >
-        Try Again
-      </button> */}
+        Try Again xxx
+      </button>
       <button
         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 m-2 rounded"
         onClick={handleShare}

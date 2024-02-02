@@ -26,6 +26,7 @@ import { FrostBite } from '../../consts/allMoves'
 import { Thunderclap } from '../../consts/allMoves'
 import { CrystalShard } from '../../consts/allMoves'
 import { ShadowLash } from '../../consts/allMoves'
+import TreasureChest from '../visuals/TeasureChest'
 
 function Results({ experience = 100, pal, isBoss = false }) {
   const state = useStateContext()
@@ -375,6 +376,8 @@ function Results({ experience = 100, pal, isBoss = false }) {
             </button>
           ))}
         </div>
+        <TreasureChest />
+
         {selectedItem && (
           <div className="my-4 p-4 bg-yellow-100 text-black rounded">
             <h4 className="font-bold">{selectedItem.name}</h4>
