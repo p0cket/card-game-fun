@@ -14,7 +14,7 @@ import {
 
 export const cleanupAbilitiesHandler = (state) => {
   // Add opponent passives too
-  // update the pal object, add it to the party, 
+  // update the pal object, add it to the party,
   // then update the state with it
   const updatedHumanPal = applyPalPassive(state.userParty[0], 0)
   const updatedParty = updateHumanPartyWithPal(state, updatedHumanPal, 0)
@@ -24,15 +24,25 @@ export const cleanupAbilitiesHandler = (state) => {
 }
 
 export const applyPalPassive = (pal, palIndex) => {
+  if (
+    !pal.passives ||
+    !pal.passives.effects ||
+    pal.passives.effects.length === 0
+  ) {
+    console.log(`No passives to apply for pal at index ${palIndex}`)
+    return pal
+  }
+
   console.log(
     `pal, pal.passives.effects`,
     pal,
     pal.passives,
     pal.passives.effects,
   )
-  const { passives } = pal // Assuming each pal has a single `passive` object, not an array
-  const { effects } = passives
+
+  const { effects } = pal.passives
   const currentEffect = effects[0]
+
   switch (currentEffect.type) {
     case PASSIVE_TYPES.REGEN:
       console.log(`applyHumanPalPassive: pal, palIndex`, pal, palIndex)
@@ -40,9 +50,10 @@ export const applyPalPassive = (pal, palIndex) => {
       console.log(`applyHumanPalPassive returning: pal`, pal)
       return pal
     default:
-      // Handle unknown passiveUid or passives without effects
+      console.log(`Unknown passive type: ${currentEffect.type}`)
       break
   }
+
   return pal
 }
 

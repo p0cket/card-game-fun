@@ -9,6 +9,9 @@ const Event = ({ dispatch }) => {
     // the user to the trans scene with enough info to have the trans go to the next scene
   }
 
+  // enter contest, trade a mon? 
+  //Learn a specific move from a specific person?
+
   const chosenEvent = Math.floor(Math.random() * possibleEvents.length)
   const ourEvent = possibleEvents[chosenEvent]
   return (

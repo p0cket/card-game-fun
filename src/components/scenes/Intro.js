@@ -26,6 +26,8 @@ import FlashingImage from '../effects/misc/FlashingImage'
 import Shop from './Shop'
 import CanvasSquare from '../canvas/CanvasSquare'
 import Tilemap from '../canvas/Tilemap'
+import TreasureChest from '../visuals/TeasureChest'
+import SpinningBall from '../visuals/SpinningBall'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -168,6 +170,8 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
             </motion.div>
+            <SpinningBall />
+            <TreasureChest />
           </div>
           {inDebug ? (
             <>
@@ -182,9 +186,24 @@ const Intro = ({ dispatch }) => {
           ) : (
             ''
           )}
-          <div className="grid grid-cols-2 items-center gap-4">
+          {/* <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
             <img src={gashTrainerImg} alt="gash trainer" />
+          </div> */}
+          <div className="grid grid-cols-2 items-center gap-4 relative">
+            <Carousel ourImages={palImages} />
+            <div className="relative">
+              <img src={gashTrainerImg} alt="gash trainer" className="block" />
+              <div
+                className="absolute"
+                // style={{ bottom: '102px', right: '163px' }}
+                style={{ bottom: '25%', right: '38%' }} // Example using percentages
+                >
+                {' '}
+                {/* Adjust these values */}
+                <SpinningBall />
+              </div>
+            </div>
           </div>
           {/* <img src={palImages[0]} alt="pal logo" /> */}
           {/* <FlashingImage
@@ -197,7 +216,6 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
-         
           <div style={{ padding: '10px' }}>
             <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
           </div>
@@ -209,15 +227,21 @@ const Intro = ({ dispatch }) => {
           </div>
           {isNewGamePlus && (
             <>
-              {' '} <div>
-            Credits: (People who have supported the project)
-            <>splatfest in credits based on the team people backed</>
-          </div>
-          <div>
-            spend gems from run on bonuses. (bonuses must balance), catch
-          </div>
-          <div>difficulty: enemyHealth, pain runes</div>
-          <div>randomized shop options: 1,2,3</div>
+              {' '}
+              <div>
+                Credits: (People who have supported the project)
+                <>splatfest in credits based on the team people backed</>
+                <>
+                  quest: use x move 5 times, poison 3 times, regain x health
+                  with x
+                </>
+                <>Or: Move used 5x, it then grows to lvl 2</>
+              </div>
+              <div>
+                spend gems from run on bonuses. (bonuses must balance), catch
+              </div>
+              <div>difficulty: enemyHealth, pain runes</div>
+              <div>randomized shop options: 1,2,3</div>
               <div>Coming Features</div>{' '}
               <div>Defeated runs: defeatedRuns on version: gameversion</div>
               <div>Previous wins: wins</div>

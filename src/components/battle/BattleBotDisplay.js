@@ -88,8 +88,11 @@ function BattleBotDisplay({ ourCurrentMon }) {
                       key={key}
                       title="Effect"
                       // details={JSON.stringify(ourCurrentMon.status[key])}
-                      details={ourCurrentMon.status[key].type.description}
-                      // explanation={JSON.stringify(ourCurrentMon.status[key])}
+                      details={
+                        ourCurrentMon.status[key].type
+                          ? ourCurrentMon.status[key].type.description
+                          : 'No details available'
+                      }
                       name={key}
                       ourCurrentMon={ourCurrentMon}
                       showTooltip={showTooltip[key]}

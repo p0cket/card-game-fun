@@ -91,7 +91,6 @@ export const MainProvider = ({ children }) => {
   // Here we initialize the state with the startingData
   // const initialState = { startingData };
   // Here is the reducer function
-  // const [state, dispatch] = React.useReducer(reducer, initialState);
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
 
   function reducer(state, action) {

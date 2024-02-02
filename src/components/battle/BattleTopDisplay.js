@@ -178,8 +178,11 @@ export default function BattleTopDisplay() {
                     <TooltipButton
                       key={key}
                       title="Effect"
-                      details={currentMon.status[key].type.description}
-                      // explanation={JSON.stringify(currentMon.status[key])}
+                      details={
+                        currentMon.status[key] && currentMon.status[key].type
+                          ? currentMon.status[key].type.description
+                          : 'No details available'
+                      }
                       name={key}
                       ourCurrentMon={currentMon}
                       showTooltip={showTooltip[key]}
