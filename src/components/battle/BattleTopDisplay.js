@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // eslint-disable-next-line no-unused-vars
 // import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 
 import './../scenes/Battle.css'
 import './../common/Button.css'
@@ -14,7 +14,60 @@ import bg1 from './../../assets/backgrounds/bg1.png'
 import TooltipButton from '../common/Tooltip'
 
 export default function BattleTopDisplay() {
+  const state = useStateContext()
+  const dispatch = useDispatchContext()
   const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
+  const [prevHP, setPrevHP] = useState(null)
+
+  // const [prevHP, setPrevHP] = useState(currentMon.stats.hp)
+  const [healthWidth, setHealthWidth] = useState(100) // Initially set to 100%
+  const controls = useAnimation()
+  // Assuming `state.opponent.monsters[0]` is always available; adjust accordingly if it might not be
+  const currentMon = state.opponent.monsters[0]
+
+  // Now that `currentMon` is defined, we can set `prevHP` appropriately
+  useEffect(() => {
+    setPrevHP(currentMon.stats.hp)
+  }, [currentMon.stats.hp])
+  // Idle (breathing) animation setup
+  useEffect(() => {
+    controls.start({
+      // scale: [1, 1.02, 1],
+      scale: [1, 1.02, 1],
+      x: [0, 2, -3, 5, -1, 5, -3, 0],
+      y: [0, 3, -1, 4, 0],
+      transition: { repeat: Infinity, duration: 8, ease: 'easeInOut' },
+    })
+  }, [controls])
+
+  useEffect(() => {
+    // Health decrease triggers a shake animation
+    if (currentMon.stats.hp < prevHP) {
+      controls
+        .start({
+          x: [0, -5, 5, -5, 5, 0],
+          transition: { duration: 0.5 },
+          filter: ['brightness(100%)', 'brightness(0%)', 'brightness(100%)'],
+        })
+        .then(() => {
+          // Resume idle animation after shake completes
+          controls.start({
+            scale: [1, 1.02, 1],
+            x: [0, 2, -3, 5, -1, 5, -3, 0],
+            y: [0, 3, -1, 4, 0],
+            transition: { repeat: Infinity, duration: 8, ease: 'easeInOut' },
+          })
+        })
+    }
+    setPrevHP(currentMon.stats.hp)
+  }, [currentMon.stats.hp, controls, prevHP])
+
+  useEffect(() => {
+    const newWidth = (currentMon.stats.hp / currentMon.stats.max_hp) * 100
+    setHealthWidth(Math.max(0, newWidth))
+  }, [currentMon.stats.hp, currentMon.stats.max_hp])
+  // -------
+
   const attackPopupStyles = {
     overlay: {
       position: 'fixed',
@@ -36,8 +89,6 @@ export default function BattleTopDisplay() {
     },
   }
   // const [isAttackDisplayVisible, setAttackDisplayVisible] = useState(false)
-  const state = useStateContext()
-  const dispatch = useDispatchContext()
 
   const toggleTooltip = (key) => {
     setShowTooltip((prevState) => ({
@@ -51,9 +102,9 @@ export default function BattleTopDisplay() {
 
   //this is the current monster. We need to track this down and
   // assign it to the currentMon
-  const currentMon =
-    // state.current.scene.details.trainer.monsters[0]
-    state.opponent.monsters[0]
+  // const currentMon =
+  //   // state.current.scene.details.trainer.monsters[0]
+  //   state.opponent.monsters[0]
   console.log(
     `currentMon & currentMonDetails:`,
     currentMon,
@@ -144,12 +195,20 @@ export default function BattleTopDisplay() {
             </div>
             <div className="flex items-start">
               {currentMon.stats.hp}HP
-              <progress
+              {/* <progress
                 id="health"
                 value={currentMon.stats.hp}
                 max={currentMon.stats.max_hp}
                 className="bg-boy-green"
-              />
+              /> */}
+              <div className="relative w-full h-4 ml-2 bg-gray-400">
+                <motion.div
+                  className="bg-boy-green h-full"
+                  initial={{ width: '100%' }}
+                  animate={{ width: `${healthWidth}%` }}
+                  transition={{ duration: 0.5, ease: 'easeIn' }}
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -235,12 +294,21 @@ export default function BattleTopDisplay() {
       >
         <motion.img
           // className="w-45 h-38"
+          // animate="visible"
+          animate={controls}
+          whileHover="hover"
+          // variants={yourVariants}
+          src={currentMon.image}
+          alt="Your Chibipal"
+        />
+        {/* <motion.img
+          // className="w-45 h-38"
           animate="visible"
           whileHover="hover"
           variants={yourVariants}
           src={currentMon.image}
           alt="Your Chibipal"
-        />
+        /> */}
       </div>
     </div>
   )

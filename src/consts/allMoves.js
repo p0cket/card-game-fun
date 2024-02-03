@@ -17,7 +17,7 @@ export const SolarSpiritBlast = {
   // },
   priority: 'slow',
 }
-
+//lvl1, 2, 3,4. common uncommon rare, mythic
 export const QuickStrike = {
   name: 'Quick Strike',
   type: 'physical',

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 // import { useDispatchContext, useStateContext } from "../../MainContext"
 import './../scenes/Battle.css'
 import './../common/Button.css'
@@ -12,17 +12,77 @@ import TooltipButton from '../common/Tooltip'
 
 function BattleBotDisplay({ ourCurrentMon }) {
   const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
-  const yourVariants = {
-    visible: {
-      x: [0, 2, -3, 5, -1, 5, -3, 1],
-      y: [0, 3, -1, 4],
-      transition: {
-        // delay: 0.5,
-        duration: 15,
-        yoyo: Infinity,
-      },
-    },
-  }
+  const [prevHP, setPrevHP] = useState(ourCurrentMon.stats.hp)
+  const [healthWidth, setHealthWidth] = useState(100) // Initially set to 100%
+  const controls = useAnimation()
+
+  // Idle (breathing) animation setup
+  useEffect(() => {
+    controls.start({
+      // scale: [1, 1.02, 1],
+      scale: [1, 1.02, 1],
+
+      x: [0, 2, -3, 5, -1, 5, -3, 0],
+      y: [0, 3, -1, 4, 0],
+      transition: { repeat: Infinity, duration: 8, ease: 'easeInOut' },
+    })
+  }, [controls])
+
+  useEffect(() => {
+    // Health decrease triggers a shake animation
+    if (ourCurrentMon.stats.hp < prevHP) {
+      controls
+        .start({
+          x: [0, -5, 5, -5, 5, 0],
+          transition: { duration: 0.5 },
+          filter: ['brightness(100%)', 'brightness(0%)', 'brightness(100%)'],
+        })
+        .then(() => {
+          // Resume idle animation after shake completes
+          controls.start({
+            scale: [1, 1.02, 1],
+            x: [0, 2, -3, 5, -1, 5, -3, 0],
+            y: [0, 3, -1, 4, 0],
+            transition: { repeat: Infinity, duration: 8, ease: 'easeInOut' },
+          })
+        })
+    }
+    setPrevHP(ourCurrentMon.stats.hp)
+  }, [ourCurrentMon.stats.hp, controls, prevHP])
+
+  useEffect(() => {
+    const newWidth = (ourCurrentMon.stats.hp / ourCurrentMon.stats.max_hp) * 100
+    setHealthWidth(Math.max(0, newWidth))
+  }, [ourCurrentMon.stats.hp, ourCurrentMon.stats.max_hp])
+  // useEffect(() => {
+  //   if (ourCurrentMon.stats.hp < prevHP) {
+  //     // Trigger shake animation
+  //     controls.start({
+  //       x: [0, -5, 5, -5, 5, 0],
+  //       transition: { duration: 0.5 },
+  //       filter: ['brightness(100%)', 'brightness(0%)', 'brightness(100%)'],
+  //     })
+  //   }
+  //   setPrevHP(ourCurrentMon.stats.hp)
+  // }, [ourCurrentMon.stats.hp, controls, prevHP])
+
+  // useEffect(() => {
+  //   // Calculate the new width percentage based on current HP vs. max HP
+  //   const newWidth = (ourCurrentMon.stats.hp / ourCurrentMon.stats.max_hp) * 100
+  //   setHealthWidth(Math.max(0, newWidth)) // Ensure width doesn't go below 0
+  // }, [ourCurrentMon.stats.hp, ourCurrentMon.stats.max_hp])
+
+  // const yourVariants = {
+  //   visible: {
+  //     x: [0, 2, -3, 5, -1, 5, -3, 1],
+  //     y: [0, 3, -1, 4],
+  //     transition: {
+  //       // delay: 0.5,
+  //       duration: 15,
+  //       yoyo: Infinity,
+  //     },
+  //   },
+  // }
   const toggleTooltip = (key) => {
     setShowTooltip((prevState) => ({
       ...prevState,
@@ -53,9 +113,10 @@ function BattleBotDisplay({ ourCurrentMon }) {
       >
         <motion.img
           // className="w-45 h-38"
-          animate="visible"
+          // animate="visible"
+          animate={controls}
           whileHover="hover"
-          variants={yourVariants}
+          // variants={yourVariants}
           src={ourCurrentMon.image}
           alt="Your Chibipal"
         />
@@ -71,12 +132,20 @@ function BattleBotDisplay({ ourCurrentMon }) {
             </div>
             <div className="flex items-start">
               {ourCurrentMon.stats.hp}HP
-              <progress
+              <div className="relative w-full h-4 ml-2 bg-gray-400">
+                <motion.div
+                  className="bg-boy-green h-full"
+                  initial={{ width: '100%' }}
+                  animate={{ width: `${healthWidth}%` }}
+                  transition={{ duration: 0.5, ease: 'easeIn' }}
+                />
+              </div>
+              {/* <progress
                 id="health"
                 value={ourCurrentMon.stats.hp}
                 max={ourCurrentMon.stats.max_hp}
                 className="bg-boy-green"
-              />
+              /> */}
             </div>
           </div>
           <div>
@@ -118,16 +187,16 @@ function BattleBotDisplay({ ourCurrentMon }) {
             </div>
             <ul className="text-sm flex flex-col justify-start align-start">
               {ourCurrentMon.passives && (
-  <TooltipButton
-    title="Passive"
-    details={ourCurrentMon.passives.details}
-    explanation={ourCurrentMon.passives.reasoning}
-    name={ourCurrentMon.passives.name}
-    ourCurrentMon={ourCurrentMon}
-    showTooltip={showPassiveTooltip}
-    setShowTooltip={setShowPassiveTooltip}
-  />
-)}
+                <TooltipButton
+                  title="Passive"
+                  details={ourCurrentMon.passives.details}
+                  explanation={ourCurrentMon.passives.reasoning}
+                  name={ourCurrentMon.passives.name}
+                  ourCurrentMon={ourCurrentMon}
+                  showTooltip={showPassiveTooltip}
+                  setShowTooltip={setShowPassiveTooltip}
+                />
+              )}
               {/* <li>Group: {ourCurrentMon.specialty_group}</li>
               <li>
                 +{' '}

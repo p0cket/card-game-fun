@@ -9,7 +9,7 @@ export const levels = [
     options: [
       { id: '1a', description: 'Fight a monster', scene: SCENES.BATTLE },
       // { id: '1b', description: 'Visit a shop', scene: SCENES.SHOP },
-  
+
       // { id: '1c', description: 'boss', scene: SCENES.BOSS }, // You may want to specify a different scene here.
     ],
   },
@@ -108,22 +108,41 @@ export const gymLevels = [
     id: 1,
     title: 'The Gym Entrance',
     options: [
-      { id: '1a', description: 'Battle the first trainer', scene: SCENES.BATTLE, trainer: 'Rookie Trainer' },
+      {
+        id: '1a',
+        description: 'Battle the first trainer',
+        scene: SCENES.BATTLE,
+        trainer: 'Rookie Trainer',
+      },
     ],
   },
   {
     id: 2,
     title: 'The Training Hall',
     options: [
-      { id: '2a', description: 'Face off against a seasoned fighter', scene: SCENES.BATTLE, trainer: 'Seasoned Fighter' },
-      { id: '2b', description: 'Take a moment to strategize', scene: SCENES.REST },
+      {
+        id: '2a',
+        description: 'Face off against a seasoned fighter',
+        scene: SCENES.BATTLE,
+        trainer: 'Seasoned Fighter',
+      },
+      {
+        id: '2b',
+        description: 'Take a moment to strategize',
+        scene: SCENES.REST,
+      },
     ],
   },
   {
     id: 3,
     title: 'The Strategy Room',
     options: [
-      { id: '3a', description: 'Test your tactics against a tactical genius', scene: SCENES.BATTLE, trainer: 'Tactical Genius' },
+      {
+        id: '3a',
+        description: 'Test your tactics against a tactical genius',
+        scene: SCENES.BATTLE,
+        trainer: 'Tactical Genius',
+      },
       { id: '3b', description: 'Rest and recover', scene: SCENES.REST },
     ],
   },
@@ -131,14 +150,24 @@ export const gymLevels = [
     id: 4,
     title: 'The Elemental Zone',
     options: [
-      { id: '4a', description: 'Overcome an elemental challenge', scene: SCENES.BATTLE, trainer: 'Elemental Specialist' },
+      {
+        id: '4a',
+        description: 'Overcome an elemental challenge',
+        scene: SCENES.BATTLE,
+        trainer: 'Elemental Specialist',
+      },
     ],
   },
   {
     id: 5,
-    title: 'The Veteran\'s Court',
+    title: "The Veteran's Court",
     options: [
-      { id: '5a', description: 'Prove your worth against a gym veteran', scene: SCENES.BATTLE, trainer: 'Gym Veteran' },
+      {
+        id: '5a',
+        description: 'Prove your worth against a gym veteran',
+        scene: SCENES.BATTLE,
+        trainer: 'Gym Veteran',
+      },
       { id: '5b', description: 'Catch your breath', scene: SCENES.REST },
     ],
   },
@@ -146,17 +175,27 @@ export const gymLevels = [
     id: 6,
     title: 'The Final Test',
     options: [
-      { id: '6a', description: 'The ultimate challenge before the leader', scene: SCENES.BATTLE, trainer: 'The Gatekeeper' },
+      {
+        id: '6a',
+        description: 'The ultimate challenge before the leader',
+        scene: SCENES.BATTLE,
+        trainer: 'The Gatekeeper',
+      },
     ],
   },
   {
     id: 7,
-    title: 'The Leader\'s Arena',
+    title: "The Leader's Arena",
     options: [
-      { id: '7a', description: 'Face the Gym Leader', scene: SCENES.BOSS, leader: 'Gym Leader' },
+      {
+        id: '7a',
+        description: 'Face the Gym Leader',
+        scene: SCENES.BOSS,
+        leader: 'Gym Leader',
+      },
     ],
   },
-];
+]
 
 // Assuming SCENES.BATTLE and SCENES.BOSS are predefined to handle battles and the final boss encounter
 // "trainer" and "leader" would be references to specific trainer and leader objects defined elsewhere
@@ -201,9 +240,6 @@ export const gymLevels = [
 //   // Return the current tier if already at the last tier
 //   return currentTier;
 // }
-
-
-
 
 export function generateNextLevelOptions() {
   const options = []

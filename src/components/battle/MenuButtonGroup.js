@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
-import { useDispatchContext, useStateContext } from '../../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
 import { MeteorStrike } from '../../consts/allMoves'
 import ItemMenuModal from '../common/ItemMenuModal'
+import { DIALOGS } from '../dialog/DialogManager'
 
 function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   const contextualState = useStateContext()
@@ -14,6 +15,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
 
   const [itemModalVisible, setItemModalVisible] = useState(false)
   const { items } = contextualState.bag
+
   //   useEffect(() => {
   //   const handleKeyDown = (event) => {
   //     if (event.shiftKey && event.key === 'D') {
@@ -26,7 +28,14 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
   //   // Clean up to avoid memory leak
   //   return () => document.removeEventListener('keydown', handleKeyDown)
   // }, [])
-
+  const togglePalMenu = () => {
+    // set current menu to swap
+    // state = switchDialog(state, DIALOGS.SWAP_PAL)
+    contextualDispatch({
+      type: ACTIONS.CHANGE_DIALOG,
+      payload: DIALOGS.SWAP_PAL,
+    })
+  }
 
   console.log(`ourCurrentMon!:D `, ourCurrentMon)
   const menuButtons = () => (
@@ -48,7 +57,10 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           >
             Items
           </div>
-          <div className="text-sm p-1 flex items-center justify-center">
+          <div
+            className="text-sm p-1 flex items-center justify-center"
+            onClick={togglePalMenu}
+          >
             🔒PaLs
           </div>
           <div
@@ -111,7 +123,12 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       {' '}
       {/* Add relative here for positioning the modal */}
       {currentView === 'menu' ? menuButtons() : attackButtons()}
-      {itemModalVisible && <ItemMenuModal items={items} setItemModalVisible={setItemModalVisible} />}
+      {itemModalVisible && (
+        <ItemMenuModal
+          items={items}
+          setItemModalVisible={setItemModalVisible}
+        />
+      )}
     </div>
   )
 }

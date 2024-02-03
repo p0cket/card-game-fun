@@ -366,19 +366,27 @@ function Results({ experience = 100, pal, isBoss = false }) {
     return (
       <div>
         <div id="item-container" className="item-container">
-          {itemsToChooseFrom.map((item) => (
-            <button
-              key={item.name}
-              className="py-2 px-4 m-1 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
-              onClick={() => handleItemSelect(item)}
-            >
-              {item.name}
-            </button>
+          {itemsToChooseFrom.map((item, index) => (
+            <div key={index}>
+              <TreasureChest
+                item={item}
+                handleSelectItem={handleItemSelect}
+                selectedItem={selectedItem}
+                onContinue={onContinue}
+              />
+              {/* <button
+                key={item.name}
+                className="py-2 px-4 m-1 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
+                onClick={() => {
+                  handleItemSelect(item)
+                }}
+              >
+                {item.name}
+              </button> */}
+            </div>
           ))}
         </div>
-        <TreasureChest />
-
-        {selectedItem && (
+        {/* {selectedItem && (
           <div className="my-4 p-4 bg-yellow-100 text-black rounded">
             <h4 className="font-bold">{selectedItem.name}</h4>
             <p>{selectedItem.description}</p>
@@ -390,7 +398,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
               Continue
             </button>
           </div>
-        )}
+        )} */}
       </div>
     )
   }
@@ -549,8 +557,8 @@ function Results({ experience = 100, pal, isBoss = false }) {
       {/* storytelling note: Matt and Trey's method - and so, as opposed to and then */}
       {/* TODO: Add display of Modifications
       {DisplayModifications()} */}
-      {displayMoves()}
       {/* uncomment the 3 below when ready: */}
+      {displayItems()}
       {/* {rewardNum === 0 ? displayMoves() : ''}
       {rewardNum === 1 ? displayItems() : ''}
       {rewardNum === 2 ? displayRunes() : ''} */}

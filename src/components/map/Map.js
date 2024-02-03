@@ -91,10 +91,9 @@ function Map() {
           {/* <div> {contextualState.current.completedLevels.map((lvl, index) => {
             return <div key={index}>lvl: {JSON.stringify(lvl)}</div> })}</div> */}
         </div>
-        <h3 className="text-sm">Party:</h3>
-        <div className="flex flex-wrap justify-between">
+        {/* <div className="flex flex-wrap justify-between"> */}
           <PartyMenu party={ourParty} type={'display'} />
-        </div>
+        {/* </div> */}
         {/* <div className="bg-green-500 rounded p-1 mb-1"> */}
           {/* #TODO: Implement inventory here */}
           {/* <h3 className="text-sm">Inventory</h3>

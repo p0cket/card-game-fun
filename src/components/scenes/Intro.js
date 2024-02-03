@@ -170,7 +170,6 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
             </motion.div>
-            <TreasureChest />
           </div>
           {inDebug ? (
             <>
@@ -228,6 +227,8 @@ const Intro = ({ dispatch }) => {
             <>
               {' '}
               <div>
+                <button>Credits:</button>
+                
                 Credits: (People who have supported the project)
                 <>splatfest in credits based on the team people backed</>
                 <>
