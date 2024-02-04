@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { executeMove } from '../../handlers/moveHandlers'
 
 function RenderCounter({ move, pal }) {
   const [showCounter, setShowCounter] = useState(false)
   const toggleShowCounter = () => setShowCounter(!showCounter)
+
 
   const counterDetail = (move, pal) => {
     const buttonStyle =
