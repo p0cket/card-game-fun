@@ -1,7 +1,7 @@
 import { motion, useAnimation } from 'framer-motion'
 import React, { useState } from 'react'
 import { swapPals } from '../../handlers/state/partyStateHandlers'
-import { ACTIONS, useDispatchContext } from '../../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { PLAYERS } from '../../consts/consts'
 
 function PartyMenu({
@@ -12,6 +12,8 @@ function PartyMenu({
   type,
   canSwitch = true,
 }) {
+  const state = useStateContext()
+  const inDebug = state.debug && state.debug.isOpen
   const [selectedOne, setSelectedOne] = useState()
   const [selectedTwo, setSelectedTwo] = useState()
   const selectPal = (pal, index) => {
@@ -199,6 +201,7 @@ function PartyMenu({
       <div>PartyMenu</div>
       {party.map((pal, index) => renderMonsterDetails(pal, index))}
       {canSwitch &&
+        inDebug &&
         (switchMode ? (
           <button onClick={toggleSwitchMode}>Switch Pal?</button>
         ) : (

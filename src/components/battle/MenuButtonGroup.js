@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
 import PropTypes from 'prop-types'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
 import { MeteorStrike } from '../../consts/allMoves'
@@ -8,8 +9,10 @@ import ItemMenuModal from '../common/ItemMenuModal'
 import { DIALOGS } from '../dialog/DialogManager'
 
 function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
+  
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
+  const inDebug = contextualState.debug && contextualState.debug.isOpen
   const [currentView, setCurrentView] = useState('menu')
   const [debugMenuOpen, setDebugMenuOpen] = useState(false)
 
@@ -43,6 +46,17 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       <div className="flex items-center justify-center flex-grow p-1 text-sm">
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
+    { inDebug &&  <div className="flex items-start">
+        {contextualState.game.player.energy} Energy
+        <div className="relative w-full h-4 ml-2 bg-gray-400">
+          <motion.div
+            className="bg-blue-500 h-full"
+            initial={{ height: '0%' }}
+            animate={{ height: `${Math.min(100, contextualState.game.player.energy)}%` }}
+            transition={{ duration: 0.5, ease: 'easeIn' }}
+          />
+        </div>
+      </div>}
       <div className="flex flex-grow justify-around items-center m-1 bg-[#5a7d2a]">
         <div className="grid grid-cols-2 grid-rows-2 w-full h-full bg-boy-green border border-gray-400 rounded-sm">
           <div
@@ -119,7 +133,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
     </div>
   )
   return (
-    <div className="w-full mx-2 relative">
+    <div className="w-full relative">
       {' '}
       {/* Add relative here for positioning the modal */}
       {currentView === 'menu' ? menuButtons() : attackButtons()}

@@ -31,6 +31,8 @@ import TreasureChest from '../visuals/TeasureChest'
 function Results({ experience = 100, pal, isBoss = false }) {
   const state = useStateContext()
   const dispatch = useDispatchContext()
+  const inDebug = state.debug && state.debug.isOpen
+  const damageToAdd = 5
 
   // get an array of attacks from your party (for adding dmg)
   const [selectedAttack, setSelectedAttack] = useState(null)
@@ -44,13 +46,13 @@ function Results({ experience = 100, pal, isBoss = false }) {
     setSelectedAttack(attackInfo)
   }
 
-  const confirmDamageIncrease = () => {
+  const confirmDamageIncrease = (damageBonus) => {
     if (!selectedAttack) return
     // Dispatch action to increase attack damage
     dispatch({
       type: ACTIONS.INCREASE_MOVE_DAMAGE,
       payload: {
-        additionalDamage: 5, // Assuming a fixed damage increase for simplicity
+        additionalDamage: damageBonus, // Assuming a fixed damage increase for simplicity
         ...selectedAttack,
       },
     })
@@ -294,7 +296,6 @@ function Results({ experience = 100, pal, isBoss = false }) {
     //   },
     // },
   ]
-
   // Define animation variants for Framer Motion
   const containerVariants = {
     hidden: { opacity: 0, x: -100 },
@@ -423,6 +424,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
   //     </div>
   //   )
   // }
+  //
   function displayModifications() {
     return (
       <div
@@ -430,7 +432,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
         className="modifications-container flex flex-col items-center p-4 bg-gray-800 rounded-lg shadow gap-2"
       >
         <h2 className="text-lg font-bold text-center">
-          Select an Attack to Increase its Damage
+          Select an Attack to Increase its Damage by {damageToAdd}
         </h2>
         <div className="flex flex-wrap justify-center gap-2">
           {attacksToChooseFrom.map((attackInfo, index) => (
@@ -439,20 +441,26 @@ function Results({ experience = 100, pal, isBoss = false }) {
               className="py-2 px-4 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
               onClick={() => handleAttackSelection(attackInfo)}
             >
-              {attackInfo.move.name} (Current Damage: {attackInfo.move.damage})
+              {` ${attackInfo.move.name}`}
+              <div>
+                {' '}
+                {`Damage: ${attackInfo.move.damage} -> ${
+                  attackInfo.move.damage + damageToAdd
+                }`}
+              </div>
             </button>
           ))}
         </div>
         <button
           className="mt-4 py-2 px-6 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
-          onClick={confirmDamageIncrease}
+          onClick={() => confirmDamageIncrease(damageToAdd)}
         >
           Confirm Increase
         </button>
       </div>
     )
   }
-
+/////
   const displayItems = () => {
     return (
       <div>
@@ -560,7 +568,9 @@ function Results({ experience = 100, pal, isBoss = false }) {
                   <img src={moveObj.pal.image} />
                   <div className="text-xs text-gray-200">
                     {' '}
-                    (party slot {moveObj.palIndex + 1})
+                    {inDebug && (
+                      <div>{`(party slot ${moveObj.palIndex + 1})`}</div>
+                    )}
                   </div>
                   <div>Uncommon</div>
                 </button>
@@ -642,12 +652,10 @@ function Results({ experience = 100, pal, isBoss = false }) {
       animate="visible"
     >
       <h2 className="text-center text-xl mb-4">Battle Results</h2>
-      <p className="mb-4 text-gray-300">{`${enemyDialog}`}</p>
+      <p className="mb-4 text-gray-300">{`"${enemyDialog}" -defeated opponent`}</p>
       <p className="mb-4 text-gray-500">{rewardDialog}</p>
       {/* TODO: decide on exp and gold reward */}
       {/* storytelling note: Matt and Trey's method - and so, as opposed to and then */}
-      {/* TODO: Add display of Modifications
-      {DisplayModifications()} */}
       {/* uncomment the 3 below when ready: */}
       {/* {displayItems()} */}
       {/* {displayModifications()} */}

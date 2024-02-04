@@ -28,7 +28,7 @@ const Victory = () => {
       </div> */}
       <div className="mt-6">
         <h2 className="text-2xl font-bold text-green-800">
-          Thanks for playing! Badges hopefully would be equipped in future runs.
+          Thanks for playing! In a future update, Badges hopefully can be equipped for bonus stats!
         </h2>
         <div className=" text-green-800 mb-4">-Pocket</div>
         <div className=" text-green-800">Elevation Badge</div>
@@ -45,7 +45,6 @@ const Victory = () => {
             Prize Option 3
           </button>
         </div> */}
-
         {inDebug && (
           <>
             Share with friends: Meet my Dream Team! 🐲🔥 Lv.15, 🌿🐉 Lv.12, 🌊🐍

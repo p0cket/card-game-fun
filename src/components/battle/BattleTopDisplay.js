@@ -186,15 +186,15 @@ export default function BattleTopDisplay() {
   }
 
   return (
-    <div className="flex px-2 mx-2 pb-1 justify-around bg-boy-green text-8px ">
+    <div className="flex px-2  pb-1 justify-around bg-boy-green text-8px w-full">
       <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
-        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
-          <div>
+        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow w-full">
+          <div className='w-full'>
             <div className="flex items-start text-2xl">
               {currentMon.name}
               <span className="text-xs text-gray-500">lvl{currentMon.lvl}</span>
             </div>
-            <div className="flex items-start">
+            <div className="flex items-start w-full">
               {currentMon.stats.hp}HP
               {/* <progress
                 id="health"
@@ -302,6 +302,11 @@ export default function BattleTopDisplay() {
           src={currentMon.image}
           alt="Your Chibipal"
           // className={`w-48 h-48`}
+          style={{
+            width: '200px',
+            height: '200px',
+          }}
+
 
         />
         {/* <motion.img

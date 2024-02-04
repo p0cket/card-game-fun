@@ -168,7 +168,7 @@ const Intro = ({ dispatch }) => {
               <img src={ChibipalsLogo} alt="pal logo" />
               <div>友達を殺す</div>
               <div className="text-sm">Plausibly Sentient Monster Slayer</div>
-              <div className="text-sm text-green-300">Friendship Edition</div>
+              <div className="text-sm text-green-300">Friendship Edition Demo</div>
               <div>友情編</div>
             </motion.div>
             {/* <Cube /> */}

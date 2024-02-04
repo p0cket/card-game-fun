@@ -11,6 +11,8 @@ import bg1 from './../../assets/backgrounds/bg1.png'
 import TooltipButton from '../common/Tooltip'
 
 function BattleBotDisplay({ ourCurrentMon }) {
+  const state = useStateContext()
+  const inDebug = state.debug && state.debug.isOpen
   const [showPassiveTooltip, setShowPassiveTooltip] = useState(false)
   const [prevHP, setPrevHP] = useState(ourCurrentMon.stats.hp)
   const [healthWidth, setHealthWidth] = useState(100) // Initially set to 100%
@@ -73,7 +75,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
   }, [ourCurrentMon.status])
 
   return (
-    <div className="flex px-2 mx-2 justify-around bg-boy-green text-8px">
+    <div className="flex px-2 justify-around bg-boy-green text-8px w-full">
       <div
         className="flex flex-col items-center flex-grow"
         style={{
@@ -92,11 +94,15 @@ function BattleBotDisplay({ ourCurrentMon }) {
           src={ourCurrentMon.image}
           alt="Your Chibipal"
           // className={`w-48 h-48`}
+          style={{
+            width: '200px',
+            height: '200px',
+          }}
         />
       </div>
-      <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
-        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow">
-          <div>
+      <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen ">
+        <div className="flex flex-col items-start bg-boy-lightgreen flex-grow w-full">
+          <div className="w-full">
             <div className="flex items-start text-2xl">
               {ourCurrentMon.name}
               <span className="text-xs text-gray-500">
@@ -113,13 +119,19 @@ function BattleBotDisplay({ ourCurrentMon }) {
                   transition={{ duration: 0.5, ease: 'easeIn' }}
                 />
               </div>
-              {/* <progress
-                id="health"
-                value={ourCurrentMon.stats.hp}
-                max={ourCurrentMon.stats.max_hp}
-                className="bg-boy-green"
-              /> */}
             </div>
+         {inDebug &&   <div className="flex items-start">
+              {ourCurrentMon.stats.hp}HP
+              <div className="relative w-full h-4 ml-2 bg-gray-400">
+                 <motion.div
+                  className="bg-boy-extra-green h-full"
+                  initial={{ width: '0%' }}
+                  animate={{ width: `${Math.max(0, healthWidth - 100)}%` }}
+                  transition={{ duration: 0.5, ease: 'easeIn' }}
+                  style={{ opacity: healthWidth > 100 ? 1 : 0 }}
+                />
+              </div>
+            </div>}
           </div>
           <div>
             <div>

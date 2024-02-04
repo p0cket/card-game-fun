@@ -1,11 +1,11 @@
 import React from 'react'
-import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../../MainContext'
 import campfireImg from '../../assets/eventImages/campfirePXL.png'
 import {
   SCENES,
   updateLevel,
   updateScene,
-} from '../../handlers/sceneHandlers_new'
+} from '../../../handlers/sceneHandlers_new'
 import palHealingCenterImg from '../../assets/eventImages/rest/PalHealingCenter.png'
 import palHealingCenterImg2 from '../../assets/eventImages/rest/PalHealingCenter2.png'
 import palHealingCenterImg3 from '../../assets/eventImages/rest/PalHealingCenter3.png'
@@ -26,12 +26,12 @@ const randomizeImage = () => {
 
 const randomizedImage = randomizeImage()
 
-const Rest = () => {
+const IncreaseDamage = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
   const healToFullHealth = () => {
     dispatch({
-      // type: ACTIONS.SELECT_REST,
+      // type: ACTIONS.SELECT_EventIncrease,
       type: ACTIONS.HEAL_PAL_FULL,
       payload: {
         pal: 'loremIpsmon',
@@ -98,7 +98,7 @@ const Rest = () => {
   )
 }
 
-export default Rest
+export default IncreaseDamage
 
 // Campfire version
 {

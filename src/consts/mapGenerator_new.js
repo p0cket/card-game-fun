@@ -128,7 +128,8 @@ export const gymLevels = [
       },
       {
         id: '2b',
-        description: 'Take a moment to strategize',
+        // description: 'Take a moment to strategize',
+        description: 'Rest and heal up',
         scene: SCENES.REST,
       },
     ],
@@ -168,7 +169,7 @@ export const gymLevels = [
         scene: SCENES.BATTLE,
         trainer: 'Gym Veteran',
       },
-      { id: '5b', description: 'Catch your breath', scene: SCENES.REST },
+      { id: '5b', description: 'Catch your breath and rest', scene: SCENES.REST },
     ],
   },
   {
