@@ -136,7 +136,7 @@ export const dmgPhase = (state, attackPayload) => {
       let finalDmg = move.damage
       console.log(`AI hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`)
       // #TODO:  consolidate these two
-      finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      // finalDmg = ifWeakDoLessDamage(user, finalDmg)
       newState = lowerAttackDamageInState(newState, user, finalDmg)
       console.log(`dmg is ${finalDmg} after ifWeakDoLessDamage`)
 
@@ -203,10 +203,11 @@ const ifWeakDoLessDamage = (userPal, dmg) => {
   if (userPal.status && userPal.status.weak) {
     console.log(
       `Applying weakness, reducing damage (${dmg}) by ${
-        userPal.status.weak.amt
-      }. Dmg is now ${dmg - userPal.status.weak.amt}`,
+        userPal.status.weak.effect
+      }. Dmg is now ${dmg - userPal.status.weak.effect}`,
     )
-    dmg -= userPal.status.weak.amt
+    //one
+    dmg -= userPal.status.weak.effect
   }
   console.log(`dmg result: ifWeakDoLessDamage: ${dmg}`)
   return dmg
@@ -217,8 +218,8 @@ const lowerAttackDamageInState = (newState, userPal, newDmgAmt) => {
   if (userPal.status && userPal.status.weak) {
     console.log(
       `Applying weakness, reducing damage (${newDmgAmt}) by ${
-        userPal.status.weak.amt
-      }. newDmgAmt is now ${newDmgAmt - userPal.status.weak.amt}`,
+        userPal.status.weak.effect
+      }. newDmgAmt is now ${newDmgAmt - userPal.status.weak.effect}`,
     )
     // newDmgAmt -= userPal.status.weak.amt
     newState = {
@@ -227,7 +228,7 @@ const lowerAttackDamageInState = (newState, userPal, newDmgAmt) => {
         ...newState.attack,
         move: {
           ...newState.attack.move,
-          damage: newDmgAmt - userPal.status.weak.amt,
+          damage: newDmgAmt - userPal.status.weak.effect,
         },
       },
     }

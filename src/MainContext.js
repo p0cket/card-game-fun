@@ -16,6 +16,8 @@ import {
 } from './handlers/sceneHandlers_new'
 // import { SCENES } from './scenes'
 import {
+  clearEnemyPalStatuses,
+  clearUserPartyStatuses,
   healAIPal,
   healHumanPal,
   setEnemyPalEnergyToMax,
@@ -27,6 +29,7 @@ import {
   addAttackToPalInState,
   addAttackToState,
   addMoveToPalInState,
+  updateMoveOnPal,
 } from './handlers/state/attackStateHandlers'
 import {
   logLevelsCompletedData,
@@ -54,6 +57,7 @@ export const ACTIONS = {
   ADD_RUNE: 'ADD_RUNE',
   ADD_ITEM: 'ADD_ITEM',
   ADD_MOVE: 'ADD_MOVE',
+  INCREASE_MOVE_DAMAGE: 'INCREASE_MOVE_DAMAGE',
 
   USE_ITEM: 'USE_ITEM',
 
@@ -166,6 +170,9 @@ export const MainProvider = ({ children }) => {
             nextLevelState = logLevelsCompletedData(nextLevelState)
             nextLevelState = setEnemyPalEnergyToMax(nextLevelState)
             nextLevelState = setEnemyPalHPToMax(nextLevelState)
+            nextLevelState = clearEnemyPalStatuses(nextLevelState)
+            // clear our pal's statuses before the next level as well
+            nextLevelState = clearUserPartyStatuses(nextLevelState)
             break // This will prevent fall-through and continue with the rest of the function after the switch
           // Other cases can be added here as needed
         }
@@ -432,6 +439,19 @@ export const MainProvider = ({ children }) => {
       // }
       // return stateWithHealth
       // break
+      case ACTIONS.INCREASE_MOVE_DAMAGE: {
+        const { palIndex, moveIndex, additionalDamage } = action.payload;
+        const updatedState = {
+          ...state,
+          userParty: state.userParty.map((pal, index) => {
+            if (index === palIndex) {
+              return updateMoveOnPal(pal, moveIndex, additionalDamage);
+            }
+            return pal;
+          }),
+        };
+        return updatedState;
+      }
       case ACTIONS.USE_ITEM:
         console.log('Reducer USE_ITEM:', action)
         // Check for the effect property directly in the payload

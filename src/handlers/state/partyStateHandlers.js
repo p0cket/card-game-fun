@@ -42,6 +42,7 @@ export const updateHumanStateWithParty = (state, party) => {
   return updatedParty
 }
 
+//Apply level up bonus to userParty pal, new hp, new max hp
 export const applyLevelUpBonus = (state) => {
   const levelIncrease = Math.floor(Math.random() * 8)
   const levelIncreaseBonus = 4
@@ -60,6 +61,7 @@ export const addToUserPartyHP = (state, amt) => {
       stats: {
         ...updatedParty[0].stats,
         hp: updatedParty[0].stats.hp + amt,
+        max_hp: updatedParty[0].stats.max_hp + amt,
       },
     }
   }
@@ -100,19 +102,19 @@ export const addToUserPartyLvl = (state, amt) => {
   }
 }
 
-export const adToUserPartyLvl = (state, amt) => {
-  state = {
-    ...state,
-    userParty: {
-      ...state.userParty,
-      [0]: {
-        ...state.userParty[0],
-        lvl: state.userParty[0].lvl + amt,
-      },
-    },
-  }
-  return state
-}
+// export const adToUserPartyLvl = (state, amt) => {
+//   state = {
+//     ...state,
+//     userParty: {
+//       ...state.userParty,
+//       [0]: {
+//         ...state.userParty[0],
+//         lvl: state.userParty[0].lvl + amt,
+//       },
+//     },
+//   }
+//   return state
+// }
 
 export const swapPals = (
   state,

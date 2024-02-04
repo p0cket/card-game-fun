@@ -9,6 +9,7 @@ const GeneralPopup = (props) => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
   const [showCounter, setShowCounter] = useState(false)
+  const inDebug = state.debug && state.debug.isOpen
 
   // Or use the actual trigger condition
   const { isOpen, popupType, attack, ourCurrentMon, canUse, previousDialog } =
@@ -47,7 +48,7 @@ const GeneralPopup = (props) => {
             <div className="w-6 h-6 bg-boy-green mr-1">{'!'}</div>
             <div className="font-bold text-white flex justify-between w-full">
               <div>
-                {attack.name} ({attack.type})
+                {attack.name} {inDebug && attack.type}
               </div>{' '}
               <div onClick={() => closeDialogPopup()}>x</div>
             </div>
@@ -138,20 +139,26 @@ const GeneralPopup = (props) => {
   )
 ))} */}
 
-              {moves.map((move, index) =>
-                move.counter ? (
-                  <div
-                    className="cursor-pointer text-sm text-white"
-                    key={index}
-                    onClick={() =>
-                      showTheAttack(move.counter, dispatch, true, ourCurrentMon)
-                    }
-                  >
-                    {move.name}
-                  </div>
-                ) : (
-                  <div key={index}>No Counter</div>
-                ),
+              {moves.map(
+                (move, index) =>
+                  move.counter ? (
+                    <div
+                      className="cursor-pointer text-sm text-white"
+                      key={index}
+                      onClick={() =>
+                        showTheAttack(
+                          move.counter,
+                          dispatch,
+                          true,
+                          ourCurrentMon,
+                        )
+                      }
+                    >
+                      {move.name}
+                    </div>
+                  ) : (
+                    <div key={index}>No Counter</div>
+                  ),
                 //null
               )}
             </div>

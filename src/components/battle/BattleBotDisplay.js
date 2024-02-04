@@ -54,35 +54,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
     const newWidth = (ourCurrentMon.stats.hp / ourCurrentMon.stats.max_hp) * 100
     setHealthWidth(Math.max(0, newWidth))
   }, [ourCurrentMon.stats.hp, ourCurrentMon.stats.max_hp])
-  // useEffect(() => {
-  //   if (ourCurrentMon.stats.hp < prevHP) {
-  //     // Trigger shake animation
-  //     controls.start({
-  //       x: [0, -5, 5, -5, 5, 0],
-  //       transition: { duration: 0.5 },
-  //       filter: ['brightness(100%)', 'brightness(0%)', 'brightness(100%)'],
-  //     })
-  //   }
-  //   setPrevHP(ourCurrentMon.stats.hp)
-  // }, [ourCurrentMon.stats.hp, controls, prevHP])
-
-  // useEffect(() => {
-  //   // Calculate the new width percentage based on current HP vs. max HP
-  //   const newWidth = (ourCurrentMon.stats.hp / ourCurrentMon.stats.max_hp) * 100
-  //   setHealthWidth(Math.max(0, newWidth)) // Ensure width doesn't go below 0
-  // }, [ourCurrentMon.stats.hp, ourCurrentMon.stats.max_hp])
-
-  // const yourVariants = {
-  //   visible: {
-  //     x: [0, 2, -3, 5, -1, 5, -3, 1],
-  //     y: [0, 3, -1, 4],
-  //     transition: {
-  //       // delay: 0.5,
-  //       duration: 15,
-  //       yoyo: Infinity,
-  //     },
-  //   },
-  // }
+  
   const toggleTooltip = (key) => {
     setShowTooltip((prevState) => ({
       ...prevState,
@@ -119,6 +91,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
           // variants={yourVariants}
           src={ourCurrentMon.image}
           alt="Your Chibipal"
+          // className={`w-48 h-48`}
         />
       </div>
       <div className="flex flex-col items-start px-2 mx-0 flex-grow bg-boy-lightgreen">
@@ -185,7 +158,7 @@ function BattleBotDisplay({ ourCurrentMon }) {
                 }
               })}
             </div>
-            <ul className="text-sm flex flex-col justify-start align-start">
+            <ul className="text-sm flex flex-col justify-start align-start mt-1">
               {ourCurrentMon.passives && (
                 <TooltipButton
                   title="Passive"

@@ -32,6 +32,47 @@ function Results({ experience = 100, pal, isBoss = false }) {
   const state = useStateContext()
   const dispatch = useDispatchContext()
 
+  // get an array of attacks from your party (for adding dmg)
+  const [selectedAttack, setSelectedAttack] = useState(null)
+  const [attacksToChooseFrom, setAttacksToChooseFrom] = useState([])
+  useEffect(() => {
+    const attacks = getRandomAttacksFromParty(state.userParty)
+    setAttacksToChooseFrom(attacks)
+  }, [state.userParty])
+  const handleAttackSelection = (attackInfo) => {
+    // Implement logic to select an attack
+    setSelectedAttack(attackInfo)
+  }
+
+  const confirmDamageIncrease = () => {
+    if (!selectedAttack) return
+    // Dispatch action to increase attack damage
+    dispatch({
+      type: ACTIONS.INCREASE_MOVE_DAMAGE,
+      payload: {
+        additionalDamage: 5, // Assuming a fixed damage increase for simplicity
+        ...selectedAttack,
+      },
+    })
+    const randomizedTrainer = randomlySelectTrainer(allTrainers)
+    console.log('Continue to next scene')
+    dispatch({
+      type: ACTIONS.CHANGE_SCENE,
+      payload: {
+        screen: SCENES.MAP,
+        details: {
+          type: 'win',
+          trainer: randomizedTrainer,
+          area: 'tranquil forest',
+          difficulty: 'easy',
+          achievement: 'flawless victory',
+          VIP: 'your pal',
+          EXP: `Difficulty * lvl of monster * 10`,
+        },
+      },
+    })
+  }
+
   const [selectedRune, setSelectedRune] = useState(null)
   const [selectedMove, setSelectedMove] = useState(null)
   const [selectedItem, setSelectedItem] = useState(null)
@@ -47,7 +88,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
   useEffect(() => {
     setEnemyDialog(randomlySelect(enemyDefeatedResponses))
     setRewardDialog(randomlySelect(rewardDialogs))
-    setRewardNum(Math.floor(Math.random() * 2))
+    setRewardNum(Math.floor(Math.random() * 3))
     const moveArr = generateMovesToChooseFrom(
       state.userParty,
       movesToChooseFrom,
@@ -99,6 +140,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
     return unlearntMoves
   }
 
+  // get an array of unlearnt moves for options to choose from
   function generateMovesToChooseFrom(userParty, movePool) {
     const movesToChooseFrom = []
     const selectedMoves = new Set() // Track selected moves to ensure uniqueness.
@@ -141,6 +183,39 @@ function Results({ experience = 100, pal, isBoss = false }) {
 
     console.log('movesToChooseFrom generated:', movesToChooseFrom)
     return movesToChooseFrom
+  }
+
+  // get an array of attacks from your party (for adding dmg)
+  function getRandomAttacksFromParty(userParty) {
+    const attacksToChooseFrom = []
+    const selectedAttacks = new Set()
+
+    while (
+      attacksToChooseFrom.length < 3 &&
+      selectedAttacks.size < userParty.flatMap((pal) => pal.moves).length
+    ) {
+      const randomPalIndex = Math.floor(Math.random() * userParty.length)
+      const randomPal = userParty[randomPalIndex]
+      if (randomPal.moves.length === 0) {
+        continue // Skip if the pal has no moves
+      }
+
+      const randomMoveIndex = Math.floor(Math.random() * randomPal.moves.length)
+      const randomMove = randomPal.moves[randomMoveIndex]
+
+      if (!selectedAttacks.has(randomMove.name)) {
+        selectedAttacks.add(randomMove.name) // Mark this move as selected.
+        attacksToChooseFrom.push({
+          move: randomMove,
+          pal: randomPal,
+          palIndex: randomPalIndex,
+          moveIndex: randomMoveIndex,
+        })
+      }
+    }
+
+    console.log('Attacks to choose from generated:', attacksToChooseFrom)
+    return attacksToChooseFrom
   }
 
   // case ACTIONS.ADD_MOVE:
@@ -327,36 +402,52 @@ function Results({ experience = 100, pal, isBoss = false }) {
     })
   }
 
-  function DisplayModifications() {
+  // function displayModifications() {
+  //   return (
+  //     <div
+  //       id="modifications-container"
+  //       className="modifications-container gap-2"
+  //     >
+  //       <div>
+  //         <h2>Select an Attack to Increase its Damage</h2>
+  //         {attacksToChooseFrom.map((attackInfo, index) => (
+  //           <button
+  //             key={index}
+  //             onClick={() => handleAttackSelection(attackInfo)}
+  //           >
+  //             {attackInfo.move.name} (Current Damage: {attackInfo.move.damage})
+  //           </button>
+  //         ))}
+  //         <button onClick={confirmDamageIncrease}>Confirm Increase</button>
+  //       </div>
+  //     </div>
+  //   )
+  // }
+  function displayModifications() {
     return (
       <div
         id="modifications-container"
-        className="modifications-container gap-2"
+        className="modifications-container flex flex-col items-center p-4 bg-gray-800 rounded-lg shadow gap-2"
       >
-        <h2>Available Modifications</h2>
+        <h2 className="text-lg font-bold text-center">
+          Select an Attack to Increase its Damage
+        </h2>
+        <div className="flex flex-wrap justify-center gap-2">
+          {attacksToChooseFrom.map((attackInfo, index) => (
+            <button
+              key={index}
+              className="py-2 px-4 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
+              onClick={() => handleAttackSelection(attackInfo)}
+            >
+              {attackInfo.move.name} (Current Damage: {attackInfo.move.damage})
+            </button>
+          ))}
+        </div>
         <button
-          className="py-2 px-4 m-1 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
-          id="power-boost"
-          // onClick={() => handleModificationSelect('power-boost')}
+          className="mt-4 py-2 px-6 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
+          onClick={confirmDamageIncrease}
         >
-          <h3>Power Boost</h3>
-          {/* <p className='text-xs'>Increases the move's damage.</p> */}
-        </button>
-        <button
-          className="py-2 px-4 m-1 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
-          id="speed-boost"
-          // onClick={() => handleModificationSelect('speed-boost')}
-        >
-          <h3>Speed Boost</h3>
-          {/* <p className='text-xs'>Increases the move's speed.</p> */}
-        </button>
-        <button
-          className="py-2 px-4 m-1 bg-boy-green text-white rounded hover:bg-green-700 transition duration-300"
-          id="energy-saver"
-          // onClick={() => handleModificationSelect('energy-saver')}
-        >
-          <h3>Energy Saver</h3>
-          {/* <p className='text-xs'>Reduces the move's energy cost.</p> */}
+          Confirm Increase
         </button>
       </div>
     )
@@ -558,10 +649,14 @@ function Results({ experience = 100, pal, isBoss = false }) {
       {/* TODO: Add display of Modifications
       {DisplayModifications()} */}
       {/* uncomment the 3 below when ready: */}
-      {displayItems()}
-      {/* {rewardNum === 0 ? displayMoves() : ''}
+      {/* {displayItems()} */}
+      {/* {displayModifications()} */}
+      {/* {displayRunes()} */}
+      {rewardNum === 0 ? displayMoves() : ''}
       {rewardNum === 1 ? displayItems() : ''}
-      {rewardNum === 2 ? displayRunes() : ''} */}
+      {rewardNum === 2 ? displayModifications() : ''}
+      {rewardNum === 3 ? displayRunes() : ''}
+
       {/* TODO: Add display of Runes */}
     </motion.div>
   )

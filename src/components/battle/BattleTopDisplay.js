@@ -63,6 +63,7 @@ export default function BattleTopDisplay() {
   }, [currentMon.stats.hp, controls, prevHP])
 
   useEffect(() => {
+    console.log(`health changed to ${currentMon.stats.hp}. max hp is ${currentMon.stats.max_hp}.`)
     const newWidth = (currentMon.stats.hp / currentMon.stats.max_hp) * 100
     setHealthWidth(Math.max(0, newWidth))
   }, [currentMon.stats.hp, currentMon.stats.max_hp])
@@ -300,6 +301,8 @@ export default function BattleTopDisplay() {
           // variants={yourVariants}
           src={currentMon.image}
           alt="Your Chibipal"
+          // className={`w-48 h-48`}
+
         />
         {/* <motion.img
           // className="w-45 h-38"

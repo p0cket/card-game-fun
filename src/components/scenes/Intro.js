@@ -28,6 +28,7 @@ import CanvasSquare from '../canvas/CanvasSquare'
 import Tilemap from '../canvas/Tilemap'
 import TreasureChest from '../visuals/TeasureChest'
 import SpinningBall from '../visuals/SpinningBall'
+import Cube from '../3D/Cube'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -170,6 +171,7 @@ const Intro = ({ dispatch }) => {
               <div className="text-sm text-green-300">Friendship Edition</div>
               <div>友情編</div>
             </motion.div>
+            {/* <Cube /> */}
           </div>
           {inDebug ? (
             <>
@@ -196,7 +198,7 @@ const Intro = ({ dispatch }) => {
                 className="absolute"
                 // style={{ bottom: '102px', right: '163px' }}
                 style={{ bottom: '25%', right: '38%' }} // Example using percentages
-                >
+              >
                 {' '}
                 {/* Adjust these values */}
                 <SpinningBall />
@@ -228,7 +230,6 @@ const Intro = ({ dispatch }) => {
               {' '}
               <div>
                 <button>Credits:</button>
-                
                 Credits: (People who have supported the project)
                 <>splatfest in credits based on the team people backed</>
                 <>

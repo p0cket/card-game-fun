@@ -354,9 +354,9 @@ export const FeatherGlide = {
   effect: {
     description:
       'Glide gracefully to deliver a swift and graceful physical attack',
-    chance: 10,
-    result: 'stun',
-    duration: '1 turn', // Added duration
+    // chance: 10,
+    // result: 'stun',
+    // duration: '1 turn', // Added duration
     amt: 12, // Added amt (assuming 20 as an example value)
   },
   priority: 'medium',

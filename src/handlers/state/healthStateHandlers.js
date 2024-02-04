@@ -97,7 +97,6 @@ export const healPal = (pal, healAmount) => {
 }
 
 export const setPlayerPalHPToMax = (state) => {
-  // export const healHumanPal = (ourState, healAmount) => {
   console.log('ourState.userParty[0]:', state.userParty[0])
   state = {
     ...state,
@@ -136,11 +135,11 @@ export const setEnemyPalEnergyToMax = (state) => {
 
 export const setEnemyPalHPToMax = (state) => {
   console.warn(`setEnemyPalHPToMax: state`, state)
-  const randomizedLevel = Math.floor(Math.random() * 12)  + state.current.mapLevel * 10
+  const randomizedLevel =
+    Math.floor(Math.random() * 12) + state.current.mapLevel * 10
   console.log(`setEnemyPalHPToMax: randomizedLevel`, randomizedLevel)
   // set hp to max
   state = {
-    // state.opponent.monsters[0].stats.hp
     ...state,
     opponent: {
       ...state.opponent,
@@ -150,12 +149,41 @@ export const setEnemyPalHPToMax = (state) => {
           stats: {
             ...state.opponent.monsters[0].stats,
             hp: state.opponent.monsters[0].stats.max_hp + randomizedLevel,
+            max_hp: state.opponent.monsters[0].stats.max_hp + randomizedLevel,
           },
           lvl: randomizedLevel,
         },
       ],
     },
   }
+  return state
+}
 
+export const clearEnemyPalStatuses = (state) => {
+  console.warn(`clearEnemyPalStatuses: state`, state)
+  // Clear statuses
+  state = {
+    ...state,
+    opponent: {
+      ...state.opponent,
+      monsters: state.opponent.monsters.map((monster) => ({
+        ...monster,
+        status: {},
+      })),
+    },
+  }
+  return state
+}
+
+export const clearUserPartyStatuses = (state) => {
+  console.warn(`clearUserPartyStatuses: state`, state)
+  // Clear statuses
+  state = {
+    ...state,
+    userParty: state.userParty.map((partyMember) => ({
+      ...partyMember,
+      status: {},
+    })),
+  }
   return state
 }
