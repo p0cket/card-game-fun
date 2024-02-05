@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import NewCanvas from './NewCanvas'
 import mapData from '../../assets/maps/mapTest3.json'
-import tsOuterworld from '../../assets/tilesets/ts_outerworld.png'
+// import tsOuterworld from '../../assets/tilesets/ts_outerworld.png'
 
 const GameMap = () => {
   const [tilesetImage, setTilesetImage] = useState(new Image())
@@ -10,7 +10,7 @@ const GameMap = () => {
     // Assuming your tileset is correctly referenced and imported
     const image = new Image()
     image.onload = () => setTilesetImage(image)
-    image.src = tsOuterworld
+    // image.src = tsOuterworld
   }, [])
 
   const draw = (ctx) => {
