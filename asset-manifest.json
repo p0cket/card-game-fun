@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/card-game-fun/static/css/main.6768e382.css",
-    "main.js": "/card-game-fun/static/js/main.4a2a4d3b.js",
+    "main.css": "/card-game-fun/static/css/main.02cc07d9.css",
+    "main.js": "/card-game-fun/static/js/main.88c230d3.js",
     "static/media/Moltenscale.png": "/card-game-fun/static/media/Moltenscale.95de0a01601e1506c4f6.png",
+    "static/media/bg2testBIG.png": "/card-game-fun/static/media/bg2testBIG.44195fe2a04959f3e99c.png",
     "static/media/Squirrely.png": "/card-game-fun/static/media/Squirrely.7f404466657a69445d35.png",
     "static/media/PalHealingCenter5.png": "/card-game-fun/static/media/PalHealingCenter5.c3b5790a0e07977e6580.png",
     "static/media/PalHealingCenter.png": "/card-game-fun/static/media/PalHealingCenter.a2629b4cd8e31e053968.png",
@@ -15,6 +16,7 @@
     "static/media/mart1.png": "/card-game-fun/static/media/mart1.2a123c6d25efba8ee293.png",
     "static/media/SelectStarterImg.png": "/card-game-fun/static/media/SelectStarterImg.2f07fc23fc3f6678e05b.png",
     "static/media/Luminowl_pxl.png": "/card-game-fun/static/media/Luminowl_pxl.568639ad3a53b7d598a7.png",
+    "static/media/berocroseal_pxl2.png": "/card-game-fun/static/media/berocroseal_pxl2.0d79c67dd80c7b04507e.png",
     "static/media/campfirePXL.png": "/card-game-fun/static/media/campfirePXL.5b028f1460e5be394dd8.png",
     "static/media/mart3.png": "/card-game-fun/static/media/mart3.7009ba55f3a6a81fb97c.png",
     "static/media/Umbrabunny_pxl.png": "/card-game-fun/static/media/Umbrabunny_pxl.2cb6ac533c253a57b7dd.png",
@@ -30,12 +32,13 @@
     "static/media/item3.png": "/card-game-fun/static/media/item3.6db6c9409e82adb674b3.png",
     "static/media/emblem_bug2.png": "/card-game-fun/static/media/emblem_bug2.74438ed513208645b3d0.png",
     "static/media/Chibipals_Logo_only_2_n.png": "/card-game-fun/static/media/Chibipals_Logo_only_2_n.229662dff15e6d8022a9.png",
+    "static/media/mapTiledTest2.tmj": "/card-game-fun/static/media/mapTiledTest2.e01b39df7897db8ba7ca.tmj",
     "index.html": "/card-game-fun/index.html",
-    "main.6768e382.css.map": "/card-game-fun/static/css/main.6768e382.css.map",
-    "main.4a2a4d3b.js.map": "/card-game-fun/static/js/main.4a2a4d3b.js.map"
+    "main.02cc07d9.css.map": "/card-game-fun/static/css/main.02cc07d9.css.map",
+    "main.88c230d3.js.map": "/card-game-fun/static/js/main.88c230d3.js.map"
   },
   "entrypoints": [
-    "static/css/main.6768e382.css",
-    "static/js/main.4a2a4d3b.js"
+    "static/css/main.02cc07d9.css",
+    "static/js/main.88c230d3.js"
   ]
 }
