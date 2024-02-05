@@ -24,12 +24,12 @@ import NotEnoughEnergy from './components/dialog/NotEnoughEnergy'
 import DialogManager, { DIALOGS } from './components/dialog/DialogManager'
 import { startingDataOld } from './consts/startingData'
 import mixpanel from 'mixpanel-browser'
-
-
-
+import Victory from './components/scenes/Victory'
+import GameMap from './components/canvas/GameMap'
 
 const message = 'intro message'
-mixpanel.init('0fb23b493c97c7adebe65da13eae29eb', {//c4fe5b40d30af0dd541fff1414cf8f07
+mixpanel.init('0fb23b493c97c7adebe65da13eae29eb', {
+  //c4fe5b40d30af0dd541fff1414cf8f07
   debug: true,
   track_pageview: true,
   persistence: 'localStorage',
@@ -55,9 +55,9 @@ export default function App() {
         dispatch({ type: ACTIONS.TOGGLE_DEBUG })
       }
     }
-  
+
     document.addEventListener('keydown', handleKeyDown)
-  
+
     // Clean up to avoid memory leak
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
@@ -93,6 +93,8 @@ export default function App() {
         {/* Dialogue goes here and passes state in or runs from useReducer state somehow */}
         {/* <DialoguePopup message={message} /> */}
         {/* <NotEnoughEnergy /> */}
+        {/* toggle this for seeing testing the victory screen  */}
+        {/* <Victory /> */}
         {state.dialog ? <DialogManager current={state.dialog.type} /> : ''}
         <GeneralPopup message={message} />
         {/* <SpiralTransition delay={1} /> */}

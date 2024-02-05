@@ -45,10 +45,10 @@ const Victory = () => {
         <div className=" text-green-800 mb-4">-Pocket</div>
         <div className=" text-green-800">Elevation Badge</div>
         <img src={emblemBug} />
-        <div>
+        <div className="text-gray-800">
           <div>Youve discovered some lore:</div>
           <div className="lore-title font-bold">{generatedLore.title}</div>
-          <div className="lore-description">{generatedLore.description}</div>
+          <div className="lore-description">{`"${generatedLore.description}"`}</div>
         </div>
         {/* <p className="font-semibold text-green-700 mb-2">Select your prize:</p>
         <div className="flex flex-col space-y-4">
@@ -73,7 +73,7 @@ const Victory = () => {
             <div>Donate if you like the game, and Ill make it better :) </div>
           </>
         )}
-        <div>No Chibipals were harmed in the creation of this game.</div>
+        <div className="text-gray-400">No Chibipals were harmed in the creation of this game.</div>
       </div>
     </div>
   )

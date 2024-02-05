@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 // @TODO: Add typewriter effect to text
 import '../common/Button.css'
 import { AnimatePresence } from 'framer-motion'
+import mapTest from '../../assets/maps/mapTiledTest2.tmj'
 
 import Dialog from '../common/Dialog'
 import ThemedButton from '../common/ThemedButton'
@@ -29,6 +30,9 @@ import Tilemap from '../canvas/Tilemap'
 import TreasureChest from '../visuals/TeasureChest'
 import SpinningBall from '../visuals/SpinningBall'
 import Cube from '../3D/Cube'
+import NewCanvas from '../canvas/NewCanvas'
+import TopDownTest from '../canvas/TopDownTest'
+import GameMap from '../canvas/GameMap'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -49,6 +53,7 @@ const Intro = ({ dispatch }) => {
   const isNewGamePlus =
     contextualState.userData && contextualState.userData.newGamePlus
   // const newGamePlus = contextualState.newGamePlus
+  //Canvas stuff
 
   const loadNextLevel = () => {
     console.log(`func: loadNextLevel()`)
@@ -168,20 +173,18 @@ const Intro = ({ dispatch }) => {
               <img src={ChibipalsLogo} alt="pal logo" />
               <div>友達を殺す</div>
               <div className="text-sm">Plausibly Sentient Monster Slayer</div>
-              <div className="text-sm text-green-300">Friendship Edition Demo</div>
+              <div className="text-sm text-green-300">
+                Friendship Edition Demo
+              </div>
               <div>友情編</div>
             </motion.div>
             {/* <Cube /> */}
           </div>
+          {inDebug && <TopDownTest />} {/* <GameMap  /> */}
           {inDebug ? (
             <>
-              <CanvasSquare />
-              <Tilemap
-                src="path/to/your/tilemap.json"
-                tilesetSrc="path/to/your/tileset/image.png"
-                tileWidth={32} // Adjust based on your tileset
-                tileHeight={32} // Adjust based on your tileset
-              />{' '}
+              {/* <CanvasSquare /> */}
+              {/* <NewCanvas draw={draw} width={1024} height={576} /> */}
             </>
           ) : (
             ''
