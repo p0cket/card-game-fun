@@ -140,7 +140,23 @@ export const placeholderTrainer = {
 }
 
 export const bossBarry = {
-  name: 'Boss Barry',
+  name: 'Gym Leader Barry',
+  reward: {
+    experience: 150,
+    currency: 300,
+    items: [{ name: 'dragon Candy', quantity: 2 }],
+  },
+  monsters: [
+    MoltenScale,
+  ],
+  dialogue: {
+    enter: 'Prepare to be crushed under the weight of my mighty dragon!',
+    win: "You're no match for my boulders!",
+    lose: "You've chipped away at my confidence. Well done.",
+  },
+}
+export const bossSebastian = {
+  name: 'Gym Leader Sebastian',
   reward: {
     experience: 150,
     currency: 300,

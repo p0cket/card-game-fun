@@ -83,9 +83,9 @@ function Map() {
   }
   return (
     <div className='flex justify-center'>
-      <div className="font-[silkscreen] text-white m-1 text-center max-w-[500px]">
+      <div className="font-[silkscreen] text-white m-1 text-center">
         <div className="bg-boy-green rounded p-1 mb-1">
-          <h2 className="text-2xl mb-1">Map to the top</h2>
+          <h2 className="text-2xl mb-1">Can you defeat the Gym Leader?</h2>
           {/* <SimpleLevelList levels={levels} /> */}
           <SimpleLevelList levels={gymLevels} />
           {/* <div> {contextualState.current.completedLevels.map((lvl, index) => {

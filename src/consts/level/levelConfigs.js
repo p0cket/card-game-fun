@@ -1,6 +1,6 @@
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import { SCENES } from '../../handlers/sceneHandlers_new'
-import { allTrainers, bossBarry } from '../party/trainers'
+import { allTrainers, bossBarry, bossSebastian } from '../party/trainers'
 
 export const battleConfig = () => {
   const selectedTrainer = randomlySelectTrainer(allTrainers)
@@ -16,7 +16,7 @@ export const battleConfig = () => {
   }
 }
 export const bossConfig = {
-  trainer: bossBarry,
+  trainer: bossSebastian,
   // pal: MoltenScale,
   type: 'boss',
   area: 'tranquil forest',

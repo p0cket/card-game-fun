@@ -186,7 +186,7 @@ export const gymLevels = [
   },
   {
     id: 7,
-    title: "The Leader's Arena",
+    title: "Gym Leader's Arena",
     options: [
       {
         id: '7a',
