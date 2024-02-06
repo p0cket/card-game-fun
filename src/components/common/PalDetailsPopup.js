@@ -55,17 +55,17 @@ function PalDetailsPopup({
               <div className="flex justify-start">Types</div>
               <div className="flex">
                 <div className="flex-grow">
-                  <div className="flex gap-2 p-1 justify-start">
-                    <button className="bg-green-200 rounded px-1 text-green-700">
-                      {selectedPal.elemental_type}
-                    </button>
-                    <button className="bg-green-200 rounded px-1 text-green-700">
-                      {selectedPal.creature_type}
-                    </button>
-                    <button className="bg-green-200 rounded px-1  text-green-700">
-                      {selectedPal.specialty_group}
-                    </button>
-                  </div>
+                <div className="flex flex-col gap-2 p-1">
+                  <button className="bg-green-200 rounded px-1 text-green-700">
+                    {selectedPal.elemental_type}
+                  </button>
+                  <button className="bg-green-200 rounded px-1 text-green-700">
+                    {selectedPal.creature_type}
+                  </button>
+                  <button className="bg-green-200 rounded px-1 text-green-700">
+                    {selectedPal.specialty_group}
+                  </button>
+                </div>
                 </div>
               </div>
             </div>

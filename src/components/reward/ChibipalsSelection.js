@@ -71,7 +71,7 @@ const ChibipalsSelection = () => {
   return (
     <div className="font-[silkscreen] text-white m-1">
       {!showDetails && <img src={selectStartImg} alt="select starter" />}
-      <h1 className="text-center text-2xl font-bold">Adopt Your Chibipal</h1>
+      <h1 className="text-center text-2xl font-bold">Recruit Your Chibipal</h1>
       <div className="flex justify-center ">
         {palStarters.map((monster) => (
           <div
