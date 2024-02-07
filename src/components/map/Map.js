@@ -92,7 +92,7 @@ function Map() {
             return <div key={index}>lvl: {JSON.stringify(lvl)}</div> })}</div> */}
         </div>
         {/* <div className="flex flex-wrap justify-between"> */}
-          <PartyMenu party={ourParty} type={'display'} />
+          <PartyMenu party={ourParty} type={'display'} hasSwitchOption={true}/>
         {/* </div> */}
         {/* <div className="bg-green-500 rounded p-1 mb-1"> */}
           {/* #TODO: Implement inventory here */}

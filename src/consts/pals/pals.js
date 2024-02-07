@@ -125,8 +125,8 @@ export const Umbrabunny = {
   // nature: 'Adorable',
   quirks: ['Emotion Sponge', 'Reassuring Presence'],
   stats: {
-    hp: 10,
-    max_hp: 10,
+    hp: 92,
+    max_hp: 92,
     attack: 60,
     defense: 70,
     special_attack: 80,

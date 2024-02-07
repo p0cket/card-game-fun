@@ -10,19 +10,48 @@ function PartyMenu({
   setPalToSwapWith,
   setPalToSwapWithLocation,
   type,
-  canSwitch = true,
+  // canSwitch = true,
+  hasSwitchOption = true,
 }) {
   const state = useStateContext()
+  const dispatch = useDispatchContext()
   const inDebug = state.debug && state.debug.isOpen
   const [selectedOne, setSelectedOne] = useState()
   const [selectedTwo, setSelectedTwo] = useState()
   const selectPal = (pal, index) => {
+    console.log(
+      `selectPal: pal, index of ${index}.
+      selectedOne is ${selectedOne}, selectedTwo is ${selectedTwo}`,
+      pal,
+      index,
+      selectedOne,
+      selectedTwo,
+    )
     if (!selectedOne) {
       setSelectedOne({ pal: pal, index: index })
     } else if (!selectedTwo) {
       setSelectedTwo({ pal: pal, index: index })
     }
   }
+
+  // const handlePalClick = (monster, index, isRegSwap) => {
+  //   console.log(
+  //     `handlePalClick: monster, index, isRegSwap`,
+  //     monster,
+  //     index,
+  //     isRegSwap,
+  //   )
+  //   if (isRegSwap) {
+  //     selectPal(monster, index)
+  //   }
+  //   // cases where pal is fainted. not regular swap
+  //   else {
+  //     runSwapOnFainted(index, monster, dispatch)
+  //   }
+  //   // isRegSwap
+  //   // ? () => selectPal(monster, index)
+  //   // : () =>
+  // }
 
   const [switchMode, setSwitchMode] = useState(false)
   const toggleSwitchMode = () => setSwitchMode(!switchMode)
@@ -84,10 +113,15 @@ function PartyMenu({
       },
     })
     dispatch({ type: ACTIONS.CLOSE_DIALOG })
+
+    // set the selecteds back to null
+    setSelectedOne(null)
+    setSelectedTwo(null)
   }
 
   const renderMonsterDetails = (monster, index, isRegSwap) => {
-    const dispatch = useDispatchContext()
+    console.log(`isRegSwap`, isRegSwap)
+    console.log(`type`, type)
     return (
       <div
         key={monster ? monster.id : 'empty-slot'}
@@ -100,36 +134,12 @@ function PartyMenu({
                 className={`flex items-center justify-between w-full ${
                   index === 0 ? 'pointer-events-none opacity-50' : ''
                 }`}
-                //add in logic for if swap is regular swap
-                // { isRegSwap ? onClick={() => runSwap{ monster, index}} : ''}
-                //replace
-                onClick={
-                  isRegSwap
-                    ? () => selectPal(monster, index)
-                    : () => runSwapOnFainted(index, monster, dispatch)
-                  // () => {
-                  //     if (index !== 0) {
-                  //       console.log(
-                  //         `setPalToSwapWith this monster, index:`,
-                  //         monster,
-                  //         index,
-                  //       )
-                  //       setPalToSwapWith(monster)
-                  //       setPalToSwapWithLocation(index)
-                  //       dispatch({
-                  //         type: ACTIONS.SWAP_PALS,
-                  //         payload: {
-                  //           palToSwap: party[0],
-                  //           palLocation: 0,
-                  //           palToSwapWith: monster,
-                  //           palToSwapWithLocation: index,
-                  //           player: PLAYERS.HUMAN,
-                  //         },
-                  //       })
-                  //       dispatch({ type: ACTIONS.CLOSE_DIALOG })
-                  //     }
-                  //   }
-                }
+                onClick={() => {
+                  //prev
+                  // handlePalClick(monster, index, isRegSwap)
+                  // back to og
+                  runSwapOnFainted(index, monster, dispatch)
+                }}
               >
                 <motion.img
                   src={monster.image}
@@ -139,14 +149,38 @@ function PartyMenu({
                 />
                 <div>{monster.name}</div>
                 <p className="p-1">
-                  HP: {monster.stats.hp}/{monster.stats.max_hp}
+                  {JSON.stringify(isRegSwap)} HP: {monster.stats.hp}/
+                  {monster.stats.max_hp}
                 </p>
               </div>
             )}
             {type === 'display' && (
               <div
-                className={`flex items-center justify-between w-full
-            `}
+                className={`flex items-center justify-between w-full ${
+                  selectedOne && selectedOne.index === index
+                    ? 'bg-green-600'
+                    : ''
+                } ${
+                  selectedTwo && selectedTwo.index === index
+                    ? 'bg-green-800'
+                    : ''
+                 }
+              `}
+                onClick={(e) => {
+                  e.stopPropagation() // Prevent the event from bubbling up
+                  if (switchMode) {
+                    selectPal(monster, index)
+                  } else {
+                    console.log(`clicked pal but not in switch mode`)
+                  }
+                }}
+                // onClick={() => {
+                //   if (switchMode) {
+                //     selectPal(monster, index)
+                //   } else {
+                //     console.log(`clicked pal but not in switch mode`)
+                //   }
+                // }}
               >
                 <motion.img
                   src={monster.image}
@@ -156,7 +190,7 @@ function PartyMenu({
                 />
                 <div>{monster.name}</div>
                 <p className="p-1">
-                  HP: {monster.stats.hp}/{monster.stats.max_hp}
+                  r HP: {monster.stats.hp}/{monster.stats.max_hp}
                 </p>
               </div>
             )}
@@ -196,16 +230,23 @@ function PartyMenu({
       </div>
     )
   }
+
   return (
     <div>
       <div>Party</div>
-      {party.map((pal, index) => renderMonsterDetails(pal, index, canSwitch))}
-      {canSwitch &&
+      {party.map((pal, index) =>
+        renderMonsterDetails(pal, index, hasSwitchOption),
+      )}
+      {hasSwitchOption &&
         inDebug &&
         (switchMode ? (
-          <button onClick={toggleSwitchMode}>Switch Pal?</button>
+          <button onClick={toggleSwitchMode}>
+            Cancel Swap (switchMode:{JSON.stringify(switchMode)})
+          </button>
         ) : (
-          <button onClick={toggleSwitchMode}>Cancel Swap</button>
+          <button onClick={toggleSwitchMode}>
+            Switch Pal? (switchMode:{JSON.stringify(switchMode)})
+          </button>
         ))}
       {selectedOne && selectedTwo && (
         <button
@@ -215,6 +256,7 @@ function PartyMenu({
               selectedOne.index,
               selectedTwo.pal,
               selectedTwo.index,
+              dispatch,
             )
           }
         >
@@ -230,3 +272,30 @@ function PartyMenu({
 }
 
 export default PartyMenu
+
+//add in logic for if swap is regular swap
+// { isRegSwap ? onClick={() => runSwap{ monster, index}} : ''}
+//replace
+
+// () => {
+//     if (index !== 0) {
+//       console.log(
+//         `setPalToSwapWith this monster, index:`,
+//         monster,
+//         index,
+//       )
+//       setPalToSwapWith(monster)
+//       setPalToSwapWithLocation(index)
+//       dispatch({
+//         type: ACTIONS.SWAP_PALS,
+//         payload: {
+//           palToSwap: party[0],
+//           palLocation: 0,
+//           palToSwapWith: monster,
+//           palToSwapWithLocation: index,
+//           player: PLAYERS.HUMAN,
+//         },
+//       })
+//       dispatch({ type: ACTIONS.CLOSE_DIALOG })
+//     }
+//   }
