@@ -15,6 +15,7 @@ import {
   eventConfig,
   restConfig,
 } from '../../consts/level/levelConfigs'
+import { motion } from 'framer-motion'
 
 function SimpleLevelList({ levels, onOptionSelected }) {
   //   const [currentLevelId, setCurrentLevelId] = useState(1)
@@ -63,12 +64,12 @@ function SimpleLevelList({ levels, onOptionSelected }) {
           details: eventConfig,
         })
         break
-        case SCENES.BOSS:
+      case SCENES.BOSS:
         handleChangeLevel(state, {
           screen: SCENES.BOSS,
           details: bossConfig,
         })
-    } 
+    }
   }
 
   const handleChangeLevel = (passedInState, payload) => {
@@ -94,76 +95,112 @@ function SimpleLevelList({ levels, onOptionSelected }) {
     console.warn(`handleOptionClick: level,  option`, level, option)
     changeLevel(level, option)
     // }
-
     // const nextLevelId = levelId < levels.length ? levelId + 1 : levelId
     // setCurrentLevelId(nextLevelId)
   }
 
-    // Boss level card
-  // const bossLevelCard = () => {
-  //   const bossLevel = levels[levels.length - 1] // Assuming the boss level is the last one
-  //   return (
-  //     <div
-  //       className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
-  //         bossLevel.id === state.current.mapLevel + 1
-  //           ? 'border-l-4 border-red-500 bg-gray-800'
-  //           : 'bg-gray-700'
-  //       }`}
-  //     >
-  //       {/* <p className="font-bold">Boss Level {bossLevel.id}</p> */}
-  //       <div className="flex justify-between items-center">
-  //         {/* <p>{bossLevel.name}</p> */}
-  //         <button
-  //           className={`px-2 py-1 rounded ${
-  //             bossLevel.id === state.current.mapLevel + 1
-  //               ? 'bg-red-600 hover:bg-red-700'
-  //               : 'bg-gray-600 cursor-not-allowed'
-  //           }`}
-  //           onClick={() => {
-  //             if (bossLevel.id === state.current.mapLevel + 1) {
-  //               // changeLevel()
-  //               goToBoss()
-  //             }
-  //           }}
-  //           disabled={bossLevel.id !== state.current.mapLevel + 1}
-  //         >
-  //           Challenge Boss
-  //         </button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
+  const glowAnimation = {
+    glow: {
+      scale: [1, 1.05, 1],
+      boxShadow: [
+        '0 0 3px rgba(255, 255, 255, 0.6)',
+        '0 0 12px rgba(124,252,0, 0.8)',
+        '0 0 3px rgba(255, 255, 255, 0.6)',
+        // '0 0 3px rgba(255, 255, 255, 0.6)',
+        // '0 0 12px rgba(255, 255, 255, 0.8)',
+        // '0 0 3px rgba(255, 255, 255, 0.6)',
+      ],
+      transition: {
+        duration: 2,
+        ease: 'easeInOut',
+        repeat: Infinity,
+      },
+    },
+  }
+
   return (
     <div className="container mx-auto p-1 bg-gray-900 text-white">
-      {[...levels].reverse().map((level) => (
-        <div
-          key={level.id}
-          className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
-            // level.id === currentLevelId
-            level.id === state.current.mapLevel + 1
-              ? 'border-l-4 border-boy-green bg-gray-800'
-              : 'bg-gray-700'
-          }`}
-        >
-          <div className="font-semibold mb-1">{level.title}</div>
-          {/* {level.id === currentLevelId && ( */}
-          {level.id === state.current.mapLevel + 1 && (
-            <div className="flex justify-between">
-              {level.options.map((option) => (
-                <button
-                  key={option.id}
-                  className="flex-1 text-center bg-boy-green text-white rounded p-1 mx-1 hover:bg-green-700 focus:outline-none"
-                  onClick={() => handleOptionClick(level, option)}
-                >
-                  {option.description}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+      {[...levels].reverse().map((level) => {
+        const isNextLevel = level.id === state.current.mapLevel + 1
+
+        return (
+          <div
+            key={level.id}
+            className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
+              isNextLevel
+                ? 'border-l-4 border-boy-green bg-gray-800'
+                : 'bg-gray-700'
+            }`}
+          >
+            <div className="font-semibold mb-1">{level.title}</div>
+            {isNextLevel && (
+              <div className="flex flex-wrap items-start">
+                {level.options.map((option) => (
+                  <div
+                    key={option.id}
+                    className="flex flex-col items-center m-1"
+                  >
+                    <motion.div
+                      variants={glowAnimation}
+                      initial="glow"
+                      animate="glow"
+                    >
+                      <button
+                        className="bg-boy-green text-white rounded py-1 px-2 focus:outline-none"
+                        onClick={() => handleOptionClick(level, option)}
+                      >
+                        {option.shortDesc}
+                      </button>{' '}
+                    </motion.div>
+                    <span className="text-xs mt-2">{option.longDesc}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
+
+  // return (
+  //   <div className="container mx-auto p-1 bg-gray-900 text-white">
+  //     {[...levels].reverse().map((level) => (
+  //       <div
+  //         key={level.id}
+  //         className={`flex flex-col rounded shadow p-2 mb-1 text-xs ${
+  //           // level.id === currentLevelId
+  //           level.id === state.current.mapLevel + 1
+  //             ? 'border-l-4 border-boy-green bg-gray-800'
+  //             : 'bg-gray-700'
+  //         }`}
+  //       >
+  //         <div className="font-semibold mb-1">{level.title}</div>
+  //         {/* <div className="m-1 text-gray-800">{level.description}</div> */}
+  //         {/* {level.id === currentLevelId && ( */}
+  //         {level.id === state.current.mapLevel + 1 && (
+  //           <div className="flex justify-between">
+  //             {level.options.map((option) => (
+  //               // <div key={option.id}>
+  //               <div className="flex flex-col justify-center" key={option.id}>
+  //                 {' '}
+  //                 <button
+  //                   // key={option.id}
+  //                   className=" text-center bg-boy-green text-white rounded py-1 m-1 hover:bg-green-700 focus:outline-none"
+  //                   onClick={() => handleOptionClick(level, option)}
+  //                 >
+  //                   <div>{option.shortDesc}</div>{' '}
+  //                 </button>
+  //                 {option.longDesc}
+  //               </div>
+  //               // </div>
+  //             ))}
+  //           </div>
+  //         )}
+  //       </div>
+  //     ))}
+  //   </div>
+  // )
 }
 
 export default SimpleLevelList

@@ -103,97 +103,141 @@ export const levels = [
     ],
   },
 ]
-export const gymLevels = [
+
+export const gymLevelsTwo = [
   {
     id: 1,
-    title: 'The Gym Entrance',
+    title: "Rookie's Welcome",
+    description:
+      'The gateway to your adventure, where the path of challenges begins under the watchful eyes of the Rookie Trainer.',
     options: [
       {
         id: '1a',
-        description: 'Battle the first trainer',
+        shortDesc: 'Battle a Rookie Trainer',
+        longDesc: `Engage in your first test of strength against the 
+        welcoming Rookie Trainer, a crucial step on your journey. 
+        He might know who how to get to the gym boss`,
         scene: SCENES.BATTLE,
-        trainer: 'Rookie Trainer',
+        // trainerArr: 'Rookies'
       },
     ],
+    mapFeatures: ['Welcoming Arch', 'Symbolic Statues', 'Path of Trials'],
   },
   {
     id: 2,
-    title: 'The Training Hall',
+    title: "Seasoned Fighter's Arena",
+    description: `A robust hall echoing the spirit of countless battles, 
+      where seasoned warriors share their prowess. 
+     `,
     options: [
       {
         id: '2a',
-        description: 'Face off against a seasoned fighter',
+        shortDesc: 'Challenge the Seasoned Fighter',
+        longDesc: ` Test your skills in combat against a seasoned fighter.  One of them knows the path for you to take.`,
         scene: SCENES.BATTLE,
-        trainer: 'Seasoned Fighter',
       },
       {
         id: '2b',
-        // description: 'Take a moment to strategize',
-        description: 'Rest and heal up',
+        shortDesc: 'Rest and Strategize',
+        longDesc: 'Take a well-earned rest to heal.',
         scene: SCENES.REST,
       },
     ],
+    mapFeatures: ['Training Dummies', 'Weapon Racks', 'Resting Quarters'],
   },
   {
     id: 3,
-    title: 'The Strategy Room',
+    title: 'A surprising challenger',
+    description: 'A menacing challenger blocks your way.',
     options: [
       {
         id: '3a',
-        description: 'Test your tactics against a tactical genius',
+        shortDesc: 'Face the Tactical Genius',
+        longDesc:
+          'Engage in a battle of wits against a menacing challenger that ambushed you and wont let you pass.',
         scene: SCENES.BATTLE,
-        trainer: 'Tactical Genius',
       },
-      { id: '3b', description: 'Rest and recover', scene: SCENES.REST },
+      {
+        id: '3b',
+        shortDesc: 'Recover and Reflect',
+        longDesc: 'Use this time to recover your strength.',
+        scene: SCENES.REST,
+      },
     ],
+    mapFeatures: ['Strategy Tables', 'Ancient Maps', 'Puzzle Locks'],
   },
   {
     id: 4,
-    title: 'The Elemental Zone',
+    title: "The wise one's domain",
+    description:
+      'You see a elegant domain, and a shadowy figure within it. The figure knows the path for you to take.',
     options: [
       {
         id: '4a',
-        description: 'Overcome an elemental challenge',
+        shortDesc: 'Prove yourself',
+        longDesc:
+          'To consult the wise one, you must prove yourselfProve your mastery over the elements by facing the Elemental Specialist in a trial by fire, water, earth, and air.',
         scene: SCENES.BATTLE,
-        trainer: 'Elemental Specialist',
       },
     ],
+    mapFeatures: ['Elemental Altars', 'Natural Obstacles', 'Mystic Fountains'],
   },
   {
     id: 5,
-    title: "The Veteran's Court",
+    title: "Veteran's Court",
+    description:
+      'The arena where legends are made, challenging you to rise above and prove your worth.',
     options: [
       {
         id: '5a',
-        description: 'Prove your worth against a gym veteran',
+        shortDesc: 'Battle the Gym Veteran',
+        longDesc:
+          'Engage in a decisive battle against a seasoned veteran, testing your mettle against their years of experience.',
         scene: SCENES.BATTLE,
-        trainer: 'Gym Veteran',
       },
-      { id: '5b', description: 'Catch your breath and rest', scene: SCENES.REST },
+      {
+        id: '5b',
+        shortDesc: 'Rest and Reflect',
+        longDesc: 'Catch your breath and gather your strength.',
+        scene: SCENES.REST,
+      },
     ],
+    mapFeatures: ['Hall of Heroes', 'Victory Statues', 'Reflection Pool'],
   },
   {
     id: 6,
-    title: 'The Final Test',
+    title: "The Gatekeeper's Trial",
+    description:
+      'The ultimate test of your skills before the final showdown, where only the worthy may pass.',
     options: [
       {
         id: '6a',
-        description: 'The ultimate challenge before the leader',
+        shortDesc: 'Face The Gatekeeper',
+        longDesc:
+          'Confront The Gatekeeper in a battle that will decide your fate and prove if you are ready to face the Gym Leader.',
         scene: SCENES.BATTLE,
-        trainer: 'The Gatekeeper',
       },
     ],
+    mapFeatures: ['Mystical Gates', 'Runic Circles', 'Trial Grounds'],
   },
   {
     id: 7,
-    title: "Gym Leader's Arena",
+    title: "Gym Leader's Challenge",
+    description:
+      'The pinnacle of your journey, facing the Gym Leader in a battle for glory and honor.',
     options: [
       {
         id: '7a',
-        description: 'Face the Gym Leader',
+        shortDesc: 'Challenge the Gym Leader',
+        longDesc:
+          'Engage in an epic showdown with the Gym Leader, the ultimate test of your abilities and the final step to becoming a champion.',
         scene: SCENES.BOSS,
-        leader: 'Gym Leader',
       },
+    ],
+    mapFeatures: [
+      "Leader's Throne",
+      'Arena of Champions',
+      'Crowd of Spectators',
     ],
   },
 ]

@@ -4,7 +4,7 @@ import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import { SCENES, changeLevel } from '../../handlers/sceneHandlers_new'
 import MapComponent from './MapComponent'
 import { LevelList } from './LevelList'
-import { gymLevels, levels } from '../../consts/mapGenerator_new'
+import { gymLevels, gymLevelsTwo, levels } from '../../consts/mapGenerator_new'
 import SimpleLevelList from './SimpleLevelList'
 import PartyMenu from '../battle/PartyMenu'
 
@@ -87,7 +87,7 @@ function Map() {
         <div className="bg-boy-green rounded p-1 mb-1">
           <h2 className="text-2xl mb-1">Can you defeat the Gym Leader?</h2>
           {/* <SimpleLevelList levels={levels} /> */}
-          <SimpleLevelList levels={gymLevels} />
+          <SimpleLevelList levels={gymLevelsTwo} />
           {/* <div> {contextualState.current.completedLevels.map((lvl, index) => {
             return <div key={index}>lvl: {JSON.stringify(lvl)}</div> })}</div> */}
         </div>

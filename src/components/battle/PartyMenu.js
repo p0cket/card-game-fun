@@ -198,8 +198,8 @@ function PartyMenu({
   }
   return (
     <div>
-      <div>PartyMenu</div>
-      {party.map((pal, index) => renderMonsterDetails(pal, index))}
+      <div>Party</div>
+      {party.map((pal, index) => renderMonsterDetails(pal, index, canSwitch))}
       {canSwitch &&
         inDebug &&
         (switchMode ? (
