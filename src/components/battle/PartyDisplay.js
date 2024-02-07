@@ -6,6 +6,9 @@ import TicklefairyImg from './../../assets/pals/Ticklefairy_pxl.png'
 import UmbrabunnyImg from './../../assets/pals/Umbrabunny_pxl.png'
 import ChibipalDefaultImg from './../../assets/pals/Chibipal.png'
 
+//We could have personality on the pals, they could root or be sad or something and have
+// it affect the battle and img
+
 const PartyDisplay = ({ party, userFlag }) => {
   // Placeholder data for party members (with made-up creature names)
 
@@ -38,25 +41,21 @@ const PartyDisplay = ({ party, userFlag }) => {
 
   return (
     <div style={{ textAlign: 'center', fontFamily: 'Silkscreen' }}>
-      <div
+      {/* <div
         style={{
           display: 'flex',
           justifyContent: 'center',
           flexWrap: 'wrap',
           color: 'green',
         }}
+      > */}
+      <div
+        className="grid grid-cols-3 gap-1 justify-center items-center text-green-500 p-1 m-1"
       >
         {partyMembers.map((member, index) => (
-          <div
-            key={index}
-            style={{
-              margin: '5px',
-              border: '2px solid green',
-              borderRadius: '2%',
-            }}
-          >
+          <div key={index} className="m-1 border-2 border-green-500 rounded-sm">
             <div>{member.name}</div>
-            <div className="flex">
+            <div className="flex m-2">
               <img
                 src={member.image}
                 alt={`Party Member ${index + 1}`}
@@ -79,23 +78,17 @@ const PartyDisplay = ({ party, userFlag }) => {
           </div>
         ))}
         {emptySlotsArray.map((_, index) => (
-          <div
-            key={`empty-${index}`}
-            style={{
-              margin: '5px',
-              border: '2px dashed green',
-              borderRadius: '2%',
-              opacity: 0.5,
-              width: '60px', // Set width (and height if needed) to match your member cards
-              height: '80px', // Set height to match your member cards
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <span>Locked</span>
-          </div>
-        ))}
+  <div
+    key={`empty-${index}`}
+    className="m-1 border-2 border-dashed border-green-500 rounded-sm opacity-50 flex justify-center items-center"
+    style={{
+      width: '60px',
+      height: '80px',
+    }}
+  >
+    <span>Locked</span>
+  </div>
+))}
       </div>
     </div>
   )

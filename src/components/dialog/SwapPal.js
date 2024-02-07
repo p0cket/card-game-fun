@@ -4,6 +4,7 @@ import { useDispatchContext, useStateContext } from '../../MainContext'
 import PartyMenu from '../battle/PartyMenu'
 import { PLAYERS } from '../../consts/consts'
 
+//when you get a chance, change to SwapPalOnFaint
 function SwapPal() {
   const state = useStateContext()
   const dispatch = useDispatchContext()

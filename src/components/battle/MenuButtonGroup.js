@@ -9,7 +9,6 @@ import ItemMenuModal from '../common/ItemMenuModal'
 import { DIALOGS } from '../dialog/DialogManager'
 
 function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
-  
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
   const inDebug = contextualState.debug && contextualState.debug.isOpen
@@ -36,7 +35,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
     // state = switchDialog(state, DIALOGS.SWAP_PAL)
     contextualDispatch({
       type: ACTIONS.CHANGE_DIALOG,
-      payload: DIALOGS.SWAP_PAL,
+      payload: { dialog: DIALOGS.SWAP_PAL_BASIC },
     })
   }
 
@@ -46,17 +45,21 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       <div className="flex items-center justify-center flex-grow p-1 text-sm">
         {contextualState.game.player.energy} Energy {energyEmoji}
       </div>
-    { inDebug &&  <div className="flex items-start">
-        {contextualState.game.player.energy} Energy
-        <div className="relative w-full h-4 ml-2 bg-gray-400">
-          <motion.div
-            className="bg-blue-500 h-full"
-            initial={{ height: '0%' }}
-            animate={{ height: `${Math.min(100, contextualState.game.player.energy)}%` }}
-            transition={{ duration: 0.5, ease: 'easeIn' }}
-          />
+      {inDebug && (
+        <div className="flex items-start">
+          {contextualState.game.player.energy} Energy
+          <div className="relative w-full h-4 ml-2 bg-gray-400">
+            <motion.div
+              className="bg-blue-500 h-full"
+              initial={{ height: '0%' }}
+              animate={{
+                height: `${Math.min(100, contextualState.game.player.energy)}%`,
+              }}
+              transition={{ duration: 0.5, ease: 'easeIn' }}
+            />
+          </div>
         </div>
-      </div>}
+      )}
       <div className="flex flex-grow justify-around items-center m-1 bg-[#5a7d2a]">
         <div className="grid grid-cols-2 grid-rows-2 w-full h-full bg-boy-green border border-gray-400 rounded-sm">
           <div
@@ -106,7 +109,7 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           </div>
         ))}
         {contextualState.debug && contextualState.debug.isOpen ? (
-          <div>DEBUG</div>
+          <div>DEBUG / LIMIT BREAK</div>
         ) : (
           ''
         )}
@@ -137,6 +140,10 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       {' '}
       {/* Add relative here for positioning the modal */}
       {currentView === 'menu' ? menuButtons() : attackButtons()}
+      {/* test this and then replace */}
+      {/* {currentView === 'menu' ? menuButtons() : ""} */}
+      {/* {currentView === 'attacks' ?  attackButtons() : ""} */}
+
       {itemModalVisible && (
         <ItemMenuModal
           items={items}
