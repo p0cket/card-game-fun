@@ -70,7 +70,13 @@ const ChibipalsSelection = () => {
 
   return (
     <div className="font-[silkscreen] text-white m-1">
-      {!showDetails && <img src={selectStartImg} alt="select starter" />}
+      {!showDetails && (
+        <div>
+          {' '}
+          <div className="text-center text-3xl p-1 mb-1 border-2 border-green-600">To defeat a gym leader, youll need help...</div>
+          <img src={selectStartImg} alt="select starter" />
+        </div>
+      )}
       <h1 className="text-center text-2xl font-bold">Recruit Your Chibipal</h1>
       <div className="flex justify-center ">
         {palStarters.map((monster) => (

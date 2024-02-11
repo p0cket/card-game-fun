@@ -33,6 +33,8 @@ import Cube from '../3D/Cube'
 import NewCanvas from '../canvas/NewCanvas'
 import TopDownTest from '../canvas/TopDownTest'
 import GameMap from '../canvas/GameMap'
+import PixelButton from '../common/PixelButton'
+import MainCanvas from '../canvas/MainCanvas'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -163,24 +165,28 @@ const Intro = ({ dispatch }) => {
             {gameVersion}
           </div>
           {/* <Shop /> */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.1, duration: 2 }}
-              style={styles.fontStyle}
-            >
-              <img src={ChibipalsLogo} alt="pal logo" />
-              <div>友達を殺す</div>
-              <div className="text-sm">Plausibly Sentient Monster Slayer</div>
-              <div className="text-sm text-green-300">
-                Friendship Edition Demo
-              </div>
-              <div>友情編</div>
-            </motion.div>
-            {/* <Cube /> */}
-          </div>
-          {inDebug && <TopDownTest />} {/* <GameMap  /> */}
+          {!inDebug && (
+            <div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.1, duration: 2 }}
+                style={styles.fontStyle}
+              >
+                <img src={ChibipalsLogo} alt="pal logo" />
+                <div>友達を殺す</div>
+                <div className="text-sm">Plausibly Sentient Monster Slayer</div>
+                <div className="text-sm text-green-300">
+                  Friendship Edition Demo
+                </div>
+                <div>友情編</div>
+              </motion.div>
+              {/* <Cube /> */}
+            </div>
+          )}
+          {/* <MainCanvas /> */}
+          {/* <TopDownTest /> */}
+          {/* <GameMap  /> */}
           {inDebug ? (
             <>
               {/* <CanvasSquare /> */}
@@ -193,21 +199,28 @@ const Intro = ({ dispatch }) => {
             <Carousel ourImages={palImages} />
             <img src={gashTrainerImg} alt="gash trainer" />
           </div> */}
-          <div className="grid grid-cols-2 items-center gap-4 relative">
-            <Carousel ourImages={palImages} />
-            <div className="relative">
-              <img src={gashTrainerImg} alt="gash trainer" className="block" />
-              <div
-                className="absolute"
-                // style={{ bottom: '102px', right: '163px' }}
-                style={{ bottom: '25%', right: '38%' }} // Example using percentages
-              >
-                {' '}
-                {/* Adjust these values */}
-                <SpinningBall />
+          {!inDebug && (
+            <div className="grid grid-cols-2 items-center gap-4 relative">
+              <Carousel ourImages={palImages} />
+              <div className="relative">
+                <img
+                  src={gashTrainerImg}
+                  alt="gash trainer"
+                  className="block"
+                />
+                <div
+                  className="absolute"
+                  // style={{ bottom: '102px', right: '163px' }}
+                  style={{ bottom: '25%', right: '38%' }} // Example using percentages
+                >
+                  {' '}
+                  {/* Adjust these values */}
+                  <SpinningBall />
+                </div>
               </div>
             </div>
-          </div>
+          )}
+          {inDebug && <TopDownTest />}
           {/* <img src={palImages[0]} alt="pal logo" /> */}
           {/* <FlashingImage
             src={palImages[0]}
@@ -219,6 +232,49 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
+          {inDebug && (
+            <div style={{ padding: '10px' }}>
+              <div className="space-y-2">
+                <div>
+                  <PixelButton
+                    size="small"
+                    buttonStyle="normal"
+                    onClick={() => console.log('Small button clicked')}
+                    className="p-1 m-1"
+                  >
+                    Small Button
+                  </PixelButton>
+                </div>
+                <div>
+                  <PixelButton
+                    size="medium"
+                    buttonStyle="important"
+                    onClick={() => console.log('Important button clicked')}
+                    className="p-1 m-3"
+                  >
+                    Important Button
+                  </PixelButton>
+                </div>
+                <div>
+                  <PixelButton
+                    size="large"
+                    buttonStyle="disabled"
+                    className="p-1 m-3"
+                  >
+                    Disabled Button
+                  </PixelButton>
+                </div>
+              </div>
+              <PixelButton
+                size="small"
+                buttonStyle="normal"
+                className="p-1 m-1"
+                onClick={() => console.log('Small button clicked')}
+              >
+                Daily Woods Expedition{' '}
+              </PixelButton>
+            </div>
+          )}
           <div style={{ padding: '10px' }}>
             <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
           </div>

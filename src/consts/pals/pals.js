@@ -27,6 +27,7 @@ import {
   SunShield,
   SunstoneSmash,
   Teleport,
+  VenomousBite,
   WarmEmbrace,
   WiseGaze,
 } from '../allMoves'
@@ -142,7 +143,7 @@ export const Umbrabunny = {
   lvl: 5,
   experience: 4800,
   status: {},
-  moves: [LightBeam, EmotionDrain],
+  moves: [LightBeam, EmotionDrain, VenomousBite],
   // moves: [EmotionDrain, CuteCharm, ComfortingHug],
   possible_moves: ['Dark Aura', 'Empathy Wave', 'Peaceful Presence'],
   // passives: 'Emotion Balance',

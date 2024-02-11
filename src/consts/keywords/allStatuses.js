@@ -1,5 +1,5 @@
 //allModifyers.js instead?
-import { applyBlind, applyWeak } from '../../handlers/state/statusStateHandlers'
+import { applyBlind, applyPoison, applyWeak } from '../../handlers/state/statusStateHandlers'
 // export const Stun = {
 //     description:
 //       'Stuns the target for a duration, preventing them from taking actions during that time.',
@@ -23,12 +23,27 @@ export const Blind = {
 }
 
 export const Weak = {
+  // description:
+  //   'Applies the weak status to the target, reducing their damage dealt.',
   description:
-    'Applies the weak status to the target, reducing their damage dealt.',
+  'Reduces damage dealt by this creature',
   type: 'Modifier',
   effect: applyWeak,
   stackable: false,
   targets: 'creature',
   duration: 1, // Duration can be adjusted as needed
   name: 'Weak',
+}
+
+export const Poison = {
+  // description:
+  //   'Applies the weak status to the target, reducing their damage dealt.',
+  description:
+  'Deals poison damage each turn.',
+  type: 'Modifier',
+  effect: applyPoison,
+  stackable: false,
+  targets: 'creature',
+  duration: 1, // Duration can be adjusted as needed
+  name: 'Poison',
 }

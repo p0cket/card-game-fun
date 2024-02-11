@@ -10,7 +10,7 @@ const NewCanvas = ({ draw, width, height }) => {
       console.log('Draw function not provided to NewCanvas.')
       return
     }
-    console.log('Calling draw function from NewCanvas...')
+    // console.log('Calling draw function from NewCanvas...')
     draw(context)
   }, [draw, width, height])
 

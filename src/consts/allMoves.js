@@ -125,7 +125,6 @@ export const DoubleStrike = {
   },
   priority: 'fast',
   targets: ['opponent', 'opponent_pals'],
-
 }
 
 export const LifeSwap = {
@@ -305,7 +304,6 @@ export const WiseGaze = {
     duration: '1 turn',
     amt: 8,
     type: Weak,
-
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -393,6 +391,7 @@ export const FeatherGlide = {
     targets: ['opponent'],
   },
 }
+
 export const ShadowLash = {
   name: 'Shadow Lash',
   type: 'physical',
@@ -455,7 +454,8 @@ export const CrystalShard = {
     type: 'buff',
     accuracy: 100,
     effect: {
-      description: 'Forms a protective barrier of crystal, reducing damage taken',
+      description:
+        'Forms a protective barrier of crystal, reducing damage taken',
       duration: '1 turn',
       damage_reduction: 25,
     },
@@ -496,7 +496,8 @@ export const Thunderclap = {
     type: 'buff',
     accuracy: 85,
     effect: {
-      description: 'Generates a static field, reducing damage from physical attacks',
+      description:
+        'Generates a static field, reducing damage from physical attacks',
       duration: '1 turn',
       physical_damage_reduction: 20,
     },
@@ -565,7 +566,8 @@ export const EarthenGrasp = {
   speed: 7,
   cost: { energy: 4 },
   effect: {
-    description: 'The ground beneath the opponent erupts, grasping and immobilizing them',
+    description:
+      'The ground beneath the opponent erupts, grasping and immobilizing them',
     chance: 82,
     result: 'weak',
     duration: '1 turn',
@@ -591,7 +593,8 @@ export const EarthenGrasp = {
     speed: 5,
     cost: { energy: 6 },
     effect: {
-      description: 'Drops a giant boulder on the opponent for significant damage',
+      description:
+        'Drops a giant boulder on the opponent for significant damage',
       chance: 80,
       result: 'weak',
       duration: '1 turn',
@@ -621,7 +624,8 @@ export const DoubleJab = {
     type: 'buff',
     accuracy: 95,
     effect: {
-      description: 'Releases a toxic mist, enhancing evasion by confusing attackers',
+      description:
+        'Releases a toxic mist, enhancing evasion by confusing attackers',
       duration: '1 turn',
       evasion_boost: 35,
     },
@@ -634,7 +638,8 @@ export const DoubleJab = {
     speed: 10,
     cost: { energy: 5 },
     effect: {
-      description: 'Delivers a powerful strike infused with potent poison, guaranteeing weakness',
+      description:
+        'Delivers a powerful strike infused with potent poison, guaranteeing weakness',
       chance: 100,
       result: 'weak',
       duration: '1 turn',
@@ -653,8 +658,7 @@ export const Smash = {
   cost: { energy: 4 },
   energyCost: 5,
   effect: {
-    description:
-      'Hit with the power of your body weight',
+    description: 'Hit with the power of your body weight',
     // chance: 10,
     // result: 'stun',
     duration: '1 turn', // Added duration
@@ -1561,4 +1565,97 @@ export const MeteorStrike = {
     },
     targets: ['all_opponents'],
   },
+}
+
+// Poison Effects
+export const VenomousBite = {
+  name: 'Venomous Bite',
+  type: 'poison',
+  damage: 35,
+  accuracy: 90,
+  speed: 12,
+  cost: { energy: 4 },
+  effect: {
+    description: 'Bites the opponent with venomous fangs to inflict poison.',
+    chance: 80,
+    result: 'poison',
+    duration: '3 turns',
+    amt: 3,
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+}
+
+export const AcidSpray = {
+  name: 'Acid Spray',
+  type: 'poison',
+  damage: 30,
+  accuracy: 85,
+  speed: 8,
+  cost: { energy: 5 },
+  effect: {
+    description: 'Sprays corrosive acid to lower the opponent’s defense.',
+    chance: 70,
+    result: 'defense_down',
+    duration: '1 turn',
+    amt: 7,
+  },
+  priority: 'medium',
+  targets: ['opponent'],
+}
+
+export const PoisonousCloud = {
+  name: 'Poisonous Cloud',
+  type: 'poison',
+  damage: 0,
+  accuracy: 100,
+  speed: 9,
+  cost: { energy: 6 },
+  effect: {
+    description: 'Creates a poisonous cloud to poison multiple opponents.',
+    chance: 85,
+    result: 'poison',
+    duration: '2 turns',
+    amt: 7,
+  },
+  priority: 'high',
+  targets: ['all opponents'],
+}
+
+export const NecroticSludge = {
+  name: 'Necrotic Sludge',
+  type: 'poison',
+  damage: 45,
+  accuracy: 80,
+  speed: 7,
+  cost: { energy: 7 },
+  effect: {
+    description:
+      'Covers the opponent in necrotic sludge, severely poisoning them.',
+    chance: 60,
+    result: 'poison',
+    duration: '3 turns',
+    amt: 6,
+  },
+  priority: 'low',
+  targets: ['opponent'],
+}
+
+export const VenomShock = {
+  name: 'Venom Shock',
+  type: 'poison',
+  damage: 40,
+  accuracy: 88,
+  speed: 11,
+  cost: { energy: 5 },
+  effect: {
+    description:
+      'Shocks the opponent with a venomous charge, potentially poisoning them.',
+    chance: 85,
+    result: 'poison',
+    duration: '2 turns',
+    amt: 5,
+  },
+  priority: 'medium',
+  targets: ['opponent'],
 }

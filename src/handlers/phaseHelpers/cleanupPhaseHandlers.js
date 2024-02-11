@@ -22,7 +22,6 @@ export const cleanupAbilitiesHandler = (state) => {
   console.log(`cleanupAbilitiesHandler returning: state`, state)
   return state
 }
-
 export const applyPalPassive = (pal, palIndex) => {
   if (
     !pal.passives ||
@@ -59,77 +58,74 @@ export const applyPalPassive = (pal, palIndex) => {
 
 export const applyOpponentPalPassive = (pal, palIndex) => {}
 
-// export const cleanupStepHandler = (state, details) => {
-//   let nextState = { ...state }
+export const applyStatusAtCleanup = (state) => {
+  // switch()
+  // case EFFECTS.POISON:
+  // check for poison. if poison, damage.
+  // go through the entire party and apply poison damage.
+  // if (state.userParty[0].status && state.userParty[0].status.poison) {
+  //   const poisonDamage = state.userParty[0].status.poison.amt
+  //   state.userParty[0].hp -= poisonDamage
+  //   console.log(`Applying poison damage of ${poisonDamage}`)
+  // }
+  console.log(`applyStatusAtCleanup: checking for poison state`, state)
+  // Note: This forEach loop is expected to modify each 'pal' in the 'userParty' array by applying poison damage.
+  // However, since we are assigning the result of 'applyPoisonDamage' back to 'pal',
+  // which is a local variable in the forEach callback,
+  // this does not directly modify the original array elements.
+  // To ensure the 'userParty' array elements are updated,
+  console.log(`applyStatusAtCleanup: Starting status application for userParty`)
+  state.userParty.forEach((pal, index) => {
+    console.log(
+      `applyStatusAtCleanup: Applying status to userParty member at index ${index}`,
+      pal,
+    )
+    state.userParty[index] = applyPoisonDamage(pal)
+    console.log(
+      `applyStatusAtCleanup: Updated userParty member at index ${index}`,
+      state.userParty[index],
+    )
+  })
 
-//   // All cleanup triggers are everything that should happen at the end of the turn
-//   // status changes, status effects, item abilities, etc.
-//   // enemy first, then player
+  console.log(
+    `applyStatusAtCleanup: Starting status application for opponent.monsters`,
+  )
+  state.opponent.monsters.forEach((monster, index) => {
+    console.log(
+      `applyStatusAtCleanup: Applying status to opponent's monster at index ${index}`,
+      monster,
+    )
+    state.opponent.monsters[index] = applyPoisonDamage(monster)
+    console.log(
+      `applyStatusAtCleanup: Updated opponent's monster at index ${index}`,
+      state.opponent.monsters[index],
+    )
+  })
+  // we should directly modify the elements within the 'applyPoisonDamage' function.
+  state.userParty.forEach((pal, index) => {
+    state.userParty[index] = applyPoisonDamage(pal)
+  })
 
-//   const aiCleanupPals = nextState.opponent.monsters[0]
-//   const humanCleanupPals = nextState.userParty.monsters[0]
-//   // for all pals in an obj, apply whatever the status
-//   // lets go through all of the keys of the objects of aiCleanupPals and if the
+  // Apply poison damage to the opponent party
+  state.opponent.monsters.forEach((monster, index) => {
+    state.opponent.monsters[index] = applyPoisonDamage(monster)
+  })
 
-//   console.log(`cleanupStepHandler: nextState, details`, nextState, details)
+  return state
+  // state.userParty.forEach((pal) => {
+  //   if (pal.status && pal.status.poison && pal.status.poison.active) {
+  //     const poisonDamage = pal.status.poison.amt
+  //     pal.hp = Math.max(0, pal.hp - poisonDamage) // Prevent hp from going negative
+  //     console.log(`Applying poison damage of ${poisonDamage} to ${pal.name}`)
+  //   }
+  // })
+}
 
-//   // apply effects
-//   const allCurrentEffects = []
-//   for (let i = 0; i < allCurrentEffects.length; i++) {
-//     switch (allCurrentEffects[i]) {
-//       case EFFECTS.STUN:
-//         // check if they should keep the stun
-//         console.log(
-//           `stun case met, lets see if they keep the stun or it goes away`,
-//         )
-//         return nextState
-//       case EFFECTS.POISON:
-//         // add poison effect to enemy.
-//         return nextState
-//       case EFFECTS.SLEEP:
-//         // add sleep effect to enemy.
-//         return nextState
-//       case EFFECTS.SHEILD:
-//         // add sheild effect to enemy.
-//         return nextState
-//       case EFFECTS.ENERGIZE:
-//         // add energize effect to enemy.
-//         return nextState
-//       case EFFECTS.AURA:
-//         // add aura effect to enemy.
-//         return nextState
-
-//       default:
-//         console.log(`default case for no effects applied`)
-//         return nextState
-//     }
-//   }
-//   return nextState
-// }
-
-// case 'mystic-regeneration-uid':
-//   // Apply health regeneration effect
-//   pal.hp += passive.effects.find((effect) => effect.type === 'Regen').amt
-//   break
-// // case 'shadow-camouflage-uid':
-// //   // Apply evasion and stealth effect
-// //   const evasionEffect = passive.effects.find(
-// //     (effect) => effect.type === 'Evasion',
-// //   )
-// //   if (evasionEffect) pal.evasion += evasionEffect.amt
-// //   const stealthEffect = passive.effects.find(
-// //     (effect) => effect.type === 'Stealth',
-// //   )
-// //   if (stealthEffect) pal.stealth += stealthEffect.amt
-// //   break
-// case 'mana-echo-uid':
-//   // Implement mana cost reduction effect
-//   // Logic for the chance to cast a spell without using mana
-//   break
-// case 'critical-insight-uid':
-//   // Apply critical hit chance effect
-//   pal.critChance += passive.effects.find(
-//     (effect) => effect.type === 'Crit Chance',
-//   ).amt
-//   break
-// Add cases for other passives as needed
+export function applyPoisonDamage(pal) {
+  if (pal.status && pal.status.poison && pal.status.poison.active) {
+    const poisonDamage = pal.status.poison.amt
+    pal.hp = Math.max(0, pal.hp - poisonDamage) // Prevent hp from going negative
+    console.log(`Applying poison damage of ${poisonDamage} to ${pal.name}`)
+  }
+  return pal
+}

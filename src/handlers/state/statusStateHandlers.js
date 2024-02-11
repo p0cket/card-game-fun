@@ -4,19 +4,6 @@ import { PLAYERS } from '../../consts/consts'
 import { EFFECTS } from '../../effects'
 import { ATK_PHASES, executeMove } from '../moveHandlers'
 
-// Apply poison effect to the target
-export const applyPoison = (target, effectValue) => {
-  console.log(`applying poison to ${target.name}, damage: ${effectValue}`)
-  target.status = {
-    ...target.status,
-    poison: {
-      active: true,
-      damage: effectValue,
-    },
-  }
-  return target
-}
-
 // Apply burn effect to the target
 export const applyBurn = (target, effectValue) => {
   console.log(`applying burn to ${target.name}, damage: ${effectValue}`)
@@ -135,6 +122,27 @@ const modifyPalAccuracy = (pal, amt) => {
   console.log(`modified accuracy of ${pal.name} to ${pal.stats.accuracy}`, pal)
   return pal
 }
+
+// Apply poison effect to the target
+export const applyPoison = (pal, poisonAmt, effect, type) => {
+  console.log(`DUCK: applyPoison, amt: ${poisonAmt}, effect, pal:`, effect, pal)
+  if (!pal.status) {
+    pal.status = {}
+  }
+  // replace here with what effect you're adding
+  pal.status.poison = {
+    active: true, // Indicating that the weak status is currently active.
+    amt: poisonAmt, // The amount by which the damage will be reduced.
+    name: EFFECTS.POISON,
+    effect: effect,
+    type: type,
+  }
+  console.log(
+    `Applying 'weak' status, now damage dealt by ${pal.name} will be reduced by ${poisonAmt}`,
+  )
+  return pal
+}
+
 export const updateStatusState = (
   // updateStatusState(, , ,
   //, move.effect.type)
@@ -201,15 +209,8 @@ export const updateStatusState = (
       statusValue,
       index,
       PLAYERS.AI,
-      type
+      type,
     )
-    // updatedMonsters = applyStatusToPal(
-    //   statusResult,
-    //   updatedMonsters,
-    //   statusValue,
-    //   index,
-    //   PLAYERS.AI,
-    // )
     return {
       ...contextualState,
       userParty: updatedMonsters,
@@ -277,6 +278,25 @@ const applyStatusToPal = (
         )
         palToApplyTo = applyBlind(palToApplyTo, statusValue, effect, type)
         console.log(`Monster after applying blind:`, palToApplyTo)
+      }
+      return palToApplyTo
+    case 'poison':
+      if (
+        !(
+          palToApplyTo.status &&
+          palToApplyTo.status.poison &&
+          palToApplyTo.status.poison.active
+        )
+      ) {
+        console.log(
+          `Status result: ${statusResult} Status value: ${statusValue}`,
+        )
+        console.log(
+          `Monster before applying poison to ${palToApplyTo.name}:`,
+          palToApplyTo,
+        )
+        palToApplyTo = applyPoison(palToApplyTo, statusValue, effect, type)
+        console.log(`Monster after applying poison:`, palToApplyTo)
       }
       return palToApplyTo
     default:
