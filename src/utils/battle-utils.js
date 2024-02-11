@@ -58,13 +58,23 @@ export function applyStatusEffect(contextualState, player, move) {
     )
     console.log(`move`, move)
     console.log(`move.effect.type`, move.effect.type)
-    const updatedStatusState = updateStatusState(
-      contextualState,
-      player,
-      move.effect.result,
-      move.effect.amt,
-      move.effect.type,
-    )
+    // const updatedStatusState = updateStatusState(
+    //   contextualState,
+    //   player,
+    //   move.effect.result,
+    //   move.effect.amt,
+    //   move.effect.type,
+    // )
+    console.log(`applyStatusEffect: move.effect.amt`, move.effect.amt)
+    const updatedStatusState = updateStatusState({
+      contextualState: contextualState,
+      player: player,
+      statusResult: move.effect.result,
+      effectAmt: move.effect.amt, // Renamed to match the function's new parameter
+      type: move.effect.type,
+      effectObj: move.effect,
+      // statusValue and index can be omitted if they are using default values
+    })
     console.log(
       `DUCK: after updatedStatusState - contextualState, player, move`,
       contextualState,
@@ -83,13 +93,22 @@ export function applyStatusEffect(contextualState, player, move) {
     )
     console.log(`move`, move)
     console.log(`move.effect.type`, move.effect.type)
-    const updatedStatusState = updateStatusState(
-      contextualState,
-      player,
-      move.effect.result,
-      move.effect.amt,
-      move.effect.type,
-    )
+    // const updatedStatusState = updateStatusState(
+    //   contextualState,
+    //   player,
+    //   move.effect.result,
+    //   move.effect.amt,
+    //   move.effect.type,
+    // )
+    const updatedStatusState = updateStatusState({
+      contextualState: contextualState,
+      player: player,
+      statusResult: move.effect.result,
+      effectAmt: move.effect.amt, // Renamed to match the function's new parameter
+      type: move.effect.type,
+      effectObj: move.effect,
+      // statusValue and index can be omitted if they are using default values
+    })
     console.log('updatedStatusState', updatedStatusState)
     return updatedStatusState
   }

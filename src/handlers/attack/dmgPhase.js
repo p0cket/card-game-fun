@@ -90,7 +90,9 @@ export const dmgPhase = (state, attackPayload) => {
       console.log(
         `HUMAN hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`,
       )
-      finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      // finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      finalDmg = ifBuffDoMoreDamage(user, finalDmg)
+      // finalDmg = newDamage
       newState = lowerAttackDamageInState(newState, user, finalDmg)
       console.log(` dmg is ${finalDmg} after ifWeakDoLessDamage`)
 
@@ -137,6 +139,7 @@ export const dmgPhase = (state, attackPayload) => {
       console.log(`AI hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`)
       // #TODO:  consolidate these two
       // finalDmg = ifWeakDoLessDamage(user, finalDmg)
+      finalDmg = ifBuffDoMoreDamage(user, finalDmg)
       newState = lowerAttackDamageInState(newState, user, finalDmg)
       console.log(`dmg is ${finalDmg} after ifWeakDoLessDamage`)
 
@@ -210,6 +213,20 @@ const ifWeakDoLessDamage = (userPal, dmg) => {
     dmg -= userPal.status.weak.effect
   }
   console.log(`dmg result: ifWeakDoLessDamage: ${dmg}`)
+  return dmg
+}
+
+const ifBuffDoMoreDamage = (userPal, dmg) => {
+  if (userPal.status && userPal.status.buff) {
+    console.log(
+      `Applying buff, reducing damage (${dmg}) by ${
+        userPal.status.buff.effect
+      }. Dmg is now ${dmg - userPal.status.buff.effect}`,
+    )
+    //one
+    dmg -= userPal.status.buff.effect
+  }
+  console.log(`dmg result: ifBuffDoLessDamage: ${dmg}`)
   return dmg
 }
 

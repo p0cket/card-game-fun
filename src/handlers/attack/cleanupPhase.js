@@ -41,7 +41,11 @@ export const cleanupPhase = (state, attackPayload) => {
   // #TODO: Finish cleanupAbilitiesHandler and cleanupAbilitiesHandler
   state = cleanupAbilitiesHandler(state) // may not need pal, userSlot
   // Apply stuff like poison damage, seeing if they wake from sleep, etc
-  state = applyStatusAtCleanup(state)
+
+  // To simplify: just apply status at AI cleanup, end of the cycle
+  if (player === PLAYERS.AI) {
+    state = applyStatusAtCleanup(state)
+  }
 
   if (player === PLAYERS.HUMAN) {
     state = switchDialog(state, DIALOGS.CLEANUP_HUMAN)

@@ -9,16 +9,20 @@ const EnergyPaid = () => {
     label: 'Continue',
     onClick: () => {
       console.log(`EnergyPaid: Clicked Continue, state`, state)
-      executeMove(dispatch, {
+console.log(`m`, state.attack.move, state.attack.move.moveCategory)
+      const moveCategory = state.attack.move.moveCategory
+      const movePayload = {
         pal: state.attack.pal,
         move: state.attack.move,
-        phase: ATK_PHASES.DAMAGE,
-
+        phase:
+          moveCategory === 'change' ? ATK_PHASES.STATUSES : ATK_PHASES.DAMAGE,
         userSlot: state.attack.userSlot,
         targets: state.attack.targets,
         player: state.attack.player,
         // possessed: false,
-      })
+      }
+
+      executeMove(dispatch, movePayload)
     },
   }
 

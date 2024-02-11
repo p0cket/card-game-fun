@@ -53,9 +53,11 @@ export const applyBlind = (target, effectValue, effect, type) => {
     ...target.status,
     blind: {
       active: true,
-      amt: effectValue,
+      // amt: effectValue,
+      amt: effect,
       name: EFFECTS.BLIND,
       effect: effect,
+      // effect: effectValue,
       type: type,
     },
   }
@@ -124,37 +126,101 @@ const modifyPalAccuracy = (pal, amt) => {
 }
 
 // Apply poison effect to the target
-export const applyPoison = (pal, poisonAmt, effect, type) => {
+// export const applyPoison = (pal, poisonAmt, effect, type) => {
+export const applyPoison = ({ pal, poisonAmt, effect, type }) => {
   console.log(`DUCK: applyPoison, amt: ${poisonAmt}, effect, pal:`, effect, pal)
   if (!pal.status) {
     pal.status = {}
   }
   // replace here with what effect you're adding
-  pal.status.poison = {
-    active: true, // Indicating that the weak status is currently active.
-    amt: poisonAmt, // The amount by which the damage will be reduced.
-    name: EFFECTS.POISON,
-    effect: effect,
-    type: type,
+  // pal.status.poison = {
+  //   active: true, // Indicating that the weak status is currently active.
+  //   amt: poisonAmt, // The amount by which the damage will be reduced.
+  //   name: EFFECTS.POISON,
+  //   // effect: effect,
+  //   // effect is the part that shows on screen by the status.
+  //   effect: poisonAmt,
+  //   type: type,
+  // }
+
+  if (pal.status.poison && pal.status.poison.active) {
+    pal.status.poison.amt += poisonAmt
+  } else {
+    // If the pal does not have an active poison status, set the initial amount
+    pal.status.poison = {
+      active: true,
+      amt: poisonAmt,
+      name: EFFECTS.POISON,
+      effect: effect,
+      type: type,
+    }
   }
   console.log(
     `Applying 'weak' status, now damage dealt by ${pal.name} will be reduced by ${poisonAmt}`,
   )
   return pal
 }
+export const applyBuff = ({ pal, buffAmt, effect, type }) => {
+  console.log(
+    `DUCK: applyPoison, amt: ${buffAmt}, effect, pal:`,
+    effect,
+    pal,
+    type,
+  )
+  if (!pal.status) {
+    pal.status = {}
+  }
 
-export const updateStatusState = (
-  // updateStatusState(, , ,
-  //, move.effect.type)
-  contextualState, //contextualState
-  player, //player
-  statusResult, //move.effect.result
-  effect, //amt//move.effect.amt
+  if (pal.status.buff && pal.status.buff.active) {
+    // Convert string to number before adding
+    const currentAmt = parseInt(pal.status.buff.amt, 10);
+    const additionalAmt = parseInt(buffAmt, 10);
+    const newAmt = currentAmt + additionalAmt;
+    console.log(
+      `DUCK: buff already active, adding to amt of ${currentAmt} to ${additionalAmt} = ${newAmt}`,
+    )
+    pal.status.buff.amt = newAmt;
+    pal.status.buff.effect = newAmt; // Assuming effect should also be the new amount
+  } else {
+    console.log(`DUCK: buff not active, setting amt to ${buffAmt}`)
+    // If the pal does not have an active buff status, set the initial amount
+    pal.status.buff = {
+      active: true,
+      amt: buffAmt, /// currently both are being used. we should only use one.
+      name: EFFECTS.BUFF,
+      // effect: effect,
+      effect: buffAmt, /// currently both are being used. we should only use one.
+      type: type,
+    }
+  }
+  console.log(
+    `Applying 'buff' status, now damage dealt by ${pal.name} will be buffed by ${buffAmt}`,
+  )
+  return pal
+}
+
+// export const updateStatusState = (
+//   // updateStatusState(, , ,
+//   //, move.effect.type)
+//   contextualState, //contextualState
+//   player, //player
+//   statusResult, //move.effect.result
+//   effect, //amt//move.effect.amt
+//   type,
+//   //, move.effect.type)
+//   statusValue = true,
+//   index = 0,
+// ) => {
+export const updateStatusState = ({
+  contextualState,
+  player,
+  statusResult,
+  effectAmt, // Assuming this is the renamed parameter for clarity
   type,
-  //, move.effect.type)
+  effectObj,
   statusValue = true,
   index = 0,
-) => {
+}) => {
   const { HUMAN, AI } = PLAYERS
   console.log(
     `DUCK: updateStatusState:   contextualState,
@@ -162,60 +228,209 @@ export const updateStatusState = (
     statusResult,
     effect,
     type,
+    effectObj,
     statusValue,
     index,`,
     contextualState,
     player,
     statusResult, //name of status
-    effect,
+    effectAmt,
     type,
+    effectObj,
     statusValue,
     index,
   )
+  console.log(`updateStatusState effectAmt`, effectAmt)
+  // if (player === HUMAN) {
+  //   let updatedAiParty = [...contextualState.opponent.monsters]
+  //   //now that we have our party, we can apply the status to us.
+  //   // but how should we pass it in?
+  //   let userParty = [...contextualState.userParty]
+
+  //   console.log(`index: ${index}`)
+
+  //   // if target is 'self', then use the userParty
+  //   // else use the aiParty. we can use effectObj.targets, which is an array.
+  //   // currently only one target, but hopefully extendable to multiple
+  //   // ex: targets: ['self'],
+  //   let targetParty = effectObj.targets.includes('self')
+  //     ? userParty
+  //     : updatedAiParty
+  //   let targetIndex = effectObj.targets.includes('self') ? 0 : index // Assuming self always targets the first index
+
+  //   targetParty[targetIndex] = applyStatusToPal(
+  //     effectAmt,
+  //     statusResult,
+  //     targetParty,
+  //     statusValue,
+  //     targetIndex,
+  //     player,
+  //     type,
+  //   )
+  //   console.log(`DUCK: updatedAiParty: `, updatedAiParty)
+  //   let nextState
+  //   if (effectObj.targets.includes('self')) {
+  //     nextState = {
+  //       ...contextualState,
+  //       userParty: targetParty,
+  //     }
+  //   } else {
+  //     nextState = {
+  //       ...contextualState,
+  //       opponent: {
+  //         ...contextualState.opponent,
+  //         monsters: targetParty,
+  //       },
+  //     }
+  //   }
+  //   return nextState
+  // } else if (player === AI) {
+  //   let updatedHumanParty = [...contextualState.userParty]
+  //   let updatedAiParty = [...contextualState.opponent.monsters]
+
+  //   console.log(`index: ${index}`)
+
+  //   let targetParty = effectObj.targets.includes('self')
+  //     ? updatedAiParty
+  //     : updatedHumanParty
+  //   let targetIndex = effectObj.targets.includes('self') ? 0 : index
+
+  //   targetParty[targetIndex] = applyStatusToPal(
+  //     effectAmt,
+  //     statusResult,
+  //     targetParty,
+  //     statusValue,
+  //     targetIndex,
+  //     player,
+  //     type,
+  //   )
+  //   console.log(`DUCK: updatedHumanParty: `, updatedHumanParty)
+  //   let nextState
+  //   if (effectObj.targets.includes('self')) {
+  //     nextState = {
+  //       ...contextualState,
+  //       opponent: {
+  //         ...contextualState.opponent,
+  //         monsters: targetParty,
+  //       },
+  //     }
+  //   } else {
+  //     nextState = {
+  //       ...contextualState,
+  //       userParty: targetParty,
+  //     }
+  //   }
+  //   return nextState
+  // }
+  // return contextualState // In case player is neither 'human' nor 'AI'
+  console.log(`Starting effect application for player type: ${player}`)
+
   if (player === HUMAN) {
-    let updatedMonsters = [...contextualState.opponent.monsters]
-    console.log(`index: ${index}`)
-    updatedMonsters[index] = applyStatusToPal(
-      effect,
+    console.log(`Processing effect for HUMAN player.`)
+    let updatedAiParty = [...contextualState.opponent.monsters]
+    console.log(`Initial AI Party State: `, updatedAiParty)
+
+    let userParty = [...contextualState.userParty]
+    console.log(`Initial User Party State: `, userParty)
+
+    console.log(`Effect index: ${index}`)
+
+    //our alternative will be     targets: ['opponent'] for opponent targets
+    let targetParty = effectObj.targets.includes('self')
+      ? userParty
+      : updatedAiParty
+    let targetIndex = effectObj.targets.includes('self') ? 0 : index // Assuming self always targets the first index
+    console.log(
+      `Targeting ${
+        effectObj.targets.includes('self') ? 'self' : 'opponent'
+      } at index ${targetIndex}`,
+    )
+
+    targetParty[targetIndex] = applyStatusToPal(
+      effectAmt,
       statusResult,
-      updatedMonsters,
+      targetParty,
       statusValue,
-      index,
-      PLAYERS.HUMAN,
+      targetIndex,
+      player,
       type,
     )
-    console.log(`DUCK: updatedMonsters: `, updatedMonsters)
-    const nextState = {
-      ...contextualState,
-      opponent: {
-        ...contextualState.opponent,
-        monsters: updatedMonsters,
-      },
+    console.log(`Post-effect application, targetParty: `, targetParty)
+
+    let nextState
+    if (effectObj.targets.includes('self')) {
+      nextState = {
+        ...contextualState,
+        userParty: targetParty,
+      }
+      console.log(`Updated state with effect applied to user's party.`)
+    } else {
+      nextState = {
+        ...contextualState,
+        opponent: {
+          ...contextualState.opponent,
+          monsters: targetParty,
+        },
+      }
+      console.log(`Updated state with effect applied to AI's party.`)
     }
+    console.log(`Final state for HUMAN player action: `, nextState)
     return nextState
   } else if (player === AI) {
-    console.warn(
-      `updateStatusState: AI player: ${player} contextualState, player, statusResult, statusValue`,
-      contextualState,
-      player,
-      statusResult, //name of status
-      statusValue,
+    //
+    console.log(`AI STATUS BEING APPLIED: Starting AI effect application.`)
+    console.log(`Processing effect for AI player.`)
+    let updatedHumanParty = [...contextualState.userParty]
+    console.log(`Initial Human Party State: `, updatedHumanParty)
+
+    let updatedAiParty = [...contextualState.opponent.monsters]
+    console.log(`Initial AI Party State: `, updatedAiParty)
+
+    console.log(`Effect index: ${index}`)
+
+    let targetParty = effectObj.targets.includes('self')
+      ? updatedAiParty
+      : updatedHumanParty
+    let targetIndex = effectObj.targets.includes('self') ? 0 : index
+    console.log(
+      `Targeting ${
+        effectObj.targets.includes('self') ? 'self' : 'human'
+      } at index ${targetIndex}`,
     )
-    let updatedMonsters = [...contextualState.userParty]
-    updatedMonsters[index] = applyStatusToPal(
-      effect,
+
+    targetParty[targetIndex] = applyStatusToPal(
+      effectAmt,
       statusResult,
-      updatedMonsters,
+      targetParty,
       statusValue,
-      index,
-      PLAYERS.AI,
+      targetIndex,
+      player,
       type,
     )
-    return {
-      ...contextualState,
-      userParty: updatedMonsters,
+    console.log(`Post-effect application, targetParty: `, targetParty)
+
+    let nextState
+    if (effectObj.targets.includes('self')) {
+      nextState = {
+        ...contextualState,
+        opponent: {
+          ...contextualState.opponent,
+          monsters: targetParty,
+        },
+      }
+      console.log(`Updated state with effect applied to AI's party.`)
+    } else {
+      nextState = {
+        ...contextualState,
+        userParty: targetParty,
+      }
+      console.log(`Updated state with effect applied to user's party.`)
     }
+    console.log(`Final state for AI player action: `, nextState)
+    return nextState
   }
+
+  console.log(`No action taken, returning contextual state as is.`)
   return contextualState // In case player is neither 'human' nor 'AI'
 }
 
@@ -281,23 +496,43 @@ const applyStatusToPal = (
       }
       return palToApplyTo
     case 'poison':
-      if (
-        !(
-          palToApplyTo.status &&
-          palToApplyTo.status.poison &&
-          palToApplyTo.status.poison.active
-        )
-      ) {
-        console.log(
-          `Status result: ${statusResult} Status value: ${statusValue}`,
-        )
-        console.log(
-          `Monster before applying poison to ${palToApplyTo.name}:`,
-          palToApplyTo,
-        )
-        palToApplyTo = applyPoison(palToApplyTo, statusValue, effect, type)
-        console.log(`Monster after applying poison:`, palToApplyTo)
-      }
+      console.log(
+        `Status result: ${statusResult} Status value: ${statusValue} and effect ${effect}`,
+        statusValue,
+        effect,
+      )
+      console.log(
+        `Monster before applying poison to ${palToApplyTo.name}:`,
+        palToApplyTo,
+      )
+      palToApplyTo = applyPoison({
+        pal: palToApplyTo,
+        poisonAmt: effect, // or whatever the amount should be
+        effect: statusValue, // Additional details about the effect, if necessary
+        type: type, // The type of the effect
+      })
+      console.log(`Monster after applying poison:`, palToApplyTo)
+      return palToApplyTo
+
+    case 'buff':
+      console.log(
+        `Status result: ${statusResult} Status value: ${statusValue} and effect ${effect}`,
+        statusValue,
+        effect,
+      )
+      console.log(
+        `Monster before applying buff to ${palToApplyTo.name}:`,
+        palToApplyTo,
+        type,
+      )
+      // somehow pass in your pal instead of the opponent pal
+      palToApplyTo = applyBuff({
+        pal: palToApplyTo,
+        buffAmt: effect, // or whatever the amount should be
+        effect: statusValue, // Additional details about the effect, if necessary
+        type: type, // The type of the effect
+      })
+      console.log(`Monster after applying buff:`, palToApplyTo)
       return palToApplyTo
     default:
       // any other status to be applied

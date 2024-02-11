@@ -1,6 +1,6 @@
 import { EFFECTS } from '../effects'
 import { EvasiveTwirl, SolarBlast } from './allCounters'
-import { Blind, Weak } from './keywords/allStatuses'
+import { Blind, Buff, Poison, Weak } from './keywords/allStatuses'
 
 export const SolarSpiritBlast = {
   name: 'Solar Spirit Blast',
@@ -76,6 +76,7 @@ export const WebTrap = {
     chance: 40,
     result: 'immobilize',
     duration: '1 turn',
+    targets: ['opponent'],
   },
   priority: 'normal',
 }
@@ -94,6 +95,7 @@ export const Teleport = {
   //   location: 'opponent',
   // },
   priority: 'fast',
+  targets: ['self'],
 }
 
 export const Mimicry = {
@@ -122,6 +124,7 @@ export const DoubleStrike = {
     description: 'Goes again if the first attack is successful',
     // chance: 100,
     // result: 'double_strike',
+    targets: ['self'],
   },
   priority: 'fast',
   targets: ['opponent', 'opponent_pals'],
@@ -139,6 +142,7 @@ export const LifeSwap = {
     chance: 100,
     result: 'life_swap',
     amt: 80,
+    targets: ['opponent'],
   },
   priority: 'slow',
 }
@@ -156,6 +160,7 @@ export const Thunderstorm = {
     chance: 30,
     result: 'paralyze_multiple',
     duration: '1 turn',
+    targets: ['opponent'],
   },
   priority: 'slow',
 }
@@ -265,6 +270,7 @@ export const LightBeam = {
     duration: '1 turn',
     amt: -20,
     type: Blind,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -304,6 +310,7 @@ export const WiseGaze = {
     duration: '1 turn',
     amt: 8,
     type: Weak,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -356,6 +363,7 @@ export const FeatherGlide = {
     // result: 'stun',
     // duration: '1 turn', // Added duration
     amt: 12, // Added amt (assuming 20 as an example value)
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -405,6 +413,7 @@ export const ShadowLash = {
     result: 'blind',
     duration: '1 turn',
     amt: -15,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -446,6 +455,7 @@ export const CrystalShard = {
     description: 'Launches sharp, crystalline shards at the opponent',
     chance: 88,
     result: 'none',
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -488,6 +498,7 @@ export const Thunderclap = {
     result: 'weak',
     duration: '1 turn',
     amt: 12,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -530,6 +541,7 @@ export const FrostBite = {
     description: 'Bites the opponent with chilling frost, slowing them down',
     chance: 80,
     result: 'none',
+    targets: ['opponent'],
   },
   priority: 'high',
   targets: ['opponent'],
@@ -572,6 +584,7 @@ export const EarthenGrasp = {
     result: 'weak',
     duration: '1 turn',
     amt: 10,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -599,6 +612,7 @@ export const EarthenGrasp = {
       result: 'weak',
       duration: '1 turn',
       amt: 20,
+      targets: ['opponent'],
     },
     targets: ['opponent'],
   },
@@ -616,6 +630,7 @@ export const DoubleJab = {
     result: 'weak',
     duration: '1 turn',
     amt: 10,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -644,6 +659,7 @@ export const DoubleJab = {
       result: 'weak',
       duration: '1 turn',
       amt: 20,
+      targets: ['opponent'],
     },
     targets: ['opponent'],
   },
@@ -660,10 +676,22 @@ export const Smash = {
   effect: {
     description: 'Hit with the power of your body weight',
     // chance: 10,
-    // result: 'stun',
+    result: 'buff',
     duration: '1 turn', // Added duration
-    // amt: 12, // Added amt (assuming 20 as an example value)
+    amt: 2, // Added amt (assuming 20 as an example value)
+    targets: ['opponent'],
   },
+  // effect: {
+  //   description: 'Pierces the opponent with a wise and penetrating gaze',
+  //   chance: 90,
+  //   // result: 'confuse',
+  //   result: 'weak',
+  //   // resutl: EFFECTS.WEAK,
+  //   duration: '1 turn',
+  //   amt: 8,
+  //   type: Weak,
+  // },
+
   priority: 'medium',
   targets: ['opponent'],
   // "NotSoFast" aspect:
@@ -752,6 +780,7 @@ export const LuminousFlight = {
 export const GlowingCharm = {
   name: 'Glowing Charm',
   type: 'elemental',
+  moveCategory: 'change',
   damage: 0, // Glowing Charm doesn't deal damage
   accuracy: 90,
   speed: 9,
@@ -863,6 +892,7 @@ export const EmotionDrain = {
     duration: '1 turn',
     amt: 20,
     type: Weak,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -1213,6 +1243,7 @@ export const RadiantBeam = {
     duration: '1 turn',
     amt: -35,
     type: Blind,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -1246,6 +1277,7 @@ export const RadiantBeam = {
       duration: '1 turn',
       amt: -45,
       type: Blind,
+      targets: ['opponent'],
     },
     targets: ['opponent'],
   },
@@ -1366,6 +1398,7 @@ export const SunShield = {
     result: 'damage_reduction',
     duration: '1 turn',
     amt: 30,
+    targets: ['self'],
   },
   priority: 'medium',
   targets: ['self'],
@@ -1415,6 +1448,7 @@ export const ThunderousRoar = {
     result: 'disorient',
     duration: '1 turn',
     amt: 30,
+    targets: ['opponent'],
   },
   priority: 'high',
   targets: ['opponent'],
@@ -1458,6 +1492,7 @@ export const ColossalSlam = {
     result: 'stun',
     duration: '1 turn',
     amt: 20,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -1500,6 +1535,7 @@ export const ProtectiveBarrier = {
     result: 'shield',
     duration: '2 turns',
     shield_value: 40,
+    targets: ['self'],
   },
   priority: 'high',
   targets: ['user_pals'],
@@ -1537,6 +1573,7 @@ export const MeteorStrike = {
     result: 'burn',
     duration: '2 turns',
     burn_damage: 15,
+    targets: ['opponent'],
   },
   priority: 'ultimate',
   targets: ['all_opponents'],
@@ -1576,11 +1613,13 @@ export const VenomousBite = {
   speed: 12,
   cost: { energy: 4 },
   effect: {
+    type: Poison,
     description: 'Bites the opponent with venomous fangs to inflict poison.',
     chance: 80,
     result: 'poison',
     duration: '3 turns',
     amt: 3,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -1594,11 +1633,14 @@ export const AcidSpray = {
   speed: 8,
   cost: { energy: 5 },
   effect: {
+    type: Poison,
+
     description: 'Sprays corrosive acid to lower the opponent’s defense.',
     chance: 70,
     result: 'defense_down',
     duration: '1 turn',
     amt: 7,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
@@ -1612,11 +1654,14 @@ export const PoisonousCloud = {
   speed: 9,
   cost: { energy: 6 },
   effect: {
+    type: Poison,
+
     description: 'Creates a poisonous cloud to poison multiple opponents.',
     chance: 85,
     result: 'poison',
     duration: '2 turns',
     amt: 7,
+    targets: ['opponent'],
   },
   priority: 'high',
   targets: ['all opponents'],
@@ -1630,12 +1675,15 @@ export const NecroticSludge = {
   speed: 7,
   cost: { energy: 7 },
   effect: {
+    type: Poison,
+
     description:
       'Covers the opponent in necrotic sludge, severely poisoning them.',
     chance: 60,
     result: 'poison',
     duration: '3 turns',
     amt: 6,
+    targets: ['opponent'],
   },
   priority: 'low',
   targets: ['opponent'],
@@ -1649,13 +1697,62 @@ export const VenomShock = {
   speed: 11,
   cost: { energy: 5 },
   effect: {
+    type: Poison,
+
     description:
       'Shocks the opponent with a venomous charge, potentially poisoning them.',
     chance: 85,
     result: 'poison',
     duration: '2 turns',
     amt: 5,
+    targets: ['opponent'],
   },
   priority: 'medium',
   targets: ['opponent'],
+}
+
+//Status Moves / Change Moves
+export const Inspire = {
+  name: 'Inspire',
+  type: 'mental',
+  moveCategory: 'change',
+  accuracy: 100,
+  cost: { energy: 4 },
+  effect: {
+    type: Buff,
+
+
+    description:
+      'Motivates the user, boosting both attack and morale for better performance in battle.',
+    result: 'buff',
+    chance: 90,
+    duration: '3 turns',
+    amt: '7',
+    morale_boost: true, // Assuming morale affects critical hit rate or evasion
+    targets: ['self'],
+  },
+  priority: 'medium',
+  targets: ['self'],
+}
+
+export const FocusMind = {
+  name: 'Focus Mind',
+  type: 'psychic',
+  moveCategory: 'change',
+  accuracy: 100,
+  cost: { energy: 2 },
+  effect: {
+    type: Buff,
+
+    description:
+      'Sharpens mental acuity, increasing special attack for more powerful ability usage.',
+    result: 'buff',
+    chance: 70,
+    duration: '3 turns',
+    amt: '10',
+    special_attack_boost: 20,
+    targets: ['self'],
+  },
+  priority: 'medium',
+  targets: ['self'],
 }

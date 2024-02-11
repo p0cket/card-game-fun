@@ -1,31 +1,33 @@
 export const EFFECTS = {
-  DOUBLEDAMAGE: "doubledamage",
-  STUN: "stun",
-  DRAW: "draw",
-  SLEEP: "sleep",
-  POISON: "poison",
+  BUFF: 'buff',
+//---
+  DOUBLEDAMAGE: 'doubledamage',
+  STUN: 'stun',
+  DRAW: 'draw',
+  SLEEP: 'sleep',
+  POISON: 'poison',
   // Applies damage every turn, stacks with additional poison attacks
-  HEALING: "healing",
+  HEALING: 'healing',
   // Heal a player for amt
-  SHEILD: "sheild",
+  SHEILD: 'sheild',
   // Apply temporary effect that takes away some damage player will recieve
-  BUILDUP: "buildup",
+  BUILDUP: 'buildup',
   // For each card used this turn, add more damage this card will apply
-  LIFESTEAL: "lifesteal",
+  LIFESTEAL: 'lifesteal',
   // A vampiric effect that heals player for the amt of dmg the attack does
-  ARMOR: "armor",
+  ARMOR: 'armor',
   // Apply Battle-long effect that takes away some damage player will recieve
-  EVADE: "evade",
+  EVADE: 'evade',
   // Apply percentage chance that player does not receive damage
-  WEAK: "weakened",
+  WEAK: 'weakened',
   // Apply a amt of damage that is weakens the enemy
   // STACKING: "stacking",
-  ENERGIZE: "energize",
+  ENERGIZE: 'energize',
   // Gain more energy
-  AURA: "aura",
+  AURA: 'aura',
   // If this card is in hand, apply effect on it to other cards in hand
-  STACKING: "stacking",
+  STACKING: 'stacking',
   // If this card is in hand, apply effect on it to other cards in hand
-  BLIND: "blind",
+  BLIND: 'blind',
   // Apply blind effect to the target. Causes Accuracy to be lower
 }
