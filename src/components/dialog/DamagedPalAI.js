@@ -25,6 +25,7 @@ const DamagedPalAI = () => {
   const aiPalDamagedDialogProps = {
     title: 'AI Pal Damaged',
     header: 'AI Pal took damage',
+    //change to take in the actual damage
     message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage. Result: ${state.opponent.monsters[0].stats.hp}HP`,
     options: [dmg_continueOption],
   }

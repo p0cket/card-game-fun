@@ -179,6 +179,7 @@ const runDmgHuman = (newState, targetPal, move, dmgAmt) => {
   newState = createAIDamagedState(newState, damagedHP)
   console.log(`createAIDamagedState:`, newState)
 
+  //change to the right amount of damage dialog
   newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_AI)
   console.log(`dmg after the createAIDamagedState:`, newState)
   return newState
@@ -219,12 +220,19 @@ const ifWeakDoLessDamage = (userPal, dmg) => {
 const ifBuffDoMoreDamage = (userPal, dmg) => {
   if (userPal.status && userPal.status.buff) {
     console.log(
-      `Applying buff, reducing damage (${dmg}) by ${
+      `Applying buff, increasing damage (${dmg}) by ${
         userPal.status.buff.effect
-      }. Dmg is now ${dmg - userPal.status.buff.effect}`,
+      }. Dmg is now ${dmg + parseInt(userPal.status.buff.effect, 10)}`,
     )
     //one
-    dmg -= userPal.status.buff.effect
+    const buffEffect = parseInt(userPal.status.buff.effect, 10)
+    if (!isNaN(buffEffect)) {
+      dmg += buffEffect
+    } else {
+      console.error(
+        `buff.effect is not a number: ${userPal.status.buff.effect}`,
+      )
+    }
   }
   console.log(`dmg result: ifBuffDoLessDamage: ${dmg}`)
   return dmg
