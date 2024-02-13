@@ -16,6 +16,7 @@ import {
   restConfig,
 } from '../../consts/level/levelConfigs'
 import { motion } from 'framer-motion'
+import PixelButton from '../common/PixelButton'
 
 function SimpleLevelList({ levels, onOptionSelected }) {
   //   const [currentLevelId, setCurrentLevelId] = useState(1)
@@ -145,12 +146,21 @@ function SimpleLevelList({ levels, onOptionSelected }) {
                       initial="glow"
                       animate="glow"
                     >
-                      <button
+                      <PixelButton
+                        size="large"
+                        buttonStyle="normal"
+                        className="p-1 m-1"
+                        // onClick={() => console.log('Small button clicked')}
+                        onClick={() => handleOptionClick(level, option)}
+                      >
+                        {option.shortDesc}
+                      </PixelButton>
+                      {/* <button
                         className="bg-boy-green text-white rounded py-1 px-2 focus:outline-none"
                         onClick={() => handleOptionClick(level, option)}
                       >
                         {option.shortDesc}
-                      </button>{' '}
+                      </button>{' '} */}
                     </motion.div>
                     <span className="text-xs mt-2">{option.longDesc}</span>
                   </div>

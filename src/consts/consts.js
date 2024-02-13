@@ -5,6 +5,34 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 
 export const gameVersion = 'Rebirth: v0.49-p - Almost ready for release'
 
+// export const difficultyLevels = ['Easy', 'Normal', 'Hard', 'Very Hard', 'Extreme', 'Insane', 'Impossible', 'Godlike', 'Transcendental', 'Unfathomable', 'Inconceivable'];
+export const difficultyLevels = [
+  'Mild',
+  'Tangy',
+  'Spicy',
+  'Hot',
+  'Fiery',
+  'Explosive',
+  'Nuclear',
+  'Inferno',
+  'Supernatural',
+  'Mythical',
+  'Legendary',
+]
+
+export const difficultyStyles = [
+  'text-gray-900 bg-white border-gray-200 shadow-inner', // Level 0
+  'text-gray-800 bg-gray-100 border-gray-300 shadow', // Level 1
+  'text-gray-700 bg-gray-200 border-gray-400 shadow-sm', // Level 2
+  'text-gray-600 bg-gray-300 border-gray-500 shadow-md', // Level 3
+  'text-gray-500 bg-gray-400 border-gray-600 shadow-lg', // Level 4
+  'text-gray-400 bg-gray-500 border-gray-700 shadow-xl', // Level 5
+  'text-gray-300 bg-gray-600 border-gray-800 shadow-2xl', // Level 6
+  'text-gray-200 bg-gray-700 border-gray-900 shadow-2xl', // Level 7
+  'text-gray-100 bg-gray-800 border-black shadow-2xl', // Level 8
+  'text-white bg-gray-900 border-black shadow-2xl', // Level 9
+  'text-white bg-black border-black shadow-2xl', // Level 10
+]
 // deprecated: previous iteration consts.
 export const startingDeck = [
   { ...basicCards.flame, id: 1 },

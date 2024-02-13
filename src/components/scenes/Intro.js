@@ -16,7 +16,11 @@ import {
   updateLevel,
   updateScene,
 } from '../../handlers/sceneHandlers_new'
-import { gameVersion } from '../../consts/consts'
+import {
+  difficultyLevels,
+  difficultyStyles,
+  gameVersion,
+} from '../../consts/consts'
 // import SparkleButton from '../common/SparkleButton'
 import Chibipal from '../../assets/Chibipal.png'
 import Carousel from '../effects/Carousel'
@@ -35,6 +39,7 @@ import TopDownTest from '../canvas/TopDownTest'
 import GameMap from '../canvas/GameMap'
 import PixelButton from '../common/PixelButton'
 import MainCanvas from '../canvas/MainCanvas'
+import Slider from '../common/Slider'
 
 const Intro = ({ dispatch }) => {
   const styles = {
@@ -51,6 +56,7 @@ const Intro = ({ dispatch }) => {
 
   const contextualState = useStateContext()
   const contextualDispatch = useDispatchContext()
+  const [difficultyLevel, setDifficultyLevel] = useState(0)
   const inDebug = contextualState.debug && contextualState.debug.isOpen
   const isNewGamePlus =
     contextualState.userData && contextualState.userData.newGamePlus
@@ -70,6 +76,42 @@ const Intro = ({ dispatch }) => {
       payload: nextLevelState,
       type: ACTIONS.UPDATE_GAMEDATA,
     })
+  }
+
+  // const handleSliderChange = (e) => {
+  //   const newDifficulty = parseInt(e.target.value, 10)
+  //   if (newDifficulty <= contextualState.permissions.difficulty) {
+  //     setDifficultyLevel(newDifficulty)
+  //   }
+  // }
+  // const handleSliderChange = (newValue) => {
+  //   const newDifficulty = parseInt(newValue, 10);
+  //   if (newDifficulty <= contextualState.permissions.difficulty) {
+  //     setDifficultyLevel(newDifficulty);
+  //   }
+  // };
+  const [displayMessage, setDisplayMessage] = useState('')
+
+  // const handleSliderChange = (newValue) => {
+  //   const newDifficulty = parseInt(newValue, 10);
+  //   if (newDifficulty <= contextualState.permissions.difficulty) {
+  //     setDifficultyLevel(newDifficulty);
+  //     setDisplayMessage(''); // Clear the display message when within allowed difficulty
+  //   } else {
+  //     // Keep the slider's visual feedback but indicate the level is locked
+  //     setDisplayMessage(' - Locked Difficulty');
+  //   }
+  // };
+  // Correctly expect an event object and parse the new value from it.
+  const handleSliderChange = (e) => {
+    const newDifficulty = parseInt(e, 10) // Since you're passing the value directly, not an event object
+    if (newDifficulty <= contextualState.permissions.difficulty) {
+      setDifficultyLevel(newDifficulty)
+      setDisplayMessage('') // Clear any locked message if the level is allowed
+    } else {
+      // If the new difficulty is beyond allowed, don't change the level but indicate it's locked
+      setDisplayMessage(' - Locked')
+    }
   }
 
   // Viseral Resonance, Behavioral Resonance, Reflective Resonance
@@ -234,37 +276,6 @@ const Intro = ({ dispatch }) => {
           </div>{' '}
           {inDebug && (
             <div style={{ padding: '10px' }}>
-              <div className="space-y-2">
-                <div>
-                  <PixelButton
-                    size="small"
-                    buttonStyle="normal"
-                    onClick={() => console.log('Small button clicked')}
-                    className="p-1 m-1"
-                  >
-                    Small Button
-                  </PixelButton>
-                </div>
-                <div>
-                  <PixelButton
-                    size="medium"
-                    buttonStyle="important"
-                    onClick={() => console.log('Important button clicked')}
-                    className="p-1 m-3"
-                  >
-                    Important Button
-                  </PixelButton>
-                </div>
-                <div>
-                  <PixelButton
-                    size="large"
-                    buttonStyle="disabled"
-                    className="p-1 m-3"
-                  >
-                    Disabled Button
-                  </PixelButton>
-                </div>
-              </div>
               <PixelButton
                 size="small"
                 buttonStyle="normal"
@@ -276,8 +287,34 @@ const Intro = ({ dispatch }) => {
             </div>
           )}
           <div style={{ padding: '10px' }}>
-            <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} />
+            <PixelButton
+              size="large"
+              buttonStyle="normal"
+              className="p-1 m-1"
+              // onClick={() => console.log('Small button clicked')}
+              onClick={loadNextLevel}
+            >
+              {`Let's Adventure!`}
+            </PixelButton>
+          {inDebug &&  <div>
+            
+              <div>
+                Difficulty Lvl:{' '}
+                {difficultyLevel <= contextualState.permissions.difficulty
+                  ? difficultyLevels[difficultyLevel]
+                  : 'Locked'}
+                {/* {displayMessage} */}
+              </div>
+              <Slider
+                min="0"
+                max="10"
+                value={difficultyLevel.toString()} // Ensuring the value is a string
+                onChange={handleSliderChange} // Since handleSliderChange now correctly expects a value directly
+              />
+            </div>}
+            {/* <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} /> */}
           </div>
+          {inDebug && <PixelButton size="small" buttonStyle="normal">ToolBox</PixelButton>}
           {/* <SparkleButton /> */}
           <div className="flex">
             {/* TODO: Implement options and museum */}
@@ -286,7 +323,6 @@ const Intro = ({ dispatch }) => {
           </div>
           {isNewGamePlus && (
             <>
-              {' '}
               <div>
                 <button>Credits:</button>
                 Credits: (People who have supported the project)

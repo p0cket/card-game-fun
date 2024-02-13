@@ -43,6 +43,22 @@ const PixelButton = ({
       borderColor: 'border-gray-500',
       shadowColor: '#000000',
     },
+    alternative: {
+      bgColor: 'bg-green-200', // Muted green for the "Back" button
+      borderColor: 'border-green-300', // Slightly darker border for distinction
+      shadowColor: '#000000', // Black shadow to maintain consistency
+    },
+    negative: {
+      bgColor: 'bg-green-900', // Muted green for the "Back" button
+      borderColor: 'border-green-800', // Slightly darker border for distinction
+      shadowColor: '#000000', // Black shadow to maintain consistency
+    },
+    boy: {
+      // bgColor: 'bg-boy-green', 
+      bgColor: 'bg-green-700', 
+      borderColor: 'border-green-800',
+      shadowColor: '#000000',
+    },
   }
 
   const currentStyle = styleConfigs[buttonStyle] || styleConfigs.normal

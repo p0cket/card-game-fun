@@ -173,14 +173,14 @@ export const applyBuff = ({ pal, buffAmt, effect, type }) => {
 
   if (pal.status.buff && pal.status.buff.active) {
     // Convert string to number before adding
-    const currentAmt = parseInt(pal.status.buff.amt, 10);
-    const additionalAmt = parseInt(buffAmt, 10);
-    const newAmt = currentAmt + additionalAmt;
+    const currentAmt = parseInt(pal.status.buff.amt, 10)
+    const additionalAmt = parseInt(buffAmt, 10)
+    const newAmt = currentAmt + additionalAmt
     console.log(
       `DUCK: buff already active, adding to amt of ${currentAmt} to ${additionalAmt} = ${newAmt}`,
     )
-    pal.status.buff.amt = newAmt;
-    pal.status.buff.effect = newAmt; // Assuming effect should also be the new amount
+    pal.status.buff.amt = newAmt
+    pal.status.buff.effect = newAmt // Assuming effect should also be the new amount
   } else {
     console.log(`DUCK: buff not active, setting amt to ${buffAmt}`)
     // If the pal does not have an active buff status, set the initial amount
@@ -198,19 +198,6 @@ export const applyBuff = ({ pal, buffAmt, effect, type }) => {
   )
   return pal
 }
-
-// export const updateStatusState = (
-//   // updateStatusState(, , ,
-//   //, move.effect.type)
-//   contextualState, //contextualState
-//   player, //player
-//   statusResult, //move.effect.result
-//   effect, //amt//move.effect.amt
-//   type,
-//   //, move.effect.type)
-//   statusValue = true,
-//   index = 0,
-// ) => {
 export const updateStatusState = ({
   contextualState,
   player,
@@ -241,88 +228,6 @@ export const updateStatusState = ({
     index,
   )
   console.log(`updateStatusState effectAmt`, effectAmt)
-  // if (player === HUMAN) {
-  //   let updatedAiParty = [...contextualState.opponent.monsters]
-  //   //now that we have our party, we can apply the status to us.
-  //   // but how should we pass it in?
-  //   let userParty = [...contextualState.userParty]
-
-  //   console.log(`index: ${index}`)
-
-  //   // if target is 'self', then use the userParty
-  //   // else use the aiParty. we can use effectObj.targets, which is an array.
-  //   // currently only one target, but hopefully extendable to multiple
-  //   // ex: targets: ['self'],
-  //   let targetParty = effectObj.targets.includes('self')
-  //     ? userParty
-  //     : updatedAiParty
-  //   let targetIndex = effectObj.targets.includes('self') ? 0 : index // Assuming self always targets the first index
-
-  //   targetParty[targetIndex] = applyStatusToPal(
-  //     effectAmt,
-  //     statusResult,
-  //     targetParty,
-  //     statusValue,
-  //     targetIndex,
-  //     player,
-  //     type,
-  //   )
-  //   console.log(`DUCK: updatedAiParty: `, updatedAiParty)
-  //   let nextState
-  //   if (effectObj.targets.includes('self')) {
-  //     nextState = {
-  //       ...contextualState,
-  //       userParty: targetParty,
-  //     }
-  //   } else {
-  //     nextState = {
-  //       ...contextualState,
-  //       opponent: {
-  //         ...contextualState.opponent,
-  //         monsters: targetParty,
-  //       },
-  //     }
-  //   }
-  //   return nextState
-  // } else if (player === AI) {
-  //   let updatedHumanParty = [...contextualState.userParty]
-  //   let updatedAiParty = [...contextualState.opponent.monsters]
-
-  //   console.log(`index: ${index}`)
-
-  //   let targetParty = effectObj.targets.includes('self')
-  //     ? updatedAiParty
-  //     : updatedHumanParty
-  //   let targetIndex = effectObj.targets.includes('self') ? 0 : index
-
-  //   targetParty[targetIndex] = applyStatusToPal(
-  //     effectAmt,
-  //     statusResult,
-  //     targetParty,
-  //     statusValue,
-  //     targetIndex,
-  //     player,
-  //     type,
-  //   )
-  //   console.log(`DUCK: updatedHumanParty: `, updatedHumanParty)
-  //   let nextState
-  //   if (effectObj.targets.includes('self')) {
-  //     nextState = {
-  //       ...contextualState,
-  //       opponent: {
-  //         ...contextualState.opponent,
-  //         monsters: targetParty,
-  //       },
-  //     }
-  //   } else {
-  //     nextState = {
-  //       ...contextualState,
-  //       userParty: targetParty,
-  //     }
-  //   }
-  //   return nextState
-  // }
-  // return contextualState // In case player is neither 'human' nor 'AI'
   console.log(`Starting effect application for player type: ${player}`)
 
   if (player === HUMAN) {

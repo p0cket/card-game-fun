@@ -74,12 +74,18 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
           >
             Items
           </div>
-          <div
-            className="text-sm p-1 flex items-center justify-center"
-            onClick={togglePalMenu}
-          >
-            🔒PaLs
-          </div>
+          {inDebug ? (
+            <div
+              className="text-sm p-1 flex items-center justify-center"
+              onClick={togglePalMenu}
+            >
+              🔒PaLs
+            </div>
+          ) : (
+            <div className="text-sm p-1 flex items-center justify-center">
+              🔒PaLs
+            </div>
+          )}
           <div
             // onClick={togglePopup} maybe options button?
             className="text-sm p-1 flex items-center justify-center"
@@ -143,7 +149,6 @@ function MenuButtonGroup({ togglePopup, ourCurrentMon }) {
       {/* test this and then replace */}
       {/* {currentView === 'menu' ? menuButtons() : ""} */}
       {/* {currentView === 'attacks' ?  attackButtons() : ""} */}
-
       {itemModalVisible && (
         <ItemMenuModal
           items={items}

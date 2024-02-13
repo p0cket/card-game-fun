@@ -1,6 +1,7 @@
 import React from 'react'
 import Dialog from './Dialog'
 import { useStateContext } from '../../MainContext'
+import PixelButton from './PixelButton'
 
 function DialogTemplate({ title, message, options }) {
   // console.warn(`DialogTemplate: ${title}, ${message}, ${options}`, options)
@@ -26,7 +27,7 @@ function DialogTemplate({ title, message, options }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        paddingBottom: '10vh',
+        paddingBottom: '20vh',
         zIndex: 100,
       }}
     >
@@ -69,23 +70,37 @@ function DialogTemplate({ title, message, options }) {
         </div>
         <Dialog size="20" myText={message} />
         <div>
-          {options.map((button, index) => button && (
-            <button
-              key={index}
-              onClick={() => closeDialogPopup(button)}
-              style={{
-                backgroundColor: (button.backgroundColor || '#4b770e'),
-                border: 'none',
-                color: (button.color || '#fff'),
-                padding: '4px 4px',
-                margin: '2px',
-                cursor: 'pointer',
-              }}
-              className="font-[silkscreen]"
-            >
-              {button.label}
-            </button>
-          )).filter(Boolean)}
+          {options
+            .map(
+              (button, index) =>
+                button && (
+                  <PixelButton
+                    key={index}
+                    size="small"
+                    buttonStyle="boy"
+                    onClick={() => closeDialogPopup(button)}
+                    className="p-1 m-3"
+                  >
+                    {button.label}
+                  </PixelButton>
+                  // <button
+                  //   key={index}
+                  //   onClick={() => closeDialogPopup(button)}
+                  //   style={{
+                  //     backgroundColor: (button.backgroundColor || '#4b770e'),
+                  //     border: 'none',
+                  //     color: (button.color || '#fff'),
+                  //     padding: '4px 4px',
+                  //     margin: '2px',
+                  //     cursor: 'pointer',
+                  //   }}
+                  //   className="font-[silkscreen]"
+                  // >
+                  //   {button.label}
+                  // </button>
+                ),
+            )
+            .filter(Boolean)}
         </div>
       </div>
     </div>

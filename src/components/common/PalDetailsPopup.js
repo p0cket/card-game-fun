@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatchContext, useStateContext } from '../../MainContext'
 import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
+import PixelButton from './PixelButton'
 
 function PalDetailsPopup({
   selectedPal,
@@ -91,7 +92,7 @@ function PalDetailsPopup({
           </div>
         </div>
         <div className="mt-6 p-6 flex justify-between">
-          <button
+          {/* <button
             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
             onClick={handleGoBack}
           >
@@ -102,7 +103,25 @@ function PalDetailsPopup({
             onClick={() => handleSelect(selectedPal)}
           >
             Select
-          </button>
+          </button> */}
+          <PixelButton
+              size="large"
+              buttonStyle="negative"
+              className="p-1 m-1"
+              // onClick={() => console.log('Small button clicked')}
+              onClick={handleGoBack}
+              >
+              {`Go Back`}
+            </PixelButton>
+            <PixelButton
+              size="large"
+              buttonStyle="normal"
+              className="p-1 m-1"
+              // onClick={() => console.log('Small button clicked')}
+              onClick={() => handleSelect(selectedPal)}
+              >
+              {`Select!`}
+            </PixelButton>
         </div>
       </div>
     </div>

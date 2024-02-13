@@ -629,3 +629,35 @@ export const testPals = [
   Verdantshifter,
   Technotitan,
 ]
+
+const PalTemplate = {
+  id: "template",
+  name: "TemplateMon",
+  type: "Elemental",
+  baseStats: {
+    hp: 50,
+    attack: 40,
+    defense: 35,
+    specialAttack: 45,
+    specialDefense: 40,
+    speed: 30,
+  },
+  statBonuses: {
+    hp: { every: 1, rate: 10 }, // +10 HP every level
+    attack: { every: 3, rate: 1 }, // +1 attack every 3 levels
+    defense: { every: 2, rate: 2 }, // +2 defense every 2 levels
+    specialAttack: { every: 4, rate: 2 }, // +2 special attack every 4 levels
+    specialDefense: { every: 4, rate: 2 }, // +2 special defense every 4 levels
+    speed: { every: 5, rate: 3 }, // +3 speed every 5 levels
+  },
+  moveSet: [
+    { level: 1, move: "Tackle" },
+    { level: 5, move: "Elemental Burst" },
+    { level: 10, move: "Healing Light" },
+    { level: 15, move: "Power Surge" },
+  ],
+  evolveAt: 20,
+  evolveTo: "EvolvedTemplateMon",
+  lore: "A mysterious creature that harnesses the power of elements. It evolves into a more powerful form as it grows.",
+};
+
