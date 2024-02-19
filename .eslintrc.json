@@ -32,6 +32,7 @@
  
     "space-before-function-paren": "off",
     "no-unused-vars": "off"
+    // "no-unsafe-optional-chaining": "off"
 
     // if you want to remove prop validation:
     // "react/prop-types": "off"

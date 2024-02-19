@@ -1,4 +1,4 @@
-// damageStateHandlers.js
+// damageStateHandlers.js (but really statusStateHandlers)
 
 import { PLAYERS } from '../../consts/consts'
 import { EFFECTS } from '../../effects'

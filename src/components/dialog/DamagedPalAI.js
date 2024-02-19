@@ -6,6 +6,8 @@ import { useDispatchContext, useStateContext } from '../../MainContext'
 const DamagedPalAI = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
+  const opponentFirstMonsterHP = state.opponent.monsters?.[0]?.stats.hp ?? 'N/A';
+
   const dmg_continueOption = {
     label: 'Continue',
     onClick: () => {
@@ -26,7 +28,7 @@ const DamagedPalAI = () => {
     title: 'AI Pal Damaged',
     header: 'AI Pal took damage',
     //change to take in the actual damage
-    message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage. Result: ${state.opponent.monsters[0].stats.hp}HP`,
+    message: `${state.attack.pal.name} dealt ${state.attack.move.damage} damage. Result: ${opponentFirstMonsterHP}HP`,
     options: [dmg_continueOption],
   }
 

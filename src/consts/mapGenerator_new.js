@@ -104,6 +104,9 @@ export const levels = [
   },
 ]
 
+//Maybe small early battles to get moves from small mons?
+// choices of path - go to poison mon to learn that one from a TM or Buff?
+
 export const gymLevelsTwo = [
   {
     id: 1,
@@ -241,6 +244,90 @@ export const gymLevelsTwo = [
     ],
   },
 ]
+
+export const testLevels = [
+  {
+    "id": 1,
+    "title": "Rookie's Welcome",
+    "description": "The gateway to your adventure, where the path of challenges begins under the watchful eyes of the Rookie Trainer.",
+    "options": [
+      {
+        "id": "1a",
+        "shortDesc": "Battle a Rookie Trainer",
+        "longDesc": "Engage in your first test of strength against the welcoming Rookie Trainer, a crucial step on your journey. He might know how to get to the gym boss.",
+        "scene": "BATTLE"
+      }
+    ],
+    "mapFeatures": ["Welcoming Arch", "Symbolic Statues", "Path of Trials"]
+  },
+  {
+    "id": 2,
+    "title": "The Wild Thickets: Voltage Surge",
+    "description": "An electrifying energy pervades this part of the Wild Thickets, attracting powerful electric-type monsters.",
+    "options": [
+      {
+        "id": "2a",
+        "shortDesc": "Face Zapling, the Electric Whisker",
+        "longDesc": "A swift electric-type monster that tests your precision and timing with its blinding speed and electric shocks.",
+        "scene": "BATTLE",
+        "rewards": ["Electric Pace", "Static Coat"]
+      }
+    ],
+    "mapFeatures": ["Crackling Air", "Sparking Ground", "Electric Arcs"]
+  },
+  {
+    "id": 3,
+    "title": "The Wild Thickets: Misty Veil",
+    "description": "A dense mist limits visibility, home to ghostly figures and water-type monsters lurking in the obscured conditions.",
+    "options": [
+      {
+        "id": "3a",
+        "shortDesc": "Confront Fogshade, the Mist Wanderer",
+        "longDesc": "Challenge a ghostly figure that moves silently through the mist, attacking with chilling, spectral moves.",
+        "scene": "BATTLE",
+        "rewards": ["Spectral Dodge", "Ghostly Essence"]
+      }
+    ],
+    "mapFeatures": ["Thick Mist", "Limited Visibility", "Eerie Silence"]
+  },
+  {
+    "id": 4,
+    "title": "The Wild Thickets: Scorched Trails",
+    "description": "Recent fires have scorched this area, attracting fire-type monsters to its warmth.",
+    "options": [
+      {
+        "id": "4a",
+        "shortDesc": "Battle Emberclaw, the Flame Prowler",
+        "longDesc": "Face a creature of flame and ash, capable of igniting fierce flames with its claws.",
+        "scene": "BATTLE",
+        "rewards": ["Flame Heart", "Ashen Hide"]
+      }
+    ],
+    "mapFeatures": ["Scorched Earth", "Warmth", "Regenerating Flora"]
+  },
+  {
+    "id": 5,
+    "title": "Seasoned Fighter's Arena",
+    "description": "A robust hall echoing the spirit of countless battles, where seasoned warriors share their prowess.",
+    "options": [
+      {
+        "id": "5a",
+        "shortDesc": "Challenge the Seasoned Fighter",
+        "longDesc": "Test your skills in combat against a seasoned fighter. One of them knows the path for you to take.",
+        "scene": "BATTLE"
+      },
+      {
+        "id": "5b",
+        "shortDesc": "Rest and Strategize",
+        "longDesc": "Take a well-earned rest to heal.",
+        "scene": "REST"
+      }
+    ],
+    "mapFeatures": ["Training Dummies", "Weapon Racks", "Resting Quarters"]
+  }
+  // Additional levels can be added following this pattern.
+]
+
 
 // Assuming SCENES.BATTLE and SCENES.BOSS are predefined to handle battles and the final boss encounter
 // "trainer" and "leader" would be references to specific trainer and leader objects defined elsewhere

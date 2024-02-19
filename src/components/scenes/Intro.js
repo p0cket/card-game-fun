@@ -40,8 +40,14 @@ import GameMap from '../canvas/GameMap'
 import PixelButton from '../common/PixelButton'
 import MainCanvas from '../canvas/MainCanvas'
 import Slider from '../common/Slider'
+import VariablesConfigMenu from '../dialog/VariablesConfigMenu'
 
 const Intro = ({ dispatch }) => {
+  const handleVariablesChange = (newVariables) => {
+    console.log('Updated Variables:', newVariables)
+    // Update your game's configuration based on newVariables here
+  }
+
   const styles = {
     fontStyle: {
       fontFamily: 'Silkscreen',
@@ -237,6 +243,12 @@ const Intro = ({ dispatch }) => {
           ) : (
             ''
           )}
+          <div className="p-4">
+            {/*
+            //uncomment to work on variables menu
+                        <h1 className="text-2xl font-bold mb-4">Game Settings</h1>
+             <VariablesConfigMenu onVariablesChange={handleVariablesChange} /> */}
+          </div>
           {/* <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
             <img src={gashTrainerImg} alt="gash trainer" />
@@ -296,25 +308,30 @@ const Intro = ({ dispatch }) => {
             >
               {`Let's Adventure!`}
             </PixelButton>
-          {inDebug &&  <div>
-            
+            {inDebug && (
               <div>
-                Difficulty Lvl:{' '}
-                {difficultyLevel <= contextualState.permissions.difficulty
-                  ? difficultyLevels[difficultyLevel]
-                  : 'Locked'}
-                {/* {displayMessage} */}
+                <div>
+                  Difficulty Lvl:{' '}
+                  {difficultyLevel <= contextualState.permissions.difficulty
+                    ? difficultyLevels[difficultyLevel]
+                    : 'Locked'}
+                  {/* {displayMessage} */}
+                </div>
+                <Slider
+                  min="0"
+                  max="10"
+                  value={difficultyLevel.toString()} // Ensuring the value is a string
+                  onChange={handleSliderChange} // Since handleSliderChange now correctly expects a value directly
+                />
               </div>
-              <Slider
-                min="0"
-                max="10"
-                value={difficultyLevel.toString()} // Ensuring the value is a string
-                onChange={handleSliderChange} // Since handleSliderChange now correctly expects a value directly
-              />
-            </div>}
+            )}
             {/* <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} /> */}
           </div>
-          {inDebug && <PixelButton size="small" buttonStyle="normal">ToolBox</PixelButton>}
+          {inDebug && (
+            <PixelButton size="small" buttonStyle="normal">
+              ToolBox
+            </PixelButton>
+          )}
           {/* <SparkleButton /> */}
           <div className="flex">
             {/* TODO: Implement options and museum */}
