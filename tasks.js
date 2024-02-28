@@ -7,10 +7,17 @@
 // [ ] Remove the types for now
 // [ ] Fix alignment of chibipal selection
 
-// Three real taks for now:
+// Three real taks for now: (break them down into steps and expand on thoughts)
 // [ ] Make palGenerator
+//  find where you set up a pal. Replace that setup with the generator.
+// The place I set up the pal is _____.
+// The way it is set up is ___
 
 // [ ] Add in depth to combat
+// ways I can add depth are ____
 
 // [ ] Add in pal catching
+// I can add in pal catching by adding _____
 // [ ] Add in pal entering/leaving
+// entering can just be switching, leaving needs to trigger the switch.
+// the way it'll trigger the switch is ____
