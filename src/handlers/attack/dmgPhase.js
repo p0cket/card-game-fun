@@ -14,6 +14,10 @@ import { dmgEffectsHandler } from '../phaseHelpers/dmgPhaseHandlers'
 import {
   createAIDamagedState,
   createHumanDamagedState,
+  ifBuffDoMoreDamage,
+  lowerAttackDamageInState,
+  runDmgAI,
+  runDmgHuman,
 } from '../state/damageStateHandlers'
 let ourDmg
 let damagedHP
@@ -160,122 +164,4 @@ export const dmgPhase = (state, attackPayload) => {
       return newState
     }
   }
-}
-
-const runDmgHuman = (newState, targetPal, move, dmgAmt) => {
-  console.log(`ATK: DMG phase: targetPal, move`, targetPal, move)
-  // add the Effects Handler here:
-  //  newState = dmgEffectsHandler(newState, pal, 0)
-  const moveCost = move.cost.energy
-  ourDmg = dmgAmt
-  damagedHP = targetPal.stats.hp - ourDmg
-  console.warn(
-    `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
-  )
-  console.log(
-    `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${damagedHP}`,
-    newState,
-  )
-  newState = createAIDamagedState(newState, damagedHP)
-  console.log(`createAIDamagedState:`, newState)
-
-  //change to the right amount of damage dialog
-  newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_AI)
-  console.log(`dmg after the createAIDamagedState:`, newState)
-  return newState
-}
-const runDmgAI = (newState, targetPal, move, dmgAmt) => {
-  console.log(`Player is AI: newState.userParty`, newState.userParty)
-  const moveCost = move.cost.energy
-  console.log(
-    `ATK: DMG phase: targetPal, move`,
-    targetPal,
-    move,
-    `The AI damage to be dealt is ${dmgAmt}.
-This will result in targetPal.stats.hp (${targetPal.stats.hp})
- at: ${targetPal.stats.hp - dmgAmt}`,
-  )
-  damagedHP = targetPal.stats.hp - dmgAmt
-  newState = createHumanDamagedState(newState, damagedHP)
-  newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN)
-  console.log(`After createHumanDamagedState:`, newState)
-  console.log(`ATK: DAMAGE phase ending:`, newState)
-  return newState
-}
-
-const ifWeakDoLessDamage = (userPal, dmg) => {
-  if (userPal.status && userPal.status.weak) {
-    console.log(
-      `Applying weakness, reducing damage (${dmg}) by ${
-        userPal.status.weak.effect
-      }. Dmg is now ${dmg - userPal.status.weak.effect}`,
-    )
-    //one
-    dmg -= userPal.status.weak.effect
-  }
-  console.log(`dmg result: ifWeakDoLessDamage: ${dmg}`)
-  return dmg
-}
-
-const ifBuffDoMoreDamage = (userPal, dmg) => {
-  if (userPal.status && userPal.status.buff) {
-    console.log(
-      `Applying buff, increasing damage (${dmg}) by ${
-        userPal.status.buff.effect
-      }. Dmg is now ${dmg + parseInt(userPal.status.buff.effect, 10)}`,
-    )
-    //one
-    const buffEffect = parseInt(userPal.status.buff.effect, 10)
-    if (!isNaN(buffEffect)) {
-      dmg += buffEffect
-    } else {
-      console.error(
-        `buff.effect is not a number: ${userPal.status.buff.effect}`,
-      )
-    }
-  }
-  console.log(`dmg result: ifBuffDoLessDamage: ${dmg}`)
-  return dmg
-}
-
-const lowerAttackDamageInState = (newState, userPal, newDmgAmt) => {
-  // Adjusts the damage in the state and returns the updated state object.
-  if (userPal.status && userPal.status.weak) {
-    console.log(
-      `Applying weakness, reducing damage (${newDmgAmt}) by ${
-        userPal.status.weak.effect
-      }. newDmgAmt is now ${newDmgAmt - userPal.status.weak.effect}`,
-    )
-    // newDmgAmt -= userPal.status.weak.amt
-    newState = {
-      ...newState,
-      attack: {
-        ...newState.attack,
-        move: {
-          ...newState.attack.move,
-          damage: newDmgAmt - userPal.status.weak.effect,
-        },
-      },
-    }
-  }
-  // apply the weak to the attack itself
-  newState = appendAttackDebuffState(newState, userPal.status.weak)
-  console.log(`newDmgAmt result sate after lowerDamageByWeak`, newState)
-  return newState // Returns the full state object with the new damage applied.
-}
-const appendAttackDebuffState = (newState, debuff) => {
-  newState = {
-    ...newState,
-    attack: {
-      ...newState.attack,
-      debuffs: newState.attack.debuffs
-        ? [...newState.attack.debuffs, debuff]
-        : [debuff],
-    },
-  }
-  console.log(
-    `newState result after appending debuff: appendAttackDebuffState`,
-    newState,
-  )
-  return newState
 }

@@ -43,6 +43,15 @@ import Slider from '../common/Slider'
 import VariablesConfigMenu from '../dialog/VariablesConfigMenu'
 
 const Intro = ({ dispatch }) => {
+  const [toolBoxVisible, setToolBoxVisible] = useState(false)
+  const [canvasVisible, setCanvasVisible] = useState(false)
+
+  const toggleCanvas = () => {
+    setCanvasVisible(prev => !prev);
+  }
+  const toggleToolBox = () => {
+    setToolBoxVisible(prev => !prev);
+  }
   const handleVariablesChange = (newVariables) => {
     console.log('Updated Variables:', newVariables)
     // Update your game's configuration based on newVariables here
@@ -244,10 +253,11 @@ const Intro = ({ dispatch }) => {
             ''
           )}
           <div className="p-4">
-            {/*
-            //uncomment to work on variables menu
-                        <h1 className="text-2xl font-bold mb-4">Game Settings</h1>
-             <VariablesConfigMenu onVariablesChange={handleVariablesChange} /> */}
+                    {toolBoxVisible && (
+                    <>
+                      <VariablesConfigMenu onVariablesChange={handleVariablesChange} />
+                    </>
+                  )}
           </div>
           {/* <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
@@ -274,7 +284,7 @@ const Intro = ({ dispatch }) => {
               </div>
             </div>
           )}
-          {inDebug && <TopDownTest />}
+          {canvasVisible && <TopDownTest />}
           {/* <img src={palImages[0]} alt="pal logo" /> */}
           {/* <FlashingImage
             src={palImages[0]}
@@ -286,18 +296,7 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
-          {inDebug && (
-            <div style={{ padding: '10px' }}>
-              <PixelButton
-                size="small"
-                buttonStyle="normal"
-                className="p-1 m-1"
-                onClick={() => console.log('Small button clicked')}
-              >
-                Daily Woods Expedition{' '}
-              </PixelButton>
-            </div>
-          )}
+        
           <div style={{ padding: '10px' }}>
             <PixelButton
               size="large"
@@ -328,9 +327,29 @@ const Intro = ({ dispatch }) => {
             {/* <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} /> */}
           </div>
           {inDebug && (
-            <PixelButton size="small" buttonStyle="normal">
+           <> <PixelButton size="small" buttonStyle="normal"
+            onClick={toggleToolBox}
+
+            >
               ToolBox
             </PixelButton>
+            <PixelButton size="small" buttonStyle="normal"
+            onClick={toggleCanvas}
+
+            >
+              Toggle Canvas
+            </PixelButton>
+            <div style={{ padding: '10px' }}>
+              <PixelButton
+                size="small"
+                buttonStyle="normal"
+                className="p-1 m-1"
+                onClick={() => console.log('Small button clicked')}
+              >
+                Daily Woods Expedition{' '}
+              </PixelButton>
+            </div></>
+         
           )}
           {/* <SparkleButton /> */}
           <div className="flex">
