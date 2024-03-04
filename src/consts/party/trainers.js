@@ -4,8 +4,23 @@ import {
   Recycleroo,
   Ticklefairy,
   Umbrabunny,
+  getPal,
 } from '../pals/pals'
 
+// export const getTrainer(trainer) {
+
+// }
+
+// create a trainer
+// the trainer has pals
+// pals would be variable based on lvl range / difficulty
+// 
+
+// [ ] implement getTrainer like getPal MUST
+export const getTrainer = (pal) => {
+  const deepCopiedTrainer = structuredClone(pal)
+  // deepCopiedTrainer.reward.exp = deepCopiedTrainer.reward.exp * state.difficulty
+return deepCopiedTrainer}
 export const Trainer = {
   name: 'Miles Trainer',
   reward: {
@@ -21,7 +36,8 @@ export const Trainer = {
     // { name: "Bunbun", level: 2 },
     // { name: "FireDrake",
     // { name: "WaterSplash", level: 4 },
-    Ticklefairy,
+    getPal(Ticklefairy),
+    // Ticklefairy,
     Ticklefairy,
   ],
   dialogue: {

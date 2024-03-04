@@ -98,6 +98,9 @@ export const MainProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
 
   function reducer(state, action) {
+    // 
+    state = structuredClone(state)
+
     cusLog(`dispatching:`, 'info', undefined, action)
     let payState,
       dmgState,
@@ -135,29 +138,15 @@ export const MainProvider = ({ children }) => {
         console.log(`stateWithProgression: `, stateWithProgression)
         return stateWithProgression
       case ACTIONS.CHANGE_SCENE:
-        // here is the logic for changing to battle that
-        // is refactored. fix it.
+        //changing to battle that. is refactored. fix it.
         console.log(`CHANGE_SCENE. action.payload: `, action.payload)
-
         nextSceneState = updateScene(state, {
           screen: action.payload.screen,
           details: action.payload.details,
         })
         nextLevelState = updateLevel(nextSceneState, 1)
-        console.log(
-          `nextLevelState after updateLevel,  action.payload: `,
-          nextLevelState,
-          action.payload,
-        )
-        // setup our opponent
-        console.log(
-          'action.payload.details nextLevelState:',
-          action.payload.details,
-          nextLevelState,
-        )
-        // here is where we setup opponent.
-        // for a boss this needs to be modified or
-        // we need bosses that are trainers.
+        console.log(`updateLevel`,nextLevelState, action.payload)
+        // setup opponent. for a boss this needs to be modified
         nextLevelState = setupOpponent(
           nextLevelState,
           action.payload.details.trainer,
@@ -165,18 +154,15 @@ export const MainProvider = ({ children }) => {
         switch (action.payload.screen) {
           case SCENES.BATTLE:
           case SCENES.BOSS:
-            // set the pal to max, probably should be setEnemyPalEnergyToMax,
-            // or pass in opponent/index as a param.
+            // set the pal to max, probably should be setEnemyPalEnergyToMax. or pass in opponent/index as a param.
             nextLevelState = logLevelsCompletedData(nextLevelState)
             nextLevelState = setEnemyPalEnergyToMax(nextLevelState)
             nextLevelState = setEnemyPalHPToMax(nextLevelState)
             nextLevelState = clearEnemyPalStatuses(nextLevelState)
             // clear our pal's statuses before the next level as well
             nextLevelState = clearUserPartyStatuses(nextLevelState)
-            break // This will prevent fall-through and continue with the rest of the function after the switch
-          // Other cases can be added here as needed
+            break // This will prevent fall-through and continue with the rest of the function after the switch. Other cases can be added here as needed
         }
-
         console.log(`nextLevelState after setupOpponent: `, nextLevelState)
         return nextLevelState
       case ACTIONS.SHOW_ATTACK:

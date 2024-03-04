@@ -75,6 +75,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
 
   const handleChangeLevel = (passedInState, payload) => {
     console.log(`handleChangeLevel payload: `, payload)
+    // Do mapLevel+1 
     dispatch({
       type: ACTIONS.CHANGE_LEVEL,
       payload: {

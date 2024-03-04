@@ -21,3 +21,50 @@
 // [ ] Add in pal entering/leaving
 // entering can just be switching, leaving needs to trigger the switch.
 // the way it'll trigger the switch is ____
+
+// TODO
+// BUG
+// [ ]
+// FIXME
+// IDEA
+// HACK
+// NOTE
+// REVIEW
+// QUESTION
+// OPTIMIZE
+// WARNING
+// INFO
+// TASK
+// DEBUG
+// FEATURE
+// IMPROVEMENT
+// CONFIG
+// DOCUMENT
+// PERFORMANCE
+// STYLE
+// SECURITY
+// REFACTOR
+// DEPRECATED
+// TEMP
+// TEST
+// ASSERT
+// VERIFY
+// PENDING
+// REFACTOR
+// REVISIT
+// CONSIDER
+// EXPERIMENT
+// ANALYZE
+// IMPLEMENT
+// VERIFY
+// CONFIRM
+// CHALLENGE
+// SUPPORT
+// RESOLVE
+// DISCUSS
+// RESEARCH
+// DESIGN
+// PLAN
+// BREAKDOWN
+// ASSIGN
+// SCHEDULE

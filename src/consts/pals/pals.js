@@ -538,6 +538,12 @@ export const Wolfjobb = {
   passives: 'Leadership',
 }
 
+// [ ] implement this getTicklefairy
+export const getPal = (pal) => {
+  const deepCopiedPal = structuredClone(pal)
+  // deepCopiedPal.health = deepCopiedPal.stats.hp * state.difficulty
+return deepCopiedPal}
+
 export const Ticklefairy = {
   name: 'Ticklefairy',
   lore: 'Ticklefairy is a mischievous fairy that spreads laughter and joy wherever it goes.',

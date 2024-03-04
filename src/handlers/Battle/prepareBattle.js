@@ -67,6 +67,7 @@ export const startBattle = (trainer) => {
   logWithColor(`Battle started with ${trainer.name}`, 'blue')
 }
 
+//[ ] add depth to randomlySelectTrainer similar to generatePal
 export const randomlySelectTrainer = (trainersToSelectFrom) => {
   const chosenTrainer =
     trainersToSelectFrom[
