@@ -5,7 +5,7 @@ import { opponent, userParty } from './party/parties'
 import { generateMap } from './mapGenerator_new'
 import { placeholderTrainer } from './party/trainers'
 import { LightBeam } from './allMoves'
-import { Luminowl } from './pals/pals'
+// import { Luminowl } from './pals/pals'
 import { DIALOGS } from '../components/dialog/DialogManager'
 import { ATK_PHASES } from '../handlers/moveHandlers'
 import {
@@ -15,6 +15,7 @@ import {
   pumpernickelSoda,
   superPotion,
 } from './items/basicItems'
+import { getLuminowl } from './pals/pals'
 
 const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 //
@@ -159,10 +160,10 @@ export const getFreshStartingData = () => ({
     isOpen: false,
     popupType: 'attack',
     attack: LightBeam,
-    ourCurrentMon: Luminowl,
+    ourCurrentMon: getLuminowl(),
   },
   attack: {
-    pal: Luminowl,
+    pal: getLuminowl(),
     move: LightBeam,
     phase: 'default null phase',
     // actionDetails:

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 // import { SCENES } from '../../scenes'
-import { allTrainers, bossBarry } from '../../consts/party/trainers'
+import { allTrainers, bossBarry, getTrainer } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import {
   SCENES,
@@ -42,10 +42,14 @@ function SimpleLevelList({ levels, onOptionSelected }) {
   }
 
   const changeLevel = (level, option) => {
-    const selectedTrainer = randomlySelectTrainer(allTrainers)
+    let selectedTrainer = randomlySelectTrainer(allTrainers)
     console.log(`selectedTrainer`, selectedTrainer, allTrainers)
-    console.table(selectedTrainer)
-    console.log(`level, option`, level, option)
+
+    // generate the trainer
+    selectedTrainer = getTrainer(selectedTrainer)
+        console.table(selectedTrainer)
+
+    console.log(`level, option, selectedTrainer`, level, option, selectedTrainer)
     switch (option.scene) {
       case SCENES.BATTLE:
         handleChangeLevel(state, {
@@ -75,7 +79,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
 
   const handleChangeLevel = (passedInState, payload) => {
     console.log(`handleChangeLevel payload: `, payload)
-    // Do mapLevel+1 
+    // increases the mapLevel+1 (state.current.mapLevel+1)
     dispatch({
       type: ACTIONS.CHANGE_LEVEL,
       payload: {
@@ -83,6 +87,7 @@ function SimpleLevelList({ levels, onOptionSelected }) {
         details: payload.details,
       },
     })
+    //
     dispatch({
       type: ACTIONS.CHANGE_SCENE,
       payload: {

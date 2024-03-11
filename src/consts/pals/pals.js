@@ -75,7 +75,8 @@ export const monsterPropTypes = PropTypes.shape({
   weight: PropTypes.string.isRequired,
   lore: PropTypes.string.isRequired,
 })
-export const Luminowl = {
+
+export const getLuminowl = () => ({
   id: 1,
   name: 'Luminowl',
   elemental_type: 'Light',
@@ -117,8 +118,9 @@ export const Luminowl = {
   size: 'Medium',
   weight: 'Light',
   lore: "Legends speak of Luminowl's ability to bring light and wisdom to those in need.",
-}
-export const Umbrabunny = {
+})
+
+export const getUmbrabunny = () => ({
   id: 8,
   name: 'Umbrabunny',
   elemental_type: 'Dark',
@@ -160,8 +162,9 @@ export const Umbrabunny = {
   size: 'Small',
   weight: 'Light',
   lore: "Legends speak of Umbrabunny's ability to bring comfort and emotional balance to troubled hearts.",
-}
-export const Glowbuggle = {
+})
+
+export const getGlowbuggle = () => ({
   id: 7,
   name: 'Glowbuggle',
   elemental_type: 'Light',
@@ -207,11 +210,11 @@ export const Glowbuggle = {
   size: 'Tiny',
   weight: 'Light',
   lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
-}
+})
 
 
 // ----
-export const Shadowstalker = {
+export const Shadowstalker = () => ({
   id: 2,
   name: 'Shadowstalker',
   elemental_type: 'Dark',
@@ -251,9 +254,10 @@ export const Shadowstalker = {
   size: 'Medium',
   weight: 'Light',
   lore: "Legends speak of Shadowstalker's ability to strike from the shadows with unmatched precision.",
-}
+})
 
-export const Infernodragon = {
+// export const Infernodragon = {
+export const getInfernodragon = () => ({
   id: 3,
   name: 'Infernodragon',
   elemental_type: 'Fire',
@@ -294,9 +298,10 @@ export const Infernodragon = {
   size: 'Large',
   weight: 'Heavy',
   lore: "Legends speak of Infernodragon's ability to bring devastation with its fiery breath.",
-}
+})
 
-export const Aquaphoenix = {
+// export const Aquaphoenix = {
+export const getAquaphoenix = () => ({
   id: 4,
   name: 'Aquaphoenix',
   elemental_type: 'Water',
@@ -337,9 +342,10 @@ export const Aquaphoenix = {
   size: 'Large',
   weight: 'Light',
   lore: "Legends speak of Aquaphoenix's ability to bring life-giving rains to drought-stricken lands.",
-}
+})
 
-export const Verdantshifter = {
+// export const Verdantshifter = {
+export const getVerdantshifter = () => ({
   id: 5,
   name: 'Verdantshifter',
   elemental_type: 'Nature',
@@ -380,9 +386,10 @@ export const Verdantshifter = {
   size: 'Medium',
   weight: 'Medium',
   lore: "Legends speak of Verdantshifter's ability to restore balance to nature with its morphing skills.",
-}
+})
 
-export const Technotitan = {
+// export const Technotitan = {
+export const getTechnotitan = () => ({
   id: 6,
   name: 'Technotitan',
   elemental_type: 'Tech',
@@ -423,9 +430,10 @@ export const Technotitan = {
   size: 'Giant',
   weight: 'Heavy',
   lore: "Legends speak of Technotitan's ability to defend cities and civilizations from threats with its advanced technology.",
-}
+})
 
-export const Recycleroo = {
+// export const Recycleroo = {
+export const getRecycleroo = () => ({
   id: 9,
   name: 'Recycleroo',
   elemental_type: 'Nature',
@@ -468,10 +476,13 @@ export const Recycleroo = {
   size: 'Medium',
   weight: 'Moderate',
   lore: 'Recycleroo is known for its dedication to environmental protection, using recycled materials to defend nature.',
-}
+})
 
 //this doesn't have and above and for shoe
-export const Shoeb = {
+// export const Shoeb = {
+export const getShoeb = () => ({
+  
+
   name: 'Shoeb',
   lore: "A lost shoe that somehow became a commander. It doesn't have any special abilities or moves.",
   image: '/shoeb_image.png',
@@ -503,9 +514,12 @@ export const Shoeb = {
   possible_moves: [],
   passives: 'Forgotten',
   //   lore: "Really? A shoe?",
-}
+})
 
-export const Wolfjobb = {
+// export const Wolfjobb = {
+export const getWolfjobb = () => ({
+  
+
   name: 'Wolfjobb',
   lore: "A wolf with an amazing work ethic. It leads by example but doesn't have any special commander abilities or moves.",
   image: '/wolfjobb_image.png',
@@ -536,7 +550,7 @@ export const Wolfjobb = {
   moves: ['Workaholic Bite', 'Diligent Howl', 'Teamwork'],
   possible_moves: ['Overtime Strike', 'Efficiency Boost', 'Persistence'],
   passives: 'Leadership',
-}
+})
 
 // [ ] implement this getTicklefairy
 export const getPal = (pal) => {
@@ -544,7 +558,8 @@ export const getPal = (pal) => {
   // deepCopiedPal.health = deepCopiedPal.stats.hp * state.difficulty
 return deepCopiedPal}
 
-export const Ticklefairy = {
+// export const Ticklefairy = {
+export const getTicklefairy = () => ({
   name: 'Ticklefairy',
   lore: 'Ticklefairy is a mischievous fairy that spreads laughter and joy wherever it goes.',
   image: TicklefairyImg,
@@ -572,16 +587,15 @@ export const Ticklefairy = {
   experience: 4000,
   status: {},
   moves: [ LightBeam, WiseGaze, FeatherGlide],
-  // moves: [QuickStrike, SolarSpiritBlast],
-
   // moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
   passives: 'Joyful Aura',
-}
+})
 
 // bosses
-export const MoltenScale = {
+// export const MoltenScale = {
+export const getMoltenScale = () => ({
   id: 10,
   name: 'MoltenScale', // Added name property for consistency
   elemental_type: 'Light',
@@ -620,20 +634,22 @@ export const MoltenScale = {
   size: 'Large',
   weight: 'Heavy',
   lore: 'Legends tell of a dragon born from the heart of the sun, bringing light and power to civilizations.',
-}
+})
 
 //types: Foodbased, Water, Earth, Fire, Air,
 // Light, Dark, None, Physical, Magical, Nature
 //
 
-export const testPals = [
-  Luminowl,
-  Glowbuggle,
-  Umbrabunny,
-  Infernodragon,
-  Aquaphoenix,
-  Verdantshifter,
-  Technotitan,
+export const testPalsFunctions = [
+  getLuminowl,
+  getGlowbuggle,
+  getUmbrabunny,
+  getInfernodragon,
+  getAquaphoenix,
+  getVerdantshifter,
+  getTechnotitan,
+  getTicklefairy,
+  getMoltenScale
 ]
 
 const PalTemplate = {

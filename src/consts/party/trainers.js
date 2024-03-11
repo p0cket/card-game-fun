@@ -1,10 +1,15 @@
 import {
-  Luminowl,
-  MoltenScale,
-  Recycleroo,
-  Ticklefairy,
-  Umbrabunny,
+  // Luminowl,
+  // MoltenScale,
+  // Recycleroo,
+  // Ticklefairy,
+  // Umbrabunny,
+  getLuminowl,
+  getMoltenScale,
   getPal,
+  getRecycleroo,
+  getTicklefairy,
+  getUmbrabunny,
 } from '../pals/pals'
 
 // export const getTrainer(trainer) {
@@ -17,11 +22,12 @@ import {
 // 
 
 // [ ] implement getTrainer like getPal MUST
-export const getTrainer = (pal) => {
-  const deepCopiedTrainer = structuredClone(pal)
-  // deepCopiedTrainer.reward.exp = deepCopiedTrainer.reward.exp * state.difficulty
-return deepCopiedTrainer}
-export const Trainer = {
+// export const getTrainer = (pal) => {
+//   const deepCopiedTrainer = structuredClone(pal)
+//   // deepCopiedTrainer.reward.exp = deepCopiedTrainer.reward.exp * state.difficulty
+// return deepCopiedTrainer
+// }
+export const getTrainer = () => ({
   name: 'Miles Trainer',
   reward: {
     experience: 100,
@@ -33,12 +39,13 @@ export const Trainer = {
     ],
   },
   monsters: [
+    getTicklefairy(),
     // { name: "Bunbun", level: 2 },
     // { name: "FireDrake",
     // { name: "WaterSplash", level: 4 },
-    getPal(Ticklefairy),
+    // getPal(Ticklefairy),
     // Ticklefairy,
-    Ticklefairy,
+    // Ticklefairy,
   ],
   dialogue: {
     enter: 'I challenge you to a battle!',
@@ -49,7 +56,7 @@ export const Trainer = {
   // Maybe spirit. Spirit would be a powerful buff from a dead monster. This could be the
   // commander ability
   // Add other trainer properties like image, location, etc.
-}
+})
 
 export const hikerBrak = {
   name: 'Hiker Brak',
@@ -59,8 +66,8 @@ export const hikerBrak = {
     items: [{ name: 'Rock Candy', quantity: 2 }],
   },
   monsters: [
-    Umbrabunny,
-    Ticklefairy,
+    getUmbrabunny(),
+    getTicklefairy(),
   ],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty rocks!',
@@ -79,8 +86,8 @@ export const mysticWillow = {
   monsters: [
     // { name: "Sparklefox", level: 10 },
     // { name: "Moonshadow", level: 12 },
-    Recycleroo,
-    Ticklefairy,
+    getRecycleroo,
+    getTicklefairy,
   ],
   dialogue: {
     enter: 'Let the magic of nature guide our battle!',
@@ -99,8 +106,8 @@ export const acePilotSkyler = {
   monsters: [
     // { name: "Thunderhawk", level: 15 },
     // { name: "Cyclonejet", level: 17 },
-    Luminowl,
-    Ticklefairy,
+    getLuminowl(),
+    getTicklefairy(),
   ],
   dialogue: {
     enter: "Fasten your seatbelts! We're in for a turbulent battle!",
@@ -119,8 +126,8 @@ export const scientistTesla = {
   monsters: [
     // { name: "Electroray", level: 9 },
     // { name: "Voltorbolt", level: 11 },
-    Ticklefairy,
-    Ticklefairy,
+    getTicklefairy(),
+    getTicklefairy(),
   ],
   dialogue: {
     enter: 'Witness the power of electricity, harnessed for battle!',
@@ -142,9 +149,10 @@ export const placeholderTrainer = {
   monsters: [
     // { name: "Sillyslime", level: 1 }, // A slime that tells dad jokes
     // { name: "Pillowpet", level: 2 }, // Literally a fluffy pillow brought to life
-    Ticklefairy, // Special move: Tickle Attack!
-    Ticklefairy,
-    Ticklefairy,
+    getTicklefairy(),
+    getTicklefairy(),
+    getTicklefairy(),
+    getTicklefairy(),
   ],
   dialogue: {
     enter: 'I challenge you to a tickle fight! Oops, I mean a battle!',
@@ -163,7 +171,7 @@ export const bossBarry = {
     items: [{ name: 'dragon Candy', quantity: 2 }],
   },
   monsters: [
-    MoltenScale,
+    getMoltenScale(),
   ],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty dragon!',
@@ -179,7 +187,7 @@ export const bossSebastian = {
     items: [{ name: 'dragon Candy', quantity: 2 }],
   },
   monsters: [
-    MoltenScale,
+    getMoltenScale(),
   ],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty dragon!',
@@ -189,7 +197,7 @@ export const bossSebastian = {
 }
 
 export const basicTrainers = [
-  Trainer,
+  getTrainer(),
   hikerBrak,
   mysticWillow,
   acePilotSkyler,
@@ -209,12 +217,12 @@ export const allTrainers = [
 // What trainerNames does is it returns an array of trainer names.
 export const trainerNames = allTrainers.map((trainer) => trainer.name)
 
-// trainerNamesAndLevels returns an array of objects with the trainer name and level.
+//  returns an array of objects with the trainer name and level.
 // This is useful for displaying trainer names and levels in a table or list.
 // Example usage:
-// const trainerNamesAndLevels = trainerNamesAndLevels();
-// console.log(trainerNamesAndLevels); // [{ name: "Trainer Name", level: 2 }
-export const trainerNamesAndLevels = allTrainers.map((trainer) => ({
-  name: trainer.name,
-  level: trainer.monsters[0].level,
-}))
+
+// export const trainerNamesAndLevels = allTrainers.map((trainer) => ({
+//   name: trainer.name,
+//   level: trainer.monsters[0] ? trainer.monsters[0].level : 'Unknown',
+// }));
+

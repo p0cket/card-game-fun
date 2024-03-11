@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Luminowl, Glowbuggle, Umbrabunny } from '../../consts/pals/pals'
+import { Luminowl, Glowbuggle, Umbrabunny, getLuminowl, getGlowbuggle, getUmbrabunny } from '../../consts/pals/pals'
 import { addPalToParty } from '../../handlers/partyHandlers_new'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 import {
@@ -13,7 +13,7 @@ import selectStartImg from './../../assets/eventImages/SelectStarterImg.png'
 const ChibipalsSelection = () => {
   const [selectedPal, setSelectedPal] = useState(null)
   const [showDetails, setShowDetails] = useState(false)
-  const palStarters = [Luminowl, Glowbuggle, Umbrabunny]
+  const palStarters = [getLuminowl(), getGlowbuggle(), getUmbrabunny()]
   const handleMonsterClick = (clickedPal) => {
     setSelectedPal(clickedPal)
     setShowDetails(true)

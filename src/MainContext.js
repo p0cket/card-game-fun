@@ -92,15 +92,9 @@ export const ACTIONS = {
 }
 
 export const MainProvider = ({ children }) => {
-  // Here we initialize the state with the startingData
-  // const initialState = { startingData };
-  // Here is the reducer function
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
-
   function reducer(state, action) {
-    // 
     state = structuredClone(state)
-
     cusLog(`dispatching:`, 'info', undefined, action)
     let payState,
       dmgState,
