@@ -18,7 +18,7 @@ export const Blind = {
     'Lowers Accuracy by the amount',
   
   type: 'Modifier',
-  effect: applyBlind,
+  // effect: applyBlind,
   stackable: false,
   targets: 'creature',
   duration: 1, // Duration can be adjusted as needed
@@ -31,7 +31,7 @@ export const Weak = {
   description:
   'Reduces damage dealt by this creature',
   type: 'Modifier',
-  effect: applyWeak,
+  // effect: applyWeak,
   stackable: false,
   targets: 'creature',
   duration: 1, // Duration can be adjusted as needed
@@ -43,7 +43,7 @@ export const Poison = {
   //   'Applies the weak status to the target, reducing their damage dealt.',
   description: 'Deals poison damage each turn.',
   type: 'Modifier',
-  effect: applyPoison,
+  // effect: applyPoison,
   stackable: false,
   targets: 'creature',
   duration: 1, // Duration can be adjusted as needed
@@ -55,7 +55,7 @@ export const Buff = {
   //   'Applies the weak status to the target, reducing their damage dealt.',
   description: 'Increases damage output.',
   type: 'Modifier',
-  effect: applyBuff,
+  // effect: applyBuff,
   stackable: false,
   targets: 'creature',
   duration: 1, // Duration can be adjusted as needed

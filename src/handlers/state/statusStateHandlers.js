@@ -418,7 +418,6 @@ const applyStatusToPal = (
       })
       console.log(`Monster after applying poison:`, palToApplyTo)
       return palToApplyTo
-
     case 'buff':
       console.log(
         `Status result: ${statusResult} Status value: ${statusValue} and effect ${effect}`,
