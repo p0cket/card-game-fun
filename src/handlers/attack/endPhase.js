@@ -110,7 +110,7 @@ export const endPhase = (state, attackPayload) => {
     //     screen: SCENES.BATTLE,
     //     details: {
     //       type: 'trainer',
-    //       trainer: hikerBrak,
+    //      
     //       area: 'tranquil forest',
     //       difficulty: 'easy',
     //     },

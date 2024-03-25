@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
 // import { SCENES } from '../../scenes'
-import { allTrainers, bossBarry, getTrainer } from '../../consts/party/trainers'
+import { getAllTrainers, bossBarry, getTrainer } from '../../consts/party/trainers'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
 import {
   SCENES,
@@ -42,8 +42,8 @@ function SimpleLevelList({ levels, onOptionSelected }) {
   }
 
   const changeLevel = (level, option) => {
-    let selectedTrainer = randomlySelectTrainer(allTrainers)
-    console.log(`selectedTrainer`, selectedTrainer, allTrainers)
+    let selectedTrainer = randomlySelectTrainer(getAllTrainers())
+    console.log(`selectedTrainer`, selectedTrainer, getAllTrainers())
 
     // generate the trainer
     selectedTrainer = getTrainer(selectedTrainer)

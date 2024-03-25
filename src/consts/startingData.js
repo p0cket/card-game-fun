@@ -3,7 +3,7 @@ import { EFFECTS } from '../effects'
 import { SCENES } from '../handlers/sceneHandlers_new'
 import { opponent, userParty } from './party/parties'
 import { generateMap } from './mapGenerator_new'
-import { placeholderTrainer } from './party/trainers'
+import { getPlaceholderTrainer } from './party/trainers'
 import { LightBeam } from './allMoves'
 // import { Luminowl } from './pals/pals'
 import { DIALOGS } from '../components/dialog/DialogManager'
@@ -71,7 +71,7 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
 export const getFreshStartingData = () => ({
   userParty: [],
   // opponentParty: [], // TODO move opponent party here
-  opponent: placeholderTrainer,
+  opponent: getPlaceholderTrainer(),
   battleManager: {
     turn: 1,
     currentPlayer: 'player',

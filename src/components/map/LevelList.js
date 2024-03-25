@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 // import { SCENES } from "../handlers/sceneHandlers_new"
 import { SCENES, changeLevel } from '../../handlers/sceneHandlers_new'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-import { hikerBrak } from '../../consts/party/trainers'
+import { getHikerBrak } from '../../consts/party/trainers'
 
 //state.current.completedLevels has how many and the details of the levels you've completed
 // should be checked and each entry is one level that we hacve completed
@@ -86,7 +86,7 @@ export const LevelList = ({ levels }) => {
                   screen: SCENES.BATTLE,
                   details: {
                     type: 'trainer',
-                    trainer: hikerBrak,
+                    trainer: getHikerBrak(),
                     area: 'tranquil forest',
                     difficulty: 'easy',
                     refillEnergy: true,

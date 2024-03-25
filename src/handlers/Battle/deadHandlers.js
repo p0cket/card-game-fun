@@ -1,5 +1,5 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
-import { bossBarry, hikerBrak } from '../../consts/party/trainers'
+import { getBossBarry, getHikerBrak } from '../../consts/party/trainers'
 import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { SCENES, changeLevel, updateScene } from '../sceneHandlers_new'
@@ -91,7 +91,7 @@ export const checkIfDead = (state) => {
           screen: SCENES.RESULTS,
           details: {
             type: 'win',
-            trainer: hikerBrak,
+            trainer: getHikerBrak(),
             area: 'tranquil forest',
             difficulty: 'easy',
             achievement: 'flawless victory',
@@ -104,7 +104,7 @@ export const checkIfDead = (state) => {
           screen: SCENES.VICTORY,
           details: {
             type: 'win',
-            trainer: bossBarry,
+            trainer: getBossBarry(),
             area: 'serene meadow',
             difficulty: 'moderate',
             achievement: 'perfect conqueror',

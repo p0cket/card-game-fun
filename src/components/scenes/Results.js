@@ -8,7 +8,7 @@ import {
 } from '../../handlers/sceneHandlers_new'
 // import { SCENES } from '../../scenes'
 import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
-import { allTrainers } from '../../consts/party/trainers'
+import { getAllTrainers } from '../../consts/party/trainers'
 import {
   CuteCharm,
   DoubleStrike,
@@ -56,7 +56,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
         ...selectedAttack,
       },
     })
-    const randomizedTrainer = randomlySelectTrainer(allTrainers)
+    const randomizedTrainer = randomlySelectTrainer(getAllTrainers())
     console.log('Continue to next scene')
     dispatch({
       type: ACTIONS.CHANGE_SCENE,
@@ -348,7 +348,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
         },
       })
     }
-    const randomizedTrainer = randomlySelectTrainer(allTrainers)
+    const randomizedTrainer = randomlySelectTrainer(getAllTrainers())
 
     console.log('Continue to next scene')
     dispatch({
@@ -384,7 +384,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
         palIndex: palIndex,
       },
     })
-    const randomizedTrainer = randomlySelectTrainer(allTrainers)
+    const randomizedTrainer = randomlySelectTrainer(getAllTrainers())
     console.log('Continue to next scene')
     dispatch({
       type: ACTIONS.CHANGE_SCENE,

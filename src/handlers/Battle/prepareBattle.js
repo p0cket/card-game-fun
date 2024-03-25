@@ -23,7 +23,6 @@
 //   // Add other trainer properties like image, location, etc.
 // };
 import { basicTrainers } from '../../consts/party/trainers'
-import { hikerBrak } from '../../consts/party/trainers'
 
 // Add enemy pals to their party and add on the additional Details
 // like level and what results from that
