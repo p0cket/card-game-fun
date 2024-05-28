@@ -1,7 +1,13 @@
 // Replace the other functions of the same name
 // so you can use the functions in Battle.js
 import { ATK_PHASES } from '../handlers/moveHandlers'
-import { clearEnemyPalStatuses, clearUserPartyStatuses, setEnemyPalEnergyToMax, setEnemyPalHPToMax, setPlayerPalHPToMax } from '../handlers/state/healthStateHandlers'
+import {
+  clearEnemyPalStatuses,
+  clearUserPartyStatuses,
+  setEnemyPalEnergyToMax,
+  setEnemyPalHPToMax,
+  setPlayerPalHPToMax,
+} from '../handlers/state/healthStateHandlers'
 import { updateStatusState } from '../handlers/state/statusStateHandlers'
 
 export const decideEnemyATK = (enemyAttacks) => {
@@ -140,11 +146,11 @@ export function nextPhase(phase) {
 
 //expand on this
 function resetBattleState(state) {
-  let newState = { ...state };
-  newState = setPlayerPalHPToMax(newState);
-  newState = setEnemyPalEnergyToMax(newState);
-  newState = setEnemyPalHPToMax(newState);
-  newState = clearEnemyPalStatuses(newState);
-  newState = clearUserPartyStatuses(newState); // Assuming this function exists
-  return newState;
+  let newState = { ...state }
+  newState = setPlayerPalHPToMax(newState)
+  newState = setEnemyPalEnergyToMax(newState)
+  newState = setEnemyPalHPToMax(newState)
+  newState = clearEnemyPalStatuses(newState)
+  newState = clearUserPartyStatuses(newState) // Assuming this function exists
+  return newState
 }

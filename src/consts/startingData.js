@@ -128,17 +128,16 @@ export const getFreshStartingData = () => ({
     },
     alerts: [],
     devMode: false,
-  }, 
-   userData: {
+  },
+  userData: {
     newGamePlus: false,
-    pals:[],
-    items:[],
+    pals: [],
+    items: [],
     gold: 0,
-    medals:[],
-    runes:[],
+    medals: [],
+    runes: [],
     inventory: [],
     badges: [],
-    
   },
   events: {},
   dialog: {
@@ -178,7 +177,7 @@ export const getFreshStartingData = () => ({
   },
   moveStack: [],
   difficulty: 0,
-  permissions: {difficulty: 3}
+  permissions: { difficulty: 3 },
 })
 export const newStartingData = getFreshStartingData()
 

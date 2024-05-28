@@ -47,10 +47,10 @@ const Intro = ({ dispatch }) => {
   const [canvasVisible, setCanvasVisible] = useState(false)
 
   const toggleCanvas = () => {
-    setCanvasVisible(prev => !prev);
+    setCanvasVisible((prev) => !prev)
   }
   const toggleToolBox = () => {
-    setToolBoxVisible(prev => !prev);
+    setToolBoxVisible((prev) => !prev)
   }
   const handleVariablesChange = (newVariables) => {
     console.log('Updated Variables:', newVariables)
@@ -253,11 +253,13 @@ const Intro = ({ dispatch }) => {
             ''
           )}
           <div className="p-4">
-                    {toolBoxVisible && (
-                    <>
-                      <VariablesConfigMenu onVariablesChange={handleVariablesChange} />
-                    </>
-                  )}
+            {toolBoxVisible && (
+              <>
+                <VariablesConfigMenu
+                  onVariablesChange={handleVariablesChange}
+                />
+              </>
+            )}
           </div>
           {/* <div className="grid grid-cols-2 items-center gap-4">
             <Carousel ourImages={palImages} />
@@ -296,7 +298,6 @@ const Intro = ({ dispatch }) => {
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
-        
           <div style={{ padding: '10px' }}>
             <PixelButton
               size="large"
@@ -327,29 +328,33 @@ const Intro = ({ dispatch }) => {
             {/* <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} /> */}
           </div>
           {inDebug && (
-           <> <PixelButton size="small" buttonStyle="normal"
-            onClick={toggleToolBox}
-
-            >
-              ToolBox
-            </PixelButton>
-            <PixelButton size="small" buttonStyle="normal"
-            onClick={toggleCanvas}
-
-            >
-              Toggle Canvas
-            </PixelButton>
-            <div style={{ padding: '10px' }}>
+            <>
+              {' '}
               <PixelButton
                 size="small"
                 buttonStyle="normal"
-                className="p-1 m-1"
-                onClick={() => console.log('Small button clicked')}
+                onClick={toggleToolBox}
               >
-                Daily Woods Expedition{' '}
+                ToolBox
               </PixelButton>
-            </div></>
-         
+              <PixelButton
+                size="small"
+                buttonStyle="normal"
+                onClick={toggleCanvas}
+              >
+                Toggle Canvas
+              </PixelButton>
+              <div style={{ padding: '10px' }}>
+                <PixelButton
+                  size="small"
+                  buttonStyle="normal"
+                  className="p-1 m-1"
+                  onClick={() => console.log('Small button clicked')}
+                >
+                  Daily Woods Expedition{' '}
+                </PixelButton>
+              </div>
+            </>
           )}
           {/* <SparkleButton /> */}
           <div className="flex">

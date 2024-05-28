@@ -1,7 +1,11 @@
 /* eslint-disable indent */
 import React, { useContext, useState } from 'react'
 import './index.css'
-import { getFreshStartingData, newStartingData, startingDataBackup } from './consts/startingData'
+import {
+  getFreshStartingData,
+  newStartingData,
+  startingDataBackup,
+} from './consts/startingData'
 import { cusLog } from './utils/debugging-utils'
 import { payPhase } from './handlers/attack/payPhase'
 import { dmgPhase } from './handlers/attack/dmgPhase'
@@ -139,7 +143,7 @@ export const MainProvider = ({ children }) => {
           details: action.payload.details,
         })
         nextLevelState = updateLevel(nextSceneState, 1)
-        console.log(`updateLevel`,nextLevelState, action.payload)
+        console.log(`updateLevel`, nextLevelState, action.payload)
         // setup opponent. for a boss this needs to be modified
         nextLevelState = setupOpponent(
           nextLevelState,
@@ -420,17 +424,17 @@ export const MainProvider = ({ children }) => {
       // return stateWithHealth
       // break
       case ACTIONS.INCREASE_MOVE_DAMAGE: {
-        const { palIndex, moveIndex, additionalDamage } = action.payload;
+        const { palIndex, moveIndex, additionalDamage } = action.payload
         const updatedState = {
           ...state,
           userParty: state.userParty.map((pal, index) => {
             if (index === palIndex) {
-              return updateMoveOnPal(pal, moveIndex, additionalDamage);
+              return updateMoveOnPal(pal, moveIndex, additionalDamage)
             }
-            return pal;
+            return pal
           }),
-        };
-        return updatedState;
+        }
+        return updatedState
       }
       case ACTIONS.USE_ITEM:
         console.log('Reducer USE_ITEM:', action)
@@ -498,7 +502,7 @@ export const MainProvider = ({ children }) => {
         freshData = getFreshStartingData()
         freshData.userData = state.userData
         return freshData
-        // return { ...newStartingData }
+      // return { ...newStartingData }
       // return {...startingDataCopy}
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')

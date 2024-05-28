@@ -103,7 +103,7 @@ export const getLuminowl = () => ({
   experience: 5000,
   status: {},
   // moves: ['Light Beam', 'Wise Gaze', 'Feather Glide'],
-  moves: [ LightBeam, WiseGaze, FeatherGlide],
+  moves: [LightBeam, WiseGaze, FeatherGlide],
   possible_moves: ['Luminous Aura', 'Mystic Sight', 'Soothing Melody'],
   // passives: 'Guiding Wisdom',
   passives: mysticRegeneration,
@@ -187,10 +187,10 @@ export const getGlowbuggle = () => ({
   strengths: ['Dark'],
   weaknesses: ['Electric', 'Ice'],
   cost: 400,
-  lvl:5,
+  lvl: 5,
   experience: 4000,
   status: {},
-  moves: [Smash,  EmotionDrain],
+  moves: [Smash, EmotionDrain],
   // moves: [LuminousFlight, GlowingCharm, WarmEmbrace],
   possible_moves: [
     'Bioluminescent Burst',
@@ -211,7 +211,6 @@ export const getGlowbuggle = () => ({
   weight: 'Light',
   lore: "Legends speak of Glowbuggle's ability to bring comfort and light to those in the darkest of nights.",
 })
-
 
 // ----
 export const Shadowstalker = () => ({
@@ -481,8 +480,6 @@ export const getRecycleroo = () => ({
 //this doesn't have and above and for shoe
 // export const Shoeb = {
 export const getShoeb = () => ({
-  
-
   name: 'Shoeb',
   lore: "A lost shoe that somehow became a commander. It doesn't have any special abilities or moves.",
   image: '/shoeb_image.png',
@@ -518,8 +515,6 @@ export const getShoeb = () => ({
 
 // export const Wolfjobb = {
 export const getWolfjobb = () => ({
-  
-
   name: 'Wolfjobb',
   lore: "A wolf with an amazing work ethic. It leads by example but doesn't have any special commander abilities or moves.",
   image: '/wolfjobb_image.png',
@@ -556,7 +551,8 @@ export const getWolfjobb = () => ({
 export const getPal = (pal) => {
   const deepCopiedPal = structuredClone(pal)
   // deepCopiedPal.health = deepCopiedPal.stats.hp * state.difficulty
-return deepCopiedPal}
+  return deepCopiedPal
+}
 
 // export const Ticklefairy = {
 export const getTicklefairy = () => ({
@@ -586,7 +582,7 @@ export const getTicklefairy = () => ({
   lvl: 40,
   experience: 4000,
   status: {},
-  moves: [ LightBeam, WiseGaze, FeatherGlide],
+  moves: [LightBeam, WiseGaze, FeatherGlide],
   // moves: [QuickStrike, SolarSpiritBlast, Teleport],
   // moves: ["Tickle Whirlwind", "Giggle Spark", "Joyful Charm"],
   possible_moves: ['Laughter Explosion', 'Tickle Dance', 'Happy Hug'],
@@ -649,13 +645,13 @@ export const testPalsFunctions = [
   getVerdantshifter,
   getTechnotitan,
   getTicklefairy,
-  getMoltenScale
+  getMoltenScale,
 ]
 
 const PalTemplate = {
-  id: "template",
-  name: "TemplateMon",
-  type: "Elemental",
+  id: 'template',
+  name: 'TemplateMon',
+  type: 'Elemental',
   baseStats: {
     hp: 50,
     attack: 40,
@@ -673,13 +669,12 @@ const PalTemplate = {
     speed: { every: 5, rate: 3 }, // +3 speed every 5 levels
   },
   moveSet: [
-    { level: 1, move: "Tackle" },
-    { level: 5, move: "Elemental Burst" },
-    { level: 10, move: "Healing Light" },
-    { level: 15, move: "Power Surge" },
+    { level: 1, move: 'Tackle' },
+    { level: 5, move: 'Elemental Burst' },
+    { level: 10, move: 'Healing Light' },
+    { level: 15, move: 'Power Surge' },
   ],
   evolveAt: 20,
-  evolveTo: "EvolvedTemplateMon",
-  lore: "A mysterious creature that harnesses the power of elements. It evolves into a more powerful form as it grows.",
-};
-
+  evolveTo: 'EvolvedTemplateMon',
+  lore: 'A mysterious creature that harnesses the power of elements. It evolves into a more powerful form as it grows.',
+}

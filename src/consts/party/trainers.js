@@ -5,19 +5,18 @@ import {
   getRecycleroo,
   getTicklefairy,
   getUmbrabunny,
-} from '../pals/pals';
+} from '../pals/pals'
 
-export const getTrainer = (trainerName, trainer) => { // maybe trainer name?
-  switch(trainerName){
-    case "HIKER_BRAK":
+export const getTrainer = (trainerName, trainer) => {
+  // maybe trainer name?
+  switch (trainerName) {
+    case 'HIKER_BRAK':
       return getHikerBrak()
-  default:
-      console.log("no trainer")
+    default:
+      console.log('no trainer')
   }
-  return ""
+  return ''
 }
-
-
 
 export const getHikerBrak = () => ({
   name: 'Hiker Brak',
@@ -26,16 +25,13 @@ export const getHikerBrak = () => ({
     currency: 300,
     items: [{ name: 'Rock Candy', quantity: 2 }],
   },
-  monsters: [
-    getUmbrabunny(),
-    getTicklefairy(),
-  ],
+  monsters: [getUmbrabunny(), getTicklefairy()],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty rocks!',
     win: "You're no match for my boulders!",
     lose: "You've chipped away at my confidence. Well done.",
   },
-});
+})
 
 export const getMysticWillow = () => ({
   name: 'Mystic Willow',
@@ -44,16 +40,13 @@ export const getMysticWillow = () => ({
     currency: 400,
     items: [{ name: 'Enchanted Orb', quantity: 1 }],
   },
-  monsters: [
-    getRecycleroo(),
-    getTicklefairy(),
-  ],
+  monsters: [getRecycleroo(), getTicklefairy()],
   dialogue: {
     enter: 'Let the magic of nature guide our battle!',
     win: "Nature's power flows through you as well. Impressive!",
     lose: "You've proven that the balance of nature is unpredictable.",
   },
-});
+})
 
 export const getAcePilotSkyler = () => ({
   name: 'Ace Pilot Skyler',
@@ -62,16 +55,13 @@ export const getAcePilotSkyler = () => ({
     currency: 600,
     items: [{ name: 'Jet Fuel', quantity: 3 }],
   },
-  monsters: [
-    getLuminowl(),
-    getTicklefairy(),
-  ],
+  monsters: [getLuminowl(), getTicklefairy()],
   dialogue: {
     enter: "Fasten your seatbelts! We're in for a turbulent battle!",
     win: 'You soared to new heights in this battle! Excellent!',
     lose: 'My victory was as fleeting as the wind. Well fought.',
   },
-});
+})
 
 export const getScientistTesla = () => ({
   name: 'Scientist Tesla',
@@ -80,16 +70,13 @@ export const getScientistTesla = () => ({
     currency: 500,
     items: [{ name: 'Tesla Coil', quantity: 1 }],
   },
-  monsters: [
-    getTicklefairy(),
-    getTicklefairy(),
-  ],
+  monsters: [getTicklefairy(), getTicklefairy()],
   dialogue: {
     enter: 'Witness the power of electricity, harnessed for battle!',
     win: 'Your energy is electrifying! Impressive!',
     lose: "You've caused a short circuit in my plans. Well done.",
   },
-});
+})
 
 // Repeat the pattern for other trainers, such as placeholderTrainer, bossBarry, bossSebastian
 //fix getTrainer
@@ -100,7 +87,7 @@ export const getBasicTrainers = () => [
   getAcePilotSkyler(),
   getScientistTesla(),
   // Add more basic trainers as needed
-];
+]
 
 export const getAllTrainers = () => [
   ...getBasicTrainers(),
@@ -109,13 +96,13 @@ export const getAllTrainers = () => [
   // ...getSpecialTrainers(),
   // ...getOtherTrainers(),
   // ...etc.
-];
+]
 
 // For trainer names, you can adapt to this new pattern:
-export const getTrainerNames = () => getAllTrainers().map((trainer) => trainer().name);
+export const getTrainerNames = () =>
+  getAllTrainers().map((trainer) => trainer().name)
 
 // This approach ensures all trainer data is dynamically generated and inherently non-serializable due to the use of functions, matching the pattern seen with your pal entities.
-
 
 // import {
 //   // Luminowl,
@@ -138,7 +125,7 @@ export const getTrainerNames = () => getAllTrainers().map((trainer) => trainer()
 // // create a trainer
 // // the trainer has pals
 // // pals would be variable based on lvl range / difficulty
-// // 
+// //
 
 // // [ ] implement getTrainer like getPal MUST
 // // export const getTrainer = (pal) => {
@@ -289,9 +276,7 @@ export const getBossBarry = () => ({
     currency: 300,
     items: [{ name: 'dragon Candy', quantity: 2 }],
   },
-  monsters: [
-    getMoltenScale(),
-  ],
+  monsters: [getMoltenScale()],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty dragon!',
     win: "You're no match for my boulders!",
@@ -306,16 +291,21 @@ export const getBossSebastian = () => ({
     currency: 300,
     items: [{ name: 'dragon Candy', quantity: 2 }],
   },
-  monsters: [
-    getMoltenScale(),
-  ],
+  monsters: [getMoltenScale()],
   dialogue: {
     enter: 'Prepare to be crushed under the weight of my mighty dragon!',
     win: "You're no match for my boulders!",
     lose: "You've chipped away at my confidence. Well done.",
   },
 })
-
+export const basicTrainers = [
+  // ...
+  getHikerBrak(),
+  getMysticWillow(),
+  getAcePilotSkyler(),
+  getScientistTesla(),
+  // Add more basic trainers as needed
+]
 // export const basicTrainers = [
 //   getTrainer(),
 
@@ -345,4 +335,3 @@ export const getBossSebastian = () => ({
 // //   name: trainer.name,
 // //   level: trainer.monsters[0] ? trainer.monsters[0].level : 'Unknown',
 // // }));
-
