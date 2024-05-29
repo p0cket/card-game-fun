@@ -121,7 +121,7 @@ export const getFreshStartingData = () => ({
         options: [
           {
             text: 'Start the adventure',
-            action: () => {},
+            // action: () => {},
           },
         ],
       },
@@ -147,7 +147,7 @@ export const getFreshStartingData = () => ({
     options: [
       {
         label: 'start',
-        onClick: () => {},
+        // onClick: () => {}, // can't do this, non-serializable
         backgroundColor: '#4b770e',
         color: '#fff',
       },

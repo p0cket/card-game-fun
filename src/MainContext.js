@@ -43,6 +43,59 @@ import {
 } from './handlers/state/levelStateHandlers'
 import { swapPals } from './handlers/state/partyStateHandlers'
 
+// function logAndStripFunctionsBasic(obj, path = '') {
+//   if (typeof obj !== 'object' || obj === null) {
+//     return obj
+//   }
+
+//   if (Array.isArray(obj)) {
+//     return obj.map((item, index) =>
+//       logAndStripFunctions(item, `${path}[${index}]`),
+//     )
+//   }
+
+//   return Object.fromEntries(
+//     Object.entries(obj).map(([key, value]) => {
+//       const currentPath = path ? `${path}.${key}` : key
+//       if (typeof value === 'function') {
+//         console.log(`GOTCHA! Function found at ${currentPath}`)
+//         return [key, null] // Replace function with null for cloning purposes
+//       }
+//       return [key, logAndStripFunctions(value, currentPath)]
+//     }),
+//   )
+// }
+function logAndStripFunctions(obj, path = '', functionPaths = []) {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map((item, index) =>
+      logAndStripFunctions(item, `${path}[${index}]`, functionPaths),
+    )
+  }
+
+  const strippedObj = Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => {
+      const currentPath = path ? `${path}.${key}` : key
+      if (typeof value === 'function') {
+        console.log(`GOTCHA! Function found at ${currentPath}`)
+        functionPaths.push(currentPath)
+        return [key, null] // Replace function with null for cloning purposes
+      }
+      return [key, logAndStripFunctions(value, currentPath, functionPaths)]
+    }),
+  )
+
+  if (path === '') {
+    console.log(`GOTCHAS Summary of functions found: ${functionPaths.length}`)
+    functionPaths.forEach((path) => console.log(`Function path: ${path}`))
+  }
+
+  return strippedObj
+}
+
 const stateContext = React.createContext()
 const dispatchContext = React.createContext()
 
@@ -98,7 +151,50 @@ export const ACTIONS = {
 export const MainProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
   function reducer(state, action) {
-    state = structuredClone(state)
+    console.log('Reducer called with state:', JSON.stringify(state, null, 2))
+    console.log('Reducer called with action:', JSON.stringify(action, null, 2))
+    // const cleanState = logAndStripFunctions(state)
+    // const cleanPayload = logAndStripFunctions(action.payload)
+    const functionPaths = []
+
+    const cleanState = logAndStripFunctions(state, '', functionPaths)
+    const cleanPayload = logAndStripFunctions(action.payload, '', functionPaths)
+
+    // Log individual nested properties
+    if (state.opponent) {
+      console.log('State opponent:', JSON.stringify(state.opponent, null, 2))
+      if (state.opponent.monsters) {
+        state.opponent.monsters.forEach((monster, index) => {
+          console.log(
+            `State opponent monster ${index}:`,
+            JSON.stringify(monster, null, 2),
+          )
+        })
+      }
+    }
+
+    if (action.payload && action.payload.opponent) {
+      console.log(
+        'Action payload opponent:',
+        JSON.stringify(action.payload.opponent, null, 2),
+      )
+      if (action.payload.opponent.monsters) {
+        action.payload.opponent.monsters.forEach((monster, index) => {
+          console.log(
+            `Action payload opponent monster ${index}:`,
+            JSON.stringify(monster, null, 2),
+          )
+        })
+      }
+    }
+
+    try {
+      state = structuredClone(state)
+    } catch (error) {
+      console.error('Error cloning state:', error)
+      console.log('State at error:', state)
+      console.log('Action at error:', action)
+    }
     cusLog(`dispatching:`, 'info', undefined, action)
     let payState,
       dmgState,
