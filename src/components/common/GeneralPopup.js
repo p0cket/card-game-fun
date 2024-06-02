@@ -14,13 +14,13 @@ const GeneralPopup = (props) => {
   // Or use the actual trigger condition
   const { isOpen, popupType, attack, ourCurrentMon, canUse, previousDialog } =
     state.popup
-  console.log(
-    'GeneralPopup: isOpen, type, attack, ourCurrentMon',
-    isOpen,
-    popupType,
-    attack,
-    ourCurrentMon,
-  )
+  // console.log(
+  //   'GeneralPopup: isOpen, type, attack, ourCurrentMon',
+  //   isOpen,
+  //   popupType,
+  //   attack,
+  //   ourCurrentMon,
+  // )
 
   const trigger = isOpen
   const closeDialogPopup = () => {
@@ -178,48 +178,3 @@ const GeneralPopup = (props) => {
   )
 }
 export default GeneralPopup
-
-// //
-// {moves.map((move, index) => {
-//   // move.counter ?
-//   <div
-//     className="cursor-pointer text-sm text-white"
-//     key={index}
-//     onClick={
-//       () =>
-//         showTheAttack(move.counter, dispatch, true, ourCurrentMon)
-//       // SHOW_COUNTERS
-//     }
-//   >
-//     {move.name}
-//   </div>
-//   // <RenderCounter move={move} pal={pal} key={move.name} />
-// })}
-{
-  /*    
-                   onClick: () => {
-                    dispatch({
-                      type: ACTIONS.SHOW_COUNTERS,
-                      //add the way to show which dialog it came from,
-                      // and what the dialog needs to show
-                      // this is the dialog we were at:
-                      // newState = switchDialog(newState, DIALOGS.DAMAGED_PAL_HUMAN)
-                      payload: {
-                        previousPayload: {
-                          pal: state.attack.pal,
-                          move: state.attack.move,
-                          phase: ATK_PHASES.STATUSES,
-
-                          userSlot: state.attack.userSlot,
-                          targets: state.attack.targets,
-                          player: state.attack.player,
-                        },
-                        previousDialog: DIALOGS.DAMAGED_PAL_HUMAN,
-                        popupType: 'counters',
-                      },
-                    })
-                    dispatch({ type: ACTIONS.CLOSE_DIALOG })
-                  },
-                }
-                */
-}

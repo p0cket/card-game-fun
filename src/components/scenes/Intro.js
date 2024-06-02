@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Intro.css'
 import { setSceneAction } from '../../actions'
 import { motion } from 'framer-motion'
-// @TODO: Add typewriter effect to text
+// @TOD: Add typewriter effect to text
 import '../common/Button.css'
 import { AnimatePresence } from 'framer-motion'
 import mapTest from '../../assets/maps/mapTiledTest2.tmj'
@@ -79,7 +79,7 @@ const Intro = ({ dispatch }) => {
   //Canvas stuff
 
   const loadNextLevel = () => {
-    console.log(`func: loadNextLevel()`)
+    // console.log(`func: loadNextLevel()`)
     dispatch(setSceneAction())
 
     const nextSceneState = updateScene(contextualState, {
@@ -234,7 +234,7 @@ const Intro = ({ dispatch }) => {
                 <div>友達を殺す</div>
                 <div className="text-sm">Plausibly Sentient Monster Slayer</div>
                 <div className="text-sm text-green-300">
-                  Friendship Edition Demo
+                  Friendship Edition Demo X
                 </div>
                 <div>友情編</div>
               </motion.div>

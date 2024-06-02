@@ -112,10 +112,8 @@ export const setPlayerPalHPToMax = (state) => {
         : partyMember,
     ),
   }
-
   console.log('state after healing:', state)
   return state
-  // }
 }
 
 export const setEnemyPalEnergyToMax = (state) => {
@@ -160,8 +158,7 @@ export const setEnemyPalHPToMax = (state) => {
 }
 
 export const clearEnemyPalStatuses = (state) => {
-  console.warn(`clearEnemyPalStatuses: state`, state)
-  // Clear statuses
+  // console.warn(`clearEnemyPalStatuses: state`, state)
   state = {
     ...state,
     opponent: {
@@ -176,8 +173,7 @@ export const clearEnemyPalStatuses = (state) => {
 }
 
 export const clearUserPartyStatuses = (state) => {
-  console.warn(`clearUserPartyStatuses: state`, state)
-  // Clear statuses
+  // console.warn(`clearUserPartyStatuses: state`, state)
   state = {
     ...state,
     userParty: state.userParty.map((partyMember) => ({

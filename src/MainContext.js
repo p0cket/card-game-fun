@@ -43,28 +43,6 @@ import {
 } from './handlers/state/levelStateHandlers'
 import { swapPals } from './handlers/state/partyStateHandlers'
 
-// function logAndStripFunctionsBasic(obj, path = '') {
-//   if (typeof obj !== 'object' || obj === null) {
-//     return obj
-//   }
-
-//   if (Array.isArray(obj)) {
-//     return obj.map((item, index) =>
-//       logAndStripFunctions(item, `${path}[${index}]`),
-//     )
-//   }
-
-//   return Object.fromEntries(
-//     Object.entries(obj).map(([key, value]) => {
-//       const currentPath = path ? `${path}.${key}` : key
-//       if (typeof value === 'function') {
-//         console.log(`GOTCHA! Function found at ${currentPath}`)
-//         return [key, null] // Replace function with null for cloning purposes
-//       }
-//       return [key, logAndStripFunctions(value, currentPath)]
-//     }),
-//   )
-// }
 function logAndStripFunctions(obj, path = '', functionPaths = []) {
   if (typeof obj !== 'object' || obj === null) {
     return obj
@@ -151,42 +129,40 @@ export const ACTIONS = {
 export const MainProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, newStartingData)
   function reducer(state, action) {
-    console.log('Reducer called with state:', JSON.stringify(state, null, 2))
-    console.log('Reducer called with action:', JSON.stringify(action, null, 2))
-    // const cleanState = logAndStripFunctions(state)
-    // const cleanPayload = logAndStripFunctions(action.payload)
+    // console.log('Reducer called with "state" and "action":', state, action)
     const functionPaths = []
 
-    const cleanState = logAndStripFunctions(state, '', functionPaths)
-    const cleanPayload = logAndStripFunctions(action.payload, '', functionPaths)
+    // If theres a non-serializable issue, log here to find it:
+    // const cleanState = logAndStripFunctions(state, '', functionPaths)
+    // const cleanPayload = logAndStripFunctions(action.payload, '', functionPaths)
 
     // Log individual nested properties
-    if (state.opponent) {
-      console.log('State opponent:', JSON.stringify(state.opponent, null, 2))
-      if (state.opponent.monsters) {
-        state.opponent.monsters.forEach((monster, index) => {
-          console.log(
-            `State opponent monster ${index}:`,
-            JSON.stringify(monster, null, 2),
-          )
-        })
-      }
-    }
+    // if (state.opponent) {
+    //   console.log('State opponent:', JSON.stringify(state.opponent, null, 2))
+    //   if (state.opponent.monsters) {
+    //     state.opponent.monsters.forEach((monster, index) => {
+    //       console.log(
+    //         `State opponent monster ${index}:`,
+    //         JSON.stringify(monster, null, 2),
+    //       )
+    //     })
+    //   }
+    // }
 
-    if (action.payload && action.payload.opponent) {
-      console.log(
-        'Action payload opponent:',
-        JSON.stringify(action.payload.opponent, null, 2),
-      )
-      if (action.payload.opponent.monsters) {
-        action.payload.opponent.monsters.forEach((monster, index) => {
-          console.log(
-            `Action payload opponent monster ${index}:`,
-            JSON.stringify(monster, null, 2),
-          )
-        })
-      }
-    }
+    // if (action.payload && action.payload.opponent) {
+    //   console.log(
+    //     'Action payload opponent:',
+    //     JSON.stringify(action.payload.opponent, null, 2),
+    //   )
+    //   if (action.payload.opponent.monsters) {
+    //     action.payload.opponent.monsters.forEach((monster, index) => {
+    //       console.log(
+    //         `Action payload opponent monster ${index}:`,
+    //         JSON.stringify(monster, null, 2),
+    //       )
+    //     })
+    //   }
+    // }
 
     try {
       state = structuredClone(state)
@@ -323,7 +299,6 @@ export const MainProvider = ({ children }) => {
       //     moveStack: newMoveStack,
       //   }
       //   return newStateWithStack
-
       case ACTIONS.ATTACK:
         return {
           ...state,
@@ -430,7 +405,7 @@ export const MainProvider = ({ children }) => {
         // get the state after whatever phase, then run the next phase
         // at the end, run the next phase
         // runCounter(state, action.payload)
-        //after everything is done,
+        // after everything is done,
         // runNextPhase(state, action.payload)
         break
       // return state
@@ -441,7 +416,6 @@ export const MainProvider = ({ children }) => {
           dialog: {
             ...state.dialog,
             isOpen: true,
-            // type: action.payload.type, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
             type: action.payload.dialog, // title: action.payload.title, // message: action.payload.message, // options: action.payload.options,
           },
         }
@@ -456,11 +430,9 @@ export const MainProvider = ({ children }) => {
       //     },
       //   }
       //
-
       case ACTIONS.ADD_RUNE:
-        // Maybe we'll have both an item and effect in
-        // the rune payload, so if theres a permanent
-        // effect we can handle it separately
+        // Maybe we'll have both an item and effect in the rune payload,
+        // so if theres a permanent effect we can handle it separately
         console.log('Reducer ADD_RUNE:', action)
         stateWithRune = {
           ...state,
@@ -581,25 +553,10 @@ export const MainProvider = ({ children }) => {
       case ACTIONS.RESET_DATA:
         console.log('Reducer RESET_DATA:', action)
         console.log('resetData: state, newStartingData', state, newStartingData)
-        //       state.current: {
-        //   level: 0,
-        //   mapLevel: 0,
-        //   act: 1,
-        //   completedLevels: [],
-        //   scene: { screen: SCENES.INTRO, details: null },
-        //   curEvent: null,
-        //   incomingLevels: [
-        //     {
-        //       scene: 'battle',
-        //       trainer: 'hikerNed',
-        //     },
-        //   ],
-        // },
+
         freshData = getFreshStartingData()
         freshData.userData = state.userData
         return freshData
-      // return { ...newStartingData }
-      // return {...startingDataCopy}
       default:
         console.log('ERROR: Invalid action type. End of Reducer reached')
         return state

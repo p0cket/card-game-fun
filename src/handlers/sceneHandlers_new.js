@@ -18,7 +18,7 @@ export const SCENES = {
   REWARD: 'reward',
   RESULTS: 'results',
   TREASURE: 'treasure',
-  MYSTERY: 'mystery',//Should it be mystery or secret?
+  MYSTERY: 'mystery', //Should it be mystery or secret?
   // SECRET: 'secret',
   ROBBER: 'robber',
   CONVO: 'convo',
@@ -65,19 +65,19 @@ export function updateAct(newData, newAct) {
  * @returns {object} - A copy of the updated data object with the scene updated.
  */
 export function updateScene(newData, newScene) {
-  console.log(
-    `[updateScene] newData, newScene, newData.current.scene`,
-    newData,
-    newScene,
-  )
-  console.log(`newScene`, newScene)
+  // console.log(
+  //   `[updateScene] newData, newScene, newData.current.scene`,
+  //   newData,
+  //   newScene,
+  // )
   const updatedData = { ...newData }
   updatedData.current.scene = newScene
   return updatedData
 }
 
 export const changeLevel = (state, scene) => {
-  console.log(`state before changing level:`, state, `also scene:`, scene)
+  // console.log(`before changing level "state" and "scene":`, state, scene)
+
   // let changesToBeMade = {}
   // now make any changes on the scene details before you return the new scene
   // ex: Which trainer is battling, which area, etc.
@@ -109,6 +109,10 @@ export const setupOpponent = (state, opponent) => {
     ...state,
     opponent: opponent,
   }
-  console.log(`sceneHandlers_new -> setupOpponent: newState with opponent`, opponent, newState)
+  console.log(
+    `sceneHandlers_new -> setupOpponent: newState with opponent`,
+    opponent,
+    newState,
+  )
   return newState
 }
