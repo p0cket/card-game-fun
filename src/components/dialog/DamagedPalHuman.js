@@ -18,7 +18,6 @@ const DamagedPalHuman = () => {
       targets: state.attack.targets,
       player: state.attack.player,
       // possessed: false,
-    
   }
 
   // storing the current variables of the move, not the stack
@@ -66,13 +65,14 @@ const DamagedPalHuman = () => {
   const damagedPalHumanProps = {
     title: `Your Pal Damaged`,
     header: `Your Pal took damage`,
-    message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
+    // message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. Result: ${state.userParty[0].stats.hp} HP. 
+    // `,
+    message: `${state.attack.pal.name}'s ${state.attack.move.name} dealt ${state.attack.move.damage} damage to your pal. 
     `,
     // options: [dmg_continueOption, dmg_counterOption],
 
     options: [dmg_continueOption, inDebug ? dmg_counterOption : null],
   }
-
   return <DialogTemplate {...damagedPalHumanProps} />
 }
 

@@ -56,8 +56,10 @@ const StatusAppliedAI = () => {
 
   const statusAppliedProps = {
     title: `Status Applied to Enemy`,
-    header: `You applied Statuses!`,
-    message: `Status applied! Enemy Pal's statuses are now: ${enemyStatuses}`,
+    header: `You applied Statuses to the enemy!`,
+    // message: `Status applied! Enemy Pal's statuses are now: ${enemyStatuses}`,
+    message: `Statuses are now: ${enemyStatuses}`,
+
     options: [status_ok],
   };
 

@@ -56,7 +56,7 @@ const StatusNotAppliedHuman = () => {
   const statusNotAppliedProps = {
     title: `Status Not Applied`,
     header: `Status did notApply`,
-    message: `No status applied to you. Your Pal's statuses are: ${Object.keys(
+    message: `Your Pal's statuses are still: ${Object.keys(
       // state.attack.pal.status,
       state.userParty[0].status,
     ).join(', ')}`,

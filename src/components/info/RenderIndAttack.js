@@ -61,24 +61,21 @@ function RenderIndAttack({
     )
   }
   const renderBasic = (move, pal) => {
-    const { name, damage, speed, accuracy, effect, targets, cost } = move
-    // const {result, chance, duration, amt, description} = effect
+    const { name, damage, accuracy, effect, targets, cost } = move
+    const { chance, result, amt } = effect
+
     return (
       <div className="bg-boy-lightgreen p-1 rounded shadow">
         <div className="flex justify-between mb-2">
-          <div className="p-1 m-1 bg-green-600">
+          {/* <div className="p-1 m-1 bg-green-600">
             <img src={stunImg} alt={name} className="w-28" />
-          </div>
+          </div> */}
           <table>
             <tbody>
               <tr>
                 <td className="text-gray-600 text-left">Damage:</td>
                 <td>{damage}</td>
               </tr>
-              {/* <tr>
-                <td className="text-gray-600 text-left">Speed:</td>
-                <td>{speed}</td>
-              </tr> */}
               <tr>
                 <td className="text-gray-600 text-left">Accuracy:</td>
                 <td>{accuracy}%</td>
@@ -87,15 +84,13 @@ function RenderIndAttack({
           </table>
         </div>
         <div className="text-left">
-          <div className="mb-2 text-gray-600">{effect.description}</div>
-          <div>
-            {effect.chance && effect.result && effect.amt && (
-              <div>{`${effect.chance}% Chance: May ${effect.result} ${effect.amt} `}</div>
-            )}{' '}
-            <div>Targets: {targets.join(', ')}</div>
-          </div>
+          {chance && result && amt && (
+            <div>{`${chance}% Chance: May ${result} ${amt} `}</div>
+          )}
+          <div>Targets: {targets.join(', ')}</div>{' '}
+          <div className="mb-2 text-green-700">{effect.description}</div>
         </div>
-        {canUse ? (
+        {canUse && (
           <div className="flex gap-2 justify-center">
             <button
               className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
@@ -103,12 +98,7 @@ function RenderIndAttack({
             >
               Use ({cost.energy} {energyEmoji})
             </button>
-            {/* <button className="bg-boy-green text-white flex flex-grow justify-center cursor-pointer py-2 mt-2 text-lg font-bold rounded shadow">
-              +
-            </button>{' '} */}
           </div>
-        ) : (
-          ''
         )}
       </div>
     )
@@ -169,4 +159,12 @@ export default RenderIndAttack
           {attack.name}
         </div>
       </div> */
+}
+
+// Add:  attack speed?
+{
+  /* <tr>
+                <td className="text-gray-600 text-left">Speed:</td>
+                <td>{speed}</td>
+              </tr> */
 }

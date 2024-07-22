@@ -27,7 +27,7 @@ function DialogTemplate({ title, message, options }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        paddingBottom: '20vh',
+        paddingBottom: '5vh',
         zIndex: 100,
       }}
     >

@@ -86,6 +86,10 @@ const decideDialog = (current) => {
     TEMPLATE,
   } = DIALOGS
 
+  // what would you need to make it variable?
+  // Who? AI or Human
+  // What move?
+
   switch (current) {
     // [payphase]
     case NOT_ENOUGH_ENERGY:

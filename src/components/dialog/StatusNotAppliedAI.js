@@ -56,7 +56,10 @@ const StatusNotAppliedAI = () => {
   const statusNotAppliedProps = {
     title: `Status not Applied to enemy`,
     header: `You did not apply Statuses!`,
-    message: `Status not applied. Enemy Pal's statuses are: ${Object.keys(
+    // message: `Status not applied. Enemy Pal's statuses are: ${Object.keys(
+    //   state.opponent.monsters[0].status,
+    // ).join(', ')}`,
+    message: `Enemy Pal's statuses are: ${Object.keys(
       state.opponent.monsters[0].status,
     ).join(', ')}`,
     options: [status_ok],

@@ -29,7 +29,7 @@ console.log(`m`, state.attack.move, state.attack.move.moveCategory)
   console.log(`EnergyPaid: state, player`, state, state.game.player)
   const dialogProps = {
     title: 'Energy Paid',
-    message: `Your new energy level is ${state.game.player.energy}.`,
+    message: `Your pal has ${state.game.player.energy} energy left.`,
     options: [paid_continueOption],
   }
 

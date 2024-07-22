@@ -83,7 +83,10 @@ function PalDetailsPopup({
             {selectedPal.passives && (
               <div>
                 <div className="p-1">Passive:</div>
-                <span className="bg-green-200 rounded p-1 text-green-700">
+                {/* <span className="bg-green-200 rounded p-1 text-green-700">
+                  {selectedPal.passives.name}
+                </span> */}
+                 <span className=" p-1 text-green-700">
                   {selectedPal.passives.name}
                 </span>
               </div>

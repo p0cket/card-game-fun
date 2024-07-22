@@ -30,6 +30,7 @@ function MissedAttack({ player }) {
   const missedAttackDialogProps = {
     title: 'Missed Attack',
     header: 'Missed Attack: ',
+    // maybe add in what attack was missed?
     message: `${player}'s ${state.attack.pal.name} missed his attack. No dmg dealt.`,
     options: [missedAttackContinueOption],
   }
