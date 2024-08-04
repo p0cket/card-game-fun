@@ -48,54 +48,14 @@ const styles = {
 }
 
 const AttackPopup = ({
-  // name,
-  // damage,
-  // description,
-  // energyCost,
+  // name,damage,description, used to be passed in
   onAttackClick,
   closeAttackPopup,
   removeAttackButton,
   attack,
 }) => {
   console.log('Here is attack', attack)
-  // export const QuickStrike = {
-  //   name: 'Quick Strike',
-  //   type: 'physical',
-  //   damage: 25,
-  //   speed: 7,
-  //   energyCost: 3,
-  //   effect: {
-  //     description: 'High critical hit chance',
-  //     chance: '50%',
-  //     result: 'critical_hit',
-  //   },
-  //   priority: 'fast',
-  //   targets: ['opponent', 'opponent_pals'],
-  //   // "NotSoFast" aspect:
-  //   notSoFast: {
-  //     name: 'Nimble Dodge',
-  //     type: 'buff',
-  //     effect: {
-  //       description: 'Increase evasion for the next turn',
-  //       duration: '1 turn',
-  //       evasion_boost: 30, // Increase evasion for the user
-  //     },
-  //   },
-  //   // "Forceful" aspect:
-  //   forceful: {
-  //     name: 'Rapid Fury',
-  //     type: 'physical',
-  //     damage: 40, // Enhanced damage for the Forceful aspect
-  //     speed: 9, // Slightly slower due to the added power
-  //     fuel: 4, // Increased fuel cost for the Forceful aspect
-  //     effect: {
-  //       description: 'Guaranteed critical hit and additional damage',
-  //       chance: 100,
-  //       result: 'critical_hit',
-  //     },
-  //     targets: ['opponent', 'opponent_pals'],
-  //   },
-  // };
+ 
   const {
     name,
     damage,
@@ -110,8 +70,6 @@ const AttackPopup = ({
     forceful,
   } = attack
   const { description } = effect
-
-  // #TODO: Add the attack param. It is missing so far.
 
   return (
     <div

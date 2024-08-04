@@ -1,6 +1,9 @@
 import React from 'react'
 import { useDispatchContext, useStateContext } from '../../MainContext'
-import { showTheAttack } from '../../handlers/popup/attackPopupHandlers'
+import {
+  dispatchDisplayAttackDetails,
+  showTheAttack,
+} from '../../handlers/popup/attackPopupHandlers'
 import PixelButton from './PixelButton'
 
 function PalDetailsPopup({
@@ -33,7 +36,15 @@ function PalDetailsPopup({
                     <div key={index} className="p-1">
                       <span
                         className="bg-green-200 rounded p-1 text-green-700"
-                        onClick={() => showTheAttack(move, dispatch, false)}
+                        onClick={() => {
+                          dispatchDisplayAttackDetails(
+                            move,
+                            dispatch,
+                            false,
+                            //ourCurrentMon <- we don't pass this in?
+                          )
+                        }}
+                        //replaces: onClick={() => showTheAttack(move, dispatch, false)}
                       >
                         {move.name}
                       </span>
@@ -86,7 +97,7 @@ function PalDetailsPopup({
                 {/* <span className="bg-green-200 rounded p-1 text-green-700">
                   {selectedPal.passives.name}
                 </span> */}
-                 <span className=" p-1 text-green-700">
+                <span className=" p-1 text-green-700">
                   {selectedPal.passives.name}
                 </span>
               </div>

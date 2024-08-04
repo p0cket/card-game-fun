@@ -1,11 +1,10 @@
-export const showTheAttack = (
+export const dispatchDisplayAttackDetails = (
   move,
   contextualDispatch,
   canUse,
   ourCurrentMon,
 ) => {
-  console.log(`move`, move)
-  console.log(`ourCurrentMon`, ourCurrentMon)
+  // console.log(`dispatchDisplayAttackDetails: move, ourCurrentMon`, move, ourCurrentMon)
   contextualDispatch({
     type: 'SHOW_ATTACK',
     payload: {
