@@ -216,7 +216,7 @@ export default function BattleTopDisplay() {
             <div>
               {/*  */}
               {showPassiveTooltip && (
-                <div className="absolute bottom-full mb-1 px-4 py-1 bg-boy-green text-white text-xs rounded shadow-md">
+                <div className="absolute bottom-full mb-1 px-4 py-1 bg-boy-green text-white text-xs shadow-md">
                   <button
                     className="absolute top-0 right-0 text-2xl leading-none px-2 py-1"
                     onClick={() => setShowPassiveTooltip(false)}

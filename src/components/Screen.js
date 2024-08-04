@@ -20,7 +20,7 @@ import ChooseCharacter from './scenes/ChooseCharacter'
 import { generateEnemyParty } from '../handlers/Battle/prepareBattle'
 import { hikerBrak } from '../consts/party/trainers'
 import { cusLog } from '../utils/debugging-utils'
-import Results from './scenes/Results'
+import Results from './scenes/Results/Results'
 import GameOver from './scenes/GameOver'
 import Boss from './scenes/Boss'
 // import MiniBoss from "./scenes/MiniBoss";
@@ -30,6 +30,7 @@ const Screen = ({ gameData, dispatch, map }) => {
     TRANSITION,
     INTRO,
     CHOOSECHARACTER,
+    // CHIBIPALSELECTION, // This is to replace CHOOSECHARACTER
     BATTLE,
     SHOP,
     MAP,

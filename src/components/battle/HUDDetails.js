@@ -14,8 +14,8 @@ function HUDDetails() {
         {Array.from({ length: 6 }).map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-4 bg-green-400 ${
-              index === 5 ? 'bg-green-800' : ''
+            className={`w-4 h-4 bg-gray-400 ${
+              index === 5 ? 'bg-green-400' : ''
             }`}
             style={{ marginLeft: '2px' }}
           ></div>

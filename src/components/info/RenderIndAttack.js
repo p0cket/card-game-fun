@@ -93,7 +93,7 @@ function RenderIndAttack({
         {canUse && (
           <div className="flex gap-2 justify-center">
             <button
-              className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold rounded shadow"
+              className="w-3/4 bg-boy-green text-white cursor-pointer py-2 px-4 mt-2 text-lg font-bold shadow"
               onClick={() => runMove(attack, pal)}
             >
               Use ({cost.energy} {energyEmoji})

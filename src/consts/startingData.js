@@ -178,6 +178,7 @@ export const getFreshStartingData = () => ({
   moveStack: [],
   difficulty: 0,
   permissions: { difficulty: 3 },
+  stack: [],
 })
 export const newStartingData = getFreshStartingData()
 

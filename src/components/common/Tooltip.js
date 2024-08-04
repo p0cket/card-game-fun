@@ -10,7 +10,7 @@ const TooltipButton = ({
 }) => {
   return (
     <button
-      className="bg-boy-green py-1 px-1 mr-1 rounded text-white relative"
+      className="bg-boy-green py-1 px-1 mr-1 text-white relative"
       onClick={() => setShowTooltip(!showTooltip)}
     >
       {name} <span className="text-green-200">{amt}</span>

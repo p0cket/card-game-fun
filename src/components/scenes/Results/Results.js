@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
+import { ACTIONS, useDispatchContext, useStateContext } from '../../../MainContext'
 import {
   SCENES,
   updateLevel,
   updateScene,
-} from '../../handlers/sceneHandlers_new'
+} from '../../../handlers/sceneHandlers_new'
 // import { SCENES } from '../../scenes'
-import { randomlySelectTrainer } from '../../handlers/Battle/prepareBattle'
-import { getAllTrainers } from '../../consts/party/trainers'
+import { randomlySelectTrainer } from '../../../handlers/Battle/prepareBattle'
+import { getAllTrainers } from '../../../consts/party/trainers'
 import {
   CuteCharm,
   DoubleStrike,
@@ -16,17 +16,17 @@ import {
   RadiantBeam,
   Smash,
   SunShield,
-} from '../../consts/allMoves'
-import { apple, potion, pumpernickelSoda } from '../../consts/items/basicItems'
-import { enemyDefeatedResponses } from '../../consts/fun/enemyDefeatedResponses'
-import { rewardDialogs } from '../../consts/fun/rewardDialog'
-import { DoubleJab } from '../../consts/allMoves'
-import { EarthenGrasp } from '../../consts/allMoves'
-import { FrostBite } from '../../consts/allMoves'
-import { Thunderclap } from '../../consts/allMoves'
-import { CrystalShard } from '../../consts/allMoves'
-import { ShadowLash } from '../../consts/allMoves'
-import TreasureChest from '../visuals/TeasureChest'
+} from '../../../consts/allMoves'
+import { apple, potion, pumpernickelSoda } from '../../../consts/items/basicItems'
+import { enemyDefeatedResponses } from '../../../consts/fun/enemyDefeatedResponses'
+import { rewardDialogs } from '../../../consts/fun/rewardDialog'
+import { DoubleJab } from '../../../consts/allMoves'
+import { EarthenGrasp } from '../../../consts/allMoves'
+import { FrostBite } from '../../../consts/allMoves'
+import { Thunderclap } from '../../../consts/allMoves'
+import { CrystalShard } from '../../../consts/allMoves'
+import { ShadowLash } from '../../../consts/allMoves'
+import TreasureChest from '../../visuals/TeasureChest'
 
 function Results({ experience = 100, pal, isBoss = false }) {
   const state = useStateContext()
@@ -402,29 +402,6 @@ function Results({ experience = 100, pal, isBoss = false }) {
       },
     })
   }
-
-  // function displayModifications() {
-  //   return (
-  //     <div
-  //       id="modifications-container"
-  //       className="modifications-container gap-2"
-  //     >
-  //       <div>
-  //         <h2>Select an Attack to Increase its Damage</h2>
-  //         {attacksToChooseFrom.map((attackInfo, index) => (
-  //           <button
-  //             key={index}
-  //             onClick={() => handleAttackSelection(attackInfo)}
-  //           >
-  //             {attackInfo.move.name} (Current Damage: {attackInfo.move.damage})
-  //           </button>
-  //         ))}
-  //         <button onClick={confirmDamageIncrease}>Confirm Increase</button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-  //
   function displayModifications() {
     return (
       <div
@@ -460,7 +437,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
       </div>
     )
   }
-/////
+  /////
   const displayItems = () => {
     return (
       <div>
@@ -646,7 +623,7 @@ function Results({ experience = 100, pal, isBoss = false }) {
 
   return (
     <motion.div
-      className="max-w-md mx-auto my-10 p-6 bg-black bg-opacity-60 text-white border border-white rounded-lg font-[silkscreen]"
+      className="max-w-md mx-auto my-10 p-6 m-2 bg-black bg-opacity-60 text-white border border-white rounded-lg font-[silkscreen]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -660,11 +637,12 @@ function Results({ experience = 100, pal, isBoss = false }) {
       {/* {displayItems()} */}
       {/* {displayModifications()} */}
       {/* {displayRunes()} */}
-      {rewardNum === 0 ? displayMoves() : ''}
-      {rewardNum === 1 ? displayItems() : ''}
-      {rewardNum === 2 ? displayModifications() : ''}
-      {rewardNum === 3 ? displayRunes() : ''}
-
+      <div>
+        {rewardNum === 0 ? displayMoves() : ''}
+        {rewardNum === 1 ? displayItems() : ''}
+        {rewardNum === 2 ? displayModifications() : ''}
+        {rewardNum === 3 ? displayRunes() : ''}
+      </div>
       {/* TODO: Add display of Runes */}
     </motion.div>
   )

@@ -5,7 +5,7 @@ function EnergyBar({ energy, maxEnergy, energyEmoji }) {
 
 return (
     <div
-        className="flex flex-col justify-evenly flex-grow p-1 text-sm font-[silkscreen] text-white"
+        className="flex flex-col justify-evenly flex-grow p-1 text-sm font-[silkscreen] text-white px-2"
     >
         <div>
             {' '}
