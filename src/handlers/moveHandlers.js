@@ -98,8 +98,6 @@ export const executeMove = (dispatch, payload) => {
         type: ACTIONS.PAY_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
       })
-      // dispatch({
-      // })
       //  checkAndDispatchStack(state)
       break
     case ATK_PHASES.DAMAGE:
@@ -132,7 +130,7 @@ export const executeMove = (dispatch, payload) => {
       })
       break
     default:
-      console.log(`ATK: default phase in switch reacted`)
+      console.log(`executeMove: default phase in switch reacted`)
   }
   // Always. check death
   // if (targetMonster.stats.hp <= 0) {

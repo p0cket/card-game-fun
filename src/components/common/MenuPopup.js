@@ -26,8 +26,8 @@ function MenuPopup(props) {
       </div>
     </div>
   )
-  const contextualState = useStateContext()
-  const contextualDispatch = useDispatchContext()
+  const state = useStateContext()
+  const dispatch = useDispatchContext()
   console.log('props.selectedPal', props.selectedPal)
   const menuContent = {
     [MenuOptions.ATTACKS]: {
@@ -38,8 +38,8 @@ function MenuPopup(props) {
             <RenderIndAttack
               attack={move}
               key={index}
-              contextualState={contextualState}
-              contextualDispatch={contextualDispatch}
+              state={state}
+              dispatch={dispatch}
               togglePopup={props.togglePopup}
               pal={props.selectedPal}
             />

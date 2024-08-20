@@ -2,26 +2,16 @@ import React, { useEffect, useState } from 'react'
 import './Intro.css'
 import { setSceneAction } from '../../actions'
 import { motion } from 'framer-motion'
-// @TOD: Add typewriter effect to text
 import '../common/Button.css'
 import { AnimatePresence } from 'framer-motion'
 import mapTest from '../../assets/maps/mapTiledTest2.tmj'
-
-import Dialog from '../common/Dialog'
-import ThemedButton from '../common/ThemedButton'
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-import { getRandomPALAcronym } from '../../consts/fun/pal'
 import {
   SCENES,
   updateLevel,
   updateScene,
 } from '../../handlers/sceneHandlers_new'
-import {
-  difficultyLevels,
-  difficultyStyles,
-  gameVersion,
-} from '../../consts/consts'
-// import SparkleButton from '../common/SparkleButton'
+import { difficultyLevels, gameVersion } from '../../consts/consts'
 import Chibipal from '../../assets/Chibipal.png'
 import Carousel from '../effects/Carousel'
 import { palImages } from '../../consts/pals/images'
@@ -33,19 +23,15 @@ import CanvasSquare from '../canvas/CanvasSquare'
 import Tilemap from '../canvas/Tilemap'
 import TreasureChest from '../visuals/TeasureChest'
 import SpinningBall from '../visuals/SpinningBall'
-import Cube from '../3D/Cube'
-import NewCanvas from '../canvas/NewCanvas'
 import TopDownTest from '../canvas/TopDownTest'
-import GameMap from '../canvas/GameMap'
 import PixelButton from '../common/PixelButton'
-import MainCanvas from '../canvas/MainCanvas'
 import Slider from '../common/Slider'
 import VariablesConfigMenu from '../dialog/VariablesConfigMenu'
+import Betas from '../inTesting/Betas'
 
-const Intro = ({ dispatch }) => {
+const Intro = () => {
   const [toolBoxVisible, setToolBoxVisible] = useState(false)
   const [canvasVisible, setCanvasVisible] = useState(false)
-
   const toggleCanvas = () => {
     setCanvasVisible((prev) => !prev)
   }
@@ -56,7 +42,6 @@ const Intro = ({ dispatch }) => {
     console.log('Updated Variables:', newVariables)
     // Update your game's configuration based on newVariables here
   }
-
   const styles = {
     fontStyle: {
       fontFamily: 'Silkscreen',
@@ -69,58 +54,31 @@ const Intro = ({ dispatch }) => {
     },
   }
 
-  const contextualState = useStateContext()
-  const contextualDispatch = useDispatchContext()
+  const state = useStateContext()
+  const dispatch = useDispatchContext()
   const [difficultyLevel, setDifficultyLevel] = useState(0)
-  const inDebug = contextualState.debug && contextualState.debug.isOpen
-  const isNewGamePlus =
-    contextualState.userData && contextualState.userData.newGamePlus
-  // const newGamePlus = contextualState.newGamePlus
-  //Canvas stuff
+  const inDebug = state.debug && state.debug.isOpen
+  const isNewGamePlus = state.userData && state.userData.newGamePlus
+  // const newGamePlus = state.newGamePlus
 
   const loadNextLevel = () => {
-    // console.log(`func: loadNextLevel()`)
     dispatch(setSceneAction())
-
-    const nextSceneState = updateScene(contextualState, {
+    const nextSceneState = updateScene(state, {
       screen: SCENES.CHOOSECHARACTER,
       details: null,
     })
     const nextLevelState = updateLevel(nextSceneState, 1)
-    contextualDispatch({
+    dispatch({
       payload: nextLevelState,
       type: ACTIONS.UPDATE_GAMEDATA,
     })
   }
-
-  // const handleSliderChange = (e) => {
-  //   const newDifficulty = parseInt(e.target.value, 10)
-  //   if (newDifficulty <= contextualState.permissions.difficulty) {
-  //     setDifficultyLevel(newDifficulty)
-  //   }
-  // }
-  // const handleSliderChange = (newValue) => {
-  //   const newDifficulty = parseInt(newValue, 10);
-  //   if (newDifficulty <= contextualState.permissions.difficulty) {
-  //     setDifficultyLevel(newDifficulty);
-  //   }
-  // };
   const [displayMessage, setDisplayMessage] = useState('')
 
-  // const handleSliderChange = (newValue) => {
-  //   const newDifficulty = parseInt(newValue, 10);
-  //   if (newDifficulty <= contextualState.permissions.difficulty) {
-  //     setDifficultyLevel(newDifficulty);
-  //     setDisplayMessage(''); // Clear the display message when within allowed difficulty
-  //   } else {
-  //     // Keep the slider's visual feedback but indicate the level is locked
-  //     setDisplayMessage(' - Locked Difficulty');
-  //   }
-  // };
   // Correctly expect an event object and parse the new value from it.
   const handleSliderChange = (e) => {
     const newDifficulty = parseInt(e, 10) // Since you're passing the value directly, not an event object
-    if (newDifficulty <= contextualState.permissions.difficulty) {
+    if (newDifficulty <= state.permissions.difficulty) {
       setDifficultyLevel(newDifficulty)
       setDisplayMessage('') // Clear any locked message if the level is allowed
     } else {
@@ -163,51 +121,6 @@ const Intro = ({ dispatch }) => {
     setLongestStreak(Number(localStorage.getItem('longestStreak')))
   }, [])
 
-  const circleVariants = {
-    initial: { y: 0 },
-    animate: { y: '-100vh' },
-    exit: { opacity: 0 },
-  }
-
-  const explosionVariants = {
-    initial: { scale: 0 },
-    animate: { scale: [1, 2, 2, 1, 1], opacity: [1, 1, 1, 0, 0] },
-  }
-
-  const Circle = ({ onComplete }) => (
-    <motion.div
-      variants={circleVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      onAnimationComplete={onComplete}
-      style={{
-        background: 'red',
-        borderRadius: '50%',
-        width: '100px',
-        height: '100px',
-      }}
-    />
-  )
-
-  const Explosion = () => (
-    <motion.div
-      variants={explosionVariants}
-      initial="initial"
-      animate="animate"
-      style={{
-        position: 'absolute',
-        top: '0',
-        background: 'orange',
-        borderRadius: '50%',
-        width: '200px',
-        height: '200px',
-      }}
-    />
-  )
-
-  const [explode, setExplode] = useState(false)
-  const [startAnimation, setStartAnimation] = useState(false)
   return (
     <>
       <div>
@@ -221,7 +134,6 @@ const Intro = ({ dispatch }) => {
           >
             {gameVersion}
           </div>
-          {/* <Shop /> */}
           {!inDebug && (
             <div>
               <motion.div
@@ -238,19 +150,7 @@ const Intro = ({ dispatch }) => {
                 </div>
                 <div>友情編</div>
               </motion.div>
-              {/* <Cube /> */}
             </div>
-          )}
-          {/* <MainCanvas /> */}
-          {/* <TopDownTest /> */}
-          {/* <GameMap  /> */}
-          {inDebug ? (
-            <>
-              {/* <CanvasSquare /> */}
-              {/* <NewCanvas draw={draw} width={1024} height={576} /> */}
-            </>
-          ) : (
-            ''
           )}
           <div className="p-4">
             {toolBoxVisible && (
@@ -261,10 +161,6 @@ const Intro = ({ dispatch }) => {
               </>
             )}
           </div>
-          {/* <div className="grid grid-cols-2 items-center gap-4">
-            <Carousel ourImages={palImages} />
-            <img src={gashTrainerImg} alt="gash trainer" />
-          </div> */}
           {!inDebug && (
             <div className="grid grid-cols-2 items-center gap-4 relative">
               <Carousel ourImages={palImages} />
@@ -276,25 +172,14 @@ const Intro = ({ dispatch }) => {
                 />
                 <div
                   className="absolute"
-                  // style={{ bottom: '102px', right: '163px' }}
-                  style={{ bottom: '25%', right: '38%' }} // Example using percentages
+                  style={{ bottom: '25%', right: '38%' }}
                 >
-                  {' '}
-                  {/* Adjust these values */}
                   <SpinningBall />
                 </div>
               </div>
             </div>
           )}
           {canvasVisible && <TopDownTest />}
-          {/* <img src={palImages[0]} alt="pal logo" /> */}
-          {/* <FlashingImage
-            src={palImages[0]}
-            flashTrigger={true}
-            flashCount={1} // Number of times to flash
-            glowTrigger={true}
-            shakeTrigger={true}
-          />{' '} */}
           <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
             <br />
           </div>{' '}
@@ -303,7 +188,6 @@ const Intro = ({ dispatch }) => {
               size="large"
               buttonStyle="normal"
               className="p-1 m-1"
-              // onClick={() => console.log('Small button clicked')}
               onClick={loadNextLevel}
             >
               {`Let's Adventure!`}
@@ -312,10 +196,9 @@ const Intro = ({ dispatch }) => {
               <div>
                 <div>
                   Difficulty Lvl:{' '}
-                  {difficultyLevel <= contextualState.permissions.difficulty
+                  {difficultyLevel <= state.permissions.difficulty
                     ? difficultyLevels[difficultyLevel]
                     : 'Locked'}
-                  {/* {displayMessage} */}
                 </div>
                 <Slider
                   min="0"
@@ -325,7 +208,6 @@ const Intro = ({ dispatch }) => {
                 />
               </div>
             )}
-            {/* <ThemedButton text={`Let's Adventure!`} onClick={loadNextLevel} /> */}
           </div>
           {inDebug && (
             <>
@@ -356,12 +238,18 @@ const Intro = ({ dispatch }) => {
               </div>
             </>
           )}
-          {/* <SparkleButton /> */}
-          <div className="flex">
-            {/* TODO: Implement options and museum */}
-            {/* <ThemedButton text={`Options`} onClick={loadNextLevel} />
-            <ThemedButton text={`Museum`} onClick={loadNextLevel} /> */}
-          </div>
+          {inDebug ? (
+            <>
+              <Betas
+                // draw={draw}
+                palImages={palImages}
+                gashTrainerImg={gashTrainerImg}
+                loadNextLevel={loadNextLevel}
+              />
+            </>
+          ) : (
+            ''
+          )}
           {isNewGamePlus && (
             <>
               <div>
@@ -403,3 +291,74 @@ const Intro = ({ dispatch }) => {
 }
 
 export default Intro
+
+// const Explosion = () => (
+//   <motion.div
+//     variants={explosionVariants}
+//     initial="initial"
+//     animate="animate"
+//     style={{
+//       position: 'absolute',
+//       top: '0',
+//       background: 'orange',
+//       borderRadius: '50%',
+//       width: '200px',
+//       height: '200px',
+//     }}
+//   />
+// )
+
+// const [explode, setExplode] = useState(false)
+// const [startAnimation, setStartAnimation] = useState(false)
+
+// const handleSliderChange = (e) => {
+//   const newDifficulty = parseInt(e.target.value, 10)
+//   if (newDifficulty <= state.permissions.difficulty) {
+//     setDifficultyLevel(newDifficulty)
+//   }
+// }
+// const handleSliderChange = (newValue) => {
+//   const newDifficulty = parseInt(newValue, 10);
+//   if (newDifficulty <= state.permissions.difficulty) {
+//     setDifficultyLevel(newDifficulty);
+//   }
+// };
+// const handleSliderChange = (newValue) => {
+//   const newDifficulty = parseInt(newValue, 10);
+//   if (newDifficulty <= state.permissions.difficulty) {
+//     setDifficultyLevel(newDifficulty);
+//     setDisplayMessage(''); // Clear the display message when within allowed difficulty
+//   } else {
+//     // Keep the slider's visual feedback but indicate the level is locked
+//     setDisplayMessage(' - Locked Difficulty');
+//   }
+// };
+
+//  //Canvas stuff
+
+// const circleVariants = {
+//   initial: { y: 0 },
+//   animate: { y: '-100vh' },
+//   exit: { opacity: 0 },
+// }
+
+// const Circle = ({ onComplete }) => (
+//   <motion.div
+//     variants={circleVariants}
+//     initial="initial"
+//     animate="animate"
+//     exit="exit"
+//     onAnimationComplete={onComplete}
+//     style={{
+//       background: 'red',
+//       borderRadius: '50%',
+//       width: '100px',
+//       height: '100px',
+//     }}
+//   />
+// )
+
+// const explosionVariants = {
+//   initial: { scale: 0 },
+//   animate: { scale: [1, 2, 2, 1, 1], opacity: [1, 1, 1, 0, 0] },
+// }

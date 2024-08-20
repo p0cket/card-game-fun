@@ -25,8 +25,8 @@ const AttackMenu = ({
         <div>
           <RenderIndAttack
             attack={attack}
-            contextualState={state}
-            contextualDispatch={dispatch}
+            state={state}
+            dispatch={dispatch}
             togglePopup={closeDialogPopup}
             pal={ourCurrentMon}
             canUse={canUse}

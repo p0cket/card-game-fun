@@ -179,6 +179,7 @@ export const getFreshStartingData = () => ({
   difficulty: 0,
   permissions: { difficulty: 3 },
   stack: [],
+  animationFinished: false,
 })
 export const newStartingData = getFreshStartingData()
 

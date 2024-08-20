@@ -6,7 +6,7 @@ import {
   createNotEnoughEnergyDialogState,
   switchDialog,
 } from '../dialog/energyDialogHandler'
-import { createPayloadState } from '../moveHandlers'
+import { ATK_PHASES, createPayloadState } from '../moveHandlers'
 import {
   createAIPaidState,
   createCostPaidDialogState,
@@ -20,14 +20,27 @@ let moveCost
 
 export const payPhase = (state, attackPayload) => {
   console.log(`state, attackPayload:`, state, attackPayload)
-
+  //necessary?
   let newState = createPayloadState(state, attackPayload)
   const { phase } = attackPayload
   const { pal, move, player, userSlot, targets } = newState.attack
-
-  console.groupCollapsed(`💵 payPhase: starting`, newState, move, pal, phase, player, userSlot, targets)
+  console.groupCollapsed(
+    `💵 payPhase: starting`,
+    newState,
+    move,
+    pal,
+    phase,
+    player,
+    userSlot,
+    targets,
+  )
   checkForUndefined({ newState, move, pal, phase, player, userSlot, targets })
-  console.warn(`Pay - attackPayload:`, newState, newState.game, newState.game.player)
+  console.warn(
+    `Pay - attackPayload:`,
+    newState,
+    newState.game,
+    newState.game.player,
+  )
 
   if (player === PLAYERS.HUMAN) {
     // Human player: check and pay cost
@@ -43,10 +56,38 @@ export const payPhase = (state, attackPayload) => {
       return dialogState
     } else {
       const playerEnergyAfterPayment = playerEnergy - moveCost
-      console.log(`Enough Energy, ${playerEnergy} - ${moveCost} = ${playerEnergyAfterPayment}`)
-      const energyPaidState = createUserEnergyPaidState(newState, playerEnergyAfterPayment)
+      console.log(
+        `Enough Energy, ${playerEnergy} - ${moveCost} = ${playerEnergyAfterPayment}`,
+      )
+      const energyPaidState = createUserEnergyPaidState(
+        newState,
+        playerEnergyAfterPayment,
+      )
       console.log('Pay: energyPaidState, resulting state:', energyPaidState)
-      const costPaidDialogState = switchDialog(energyPaidState, DIALOGS.ENERGY_PAID)
+
+      // Heres what the next energy paid dialog's `continue` button does. But it should be done only after the
+      // framer motion energy removed completes, now that we're trying to get rid of the dialog box.
+      // const movePayload = {
+      //   pal: state.attack.pal,
+      //   move: state.attack.move,
+      //   phase:
+      //     // moveCategory === 'change' ? ATK_PHASES.STATUSES : ATK_PHASES.DAMAGE,
+      //     ATK_PHASES.DAMAGE,
+      //   userSlot: state.attack.userSlot,
+      //   targets: state.attack.targets,
+      //   player: state.attack.player,
+      //   // possessed: false,
+      // }
+      // executeMove(dispatch, movePayload)
+
+      // instead of visually showing a dialog, lets just wait for the energy to be shown to be paid through framer motion.
+      const costPaidDialogState = switchDialog(
+        energyPaidState,
+        DIALOGS.ENERGY_PAID,
+      )
+      // replace with this but fixed
+      // const costPaidDialogState = energyPaidState //fix
+
       console.log('Pay: PAID, resulting state:', costPaidDialogState)
       console.groupEnd()
       return costPaidDialogState
@@ -54,13 +95,15 @@ export const payPhase = (state, attackPayload) => {
   } else if (player === PLAYERS.AI) {
     // AI player: assume cost can be paid
     moveCost = move.cost.energy
-    console.log(`costs ${moveCost} e. ${player} has ${playerEnergy}. Pal is:`, pal)
+    console.log(
+      `costs ${moveCost} e. ${player} has ${playerEnergy}. Pal is:`,
+      pal,
+    )
     const paidDialogState = switchDialog(newState, DIALOGS.AI_COST_PAID)
     console.groupEnd()
     return paidDialogState
   }
 }
-
 
 // import { ACTIONS, useStateContext } from '../../MainContext'
 // import { DIALOGS } from '../../components/dialog/DialogManager'

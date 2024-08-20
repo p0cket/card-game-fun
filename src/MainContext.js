@@ -121,6 +121,8 @@ export const ACTIONS = {
   END_PHASE: 'END_PHASE',
   ADD_MOVE_TO_STACK: 'ADD_MOVE_TO_STACK',
 
+  ANIMATION_RUNNING_TOGGLE: 'ANIMATION_RUNNING_TOGGLE',
+
   TOGGLE_DEBUG: 'TOGGLE_DEBUG',
 
   RESET_DATA: 'RESET_DATA',
@@ -320,22 +322,7 @@ export const MainProvider = ({ children }) => {
         console.log('Reducer PAY_PHASE: action & state', action, state)
         payState = { ...state }
         // if the attack is a counter, add the stashed move to the move stack
-        // if (action.payload.attack.isCounter) {
-        //   payState = {
-        //     ...payState,
-        //     stack: {
-        //       ...payState.stack,
-        //       pal: payState.attack.pal,
-        //       move: payState.attack.move,
-        //       // phase: payState.attack.phase
-        //       //phase is in the payload
-        //       // phase: action.payload.phase,
-        //       userSlot: payState.attack.userSlot,
-        //       targets: payState.attack.targets,
-        //       player: payState.attack.player,
-        //     },
-        //   }
-        // }
+        // if (action.payload.attack.isCounter) {... }
         // now overwrite the attack with the new payload
         payState = {
           ...payState,
@@ -539,6 +526,14 @@ export const MainProvider = ({ children }) => {
           action.payload.player,
         )
         return state
+      case ACTIONS.ANIMATION_RUNNING_TOGGLE: {
+        console.log(`ANIMATION_RUNNING_TOGGLE case hit:`, action)
+        const updatedState = {
+          ...state,
+          animationFinished: !state.animationFinished,
+        }
+        return updatedState
+      }
       case ACTIONS.TOGGLE_DEBUG:
         console.log('Reducer TOGGLE_DEBUG:', action)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { viewConsts } from '../../../consts/battleConsts'
 import EnergyBar from '../EnergyBar'
+import { ACTIONS, useDispatchContext } from '../../../MainContext'
 
 const CombatMainMenuButtons = ({
   energy,
@@ -11,6 +12,8 @@ const CombatMainMenuButtons = ({
   inDebug,
   togglePalMenu,
 }) => {
+  const dispatch = useDispatchContext()
+
   return (
     <div className="font-[silkscreen] flex w-full justify-between text-white bg-[#5a7d2a] border border-[#4e6a22] shadow-inner">
       <EnergyBar

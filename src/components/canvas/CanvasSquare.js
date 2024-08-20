@@ -18,7 +18,6 @@ const CanvasSquare = () => {
     const handleKeyDown = (event) => {
       keysPressed.current[event.key] = true
     }
-
     const handleKeyUp = (event) => {
       keysPressed.current[event.key] = false
     }

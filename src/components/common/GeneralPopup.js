@@ -7,7 +7,6 @@ import { battleMenus } from '../../consts/battleConsts'
 const GeneralPopup = (props) => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
-  const [showCounter, setShowCounter] = useState(false)
   const inDebug = state.debug && state.debug.isOpen
 
   // Or use the actual trigger condition
