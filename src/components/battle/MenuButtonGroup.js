@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { energyEmoji } from '../../consts/consts'
-
 import { ACTIONS, useDispatchContext, useStateContext } from '../../MainContext'
-
 import ItemMenuModal from '../common/ItemMenuModal'
 import { DIALOGS } from '../dialog/DialogManager'
 import { viewConsts } from '../../consts/battleConsts'

@@ -57,7 +57,7 @@ const Intro = () => {
   const state = useStateContext()
   const dispatch = useDispatchContext()
   const [difficultyLevel, setDifficultyLevel] = useState(0)
-  const inDebug = state.debug && state.debug.isOpen
+  const inDebug = state.debug && state.debug.isOpen // shft+D
   const isNewGamePlus = state.userData && state.userData.newGamePlus
   // const newGamePlus = state.newGamePlus
 
@@ -123,169 +123,170 @@ const Intro = () => {
 
   return (
     <>
-      <div>
-        <div
-          className="font-[silkscreen] flex flex-col items-center
-         bg-repeat bg-cover bg-boy-green text-white"
-        >
+      {inDebug ? (
+        <>
+          <Betas
+            // draw={draw}
+            palImages={palImages}
+            gashTrainerImg={gashTrainerImg}
+            loadNextLevel={loadNextLevel}
+          />
+        </>
+      ) : (
+        <div>
           <div
-            className="font-[silkscreen] text-white bg-black text-xs
-          p-1 m-1"
+            className="font-[silkscreen] flex flex-col items-center
+         bg-repeat bg-cover bg-boy-green text-white"
           >
-            {gameVersion}
-          </div>
-          {!inDebug && (
-            <div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1, duration: 2 }}
-                style={styles.fontStyle}
-              >
-                <img src={ChibipalsLogo} alt="pal logo" />
-                <div>友達を殺す</div>
-                <div className="text-sm">Plausibly Sentient Monster Slayer</div>
-                <div className="text-sm text-green-300">
-                  Friendship Edition Demo X
-                </div>
-                <div>友情編</div>
-              </motion.div>
-            </div>
-          )}
-          <div className="p-4">
-            {toolBoxVisible && (
-              <>
-                <VariablesConfigMenu
-                  onVariablesChange={handleVariablesChange}
-                />
-              </>
-            )}
-          </div>
-          {!inDebug && (
-            <div className="grid grid-cols-2 items-center gap-4 relative">
-              <Carousel ourImages={palImages} />
-              <div className="relative">
-                <img
-                  src={gashTrainerImg}
-                  alt="gash trainer"
-                  className="block"
-                />
-                <div
-                  className="absolute"
-                  style={{ bottom: '25%', right: '38%' }}
-                >
-                  <SpinningBall />
-                </div>
-              </div>
-            </div>
-          )}
-          {canvasVisible && <TopDownTest />}
-          <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
-            <br />
-          </div>{' '}
-          <div style={{ padding: '10px' }}>
-            <PixelButton
-              size="large"
-              buttonStyle="normal"
-              className="p-1 m-1"
-              onClick={loadNextLevel}
+            <div
+              className="font-[silkscreen] text-white bg-black text-xs
+          p-1 m-1"
             >
-              {`Let's Adventure!`}
-            </PixelButton>
-            {inDebug && (
+              {gameVersion}
+            </div>
+            {!inDebug && (
               <div>
-                <div>
-                  Difficulty Lvl:{' '}
-                  {difficultyLevel <= state.permissions.difficulty
-                    ? difficultyLevels[difficultyLevel]
-                    : 'Locked'}
-                </div>
-                <Slider
-                  min="0"
-                  max="10"
-                  value={difficultyLevel.toString()} // Ensuring the value is a string
-                  onChange={handleSliderChange} // Since handleSliderChange now correctly expects a value directly
-                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.1, duration: 2 }}
+                  style={styles.fontStyle}
+                >
+                  <img src={ChibipalsLogo} alt="pal logo" />
+                  <div>友達を殺す</div>
+                  <div className="text-sm">
+                    Plausibly Sentient Monster Slayer
+                  </div>
+                  <div className="text-sm text-green-300">
+                    Friendship Edition Demo X
+                  </div>
+                  <div>友情編</div>
+                </motion.div>
               </div>
             )}
-          </div>
-          {inDebug && (
-            <>
-              {' '}
+            <div className="p-4">
+              {toolBoxVisible && (
+                <>
+                  <VariablesConfigMenu
+                    onVariablesChange={handleVariablesChange}
+                  />
+                </>
+              )}
+            </div>
+            {!inDebug && (
+              <div className="grid grid-cols-2 items-center gap-4 relative">
+                <Carousel ourImages={palImages} />
+                <div className="relative">
+                  <img
+                    src={gashTrainerImg}
+                    alt="gash trainer"
+                    className="block"
+                  />
+                  <div
+                    className="absolute"
+                    style={{ bottom: '25%', right: '38%' }}
+                  >
+                    <SpinningBall />
+                  </div>
+                </div>
+              </div>
+            )}
+            {canvasVisible && <TopDownTest />}
+            <div style={{ paddingRight: '5px', paddingLeft: '5px' }}>
+              <br />
+            </div>{' '}
+            <div style={{ padding: '10px' }}>
               <PixelButton
-                size="small"
+                size="large"
                 buttonStyle="normal"
-                onClick={toggleToolBox}
+                className="p-1 m-1"
+                onClick={loadNextLevel}
               >
-                ToolBox
+                {`Let's Adventure!`}
               </PixelButton>
-              <PixelButton
-                size="small"
-                buttonStyle="normal"
-                onClick={toggleCanvas}
-              >
-                Toggle Canvas
-              </PixelButton>
-              <div style={{ padding: '10px' }}>
+              {inDebug && (
+                <div>
+                  <div>
+                    Difficulty Lvl:{' '}
+                    {difficultyLevel <= state.permissions.difficulty
+                      ? difficultyLevels[difficultyLevel]
+                      : 'Locked'}
+                  </div>
+                  <Slider
+                    min="0"
+                    max="10"
+                    value={difficultyLevel.toString()} // Ensuring the value is a string
+                    onChange={handleSliderChange} // Since handleSliderChange now correctly expects a value directly
+                  />
+                </div>
+              )}
+            </div>
+            {inDebug && (
+              <>
+                {' '}
                 <PixelButton
                   size="small"
                   buttonStyle="normal"
-                  className="p-1 m-1"
-                  onClick={() => console.log('Small button clicked')}
+                  onClick={toggleToolBox}
                 >
-                  Daily Woods Expedition{' '}
+                  ToolBox
                 </PixelButton>
-              </div>
-            </>
-          )}
-          {inDebug ? (
-            <>
-              <Betas
-                // draw={draw}
-                palImages={palImages}
-                gashTrainerImg={gashTrainerImg}
-                loadNextLevel={loadNextLevel}
-              />
-            </>
-          ) : (
-            ''
-          )}
-          {isNewGamePlus && (
-            <>
-              <div>
-                <button>Credits:</button>
-                Credits: (People who have supported the project)
-                <>splatfest in credits based on the team people backed</>
-                <>
-                  quest: use x move 5 times, poison 3 times, regain x health
-                  with x
-                </>
-                <>Or: Move used 5x, it then grows to lvl 2</>
-              </div>
-              <div>
-                spend gems from run on bonuses. (bonuses must balance), catch
-              </div>
-              <div>difficulty: enemyHealth, pain runes</div>
-              <div>randomized shop options: 1,2,3</div>
-              <div>Coming Features</div>{' '}
-              <div>Defeated runs: defeatedRuns on version: gameversion</div>
-              <div>Previous wins: wins</div>
-              <div>Badges: badges</div>
-              <div>difficulty: 1,2,3,4,5,6, --------slider</div>
-              <div>try modified vals: ---------</div>
-              {/* This gets hooked up to our code, and we can allow users
+                <PixelButton
+                  size="small"
+                  buttonStyle="normal"
+                  onClick={toggleCanvas}
+                >
+                  Toggle Canvas
+                </PixelButton>
+                <div style={{ padding: '10px' }}>
+                  <PixelButton
+                    size="small"
+                    buttonStyle="normal"
+                    className="p-1 m-1"
+                    onClick={() => console.log('Small button clicked')}
+                  >
+                    Daily Woods Expedition{' '}
+                  </PixelButton>
+                </div>
+              </>
+            )}
+            {isNewGamePlus && (
+              <>
+                <div>
+                  <button>Credits:</button>
+                  Credits: (People who have supported the project)
+                  <>splatfest in credits based on the team people backed</>
+                  <>
+                    quest: use x move 5 times, poison 3 times, regain x health
+                    with x
+                  </>
+                  <>Or: Move used 5x, it then grows to lvl 2</>
+                </div>
+                <div>
+                  spend gems from run on bonuses. (bonuses must balance), catch
+                </div>
+                <div>difficulty: enemyHealth, pain runes</div>
+                <div>randomized shop options: 1,2,3</div>
+                <div>Coming Features</div>{' '}
+                <div>Defeated runs: defeatedRuns on version: gameversion</div>
+                <div>Previous wins: wins</div>
+                <div>Badges: badges</div>
+                <div>difficulty: 1,2,3,4,5,6, --------slider</div>
+                <div>try modified vals: ---------</div>
+                {/* This gets hooked up to our code, and we can allow users
               to submit their own takes on difficulty
               */}
-            </>
-          )}
-          <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
-          <div className="bg-boy-lightgreen p-1">
-            <p className="font-[silkscreen] font-bold text-green-800 text-sm">
-              Streak: {streak} Best: {longestStreak} (LP: {lastPlayedTime})
-            </p>
+              </>
+            )}
+            <div className="font-[silkscreen]">© 22,23,24 Pocket Games Inc</div>
+            <div className="bg-boy-lightgreen p-1">
+              <p className="font-[silkscreen] font-bold text-green-800 text-sm">
+                Streak: {streak} Best: {longestStreak} (LP: {lastPlayedTime})
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

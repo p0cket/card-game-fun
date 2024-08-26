@@ -14,7 +14,6 @@ const TooltipButton = ({
       onClick={() => setShowTooltip(!showTooltip)}
     >
       {name} <span className="text-green-200">{amt}</span>
-      {/* {ourCurrentMon.passives.name} */}
       {showTooltip && (
         <div className="absolute bottom-full mb-2 px-4 py-1 border-2 border-green-200 bg-boy-green text-white text-xs shadow-lg">
           <button
@@ -23,14 +22,10 @@ const TooltipButton = ({
               e.stopPropagation()
               setShowTooltip(false)
             }}
-          >
-            {/* &times; */}
-          </button>
+          ></button>
           <div>
             {title}: {details}
           </div>
-
-          {/* <div>Passive: {ourCurrentMon.passives.details}</div> */}
           <div className="text-xs text-gray-900">{explanation}</div>
           <div>x</div>
         </div>

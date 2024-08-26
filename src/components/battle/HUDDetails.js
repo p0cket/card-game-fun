@@ -31,18 +31,15 @@ function HUDDetails() {
 }
 
 export default HUDDetails
+
 {
   /* TODO: Show runes and trainer */
-}
-{
   // state.bag.runes.map((rune, index) => (
   //   <div key={index}>
   //     {/* 🏺{rune} */}
   //     <img src={runeImg_4_3} alt="rune"  className="w-6 h-6 border border-gray-200" />{' '}
   //   </div>
   // ))
-}
-{
   /* {JSON.stringify(
       state.current.scene.details.trainer.monsters.map((m) => m.name),
     )}

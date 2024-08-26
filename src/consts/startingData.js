@@ -70,12 +70,12 @@ const { DRAW, STUN, DOUBLEDAMAGE, SLEEP, POISON } = EFFECTS
  */
 export const getFreshStartingData = () => ({
   userParty: [],
-  // opponentParty: [], // TODO move opponent party here
   opponent: getPlaceholderTrainer(),
   battleManager: {
     turn: 1,
     currentPlayer: 'player',
     phase: 'begin',
+    current: null,
   },
   current: {
     level: 0,

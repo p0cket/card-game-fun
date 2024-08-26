@@ -4,7 +4,7 @@ import { ATK_PHASES, executeMove } from '../../handlers/moveHandlers'
 import { moveTypes } from '../../consts/battleConsts'
 import BasicAttackDisplay from '../battle/menus/BasicAttackDisplay'
 
-
+// Change to Attack
 const RenderIndAttack = ({
   attack,
   state,
@@ -38,11 +38,6 @@ const RenderIndAttack = ({
         <BasicAttackDisplay move={move} pal={pal} runMove={runMove} canUse={canUse} />
       )
     }
-    // else if (attackType === moveTypes.FORCEFUL) {
-    //   return <RenderForceful move={move} />;
-    // } else if (attackType === moveTypes.COUNTER) {
-    //   return <RenderCounter move={move} />;
-    // }
   }
 
   return (

@@ -2,33 +2,20 @@ import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
 import {
-  applyPalPassive,
   applyStatusAtCleanup,
   cleanupAbilitiesHandler,
 } from '../phaseHelpers/cleanupPhaseHandlers'
-import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
-import { ATK_PHASES, executeMove } from '../moveHandlers'
 export const cleanupPhase = (state, attackPayload) => {
-  // const { move, pal, phase, player, userSlot, targets } = attackPayload
   const { phase } = attackPayload
-
-  // const { move, pal, phase, player, userSlot, targets } = attackPayload
   const { move, pal, player, userSlot, targets } = state.attack
-  // pal: state.attack.pal,
-  // move: state.attack.move,
-  // phase: ATK_PHASES.CLEANUP,
-  // userSlot: state.attack.userSlot,
-  // targets: state.attack.targets,
-  // player: state.attack.player,
+
   console.group(`😵‍💫 CLEANUP: start`)
   checkForUndefined({
     state,
-
     pal,
     move,
     phase,
-
     player,
     userSlot,
     targets,

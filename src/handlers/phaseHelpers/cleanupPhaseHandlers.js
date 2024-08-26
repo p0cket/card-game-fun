@@ -4,7 +4,6 @@ import { healHumanPal, healPal } from '../state/healthStateHandlers'
 import {
   updateHumanPartyWithPal,
   updateHumanStateWithParty,
-  updateOpponentPartyWithPal,
 } from '../state/partyStateHandlers'
 
 // applyPalPassive here, cleanupPhase's changing of state by running it through
@@ -58,6 +57,118 @@ export const applyPalPassive = (pal, palIndex) => {
 
 export const applyOpponentPalPassive = (pal, palIndex) => {}
 
+export const applyStatusAtCleanup = (state) => {
+  console.log(
+    '[applyStatusAtCleanup] Checking for statuses to apply in cleanup phase.',
+  )
+
+  // Process user party
+  console.log('[applyStatusAtCleanup] Processing userParty for status effects.')
+  state.userParty.forEach((pal, index) => {
+    console.log(
+      `[applyStatusAtCleanup] Processing ${pal.name} at userParty index ${index}.`,
+    )
+    state.userParty[index] = applyPoisonDamage(pal)
+  })
+
+  // Process opponent monsters
+  console.log(
+    '[applyStatusAtCleanup] Processing opponent.monsters for status effects.',
+  )
+  state.opponent.monsters.forEach((monster, index) => {
+    console.log(
+      `[applyStatusAtCleanup] Processing ${monster.name} at opponent.monsters index ${index}.`,
+    )
+    state.opponent.monsters[index] = applyPoisonDamage(monster)
+  })
+
+  console.log(
+    '[applyStatusAtCleanup] Status application completed for all characters.',
+  )
+  return state
+}
+
+export function applyPoisonDamage(pal) {
+  // Log the initial status of the character to see if poison is applicable
+  console.log(`[applyPoisonDamage] Initial status for ${pal.name}:`, pal.status)
+
+  // Check if poison status is present and active
+  if (pal.status?.poison?.active) {
+    const poisonDamage = pal.status.poison.amt
+    console.log(
+      `[applyPoisonDamage] Applying ${poisonDamage} poison damage to ${pal.name}. Current HP: ${pal.stats.hp}`,
+    )
+
+    // Apply poison damage and prevent HP from going negative
+    pal.stats.hp = Math.max(0, pal.stats.hp - poisonDamage)
+    console.log(
+      `[applyPoisonDamage] New HP for ${pal.name} after poison: ${pal.stats.hp}`,
+    )
+  } else {
+    console.log(`[applyPoisonDamage] No active poison status for ${pal.name}.`)
+  }
+
+  return pal
+}
+
+export function checkForCleanup(state) {
+  const hasActiveStatus =
+    state.userParty.some((pal) => hasActiveStatusEffect(pal)) ||
+    state.opponent.monsters.some((monster) => hasActiveStatusEffect(monster))
+
+  const hasActivePassives =
+    state.userParty.some((pal) => hasActivePassiveEffect(pal)) ||
+    state.opponent.monsters.some((monster) => hasActivePassiveEffect(monster))
+
+  return hasActiveStatus || hasActivePassives
+}
+
+function hasActiveStatusEffect(entity) {
+  // This function checks if the entity (either player or AI) has any active status effects
+  return (
+    entity.status &&
+    Object.values(entity.status).some((effect) => effect.active)
+  )
+}
+
+function hasActivePassiveEffect(entity) {
+  // This function checks if the entity has any passives that should trigger during cleanup
+  return (
+    entity.passives &&
+    entity.passives.effects &&
+    entity.passives.effects.length > 0
+  )
+}
+// export function applyPoisonDamage(pal) {
+//   if (pal.status && pal.status.poison && pal.status.poison.active) {
+//     const poisonDamage = pal.status.poison.amt
+//     pal.hp = Math.max(0, pal.hp - poisonDamage) // Prevent hp from going negative
+//     console.log(`Applying poison damage of ${poisonDamage} to ${pal.name}`)
+//   }
+//   return pal
+// }
+// export function applyPoisonDamage(pal) {
+//   // Log the initial status of the character to see if poison is applicable
+//   console.log(`[applyPoisonDamage] Initial status for ${pal.name}:`, pal.status)
+
+//   // Check if poison status is present and active
+//   if (pal.status?.poison?.active) {
+//     const poisonDamage = pal.status.poison.amt
+//     console.log(
+//       `[applyPoisonDamage] Applying ${poisonDamage} poison damage to ${pal.name}. Current HP: ${pal.hp}`,
+//     )
+
+//     // Apply poison damage and prevent HP from going negative
+//     pal.hp = Math.max(0, pal.hp - poisonDamage)
+//     console.log(
+//       `[applyPoisonDamage] New HP for ${pal.name} after poison: ${pal.hp}`,
+//     )
+//   } else {
+//     console.log(`[applyPoisonDamage] No active poison status for ${pal.name}.`)
+//   }
+
+//   return pal
+// }
 // export const applyStatusAtCleanup = (state) => {
 //   // switch()
 //   // case EFFECTS.POISON:
@@ -120,86 +231,3 @@ export const applyOpponentPalPassive = (pal, palIndex) => {}
 //   //   }
 //   // })
 // }
-export const applyStatusAtCleanup = (state) => {
-  console.log(
-    '[applyStatusAtCleanup] Checking for statuses to apply in cleanup phase.',
-  )
-
-  // Process user party
-  console.log('[applyStatusAtCleanup] Processing userParty for status effects.')
-  state.userParty.forEach((pal, index) => {
-    console.log(
-      `[applyStatusAtCleanup] Processing ${pal.name} at userParty index ${index}.`,
-    )
-    state.userParty[index] = applyPoisonDamage(pal)
-  })
-
-  // Process opponent monsters
-  console.log(
-    '[applyStatusAtCleanup] Processing opponent.monsters for status effects.',
-  )
-  state.opponent.monsters.forEach((monster, index) => {
-    console.log(
-      `[applyStatusAtCleanup] Processing ${monster.name} at opponent.monsters index ${index}.`,
-    )
-    state.opponent.monsters[index] = applyPoisonDamage(monster)
-  })
-
-  console.log(
-    '[applyStatusAtCleanup] Status application completed for all characters.',
-  )
-  return state
-}
-
-// export function applyPoisonDamage(pal) {
-//   if (pal.status && pal.status.poison && pal.status.poison.active) {
-//     const poisonDamage = pal.status.poison.amt
-//     pal.hp = Math.max(0, pal.hp - poisonDamage) // Prevent hp from going negative
-//     console.log(`Applying poison damage of ${poisonDamage} to ${pal.name}`)
-//   }
-//   return pal
-// }
-// export function applyPoisonDamage(pal) {
-//   // Log the initial status of the character to see if poison is applicable
-//   console.log(`[applyPoisonDamage] Initial status for ${pal.name}:`, pal.status)
-
-//   // Check if poison status is present and active
-//   if (pal.status?.poison?.active) {
-//     const poisonDamage = pal.status.poison.amt
-//     console.log(
-//       `[applyPoisonDamage] Applying ${poisonDamage} poison damage to ${pal.name}. Current HP: ${pal.hp}`,
-//     )
-
-//     // Apply poison damage and prevent HP from going negative
-//     pal.hp = Math.max(0, pal.hp - poisonDamage)
-//     console.log(
-//       `[applyPoisonDamage] New HP for ${pal.name} after poison: ${pal.hp}`,
-//     )
-//   } else {
-//     console.log(`[applyPoisonDamage] No active poison status for ${pal.name}.`)
-//   }
-
-//   return pal
-// }
-export function applyPoisonDamage(pal) {
-  // Log the initial status of the character to see if poison is applicable
-  console.log(`[applyPoisonDamage] Initial status for ${pal.name}:`, pal.status)
-
-  // Check if poison status is present and active
-  if (pal.status?.poison?.active) {
-    const poisonDamage = pal.status.poison.amt
-    console.log(
-      `[applyPoisonDamage] Applying ${poisonDamage} poison damage to ${pal.name}. Current HP: ${pal.stats.hp}`,
-    )
-
-    // Apply poison damage and prevent HP from going negative
-    pal.stats.hp = Math.max(0, pal.stats.hp - poisonDamage)
-    console.log(
-      `[applyPoisonDamage] New HP for ${pal.name} after poison: ${pal.stats.hp}`,
-    )
-  } else {
-    console.log(`[applyPoisonDamage] No active poison status for ${pal.name}.`)
-  }
-
-  return pal
-}

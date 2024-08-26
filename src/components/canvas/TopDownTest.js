@@ -7,7 +7,7 @@ import bgImgSrc from '../../assets/maps/bg2testBIG2.png'
 import boundaryImgSrc from '../../assets/mapTiles/autoTile_nature-25.png.png'
 import { DialogueMenu } from './DialogueMenu'
 import { drawPlayer, loadPlayerImage } from './elements/Player'
-import { lvlOne, lvlTwo } from './levels/testLevels'
+import { lvlTwo } from './levels/testLevels'
 
 const TopDownTest = () => {
   const [mode, setMode] = useState('edit') // 'edit' or 'play'
@@ -345,32 +345,7 @@ const TopDownTest = () => {
   }
 
   return (
-    <div>
-      <NewCanvas draw={draw} width={1024} height={576} />
-      <button onClick={() => toggleMode()}>toggleMode</button>
-      {mode === 'edit' && (
-        <div className="editing-controls">
-          <button
-            onClick={() => setEditingMode('boundary')}
-            style={{
-              backgroundColor: editingMode === 'boundary' ? 'lightblue' : '',
-            }}
-            className="p-4 m-2"
-          >
-            Edit Boundaries
-          </button>
-          <button
-            onClick={() => setEditingMode('NPC')}
-            style={{
-              backgroundColor: editingMode === 'NPC' ? 'lightblue' : '',
-            }}
-            className="p-4 m-2"
-          >
-            Add NPCs
-          </button>
-        </div>
-      )}
-      {showDialogue && <DialogueMenu onClose={() => setShowDialogue(false)} />}
+    <div className={`bg-boy-lightgreen`}>
       {mode === 'edit' && (
         <div className="p-4 m-2">
           Mouse Position: {`X: ${mousePosition.x}, Y: ${mousePosition.y}`}
@@ -477,6 +452,32 @@ const TopDownTest = () => {
         </div> */}
         </div>
       )}
+      <NewCanvas draw={draw} width={1024} height={576} />
+      <button onClick={() => toggleMode()}>toggleMode</button>
+      {mode === 'edit' && (
+        <div className="editing-controls">
+          <button
+            onClick={() => setEditingMode('boundary')}
+            style={{
+              backgroundColor: editingMode === 'boundary' ? 'lightblue' : '',
+            }}
+            className="p-4 m-2"
+          >
+            Edit Boundaries
+          </button>
+          <button
+            onClick={() => setEditingMode('NPC')}
+            style={{
+              backgroundColor: editingMode === 'NPC' ? 'lightblue' : '',
+            }}
+            className="p-4 m-2"
+          >
+            Add NPCs
+          </button>
+        </div>
+      )}
+      {showDialogue && <DialogueMenu onClose={() => setShowDialogue(false)} />}
+      
     </div>
   )
 }

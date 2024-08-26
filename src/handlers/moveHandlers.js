@@ -7,6 +7,7 @@ import { cleanupPhase } from './attack/cleanupPhase'
 import { endPhase } from './attack/endPhase'
 import { payPhase } from './attack/payPhase'
 import { statusPhase } from './attack/statusPhase'
+import { checkForCleanup } from './phaseHelpers/cleanupPhaseHandlers'
 // import { customLog } from '../utils/debugging-utils'
 // const dispatchCon = useDispatchContext()
 export const ATK_PHASES = {
@@ -19,8 +20,6 @@ export const ATK_PHASES = {
   // APPLY_DAMAGE: 'damage',
   END: 'end',
 }
-
-
 
 const checkAndDispatchStack = (state) => {
   let prevMove = null
@@ -92,8 +91,11 @@ export const executeMove = (dispatch, payload) => {
    * - endPhase: Concludes the attack phase and prepares for the next game state.
    *  checks if the target monster's HP is 0 or less, indicating it has fainted. */
   console.log(`Payload is: `, payload)
+
+  //we need to figure out aat the phase if theres any
   switch (phase) {
     case ATK_PHASES.PAY:
+      // if (noNeedToPay) {
       dispatch({
         type: ACTIONS.PAY_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
@@ -104,24 +106,61 @@ export const executeMove = (dispatch, payload) => {
       console.log(`ATK_PHASES.DAMAGE reached in switch`)
       dispatch({
         type: ACTIONS.DAMAGE_PHASE,
-        //
-        //dont need to pass this stuff in the state
-        //
         payload: { pal, move, phase, player, userSlot, targets },
       })
       break
     case ATK_PHASES.STATUSES:
-      console.log(`ATK_PHASES.STATUSES reached in switch`)
-      dispatch({
-        type: ACTIONS.STATUS_PHASE,
-        payload: { pal, move, phase, player, userSlot, targets },
-      })
+      console.log(`#AFKT ATK_PHASES.STATUSES reached in switch`, move)
+      // Skip to CLEANUP?
+      if (move.effect) {
+        dispatch({
+          type: ACTIONS.STATUS_PHASE,
+          payload: { pal, move, phase, player, userSlot, targets },
+        })
+      } else {
+        console.log(`#AFKT effects because move has none`, move)
+        executeMove(dispatch, {
+          pal,
+          move,
+          phase: ATK_PHASES.CLEANUP,
+          player,
+          userSlot,
+          targets,
+        })
+      }
+
       break
+    // case ATK_PHASES.CLEANUP:
+    //   // if theres more than one status, we need to check each.
+    //   // const isThereAnythingToCleanUp = checkForCleanup(pal )
+    //   // if (player.st || AI.st) {
+
+    //   dispatch({
+    //     type: ACTIONS.CLEANUP_PHASE,
+    //     payload: { pal, move, phase, player, userSlot, targets },
+    //   })
+    //   break
     case ATK_PHASES.CLEANUP:
+      console.log(`#AFKT ATK_PHASES.CLEANUP reached in switch`)
+      // we don't pass in state here. we would need both Player and AI team to check for cleanup
+      // const isThereAnythingToCleanUp = checkForCleanup(state)
+
+      // if (isThereAnythingToCleanUp) {
       dispatch({
         type: ACTIONS.CLEANUP_PHASE,
         payload: { pal, move, phase, player, userSlot, targets },
       })
+      // } else {
+      console.log(`#AFKT No cleanup needed, moving to next phase`)
+      executeMove(dispatch, {
+        pal,
+        move,
+        phase: ATK_PHASES.END,
+        player,
+        userSlot,
+        targets,
+      })
+      // }
       break
     case ATK_PHASES.END:
       dispatch({

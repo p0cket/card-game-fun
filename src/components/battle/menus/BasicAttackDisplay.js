@@ -1,7 +1,5 @@
 import React from 'react'
 import { energyEmoji } from '../../../consts/consts'
-// import PropTypes from 'prop-types'
-// import { energyEmoji } from '../../consts/consts'
 
 const BasicAttackDisplay = ({ move, pal, runMove, canUse }) => {
   const { name, damage, accuracy, effect, targets, cost } = move

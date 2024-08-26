@@ -1,38 +1,20 @@
-import { ACTIONS } from '../../MainContext'
 import { DIALOGS } from '../../components/dialog/DialogManager'
 import { PLAYERS } from '../../consts/consts'
 import { checkForUndefined } from '../../utils/debugging-utils'
-import { createPopupVisibleState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
+import { createPayloadState } from '../moveHandlers'
 import {
-  ATK_PHASES,
-  calculateTargets,
-  createPayloadState,
-  executeMove,
-} from '../moveHandlers'
-import { dmgEffectsHandler } from '../phaseHelpers/dmgPhaseHandlers'
-import {
-  createAIDamagedState,
-  createHumanDamagedState,
   ifBuffDoMoreDamage,
   lowerAttackDamageInState,
   runDmgAI,
   runDmgHuman,
 } from '../state/damageStateHandlers'
-let ourDmg
-let damagedHP
+
 export const dmgPhase = (state, attackPayload) => {
   let newState = createPayloadState(state, attackPayload)
   const { phase } = attackPayload
-
-  // const { move, pal, phase, player, userSlot, targets } = attackPayload
   const { move, pal, player, userSlot, targets } = state.attack
-  // pal: state.attack.pal,
-  // move: state.attack.move,
-  // phase: ATK_PHASES.CLEANUP,
-  // userSlot: state.attack.userSlot,
-  // targets: state.attack.targets,
-  // player: state.attack.player,
+
   console.groupCollapsed(
     `💵 dmgPhase: starting`,
     newState,
@@ -55,9 +37,7 @@ export const dmgPhase = (state, attackPayload) => {
   })
   let targetPal
 
-  // get move's accuracy
   const accuracy = move.accuracy / 100
-  // roll random
   const roll = Math.floor(Math.random() * 100)
 
   if (player === PLAYERS.HUMAN) {
@@ -69,8 +49,7 @@ export const dmgPhase = (state, attackPayload) => {
 
     // targetPal is the reciever of the atk
     targetPal = newState.opponent.monsters[0]
-    // CRITS????
-    // Determine if the roll is a critical hit (in the lowest 5%)
+    // CRITS???? (Determine if the roll is a critical hit (in the lowest 5%))
     const isCrit = roll < 5
     let crit = false
     if (isCrit) {
@@ -94,13 +73,19 @@ export const dmgPhase = (state, attackPayload) => {
       console.log(
         `HUMAN hit lands, dmg is ${finalDmg} before ifWeakDoLessDamage`,
       )
+
+      // applyDmgModifications = () ={ switch(atkPayload){
+      // case: "buff" return state;
+      // case "weak" return state;
+      // then apply sheild if there is any
+      // case default:
+      // }}
+
       // finalDmg = ifWeakDoLessDamage(user, finalDmg)
       finalDmg = ifBuffDoMoreDamage(user, finalDmg)
       // finalDmg = newDamage
       newState = lowerAttackDamageInState(newState, user, finalDmg)
       console.log(` dmg is ${finalDmg} after ifWeakDoLessDamage`)
-
-      // then apply sheild if there is any
 
       // then apply dmg damage
       const damageAppliedFromHumanState = runDmgHuman(

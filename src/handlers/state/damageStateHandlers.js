@@ -1,7 +1,5 @@
 import { DIALOGS } from '../../components/dialog/DialogManager'
-import {
-  createPopupRemovedState,
-} from '../dialog/basicDialogHandlers'
+import { createPopupRemovedState } from '../dialog/basicDialogHandlers'
 import { switchDialog } from '../dialog/energyDialogHandler'
 import { ATK_PHASES } from '../moveHandlers'
 // allTargets.allyTargets.forEach((target, index) => {
@@ -13,22 +11,13 @@ import { ATK_PHASES } from '../moveHandlers'
 //   // ...damage calculation...
 //   newState = createEnemyDamagedState(newState, damagedHP, index); // Assuming you have a similar function for enemies
 // });
-export const createAIDamagedState = (
-  ourState,
-  damagedHP,
-) => {
-  // console.log(
-  //   'createAIDamagedState:',
-  //   ourState,
-  //   'damagedHP:',
-  //   damagedHP,
-  //   'move:',
-  //   move,
-  //   'pal:',
-  //   pal,
-  // )
-  console.log('ourState.opponent.monsters[0], damagedHP', ourState.opponent.monsters[0], damagedHP)
-  
+export const createAIDamagedState = (ourState, damagedHP) => {
+  console.log(
+    'ourState.opponent.monsters[0], damagedHP',
+    ourState.opponent.monsters[0],
+    damagedHP,
+  )
+
   let resultState = {
     ...ourState,
     opponent: {
@@ -49,23 +38,7 @@ export const createAIDamagedState = (
   console.log('resultState after damaged:', resultState)
   return resultState
 }
-export const createHumanDamagedState = (
-  ourState,
-  damagedHP,
-) => {
-  // console.log(
-  //   'Entered createHumanDamagedState:',
-  //   'ourState:',
-  //   ourState,
-  //   'damagedHP:',
-  //   damagedHP,
-  //   'move:',
-  //   move,
-  //   'pal:',
-  //   pal,
-  //   'contextualDispatch:',
-  //   contextualDispatch,
-  // )
+export const createHumanDamagedState = (ourState, damagedHP) => {
   console.log('ourState.userParty[0]:', ourState.userParty[0], ourState)
   let resultState = {
     ...ourState,
@@ -84,7 +57,6 @@ export const createHumanDamagedState = (
   console.log('resultState after damaged:', resultState)
   return resultState
 }
-
 
 export const ifWeakDoLessDamage = (userPal, dmg) => {
   if (userPal.status && userPal.status.weak) {
@@ -163,18 +135,14 @@ export const appendAttackDebuffState = (newState, debuff) => {
   return newState
 }
 
-
+//these two (AI vs human) could be one
 export const runDmgHuman = (newState, targetPal, move, dmgAmt) => {
   console.log(`ATK: DMG phase: targetPal, move`, targetPal, move)
   // add the Effects Handler here:
   //  newState = dmgEffectsHandler(newState, pal, 0)
-  const moveCost = move.cost.energy
   let ourDmg = dmgAmt
   let damagedHP = targetPal.stats.hp - ourDmg
-  console.warn(
-    `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
-  )
-  console.log(
+  console.log( `AI pal's HP ${targetPal.stats.hp} - ${ourDmg}dmg = ${damagedHP}`,
     `dmg b4 the createAIDamagedState, 'AI' pal's HP is now ${damagedHP}`,
     newState,
   )
@@ -187,9 +155,9 @@ export const runDmgHuman = (newState, targetPal, move, dmgAmt) => {
   return newState
 }
 export const runDmgAI = (newState, targetPal, move, dmgAmt) => {
-  console.log(`Player is AI: newState.userParty`, newState.userParty)
-  const moveCost = move.cost.energy
   console.log(
+    `Player is AI: newState.userParty`,
+    newState.userParty,
     `ATK: DMG phase: targetPal, move`,
     targetPal,
     move,

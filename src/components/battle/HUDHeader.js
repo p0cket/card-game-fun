@@ -1,16 +1,13 @@
 import React from 'react'
 
-function HUDHeader({ gameData }) {
+function HUDHeader() {
   return (
     <p
       style={{
-        // margin: '1px',
         backgroundColor: '#5a7d2a',
         color: 'white',
-        // center
         display: 'flex',
         justifyContent: 'center',
-        // make it take up the full width
         width: '100%',
       }}
       className='font-[silkscreen]'
